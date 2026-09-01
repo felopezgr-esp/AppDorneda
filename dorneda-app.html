@@ -296,7 +296,8 @@
     .chip-result.v{color:var(--success);}.chip-result.d{color:var(--red-light);}.chip-result.e{color:var(--warning);}
     .jornada-chip.jugado .chip-code{color:var(--success);}
     .jornada-chip.proximo .chip-code{color:var(--red-light);}
-    .copa-chips{display:flex;gap:5px;margin-top:6px;flex-wrap:wrap;}
+    .copa-chips{display:flex;align-items:center;gap:8px;margin-top:8px;flex-wrap:wrap;}
+#copaChips{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
     .copa-chip-label{font-size:9px;font-weight:600;color:var(--text-dim);align-self:center;margin-right:4px;}
 
     /* COMPACT CALENDAR */
@@ -828,6 +829,15 @@
             <div id="dashSancionadosBox"></div>
           </div>
 
+          <!-- STAT COMPETITION FILTER TABS (L+C PREDETERMINADO) -->
+          <div class="tabs mb-8" style="gap:4px">
+            <div class="tab active" onclick="setStatFilterComp('L+C', this)">⚽ L+C (Predeterminado)</div>
+            <div class="tab" onclick="setStatFilterComp('Liga', this)">🏆 Liga</div>
+            <div class="tab" onclick="setStatFilterComp('Copa', this)">🍷 Copa</div>
+            <div class="tab" onclick="setStatFilterComp('Pretemporada', this)">🔄 Pretemporada</div>
+            <div class="tab" onclick="setStatFilterComp('Total', this)">🌐 Total</div>
+          </div>
+
           <div class="grid-2 mb-12" style="gap:12px">
             <div class="card" style="margin-bottom:0"><div class="card-title">&#9917; Top Goleadores</div><div id="dashGoleadores"></div></div>
             <div class="card" style="margin-bottom:0"><div class="card-title">&#127919; Top Asistencias</div><div id="dashAsistidores"></div></div>
@@ -936,7 +946,7 @@
 </div>
 
 <script>
-const DB_KEY='dorneda_2627_v10';
+const DB_KEY='dorneda_2627_v11';
 const DEFAULT_DATA={
   jugadores:[
     {id:1,dorsal:1,nombre:'David',nombreCompleto:'David Casado Gonzalez',estado:'Con ficha',foto:null,notas:''},
@@ -1141,19 +1151,45 @@ function normalizeName(n){
   return n.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
 
-function calcGoleadores(){
+
+var statFilterComp = 'L+C';
+
+function setStatFilterComp(comp, el){
+  statFilterComp = comp;
+  if(el){
+    var parent = el.parentElement;
+    if(parent) parent.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+  }
+  if(window.renderDashboardGoleadoresYAsistidores) renderDashboardGoleadoresYAsistidores();
+  if(window.renderAnalisisIndividual) renderAnalisisIndividual();
+}
+
+function calcGoleadores(filterComp){
+  if(!filterComp) filterComp = statFilterComp;
   const m = {};
-  
-  // Map player canonical name by normalized name
   const canonicalMap = {};
   (db.jugadores || []).forEach(j => {
     if(j.nombre) canonicalMap[normalizeName(j.nombre)] = j.nombre;
   });
 
   for(const p of db.partidos){
-    // Track players counted for this match to avoid double counting
-    const playerMatchGoals = {};
+    var comp = (p.competicion || '').toLowerCase();
+    var tipo = (p.tipo || '').toLowerCase();
+    
+    if(filterComp === 'Liga'){
+      if(comp.indexOf('futgal') === -1 && comp.indexOf('liga') === -1) continue;
+    } else if(filterComp === 'Copa'){
+      if(comp.indexOf('copa') === -1 && comp.indexOf('gallego') === -1) continue;
+    } else if(filterComp === 'Pretemporada'){
+      if(comp.indexOf('pretemporada') === -1 && tipo.indexOf('amistoso') === -1) continue;
+    } else if(filterComp === 'L+C'){
+      var isLiga = comp.indexOf('futgal') !== -1 || comp.indexOf('liga') !== -1;
+      var isCopa = comp.indexOf('copa') !== -1 || comp.indexOf('gallego') !== -1;
+      if(!isLiga && !isCopa) continue;
+    }
 
+    const playerMatchGoals = {};
     for(const c of (p.convocados || [])){
       const canonName = canonicalMap[normalizeName(c.nombre)] || c.nombre;
       if(!m[canonName]) m[canonName] = {goles:0, partidos:0, titulares:0, asistencias:0};
@@ -1166,12 +1202,10 @@ function calcGoleadores(){
       if(c.titular) m[canonName].titulares++;
     }
 
-    // Check goals from goles_log if any player not in convocados or goals logged there
     for(const g of (p.goles_log || [])){
       if(g.equipo === 'Dorneda' && g.jugador){
         const canonName = canonicalMap[normalizeName(g.jugador)] || g.jugador;
         const normKey = normalizeName(canonName);
-        // If this player wasn't in convocados or had 0 goles recorded in convocados table
         if(!m[canonName]){
           m[canonName] = {goles:1, partidos:1, titulares:0, asistencias:0};
           playerMatchGoals[normKey] = 1;
@@ -1187,6 +1221,46 @@ function calcGoleadores(){
     .filter(([,v]) => v.goles > 0)
     .sort((a,b) => (b[1].goles - a[1].goles) || (a[1].partidos - b[1].partidos));
 }
+
+function calcAsistidores(filterComp){
+  if(!filterComp) filterComp = statFilterComp;
+  const m = {};
+  const canonicalMap = {};
+  (db.jugadores || []).forEach(j => {
+    if(j.nombre) canonicalMap[normalizeName(j.nombre)] = j.nombre;
+  });
+
+  for(const p of db.partidos){
+    var comp = (p.competicion || '').toLowerCase();
+    var tipo = (p.tipo || '').toLowerCase();
+    
+    if(filterComp === 'Liga'){
+      if(comp.indexOf('futgal') === -1 && comp.indexOf('liga') === -1) continue;
+    } else if(filterComp === 'Copa'){
+      if(comp.indexOf('copa') === -1 && comp.indexOf('gallego') === -1) continue;
+    } else if(filterComp === 'Pretemporada'){
+      if(comp.indexOf('pretemporada') === -1 && tipo.indexOf('amistoso') === -1) continue;
+    } else if(filterComp === 'L+C'){
+      var isLiga = comp.indexOf('futgal') !== -1 || comp.indexOf('liga') !== -1;
+      var isCopa = comp.indexOf('copa') !== -1 || comp.indexOf('gallego') !== -1;
+      if(!isLiga && !isCopa) continue;
+    }
+
+    for(const c of (p.convocados || [])){
+      const canonName = canonicalMap[normalizeName(c.nombre)] || c.nombre;
+      if(!m[canonName]) m[canonName] = {asistencias:0, partidos:0};
+      const ast = parseInt(c.asistencias) || 0;
+      m[canonName].asistencias += ast;
+      m[canonName].partidos++;
+    }
+  }
+
+  return Object.entries(m)
+    .filter(([,v]) => v.asistencias > 0)
+    .sort((a,b) => (b[1].asistencias - a[1].asistencias) || (a[1].partidos - b[1].partidos));
+}
+
+
 function calcParticipacion(){const m={};for(const p of db.partidos)for(const c of(p.convocados||[])){if(!m[c.nombre])m[c.nombre]={conv:0,tit:0,jug:0};m[c.nombre].conv++;if(c.titular)m[c.nombre].tit++;m[c.nombre].jug++;}return Object.entries(m).sort((a,b)=>b[1].jug-a[1].jug);}
 function getNextMatch(){const t=new Date();return db.calendario.find(c=>{if(c.estado==='Jugado'||c.estado==='Libre')return false;const f=c.fecha.split('-')[0].split('/');if(f.length<3)return false;return new Date(`${f[2]}-${f[1].padStart(2,'0')}-${f[0].padStart(2,'0')}`)>=t;});}
 function getPlayerStats(nombre){const s={goles:0,asistencias:0,partidos:0,titulares:0};for(const p of db.partidos){const c=(p.convocados||[]).find(x=>x.nombre===nombre);if(c){s.goles+=parseInt(c.goles)||0;s.asistencias+=parseInt(c.asistencias)||0;s.partidos++;if(c.titular)s.titulares++;}}return s;}
