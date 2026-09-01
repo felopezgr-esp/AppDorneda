@@ -936,7 +936,7 @@
 </div>
 
 <script>
-const DB_KEY='dorneda_2627_v8';
+const DB_KEY='dorneda_2627_v10';
 const DEFAULT_DATA={
   jugadores:[
     {id:1,dorsal:1,nombre:'David',nombreCompleto:'David Casado Gonzalez',estado:'Con ficha',foto:null,notas:''},
@@ -1138,7 +1138,7 @@ function compBadge(c){if(!c)return 'pendiente';const s=c.toLowerCase();if(s.incl
 function calcStats(){const p=db.partidos,v=p.filter(x=>x.resultado==='Victoria').length,e=p.filter(x=>x.resultado==='Empate').length,d=p.filter(x=>x.resultado==='Derrota').length,gf=p.reduce((s,x)=>s+(parseInt(x.gf)||0),0),gc=p.reduce((s,x)=>s+(parseInt(x.gc)||0),0);return{total:p.length,v,e,d,gf,gc};}
 function normalizeName(n){
   if(!n) return '';
-  return n.trim().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  return n.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
 
 function calcGoleadores(){
@@ -1185,7 +1185,7 @@ function calcGoleadores(){
 
   return Object.entries(m)
     .filter(([,v]) => v.goles > 0)
-    .sort((a,b) => b[1].goles - a[1].goles);
+    .sort((a,b) => (b[1].goles - a[1].goles) || (a[1].partidos - b[1].partidos));
 }
 function calcParticipacion(){const m={};for(const p of db.partidos)for(const c of(p.convocados||[])){if(!m[c.nombre])m[c.nombre]={conv:0,tit:0,jug:0};m[c.nombre].conv++;if(c.titular)m[c.nombre].tit++;m[c.nombre].jug++;}return Object.entries(m).sort((a,b)=>b[1].jug-a[1].jug);}
 function getNextMatch(){const t=new Date();return db.calendario.find(c=>{if(c.estado==='Jugado'||c.estado==='Libre')return false;const f=c.fecha.split('-')[0].split('/');if(f.length<3)return false;return new Date(`${f[2]}-${f[1].padStart(2,'0')}-${f[0].padStart(2,'0')}`)>=t;});}
@@ -1315,7 +1315,7 @@ function renderDashboardNextMatch(){
 }
 
 function renderDashboardGoleadoresYAsistidores(){
-  const gol = calcGoleadores().slice(0, 5);
+  const gol = calcGoleadores().slice(0, 8);
   const maxG = gol[0] ? gol[0][1].goles : 1;
   const icons = ['🥇','🥈','🥉','⚽','⚽'];
 
