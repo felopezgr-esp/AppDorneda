@@ -936,7 +936,7 @@
 </div>
 
 <script>
-const DB_KEY='dorneda_2627_v6';
+const DB_KEY='dorneda_2627_v7';
 const DEFAULT_DATA={
   jugadores:[
     {id:1,dorsal:1,nombre:'David',nombreCompleto:'David Casado Gonzalez',estado:'Con ficha',foto:null,notas:''},
@@ -1749,6 +1749,199 @@ function parseFutgalActa(){
 
 
 
+
+// ======================================================
+// COMPLETE MATCH STEPPER ENGINE (openNuevoPartido, editPartido, etc.)
+// ======================================================
+const STEPS = ['Basico', 'Equipacion', 'Convocatoria', 'Resultado', 'Notas'];
+
+function openNuevoPartido(){
+  newMatchData = { convocados:[], ausentes:[], goles_log:[] };
+  currentStep = 0;
+  renderStepper();
+  openModal('modalNuevoPartido');
+}
+
+function editPartido(id){
+  const p = db.partidos.find(x => x.id === id);
+  if(!p) return;
+  newMatchData = JSON.parse(JSON.stringify(p));
+  if(!newMatchData.goles_log) newMatchData.goles_log = [];
+  if(!newMatchData.convocados) newMatchData.convocados = [];
+  if(!newMatchData.ausentes) newMatchData.ausentes = [];
+  currentStep = 0;
+  renderStepper();
+  closeModal('modalDetallePartido');
+  openModal('modalNuevoPartido');
+}
+
+function renderStepper(){
+  var container = document.getElementById('stepperContainer');
+  if(!container) return;
+
+  var html = '<div class="stepper" style="position:relative">';
+  html += '<div class="stepper-line"></div>';
+  STEPS.forEach(function(s, i){
+    var activeClass = i === currentStep ? 'active' : (i < currentStep ? 'done' : '');
+    var circleContent = i < currentStep ? '&#10003;' : (i + 1);
+    html += '<div class="step ' + activeClass + '"><div class="step-circle">' + circleContent + '</div><div class="step-label">' + s + '</div></div>';
+  });
+  html += '</div>';
+
+  html += '<div id="stepContent">' + renderStepContent() + '</div>';
+
+  html += '<div class="step-nav" style="display:flex;justify-space-between;margin-top:16px">';
+  html += '<button class="btn btn-ghost" id="stepBackBtn" onclick="stepperGoBack()">' + (currentStep === 0 ? 'Cancelar' : '&#8592; Atrás') + '</button>';
+  html += '<button class="btn btn-primary" id="stepFwdBtn" onclick="stepperGoFwd()" style="margin-left:auto">' + (currentStep === STEPS.length - 1 ? '💾 Validar y Guardar' : 'Siguiente &#8594;') + '</button>';
+  html += '</div>';
+
+  container.innerHTML = html;
+}
+
+function stepperGoBack(){
+  collectStep();
+  if(currentStep === 0){
+    closeModal('modalNuevoPartido');
+  } else {
+    currentStep--;
+    renderStepper();
+  }
+}
+
+function stepperGoFwd(){
+  collectStep();
+  if(currentStep === STEPS.length - 1){
+    savePartido();
+  } else {
+    currentStep++;
+    renderStepper();
+  }
+}
+
+function renderStepContent(){
+  var d = newMatchData;
+  if(currentStep === 0){
+    // STEP 1: BASICO + URL AUTO-COMPLETER
+    var html = '<div class="card mb-16" style="background:var(--surface2);border:1px solid var(--border)">';
+    html += '<div style="font-weight:700;font-size:12px;margin-bottom:6px;color:var(--text)">🌐 Actualizar información desde URL / Acta Futgal</div>';
+    html += '<div style="display:flex;gap:8px">';
+    html += '<input class="form-control" id="step1FutgalUrl" style="flex:1;font-size:12px" placeholder="Pega aquí el enlace de la Futgal o texto del acta del partido"/>';
+    html += '<button type="button" class="btn btn-ghost btn-sm" onclick="autoFillFromUrlInput()">⚡ Auto-Completar Ficha</button>';
+    html += '</div></div>';
+
+    html += '<div class="form-row">';
+    html += '<div class="form-group"><label class="form-label">Rival *</label><input class="form-control" id="s1_rival" value="' + (d.rival||'') + '" placeholder="Ej: Betanzos C.F." required/></div>';
+    html += '<div class="form-group"><label class="form-label">Fecha *</label><input class="form-control" id="s1_fecha" type="date" value="' + (d.fecha||'') + '"/></div>';
+    html += '</div>';
+
+    html += '<div class="form-row">';
+    html += '<div class="form-group"><label class="form-label">Hora quedada</label><input class="form-control" id="s1_hq" value="' + (d.horaQuedada||'') + '" placeholder="Ej: 10:30"/></div>';
+    html += '<div class="form-group"><label class="form-label">Hora partido</label><input class="form-control" id="s1_hp" value="' + (d.horaPartido||'') + '" placeholder="Ej: 11:00"/></div>';
+    html += '</div>';
+
+    html += '<div class="form-row">';
+    html += '<div class="form-group"><label class="form-label">Competición</label><select class="form-control" id="s1_comp">';
+    ['Primera Futgal','Copa da Costa','Pretemporada','Otro'].forEach(function(c){
+      html += '<option' + (d.competicion===c ? ' selected' : '') + '>' + c + '</option>';
+    });
+    html += '</select></div>';
+
+    html += '<div class="form-group"><label class="form-label">Tipo</label><select class="form-control" id="s1_tipo">';
+    ['Oficial','Amistoso'].forEach(function(t){
+      html += '<option' + (d.tipo===t ? ' selected' : '') + '>' + t + '</option>';
+    });
+    html += '</select></div>';
+    html += '</div>';
+
+    html += '<div class="form-row">';
+    html += '<div class="form-group"><label class="form-label">Condición</label><select class="form-control" id="s1_cond">';
+    ['Local','Visitante'].forEach(function(co){
+      html += '<option' + (d.condicion===co ? ' selected' : '') + '>' + co + '</option>';
+    });
+    html += '</select></div>';
+    html += '<div class="form-group"><label class="form-label">Campo</label><input class="form-control" id="s1_campo" value="' + (d.campo||'') + '" placeholder="Ej: Dexo / A Marola"/></div>';
+    html += '</div>';
+
+    html += '<div class="form-group"><label class="form-label">Código (ej: J1, Pret_1, C_32)</label><input class="form-control" id="s1_cod" value="' + (d.codigo||'') + '"/></div>';
+    return html;
+
+  } else if(currentStep === 1){
+    // STEP 2: EQUIPACION
+    var html = '<div class="form-row">';
+    html += '<div class="form-group"><label class="form-label">Equipación Dorneda</label><input class="form-control" id="s2_eqD" value="' + (d.equipacionDorneda||'Blanco / Rojo-Negro / Blanco') + '"/></div>';
+    html += '<div class="form-group"><label class="form-label">Equipación Rival</label><input class="form-control" id="s2_eqR" value="' + (d.equipacionRival||'') + '" placeholder="Ej: Azul / Azul / Azul"/></div>';
+    html += '</div>';
+    html += '<div class="form-group"><label class="form-label">Asistió Entrenador (Kata)</label><select class="form-control" id="s2_kata"><option value="true"' + (d.kataAsistio!==false?' selected':'') + '>Sí asistió</option><option value="false"' + (d.kataAsistio===false?' selected':'') + '>No asistió</option></select></div>';
+    return html;
+
+  } else if(currentStep === 2){
+    // STEP 3: CONVOCATORIA TWO COLS
+    return renderConvocatoriaStep();
+
+  } else if(currentStep === 3){
+    // STEP 4: RESULTADO + GOAL LOG & CARDS
+    return renderResultadoStep();
+
+  } else if(currentStep === 4){
+    // STEP 5: NOTAS & RESUMEN
+    var html = '<div class="form-group"><label class="form-label">Resumen del partido</label><textarea class="form-control" id="s5_res" rows="4">' + (d.resumen||'') + '</textarea></div>';
+    html += '<div class="form-group"><label class="form-label">Observaciones del rival</label><textarea class="form-control" id="s5_obsR" rows="3">' + (d.observacionesRival||'') + '</textarea></div>';
+    html += '<div class="form-group"><label class="form-label">Incidencias / Notas</label><textarea class="form-control" id="s5_inc" rows="2">' + (d.incidencias||'') + '</textarea></div>';
+    return html;
+  }
+}
+
+function collectStep(){
+  var d = newMatchData;
+  if(currentStep === 0){
+    var rEl = document.getElementById('s1_rival'); if(rEl) d.rival = rEl.value.trim();
+    var fEl = document.getElementById('s1_fecha'); if(fEl) d.fecha = fEl.value;
+    var hqEl = document.getElementById('s1_hq'); if(hqEl) d.horaQuedada = hqEl.value;
+    var hpEl = document.getElementById('s1_hp'); if(hpEl) d.horaPartido = hpEl.value;
+    var cEl = document.getElementById('s1_comp'); if(cEl) d.competicion = cEl.value;
+    var tEl = document.getElementById('s1_tipo'); if(tEl) d.tipo = tEl.value;
+    var coEl = document.getElementById('s1_cond'); if(coEl) d.condicion = coEl.value;
+    var caEl = document.getElementById('s1_campo'); if(caEl) d.campo = caEl.value;
+    var cdEl = document.getElementById('s1_cod'); if(cdEl) d.codigo = cdEl.value;
+  } else if(currentStep === 1){
+    var eqDEl = document.getElementById('s2_eqD'); if(eqDEl) d.equipacionDorneda = eqDEl.value;
+    var eqREl = document.getElementById('s2_eqR'); if(eqREl) d.equipacionRival = eqREl.value;
+    var kEl = document.getElementById('s2_kata'); if(kEl) d.kataAsistio = kEl.value === 'true';
+  } else if(currentStep === 3){
+    var gfEl = document.getElementById('s3_gf'); if(gfEl) d.gf = gfEl.value !== '' ? parseInt(gfEl.value) : null;
+    var gcEl = document.getElementById('s3_gc'); if(gcEl) d.gc = gcEl.value !== '' ? parseInt(gcEl.value) : null;
+    var destEl = document.getElementById('s3_dest'); if(destEl) d.jugadorDestacado = destEl.value;
+    if(d.gf !== null && d.gc !== null){
+      d.resultado = d.gf > d.gc ? 'Victoria' : (d.gf === d.gc ? 'Empate' : 'Derrota');
+    }
+  } else if(currentStep === 4){
+    var resEl = document.getElementById('s5_res'); if(resEl) d.resumen = resEl.value;
+    var obsREl = document.getElementById('s5_obsR'); if(obsREl) d.observacionesRival = obsREl.value;
+    var incEl = document.getElementById('s5_inc'); if(incEl) d.incidencias = incEl.value;
+  }
+}
+
+function savePartido(){
+  collectStep();
+  const d = newMatchData;
+  if(!d.rival){ toast('El rival es obligatorio', 'error'); return; }
+  
+  if(d.id){
+    const idx = db.partidos.findIndex(x => x.id === d.id);
+    if(idx !== -1) db.partidos[idx] = d;
+  } else {
+    d.id = Date.now();
+    db.partidos.push(d);
+  }
+  
+  saveDB();
+  closeModal('modalNuevoPartido');
+  if(window.renderPartidos) renderPartidos();
+  if(window.renderDashboard) renderDashboard();
+  toast('Partido guardado con éxito', 'success');
+}
+
+
 function showDetallePartido(id){
   const p = db.partidos.find(x => x.id === id);
   if(!p) return;
@@ -1878,13 +2071,15 @@ function renderResultadoStep(){
   // Per-player goals/assists
   html+='<div class="separator"></div>';
   html+='<div class="form-group"><label class="form-label">Goles y asistencias por jugador</label>';
-  html+='<div class="table-wrap"><table><thead><tr><th>Jugador</th><th style="width:90px">Goles</th><th style="width:90px">Asistencias</th></tr></thead><tbody>';
+  html+='<div class="table-wrap"><table><thead><tr><th>Jugador</th><th style="width:70px">Goles</th><th style="width:70px">Asist.</th><th style="width:70px">🟨 Am.</th><th style="width:70px">🟥 Roj.</th></tr></thead><tbody>';
   var convs=d.convocados||[];
   for(var i=0;i<convs.length;i++){
     var c=convs[i];
     html+='<tr><td style="font-weight:600">'+c.nombre+(c.titular?' (T)':'')+'</td>';
-    html+='<td><input class="form-control" id="pg_'+i+'" type="number" min="0" style="padding:6px 8px" value="'+(c.goles||0)+'"/></td>';
-    html+='<td><input class="form-control" id="pa_'+i+'" type="number" min="0" style="padding:6px 8px" value="'+(c.asistencias||0)+'"/></td></tr>';
+    html+='<td><input class="form-control" id="pg_'+i+'" type="number" min="0" style="padding:6px 6px;text-align:center" value="'+(c.goles||0)+'" onchange="newMatchData.convocados['+i+'].goles=parseInt(this.value)||0"/></td>';
+    html+='<td><input class="form-control" id="pa_'+i+'" type="number" min="0" style="padding:6px 6px;text-align:center" value="'+(c.asistencias||0)+'" onchange="newMatchData.convocados['+i+'].asistencias=parseInt(this.value)||0"/></td>';
+    html+='<td><input class="form-control" type="number" min="0" max="2" style="padding:6px 6px;text-align:center;color:#eab308;font-weight:700" value="'+(c.amarillas||0)+'" onchange="newMatchData.convocados['+i+'].amarillas=parseInt(this.value)||0"/></td>';
+    html+='<td><input class="form-control" type="number" min="0" max="1" style="padding:6px 6px;text-align:center;color:#ef4444;font-weight:700" value="'+(c.rojas||0)+'" onchange="newMatchData.convocados['+i+'].rojas=parseInt(this.value)||0"/></td></tr>';
   }
   html+='</tbody></table></div></div>';
 
@@ -1913,12 +2108,15 @@ function renderResultadoStep(){
     html+='<div class="goal-log-field" style="flex:1"><label>Autor</label>';
     html+='<input class="form-control" style="padding:6px 8px" value="'+(g.jugador||'')+'" placeholder="Nombre" onchange="newMatchData.goles_log['+i+'].jugador=this.value"/></div>';
     // Tipo
-    html+='<div class="goal-log-field" style="flex:0 0 160px"><label>Tipo de acci\u00f3n</label>';
+    html+='<div class="goal-log-field" style="flex:0 0 130px"><label>Tipo</label>';
     html+='<select class="form-control goal-tipo-select" style="padding:6px 8px" onchange="newMatchData.goles_log['+i+'].tipo=this.value">';
     for(var t=0;t<tipoOpts.length;t++){
       html+='<option'+(g.tipo===tipoOpts[t]?' selected':'')+'>'+tipoOpts[t]+'</option>';
     }
     html+='</select></div>';
+    // Nota / Descripción
+    html+='<div class="goal-log-field" style="flex:1"><label>Nota / C&oacute;mo fue el gol</label>';
+    html+='<input class="form-control" style="padding:6px 8px" value="'+(g.nota||'')+'" placeholder="Ej: Golazo desde el medio campo, cabeceador en c\u00f3rner..." onchange="newMatchData.goles_log['+i+'].nota=this.value"/></div>';
     // Remove
     html+='<div class="goal-log-field"><label style="opacity:0">X</label>';
     html+='<button type="button" class="btn-xs ghost" onclick="removeGoalLog('+i+')">&#10005;</button></div>';
@@ -1931,7 +2129,7 @@ function renderResultadoStep(){
 
 function addGoalLog(){
   if(!newMatchData.goles_log)newMatchData.goles_log=[];
-  newMatchData.goles_log.push({minuto:'',equipo:'Dorneda',jugador:'',tipo:'Jugada'});
+  newMatchData.goles_log.push({minuto:'',equipo:'Dorneda',jugador:'',tipo:'Jugada',nota:''});
   renderStepper();
 }
 function removeGoalLog(idx){
