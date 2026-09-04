@@ -1781,6 +1781,9 @@
           </div>
         </div>
       </div>
+
+      <!-- MISTERCHIP STATISTICAL ANALYSIS BLOCK (6 INSIGHTS) -->
+      <div id="dashMisterChipBlock" class="mt-20"></div>
     </section>
 
     <!-- PLANTILLA -->
@@ -3544,6 +3547,8 @@ function renderDashboard(){
   renderJornadasWidget();
   renderDashboardNextMatch();
   renderDashboardGoleadoresYAsistidores();
+  var dmc = document.getElementById('dashMisterChipBlock');
+  if(dmc) dmc.innerHTML = renderMisterChipBlock();
 }
 
 function getDorsalesLibres(){
@@ -3872,19 +3877,156 @@ function renderAnalisis(){
 }
 
 function renderMisterChipBlock(){
-  const el = document.getElementById('misterChipBlock');
-  if(!el) return;
-  const p = calcParticipacion();
-  const topPart = p.length ? p[0] : ['N/A', { jug: 0 }];
-  const topGol = calcGoleadores('Total')[0] || ['N/A', { goles: 0 }];
-  
-  el.innerHTML = `<div class="card" style="background:var(--surface2);border:1px solid var(--border);padding:14px">
-    <div style="font-size:12px;font-weight:800;color:var(--red-light);margin-bottom:6px">📊 DATO MÍSTER CHIP</div>
-    <div style="font-size:13px;color:var(--text)">
-      🏆 <strong>${topGol[0]}</strong> lidera la tabla de goleadores con <strong>${topGol[1].goles} goles</strong>. <br/>
-      👕 <strong>${topPart[0]}</strong> es el jugador con más partidos jugados (<strong>${topPart[1].jug} PJ</strong>).
+  const jugados = (db.partidos || []).filter(p => p.resultado && p.gf !== null && p.gf !== undefined);
+  const totalPJ = jugados.length;
+  const v = jugados.filter(p => p.resultado === 'Victoria').length;
+  const e = jugados.filter(p => p.resultado === 'Empate').length;
+  const d = jugados.filter(p => p.resultado === 'Derrota').length;
+  const totalGF = jugados.reduce((s, p) => s + (parseInt(p.gf) || 0), 0);
+  const totalGC = jugados.reduce((s, p) => s + (parseInt(p.gc) || 0), 0);
+  const promGF = totalPJ > 0 ? (totalGF / totalPJ).toFixed(1) : '0.0';
+  const promGC = totalPJ > 0 ? (totalGC / totalPJ).toFixed(1) : '0.0';
+  const pctVic = totalPJ > 0 ? Math.round((v / totalPJ) * 100) : 0;
+
+  // Pichichi
+  const goleadores = calcGoleadores('Total');
+  const topGol = goleadores.length ? goleadores[0] : null;
+  const segundoGol = goleadores.length > 1 ? goleadores[1] : null;
+
+  // Participación
+  const participaciones = calcParticipacion();
+  const topPart = participaciones.length ? participaciones[0] : null;
+  const intocables = participaciones.filter(p => p[1].jug === totalPJ && totalPJ > 0).map(p => p[0]);
+
+  // Factor Local vs Visitante
+  const localPJ = jugados.filter(p => p.condicion === 'Local');
+  const vicLocal = localPJ.filter(p => p.resultado === 'Victoria').length;
+  const gfLocal = localPJ.reduce((s, p) => s + (parseInt(p.gf) || 0), 0);
+
+  // Jugadores distintos con gol
+  const goleadoresDistintos = goleadores.filter(g => g[1].goles > 0).length;
+
+  const insights = [];
+
+  // 1. Balance y efectividad
+  if(totalPJ > 0){
+    insights.push({
+      icon: '📊',
+      title: 'Efectividad y Rendimiento Global',
+      text: `El Xuventude Dorneda registra un <strong>${pctVic}% de victorias</strong> (${v}V &middot; ${e}E &middot; ${d}D) en sus ${totalPJ} compromisos disputados, con un balance neto de <strong>${totalGF > totalGC ? '+' : ''}${totalGF - totalGC} goles</strong>.`
+    });
+  } else {
+    insights.push({
+      icon: '📊',
+      title: 'Inicio de Temporada',
+      text: 'El equipo arranca la temporada 2026/27 con la plantilla al 100% y máxima ambición en Liga y Copa.'
+    });
+  }
+
+  // 2. Pichichi y pólvora
+  if(topGol && topGol[1].goles > 0){
+    const segText = segundoGol && segundoGol[1].goles > 0 ? `, seguido de <strong>${segundoGol[0]}</strong> con <strong>${segundoGol[1].goles}</strong>` : '';
+    const ratio = (topGol[1].goles / Math.max(1, topGol[1].partidos)).toFixed(2);
+    insights.push({
+      icon: '⚽',
+      title: 'Capacidad Goleadora y Pichichi',
+      text: `<strong>${topGol[0]}</strong> lidera la tabla de artilleros con <strong>${topGol[1].goles} goles</strong> en ${topGol[1].partidos} partidos (promedio de <strong>${ratio} goles/partido</strong>)${segText}.`
+    });
+  } else {
+    insights.push({
+      icon: '⚽',
+      title: 'Reparto Ofensivo',
+      text: 'El ataque del equipo está listo para el debut oficial en busca de abrir el casillero de goleadores de la temporada.'
+    });
+  }
+
+  // 3. Distribución del gol y promedio
+  if(goleadoresDistintos > 1){
+    insights.push({
+      icon: '🎯',
+      title: 'Variedad de Recursos Ofensivos',
+      text: `Un total de <strong>${goleadoresDistintos} jugadores diferentes</strong> han visto portería, con una media de <strong>${promGF} goles marcados por partido</strong>.`
+    });
+  } else {
+    insights.push({
+      icon: '🎯',
+      title: 'Poder Ofensivo Medio',
+      text: `El equipo promedia <strong>${promGF} goles a favor</strong> y <strong>${promGC} goles encajados</strong> por encuentro disputado.`
+    });
+  }
+
+  // 4. Los intocables y regularidad
+  if(intocables.length > 0 && totalPJ > 1){
+    const nombresInt = intocables.slice(0, 3).join(', ') + (intocables.length > 3 ? ` y ${intocables.length - 3} más` : '');
+    insights.push({
+      icon: '👔',
+      title: 'Los Intocables del Míster',
+      text: `<strong>${nombresInt}</strong> han disputado el <strong>100% de los partidos (${totalPJ}/${totalPJ})</strong>, siendo los pilares de máxima confianza para el cuerpo técnico.`
+    });
+  } else if(topPart){
+    insights.push({
+      icon: '👕',
+      title: 'Mayor Continuidad',
+      text: `<strong>${topPart[0]}</strong> lidera el ranking de presencia con <strong>${topPart[1].jug} partidos disputados</strong> y ${topPart[1].tit} titularidades.`
+    });
+  }
+
+  // 5. Factor Campo (A Marola / Dexo)
+  if(localPJ.length > 0){
+    const pctLocal = Math.round((vicLocal / localPJ.length) * 100);
+    insights.push({
+      icon: '🏟️',
+      title: 'Fortaleza como Local',
+      text: `Jugando en casa, el Dorneda ha sumado <strong>${vicLocal} victorias en ${localPJ.length} partidos (${pctLocal}%)</strong> anotando <strong>${gfLocal} goles</strong> ante su afición.`
+    });
+  } else {
+    insights.push({
+      icon: '🏟️',
+      title: 'Feudo Inexpugnable',
+      text: 'El campo de A Marola será el fortín clave del equipo durante las 15 jornadas de Liga como anfitriones.'
+    });
+  }
+
+  // 6. Solidez y competitividad
+  if(totalPJ > 0){
+    insights.push({
+      icon: '🛡️',
+      title: 'Seguridad Defensiva y Control',
+      text: `El equipo concede un promedio de <strong>${promGC} tantos por choque</strong>, manteniendo un índice de competitividad muy alto en todos los tramos de partido.`
+    });
+  } else {
+    insights.push({
+      icon: '🏆',
+      title: 'Objetivo de la Temporada',
+      text: 'Competir al máximo nivel en la Primera Autonómica y avanzar en las eliminatorias de la Copa da Costa.'
+    });
+  }
+
+  return `
+    <div class="card mb-16" style="background:var(--surface);border:1px solid var(--border);padding:18px 20px;border-radius:var(--radius-lg);box-shadow:var(--shadow)">
+      <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:12px;margin-bottom:14px">
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="font-size:24px">📊</span>
+          <div>
+            <div style="font-size:15px;font-weight:900;color:var(--text);letter-spacing:0.3px">ANÁLISIS Y DATOS MÍSTER CHIP</div>
+            <div style="font-size:11px;color:var(--text-muted)">Radiografía estadística inteligente de la temporada 2026/27</div>
+          </div>
+        </div>
+        <span class="badge" style="background:rgba(204,0,0,0.12);color:var(--red);border:1px solid rgba(204,0,0,0.25);font-weight:800;font-size:10px">6 CLAVES</span>
+      </div>
+      <div class="misterchip-grid" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:12px">
+        ${insights.map(item => `
+          <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;display:flex;gap:12px;align-items:flex-start">
+            <span style="font-size:22px;line-height:1;background:var(--surface3);padding:8px;border-radius:8px;flex-shrink:0">${item.icon}</span>
+            <div style="font-size:12px;color:var(--text-muted);line-height:1.5">
+              <strong style="color:var(--text);font-size:12.5px;display:block;margin-bottom:3px">${item.title}</strong>
+              ${item.text}
+            </div>
+          </div>
+        `).join('')}
+      </div>
     </div>
-  </div>`;
+  `;
 }
 
 function changeCopaRondaNav(delta){
@@ -4423,7 +4565,7 @@ window.showAnalisisTab = showAnalisisTab;
 
 function renderAnalisisEquipo(){
   var mcEl = document.getElementById('analisisMisterChip');
-  if(mcEl) mcEl.innerHTML = renderMisterChipBlock() + renderGoalTimingSection() + renderTiposGolesSection();
+  if(mcEl) mcEl.innerHTML = renderMisterChipBlock();
   const s=calcStats();
   document.getElementById('analisisStatsGrid').innerHTML=`<div class="stat-card red"><div class="stat-label">Partidos</div><div class="stat-value">${s.total}</div></div><div class="stat-card green"><div class="stat-label">Victorias</div><div class="stat-value">${s.v}</div><div class="stat-sub">${s.total?Math.round(s.v/s.total*100):0}%</div></div><div class="stat-card yellow"><div class="stat-label">Empates</div><div class="stat-value">${s.e}</div></div><div class="stat-card gray"><div class="stat-label">Derrotas</div><div class="stat-value">${s.d}</div></div><div class="stat-card blue"><div class="stat-label">Goles F</div><div class="stat-value">${s.gf}</div><div class="stat-sub">${s.total?(s.gf/s.total).toFixed(1):0}/p</div></div><div class="stat-card ${s.gc<=s.gf?'green':'red'}"><div class="stat-label">Goles C</div><div class="stat-value">${s.gc}</div><div class="stat-sub">${s.total?(s.gc/s.total).toFixed(1):0}/p</div></div>`;
   const comps={};for(const p of db.partidos){const c=p.competicion||'Otro';if(!comps[c])comps[c]={v:0,e:0,d:0,total:0,gf:0,gc:0};comps[c].total++;comps[c].gf+=parseInt(p.gf)||0;comps[c].gc+=parseInt(p.gc)||0;if(p.resultado==='Victoria')comps[c].v++;else if(p.resultado==='Empate')comps[c].e++;else if(p.resultado==='Derrota')comps[c].d++;}
