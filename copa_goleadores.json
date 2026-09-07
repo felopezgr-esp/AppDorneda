@@ -1,0 +1,983 @@
+﻿[
+    {
+        "pos":  1,
+        "jugador":  "MENDEZ GARCIA, JAVIER",
+        "equipo":  "C.F. TEKE TEKE ORDES",
+        "pj":  1,
+        "goles":  8,
+        "penaltis":  1,
+        "promedio":  "8,0000"
+    },
+    {
+        "pos":  2,
+        "jugador":  "PREGO REY, MANUEL",
+        "equipo":  "UD CARRAL",
+        "pj":  1,
+        "goles":  3,
+        "penaltis":  0,
+        "promedio":  "3,0000"
+    },
+    {
+        "pos":  3,
+        "jugador":  "ALONSO A�ON, JAVIER",
+        "equipo":  "U.D. PAIOSACO H.A�ON",
+        "pj":  1,
+        "goles":  3,
+        "penaltis":  0,
+        "promedio":  "3,0000"
+    },
+    {
+        "pos":  4,
+        "jugador":  "CASAS VARELA, MARCOS M",
+        "equipo":  "SAN MARTI�O S.D.",
+        "pj":  1,
+        "goles":  3,
+        "penaltis":  1,
+        "promedio":  "3,0000"
+    },
+    {
+        "pos":  5,
+        "jugador":  "FERRO ROZAS, GONZALO",
+        "equipo":  "SADA F.C. A NOSA VI�A",
+        "pj":  1,
+        "goles":  2,
+        "penaltis":  0,
+        "promedio":  "2,0000"
+    },
+    {
+        "pos":  6,
+        "jugador":  "GONZALEZ CABANAS, DANIEL",
+        "equipo":  "C.D. CIUDAD",
+        "pj":  1,
+        "goles":  2,
+        "penaltis":  0,
+        "promedio":  "2,0000"
+    },
+    {
+        "pos":  7,
+        "jugador":  "BALDOMIR MATO, MIGUEL",
+        "equipo":  "CF CRENDES DE VETERANOS",
+        "pj":  1,
+        "goles":  2,
+        "penaltis":  0,
+        "promedio":  "2,0000"
+    },
+    {
+        "pos":  8,
+        "jugador":  "SOUTO PATI�O, DAVID",
+        "equipo":  "FUTBOL CLUB ROSSONERO",
+        "pj":  1,
+        "goles":  2,
+        "penaltis":  0,
+        "promedio":  "2,0000"
+    },
+    {
+        "pos":  9,
+        "jugador":  "SEOANE SANDE, ALBERTO",
+        "equipo":  "ATL�TICO CASTROS",
+        "pj":  1,
+        "goles":  2,
+        "penaltis":  0,
+        "promedio":  "2,0000"
+    },
+    {
+        "pos":  10,
+        "jugador":  "IGLESIAS FEIJOO, DIEGO",
+        "equipo":  "VETERANOS DO REL�MPAGO",
+        "pj":  1,
+        "goles":  2,
+        "penaltis":  0,
+        "promedio":  "2,0000"
+    },
+    {
+        "pos":  11,
+        "jugador":  "BEA NEIRA, DANIEL",
+        "equipo":  "C.D. MARTE",
+        "pj":  1,
+        "goles":  2,
+        "penaltis":  0,
+        "promedio":  "2,0000"
+    },
+    {
+        "pos":  12,
+        "jugador":  "MARTINEZ GONZALEZ, RUBEN",
+        "equipo":  "VIO�O C.F.",
+        "pj":  1,
+        "goles":  2,
+        "penaltis":  0,
+        "promedio":  "2,0000"
+    },
+    {
+        "pos":  13,
+        "jugador":  "NOVO HERNANZ, IGNACIO",
+        "equipo":  "S.D. SANTA MARGARITA",
+        "pj":  1,
+        "goles":  2,
+        "penaltis":  0,
+        "promedio":  "2,0000"
+    },
+    {
+        "pos":  14,
+        "jugador":  "CASTREJE DIAZ, ELOY",
+        "equipo":  "U.D.J. ALMEIRAS",
+        "pj":  1,
+        "goles":  2,
+        "penaltis":  0,
+        "promedio":  "2,0000"
+    },
+    {
+        "pos":  15,
+        "jugador":  "LOPEZ ACU�A, ALVARO",
+        "equipo":  "C.F. BATALLADOR S.D.",
+        "pj":  1,
+        "goles":  2,
+        "penaltis":  0,
+        "promedio":  "2,0000"
+    },
+    {
+        "pos":  16,
+        "jugador":  "MUI�OS ALVAREZ, LUIS A",
+        "equipo":  "PASTORIZA VETERANOS",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  17,
+        "jugador":  "LEIRA JOGLAR, DIEGO",
+        "equipo":  "FUTBOL CLUB ROSSONERO",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  18,
+        "jugador":  "VILLAR RODRIGUEZ, JAVIER",
+        "equipo":  "PENOUQUEIRA S.R.D.",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  19,
+        "jugador":  "PEREZ SABIO, ADRIAN",
+        "equipo":  "SPORTING CAMBRE AS TRAVESAS",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  20,
+        "jugador":  "COSTA RODRIGUEZ, ALBERTO",
+        "equipo":  "PENOUQUEIRA S.R.D.",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  21,
+        "jugador":  "TEMPRANO GOLPE, VICTOR M",
+        "equipo":  "C.F. BATALLADOR S.D.",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  22,
+        "jugador":  "DOLDAN PARGA, JOAQUIN EDUARDO",
+        "equipo":  "CECEBRE S.D.",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  23,
+        "jugador":  "LOPEZ GRA�A, IVAN",
+        "equipo":  "S.D. VALDOVI�O",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  24,
+        "jugador":  "MANEIRO RUA, DIEGO",
+        "equipo":  "ATL�TICO CASTROS",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  25,
+        "jugador":  "SANCHEZ SEOANE, MARCOS",
+        "equipo":  "CLUB DEPORTIVO NARON SILVER CATERING",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  1,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  26,
+        "jugador":  "CASTRO GAYOSO, ALBERTO D",
+        "equipo":  "MERCURIO S.D.",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  27,
+        "jugador":  "CAMPO SAEZ, JACOBO N",
+        "equipo":  "S.D. SIN QUERER LA CON FUSION",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  28,
+        "jugador":  "CASAL PALLAS, MIGUEL",
+        "equipo":  "CARRAL VETERANOS",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  29,
+        "jugador":  "GOMEZ LOPEZ, FRANCISCO J",
+        "equipo":  "CLUB DEPORTIVO NARON SILVER CATERING",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  30,
+        "jugador":  "PAMPIN CASTI�EIRAS, JAVIER",
+        "equipo":  "UD CARRAL",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  31,
+        "jugador":  "NAYA RIVEIRO, JUAN M",
+        "equipo":  "C.D. LARIN",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  32,
+        "jugador":  "PEREZ MACEIRA, IVAN S",
+        "equipo":  "SPORTING CAMBRE AS TRAVESAS",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  33,
+        "jugador":  "CARRERA PEREZ, ISAAC",
+        "equipo":  "PIADELA C.F.",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  34,
+        "jugador":  "EDREIRA LOUREDA, GABRIEL",
+        "equipo":  "CF CRENDES DE VETERANOS",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  1,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  35,
+        "jugador":  "VARELA CAINZOS, MARCOS A",
+        "equipo":  "BEMANTES VETERANOS CAF� QUERCUS",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  36,
+        "jugador":  "ABRU�EDO LOMBARDERO, DANIEL",
+        "equipo":  "SPORTING MEICENDE",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  37,
+        "jugador":  "GALAN PREGO, JENSEN",
+        "equipo":  "S.D. SIN QUERER LA CON FUSION",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  38,
+        "jugador":  "BOO FERNANDEZ, MIGUEL A",
+        "equipo":  "SADA F.C. A NOSA VI�A",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  39,
+        "jugador":  "SILVA SUAREZ, SANTIAGO",
+        "equipo":  "C.F. BATALLADOR S.D.",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  40,
+        "jugador":  "GARCIA CAAMA�O, JESUS",
+        "equipo":  "SPORTING UXES VETERANOS",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  41,
+        "jugador":  "PEREIRA IGLESIAS, DANIEL",
+        "equipo":  "OSEIRO CLICKFER ARTEIXO",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  42,
+        "jugador":  "LINARES ALONSO, ANTONIO",
+        "equipo":  "ATLETICO SOBRADO XUVENTUDE",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  43,
+        "jugador":  "CUBEIRO FERNANDEZ, BRAIS",
+        "equipo":  "SPORTING CAMBRE AS TRAVESAS",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  44,
+        "jugador":  "TUSET ARIJON, RUBEN",
+        "equipo":  "CAMPANAL DE LOUREDA F. C.",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  45,
+        "jugador":  "PEREZ OTERO, MARTIN",
+        "equipo":  "OSEIRO CLICKFER ARTEIXO",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  46,
+        "jugador":  "CALATRAVA BLANCO, FERNANDO",
+        "equipo":  "C.D. MARTE",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  47,
+        "jugador":  "LOURIDO RODRIGUEZ, IVAN",
+        "equipo":  "U.D.J. ALMEIRAS",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  48,
+        "jugador":  "ABUIN RODRIGUEZ, GERMAN",
+        "equipo":  "SPORTING BURGO",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  49,
+        "jugador":  "SOBRIDO GARCIA, OSCAR",
+        "equipo":  "CARRAL VETERANOS",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  50,
+        "jugador":  "LISTE LOPEZ, JOSE",
+        "equipo":  "C.F. TEKE TEKE ORDES",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  51,
+        "jugador":  "SANCHEZ BLANCO, IVAN",
+        "equipo":  "CAMPANAL DE LOUREDA F. C.",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  52,
+        "jugador":  "UZAL GOLPE, JUAN M",
+        "equipo":  "SPORTING BURGO",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  53,
+        "jugador":  "FONTENLA SANTISO, JORGE",
+        "equipo":  "C.F. BATALLADOR S.D.",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  54,
+        "jugador":  "BONIGNO SILVA, ALBERTO MANUEL",
+        "equipo":  "SPORTING UXES VETERANOS",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  55,
+        "jugador":  "CASTRO VENTURA, JOSE R",
+        "equipo":  "PENOUQUEIRA S.R.D.",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  56,
+        "jugador":  "LOPEZ LISTE, FRANCISCO J",
+        "equipo":  "S.D. VALDOVI�O",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  57,
+        "jugador":  "RODRIGUEZ GONZALEZ, JORGE",
+        "equipo":  "CARRAL VETERANOS",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  58,
+        "jugador":  "GONZALEZ BLACH, DIEGO",
+        "equipo":  "CLUB DO MAR",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  59,
+        "jugador":  "SANCHEZ PEREZ, RUBEN",
+        "equipo":  "CLUB DO MAR",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  60,
+        "jugador":  "NOVOA COUSILLAS, ELOY",
+        "equipo":  "PAIOSACO S.D.",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  61,
+        "jugador":  "CIVES PAZ, SERGIO",
+        "equipo":  "UD CARRAL",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  1,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  62,
+        "jugador":  "MALLO LUNA, JOSE F",
+        "equipo":  "PAIOSACO S.D.",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  63,
+        "jugador":  "PARIS LABANDEIRA, DAMIAN",
+        "equipo":  "SADA F.C. A NOSA VI�A",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  1,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  64,
+        "jugador":  "GARCIA GARCIA, JORGE",
+        "equipo":  "CARRAL VETERANOS",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  65,
+        "jugador":  "LEON MARTINEZ, FRANCISCO",
+        "equipo":  "C.D. CIUDAD",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  66,
+        "jugador":  "MENDEZ GARCIA, IVAN",
+        "equipo":  "C.F. TEKE TEKE ORDES",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  67,
+        "jugador":  "RIVADULLA FERNANDEZ, DIEGO",
+        "equipo":  "S.C.D. SAN CRISTOBAL DAS VI�AS",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  68,
+        "jugador":  "REY VAZQUEZ, DIEGO",
+        "equipo":  "FUTBOL CLUB ROSSONERO",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  69,
+        "jugador":  "COLLAZO AIRA, ADRIAN",
+        "equipo":  "ATL�TICO CASTROS",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  70,
+        "jugador":  "FERREIRA SOUTO, PABLO",
+        "equipo":  "C.F. TEKE TEKE ORDES",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  71,
+        "jugador":  "MARO�O BOEDO, IVAN",
+        "equipo":  "CAMPANAL DE LOUREDA F. C.",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  72,
+        "jugador":  "RICO SOUTO, BRAIS",
+        "equipo":  "CAMBRE CF",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  73,
+        "jugador":  "FUENTES RODRIGUEZ, CHRISTIAN",
+        "equipo":  "SPORTING MEICENDE",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  74,
+        "jugador":  "AMOR CANDAL, GABRIEL",
+        "equipo":  "CLUB DO MAR",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  75,
+        "jugador":  "MARTINEZ PEREZ, ISAAC C",
+        "equipo":  "S.D.C. TEIXEIRO",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  76,
+        "jugador":  "MARTINEZ MU�IZ, MICHAEL",
+        "equipo":  "SPORTING MEICENDE",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  77,
+        "jugador":  "SOUTO CALVETE, BORJA",
+        "equipo":  "PASTORIZA VETERANOS",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  78,
+        "jugador":  "CANOSA CAMBEIRO, DOMINGO M",
+        "equipo":  "PAIOSACO S.D.",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  79,
+        "jugador":  "MOSQUERA RODRIGUEZ, DAVID",
+        "equipo":  "CLUB DO MAR",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  80,
+        "jugador":  "LOPEZ NOVOA, CRISTIAN",
+        "equipo":  "SPORTING MEICENDE",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  81,
+        "jugador":  "IBA�EZ NICOLAS, MARCOS",
+        "equipo":  "OSEIRO CLICKFER ARTEIXO",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  1,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  82,
+        "jugador":  "ESPIDO LORENZO, ANGEL",
+        "equipo":  "ATLETICO SOBRADO XUVENTUDE",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  83,
+        "jugador":  "PICADO LI�ARES, JAVIER",
+        "equipo":  "HERCULES S.D.",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  84,
+        "jugador":  "DEL RIO BAICA, MAXIMILIANO DANIEL",
+        "equipo":  "ATLETICO PERILLO",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  85,
+        "jugador":  "MIRAZ ARES, FRANCISCO JAVIER",
+        "equipo":  "S.D.C. TEIXEIRO",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  86,
+        "jugador":  "MARTINEZ JOVE, SERGIO",
+        "equipo":  "CLUB DO MAR",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  87,
+        "jugador":  "DYULGEROV, GEORGI N",
+        "equipo":  "CF CRENDES DE VETERANOS",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  1,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  88,
+        "jugador":  "MENDEZ CALVO, MANUEL ANTONIO",
+        "equipo":  "ATLETICO SOBRADO XUVENTUDE",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  89,
+        "jugador":  "REIMUNDEZ RODRIGUEZ, LUIS",
+        "equipo":  "UD CARRAL",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  90,
+        "jugador":  "PIQUER LOUZAN, MANUEL ANGEL",
+        "equipo":  "SPORTING UXES VETERANOS",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  91,
+        "jugador":  "LOPEZ GESTAL, FRANCISCO JAVIER",
+        "equipo":  "VIO�O C.F.",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  92,
+        "jugador":  "MANTI�AN SEIJAS, YERAY JAVIER",
+        "equipo":  "HERCULES S.D.",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  93,
+        "jugador":  "LOPEZ GRA�A, FELIX",
+        "equipo":  "XUVENTUDE DORNEDA",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  94,
+        "jugador":  "MEILAN SEOANE, IVAN",
+        "equipo":  "XUVENTUDE DORNEDA",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  95,
+        "jugador":  "GARCIA MARTINEZ, FERNANDO DANIEL",
+        "equipo":  "MARINO C.F.",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  96,
+        "jugador":  "ALVAREZ CU�ARRO, ADRIAN",
+        "equipo":  "C.F. BATALLADOR S.D.",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  97,
+        "jugador":  "CRUZ GARCIA, MARCELO",
+        "equipo":  "CAMBRE CF",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  98,
+        "jugador":  "COLLAZO PORTEIRO, OSCAR",
+        "equipo":  "LICEO DE MONELOS S.D.",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  99,
+        "jugador":  "IGLESIAS VICENTE, SANTIAGO",
+        "equipo":  "C.F. BATALLADOR S.D.",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  100,
+        "jugador":  "ESCOLANO CASAS, RUB�N",
+        "equipo":  "SPORTING MAP",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  101,
+        "jugador":  "CANZOBRE RIVAS, JOSE M",
+        "equipo":  "ATLETICO ARTEIXO",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  102,
+        "jugador":  "SEOANE RODRIGUEZ, JOSE ANGEL",
+        "equipo":  "SPM",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  103,
+        "jugador":  "JEREZ ROBLES, DOUGLAS JHOAN",
+        "equipo":  "RACING SADA F�TBOL CLUB",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  1,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  104,
+        "jugador":  "HERNANZ NOCEDA, ENRIQUE",
+        "equipo":  "C.F. BATALLADOR S.D.",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  105,
+        "jugador":  "VELASCO PAB�N, FERNANDO JOS�",
+        "equipo":  "S.C.D. SAN CRISTOBAL DAS VI�AS",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  106,
+        "jugador":  "BOQUETE GEYMONAT, NICOLAS FEDERICO",
+        "equipo":  "ATL�TICO CASTROS",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  107,
+        "jugador":  "CAO DIAZ, FRANCISCO",
+        "equipo":  "ATLETICO ARTEIXO",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  108,
+        "jugador":  "MENDEZ LOPEZ, DAVID",
+        "equipo":  "ATLETICO ARTEIXO",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    },
+    {
+        "pos":  109,
+        "jugador":  "AMOUR, HEMZA",
+        "equipo":  "RACING SADA F�TBOL CLUB",
+        "pj":  1,
+        "goles":  1,
+        "penaltis":  0,
+        "promedio":  "1,0000"
+    }
+]

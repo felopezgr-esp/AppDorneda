@@ -1,0 +1,38 @@
+name: Sincronización Automática con FUTGAL
+
+on:
+  schedule:
+    # Ejecución automática diaria a las 04:00 UTC (06:00 hora peninsular española / Madrid)
+    - cron: '0 4 * * *'
+  workflow_dispatch:
+    # Permite la ejecución manual bajo demanda desde GitHub Actions o API
+
+jobs:
+  sync:
+    name: Sincronizar Partidos de Liga y Copa
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar Código del Repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Entorno Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Ejecutar Sincronizador con FUTGAL y Firestore
+        run: |
+          node scripts/sync-futgal.js
+
+      - name: Guardar Registro y Snapshot si hubo cambios
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add Archivos/backups/ || true
+          if git diff --staged --quiet; then
+            echo "Sin cambios en archivos locales para commit."
+          else
+            git commit -m "chore(sync): actualizar snapshot de datos FUTGAL [skip ci]"
+            git push || echo "Push omitido"
+          fi

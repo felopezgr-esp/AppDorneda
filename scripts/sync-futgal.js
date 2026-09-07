@@ -1,0 +1,342 @@
+/**
+ * sync-futgal.js - Script de sincronización backend autónomo con FUTGAL y Firebase Firestore
+ * Xuventude Dorneda - Temporada 2026/27
+ */
+
+const https = require('https');
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
+const {
+  FUTGAL_COMPETITIONS,
+  parseFutgalJornadaHtml,
+  buildFutgalUrl,
+  mergeFutgalDataIntoDB,
+  getMadridFormattedTimestamp
+} = require('./futgal-core');
+
+const FIRESTORE_PROJECT = "appdorneda";
+const FIRESTORE_DOC_PATH = "dorneda_app_data/temporada_2026_2027";
+const FIRESTORE_API_KEY = "AIzaSyCGDgGaAX2uqi0CwmY6ejVH_4SDhiLz1AA";
+const USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36";
+
+let sessionCookies = "";
+
+/**
+ * Realiza una petición HTTPS con soporte de cookies y seguimiento de redirecciones
+ */
+function fetchWithCookies(url, customHeaders = {}) {
+  return new Promise((resolve, reject) => {
+    const parsedUrl = new URL(url);
+    const headers = {
+      'User-Agent': USER_AGENT,
+      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+      'Accept-Language': 'es-ES,es;q=0.9,en;q=0.8',
+      ...customHeaders
+    };
+    if (sessionCookies) {
+      headers['Cookie'] = sessionCookies;
+    }
+
+    const req = https.get(parsedUrl, { headers }, (res) => {
+      // Capturar cookies de sesión
+      if (res.headers['set-cookie']) {
+        const cookies = res.headers['set-cookie'].map(c => c.split(';')[0]).join('; ');
+        sessionCookies = sessionCookies ? `${sessionCookies}; ${cookies}` : cookies;
+      }
+
+      // Manejar redirecciones 301, 302, 303, 307
+      if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+        let redirectUrl = res.headers.location;
+        if (!redirectUrl.startsWith('http')) {
+          redirectUrl = new URL(redirectUrl, parsedUrl.origin).href;
+        }
+        res.resume();
+        return fetchWithCookies(redirectUrl, customHeaders).then(resolve).catch(reject);
+      }
+
+      const chunks = [];
+      res.on('data', (chunk) => chunks.push(chunk));
+      res.on('end', () => {
+        const buffer = Buffer.concat(chunks);
+        // Decodificar en ISO-8859-1 o Windows-1252
+        const html = buffer.toString('latin1');
+        resolve({ statusCode: res.statusCode, html, buffer });
+      });
+    });
+
+    req.on('error', (err) => reject(err));
+    req.setTimeout(15000, () => {
+      req.destroy();
+      reject(new Error(`Timeout fetching ${url}`));
+    });
+  });
+}
+
+/**
+ * Lee el documento actual desde Firebase Firestore vía REST API
+ */
+async function getFirestoreDB() {
+  const url = `https://firestore.googleapis.com/v1/projects/${FIRESTORE_PROJECT}/databases/(default)/documents/${FIRESTORE_DOC_PATH}?key=${FIRESTORE_API_KEY}`;
+  
+  return new Promise((resolve, reject) => {
+    https.get(url, (res) => {
+      let data = '';
+      res.on('data', chunk => data += chunk);
+      res.on('end', () => {
+        try {
+          if (res.statusCode >= 200 && res.statusCode < 300) {
+            const json = JSON.parse(data);
+            if (json.fields && json.fields.db) {
+              const dbObj = convertFirestoreMapToObject(json.fields.db);
+              resolve(dbObj);
+            } else {
+              resolve(null);
+            }
+          } else {
+            console.warn(`Firestore GET returned status ${res.statusCode}: ${data}`);
+            resolve(null);
+          }
+        } catch (e) {
+          reject(e);
+        }
+      });
+    }).on('error', reject);
+  });
+}
+
+/**
+ * Convierte un mapa de Firestore Value Types a un objeto JavaScript estándar
+ */
+function convertFirestoreValue(val) {
+  if (!val) return null;
+  if ('stringValue' in val) return val.stringValue;
+  if ('integerValue' in val) return parseInt(val.integerValue, 10);
+  if ('doubleValue' in val) return parseFloat(val.doubleValue);
+  if ('booleanValue' in val) return val.booleanValue;
+  if ('nullValue' in val) return null;
+  if ('arrayValue' in val) {
+    const arr = val.arrayValue.values || [];
+    return arr.map(convertFirestoreValue);
+  }
+  if ('mapValue' in val) {
+    return convertFirestoreMapToObject(val.mapValue);
+  }
+  return null;
+}
+
+function convertFirestoreMapToObject(mapVal) {
+  const res = {};
+  const fields = mapVal.fields || {};
+  for (const k of Object.keys(fields)) {
+    res[k] = convertFirestoreValue(fields[k]);
+  }
+  return res;
+}
+
+/**
+ * Convierte un objeto JavaScript a la estructura de campos de Firestore REST
+ */
+function convertObjectToFirestoreValue(val) {
+  if (val === null || val === undefined) {
+    return { nullValue: null };
+  }
+  if (typeof val === 'string') {
+    return { stringValue: val };
+  }
+  if (typeof val === 'number') {
+    if (Number.isInteger(val)) {
+      return { integerValue: String(val) };
+    }
+    return { doubleValue: val };
+  }
+  if (typeof val === 'boolean') {
+    return { booleanValue: val };
+  }
+  if (Array.isArray(val)) {
+    return {
+      arrayValue: {
+        values: val.map(convertObjectToFirestoreValue)
+      }
+    };
+  }
+  if (typeof val === 'object') {
+    const fields = {};
+    for (const k of Object.keys(val)) {
+      fields[k] = convertObjectToFirestoreValue(val[k]);
+    }
+    return {
+      mapValue: { fields }
+    };
+  }
+  return { stringValue: String(val) };
+}
+
+/**
+ * Guarda el objeto DB en Firebase Firestore vía REST API
+ */
+async function saveFirestoreDB(dbObj) {
+  const url = `https://firestore.googleapis.com/v1/projects/${FIRESTORE_PROJECT}/databases/(default)/documents/${FIRESTORE_DOC_PATH}?key=${FIRESTORE_API_KEY}`;
+  
+  const payload = JSON.stringify({
+    fields: {
+      db: convertObjectToFirestoreValue(dbObj),
+      version: { stringValue: 'v17' },
+      updatedAt: { timestampValue: new Date().toISOString() }
+    }
+  });
+
+  return new Promise((resolve, reject) => {
+    const parsed = new URL(url);
+    const req = https.request(parsed, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(payload)
+      }
+    }, (res) => {
+      let data = '';
+      res.on('data', chunk => data += chunk);
+      res.on('end', () => {
+        if (res.statusCode >= 200 && res.statusCode < 300) {
+          resolve(JSON.parse(data));
+        } else {
+          reject(new Error(`Firestore PATCH failed (${res.statusCode}): ${data}`));
+        }
+      });
+    });
+
+    req.on('error', reject);
+    req.write(payload);
+    req.end();
+  });
+}
+
+/**
+ * Función principal de sincronización
+ */
+async function runSync() {
+  console.log(`[${getMadridFormattedTimestamp()}] Iniciando sincronización oficial con FUTGAL...`);
+
+  const futgalResults = {
+    liga: [],
+    copa: []
+  };
+
+  // 1. Sincronizar Liga (30 jornadas)
+  const ligaConfig = FUTGAL_COMPETITIONS.find(c => c.tipo === 'liga');
+  if (ligaConfig) {
+    console.log(`\n=== Consultando LIGA (${ligaConfig.nombre}): ${ligaConfig.jornadas} Jornadas ===`);
+    for (let j = 1; j <= ligaConfig.jornadas; j++) {
+      const url = buildFutgalUrl(ligaConfig, j);
+      try {
+        const { html } = await fetchWithCookies(url);
+        const matches = parseFutgalJornadaHtml(html, j, ligaConfig);
+        futgalResults.liga.push(matches);
+        const dornedaM = matches.find(m => m.dorneda);
+        if (dornedaM) {
+          console.log(`  ✓ J${j}: ${dornedaM.local} (${dornedaM.gl !== null ? dornedaM.gl : '-'}) vs ${dornedaM.visitante} (${dornedaM.gv !== null ? dornedaM.gv : '-'}) | ${dornedaM.fecha} ${dornedaM.hora || ''}`);
+        } else {
+          console.log(`  ✓ J${j}: ${matches.length} partidos encontrados`);
+        }
+      } catch (err) {
+        console.error(`  ✗ Error al consultar Liga J${j}:`, err.message);
+      }
+      // Pequeña pausa para evitar rate limiting
+      await new Promise(r => setTimeout(r, 120));
+    }
+  }
+
+  // 2. Sincronizar Copas (Copa 1 y futuras)
+  const copaConfigs = FUTGAL_COMPETITIONS.filter(c => c.tipo === 'copa');
+  for (const copaConfig of copaConfigs) {
+    console.log(`\n=== Consultando COPA (${copaConfig.nombre}) ===`);
+    let ronda = 1;
+    let keepChecking = true;
+
+    while (keepChecking && ronda <= 10) {
+      const url = buildFutgalUrl(copaConfig, ronda);
+      try {
+        const { html } = await fetchWithCookies(url);
+        const matches = parseFutgalJornadaHtml(html, ronda, copaConfig);
+
+        if (matches.length === 0) {
+          console.log(`  ℹ Ronda ${ronda}: Sin partidos publicados aún.`);
+          keepChecking = false;
+        } else {
+          futgalResults.copa.push(matches);
+          const dornedaM = matches.find(m => m.dorneda);
+          if (dornedaM) {
+            console.log(`  ✓ Ronda ${ronda} (Dorneda): ${dornedaM.local} (${dornedaM.gl !== null ? dornedaM.gl : '-'}) vs ${dornedaM.visitante} (${dornedaM.gv !== null ? dornedaM.gv : '-'}) | ${dornedaM.fecha} ${dornedaM.hora || ''} | Estado: ${dornedaM.estado}`);
+          } else {
+            console.log(`  ✓ Ronda ${ronda}: ${matches.length} partidos encontrados.`);
+          }
+          ronda++;
+        }
+      } catch (err) {
+        console.error(`  ✗ Error al consultar Copa Ronda ${ronda}:`, err.message);
+        keepChecking = false;
+      }
+      await new Promise(r => setTimeout(r, 150));
+    }
+  }
+
+  // 3. Obtener DB actual de Firestore
+  console.log(`\n=== Obteniendo datos actuales de Firebase Firestore... ===`);
+  let currentDB = await getFirestoreDB();
+  if (!currentDB) {
+    console.warn(`No se pudo obtener DB de Firestore o está vacía. Intentando cargar datos por defecto...`);
+    // Cargar archivo dorneda-app.html para extraer DEFAULT_DATA si fuera necesario
+    currentDB = { partidos: [], calendario: [], todasJornadas: [], copaJornadas: [] };
+  }
+
+  // 4. Merge no destructivo
+  console.log(`=== Realizando fusión no destructiva (Upsert) de datos... ===`);
+  const { updatedDB, summary, logs } = mergeFutgalDataIntoDB(currentDB, futgalResults);
+
+  console.log(`\nResumen de Sincronización:`);
+  console.log(`- Jornadas de Liga revisadas: ${summary.ligaJornadasChecked}`);
+  console.log(`- Rondas de Copa encontradas: ${summary.copaRondasFound}`);
+  console.log(`- Partidos actualizados: ${summary.partidosActualizados}`);
+  console.log(`- Nuevos partidos: ${summary.nuevosPartidos}`);
+  console.log(`- Sin cambios: ${summary.sinCambios}`);
+
+  if (logs.length > 0) {
+    console.log(`\nCambios detectados:`);
+    logs.forEach(l => console.log(`  • [${l.fecha} ${l.hora}] ${l.detalle}`));
+  }
+
+  // 5. Guardar en Firestore
+  console.log(`\n=== Guardando datos actualizados en Firestore... ===`);
+  try {
+    await saveFirestoreDB(updatedDB);
+    console.log(`✓ Datos guardados exitosamente en Firestore.`);
+  } catch (err) {
+    console.error(`✗ Error al guardar en Firestore:`, err.message);
+  }
+
+  // 6. Guardar snapshot local de backup
+  try {
+    const backupDir = path.join(__dirname, '..', 'Archivos', 'backups');
+    if (!fs.existsSync(backupDir)) {
+      fs.mkdirSync(backupDir, { recursive: true });
+    }
+    const backupFile = path.join(backupDir, `db_snapshot_${Date.now()}.json`);
+    fs.writeFileSync(backupFile, JSON.stringify(updatedDB, null, 2), 'utf8');
+    console.log(`✓ Snapshot de seguridad guardado en ${backupFile}`);
+  } catch (e) {
+    console.warn(`No se pudo guardar el snapshot local:`, e.message);
+  }
+
+  console.log(`\n[${getMadridFormattedTimestamp()}] Sincronización completada con éxito.`);
+}
+
+// Ejecutar si se invoca directamente
+if (require.main === module) {
+  runSync().catch(err => {
+    console.error('Error fatal en sincronización:', err);
+    process.exit(1);
+  });
+}
+
+module.exports = { runSync, fetchWithCookies, getFirestoreDB, saveFirestoreDB };
