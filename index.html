@@ -616,6 +616,218 @@
       box-shadow: 0 1px 2px rgba(0,0,0,0.02);
     }
 
+    /* ==========================================
+       COPA TOURNAMENT BRACKET (CUADRO DE COPA)
+       ========================================== */
+    .copa-bracket-wrap {
+      position: relative;
+      background: radial-gradient(ellipse at 50% 20%, #093f55 0%, #082939 55%, #051a24 100%);
+      border: 1px solid #0284c7;
+      border-radius: 12px;
+      padding: 16px;
+      overflow-x: auto;
+      scrollbar-width: thin;
+      box-shadow: inset 0 0 35px rgba(0,0,0,0.5), 0 4px 20px rgba(0,0,0,0.25);
+    }
+    .copa-bracket-inner {
+      min-width: 1540px;
+      transform-origin: top left;
+      transition: transform 0.15s ease;
+    }
+    .copa-bracket-headers {
+      display: grid;
+      grid-template-columns: 210px 175px 160px 150px 145px 190px 145px 150px 160px 175px 210px;
+      gap: 12px;
+      margin-bottom: 16px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .copa-round-hdr {
+      padding: 6px 4px;
+      border-radius: 6px;
+      font-weight: 900;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      line-height: 1.2;
+    }
+    .copa-round-hdr .hdr-title { font-size: 11px; }
+    .copa-round-hdr .hdr-date { font-size: 9px; font-weight: 700; opacity: 0.9; margin-top: 1px; }
+    .hdr-32 { background: linear-gradient(135deg, #f97316, #ea580c); border: 1px solid #c2410c; }
+    .hdr-16 { background: linear-gradient(135deg, #16a34a, #15803d); border: 1px solid #14532d; }
+    .hdr-8 { background: linear-gradient(135deg, #65a30d, #4d7c0f); border: 1px solid #365314; }
+    .hdr-4 { background: linear-gradient(135deg, #eab308, #ca8a04); border: 1px solid #a16207; color: #451a03 !important; }
+    .hdr-semi { background: linear-gradient(135deg, #f97316, #ea580c); border: 1px solid #c2410c; }
+    .hdr-final { background: linear-gradient(135deg, #9333ea, #7e22ce); border: 2px solid #a855f7; box-shadow: 0 0 15px rgba(168,85,247,0.4); }
+
+    .copa-bracket-body {
+      display: grid;
+      grid-template-columns: 210px 175px 160px 150px 145px 190px 145px 150px 160px 175px 210px;
+      gap: 12px;
+      align-items: stretch;
+      min-height: 720px;
+    }
+
+    .bracket-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      gap: 6px;
+      position: relative;
+    }
+
+    .bracket-slot-card {
+      background: #ffffff;
+      color: #0f172a;
+      border: 1px solid #cbd5e1;
+      border-radius: 5px;
+      padding: 3px 6px;
+      font-size: 10px;
+      font-weight: 700;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+      transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
+      position: relative;
+      user-select: none;
+    }
+    .bracket-slot-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      border-color: #0284c7;
+      z-index: 5;
+    }
+    .bracket-slot-card.dorneda-slot {
+      background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%) !important;
+      border: 2px solid #dc2626 !important;
+      box-shadow: 0 0 12px rgba(220,38,38,0.35) !important;
+    }
+    .bracket-slot-card.dorneda-slot .team-name {
+      color: #991b1b !important;
+      font-weight: 900 !important;
+    }
+    .bracket-slot-card.winner {
+      background: #f0fdf4;
+      border-color: #22c55e;
+    }
+    .bracket-slot-card.winner .team-name {
+      color: #15803d;
+      font-weight: 800;
+    }
+    .bracket-slot-card.empty-slot {
+      background: rgba(255,255,255,0.85);
+      border: 1px dashed #94a3b8;
+      color: #64748b;
+      font-style: italic;
+    }
+
+    .bracket-match-32-row {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 4px;
+    }
+    .bracket-num-pill {
+      width: 17px;
+      height: 17px;
+      background: #0284c7;
+      color: #ffffff;
+      border-radius: 50%;
+      font-size: 8.5px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+    .bracket-team-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3px;
+      padding: 1.5px 0;
+      line-height: 1.2;
+    }
+    .bracket-team-line .team-name {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      flex: 1;
+      font-size: 9.5px;
+    }
+    .bracket-team-line .team-div {
+      font-size: 8px;
+      color: #64748b;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .bracket-team-line .team-score {
+      font-size: 10px;
+      font-weight: 900;
+      padding: 0 3px;
+      border-radius: 2px;
+      background: #e2e8f0;
+      color: #0f172a;
+      flex-shrink: 0;
+    }
+    .bracket-team-line.is-winner .team-score {
+      background: #22c55e;
+      color: #ffffff;
+    }
+    .bracket-arrow-indicator {
+      font-size: 10px;
+      color: #38bdf8;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    /* Final Hero Card in center */
+    .bracket-final-box {
+      background: linear-gradient(145deg, #581c87 0%, #3b0764 100%);
+      border: 3px solid #a855f7;
+      border-radius: 10px;
+      padding: 12px 8px;
+      color: #ffffff;
+      text-align: center;
+      box-shadow: 0 0 25px rgba(168,85,247,0.45);
+      position: relative;
+    }
+    .bracket-final-trophy {
+      font-size: 28px;
+      margin-bottom: 4px;
+      filter: drop-shadow(0 2px 6px rgba(234,179,8,0.6));
+    }
+    .bracket-final-title {
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      color: #fef08a;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+    .bracket-final-date {
+      font-size: 9.5px;
+      font-weight: 700;
+      color: #e9d5ff;
+      margin-bottom: 10px;
+    }
+
+    .pulse-gold-highlight {
+      animation: pulseGoldGlow 1.5s infinite alternate;
+    }
+    @keyframes pulseGoldGlow {
+      from { box-shadow: 0 0 8px #eab308, 0 0 16px #eab308; }
+      to { box-shadow: 0 0 20px #eab308, 0 0 35px #f59e0b; }
+    }
+
     /* AUTHENTIC SOCCER CARDS (Amarilla / Roja) */
     .soccer-card {
       display: inline-block;
@@ -2854,12 +3066,13 @@
       <div id="compViewCopa" style="display:none">
         <!-- Sub-tabs bar Copa -->
         <div style="display:flex;gap:6px;overflow-x:auto;padding-bottom:10px;margin-bottom:16px;scrollbar-width:thin;border-bottom:1px solid var(--border);" id="copaSubTabsWrap">
-          <button class="btn btn-sm btn-primary" id="subTabCopaCuadro" onclick="showCopaSubTab('cuadro')" style="font-size:12px;font-weight:800;border-radius:12px;white-space:nowrap;">🏆 Eliminatorias y Cuadro</button>
-          <button class="btn btn-sm btn-ghost" id="subTabCopaGoleadores" onclick="showCopaSubTab('goleadores')" style="font-size:12px;font-weight:800;border-radius:12px;white-space:nowrap;">&#128095; Goleadores Copa (109)</button>
+          <button class="btn btn-sm btn-ghost" id="subTabCopaEliminatorias" onclick="showCopaSubTab('eliminatorias')" style="font-size:12px;font-weight:800;border-radius:12px;white-space:nowrap;">🏆 Eliminatorias y Resultados</button>
+          <button class="btn btn-sm btn-primary" id="subTabCopaCuadro" onclick="showCopaSubTab('cuadro')" style="font-size:12px;font-weight:800;border-radius:12px;white-space:nowrap;">🌳 Cuadro de Copa</button>
+          <button class="btn btn-sm btn-ghost" id="subTabCopaGoleadores" onclick="showCopaSubTab('goleadores')" style="font-size:12px;font-weight:800;border-radius:12px;white-space:nowrap;">👟 Goleadores Copa (109)</button>
         </div>
 
-        <!-- 3.1 COPA ELIMINATORIAS Y CUADRO -->
-        <div id="copaSubViewCuadro">
+        <!-- 3.1 COPA ELIMINATORIAS Y RESULTADOS -->
+        <div id="copaSubViewEliminatorias" style="display:none">
           <div class="card mb-16">
             <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:14px;border-bottom:1px solid var(--border);padding-bottom:12px;">
               <div>
@@ -2925,7 +3138,61 @@
           </div>
         </div>
 
-        <!-- 3.2 COPA GOLEADORES -->
+        <!-- 3.2 COPA CUADRO DEL TORNEO (BRACKET) -->
+        <div id="copaSubViewCuadro">
+          <div class="card mb-16" style="padding:16px;">
+            <!-- Header bar with title and actions -->
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:14px;border-bottom:1px solid var(--border);padding-bottom:12px;">
+              <div>
+                <div style="font-size:16px;font-weight:900;color:var(--text);display:flex;align-items:center;gap:6px">
+                  <span>🌳 Cuadro Oficial del Torneo &middot; Copa Federación A Coruña 2026/27</span>
+                </div>
+                <div style="font-size:12px;color:var(--text-muted);margin-top:2px">
+                  Diagrama interactivo de emparejamientos y eliminatorias directas desde 32-avos hasta la Gran Final
+                </div>
+              </div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+                <!-- Dorneda shortcut button -->
+                <button type="button" class="btn btn-primary btn-sm" onclick="focusCopaDornedaPath()" title="Centrar y resaltar el camino del Xuventude Dorneda">
+                  <span>⭐ Camino Dorneda</span>
+                </button>
+                <!-- Zoom controls -->
+                <div class="btn-group" style="display:inline-flex;border:1px solid var(--border);border-radius:6px;overflow:hidden;">
+                  <button type="button" class="btn btn-ghost btn-sm" onclick="zoomCopaBracket(-0.1)" title="Alejar (Zoom Out)" style="padding:4px 8px;font-weight:900;">➖</button>
+                  <button type="button" class="btn btn-ghost btn-sm" onclick="resetCopaBracketZoom()" title="Restablecer Zoom" id="btnBracketZoomLabel" style="padding:4px 8px;font-size:11px;font-weight:700;">100%</button>
+                  <button type="button" class="btn btn-ghost btn-sm" onclick="zoomCopaBracket(0.1)" title="Acercar (Zoom In)" style="padding:4px 8px;font-weight:900;">➕</button>
+                </div>
+                <button type="button" class="btn btn-ghost btn-sm" onclick="syncCopaFromFutgal()">
+                  <span>🔄 Actualizar Copa</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Legend and Info pill bar -->
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px 12px;margin-bottom:14px;font-size:11px;color:var(--text-muted);">
+              <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                <span style="display:inline-flex;align-items:center;gap:4px;"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#f97316;"></span> <strong>32-Avos:</strong> 5 Sept</span>
+                <span style="display:inline-flex;align-items:center;gap:4px;"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#16a34a;"></span> <strong>16-Avos:</strong> 31 Oct</span>
+                <span style="display:inline-flex;align-items:center;gap:4px;"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#65a30d;"></span> <strong>Octavos:</strong> 26 Dic</span>
+                <span style="display:inline-flex;align-items:center;gap:4px;"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#eab308;"></span> <strong>Cuartos:</strong> 2 Ene</span>
+                <span style="display:inline-flex;align-items:center;gap:4px;"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#ea580c;"></span> <strong>Semis:</strong> 27 Mar</span>
+                <span style="display:inline-flex;align-items:center;gap:4px;"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#9333ea;"></span> <strong>Final:</strong> 15 May</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:6px;">
+                <span class="badge badge-accent" style="font-size:9px;font-weight:900;">⭐ XUVENTUDE DORNEDA: Clasificado a 16-avos</span>
+              </div>
+            </div>
+
+            <!-- Scrollable Bracket Canvas Container -->
+            <div id="copaBracketCanvasWrap" class="copa-bracket-wrap">
+              <div id="copaBracketCanvas" class="copa-bracket-inner">
+                <!-- Dynamically rendered bracket will appear here -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3.3 COPA GOLEADORES -->
         <div id="copaSubViewGoleadores" style="display:none">
           <div class="card mb-16">
             <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:14px;border-bottom:1px solid var(--border);padding-bottom:10px;">
@@ -7664,6 +7931,7 @@ function saveModalEditarCopa(rondaNum){
     saveDB();
     closeModal('modalEditarCopa');
     renderCopaView();
+    renderCopaBracket();
     toast('Resultados de Copa guardados', 'success');
   }
 }
@@ -8926,16 +9194,502 @@ function showCopaSubTab(subTab, el){
     activeBtn.style.fontWeight = '800';
   }
 
+  var elElim = document.getElementById('copaSubViewEliminatorias');
   var elCuadro = document.getElementById('copaSubViewCuadro');
   var elGol = document.getElementById('copaSubViewGoleadores');
 
+  if(elElim) elElim.style.display = (subTab === 'eliminatorias') ? 'block' : 'none';
   if(elCuadro) elCuadro.style.display = (subTab === 'cuadro') ? 'block' : 'none';
   if(elGol) elGol.style.display = (subTab === 'goleadores') ? 'block' : 'none';
 
-  if(subTab === 'cuadro') renderCopaView();
+  if(subTab === 'eliminatorias') renderCopaView();
+  if(subTab === 'cuadro') renderCopaBracket();
   if(subTab === 'goleadores') renderCopaGoleadoresView();
 }
 window.showCopaSubTab = showCopaSubTab;
+
+// =========================================================================
+// TOURNAMENT BRACKET LOGIC & RENDERING (CUADRO COMPLETO DE COPA)
+// =========================================================================
+let copaBracketZoom = 1.0;
+
+function zoomCopaBracket(delta){
+  copaBracketZoom = Math.min(1.4, Math.max(0.6, copaBracketZoom + delta));
+  applyCopaBracketZoom();
+}
+window.zoomCopaBracket = zoomCopaBracket;
+
+function resetCopaBracketZoom(){
+  copaBracketZoom = 1.0;
+  applyCopaBracketZoom();
+}
+window.resetCopaBracketZoom = resetCopaBracketZoom;
+
+function applyCopaBracketZoom(){
+  var canvas = document.getElementById('copaBracketCanvas');
+  var label = document.getElementById('btnBracketZoomLabel');
+  if(canvas){
+    canvas.style.transform = `scale(${copaBracketZoom})`;
+  }
+  if(label){
+    label.textContent = Math.round(copaBracketZoom * 100) + '%';
+  }
+}
+
+function focusCopaDornedaPath(){
+  resetCopaBracketZoom();
+  var dornedaCard = document.getElementById('bracket-match-31');
+  var container = document.getElementById('copaBracketCanvasWrap');
+  if(dornedaCard && container){
+    var offsetLeft = dornedaCard.offsetLeft - container.clientWidth / 2;
+    var offsetTop = dornedaCard.offsetTop - container.clientHeight / 2;
+    container.scrollTo({ left: Math.max(0, offsetLeft), top: Math.max(0, offsetTop), behavior: 'smooth' });
+    
+    document.querySelectorAll('.dorneda-slot').forEach(function(el){
+      el.classList.add('pulse-gold-highlight');
+      setTimeout(function(){ el.classList.remove('pulse-gold-highlight'); }, 3500);
+    });
+  }
+  toast('Camino del Xuventude Dorneda enfocado en el cuadro', 'success');
+}
+window.focusCopaDornedaPath = focusCopaDornedaPath;
+
+const COPA_BRACKET_MATCHES_32 = [
+  // LEFT SIDE - TOP QUADRANT (1 to 8)
+  { num: 1,  side: 'L', quad: 'T', t1: 'U.D. CARRAL', div1: '3ª', t2: 'PASTORIZA VET.', div2: '2ª', matchId: 113, next16: 'A' },
+  { num: 2,  side: 'L', quad: 'T', t1: 'BEAT ST. BETANZOS', div1: '2ªB', t2: 'PAIOSACO S.D.', div2: '2ª', matchId: 105, next16: 'A' },
+  { num: 3,  side: 'L', quad: 'T', t1: 'ATL. ARTEIXO', div1: '3ª', t2: 'ATL. SOBRADO', div2: '2ª', matchId: 125, next16: 'B' },
+  { num: 4,  side: 'L', quad: 'T', t1: 'SAN CRISTÓBAL', div1: '3ª', t2: 'C.D. SIGRAS', div2: '1ª', matchId: 114, next16: 'B' },
+  { num: 5,  side: 'L', quad: 'T', t1: 'RELÁMPAGO VET.', div1: '2ª', t2: 'F.C. ROSSONERO', div2: 'DH', matchId: 126, next16: 'C' },
+  { num: 6,  side: 'L', quad: 'T', t1: 'BETANZOS NORTE', div1: '1ª', t2: 'SPORTING UXES', div2: 'DH', matchId: 115, next16: 'C' },
+  { num: 7,  side: 'L', quad: 'T', t1: 'MARAVILLAS S.D.', div1: '2ªB', t2: 'SPORTING MAP', div2: '2ª', matchId: 127, next16: 'D' },
+  { num: 8,  side: 'L', quad: 'T', t1: 'SP. CORUÑÉS', div1: '3ª', t2: 'CARRAL VET.', div2: 'DH', matchId: 130, next16: 'D' },
+
+  // LEFT SIDE - BOTTOM QUADRANT (17 to 24)
+  { num: 17, side: 'L', quad: 'B', t1: 'C.D. NOS CORUÑA', div1: '2ªB', t2: 'C. JUV. LATINO', div2: '2ª', matchId: 101, next16: 'E' },
+  { num: 18, side: 'L', quad: 'B', t1: 'CECEBRE S.D.', div1: '2ª', t2: 'C.F. TEKE TEKE ORDES', div2: 'DH', matchId: 102, next16: 'E' },
+  { num: 19, side: 'L', quad: 'B', t1: 'S.P.M.', div1: '2ª', t2: 'PENOUQUEIRA SRD', div2: 'DH', matchId: 120, next16: 'F' },
+  { num: 20, side: 'L', quad: 'B', t1: 'PIADELA C.F.', div1: '3ª', t2: 'C.F. CRENDES V.', div2: '2ªB', matchId: 106, next16: 'F' },
+  { num: 21, side: 'L', quad: 'B', t1: 'SP. BURGO', div1: '1ª', t2: 'C.F. BATALLADOR', div2: 'DH', matchId: 107, next16: 'G' },
+  { num: 22, side: 'L', quad: 'B', t1: 'GALICIA GAITEIRA', div1: '3ª', t2: 'BEMANTES S.D.', div2: 'DH', matchId: 103, next16: 'G' },
+  { num: 23, side: 'L', quad: 'B', t1: 'MERCURIO S.D.', div1: '2ªB', t2: 'LICEO S.D.', div2: '1ª', matchId: 108, next16: 'H' },
+  { num: 24, side: 'L', quad: 'B', t1: 'C.D. MARTE', div1: '3ª', t2: 'S.D. SIN QUERER', div2: 'DH', matchId: 129, next16: 'H' },
+
+  // RIGHT SIDE - TOP QUADRANT (9 to 16)
+  { num: 9,  side: 'R', quad: 'T', t1: 'S.D. OSEIRO', div1: '3ª', t2: 'CAMPANAL F.C.', div2: '1ª', matchId: 124, next16: 'I' },
+  { num: 10, side: 'R', quad: 'T', t1: 'S.D.C. MANIÑOS', div1: '3ª', t2: 'C.D. NARÓN', div2: '1ª', matchId: 117, next16: 'I' },
+  { num: 11, side: 'R', quad: 'T', t1: 'C.D. ESTRELLA', div1: '2ªB', t2: 'PORTAZGO S.D.', div2: '1ª', matchId: 116, next16: 'J' },
+  { num: 12, side: 'R', quad: 'T', t1: 'UDJ ALMEIRAS', div1: '2ª', t2: 'SP. MEICENDE', div2: 'DH', matchId: 128, next16: 'J' },
+  { num: 13, side: 'R', quad: 'T', t1: 'ONCE CABALLEROS C.F.', div1: '3ª', t2: 'CEDEIRA S.D.', div2: '1ª', matchId: null, next16: 'K' },
+  { num: 14, side: 'R', quad: 'T', t1: 'S.D. STA MARGARITA', div1: '2ª', t2: 'SAN MARTIÑOS S.D.', div2: '1ª', matchId: 118, next16: 'K' },
+  { num: 15, side: 'R', quad: 'T', t1: 'C. DEP. CIUDAD', div1: '3ª', t2: 'SP. CAMBRE', div2: '1ª', matchId: 119, next16: 'L' },
+  { num: 16, side: 'R', quad: 'T', t1: 'HERCULES S.D.', div1: '3ª', t2: 'SDC TEIXEIRO', div2: '2ª', matchId: 104, next16: 'L' },
+
+  // RIGHT SIDE - BOTTOM QUADRANT (25 to 32)
+  { num: 25, side: 'R', quad: 'B', t1: 'CAMBRE C.F.', div1: '2ªB', t2: 'U.D. PAIOSACO', div2: '1ª', matchId: 109, next16: 'M' },
+  { num: 26, side: 'R', quad: 'B', t1: 'MARINO C.F.', div1: '2ªB', t2: 'CLUB DO MAR', div2: '2ª', matchId: 111, next16: 'M' },
+  { num: 27, side: 'R', quad: 'B', t1: 'S.D. VALDOVIÑO', div1: '3ª', t2: 'VIOÑO C.F.', div2: '3ª', matchId: 121, next16: 'N' },
+  { num: 28, side: 'R', quad: 'B', t1: 'RACING SADA F.C.', div1: '3ª', t2: 'ATL. CASTROS', div2: '2ª', matchId: 110, next16: 'N' },
+  { num: 29, side: 'R', quad: 'B', t1: 'ATL. PERILLO', div1: '3ª', t2: 'SP. CORUÑES B', div2: '3ª', matchId: 122, next16: 'O' },
+  { num: 30, side: 'R', quad: 'B', t1: 'C.D. LARIN', div1: '2ª', t2: 'SADA C.F.', div2: '1ª', matchId: 112, next16: 'O' },
+  { num: 31, side: 'R', quad: 'B', t1: 'U.D. NARAHIO', div1: '1ª', t2: 'C. XUV. DORNEDA', div2: '1ª', matchId: 123, next16: 'P', isDorneda: true },
+  { num: 32, side: 'R', quad: 'B', t1: 'URAL ESPAÑOL C.F.', div1: '3ª', t2: 'EXENTO', div2: '', matchId: null, next16: 'P', isExento: true }
+];
+
+function get32Result(m){
+  var r32 = (db.copaJornadas && db.copaJornadas[0] ? db.copaJornadas[0].partidos : []) || [];
+  var p = null;
+  if(m.matchId){
+    p = r32.find(x => x.id === m.matchId);
+  }
+  if(!p){
+    // Match by team names
+    p = r32.find(x => {
+      var l = (x.local || '').toUpperCase();
+      var v = (x.visitante || '').toUpperCase();
+      return (l.indexOf(m.t1.toUpperCase().slice(0, 7)) !== -1 && v.indexOf(m.t2.toUpperCase().slice(0, 7)) !== -1) ||
+             (v.indexOf(m.t1.toUpperCase().slice(0, 7)) !== -1 && l.indexOf(m.t2.toUpperCase().slice(0, 7)) !== -1);
+    });
+  }
+
+  if(m.isExento || m.t2 === 'EXENTO'){
+    return { hasScore: true, s1: null, s2: null, winner: m.t1, divWinner: m.div1, isWinner1: true, isWinner2: false, isDorneda: false, matchObj: null };
+  }
+  if(m.num === 13){
+    return { hasScore: true, s1: null, s2: null, winner: 'CEDEIRA S.D.', divWinner: '1ª', isWinner1: false, isWinner2: true, isDorneda: false, matchObj: null };
+  }
+
+  if(p && p.gl !== null && p.gl !== undefined && p.gv !== null && p.gv !== undefined){
+    var s1 = (p.local && p.local.toUpperCase().indexOf(m.t1.toUpperCase().slice(0,6)) !== -1) ? p.gl : p.gv;
+    var s2 = (p.visitante && p.visitante.toUpperCase().indexOf(m.t2.toUpperCase().slice(0,6)) !== -1) ? p.gv : p.gl;
+    var isW1 = false, isW2 = false;
+    var winner = p.clasificado || null;
+    if(p.clasificado){
+      if(p.clasificado.toUpperCase().indexOf(m.t1.toUpperCase().slice(0,6)) !== -1) { isW1 = true; winner = m.t1; }
+      else { isW2 = true; winner = m.t2; }
+    } else if(s1 > s2){
+      isW1 = true; winner = m.t1;
+    } else if(s2 > s1){
+      isW2 = true; winner = m.t2;
+    }
+    var divWinner = isW1 ? m.div1 : (isW2 ? m.div2 : '');
+    var isDorneda = (m.t1.indexOf('DORNEDA') !== -1 || m.t2.indexOf('DORNEDA') !== -1);
+    return { hasScore: true, s1: s1, s2: s2, winner: winner, divWinner: divWinner, isWinner1: isW1, isWinner2: isW2, isDorneda: isDorneda, matchObj: p };
+  }
+
+  return { hasScore: false, s1: null, s2: null, winner: null, divWinner: '', isWinner1: false, isWinner2: false, isDorneda: (m.t1.indexOf('DORNEDA') !== -1 || m.t2.indexOf('DORNEDA') !== -1), matchObj: p };
+}
+
+function renderCopaBracket(){
+  var canvas = document.getElementById('copaBracketCanvas');
+  if(!canvas) return;
+
+  var r32Results = {};
+  COPA_BRACKET_MATCHES_32.forEach(function(m){
+    r32Results[m.num] = get32Result(m);
+  });
+
+  // 16-AVOS Pairs mapping
+  var pairs16 = [
+    // Left Top (A-D)
+    { code: 'A', side: 'L', quad: 'T', m1: 1,  m2: 2,  id: 201 },
+    { code: 'B', side: 'L', quad: 'T', m1: 3,  m2: 4,  id: 202 },
+    { code: 'C', side: 'L', quad: 'T', m1: 5,  m2: 6,  id: 203 },
+    { code: 'D', side: 'L', quad: 'T', m1: 7,  m2: 8,  id: 204 },
+    // Left Bottom (E-H)
+    { code: 'E', side: 'L', quad: 'B', m1: 17, m2: 18, id: 205 },
+    { code: 'F', side: 'L', quad: 'B', m1: 19, m2: 20, id: 206 },
+    { code: 'G', side: 'L', quad: 'B', m1: 21, m2: 22, id: 207 },
+    { code: 'H', side: 'L', quad: 'B', m1: 23, m2: 24, id: 208 },
+    // Right Top (I-L)
+    { code: 'I', side: 'R', quad: 'T', m1: 9,  m2: 10, id: 209 },
+    { code: 'J', side: 'R', quad: 'T', m1: 11, m2: 12, id: 210 },
+    { code: 'K', side: 'R', quad: 'T', m1: 13, m2: 14, id: 211 },
+    { code: 'L', side: 'R', quad: 'T', m1: 15, m2: 16, id: 212 },
+    // Right Bottom (M-P)
+    { code: 'M', side: 'R', quad: 'B', m1: 25, m2: 26, id: 213 },
+    { code: 'N', side: 'R', quad: 'B', m1: 27, m2: 28, id: 214 },
+    { code: 'O', side: 'R', quad: 'B', m1: 29, m2: 30, id: 215 },
+    { code: 'P', side: 'R', quad: 'B', m1: 31, m2: 32, id: 216, isDorneda: true }
+  ];
+
+  var r16Results = {};
+  var r16Matches = (db.copaJornadas && db.copaJornadas[1] ? db.copaJornadas[1].partidos : []) || [];
+
+  pairs16.forEach(function(pair){
+    var team1 = r32Results[pair.m1].winner || ('Ganador ' + pair.m1);
+    var div1  = r32Results[pair.m1].divWinner || '';
+    var team2 = r32Results[pair.m2].winner || ('Ganador ' + pair.m2);
+    var div2  = r32Results[pair.m2].divWinner || '';
+    
+    var p16 = r16Matches.find(x => x.id === pair.id);
+    var hasScore = (p16 && p16.gl !== null && p16.gv !== null);
+    var winner = null, isW1 = false, isW2 = false, s1 = null, s2 = null;
+    if(hasScore){
+      s1 = p16.gl; s2 = p16.gv;
+      if(p16.clasificado){
+        if(p16.clasificado.indexOf(team1.slice(0,6)) !== -1) { isW1 = true; winner = team1; }
+        else { isW2 = true; winner = team2; }
+      } else if(s1 > s2) { isW1 = true; winner = team1; }
+      else if(s2 > s1) { isW2 = true; winner = team2; }
+    }
+    var isDornedaMatch = (team1.indexOf('DORNEDA') !== -1 || team2.indexOf('DORNEDA') !== -1);
+    r16Results[pair.code] = { code: pair.code, side: pair.side, quad: pair.quad, team1, div1, team2, div2, hasScore, s1, s2, winner, isW1, isW2, isDorneda: isDornedaMatch, matchObj: p16 };
+  });
+
+  // OCTAVOS Pairs (Q1-Q8)
+  var pairs8 = [
+    { code: 'Q1', side: 'L', quad: 'T', p1: 'A', p2: 'B' },
+    { code: 'Q2', side: 'L', quad: 'T', p1: 'C', p2: 'D' },
+    { code: 'Q3', side: 'L', quad: 'B', p1: 'E', p2: 'F' },
+    { code: 'Q4', side: 'L', quad: 'B', p1: 'G', p2: 'H' },
+    { code: 'Q5', side: 'R', quad: 'T', p1: 'I', p2: 'J' },
+    { code: 'Q6', side: 'R', quad: 'T', p1: 'K', p2: 'L' },
+    { code: 'Q7', side: 'R', quad: 'B', p1: 'M', p2: 'N' },
+    { code: 'Q8', side: 'R', quad: 'B', p1: 'O', p2: 'P', isDorneda: true }
+  ];
+
+  var r8Results = {};
+  pairs8.forEach(function(p8){
+    var t1 = r16Results[p8.p1].winner || ('Ganador 16s (' + p8.p1 + ')');
+    var t2 = r16Results[p8.p2].winner || ('Ganador 16s (' + p8.p2 + ')');
+    var isDorneda = (t1.indexOf('DORNEDA') !== -1 || t2.indexOf('DORNEDA') !== -1);
+    r8Results[p8.code] = { code: p8.code, side: p8.side, quad: p8.quad, team1: t1, team2: t2, winner: null, isDorneda: isDorneda };
+  });
+
+  // CUARTOS Pairs (C1-C4)
+  var pairs4 = [
+    { code: 'C1', side: 'L', quad: 'T', q1: 'Q1', q2: 'Q2' },
+    { code: 'C2', side: 'L', quad: 'B', q1: 'Q3', q2: 'Q4' },
+    { code: 'C3', side: 'R', quad: 'T', q1: 'Q5', q2: 'Q6' },
+    { code: 'C4', side: 'R', quad: 'B', q1: 'Q7', q2: 'Q8', isDorneda: true }
+  ];
+
+  var r4Results = {};
+  pairs4.forEach(function(p4){
+    var t1 = r8Results[p4.q1].winner || ('Ganador Octavos (' + p4.q1 + ')');
+    var t2 = r8Results[p4.q2].winner || ('Ganador Octavos (' + p4.q2 + ')');
+    var isDorneda = (t1.indexOf('DORNEDA') !== -1 || t2.indexOf('DORNEDA') !== -1);
+    r4Results[p4.code] = { code: p4.code, side: p4.side, quad: p4.quad, team1: t1, team2: t2, winner: null, isDorneda: isDorneda };
+  });
+
+  // SEMIS (Semi 1 & Semi 2)
+  var tSemi1_A = r4Results['C1'].winner || 'Ganador Cuartos (C1)';
+  var tSemi1_B = r4Results['C2'].winner || 'Ganador Cuartos (C2)';
+  var tSemi2_A = r4Results['C3'].winner || 'Ganador Cuartos (C3)';
+  var tSemi2_B = r4Results['C4'].winner || 'Ganador Cuartos (C4)';
+
+  // RENDER COLUMNS HTML
+  function render32ColHtml(matchesList){
+    return matchesList.map(function(m){
+      var res = r32Results[m.num];
+      var isD1 = m.t1.indexOf('DORNEDA') !== -1;
+      var isD2 = m.t2.indexOf('DORNEDA') !== -1;
+      var isMatchDorneda = isD1 || isD2;
+
+      return `
+        <div class="bracket-match-32-row ${isMatchDorneda ? 'dorneda-slot' : ''}" id="bracket-match-${m.num}" onclick="${m.matchId ? `showDetallePartido(${m.matchId})` : ''}" style="${m.matchId ? 'cursor:pointer;' : ''}" title="${m.num}: ${m.t1} vs ${m.t2}">
+          <div class="bracket-num-pill">${m.num}</div>
+          <div style="flex:1;display:flex;flex-direction:column;gap:2px;overflow:hidden;">
+            <div class="bracket-slot-card ${res.isWinner1 ? 'winner' : ''} ${isD1 ? 'dorneda-slot' : ''}">
+              <div class="bracket-team-line ${res.isWinner1 ? 'is-winner' : ''}">
+                <span class="team-name">${isD1 ? '⭐ ' : ''}${highlightDorneda(m.t1)}</span>
+                <span class="team-div">(${m.div1})</span>
+                ${res.s1 !== null ? `<span class="team-score">${res.s1}</span>` : ''}
+              </div>
+            </div>
+            <div class="bracket-slot-card ${res.isWinner2 ? 'winner' : ''} ${isD2 ? 'dorneda-slot' : ''}">
+              <div class="bracket-team-line ${res.isWinner2 ? 'is-winner' : ''}">
+                <span class="team-name">${isD2 ? '⭐ ' : ''}${highlightDorneda(m.t2)}</span>
+                ${m.div2 ? `<span class="team-div">(${m.div2})</span>` : ''}
+                ${res.s2 !== null ? `<span class="team-score">${res.s2}</span>` : ''}
+              </div>
+            </div>
+          </div>
+          <div class="bracket-arrow-indicator">${m.side === 'L' ? '➡' : '⬅'}</div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function render16ColHtml(codeList){
+    return codeList.map(function(code){
+      var r = r16Results[code];
+      var isD1 = r.team1.indexOf('DORNEDA') !== -1;
+      var isD2 = r.team2.indexOf('DORNEDA') !== -1;
+      var isMatchDorneda = isD1 || isD2;
+
+      return `
+        <div class="bracket-slot-card ${isMatchDorneda ? 'dorneda-slot' : ''}" style="margin:6px 0;padding:5px 6px;" title="16-Avos (${code}): ${r.team1} vs ${r.team2}">
+          <div style="font-size:8.5px;font-weight:900;color:#0284c7;margin-bottom:3px;display:flex;justify-content:space-between;">
+            <span>16-Avos (${code})</span>
+            ${isMatchDorneda ? '<span style="color:#dc2626;font-weight:900;">⭐ DORNEDA</span>' : ''}
+          </div>
+          <div class="bracket-team-line ${r.isW1 ? 'is-winner' : ''}" style="padding:2px 0;">
+            <span class="team-name" style="font-weight:${isD1 ? '900' : '700'};color:${isD1 ? '#dc2626' : 'inherit'};">${isD1 ? '⭐ ' : ''}${highlightDorneda(r.team1)}</span>
+            ${r.div1 ? `<span class="team-div">(${r.div1})</span>` : ''}
+            ${r.s1 !== null ? `<span class="team-score">${r.s1}</span>` : ''}
+          </div>
+          <div class="bracket-team-line ${r.isW2 ? 'is-winner' : ''}" style="padding:2px 0;border-top:1px dashed #e2e8f0;margin-top:2px;">
+            <span class="team-name" style="font-weight:${isD2 ? '900' : '700'};color:${isD2 ? '#dc2626' : 'inherit'};">${isD2 ? '⭐ ' : ''}${highlightDorneda(r.team2)}</span>
+            ${r.div2 ? `<span class="team-div">(${r.div2})</span>` : ''}
+            ${r.s2 !== null ? `<span class="team-score">${r.s2}</span>` : ''}
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function render8ColHtml(codeList){
+    return codeList.map(function(code){
+      var r = r8Results[code];
+      var isD1 = r.team1.indexOf('DORNEDA') !== -1;
+      var isD2 = r.team2.indexOf('DORNEDA') !== -1;
+      var isMatchDorneda = isD1 || isD2;
+
+      return `
+        <div class="bracket-slot-card ${isMatchDorneda ? 'dorneda-slot' : ''}" style="margin:12px 0;padding:6px 6px;">
+          <div style="font-size:8.5px;font-weight:900;color:#65a30d;margin-bottom:3px;display:flex;justify-content:space-between;">
+            <span>Octavos (${code})</span>
+            ${isMatchDorneda ? '<span style="color:#dc2626;font-weight:900;">⭐ DORNEDA</span>' : ''}
+          </div>
+          <div class="bracket-team-line" style="padding:2px 0;">
+            <span class="team-name" style="font-weight:${isD1 ? '900' : '700'};">${isD1 ? '⭐ ' : ''}${highlightDorneda(r.team1)}</span>
+          </div>
+          <div class="bracket-team-line" style="padding:2px 0;border-top:1px dashed #e2e8f0;margin-top:2px;">
+            <span class="team-name" style="font-weight:${isD2 ? '900' : '700'};">${isD2 ? '⭐ ' : ''}${highlightDorneda(r.team2)}</span>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function render4ColHtml(codeList){
+    return codeList.map(function(code){
+      var r = r4Results[code];
+      var isD1 = r.team1.indexOf('DORNEDA') !== -1;
+      var isD2 = r.team2.indexOf('DORNEDA') !== -1;
+      var isMatchDorneda = isD1 || isD2;
+
+      return `
+        <div class="bracket-slot-card ${isMatchDorneda ? 'dorneda-slot' : ''}" style="margin:20px 0;padding:8px 6px;">
+          <div style="font-size:8.5px;font-weight:900;color:#eab308;margin-bottom:3px;display:flex;justify-content:space-between;">
+            <span>Cuartos (${code})</span>
+            ${isMatchDorneda ? '<span style="color:#dc2626;font-weight:900;">⭐ DORNEDA</span>' : ''}
+          </div>
+          <div class="bracket-team-line" style="padding:2px 0;">
+            <span class="team-name" style="font-weight:${isD1 ? '900' : '700'};">${isD1 ? '⭐ ' : ''}${highlightDorneda(r.team1)}</span>
+          </div>
+          <div class="bracket-team-line" style="padding:2px 0;border-top:1px dashed #e2e8f0;margin-top:2px;">
+            <span class="team-name" style="font-weight:${isD2 ? '900' : '700'};">${isD2 ? '⭐ ' : ''}${highlightDorneda(r.team2)}</span>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // Left & Right match lists
+  var m32_L_Top = COPA_BRACKET_MATCHES_32.filter(m => m.side === 'L' && m.quad === 'T');
+  var m32_L_Bot = COPA_BRACKET_MATCHES_32.filter(m => m.side === 'L' && m.quad === 'B');
+  var m32_R_Top = COPA_BRACKET_MATCHES_32.filter(m => m.side === 'R' && m.quad === 'T');
+  var m32_R_Bot = COPA_BRACKET_MATCHES_32.filter(m => m.side === 'R' && m.quad === 'B');
+
+  var html = `
+    <!-- 1. HEADERS BAR -->
+    <div class="copa-bracket-headers">
+      <div class="copa-round-hdr hdr-32"><span class="hdr-title">32-Avos</span><span class="hdr-date">5 Septiembre</span></div>
+      <div class="copa-round-hdr hdr-16"><span class="hdr-title">16-Avos</span><span class="hdr-date">31 Octubre</span></div>
+      <div class="copa-round-hdr hdr-8"><span class="hdr-title">Octavos</span><span class="hdr-date">26 Diciembre</span></div>
+      <div class="copa-round-hdr hdr-4"><span class="hdr-title">Cuartos</span><span class="hdr-date">2 Enero</span></div>
+      <div class="copa-round-hdr hdr-semi"><span class="hdr-title">Semis</span><span class="hdr-date">27 Marzo</span></div>
+      <div class="copa-round-hdr hdr-final"><span class="hdr-title">🏆 Gran Final</span><span class="hdr-date">15 Mayo</span></div>
+      <div class="copa-round-hdr hdr-semi"><span class="hdr-title">Semis</span><span class="hdr-date">27 Marzo</span></div>
+      <div class="copa-round-hdr hdr-4"><span class="hdr-title">Cuartos</span><span class="hdr-date">2 Enero</span></div>
+      <div class="copa-round-hdr hdr-8"><span class="hdr-title">Octavos</span><span class="hdr-date">26 Diciembre</span></div>
+      <div class="copa-round-hdr hdr-16"><span class="hdr-title">16-Avos</span><span class="hdr-date">31 Octubre</span></div>
+      <div class="copa-round-hdr hdr-32"><span class="hdr-title">32-Avos</span><span class="hdr-date">5 Septiembre</span></div>
+    </div>
+
+    <!-- 2. BRACKET BODY -->
+    <div class="copa-bracket-body">
+      <!-- Col 1: 32-AVOS LEFT (Matches 1-8 and 17-24) -->
+      <div class="bracket-col">
+        <div style="display:flex;flex-direction:column;gap:5px;background:rgba(0,0,0,0.18);padding:6px 4px;border-radius:6px;border:1px solid rgba(255,255,255,0.06);">
+          ${render32ColHtml(m32_L_Top)}
+        </div>
+        <div style="display:flex;flex-direction:column;gap:5px;background:rgba(0,0,0,0.18);padding:6px 4px;border-radius:6px;border:1px solid rgba(255,255,255,0.06);">
+          ${render32ColHtml(m32_L_Bot)}
+        </div>
+      </div>
+
+      <!-- Col 2: 16-AVOS LEFT (A-D and E-H) -->
+      <div class="bracket-col">
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          ${render16ColHtml(['A', 'B', 'C', 'D'])}
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          ${render16ColHtml(['E', 'F', 'G', 'H'])}
+        </div>
+      </div>
+
+      <!-- Col 3: OCTAVOS LEFT (Q1-Q2 and Q3-Q4) -->
+      <div class="bracket-col">
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          ${render8ColHtml(['Q1', 'Q2'])}
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          ${render8ColHtml(['Q3', 'Q4'])}
+        </div>
+      </div>
+
+      <!-- Col 4: CUARTOS LEFT (C1 and C2) -->
+      <div class="bracket-col">
+        <div style="display:flex;flex-direction:column;gap:32px;">
+          ${render4ColHtml(['C1', 'C2'])}
+        </div>
+      </div>
+
+      <!-- Col 5: SEMIS LEFT (Semi 1) -->
+      <div class="bracket-col" style="justify-content:center;">
+        <div class="bracket-slot-card" style="padding:10px 8px;border:2px solid #ea580c;box-shadow:0 0 15px rgba(234,88,12,0.3);">
+          <div style="font-size:9px;font-weight:900;color:#ea580c;margin-bottom:4px;">SEMIFINAL 1 (27 Mar)</div>
+          <div class="bracket-team-line" style="padding:3px 0;"><span class="team-name" style="font-weight:800;">${tSemi1_A}</span></div>
+          <div class="bracket-team-line" style="padding:3px 0;border-top:1px dashed #e2e8f0;margin-top:3px;"><span class="team-name" style="font-weight:800;">${tSemi1_B}</span></div>
+        </div>
+      </div>
+
+      <!-- Col 6: GRAN FINAL (CENTER) -->
+      <div class="bracket-col" style="justify-content:center;">
+        <div class="bracket-final-box" id="bracket-final-card">
+          <div class="bracket-final-trophy">🏆</div>
+          <div class="bracket-final-title">GRAN FINAL</div>
+          <div class="bracket-final-date">📅 15 Mayo 2027</div>
+          <div style="display:flex;flex-direction:column;gap:6px;margin:8px 0;">
+            <div class="bracket-slot-card" style="background:#ffffff;color:#0f172a;padding:5px 6px;border:1px solid #cbd5e1;">
+              <span class="team-name" style="font-weight:800;font-size:10px;">Finalista Cuadro Izq.</span>
+            </div>
+            <div style="font-size:10px;font-weight:900;color:#fef08a;">VS</div>
+            <div class="bracket-slot-card" style="background:#ffffff;color:#0f172a;padding:5px 6px;border:1px solid #cbd5e1;">
+              <span class="team-name" style="font-weight:800;font-size:10px;">Finalista Cuadro Der.</span>
+            </div>
+          </div>
+          <div style="margin-top:6px;font-size:9.5px;font-weight:800;color:#fef08a;background:rgba(0,0,0,0.35);padding:3px 6px;border-radius:4px;">
+            🎖️ CAMPEÓN DE COPA 2026/27
+          </div>
+        </div>
+      </div>
+
+      <!-- Col 7: SEMIS RIGHT (Semi 2) -->
+      <div class="bracket-col" style="justify-content:center;">
+        <div class="bracket-slot-card" style="padding:10px 8px;border:2px solid #ea580c;box-shadow:0 0 15px rgba(234,88,12,0.3);">
+          <div style="font-size:9px;font-weight:900;color:#ea580c;margin-bottom:4px;">SEMIFINAL 2 (27 Mar)</div>
+          <div class="bracket-team-line" style="padding:3px 0;"><span class="team-name" style="font-weight:800;">${tSemi2_A}</span></div>
+          <div class="bracket-team-line" style="padding:3px 0;border-top:1px dashed #e2e8f0;margin-top:3px;"><span class="team-name" style="font-weight:800;">${tSemi2_B}</span></div>
+        </div>
+      </div>
+
+      <!-- Col 8: CUARTOS RIGHT (C3 and C4) -->
+      <div class="bracket-col">
+        <div style="display:flex;flex-direction:column;gap:32px;">
+          ${render4ColHtml(['C3', 'C4'])}
+        </div>
+      </div>
+
+      <!-- Col 9: OCTAVOS RIGHT (Q5-Q6 and Q7-Q8) -->
+      <div class="bracket-col">
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          ${render8ColHtml(['Q5', 'Q6'])}
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          ${render8ColHtml(['Q7', 'Q8'])}
+        </div>
+      </div>
+
+      <!-- Col 10: 16-AVOS RIGHT (I-L and M-P) -->
+      <div class="bracket-col">
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          ${render16ColHtml(['I', 'J', 'K', 'L'])}
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          ${render16ColHtml(['M', 'N', 'O', 'P'])}
+        </div>
+      </div>
+
+      <!-- Col 11: 32-AVOS RIGHT (Matches 9-16 and 25-32) -->
+      <div class="bracket-col">
+        <div style="display:flex;flex-direction:column;gap:5px;background:rgba(0,0,0,0.18);padding:6px 4px;border-radius:6px;border:1px solid rgba(255,255,255,0.06);">
+          ${render32ColHtml(m32_R_Top)}
+        </div>
+        <div style="display:flex;flex-direction:column;gap:5px;background:rgba(0,0,0,0.18);padding:6px 4px;border-radius:6px;border:1px solid rgba(255,255,255,0.06);">
+          ${render32ColHtml(m32_R_Bot)}
+        </div>
+      </div>
+    </div>
+  `;
+
+  canvas.innerHTML = html;
+}
+window.renderCopaBracket = renderCopaBracket;
 
 // Render de Pretemporada (4 partidos limpios)
 function renderPretemporadaView(){
