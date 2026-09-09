@@ -208,11 +208,91 @@
     .score-sep{font-size:32px;color:var(--text-dim);}
     .score-result-badge{display:inline-block;padding:4px 16px;border-radius:6px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;margin-top:8px;}
     /* CLASIFICACION */
-    .clasif-row.dorneda-row td{background:rgba(204,0,0,0.06) !important;}
-    .clasif-row.dorneda-row td:nth-child(2){color:var(--red-light);font-weight:800;}
-    .clasif-pos{width:30px;text-align:center;font-weight:700;color:var(--text-dim);}
-    .clasif-pos.top3{color:var(--warning);}
-    .clasif-pts{font-weight:800;font-size:15px;color:var(--text);}
+    #mainClasifTable {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11.5px;
+    }
+    #mainClasifTable th {
+      background: var(--surface2);
+      padding: 5px 6px;
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+      white-space: nowrap;
+    }
+    #mainClasifTable th:nth-child(2) {
+      text-align: left;
+      padding-left: 8px;
+    }
+    #mainClasifTable td {
+      padding: 4px 6px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+      text-align: center;
+      font-size: 11.5px;
+      line-height: 1.25;
+    }
+    #mainClasifTable td:nth-child(2) {
+      text-align: left;
+      font-weight: 700;
+      padding-left: 8px;
+      font-size: 12px;
+    }
+    #mainClasifTable tr:hover td {
+      background: rgba(255, 255, 255, 0.04);
+    }
+    #mainClasifTable .dorneda-row {
+      background: rgba(255, 59, 32, 0.12) !important;
+      border-left: 3px solid #FF3B20 !important;
+    }
+    #mainClasifTable .dorneda-row td {
+      font-weight: 800 !important;
+    }
+    #mainClasifTable .dorneda-row td:nth-child(2) {
+      color: var(--red-light) !important;
+    }
+    .pos-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 19px;
+      height: 19px;
+      border-radius: 4px;
+      font-size: 9.5px;
+      font-weight: 800;
+    }
+    .pos-pill.top-1 { background: rgba(234, 179, 8, 0.2); color: #eab308; border: 1px solid rgba(234, 179, 8, 0.4); }
+    .pos-pill.top-2 { background: rgba(148, 163, 184, 0.2); color: #cbd5e1; border: 1px solid rgba(148, 163, 184, 0.4); }
+    .pos-pill.top-3 { background: rgba(217, 119, 6, 0.2); color: #d97706; border: 1px solid rgba(217, 119, 6, 0.4); }
+    .pos-pill.normal { color: var(--text-dim); }
+
+    #ligaGoleadoresTable, #copaGoleadoresTable {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11.5px;
+    }
+    #ligaGoleadoresTable th, #copaGoleadoresTable th {
+      background: var(--surface2);
+      padding: 5px 6px;
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--border);
+    }
+    #ligaGoleadoresTable td, #copaGoleadoresTable td {
+      padding: 4px 6px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+      font-size: 11.5px;
+      line-height: 1.25;
+    }
     /* TIMELINE */
     .timeline{position:relative;padding-left:24px;}
     .timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:var(--surface3);}
@@ -3069,16 +3149,17 @@
     </section>
 
     <!-- COMPETICIONES SECTION (MAIN TOP-LEVEL SECTION) -->
+    <!-- COMPETICIONES SECTION (MAIN TOP-LEVEL SECTION) -->
     <section class="section" id="section-clasificacion">
-      <div class="page-header" style="margin-bottom:14px">
+      <div class="page-header" style="margin-bottom:8px">
         <div>
-          <div class="page-title">Competiciones</div>
-          <div class="page-subtitle">Xuventude Dorneda &middot; Temporada 2026/27</div>
+          <div class="page-title" style="font-size:20px;font-weight:900;">Competiciones</div>
+          <div class="page-subtitle" style="font-size:11px;">Xuventude Dorneda &middot; Temporada 2026/27</div>
         </div>
       </div>
 
       <!-- MAIN COMPETITION CATEGORY TABS: Pretemporada (⏱️) · Liga (⚽) · Copa (🏆) -->
-      <div class="tabs mb-16" id="compMainTabs">
+      <div class="tabs mb-16" id="compMainTabs" style="margin-bottom:10px;">
         <div class="tab" onclick="showCompCategory('pretemporada', this)" id="tabCompPret">⏱️ Pretemporada</div>
         <div class="tab active" onclick="showCompCategory('liga', this)" id="tabCompLiga">⚽ Liga</div>
         <div class="tab" onclick="showCompCategory('copa', this)" id="tabCompCopa">🏆 Copa</div>
@@ -3088,19 +3169,19 @@
            1. PRETEMPORADA VIEW
            ========================================== -->
       <div id="compViewPretemporada" style="display:none">
-        <div class="card mb-16">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;border-bottom:1px solid var(--border);padding-bottom:12px;flex-wrap:wrap;gap:8px;">
+        <div class="card mb-16" style="padding:12px 14px;margin-bottom:12px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;border-bottom:1px solid var(--border);padding-bottom:8px;flex-wrap:wrap;gap:6px;">
             <div>
-              <div style="font-size:16px;font-weight:900;color:var(--text);display:flex;align-items:center;gap:8px;">
+              <div style="font-size:14px;font-weight:900;color:var(--text);display:flex;align-items:center;gap:6px;">
                 <span>⏱️ Partidos de Pretemporada 2026/27</span>
-                <span class="badge badge-accent" style="font-size:11px">4 Partidos Disputados</span>
+                <span class="badge badge-accent" style="font-size:10px">4 Partidos</span>
               </div>
-              <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Fase preparatoria disputada durante el mes de Agosto de 2026</div>
+              <div style="font-size:11px;color:var(--text-muted);margin-top:1px;">Fase preparatoria disputada durante el mes de Agosto de 2026</div>
             </div>
           </div>
           
           <div style="overflow-x:auto;padding-bottom:4px;scrollbar-width:thin;">
-            <div class="copa-list-header" style="display:flex;align-items:center;font-size:10px;font-weight:800;text-transform:uppercase;color:var(--text-dim);background:var(--surface2);padding:6px 10px;border-radius:4px;margin-bottom:6px;min-width:620px;border:1px solid var(--border);">
+            <div class="copa-list-header" style="display:flex;align-items:center;font-size:9.5px;font-weight:800;text-transform:uppercase;color:var(--text-dim);background:var(--surface2);padding:5px 8px;border-radius:4px;margin-bottom:4px;min-width:620px;border:1px solid var(--border);">
               <div style="width:160px;flex-shrink:0;">Horario / Campo</div>
               <div style="flex:1;text-align:right;padding-right:8px;">Equipo Local</div>
               <div style="width:60px;flex-shrink:0;text-align:center;">Marcador</div>
@@ -3108,7 +3189,7 @@
               <div style="width:130px;flex-shrink:0;text-align:center;">Resultado</div>
               <div style="width:105px;flex-shrink:0;text-align:right;">Acciones</div>
             </div>
-            <div id="pretemporadaMatchesList" style="display:flex;flex-direction:column;gap:4px;min-width:620px;"></div>
+            <div id="pretemporadaMatchesList" style="display:flex;flex-direction:column;gap:3px;min-width:620px;"></div>
           </div>
         </div>
       </div>
@@ -3118,31 +3199,31 @@
            ========================================== -->
       <div id="compViewLiga">
         <!-- Sub-tabs bar Liga -->
-        <div style="display:flex;gap:6px;overflow-x:auto;padding-bottom:10px;margin-bottom:16px;scrollbar-width:thin;border-bottom:1px solid var(--border);" id="ligaSubTabsWrap">
-          <button class="btn btn-sm btn-primary" id="subTabLigaClasif" onclick="showLigaSubTab('clasificacion')" style="font-size:12px;font-weight:800;border-radius:12px;white-space:nowrap;">&#128202; Clasificación</button>
-          <button class="btn btn-sm btn-ghost" id="subTabLigaResultados" onclick="showLigaSubTab('resultados')" style="font-size:12px;font-weight:800;border-radius:12px;white-space:nowrap;">&#128197; Resultados y Búsqueda</button>
-          <button class="btn btn-sm btn-ghost" id="subTabLigaGoleadores" onclick="showLigaSubTab('goleadores')" style="font-size:12px;font-weight:800;border-radius:12px;white-space:nowrap;">&#128095; Goleadores (Pichichi)</button>
-          <button class="btn btn-sm btn-ghost" id="subTabLigaEquipos" onclick="showLigaSubTab('equipos')" style="font-size:12px;font-weight:800;border-radius:12px;white-space:nowrap;">&#128737;&#65039; Equipos y Campos (16)</button>
+        <div style="display:flex;gap:4px;overflow-x:auto;padding-bottom:6px;margin-bottom:10px;scrollbar-width:thin;border-bottom:1px solid var(--border);" id="ligaSubTabsWrap">
+          <button class="btn btn-sm btn-primary" id="subTabLigaClasif" onclick="showLigaSubTab('clasificacion')" style="font-size:11.5px;font-weight:800;border-radius:10px;white-space:nowrap;padding:4px 10px;">&#128202; Clasificación</button>
+          <button class="btn btn-sm btn-ghost" id="subTabLigaResultados" onclick="showLigaSubTab('resultados')" style="font-size:11.5px;font-weight:800;border-radius:10px;white-space:nowrap;padding:4px 10px;">&#128197; Resultados y Búsqueda</button>
+          <button class="btn btn-sm btn-ghost" id="subTabLigaGoleadores" onclick="showLigaSubTab('goleadores')" style="font-size:11.5px;font-weight:800;border-radius:10px;white-space:nowrap;padding:4px 10px;">&#128095; Goleadores (Pichichi)</button>
+          <button class="btn btn-sm btn-ghost" id="subTabLigaEquipos" onclick="showLigaSubTab('equipos')" style="font-size:11.5px;font-weight:800;border-radius:10px;white-space:nowrap;padding:4px 10px;">&#128737;&#65039; Equipos y Campos (16)</button>
         </div>
 
         <!-- 2.1 LIGA CLASIFICACIÓN -->
         <div id="ligaSubViewClasif">
-          <div class="card mb-16">
-            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:gap:8px;margin-bottom:12px;border-bottom:1px solid var(--border);padding-bottom:10px;">
+          <div class="card mb-16" style="padding:12px 14px;margin-bottom:12px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:8px;border-bottom:1px solid var(--border);padding-bottom:8px;">
               <div>
-                <div class="card-title" style="margin:0">⚽ Clasificación Oficial &middot; Primera Autonómica Veteranos (A Coruña)</div>
-                <div style="font-size:11.5px;color:var(--text-muted);margin-top:2px;">Temporada 2026/27 &middot; 16 Equipos participantes</div>
+                <div class="card-title" style="margin:0;font-size:14px;font-weight:900;">⚽ Clasificación Oficial &middot; Primera Autonómica Veteranos (A Coruña)</div>
+                <div style="font-size:11px;color:var(--text-muted);margin-top:1px;">Temporada 2026/27 &middot; 16 Equipos participantes</div>
               </div>
-              <div style="display:flex;gap:6px;flex-wrap:wrap;">
-                <button class="btn btn-ghost btn-sm" onclick="openModalClasif()">&#9999;&#65039; Editar Tabla</button>
-                <button class="btn btn-primary btn-sm" onclick="openFutgalImporter()">&#128259; Actualizar desde Futgal</button>
+              <div style="display:flex;gap:4px;flex-wrap:wrap;">
+                <button class="btn btn-ghost btn-sm" onclick="openModalClasif()" style="font-size:11px;padding:4px 8px;">&#9999;&#65039; Editar Tabla</button>
+                <button class="btn btn-primary btn-sm" onclick="openFutgalImporter()" style="font-size:11px;padding:4px 8px;">&#128259; Actualizar desde Futgal</button>
               </div>
             </div>
             <div class="table-wrap">
               <table id="mainClasifTable">
                 <thead>
                   <tr>
-                    <th style="width:40px">Pos</th>
+                    <th style="width:34px">Pos</th>
                     <th>Equipo</th>
                     <th>PJ</th>
                     <th>PG</th>
@@ -10505,17 +10586,24 @@ function renderClasificacion(){
       const rowCls = isDorneda ? 'dorneda-row' : '';
       const dg = eq.gf - eq.gc;
       const dgStr = dg > 0 ? '+' + dg : (dg < 0 ? dg : '0');
+      const dgColor = dg > 0 ? 'color:var(--success);font-weight:700;' : (dg < 0 ? 'color:var(--red-light);' : 'color:var(--text-muted);');
+      
+      let posHtml = `<span class="pos-pill normal">${i + 1}</span>`;
+      if(i === 0) posHtml = `<span class="pos-pill top-1" title="Líder">1</span>`;
+      else if(i === 1) posHtml = `<span class="pos-pill top-2" title="2º Clasificado">2</span>`;
+      else if(i === 2) posHtml = `<span class="pos-pill top-3" title="3º Clasificado">3</span>`;
+
       return `<tr class="${rowCls}">
-        <td class="td-bold">${i + 1}</td>
-        <td class="td-bold">${highlightDorneda(eq.equipo)} ${isDorneda ? '⭐' : ''}</td>
-        <td>${eq.pj}</td>
+        <td style="width:34px;padding:3px 2px;">${posHtml}</td>
+        <td>${highlightDorneda(eq.equipo)} ${isDorneda ? '⭐' : ''}</td>
+        <td style="font-weight:700;">${eq.pj}</td>
         <td>${eq.g}</td>
         <td>${eq.e}</td>
         <td>${eq.p}</td>
         <td class="td-muted">${eq.gf}</td>
         <td class="td-muted">${eq.gc}</td>
-        <td class="td-muted">${dgStr}</td>
-        <td class="td-bold text-success" style="font-size:14px">${eq.pts}</td>
+        <td style="${dgColor}">${dgStr}</td>
+        <td style="font-size:12.5px;font-weight:900;color:var(--success);">${eq.pts}</td>
       </tr>`;
     }).join('');
   }
