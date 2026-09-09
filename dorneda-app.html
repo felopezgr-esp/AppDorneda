@@ -6346,7 +6346,7 @@ function closeMobileSidebar(){
   if(bd) bd.classList.remove('active');
 }
 
-function showSection(name, skipHashUpdate){
+function showSection(name, skipHashUpdate, skipScroll){
   currentSection = name;
   try {
     localStorage.setItem('dorneda_active_section', name);
@@ -6366,7 +6366,9 @@ function showSection(name, skipHashUpdate){
   if(mNavEl) mNavEl.classList.add('active');
   closeMobileSidebar();
   renderSection(name);
-  window.scrollTo({top: 0, behavior: 'smooth'});
+  if(!skipScroll){
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
 }
 window.showSection = showSection;
 
@@ -9329,8 +9331,23 @@ window.renderEquiposView = renderEquiposView;
 // NUEVA ESTRUCTURA DE COMPETICIONES: PRETEMPORADA - LIGA - COPA
 // ==========================================
 let compCategoryActive = 'liga';
+try {
+  const _sCat = localStorage.getItem('dorneda_active_comp_cat');
+  if(_sCat) compCategoryActive = _sCat;
+} catch(e){}
+
 let ligaSubTabActive = 'clasificacion';
+try {
+  const _sL = localStorage.getItem('dorneda_active_liga_subtab');
+  if(_sL) ligaSubTabActive = _sL;
+} catch(e){}
+
 let copaSubTabActive = 'cuadro';
+try {
+  const _sC = localStorage.getItem('dorneda_active_copa_subtab');
+  if(_sC) copaSubTabActive = _sC;
+} catch(e){}
+
 let currentLigaSearchJornada = '';
 let currentLigaSearchEquipo = '';
 let currentLigaGoleadorEquipo = '';
@@ -13279,15 +13296,53 @@ function initApp(){
     if(savedEconTab) currentEconTab = savedEconTab;
     const savedClasifTab = localStorage.getItem('dorneda_active_clasif_tab');
     if(savedClasifTab) clasifTabActive = savedClasifTab;
+    const savedCompCat = localStorage.getItem('dorneda_active_comp_cat');
+    if(savedCompCat) compCategoryActive = savedCompCat;
+    const savedLigaSubTab = localStorage.getItem('dorneda_active_liga_subtab');
+    if(savedLigaSubTab) ligaSubTabActive = savedLigaSubTab;
+    const savedCopaSubTab = localStorage.getItem('dorneda_active_copa_subtab');
+    if(savedCopaSubTab) copaSubTabActive = savedCopaSubTab;
   } catch(e){}
 
   // Detect section from URL hash or localStorage
   let initialSection = 'dashboard';
-  const hash = window.location.hash ? window.location.hash.replace('#', '') : '';
+  const rawHash = window.location.hash ? window.location.hash.replace('#', '').toLowerCase() : '';
   const validSections = ['dashboard', 'plantilla', 'partidos', 'analisis', 'clasificacion', 'calendario', 'economia'];
   
-  if(hash && validSections.includes(hash)){
-    initialSection = hash;
+  if(rawHash){
+    if(validSections.includes(rawHash)){
+      initialSection = rawHash;
+    } else if(rawHash === 'copa' || rawHash === 'copa-cuadro' || rawHash === 'cuadro' || rawHash === 'cuadro-copa'){
+      initialSection = 'clasificacion';
+      compCategoryActive = 'copa';
+      copaSubTabActive = 'cuadro';
+    } else if(rawHash === 'copa-eliminatorias' || rawHash === 'eliminatorias'){
+      initialSection = 'clasificacion';
+      compCategoryActive = 'copa';
+      copaSubTabActive = 'eliminatorias';
+    } else if(rawHash === 'copa-goleadores'){
+      initialSection = 'clasificacion';
+      compCategoryActive = 'copa';
+      copaSubTabActive = 'goleadores';
+    } else if(rawHash === 'pretemporada'){
+      initialSection = 'clasificacion';
+      compCategoryActive = 'pretemporada';
+    } else if(rawHash === 'liga' || rawHash === 'competiciones'){
+      initialSection = 'clasificacion';
+      compCategoryActive = 'liga';
+    } else if(rawHash === 'liga-resultados' || rawHash === 'jornadas' || rawHash === 'resultados'){
+      initialSection = 'clasificacion';
+      compCategoryActive = 'liga';
+      ligaSubTabActive = 'resultados';
+    } else if(rawHash === 'liga-goleadores' || rawHash === 'goleadores'){
+      initialSection = 'clasificacion';
+      compCategoryActive = 'liga';
+      ligaSubTabActive = 'goleadores';
+    } else if(rawHash === 'equipos'){
+      initialSection = 'clasificacion';
+      compCategoryActive = 'liga';
+      ligaSubTabActive = 'equipos';
+    }
   } else {
     try {
       const savedSec = localStorage.getItem('dorneda_active_section');
@@ -13297,13 +13352,10 @@ function initApp(){
     } catch(e){}
   }
 
-  showSection(initialSection);
+  showSection(initialSection, false, true);
 
   // If initial section was clasificacion or economia, restore active sub-tab UI
   if(initialSection === 'clasificacion'){
-        var savedCompCat = null;
-    try { savedCompCat = localStorage.getItem('dorneda_active_comp_cat'); } catch(e){}
-    if(savedCompCat) compCategoryActive = savedCompCat;
     showCompCategory(compCategoryActive);
   } else if(initialSection === 'economia'){
     showEconTab(currentEconTab);
@@ -13311,9 +13363,23 @@ function initApp(){
 
   // Handle browser back/forward buttons
   window.addEventListener('hashchange', function(){
-    const currentHash = window.location.hash ? window.location.hash.replace('#', '') : 'dashboard';
+    const currentHash = window.location.hash ? window.location.hash.replace('#', '').toLowerCase() : 'dashboard';
     if(validSections.includes(currentHash) && currentSection !== currentHash){
       showSection(currentHash, true);
+    } else if(currentHash === 'copa' || currentHash === 'cuadro' || currentHash === 'cuadro-copa'){
+      if(currentSection !== 'clasificacion') showSection('clasificacion', true);
+      showCompCategory('copa');
+      showCopaSubTab('cuadro');
+    } else if(currentHash === 'copa-eliminatorias' || currentHash === 'eliminatorias'){
+      if(currentSection !== 'clasificacion') showSection('clasificacion', true);
+      showCompCategory('copa');
+      showCopaSubTab('eliminatorias');
+    } else if(currentHash === 'pretemporada'){
+      if(currentSection !== 'clasificacion') showSection('clasificacion', true);
+      showCompCategory('pretemporada');
+    } else if(currentHash === 'liga' || currentHash === 'competiciones'){
+      if(currentSection !== 'clasificacion') showSection('clasificacion', true);
+      showCompCategory('liga');
     }
   });
 }
