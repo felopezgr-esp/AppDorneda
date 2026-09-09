@@ -1165,39 +1165,51 @@
     }
 
     /* COMPACT CALENDAR */
-    .cal-toggle{display:flex;gap:6px;margin-bottom:16px;}
-    .cal-toggle-btn{padding:7px 16px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--surface2);color:var(--text-muted);transition:var(--transition);}
+    .cal-toggle{display:flex;gap:4px;margin-bottom:8px;}
+    .cal-toggle-btn{padding:4px 10px;border-radius:var(--radius-sm);font-size:11px;font-weight:700;cursor:pointer;border:1px solid var(--border);background:var(--surface2);color:var(--text-muted);transition:var(--transition);}
     .cal-toggle-btn.active{background:var(--red);border-color:var(--red);color:white;}
     .cal-toggle-btn:hover:not(.active){background:var(--surface3);color:var(--text);}
-    .cal-grid-view{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-    .cal-vuelta-title{background:var(--red);color:white;padding:8px 14px;border-radius:var(--radius-sm);font-size:11px;font-weight:800;text-align:center;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;}
-    .cal-row{display:flex;align-items:center;gap:6px;padding:6px 10px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:3px;cursor:pointer;transition:var(--transition);}
+    .cal-grid-view{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    .cal-vuelta-title{background:var(--red);color:white;padding:4px 8px;border-radius:var(--radius-sm);font-size:10px;font-weight:800;text-align:center;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;}
+    .cal-row{display:flex;align-items:center;gap:5px;padding:3.5px 6px;background:var(--surface2);border:1px solid var(--border);border-radius:4px;margin-bottom:2px;cursor:pointer;transition:var(--transition);font-size:11px;}
     .cal-row:hover{border-color:rgba(204,0,0,0.4);background:var(--surface3);}
     .cal-row.proximo{border-color:var(--red);background:rgba(204,0,0,0.08);}
     .cal-row.jugado{background:rgba(34,197,94,0.04);border-color:rgba(34,197,94,0.2);}
     .cal-row.libre{cursor:default;background:rgba(255,255,255,0.015);border-color:rgba(255,255,255,0.04);opacity:0.6;}
     .cal-row.condicional{opacity:0.5;}
     .cal-row.copa-row{border-color:rgba(245,158,11,0.25);background:rgba(245,158,11,0.04);}
-    .cal-j{font-size:11px;font-weight:800;color:var(--red-light);min-width:36px;}
+    .cal-j{font-size:10.5px;font-weight:800;color:var(--red-light);min-width:32px;}
     .cal-j.copa-j{color:var(--warning);}
     .cal-j.free-j{color:var(--text-dim);}
-    .cal-fecha{font-size:9px;color:var(--text-dim);min-width:42px;}
-    .cal-rival{font-size:11px;font-weight:500;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text-muted);}
+    .cal-fecha{font-size:9.5px;color:var(--text-dim);min-width:44px;}
+    .cal-rival{font-size:11px;font-weight:600;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text-muted);}
     .cal-rival.known{color:var(--text);}
-    .cal-cond-badge{font-size:9px;font-weight:700;padding:2px 5px;border-radius:3px;flex-shrink:0;}
+    .cal-cond-badge{font-size:8.5px;font-weight:800;padding:1px 4px;border-radius:3px;flex-shrink:0;}
     .cal-cond-badge.local{background:rgba(34,197,94,0.18);color:#4ade80;}
     .cal-cond-badge.visitante{background:rgba(59,130,246,0.18);color:#60a5fa;}
     .cal-cond-badge.neutro{background:rgba(245,158,11,0.15);color:var(--warning);}
     .cal-cond-badge.pend{background:rgba(255,255,255,0.05);color:var(--text-dim);}
-    .cal-score{font-size:10px;font-weight:800;min-width:28px;text-align:right;}
+    .cal-score{font-size:10.5px;font-weight:900;min-width:28px;text-align:right;}
     .cal-score.v{color:var(--success);}.cal-score.d{color:var(--red-light);}.cal-score.e{color:var(--warning);}
-    /* TIMELINE compact */
-    .timeline-item{margin-bottom:5px;}
-    .timeline-card{padding:8px 12px;}
-    .timeline-header{gap:6px;margin-bottom:2px;}
-    .timeline-date{font-size:10px;}
-    .timeline-rival{font-size:12px;}
-    .timeline-obs{font-size:10px;}
+    
+    /* TIMELINE compact 1-line */
+    .timeline{position:relative;padding-left:18px;}
+    .timeline::before{content:'';position:absolute;left:5px;top:0;bottom:0;width:2px;background:var(--surface3);}
+    .timeline-item{position:relative;margin-bottom:3px;}
+    .timeline-dot{position:absolute;left:-16px;top:9px;width:8px;height:8px;border-radius:50%;background:var(--surface3);border:2px solid var(--surface);}
+    .timeline-dot.jugado{background:var(--success);}
+    .timeline-dot.oficial{background:var(--red);}
+    .timeline-dot.condicional{background:var(--warning);}
+    .timeline-dot.libre{background:var(--text-dim);}
+    .timeline-card{background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:4px 8px;transition:var(--transition);display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:11.5px;}
+    .timeline-card:hover{border-color:var(--border2);background:var(--surface3);}
+    .timeline-card.dorneda-win{border-left:3px solid var(--success) !important;}
+    .timeline-card.dorneda-loss{border-left:3px solid var(--red) !important;}
+    .timeline-card.dorneda-draw{border-left:3px solid var(--warning) !important;}
+    .timeline-header{display:flex;align-items:center;gap:6px;flex:1;min-width:0;}
+    .timeline-date{font-size:10px;color:var(--text-dim);white-space:nowrap;flex-shrink:0;}
+    .timeline-rival{font-size:11.5px;font-weight:700;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .timeline-obs{font-size:9.5px;color:var(--text-muted);background:var(--surface3);padding:1px 5px;border-radius:3px;white-space:nowrap;}
     /* FICHA improved */
     .ficha-empty-cta{text-align:center;padding:24px;background:rgba(204,0,0,0.06);border-radius:var(--radius);border:1px dashed rgba(204,0,0,0.3);margin:16px 0;}
     .ficha-empty-cta .cta-icon{font-size:36px;margin-bottom:8px;}
@@ -3538,23 +3550,31 @@
       </div>
     </section>
 
-<section class="section" id="section-calendario">
-      <div class="page-header">
-        <div><div class="page-title">Calendario</div><div class="page-subtitle">Temporada completa 2026/27</div></div>
+    <section class="section" id="section-calendario">
+      <div class="page-header" style="margin-bottom:8px">
+        <div>
+          <div class="page-title" style="font-size:20px;font-weight:900;">Calendario Oficial</div>
+          <div class="page-subtitle" style="font-size:11px;">Temporada completa 2026/27 &middot; Xuventude Dorneda</div>
+        </div>
       </div>
-      <div style="font-size:12px;color:var(--text-muted);margin-bottom:12px">
-        Fines de semana libres: <strong>13-14 Feb 2027</strong> &middot; <strong>26-27 Jun 2027</strong>
+      
+      <div style="font-size:11px;color:var(--text-muted);background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:5px 10px;margin-bottom:8px;display:flex;align-items:center;gap:6px;">
+        <span>🏖️</span> <strong>Fines de semana libres:</strong> <span>13-14 Feb 2027 &middot; 26-27 Jun 2027</span>
       </div>
 
       <!-- FILTER TABS: PRETEMPORADA -> LIGA -> COPA -> GENERAL -->
-      <div class="tabs mb-16">
+      <div class="tabs mb-16" style="margin-bottom:8px;">
         <div class="tab" id="tabCalPret" onclick="filterCalendarioComp('Pretemporada', this)">⏱️ Pretemporada</div>
         <div class="tab active" id="tabCalLiga" onclick="filterCalendarioComp('Liga', this)">⚽ Liga</div>
         <div class="tab" id="tabCalCopa" onclick="filterCalendarioComp('Copa', this)">🏆 Copa</div>
         <div class="tab" id="tabCalTodos" onclick="filterCalendarioComp('todos', this)">🌐 General</div>
       </div>
 
-      <div class="cal-toggle"><button class="cal-toggle-btn active" id="btnTimeline" onclick="switchCalView('timeline')">&#128203; Timeline</button><button class="cal-toggle-btn" id="btnGrid" onclick="switchCalView('grid')">&#128197; Cuadr&iacute;cula</button></div>
+      <div class="cal-toggle" style="margin-bottom:8px;">
+        <button class="cal-toggle-btn active" id="btnTimeline" onclick="switchCalView('timeline')">&#128203; Timeline (1 Línea)</button>
+        <button class="cal-toggle-btn" id="btnGrid" onclick="switchCalView('grid')">&#128197; Cuadrícula (1ª y 2ª Vuelta)</button>
+      </div>
+      
       <div id="calTimelineWrap"><div class="timeline" id="calendarioTimeline"></div></div>
       <div id="calGridWrap" style="display:none"></div>
     </section>
@@ -11658,29 +11678,59 @@ function renderCalendario(){
   }
 
   if(cal.length === 0){
-    tWrap.innerHTML = '<div style="color:var(--text-dim);font-size:13px;padding:24px;text-align:center">No hay partidos en el calendario para este filtro.</div>';
-    if(gWrap) gWrap.innerHTML = '<div style="color:var(--text-dim);font-size:13px;padding:24px;text-align:center">No hay partidos en el calendario para este filtro.</div>';
+    tWrap.innerHTML = '<div style="color:var(--text-dim);font-size:12px;padding:16px;text-align:center">No hay partidos en el calendario para este filtro.</div>';
+    if(gWrap) gWrap.innerHTML = '<div style="color:var(--text-dim);font-size:12px;padding:16px;text-align:center">No hay partidos en el calendario para este filtro.</div>';
     return;
   }
 
   let tHtml = '';
   cal.forEach(item => {
     const pFound = db.partidos.find(p => p.codigo === item.codigo);
-    const isDone = item.estado === 'Jugado' || (pFound && pFound.resultado && pFound.gf !== null);
+    const isDone = item.estado === 'Jugado' || (pFound && pFound.resultado && pFound.gf !== null && pFound.gf !== undefined);
+    const isHome = item.condicion === 'Local' || (pFound && pFound.condicion === 'Local');
+    
+    let resBadge = '';
+    let cardCls = '';
+    if(pFound && pFound.resultado && pFound.gf !== null && pFound.gf !== undefined){
+      const dScore = isHome ? `${pFound.gf}-${pFound.gc}` : `${pFound.gc}-${pFound.gf}`;
+      if(pFound.resultado === 'Victoria'){
+        cardCls = 'dorneda-win';
+        resBadge = `<span class="badge" style="background:#22c55e;color:#fff;font-weight:900;font-size:10px;padding:1px 5px;border-radius:3px;">V ${dScore}</span>`;
+      } else if(pFound.resultado === 'Derrota'){
+        cardCls = 'dorneda-loss';
+        resBadge = `<span class="badge" style="background:#dc2626;color:#fff;font-weight:900;font-size:10px;padding:1px 5px;border-radius:3px;">D ${dScore}</span>`;
+      } else {
+        cardCls = 'dorneda-draw';
+        resBadge = `<span class="badge" style="background:#d97706;color:#fff;font-weight:900;font-size:10px;padding:1px 5px;border-radius:3px;">E ${dScore}</span>`;
+      }
+    } else if(item.estado === 'Libre'){
+      resBadge = `<span class="badge" style="background:rgba(255,255,255,0.06);color:var(--text-dim);font-size:9.5px;padding:1px 4px;">🏖️ Libre</span>`;
+    } else if(item.estado === 'Condicional'){
+      resBadge = `<span class="badge" style="background:rgba(245,158,11,0.12);color:var(--warning);font-size:9.5px;padding:1px 4px;">⚡ Condicional</span>`;
+    } else {
+      resBadge = `<span class="badge" style="background:rgba(255,255,255,0.06);color:var(--text-dim);font-size:9.5px;padding:1px 4px;">Pendiente</span>`;
+    }
+
     const dotCls = item.estado === 'Libre' ? 'libre' : (item.estado === 'Condicional' ? 'condicional' : (isDone ? 'jugado' : 'oficial'));
+    const horaStr = pFound && (pFound.horaPartido || pFound.hora) ? `<span style="font-size:9.5px;color:var(--info);font-weight:700;">⏰ ${pFound.horaPartido || pFound.hora}</span>` : '';
+    const condBadge = item.condicion === 'Local' ? '<span class="cal-cond-badge local">🏠 Local</span>' : (item.condicion === 'Visitante' ? '<span class="cal-cond-badge visitante">✈️ Visitante</span>' : (item.condicion ? `<span class="cal-cond-badge pend">${item.condicion}</span>` : ''));
     
     tHtml += `
       <div class="timeline-item">
         <div class="timeline-dot ${dotCls}"></div>
-        <div class="timeline-card" ${pFound ? `onclick="showDetallePartido(${pFound.id})"` : ''} style="${pFound ? 'cursor:pointer' : ''}">
+        <div class="timeline-card ${cardCls}" ${pFound ? `onclick="showDetallePartido(${pFound.id})"` : ''} style="${pFound ? 'cursor:pointer;' : ''}" title="${item.codigo}: ${item.rival} (${item.fecha})">
           <div class="timeline-header">
-            <span class="badge ${compBadge(item.competicion)}">${item.codigo}</span>
-            <span class="timeline-date">${item.fecha}</span>
-            ${(pFound && (pFound.horaPartido || pFound.hora)) ? `<span class="badge" style="background:rgba(37,99,235,0.12);color:#60a5fa;border:1px solid rgba(37,99,235,0.25);font-size:10px;font-weight:700">⏰ ${pFound.horaPartido || pFound.hora}</span>` : ''}
+            <span class="badge ${compBadge(item.competicion)}" style="font-size:10px;font-weight:800;padding:1px 5px;border-radius:3px;min-width:34px;text-align:center;">${item.codigo}</span>
+            <span class="timeline-date">📅 ${item.fecha}</span>
+            ${horaStr}
             <span class="timeline-rival">${highlightDorneda(item.rival)}</span>
-            <span class="badge ${item.condicion==='Local'?'victoria':(item.condicion==='Visitante'?'copa':'pendiente')}">${item.condicion}</span>
+            ${condBadge}
+            ${item.obs ? `<span class="timeline-obs" title="${item.obs}">ℹ️ ${item.obs}</span>` : ''}
           </div>
-          ${item.obs ? `<div class="timeline-obs">${highlightDorneda(item.obs)}</div>` : ''}
+          <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
+            ${resBadge}
+            ${pFound ? '<span style="font-size:10px;color:var(--text-dim);font-weight:700;">👁️</span>' : ''}
+          </div>
         </div>
       </div>
     `;
@@ -11693,37 +11743,39 @@ function renderCalendario(){
     const v2 = cal.slice(half);
     const title1 = calendarioFilterComp === 'Liga' ? '1ª Vuelta &middot; Liga (J1 - J15)' : '1ª Parte del Calendario';
     const title2 = calendarioFilterComp === 'Liga' ? '2ª Vuelta &middot; Liga (J16 - J30)' : '2ª Parte del Calendario';
+    
+    function renderGridRow(c){
+      const pF = db.partidos.find(p => p.codigo === c.codigo);
+      const isH = c.condicion === 'Local' || (pF && pF.condicion === 'Local');
+      let sHtml = '';
+      if(pF && pF.resultado && pF.gf !== null && pF.gf !== undefined){
+        const dS = isH ? `${pF.gf}-${pF.gc}` : `${pF.gc}-${pF.gf}`;
+        const cColor = pF.resultado === 'Victoria' ? 'color:#22c55e;' : (pF.resultado === 'Derrota' ? 'color:#ef4444;' : 'color:#f59e0b;');
+        sHtml = `<span style="font-size:10px;font-weight:900;${cColor};margin-left:auto;">${pF.resultado.charAt(0)} ${dS}</span>`;
+      }
+      const hStr = pF && (pF.horaPartido || pF.hora) ? ' ' + (pF.horaPartido || pF.hora) : '';
+      const cBadge = c.condicion === 'Local' ? '<span class="cal-cond-badge local">L</span>' : (c.condicion === 'Visitante' ? '<span class="cal-cond-badge visitante">V</span>' : '');
+
+      return `
+        <div class="cal-row ${c.estado==='Jugado'?'jugado':''}" ${pF ? `onclick="showDetallePartido(${pF.id})"` : ''} style="${pF ? 'cursor:pointer;' : ''}">
+          <span class="cal-j ${c.codigo&&c.codigo.startsWith('C_')?'copa-j':''}">${c.codigo}</span>
+          <span class="cal-fecha">${c.fecha}${hStr}</span>
+          <span class="cal-rival ${c.rival!=='Pendiente'?'known':''}">${highlightDorneda(c.rival)}</span>
+          ${cBadge}
+          ${sHtml}
+        </div>
+      `;
+    }
+
     gWrap.innerHTML = `
       <div class="cal-grid-view">
         <div>
           <div class="cal-vuelta-title">${title1}</div>
-          ${v1.map(c => {
-            const pF = db.partidos.find(p => p.codigo === c.codigo);
-            const hStr = pF && (pF.horaPartido || pF.hora) ? ' · ' + (pF.horaPartido || pF.hora) : '';
-            return `
-              <div class="cal-row ${c.estado==='Jugado'?'jugado':''}">
-                <span class="cal-j ${c.codigo&&c.codigo.startsWith('C_')?'copa-j':''}">${c.codigo}</span>
-                <span class="cal-fecha">${c.fecha}${hStr}</span>
-                <span class="cal-rival ${c.rival!=='Pendiente'?'known':''}">${highlightDorneda(c.rival)}</span>
-                <span class="cal-cond-badge ${c.condicion==='Local'?'local':(c.condicion==='Visitante'?'visitante':'pend')}">${c.condicion}</span>
-              </div>
-            `;
-          }).join('')}
+          ${v1.map(renderGridRow).join('')}
         </div>
         <div>
           <div class="cal-vuelta-title" style="background:#8b0000">${title2}</div>
-          ${v2.map(c => {
-            const pF = db.partidos.find(p => p.codigo === c.codigo);
-            const hStr = pF && (pF.horaPartido || pF.hora) ? ' · ' + (pF.horaPartido || pF.hora) : '';
-            return `
-              <div class="cal-row ${c.estado==='Jugado'?'jugado':''}">
-                <span class="cal-j ${c.codigo&&c.codigo.startsWith('C_')?'copa-j':''}">${c.codigo}</span>
-                <span class="cal-fecha">${c.fecha}${hStr}</span>
-                <span class="cal-rival ${c.rival!=='Pendiente'?'known':''}">${highlightDorneda(c.rival)}</span>
-                <span class="cal-cond-badge ${c.condicion==='Local'?'local':(c.condicion==='Visitante'?'visitante':'pend')}">${c.condicion}</span>
-              </div>
-            `;
-          }).join('')}
+          ${v2.map(renderGridRow).join('')}
         </div>
       </div>
     `;
