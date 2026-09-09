@@ -669,17 +669,18 @@
 
     .copa-bracket-body {
       display: grid;
-      grid-template-columns: 210px 175px 160px 150px 145px 190px 145px 150px 160px 175px 210px;
-      gap: 12px;
+      grid-template-columns: 215px 185px 165px 155px 145px 195px 145px 155px 165px 185px 215px;
+      grid-template-rows: repeat(16, minmax(58px, auto));
+      gap: 8px 12px;
       align-items: stretch;
-      min-height: 720px;
+      min-height: 1060px;
+      padding: 8px 2px;
     }
 
-    .bracket-col {
+    .bracket-cell {
       display: flex;
       flex-direction: column;
-      justify-content: space-around;
-      gap: 6px;
+      justify-content: center;
       position: relative;
     }
 
@@ -687,25 +688,27 @@
       background: #ffffff;
       color: #0f172a;
       border: 1px solid #cbd5e1;
-      border-radius: 5px;
-      padding: 3px 6px;
+      border-radius: 6px;
+      padding: 4px 7px;
       font-size: 10px;
       font-weight: 700;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.22);
       transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
       position: relative;
       user-select: none;
+      width: 100%;
+      box-sizing: border-box;
     }
     .bracket-slot-card:hover {
       transform: scale(1.02);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
       border-color: #0284c7;
       z-index: 5;
     }
     .bracket-slot-card.dorneda-slot {
       background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%) !important;
       border: 2px solid #dc2626 !important;
-      box-shadow: 0 0 12px rgba(220,38,38,0.35) !important;
+      box-shadow: 0 0 14px rgba(220,38,38,0.4) !important;
     }
     .bracket-slot-card.dorneda-slot .team-name {
       color: #991b1b !important;
@@ -726,15 +729,15 @@
       font-style: italic;
     }
 
-    .bracket-match-32-row {
+    .bracket-match-32-card {
       display: flex;
       align-items: center;
       gap: 4px;
-      margin-bottom: 4px;
+      width: 100%;
     }
     .bracket-num-pill {
-      width: 17px;
-      height: 17px;
+      width: 18px;
+      height: 18px;
       background: #0284c7;
       color: #ffffff;
       border-radius: 50%;
@@ -750,8 +753,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 3px;
-      padding: 1.5px 0;
+      gap: 4px;
+      padding: 2px 0;
       line-height: 1.2;
     }
     .bracket-team-line .team-name {
@@ -770,23 +773,34 @@
     .bracket-team-line .team-score {
       font-size: 10px;
       font-weight: 900;
-      padding: 0 3px;
-      border-radius: 2px;
+      padding: 0 4px;
+      border-radius: 3px;
       background: #e2e8f0;
       color: #0f172a;
       flex-shrink: 0;
+      min-width: 14px;
+      text-align: center;
     }
     .bracket-team-line.is-winner .team-score {
       background: #22c55e;
       color: #ffffff;
     }
     .bracket-arrow-indicator {
-      font-size: 10px;
+      font-size: 11px;
       color: #38bdf8;
       font-weight: 900;
       display: flex;
       align-items: center;
       flex-shrink: 0;
+    }
+    .bracket-card-header {
+      font-size: 8.5px;
+      font-weight: 900;
+      margin-bottom: 3px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      letter-spacing: 0.3px;
     }
 
     /* Final Hero Card in center */
@@ -9303,12 +9317,30 @@ function get32Result(m){
     p = r32.find(x => x.id === m.matchId);
   }
   if(!p){
-    // Match by team names
+function normStr(s){
+  if(!s) return '';
+  return s.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+          .toUpperCase()
+          .replace(/[^A-Z0-9]/g, '');
+}
+
+function get32Result(m){
+  var r32 = (db.copaJornadas && db.copaJornadas[0] ? db.copaJornadas[0].partidos : []) || [];
+  var p = null;
+  if(m.matchId){
+    p = r32.find(x => x.id === m.matchId);
+  }
+  if(!p){
+    var n1 = normStr(m.t1);
+    var n2 = normStr(m.t2);
     p = r32.find(x => {
-      var l = (x.local || '').toUpperCase();
-      var v = (x.visitante || '').toUpperCase();
-      return (l.indexOf(m.t1.toUpperCase().slice(0, 7)) !== -1 && v.indexOf(m.t2.toUpperCase().slice(0, 7)) !== -1) ||
-             (v.indexOf(m.t1.toUpperCase().slice(0, 7)) !== -1 && l.indexOf(m.t2.toUpperCase().slice(0, 7)) !== -1);
+      var loc = normStr(x.local);
+      var vis = normStr(x.visitante);
+      var m1 = (loc.includes(n1.slice(0, 5)) || n1.includes(loc.slice(0, 5)));
+      var m2 = (vis.includes(n2.slice(0, 5)) || n2.includes(vis.slice(0, 5)));
+      var m1R = (vis.includes(n1.slice(0, 5)) || n1.includes(vis.slice(0, 5)));
+      var m2R = (loc.includes(n2.slice(0, 5)) || n2.includes(loc.slice(0, 5)));
+      return (m1 && m2) || (m1R && m2R);
     });
   }
 
@@ -9320,13 +9352,23 @@ function get32Result(m){
   }
 
   if(p && p.gl !== null && p.gl !== undefined && p.gv !== null && p.gv !== undefined){
-    var s1 = (p.local && p.local.toUpperCase().indexOf(m.t1.toUpperCase().slice(0,6)) !== -1) ? p.gl : p.gv;
-    var s2 = (p.visitante && p.visitante.toUpperCase().indexOf(m.t2.toUpperCase().slice(0,6)) !== -1) ? p.gv : p.gl;
+    var locNorm = normStr(p.local);
+    var t1Norm = normStr(m.t1);
+    var isT1Local = locNorm.includes(t1Norm.slice(0, 5)) || t1Norm.includes(locNorm.slice(0, 5));
+    var s1 = isT1Local ? p.gl : p.gv;
+    var s2 = isT1Local ? p.gv : p.gl;
     var isW1 = false, isW2 = false;
-    var winner = p.clasificado || null;
+    var winner = null;
+    
     if(p.clasificado){
-      if(p.clasificado.toUpperCase().indexOf(m.t1.toUpperCase().slice(0,6)) !== -1) { isW1 = true; winner = m.t1; }
-      else { isW2 = true; winner = m.t2; }
+      var clasNorm = normStr(p.clasificado);
+      if(clasNorm.includes(t1Norm.slice(0, 5)) || t1Norm.includes(clasNorm.slice(0, 5))){
+        isW1 = true;
+        winner = m.t1;
+      } else {
+        isW2 = true;
+        winner = m.t2;
+      }
     } else if(s1 > s2){
       isW1 = true; winner = m.t1;
     } else if(s2 > s1){
@@ -9352,25 +9394,25 @@ function renderCopaBracket(){
   // 16-AVOS Pairs mapping
   var pairs16 = [
     // Left Top (A-D)
-    { code: 'A', side: 'L', quad: 'T', m1: 1,  m2: 2,  id: 201 },
-    { code: 'B', side: 'L', quad: 'T', m1: 3,  m2: 4,  id: 202 },
-    { code: 'C', side: 'L', quad: 'T', m1: 5,  m2: 6,  id: 203 },
-    { code: 'D', side: 'L', quad: 'T', m1: 7,  m2: 8,  id: 204 },
+    { code: 'A', side: 'L', quad: 'T', m1: 1,  m2: 2,  id: 201, row: 1 },
+    { code: 'B', side: 'L', quad: 'T', m1: 3,  m2: 4,  id: 202, row: 3 },
+    { code: 'C', side: 'L', quad: 'T', m1: 5,  m2: 6,  id: 203, row: 5 },
+    { code: 'D', side: 'L', quad: 'T', m1: 7,  m2: 8,  id: 204, row: 7 },
     // Left Bottom (E-H)
-    { code: 'E', side: 'L', quad: 'B', m1: 17, m2: 18, id: 205 },
-    { code: 'F', side: 'L', quad: 'B', m1: 19, m2: 20, id: 206 },
-    { code: 'G', side: 'L', quad: 'B', m1: 21, m2: 22, id: 207 },
-    { code: 'H', side: 'L', quad: 'B', m1: 23, m2: 24, id: 208 },
+    { code: 'E', side: 'L', quad: 'B', m1: 17, m2: 18, id: 205, row: 9 },
+    { code: 'F', side: 'L', quad: 'B', m1: 19, m2: 20, id: 206, row: 11 },
+    { code: 'G', side: 'L', quad: 'B', m1: 21, m2: 22, id: 207, row: 13 },
+    { code: 'H', side: 'L', quad: 'B', m1: 23, m2: 24, id: 208, row: 15 },
     // Right Top (I-L)
-    { code: 'I', side: 'R', quad: 'T', m1: 9,  m2: 10, id: 209 },
-    { code: 'J', side: 'R', quad: 'T', m1: 11, m2: 12, id: 210 },
-    { code: 'K', side: 'R', quad: 'T', m1: 13, m2: 14, id: 211 },
-    { code: 'L', side: 'R', quad: 'T', m1: 15, m2: 16, id: 212 },
+    { code: 'I', side: 'R', quad: 'T', m1: 9,  m2: 10, id: 209, row: 1 },
+    { code: 'J', side: 'R', quad: 'T', m1: 11, m2: 12, id: 210, row: 3 },
+    { code: 'K', side: 'R', quad: 'T', m1: 13, m2: 14, id: 211, row: 5 },
+    { code: 'L', side: 'R', quad: 'T', m1: 15, m2: 16, id: 212, row: 7 },
     // Right Bottom (M-P)
-    { code: 'M', side: 'R', quad: 'B', m1: 25, m2: 26, id: 213 },
-    { code: 'N', side: 'R', quad: 'B', m1: 27, m2: 28, id: 214 },
-    { code: 'O', side: 'R', quad: 'B', m1: 29, m2: 30, id: 215 },
-    { code: 'P', side: 'R', quad: 'B', m1: 31, m2: 32, id: 216, isDorneda: true }
+    { code: 'M', side: 'R', quad: 'B', m1: 25, m2: 26, id: 213, row: 9 },
+    { code: 'N', side: 'R', quad: 'B', m1: 27, m2: 28, id: 214, row: 11 },
+    { code: 'O', side: 'R', quad: 'B', m1: 29, m2: 30, id: 215, row: 13 },
+    { code: 'P', side: 'R', quad: 'B', m1: 31, m2: 32, id: 216, isDorneda: true, row: 15 }
   ];
 
   var r16Results = {};
@@ -9394,19 +9436,19 @@ function renderCopaBracket(){
       else if(s2 > s1) { isW2 = true; winner = team2; }
     }
     var isDornedaMatch = (team1.indexOf('DORNEDA') !== -1 || team2.indexOf('DORNEDA') !== -1);
-    r16Results[pair.code] = { code: pair.code, side: pair.side, quad: pair.quad, team1, div1, team2, div2, hasScore, s1, s2, winner, isW1, isW2, isDorneda: isDornedaMatch, matchObj: p16 };
+    r16Results[pair.code] = { code: pair.code, side: pair.side, quad: pair.quad, team1, div1, team2, div2, hasScore, s1, s2, winner, isW1, isW2, isDorneda: isDornedaMatch, matchObj: p16, row: pair.row };
   });
 
   // OCTAVOS Pairs (Q1-Q8)
   var pairs8 = [
-    { code: 'Q1', side: 'L', quad: 'T', p1: 'A', p2: 'B' },
-    { code: 'Q2', side: 'L', quad: 'T', p1: 'C', p2: 'D' },
-    { code: 'Q3', side: 'L', quad: 'B', p1: 'E', p2: 'F' },
-    { code: 'Q4', side: 'L', quad: 'B', p1: 'G', p2: 'H' },
-    { code: 'Q5', side: 'R', quad: 'T', p1: 'I', p2: 'J' },
-    { code: 'Q6', side: 'R', quad: 'T', p1: 'K', p2: 'L' },
-    { code: 'Q7', side: 'R', quad: 'B', p1: 'M', p2: 'N' },
-    { code: 'Q8', side: 'R', quad: 'B', p1: 'O', p2: 'P', isDorneda: true }
+    { code: 'Q1', side: 'L', quad: 'T', p1: 'A', p2: 'B', row: 1 },
+    { code: 'Q2', side: 'L', quad: 'T', p1: 'C', p2: 'D', row: 5 },
+    { code: 'Q3', side: 'L', quad: 'B', p1: 'E', p2: 'F', row: 9 },
+    { code: 'Q4', side: 'L', quad: 'B', p1: 'G', p2: 'H', row: 13 },
+    { code: 'Q5', side: 'R', quad: 'T', p1: 'I', p2: 'J', row: 1 },
+    { code: 'Q6', side: 'R', quad: 'T', p1: 'K', p2: 'L', row: 5 },
+    { code: 'Q7', side: 'R', quad: 'B', p1: 'M', p2: 'N', row: 9 },
+    { code: 'Q8', side: 'R', quad: 'B', p1: 'O', p2: 'P', isDorneda: true, row: 13 }
   ];
 
   var r8Results = {};
@@ -9414,15 +9456,15 @@ function renderCopaBracket(){
     var t1 = r16Results[p8.p1].winner || ('Ganador 16s (' + p8.p1 + ')');
     var t2 = r16Results[p8.p2].winner || ('Ganador 16s (' + p8.p2 + ')');
     var isDorneda = (t1.indexOf('DORNEDA') !== -1 || t2.indexOf('DORNEDA') !== -1);
-    r8Results[p8.code] = { code: p8.code, side: p8.side, quad: p8.quad, team1: t1, team2: t2, winner: null, isDorneda: isDorneda };
+    r8Results[p8.code] = { code: p8.code, side: p8.side, quad: p8.quad, team1: t1, team2: t2, winner: null, isDorneda: isDorneda, row: p8.row };
   });
 
   // CUARTOS Pairs (C1-C4)
   var pairs4 = [
-    { code: 'C1', side: 'L', quad: 'T', q1: 'Q1', q2: 'Q2' },
-    { code: 'C2', side: 'L', quad: 'B', q1: 'Q3', q2: 'Q4' },
-    { code: 'C3', side: 'R', quad: 'T', q1: 'Q5', q2: 'Q6' },
-    { code: 'C4', side: 'R', quad: 'B', q1: 'Q7', q2: 'Q8', isDorneda: true }
+    { code: 'C1', side: 'L', quad: 'T', q1: 'Q1', q2: 'Q2', row: 1 },
+    { code: 'C2', side: 'L', quad: 'B', q1: 'Q3', q2: 'Q4', row: 9 },
+    { code: 'C3', side: 'R', quad: 'T', q1: 'Q5', q2: 'Q6', row: 1 },
+    { code: 'C4', side: 'R', quad: 'B', q1: 'Q7', q2: 'Q8', isDorneda: true, row: 9 }
   ];
 
   var r4Results = {};
@@ -9430,7 +9472,7 @@ function renderCopaBracket(){
     var t1 = r8Results[p4.q1].winner || ('Ganador Octavos (' + p4.q1 + ')');
     var t2 = r8Results[p4.q2].winner || ('Ganador Octavos (' + p4.q2 + ')');
     var isDorneda = (t1.indexOf('DORNEDA') !== -1 || t2.indexOf('DORNEDA') !== -1);
-    r4Results[p4.code] = { code: p4.code, side: p4.side, quad: p4.quad, team1: t1, team2: t2, winner: null, isDorneda: isDorneda };
+    r4Results[p4.code] = { code: p4.code, side: p4.side, quad: p4.quad, team1: t1, team2: t2, winner: null, isDorneda: isDorneda, row: p4.row };
   });
 
   // SEMIS (Semi 1 & Semi 2)
@@ -9439,16 +9481,16 @@ function renderCopaBracket(){
   var tSemi2_A = r4Results['C3'].winner || 'Ganador Cuartos (C3)';
   var tSemi2_B = r4Results['C4'].winner || 'Ganador Cuartos (C4)';
 
-  // RENDER COLUMNS HTML
-  function render32ColHtml(matchesList){
-    return matchesList.map(function(m){
-      var res = r32Results[m.num];
-      var isD1 = m.t1.indexOf('DORNEDA') !== -1;
-      var isD2 = m.t2.indexOf('DORNEDA') !== -1;
-      var isMatchDorneda = isD1 || isD2;
+  // Helper generators
+  function render32Card(m, rowNum, colNum){
+    var res = r32Results[m.num];
+    var isD1 = m.t1.indexOf('DORNEDA') !== -1;
+    var isD2 = m.t2.indexOf('DORNEDA') !== -1;
+    var isMatchDorneda = isD1 || isD2;
 
-      return `
-        <div class="bracket-match-32-row ${isMatchDorneda ? 'dorneda-slot' : ''}" id="bracket-match-${m.num}" onclick="${m.matchId ? `showDetallePartido(${m.matchId})` : ''}" style="${m.matchId ? 'cursor:pointer;' : ''}" title="${m.num}: ${m.t1} vs ${m.t2}">
+    return `
+      <div class="bracket-cell" style="grid-column:${colNum};grid-row:${rowNum};">
+        <div class="bracket-match-32-card ${isMatchDorneda ? 'dorneda-slot' : ''}" id="bracket-match-${m.num}" onclick="${m.matchId ? `showDetallePartido(${m.matchId})` : ''}" style="${m.matchId ? 'cursor:pointer;' : ''}" title="${m.num}: ${m.t1} vs ${m.t2}">
           <div class="bracket-num-pill">${m.num}</div>
           <div style="flex:1;display:flex;flex-direction:column;gap:2px;overflow:hidden;">
             <div class="bracket-slot-card ${res.isWinner1 ? 'winner' : ''} ${isD1 ? 'dorneda-slot' : ''}">
@@ -9468,49 +9510,49 @@ function renderCopaBracket(){
           </div>
           <div class="bracket-arrow-indicator">${m.side === 'L' ? '➡' : '⬅'}</div>
         </div>
-      `;
-    }).join('');
+      </div>
+    `;
   }
 
-  function render16ColHtml(codeList){
-    return codeList.map(function(code){
-      var r = r16Results[code];
-      var isD1 = r.team1.indexOf('DORNEDA') !== -1;
-      var isD2 = r.team2.indexOf('DORNEDA') !== -1;
-      var isMatchDorneda = isD1 || isD2;
+  function render16Card(pair, colNum){
+    var r = r16Results[pair.code];
+    var isD1 = r.team1.indexOf('DORNEDA') !== -1;
+    var isD2 = r.team2.indexOf('DORNEDA') !== -1;
+    var isMatchDorneda = isD1 || isD2;
 
-      return `
-        <div class="bracket-slot-card ${isMatchDorneda ? 'dorneda-slot' : ''}" style="margin:6px 0;padding:5px 6px;" title="16-Avos (${code}): ${r.team1} vs ${r.team2}">
-          <div style="font-size:8.5px;font-weight:900;color:#0284c7;margin-bottom:3px;display:flex;justify-content:space-between;">
-            <span>16-Avos (${code})</span>
+    return `
+      <div class="bracket-cell" style="grid-column:${colNum};grid-row:${pair.row} / span 2;align-self:center;">
+        <div class="bracket-slot-card ${isMatchDorneda ? 'dorneda-slot' : ''}" style="padding:5px 6px;" title="16-Avos (${pair.code}): ${r.team1} vs ${r.team2}">
+          <div class="bracket-card-header" style="color:#0284c7;">
+            <span>16-Avos (${pair.code})</span>
             ${isMatchDorneda ? '<span style="color:#dc2626;font-weight:900;">⭐ DORNEDA</span>' : ''}
           </div>
-          <div class="bracket-team-line ${r.isW1 ? 'is-winner' : ''}" style="padding:2px 0;">
+          <div class="bracket-team-line ${r.isW1 ? 'is-winner' : ''}" style="padding:1.5px 0;">
             <span class="team-name" style="font-weight:${isD1 ? '900' : '700'};color:${isD1 ? '#dc2626' : 'inherit'};">${isD1 ? '⭐ ' : ''}${highlightDorneda(r.team1)}</span>
             ${r.div1 ? `<span class="team-div">(${r.div1})</span>` : ''}
             ${r.s1 !== null ? `<span class="team-score">${r.s1}</span>` : ''}
           </div>
-          <div class="bracket-team-line ${r.isW2 ? 'is-winner' : ''}" style="padding:2px 0;border-top:1px dashed #e2e8f0;margin-top:2px;">
+          <div class="bracket-team-line ${r.isW2 ? 'is-winner' : ''}" style="padding:1.5px 0;border-top:1px dashed #e2e8f0;margin-top:2px;">
             <span class="team-name" style="font-weight:${isD2 ? '900' : '700'};color:${isD2 ? '#dc2626' : 'inherit'};">${isD2 ? '⭐ ' : ''}${highlightDorneda(r.team2)}</span>
             ${r.div2 ? `<span class="team-div">(${r.div2})</span>` : ''}
             ${r.s2 !== null ? `<span class="team-score">${r.s2}</span>` : ''}
           </div>
         </div>
-      `;
-    }).join('');
+      </div>
+    `;
   }
 
-  function render8ColHtml(codeList){
-    return codeList.map(function(code){
-      var r = r8Results[code];
-      var isD1 = r.team1.indexOf('DORNEDA') !== -1;
-      var isD2 = r.team2.indexOf('DORNEDA') !== -1;
-      var isMatchDorneda = isD1 || isD2;
+  function render8Card(p8, colNum){
+    var r = r8Results[p8.code];
+    var isD1 = r.team1.indexOf('DORNEDA') !== -1;
+    var isD2 = r.team2.indexOf('DORNEDA') !== -1;
+    var isMatchDorneda = isD1 || isD2;
 
-      return `
-        <div class="bracket-slot-card ${isMatchDorneda ? 'dorneda-slot' : ''}" style="margin:12px 0;padding:6px 6px;">
-          <div style="font-size:8.5px;font-weight:900;color:#65a30d;margin-bottom:3px;display:flex;justify-content:space-between;">
-            <span>Octavos (${code})</span>
+    return `
+      <div class="bracket-cell" style="grid-column:${colNum};grid-row:${p8.row} / span 4;align-self:center;">
+        <div class="bracket-slot-card ${isMatchDorneda ? 'dorneda-slot' : ''}" style="padding:6px 6px;">
+          <div class="bracket-card-header" style="color:#65a30d;">
+            <span>Octavos (${p8.code})</span>
             ${isMatchDorneda ? '<span style="color:#dc2626;font-weight:900;">⭐ DORNEDA</span>' : ''}
           </div>
           <div class="bracket-team-line" style="padding:2px 0;">
@@ -9520,39 +9562,97 @@ function renderCopaBracket(){
             <span class="team-name" style="font-weight:${isD2 ? '900' : '700'};">${isD2 ? '⭐ ' : ''}${highlightDorneda(r.team2)}</span>
           </div>
         </div>
-      `;
-    }).join('');
+      </div>
+    `;
   }
 
-  function render4ColHtml(codeList){
-    return codeList.map(function(code){
-      var r = r4Results[code];
-      var isD1 = r.team1.indexOf('DORNEDA') !== -1;
-      var isD2 = r.team2.indexOf('DORNEDA') !== -1;
-      var isMatchDorneda = isD1 || isD2;
+  function render4Card(p4, colNum){
+    var r = r4Results[p4.code];
+    var isD1 = r.team1.indexOf('DORNEDA') !== -1;
+    var isD2 = r.team2.indexOf('DORNEDA') !== -1;
+    var isMatchDorneda = isD1 || isD2;
 
-      return `
-        <div class="bracket-slot-card ${isMatchDorneda ? 'dorneda-slot' : ''}" style="margin:20px 0;padding:8px 6px;">
-          <div style="font-size:8.5px;font-weight:900;color:#eab308;margin-bottom:3px;display:flex;justify-content:space-between;">
-            <span>Cuartos (${code})</span>
+    return `
+      <div class="bracket-cell" style="grid-column:${colNum};grid-row:${p4.row} / span 8;align-self:center;">
+        <div class="bracket-slot-card ${isMatchDorneda ? 'dorneda-slot' : ''}" style="padding:8px 6px;">
+          <div class="bracket-card-header" style="color:#eab308;">
+            <span>Cuartos (${p4.code})</span>
             ${isMatchDorneda ? '<span style="color:#dc2626;font-weight:900;">⭐ DORNEDA</span>' : ''}
           </div>
-          <div class="bracket-team-line" style="padding:2px 0;">
+          <div class="bracket-team-line" style="padding:2.5px 0;">
             <span class="team-name" style="font-weight:${isD1 ? '900' : '700'};">${isD1 ? '⭐ ' : ''}${highlightDorneda(r.team1)}</span>
           </div>
-          <div class="bracket-team-line" style="padding:2px 0;border-top:1px dashed #e2e8f0;margin-top:2px;">
+          <div class="bracket-team-line" style="padding:2.5px 0;border-top:1px dashed #e2e8f0;margin-top:2px;">
             <span class="team-name" style="font-weight:${isD2 ? '900' : '700'};">${isD2 ? '⭐ ' : ''}${highlightDorneda(r.team2)}</span>
           </div>
         </div>
-      `;
-    }).join('');
+      </div>
+    `;
   }
 
-  // Left & Right match lists
-  var m32_L_Top = COPA_BRACKET_MATCHES_32.filter(m => m.side === 'L' && m.quad === 'T');
-  var m32_L_Bot = COPA_BRACKET_MATCHES_32.filter(m => m.side === 'L' && m.quad === 'B');
-  var m32_R_Top = COPA_BRACKET_MATCHES_32.filter(m => m.side === 'R' && m.quad === 'T');
-  var m32_R_Bot = COPA_BRACKET_MATCHES_32.filter(m => m.side === 'R' && m.quad === 'B');
+  // Build the 32 matches row mappings
+  var m32LeftOrder = [1, 2, 3, 4, 5, 6, 7, 8, 17, 18, 19, 20, 21, 22, 23, 24];
+  var m32RightOrder = [9, 10, 11, 12, 13, 14, 15, 16, 25, 26, 27, 28, 29, 30, 31, 32];
+
+  var col1Html = m32LeftOrder.map(function(num, idx){
+    var m = COPA_BRACKET_MATCHES_32.find(x => x.num === num);
+    return render32Card(m, idx + 1, 1);
+  }).join('');
+
+  var col2Html = pairs16.filter(p => p.side === 'L').map(p => render16Card(p, 2)).join('');
+  var col3Html = pairs8.filter(p => p.side === 'L').map(p => render8Card(p, 3)).join('');
+  var col4Html = pairs4.filter(p => p.side === 'L').map(p => render4Card(p, 4)).join('');
+
+  var col5Html = `
+    <div class="bracket-cell" style="grid-column:5;grid-row:1 / span 16;align-self:center;">
+      <div class="bracket-slot-card" style="padding:10px 8px;border:2px solid #ea580c;box-shadow:0 0 15px rgba(234,88,12,0.35);">
+        <div style="font-size:9px;font-weight:900;color:#ea580c;margin-bottom:4px;">SEMIFINAL 1 (27 Mar)</div>
+        <div class="bracket-team-line" style="padding:3px 0;"><span class="team-name" style="font-weight:800;">${tSemi1_A}</span></div>
+        <div class="bracket-team-line" style="padding:3px 0;border-top:1px dashed #e2e8f0;margin-top:3px;"><span class="team-name" style="font-weight:800;">${tSemi1_B}</span></div>
+      </div>
+    </div>
+  `;
+
+  var col6Html = `
+    <div class="bracket-cell" style="grid-column:6;grid-row:1 / span 16;align-self:center;">
+      <div class="bracket-final-box" id="bracket-final-card">
+        <div class="bracket-final-trophy">🏆</div>
+        <div class="bracket-final-title">GRAN FINAL</div>
+        <div class="bracket-final-date">📅 15 Mayo 2027</div>
+        <div style="display:flex;flex-direction:column;gap:6px;margin:8px 0;">
+          <div class="bracket-slot-card" style="background:#ffffff;color:#0f172a;padding:5px 6px;border:1px solid #cbd5e1;">
+            <span class="team-name" style="font-weight:800;font-size:10px;">Finalista Cuadro Izq.</span>
+          </div>
+          <div style="font-size:10px;font-weight:900;color:#fef08a;">VS</div>
+          <div class="bracket-slot-card" style="background:#ffffff;color:#0f172a;padding:5px 6px;border:1px solid #cbd5e1;">
+            <span class="team-name" style="font-weight:800;font-size:10px;">Finalista Cuadro Der.</span>
+          </div>
+        </div>
+        <div style="margin-top:6px;font-size:9.5px;font-weight:800;color:#fef08a;background:rgba(0,0,0,0.35);padding:3px 6px;border-radius:4px;">
+          🎖️ CAMPEÓN DE COPA 2026/27
+        </div>
+      </div>
+    </div>
+  `;
+
+  var col7Html = `
+    <div class="bracket-cell" style="grid-column:7;grid-row:1 / span 16;align-self:center;">
+      <div class="bracket-slot-card" style="padding:10px 8px;border:2px solid #ea580c;box-shadow:0 0 15px rgba(234,88,12,0.35);">
+        <div style="font-size:9px;font-weight:900;color:#ea580c;margin-bottom:4px;">SEMIFINAL 2 (27 Mar)</div>
+        <div class="bracket-team-line" style="padding:3px 0;"><span class="team-name" style="font-weight:800;">${tSemi2_A}</span></div>
+        <div class="bracket-team-line" style="padding:3px 0;border-top:1px dashed #e2e8f0;margin-top:3px;"><span class="team-name" style="font-weight:800;">${tSemi2_B}</span></div>
+      </div>
+    </div>
+  `;
+
+  var col8Html = pairs4.filter(p => p.side === 'R').map(p => render4Card(p, 8)).join('');
+  var col9Html = pairs8.filter(p => p.side === 'R').map(p => render8Card(p, 9)).join('');
+  var col10Html = pairs16.filter(p => p.side === 'R').map(p => render16Card(p, 10)).join('');
+
+  var col11Html = m32RightOrder.map(function(num, idx){
+    var m = COPA_BRACKET_MATCHES_32.find(x => x.num === num);
+    return render32Card(m, idx + 1, 11);
+  }).join('');
 
   var html = `
     <!-- 1. HEADERS BAR -->
@@ -9570,120 +9670,19 @@ function renderCopaBracket(){
       <div class="copa-round-hdr hdr-32"><span class="hdr-title">32-Avos</span><span class="hdr-date">5 Septiembre</span></div>
     </div>
 
-    <!-- 2. BRACKET BODY -->
+    <!-- 2. BRACKET GRID WITH MATHEMATICAL MIDPOINT CENTERING -->
     <div class="copa-bracket-body">
-      <!-- Col 1: 32-AVOS LEFT (Matches 1-8 and 17-24) -->
-      <div class="bracket-col">
-        <div style="display:flex;flex-direction:column;gap:5px;background:rgba(0,0,0,0.18);padding:6px 4px;border-radius:6px;border:1px solid rgba(255,255,255,0.06);">
-          ${render32ColHtml(m32_L_Top)}
-        </div>
-        <div style="display:flex;flex-direction:column;gap:5px;background:rgba(0,0,0,0.18);padding:6px 4px;border-radius:6px;border:1px solid rgba(255,255,255,0.06);">
-          ${render32ColHtml(m32_L_Bot)}
-        </div>
-      </div>
-
-      <!-- Col 2: 16-AVOS LEFT (A-D and E-H) -->
-      <div class="bracket-col">
-        <div style="display:flex;flex-direction:column;gap:8px;">
-          ${render16ColHtml(['A', 'B', 'C', 'D'])}
-        </div>
-        <div style="display:flex;flex-direction:column;gap:8px;">
-          ${render16ColHtml(['E', 'F', 'G', 'H'])}
-        </div>
-      </div>
-
-      <!-- Col 3: OCTAVOS LEFT (Q1-Q2 and Q3-Q4) -->
-      <div class="bracket-col">
-        <div style="display:flex;flex-direction:column;gap:16px;">
-          ${render8ColHtml(['Q1', 'Q2'])}
-        </div>
-        <div style="display:flex;flex-direction:column;gap:16px;">
-          ${render8ColHtml(['Q3', 'Q4'])}
-        </div>
-      </div>
-
-      <!-- Col 4: CUARTOS LEFT (C1 and C2) -->
-      <div class="bracket-col">
-        <div style="display:flex;flex-direction:column;gap:32px;">
-          ${render4ColHtml(['C1', 'C2'])}
-        </div>
-      </div>
-
-      <!-- Col 5: SEMIS LEFT (Semi 1) -->
-      <div class="bracket-col" style="justify-content:center;">
-        <div class="bracket-slot-card" style="padding:10px 8px;border:2px solid #ea580c;box-shadow:0 0 15px rgba(234,88,12,0.3);">
-          <div style="font-size:9px;font-weight:900;color:#ea580c;margin-bottom:4px;">SEMIFINAL 1 (27 Mar)</div>
-          <div class="bracket-team-line" style="padding:3px 0;"><span class="team-name" style="font-weight:800;">${tSemi1_A}</span></div>
-          <div class="bracket-team-line" style="padding:3px 0;border-top:1px dashed #e2e8f0;margin-top:3px;"><span class="team-name" style="font-weight:800;">${tSemi1_B}</span></div>
-        </div>
-      </div>
-
-      <!-- Col 6: GRAN FINAL (CENTER) -->
-      <div class="bracket-col" style="justify-content:center;">
-        <div class="bracket-final-box" id="bracket-final-card">
-          <div class="bracket-final-trophy">🏆</div>
-          <div class="bracket-final-title">GRAN FINAL</div>
-          <div class="bracket-final-date">📅 15 Mayo 2027</div>
-          <div style="display:flex;flex-direction:column;gap:6px;margin:8px 0;">
-            <div class="bracket-slot-card" style="background:#ffffff;color:#0f172a;padding:5px 6px;border:1px solid #cbd5e1;">
-              <span class="team-name" style="font-weight:800;font-size:10px;">Finalista Cuadro Izq.</span>
-            </div>
-            <div style="font-size:10px;font-weight:900;color:#fef08a;">VS</div>
-            <div class="bracket-slot-card" style="background:#ffffff;color:#0f172a;padding:5px 6px;border:1px solid #cbd5e1;">
-              <span class="team-name" style="font-weight:800;font-size:10px;">Finalista Cuadro Der.</span>
-            </div>
-          </div>
-          <div style="margin-top:6px;font-size:9.5px;font-weight:800;color:#fef08a;background:rgba(0,0,0,0.35);padding:3px 6px;border-radius:4px;">
-            🎖️ CAMPEÓN DE COPA 2026/27
-          </div>
-        </div>
-      </div>
-
-      <!-- Col 7: SEMIS RIGHT (Semi 2) -->
-      <div class="bracket-col" style="justify-content:center;">
-        <div class="bracket-slot-card" style="padding:10px 8px;border:2px solid #ea580c;box-shadow:0 0 15px rgba(234,88,12,0.3);">
-          <div style="font-size:9px;font-weight:900;color:#ea580c;margin-bottom:4px;">SEMIFINAL 2 (27 Mar)</div>
-          <div class="bracket-team-line" style="padding:3px 0;"><span class="team-name" style="font-weight:800;">${tSemi2_A}</span></div>
-          <div class="bracket-team-line" style="padding:3px 0;border-top:1px dashed #e2e8f0;margin-top:3px;"><span class="team-name" style="font-weight:800;">${tSemi2_B}</span></div>
-        </div>
-      </div>
-
-      <!-- Col 8: CUARTOS RIGHT (C3 and C4) -->
-      <div class="bracket-col">
-        <div style="display:flex;flex-direction:column;gap:32px;">
-          ${render4ColHtml(['C3', 'C4'])}
-        </div>
-      </div>
-
-      <!-- Col 9: OCTAVOS RIGHT (Q5-Q6 and Q7-Q8) -->
-      <div class="bracket-col">
-        <div style="display:flex;flex-direction:column;gap:16px;">
-          ${render8ColHtml(['Q5', 'Q6'])}
-        </div>
-        <div style="display:flex;flex-direction:column;gap:16px;">
-          ${render8ColHtml(['Q7', 'Q8'])}
-        </div>
-      </div>
-
-      <!-- Col 10: 16-AVOS RIGHT (I-L and M-P) -->
-      <div class="bracket-col">
-        <div style="display:flex;flex-direction:column;gap:8px;">
-          ${render16ColHtml(['I', 'J', 'K', 'L'])}
-        </div>
-        <div style="display:flex;flex-direction:column;gap:8px;">
-          ${render16ColHtml(['M', 'N', 'O', 'P'])}
-        </div>
-      </div>
-
-      <!-- Col 11: 32-AVOS RIGHT (Matches 9-16 and 25-32) -->
-      <div class="bracket-col">
-        <div style="display:flex;flex-direction:column;gap:5px;background:rgba(0,0,0,0.18);padding:6px 4px;border-radius:6px;border:1px solid rgba(255,255,255,0.06);">
-          ${render32ColHtml(m32_R_Top)}
-        </div>
-        <div style="display:flex;flex-direction:column;gap:5px;background:rgba(0,0,0,0.18);padding:6px 4px;border-radius:6px;border:1px solid rgba(255,255,255,0.06);">
-          ${render32ColHtml(m32_R_Bot)}
-        </div>
-      </div>
+      ${col1Html}
+      ${col2Html}
+      ${col3Html}
+      ${col4Html}
+      ${col5Html}
+      ${col6Html}
+      ${col7Html}
+      ${col8Html}
+      ${col9Html}
+      ${col10Html}
+      ${col11Html}
     </div>
   `;
 
