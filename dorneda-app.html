@@ -670,11 +670,12 @@
     .copa-bracket-body {
       display: grid;
       grid-template-columns: 215px 185px 165px 155px 145px 195px 145px 155px 165px 185px 215px;
-      grid-template-rows: repeat(16, minmax(58px, auto));
-      gap: 8px 12px;
+      grid-template-rows: repeat(16, 62px);
+      row-gap: 10px;
+      column-gap: 14px;
       align-items: stretch;
-      min-height: 1060px;
-      padding: 8px 2px;
+      min-height: 1150px;
+      padding: 10px 4px;
     }
 
     .bracket-cell {
@@ -682,6 +683,215 @@
       flex-direction: column;
       justify-content: center;
       position: relative;
+    }
+
+    /* Visual Tree Connector Branches */
+    .bracket-cell-16-L::before {
+      content: '';
+      position: absolute;
+      left: -9px;
+      top: 31px;
+      bottom: 31px;
+      width: 8px;
+      border-left: 2px solid rgba(148, 163, 184, 0.45);
+      border-top: 2px solid rgba(148, 163, 184, 0.45);
+      border-bottom: 2px solid rgba(148, 163, 184, 0.45);
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+      pointer-events: none;
+    }
+    .bracket-cell-16-L::after {
+      content: '';
+      position: absolute;
+      left: -9px;
+      top: 50%;
+      width: 9px;
+      height: 2px;
+      background: rgba(148, 163, 184, 0.45);
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .bracket-cell-16-R::before {
+      content: '';
+      position: absolute;
+      right: -9px;
+      top: 31px;
+      bottom: 31px;
+      width: 8px;
+      border-right: 2px solid rgba(148, 163, 184, 0.45);
+      border-top: 2px solid rgba(148, 163, 184, 0.45);
+      border-bottom: 2px solid rgba(148, 163, 184, 0.45);
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 4px;
+      pointer-events: none;
+    }
+    .bracket-cell-16-R::after {
+      content: '';
+      position: absolute;
+      right: -9px;
+      top: 50%;
+      width: 9px;
+      height: 2px;
+      background: rgba(148, 163, 184, 0.45);
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .bracket-cell-8-L::before {
+      content: '';
+      position: absolute;
+      left: -9px;
+      top: 67px;
+      bottom: 67px;
+      width: 8px;
+      border-left: 2px solid rgba(101, 163, 13, 0.5);
+      border-top: 2px solid rgba(101, 163, 13, 0.5);
+      border-bottom: 2px solid rgba(101, 163, 13, 0.5);
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+      pointer-events: none;
+    }
+    .bracket-cell-8-L::after {
+      content: '';
+      position: absolute;
+      left: -9px;
+      top: 50%;
+      width: 9px;
+      height: 2px;
+      background: rgba(101, 163, 13, 0.5);
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .bracket-cell-8-R::before {
+      content: '';
+      position: absolute;
+      right: -9px;
+      top: 67px;
+      bottom: 67px;
+      width: 8px;
+      border-right: 2px solid rgba(101, 163, 13, 0.5);
+      border-top: 2px solid rgba(101, 163, 13, 0.5);
+      border-bottom: 2px solid rgba(101, 163, 13, 0.5);
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 4px;
+      pointer-events: none;
+    }
+    .bracket-cell-8-R::after {
+      content: '';
+      position: absolute;
+      right: -9px;
+      top: 50%;
+      width: 9px;
+      height: 2px;
+      background: rgba(101, 163, 13, 0.5);
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .bracket-cell-4-L::before {
+      content: '';
+      position: absolute;
+      left: -9px;
+      top: 139px;
+      bottom: 139px;
+      width: 8px;
+      border-left: 2px solid rgba(234, 179, 8, 0.55);
+      border-top: 2px solid rgba(234, 179, 8, 0.55);
+      border-bottom: 2px solid rgba(234, 179, 8, 0.55);
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+      pointer-events: none;
+    }
+    .bracket-cell-4-L::after {
+      content: '';
+      position: absolute;
+      left: -9px;
+      top: 50%;
+      width: 9px;
+      height: 2px;
+      background: rgba(234, 179, 8, 0.55);
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .bracket-cell-4-R::before {
+      content: '';
+      position: absolute;
+      right: -9px;
+      top: 139px;
+      bottom: 139px;
+      width: 8px;
+      border-right: 2px solid rgba(234, 179, 8, 0.55);
+      border-top: 2px solid rgba(234, 179, 8, 0.55);
+      border-bottom: 2px solid rgba(234, 179, 8, 0.55);
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 4px;
+      pointer-events: none;
+    }
+    .bracket-cell-4-R::after {
+      content: '';
+      position: absolute;
+      right: -9px;
+      top: 50%;
+      width: 9px;
+      height: 2px;
+      background: rgba(234, 179, 8, 0.55);
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .bracket-cell-semi-L::before {
+      content: '';
+      position: absolute;
+      left: -9px;
+      top: 283px;
+      bottom: 283px;
+      width: 8px;
+      border-left: 2px solid rgba(234, 88, 12, 0.6);
+      border-top: 2px solid rgba(234, 88, 12, 0.6);
+      border-bottom: 2px solid rgba(234, 88, 12, 0.6);
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+      pointer-events: none;
+    }
+    .bracket-cell-semi-L::after {
+      content: '';
+      position: absolute;
+      left: -9px;
+      top: 50%;
+      width: 9px;
+      height: 2px;
+      background: rgba(234, 88, 12, 0.6);
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .bracket-cell-semi-R::before {
+      content: '';
+      position: absolute;
+      right: -9px;
+      top: 283px;
+      bottom: 283px;
+      width: 8px;
+      border-right: 2px solid rgba(234, 88, 12, 0.6);
+      border-top: 2px solid rgba(234, 88, 12, 0.6);
+      border-bottom: 2px solid rgba(234, 88, 12, 0.6);
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 4px;
+      pointer-events: none;
+    }
+    .bracket-cell-semi-R::after {
+      content: '';
+      position: absolute;
+      right: -9px;
+      top: 50%;
+      width: 8px;
+      height: 2px;
+      background: rgba(234, 88, 12, 0.6);
+      transform: translateY(-50%);
+      pointer-events: none;
     }
 
     .bracket-slot-card {
@@ -9310,13 +9520,6 @@ const COPA_BRACKET_MATCHES_32 = [
   { num: 32, side: 'R', quad: 'B', t1: 'URAL ESPAÑOL C.F.', div1: '3ª', t2: 'EXENTO', div2: '', matchId: null, next16: 'P', isExento: true }
 ];
 
-function get32Result(m){
-  var r32 = (db.copaJornadas && db.copaJornadas[0] ? db.copaJornadas[0].partidos : []) || [];
-  var p = null;
-  if(m.matchId){
-    p = r32.find(x => x.id === m.matchId);
-  }
-  if(!p){
 function normStr(s){
   if(!s) return '';
   return s.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
@@ -9489,8 +9692,9 @@ function renderCopaBracket(){
     var isMatchDorneda = isD1 || isD2;
 
     return `
-      <div class="bracket-cell" style="grid-column:${colNum};grid-row:${rowNum};">
+      <div class="bracket-cell bracket-cell-32" style="grid-column:${colNum};grid-row:${rowNum};">
         <div class="bracket-match-32-card ${isMatchDorneda ? 'dorneda-slot' : ''}" id="bracket-match-${m.num}" onclick="${m.matchId ? `showDetallePartido(${m.matchId})` : ''}" style="${m.matchId ? 'cursor:pointer;' : ''}" title="${m.num}: ${m.t1} vs ${m.t2}">
+          ${m.side === 'R' ? `<div class="bracket-arrow-indicator">⬅</div>` : ''}
           <div class="bracket-num-pill">${m.num}</div>
           <div style="flex:1;display:flex;flex-direction:column;gap:2px;overflow:hidden;">
             <div class="bracket-slot-card ${res.isWinner1 ? 'winner' : ''} ${isD1 ? 'dorneda-slot' : ''}">
@@ -9508,7 +9712,7 @@ function renderCopaBracket(){
               </div>
             </div>
           </div>
-          <div class="bracket-arrow-indicator">${m.side === 'L' ? '➡' : '⬅'}</div>
+          ${m.side === 'L' ? `<div class="bracket-arrow-indicator">➡</div>` : ''}
         </div>
       </div>
     `;
@@ -9519,9 +9723,10 @@ function renderCopaBracket(){
     var isD1 = r.team1.indexOf('DORNEDA') !== -1;
     var isD2 = r.team2.indexOf('DORNEDA') !== -1;
     var isMatchDorneda = isD1 || isD2;
+    var cellClass = pair.side === 'L' ? 'bracket-cell bracket-cell-16-L' : 'bracket-cell bracket-cell-16-R';
 
     return `
-      <div class="bracket-cell" style="grid-column:${colNum};grid-row:${pair.row} / span 2;align-self:center;">
+      <div class="${cellClass}" style="grid-column:${colNum};grid-row:${pair.row} / span 2;align-self:center;">
         <div class="bracket-slot-card ${isMatchDorneda ? 'dorneda-slot' : ''}" style="padding:5px 6px;" title="16-Avos (${pair.code}): ${r.team1} vs ${r.team2}">
           <div class="bracket-card-header" style="color:#0284c7;">
             <span>16-Avos (${pair.code})</span>
@@ -9547,9 +9752,10 @@ function renderCopaBracket(){
     var isD1 = r.team1.indexOf('DORNEDA') !== -1;
     var isD2 = r.team2.indexOf('DORNEDA') !== -1;
     var isMatchDorneda = isD1 || isD2;
+    var cellClass = p8.side === 'L' ? 'bracket-cell bracket-cell-8-L' : 'bracket-cell bracket-cell-8-R';
 
     return `
-      <div class="bracket-cell" style="grid-column:${colNum};grid-row:${p8.row} / span 4;align-self:center;">
+      <div class="${cellClass}" style="grid-column:${colNum};grid-row:${p8.row} / span 4;align-self:center;">
         <div class="bracket-slot-card ${isMatchDorneda ? 'dorneda-slot' : ''}" style="padding:6px 6px;">
           <div class="bracket-card-header" style="color:#65a30d;">
             <span>Octavos (${p8.code})</span>
@@ -9571,9 +9777,10 @@ function renderCopaBracket(){
     var isD1 = r.team1.indexOf('DORNEDA') !== -1;
     var isD2 = r.team2.indexOf('DORNEDA') !== -1;
     var isMatchDorneda = isD1 || isD2;
+    var cellClass = p4.side === 'L' ? 'bracket-cell bracket-cell-4-L' : 'bracket-cell bracket-cell-4-R';
 
     return `
-      <div class="bracket-cell" style="grid-column:${colNum};grid-row:${p4.row} / span 8;align-self:center;">
+      <div class="${cellClass}" style="grid-column:${colNum};grid-row:${p4.row} / span 8;align-self:center;">
         <div class="bracket-slot-card ${isMatchDorneda ? 'dorneda-slot' : ''}" style="padding:8px 6px;">
           <div class="bracket-card-header" style="color:#eab308;">
             <span>Cuartos (${p4.code})</span>
@@ -9604,7 +9811,7 @@ function renderCopaBracket(){
   var col4Html = pairs4.filter(p => p.side === 'L').map(p => render4Card(p, 4)).join('');
 
   var col5Html = `
-    <div class="bracket-cell" style="grid-column:5;grid-row:1 / span 16;align-self:center;">
+    <div class="bracket-cell bracket-cell-semi-L" style="grid-column:5;grid-row:1 / span 16;align-self:center;">
       <div class="bracket-slot-card" style="padding:10px 8px;border:2px solid #ea580c;box-shadow:0 0 15px rgba(234,88,12,0.35);">
         <div style="font-size:9px;font-weight:900;color:#ea580c;margin-bottom:4px;">SEMIFINAL 1 (27 Mar)</div>
         <div class="bracket-team-line" style="padding:3px 0;"><span class="team-name" style="font-weight:800;">${tSemi1_A}</span></div>
@@ -9636,7 +9843,7 @@ function renderCopaBracket(){
   `;
 
   var col7Html = `
-    <div class="bracket-cell" style="grid-column:7;grid-row:1 / span 16;align-self:center;">
+    <div class="bracket-cell bracket-cell-semi-R" style="grid-column:7;grid-row:1 / span 16;align-self:center;">
       <div class="bracket-slot-card" style="padding:10px 8px;border:2px solid #ea580c;box-shadow:0 0 15px rgba(234,88,12,0.35);">
         <div style="font-size:9px;font-weight:900;color:#ea580c;margin-bottom:4px;">SEMIFINAL 2 (27 Mar)</div>
         <div class="bracket-team-line" style="padding:3px 0;"><span class="team-name" style="font-weight:800;">${tSemi2_A}</span></div>
