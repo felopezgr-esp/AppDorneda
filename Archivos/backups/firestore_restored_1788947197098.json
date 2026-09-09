@@ -1,0 +1,7137 @@
+{
+  "clasificacion": [
+    {
+      "equipo": "Xuventude Dorneda",
+      "pj": 0,
+      "g": 0,
+      "e": 0,
+      "p": 0,
+      "gf": 0,
+      "gc": 0,
+      "pts": 0,
+      "dorneda": true
+    },
+    {
+      "equipo": "Betanzos Norte",
+      "pj": 0,
+      "g": 0,
+      "e": 0,
+      "p": 0,
+      "gf": 0,
+      "gc": 0,
+      "pts": 0
+    },
+    {
+      "equipo": "C.C.D. Curtis",
+      "pj": 0,
+      "g": 0,
+      "e": 0,
+      "p": 0,
+      "gf": 0,
+      "gc": 0,
+      "pts": 0
+    },
+    {
+      "equipo": "C.D. Sigrás",
+      "pj": 0,
+      "g": 0,
+      "e": 0,
+      "p": 0,
+      "gf": 0,
+      "gc": 0,
+      "pts": 0
+    },
+    {
+      "equipo": "Club Deportivo Narón Silver Catering",
+      "pj": 0,
+      "g": 0,
+      "e": 0,
+      "p": 0,
+      "gf": 0,
+      "gc": 0,
+      "pts": 0
+    },
+    {
+      "equipo": "Campanal de Loureda F. C.",
+      "pj": 0,
+      "g": 0,
+      "e": 0,
+      "p": 0,
+      "gf": 0,
+      "gc": 0,
+      "pts": 0
+    },
+    {
+      "equipo": "Sporting Cambre As Travesas",
+      "pj": 0,
+      "g": 0,
+      "e": 0,
+      "p": 0,
+      "gf": 0,
+      "gc": 0,
+      "pts": 0
+    },
+    {
+      "equipo": "U.D. Narahio",
+      "pj": 0,
+      "g": 0,
+      "e": 0,
+      "p": 0,
+      "gf": 0,
+      "gc": 0,
+      "pts": 0
+    },
+    {
+      "equipo": "Portazgo S.D.",
+      "pj": 0,
+      "g": 0,
+      "e": 0,
+      "p": 0,
+      "gf": 0,
+      "gc": 0,
+      "pts": 0
+    },
+    {
+      "equipo": "Sporting Burgo",
+      "pj": 0,
+      "g": 0,
+      "e": 0,
+      "p": 0,
+      "gf": 0,
+      "gc": 0,
+      "pts": 0
+    },
+    {
+      "equipo": "Liceo de Monelos S.D.",
+      "pj": 0,
+      "g": 0,
+      "e": 0,
+      "p": 0,
+      "gf": 0,
+      "gc": 0,
+      "pts": 0
+    },
+    {
+      "equipo": "U.D. Paiosaco H.Añon",
+      "pj": 0,
+      "g": 0,
+      "e": 0,
+      "p": 0,
+      "gf": 0,
+      "gc": 0,
+      "pts": 0
+    },
+    {
+      "equipo": "Oza de los Ríos",
+      "pj": 0,
+      "g": 0,
+      "e": 0,
+      "p": 0,
+      "gf": 0,
+      "gc": 0,
+      "pts": 0
+    },
+    {
+      "equipo": "Cedeira S.D.",
+      "pj": 0,
+      "g": 0,
+      "e": 0,
+      "p": 0,
+      "gf": 0,
+      "gc": 0,
+      "pts": 0
+    },
+    {
+      "equipo": "Sada F.C. A Nosa Viña",
+      "pj": 0,
+      "g": 0,
+      "e": 0,
+      "p": 0,
+      "gf": 0,
+      "gc": 0,
+      "pts": 0
+    },
+    {
+      "equipo": "San Martiño S.D.",
+      "pj": 0,
+      "g": 0,
+      "e": 0,
+      "p": 0,
+      "gf": 0,
+      "gc": 0,
+      "pts": 0
+    }
+  ],
+  "todasJornadas": [
+    {
+      "jornada": 1,
+      "fecha": "13/09/2026",
+      "vuelta": 1,
+      "partidos": [
+        {
+          "local": "Betanzos Norte",
+          "visitante": "C.D. Sigrás",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Cedeira S.D.",
+          "visitante": "Campanal de Loureda F. C.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Xuventude Dorneda",
+          "visitante": "U.D. Narahio",
+          "gl": null,
+          "gv": null,
+          "dorneda": true,
+          "fecha": "13/09/2026",
+          "hora": "10:00",
+          "campo": "Campo de Fútbol A Marola"
+        },
+        {
+          "local": "Liceo de Monelos S.D.",
+          "visitante": "Sporting Burgo",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Portazgo S.D.",
+          "visitante": "U.D. Paiosaco H.Añon",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sporting Cambre As Travesas",
+          "visitante": "Oza de los Ríos",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Club Deportivo Narón Silver Catering",
+          "visitante": "Sada F.C. A Nosa Viña",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "San Martiño S.D.",
+          "visitante": "C.C.D. Curtis",
+          "gl": null,
+          "gv": null
+        }
+      ]
+    },
+    {
+      "jornada": 2,
+      "fecha": "19/09/2026",
+      "vuelta": 1,
+      "partidos": [
+        {
+          "local": "C.D. Sigrás",
+          "visitante": "San Martiño S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Campanal de Loureda F. C.",
+          "visitante": "Betanzos Norte",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "U.D. Narahio",
+          "visitante": "Cedeira S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sporting Burgo",
+          "visitante": "Xuventude Dorneda",
+          "gl": null,
+          "gv": null,
+          "dorneda": true
+        },
+        {
+          "local": "U.D. Paiosaco H.Añon",
+          "visitante": "Liceo de Monelos S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Oza de los Ríos",
+          "visitante": "Portazgo S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sada F.C. A Nosa Viña",
+          "visitante": "Sporting Cambre As Travesas",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "C.C.D. Curtis",
+          "visitante": "Club Deportivo Narón Silver Catering",
+          "gl": null,
+          "gv": null
+        }
+      ]
+    },
+    {
+      "jornada": 3,
+      "fecha": "26/09/2026",
+      "vuelta": 1,
+      "partidos": [
+        {
+          "local": "C.D. Sigrás",
+          "visitante": "Campanal de Loureda F. C.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Betanzos Norte",
+          "visitante": "U.D. Narahio",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Cedeira S.D.",
+          "visitante": "Sporting Burgo",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Xuventude Dorneda",
+          "visitante": "U.D. Paiosaco H.Añon",
+          "gl": null,
+          "gv": null,
+          "dorneda": true
+        },
+        {
+          "local": "Liceo de Monelos S.D.",
+          "visitante": "Oza de los Ríos",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Portazgo S.D.",
+          "visitante": "Sada F.C. A Nosa Viña",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sporting Cambre As Travesas",
+          "visitante": "C.C.D. Curtis",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "San Martiño S.D.",
+          "visitante": "Club Deportivo Narón Silver Catering",
+          "gl": null,
+          "gv": null
+        }
+      ]
+    },
+    {
+      "jornada": 4,
+      "fecha": "03/10/2026",
+      "vuelta": 1,
+      "partidos": [
+        {
+          "local": "Campanal de Loureda F. C.",
+          "visitante": "San Martiño S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "U.D. Narahio",
+          "visitante": "C.D. Sigrás",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sporting Burgo",
+          "visitante": "Betanzos Norte",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "U.D. Paiosaco H.Añon",
+          "visitante": "Cedeira S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Oza de los Ríos",
+          "visitante": "Xuventude Dorneda",
+          "gl": null,
+          "gv": null,
+          "dorneda": true
+        },
+        {
+          "local": "Sada F.C. A Nosa Viña",
+          "visitante": "Liceo de Monelos S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "C.C.D. Curtis",
+          "visitante": "Portazgo S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Club Deportivo Narón Silver Catering",
+          "visitante": "Sporting Cambre As Travesas",
+          "gl": null,
+          "gv": null
+        }
+      ]
+    },
+    {
+      "jornada": 5,
+      "fecha": "10/10/2026",
+      "vuelta": 1,
+      "partidos": [
+        {
+          "local": "Campanal de Loureda F. C.",
+          "visitante": "U.D. Narahio",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "C.D. Sigrás",
+          "visitante": "Sporting Burgo",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Betanzos Norte",
+          "visitante": "U.D. Paiosaco H.Añon",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Cedeira S.D.",
+          "visitante": "Oza de los Ríos",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Xuventude Dorneda",
+          "visitante": "Sada F.C. A Nosa Viña",
+          "gl": null,
+          "gv": null,
+          "dorneda": true
+        },
+        {
+          "local": "Liceo de Monelos S.D.",
+          "visitante": "C.C.D. Curtis",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Portazgo S.D.",
+          "visitante": "Club Deportivo Narón Silver Catering",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "San Martiño S.D.",
+          "visitante": "Sporting Cambre As Travesas",
+          "gl": null,
+          "gv": null
+        }
+      ]
+    },
+    {
+      "jornada": 6,
+      "fecha": "17/10/2026",
+      "vuelta": 1,
+      "partidos": [
+        {
+          "local": "U.D. Narahio",
+          "visitante": "San Martiño S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sporting Burgo",
+          "visitante": "Campanal de Loureda F. C.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "U.D. Paiosaco H.Añon",
+          "visitante": "C.D. Sigrás",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Oza de los Ríos",
+          "visitante": "Betanzos Norte",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sada F.C. A Nosa Viña",
+          "visitante": "Cedeira S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "C.C.D. Curtis",
+          "visitante": "Xuventude Dorneda",
+          "gl": null,
+          "gv": null,
+          "dorneda": true
+        },
+        {
+          "local": "Club Deportivo Narón Silver Catering",
+          "visitante": "Liceo de Monelos S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sporting Cambre As Travesas",
+          "visitante": "Portazgo S.D.",
+          "gl": null,
+          "gv": null
+        }
+      ]
+    },
+    {
+      "jornada": 7,
+      "fecha": "24/10/2026",
+      "vuelta": 1,
+      "partidos": [
+        {
+          "local": "U.D. Narahio",
+          "visitante": "Sporting Burgo",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Campanal de Loureda F. C.",
+          "visitante": "U.D. Paiosaco H.Añon",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "C.D. Sigrás",
+          "visitante": "Oza de los Ríos",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Betanzos Norte",
+          "visitante": "Sada F.C. A Nosa Viña",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Cedeira S.D.",
+          "visitante": "C.C.D. Curtis",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Xuventude Dorneda",
+          "visitante": "Club Deportivo Narón Silver Catering",
+          "gl": null,
+          "gv": null,
+          "dorneda": true
+        },
+        {
+          "local": "Liceo de Monelos S.D.",
+          "visitante": "Sporting Cambre As Travesas",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "San Martiño S.D.",
+          "visitante": "Portazgo S.D.",
+          "gl": null,
+          "gv": null
+        }
+      ]
+    },
+    {
+      "jornada": 8,
+      "fecha": "07/11/2026",
+      "vuelta": 1,
+      "partidos": [
+        {
+          "local": "Sporting Burgo",
+          "visitante": "San Martiño S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "U.D. Paiosaco H.Añon",
+          "visitante": "U.D. Narahio",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Oza de los Ríos",
+          "visitante": "Campanal de Loureda F. C.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sada F.C. A Nosa Viña",
+          "visitante": "C.D. Sigrás",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "C.C.D. Curtis",
+          "visitante": "Betanzos Norte",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Club Deportivo Narón Silver Catering",
+          "visitante": "Cedeira S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sporting Cambre As Travesas",
+          "visitante": "Xuventude Dorneda",
+          "gl": null,
+          "gv": null,
+          "dorneda": true
+        },
+        {
+          "local": "Portazgo S.D.",
+          "visitante": "Liceo de Monelos S.D.",
+          "gl": null,
+          "gv": null
+        }
+      ]
+    },
+    {
+      "jornada": 9,
+      "fecha": "14/11/2026",
+      "vuelta": 1,
+      "partidos": [
+        {
+          "local": "Sporting Burgo",
+          "visitante": "U.D. Paiosaco H.Añon",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "U.D. Narahio",
+          "visitante": "Oza de los Ríos",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Campanal de Loureda F. C.",
+          "visitante": "Sada F.C. A Nosa Viña",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "C.D. Sigrás",
+          "visitante": "C.C.D. Curtis",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Betanzos Norte",
+          "visitante": "Club Deportivo Narón Silver Catering",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Cedeira S.D.",
+          "visitante": "Sporting Cambre As Travesas",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Xuventude Dorneda",
+          "visitante": "Portazgo S.D.",
+          "gl": null,
+          "gv": null,
+          "dorneda": true
+        },
+        {
+          "local": "San Martiño S.D.",
+          "visitante": "Liceo de Monelos S.D.",
+          "gl": null,
+          "gv": null
+        }
+      ]
+    },
+    {
+      "jornada": 10,
+      "fecha": "21/11/2026",
+      "vuelta": 1,
+      "partidos": [
+        {
+          "local": "U.D. Paiosaco H.Añon",
+          "visitante": "San Martiño S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Oza de los Ríos",
+          "visitante": "Sporting Burgo",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sada F.C. A Nosa Viña",
+          "visitante": "U.D. Narahio",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "C.C.D. Curtis",
+          "visitante": "Campanal de Loureda F. C.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Club Deportivo Narón Silver Catering",
+          "visitante": "C.D. Sigrás",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sporting Cambre As Travesas",
+          "visitante": "Betanzos Norte",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Portazgo S.D.",
+          "visitante": "Cedeira S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Liceo de Monelos S.D.",
+          "visitante": "Xuventude Dorneda",
+          "gl": null,
+          "gv": null,
+          "dorneda": true
+        }
+      ]
+    },
+    {
+      "jornada": 11,
+      "fecha": "28/11/2026",
+      "vuelta": 1,
+      "partidos": [
+        {
+          "local": "U.D. Paiosaco H.Añon",
+          "visitante": "Oza de los Ríos",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sporting Burgo",
+          "visitante": "Sada F.C. A Nosa Viña",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "U.D. Narahio",
+          "visitante": "C.C.D. Curtis",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Campanal de Loureda F. C.",
+          "visitante": "Club Deportivo Narón Silver Catering",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "C.D. Sigrás",
+          "visitante": "Sporting Cambre As Travesas",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Betanzos Norte",
+          "visitante": "Portazgo S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Cedeira S.D.",
+          "visitante": "Liceo de Monelos S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "San Martiño S.D.",
+          "visitante": "Xuventude Dorneda",
+          "gl": null,
+          "gv": null,
+          "dorneda": true
+        }
+      ]
+    },
+    {
+      "jornada": 12,
+      "fecha": "05/12/2026",
+      "vuelta": 1,
+      "partidos": [
+        {
+          "local": "Oza de los Ríos",
+          "visitante": "San Martiño S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sada F.C. A Nosa Viña",
+          "visitante": "U.D. Paiosaco H.Añon",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "C.C.D. Curtis",
+          "visitante": "Sporting Burgo",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Club Deportivo Narón Silver Catering",
+          "visitante": "U.D. Narahio",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sporting Cambre As Travesas",
+          "visitante": "Campanal de Loureda F. C.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Portazgo S.D.",
+          "visitante": "C.D. Sigrás",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Liceo de Monelos S.D.",
+          "visitante": "Betanzos Norte",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Xuventude Dorneda",
+          "visitante": "Cedeira S.D.",
+          "gl": null,
+          "gv": null,
+          "dorneda": true
+        }
+      ]
+    },
+    {
+      "jornada": 13,
+      "fecha": "12/12/2026",
+      "vuelta": 1,
+      "partidos": [
+        {
+          "local": "Oza de los Ríos",
+          "visitante": "Sada F.C. A Nosa Viña",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "U.D. Paiosaco H.Añon",
+          "visitante": "C.C.D. Curtis",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sporting Burgo",
+          "visitante": "Club Deportivo Narón Silver Catering",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "U.D. Narahio",
+          "visitante": "Sporting Cambre As Travesas",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Campanal de Loureda F. C.",
+          "visitante": "Portazgo S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "C.D. Sigrás",
+          "visitante": "Liceo de Monelos S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Betanzos Norte",
+          "visitante": "Xuventude Dorneda",
+          "gl": null,
+          "gv": null,
+          "dorneda": true
+        },
+        {
+          "local": "San Martiño S.D.",
+          "visitante": "Cedeira S.D.",
+          "gl": null,
+          "gv": null
+        }
+      ]
+    },
+    {
+      "jornada": 14,
+      "fecha": "19/12/2026",
+      "vuelta": 1,
+      "partidos": [
+        {
+          "local": "San Martiño S.D.",
+          "visitante": "Sada F.C. A Nosa Viña",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "C.C.D. Curtis",
+          "visitante": "Oza de los Ríos",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Club Deportivo Narón Silver Catering",
+          "visitante": "U.D. Paiosaco H.Añon",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sporting Cambre As Travesas",
+          "visitante": "Sporting Burgo",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Portazgo S.D.",
+          "visitante": "U.D. Narahio",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Liceo de Monelos S.D.",
+          "visitante": "Campanal de Loureda F. C.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Xuventude Dorneda",
+          "visitante": "C.D. Sigrás",
+          "gl": null,
+          "gv": null,
+          "dorneda": true
+        },
+        {
+          "local": "Cedeira S.D.",
+          "visitante": "Betanzos Norte",
+          "gl": null,
+          "gv": null
+        }
+      ]
+    },
+    {
+      "jornada": 15,
+      "fecha": "09/01/2027",
+      "vuelta": 1,
+      "partidos": [
+        {
+          "local": "Sada F.C. A Nosa Viña",
+          "visitante": "C.C.D. Curtis",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Oza de los Ríos",
+          "visitante": "Club Deportivo Narón Silver Catering",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "U.D. Paiosaco H.Añon",
+          "visitante": "Sporting Cambre As Travesas",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sporting Burgo",
+          "visitante": "Portazgo S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "U.D. Narahio",
+          "visitante": "Liceo de Monelos S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Campanal de Loureda F. C.",
+          "visitante": "Xuventude Dorneda",
+          "gl": null,
+          "gv": null,
+          "dorneda": true,
+          "fecha": "10/01/2027",
+          "hora": "11:00",
+          "campo": "Campo de Fútbol de Freán"
+        },
+        {
+          "local": "C.D. Sigrás",
+          "visitante": "Cedeira S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Betanzos Norte",
+          "visitante": "San Martiño S.D.",
+          "gl": null,
+          "gv": null
+        }
+      ]
+    },
+    {
+      "jornada": 16,
+      "fecha": "16/01/2027",
+      "vuelta": 2,
+      "partidos": [
+        {
+          "local": "C.D. Sigrás",
+          "visitante": "Betanzos Norte",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Campanal de Loureda F. C.",
+          "visitante": "Cedeira S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "U.D. Narahio",
+          "visitante": "Xuventude Dorneda",
+          "gl": null,
+          "gv": null,
+          "dorneda": true
+        },
+        {
+          "local": "Sporting Burgo",
+          "visitante": "Liceo de Monelos S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "U.D. Paiosaco H.Añon",
+          "visitante": "Portazgo S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Oza de los Ríos",
+          "visitante": "Sporting Cambre As Travesas",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sada F.C. A Nosa Viña",
+          "visitante": "Club Deportivo Narón Silver Catering",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "C.C.D. Curtis",
+          "visitante": "San Martiño S.D.",
+          "gl": null,
+          "gv": null
+        }
+      ]
+    },
+    {
+      "jornada": 17,
+      "fecha": "23/01/2027",
+      "vuelta": 2,
+      "partidos": [
+        {
+          "local": "San Martiño S.D.",
+          "visitante": "C.D. Sigrás",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Betanzos Norte",
+          "visitante": "Campanal de Loureda F. C.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Cedeira S.D.",
+          "visitante": "U.D. Narahio",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Xuventude Dorneda",
+          "visitante": "Sporting Burgo",
+          "gl": null,
+          "gv": null,
+          "dorneda": true
+        },
+        {
+          "local": "Liceo de Monelos S.D.",
+          "visitante": "U.D. Paiosaco H.Añon",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Portazgo S.D.",
+          "visitante": "Oza de los Ríos",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sporting Cambre As Travesas",
+          "visitante": "Sada F.C. A Nosa Viña",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Club Deportivo Narón Silver Catering",
+          "visitante": "C.C.D. Curtis",
+          "gl": null,
+          "gv": null
+        }
+      ]
+    },
+    {
+      "jornada": 18,
+      "fecha": "30/01/2027",
+      "vuelta": 2,
+      "partidos": [
+        {
+          "local": "Campanal de Loureda F. C.",
+          "visitante": "C.D. Sigrás",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "U.D. Narahio",
+          "visitante": "Betanzos Norte",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sporting Burgo",
+          "visitante": "Cedeira S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "U.D. Paiosaco H.Añon",
+          "visitante": "Xuventude Dorneda",
+          "gl": null,
+          "gv": null,
+          "dorneda": true
+        },
+        {
+          "local": "Oza de los Ríos",
+          "visitante": "Liceo de Monelos S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sada F.C. A Nosa Viña",
+          "visitante": "Portazgo S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "C.C.D. Curtis",
+          "visitante": "Sporting Cambre As Travesas",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Club Deportivo Narón Silver Catering",
+          "visitante": "San Martiño S.D.",
+          "gl": null,
+          "gv": null
+        }
+      ]
+    },
+    {
+      "jornada": 19,
+      "fecha": "06/02/2027",
+      "vuelta": 2,
+      "partidos": [
+        {
+          "local": "San Martiño S.D.",
+          "visitante": "Campanal de Loureda F. C.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "C.D. Sigrás",
+          "visitante": "U.D. Narahio",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Betanzos Norte",
+          "visitante": "Sporting Burgo",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Cedeira S.D.",
+          "visitante": "U.D. Paiosaco H.Añon",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Xuventude Dorneda",
+          "visitante": "Oza de los Ríos",
+          "gl": null,
+          "gv": null,
+          "dorneda": true
+        },
+        {
+          "local": "Liceo de Monelos S.D.",
+          "visitante": "Sada F.C. A Nosa Viña",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Portazgo S.D.",
+          "visitante": "C.C.D. Curtis",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sporting Cambre As Travesas",
+          "visitante": "Club Deportivo Narón Silver Catering",
+          "gl": null,
+          "gv": null
+        }
+      ]
+    },
+    {
+      "jornada": 20,
+      "fecha": "20/02/2027",
+      "vuelta": 2,
+      "partidos": [
+        {
+          "local": "U.D. Narahio",
+          "visitante": "Campanal de Loureda F. C.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sporting Burgo",
+          "visitante": "C.D. Sigrás",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "U.D. Paiosaco H.Añon",
+          "visitante": "Betanzos Norte",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Oza de los Ríos",
+          "visitante": "Cedeira S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sada F.C. A Nosa Viña",
+          "visitante": "Xuventude Dorneda",
+          "gl": null,
+          "gv": null,
+          "dorneda": true
+        },
+        {
+          "local": "C.C.D. Curtis",
+          "visitante": "Liceo de Monelos S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Club Deportivo Narón Silver Catering",
+          "visitante": "Portazgo S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sporting Cambre As Travesas",
+          "visitante": "San Martiño S.D.",
+          "gl": null,
+          "gv": null
+        }
+      ]
+    },
+    {
+      "jornada": 21,
+      "fecha": "27/02/2027",
+      "vuelta": 2,
+      "partidos": [
+        {
+          "local": "San Martiño S.D.",
+          "visitante": "U.D. Narahio",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Campanal de Loureda F. C.",
+          "visitante": "Sporting Burgo",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "C.D. Sigrás",
+          "visitante": "U.D. Paiosaco H.Añon",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Betanzos Norte",
+          "visitante": "Oza de los Ríos",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Cedeira S.D.",
+          "visitante": "Sada F.C. A Nosa Viña",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Xuventude Dorneda",
+          "visitante": "C.C.D. Curtis",
+          "gl": null,
+          "gv": null,
+          "dorneda": true
+        },
+        {
+          "local": "Liceo de Monelos S.D.",
+          "visitante": "Club Deportivo Narón Silver Catering",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Portazgo S.D.",
+          "visitante": "Sporting Cambre As Travesas",
+          "gl": null,
+          "gv": null
+        }
+      ]
+    },
+    {
+      "jornada": 22,
+      "fecha": "06/03/2027",
+      "vuelta": 2,
+      "partidos": [
+        {
+          "local": "Sporting Burgo",
+          "visitante": "U.D. Narahio",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "U.D. Paiosaco H.Añon",
+          "visitante": "Campanal de Loureda F. C.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Oza de los Ríos",
+          "visitante": "C.D. Sigrás",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sada F.C. A Nosa Viña",
+          "visitante": "Betanzos Norte",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "C.C.D. Curtis",
+          "visitante": "Cedeira S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Club Deportivo Narón Silver Catering",
+          "visitante": "Xuventude Dorneda",
+          "gl": null,
+          "gv": null,
+          "dorneda": true
+        },
+        {
+          "local": "Sporting Cambre As Travesas",
+          "visitante": "Liceo de Monelos S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Portazgo S.D.",
+          "visitante": "San Martiño S.D.",
+          "gl": null,
+          "gv": null
+        }
+      ]
+    },
+    {
+      "jornada": 23,
+      "fecha": "13/03/2027",
+      "vuelta": 2,
+      "partidos": [
+        {
+          "local": "San Martiño S.D.",
+          "visitante": "Sporting Burgo",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "U.D. Narahio",
+          "visitante": "U.D. Paiosaco H.Añon",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Campanal de Loureda F. C.",
+          "visitante": "Oza de los Ríos",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "C.D. Sigrás",
+          "visitante": "Sada F.C. A Nosa Viña",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Betanzos Norte",
+          "visitante": "C.C.D. Curtis",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Cedeira S.D.",
+          "visitante": "Club Deportivo Narón Silver Catering",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Xuventude Dorneda",
+          "visitante": "Sporting Cambre As Travesas",
+          "gl": null,
+          "gv": null,
+          "dorneda": true
+        },
+        {
+          "local": "Liceo de Monelos S.D.",
+          "visitante": "Portazgo S.D.",
+          "gl": null,
+          "gv": null
+        }
+      ]
+    },
+    {
+      "jornada": 24,
+      "fecha": "20/03/2027",
+      "vuelta": 2,
+      "partidos": [
+        {
+          "local": "U.D. Paiosaco H.Añon",
+          "visitante": "Sporting Burgo",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Oza de los Ríos",
+          "visitante": "U.D. Narahio",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sada F.C. A Nosa Viña",
+          "visitante": "Campanal de Loureda F. C.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "C.C.D. Curtis",
+          "visitante": "C.D. Sigrás",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Club Deportivo Narón Silver Catering",
+          "visitante": "Betanzos Norte",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sporting Cambre As Travesas",
+          "visitante": "Cedeira S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Portazgo S.D.",
+          "visitante": "Xuventude Dorneda",
+          "gl": null,
+          "gv": null,
+          "dorneda": true
+        },
+        {
+          "local": "Liceo de Monelos S.D.",
+          "visitante": "San Martiño S.D.",
+          "gl": null,
+          "gv": null
+        }
+      ]
+    },
+    {
+      "jornada": 25,
+      "fecha": "03/04/2027",
+      "vuelta": 2,
+      "partidos": [
+        {
+          "local": "San Martiño S.D.",
+          "visitante": "U.D. Paiosaco H.Añon",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sporting Burgo",
+          "visitante": "Oza de los Ríos",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "U.D. Narahio",
+          "visitante": "Sada F.C. A Nosa Viña",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Campanal de Loureda F. C.",
+          "visitante": "C.C.D. Curtis",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "C.D. Sigrás",
+          "visitante": "Club Deportivo Narón Silver Catering",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Betanzos Norte",
+          "visitante": "Sporting Cambre As Travesas",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Cedeira S.D.",
+          "visitante": "Portazgo S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Xuventude Dorneda",
+          "visitante": "Liceo de Monelos S.D.",
+          "gl": null,
+          "gv": null,
+          "dorneda": true
+        }
+      ]
+    },
+    {
+      "jornada": 26,
+      "fecha": "10/04/2027",
+      "vuelta": 2,
+      "partidos": [
+        {
+          "local": "Oza de los Ríos",
+          "visitante": "U.D. Paiosaco H.Añon",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sada F.C. A Nosa Viña",
+          "visitante": "Sporting Burgo",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "C.C.D. Curtis",
+          "visitante": "U.D. Narahio",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Club Deportivo Narón Silver Catering",
+          "visitante": "Campanal de Loureda F. C.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sporting Cambre As Travesas",
+          "visitante": "C.D. Sigrás",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Portazgo S.D.",
+          "visitante": "Betanzos Norte",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Liceo de Monelos S.D.",
+          "visitante": "Cedeira S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "San Martiño S.D.",
+          "visitante": "Xuventude Dorneda",
+          "gl": null,
+          "gv": null,
+          "dorneda": true
+        }
+      ]
+    },
+    {
+      "jornada": 27,
+      "fecha": "17/04/2027",
+      "vuelta": 2,
+      "partidos": [
+        {
+          "local": "San Martiño S.D.",
+          "visitante": "Oza de los Ríos",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "U.D. Paiosaco H.Añon",
+          "visitante": "Sada F.C. A Nosa Viña",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sporting Burgo",
+          "visitante": "C.C.D. Curtis",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "U.D. Narahio",
+          "visitante": "Club Deportivo Narón Silver Catering",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Campanal de Loureda F. C.",
+          "visitante": "Sporting Cambre As Travesas",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "C.D. Sigrás",
+          "visitante": "Portazgo S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Betanzos Norte",
+          "visitante": "Liceo de Monelos S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Cedeira S.D.",
+          "visitante": "Xuventude Dorneda",
+          "gl": null,
+          "gv": null,
+          "dorneda": true
+        }
+      ]
+    },
+    {
+      "jornada": 28,
+      "fecha": "24/04/2027",
+      "vuelta": 2,
+      "partidos": [
+        {
+          "local": "Sada F.C. A Nosa Viña",
+          "visitante": "Oza de los Ríos",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "C.C.D. Curtis",
+          "visitante": "U.D. Paiosaco H.Añon",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Club Deportivo Narón Silver Catering",
+          "visitante": "Sporting Burgo",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sporting Cambre As Travesas",
+          "visitante": "U.D. Narahio",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Portazgo S.D.",
+          "visitante": "Campanal de Loureda F. C.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Liceo de Monelos S.D.",
+          "visitante": "C.D. Sigrás",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Xuventude Dorneda",
+          "visitante": "Betanzos Norte",
+          "gl": null,
+          "gv": null,
+          "dorneda": true
+        },
+        {
+          "local": "Cedeira S.D.",
+          "visitante": "San Martiño S.D.",
+          "gl": null,
+          "gv": null
+        }
+      ]
+    },
+    {
+      "jornada": 29,
+      "fecha": "01/05/2027",
+      "vuelta": 2,
+      "partidos": [
+        {
+          "local": "Sada F.C. A Nosa Viña",
+          "visitante": "San Martiño S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Oza de los Ríos",
+          "visitante": "C.C.D. Curtis",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "U.D. Paiosaco H.Añon",
+          "visitante": "Club Deportivo Narón Silver Catering",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sporting Burgo",
+          "visitante": "Sporting Cambre As Travesas",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "U.D. Narahio",
+          "visitante": "Portazgo S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Campanal de Loureda F. C.",
+          "visitante": "Liceo de Monelos S.D.",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "C.D. Sigrás",
+          "visitante": "Xuventude Dorneda",
+          "gl": null,
+          "gv": null,
+          "dorneda": true
+        },
+        {
+          "local": "Betanzos Norte",
+          "visitante": "Cedeira S.D.",
+          "gl": null,
+          "gv": null
+        }
+      ]
+    },
+    {
+      "jornada": 30,
+      "fecha": "08/05/2027",
+      "vuelta": 2,
+      "partidos": [
+        {
+          "local": "C.C.D. Curtis",
+          "visitante": "Sada F.C. A Nosa Viña",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Club Deportivo Narón Silver Catering",
+          "visitante": "Oza de los Ríos",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Sporting Cambre As Travesas",
+          "visitante": "U.D. Paiosaco H.Añon",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Portazgo S.D.",
+          "visitante": "Sporting Burgo",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Liceo de Monelos S.D.",
+          "visitante": "U.D. Narahio",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "Xuventude Dorneda",
+          "visitante": "Campanal de Loureda F. C.",
+          "gl": null,
+          "gv": null,
+          "dorneda": true
+        },
+        {
+          "local": "Cedeira S.D.",
+          "visitante": "C.D. Sigrás",
+          "gl": null,
+          "gv": null
+        },
+        {
+          "local": "San Martiño S.D.",
+          "visitante": "Betanzos Norte",
+          "gl": null,
+          "gv": null
+        }
+      ]
+    }
+  ],
+  "equipos": [
+    {
+      "id": 1,
+      "nombre": "Betanzos Norte",
+      "idFed": "1926",
+      "campo": "O Carregal (Betanzos) - Hierba Artificial (A)",
+      "direccion": "Betanzos, 15300, Betanzos (A Coruña)",
+      "contacto": "Luis Alberto González Picado",
+      "telefono": "680516451",
+      "equipacion1": {
+        "camiseta": "Roja (Lisa)",
+        "pantalon": "Azul",
+        "medias": "Rojas"
+      },
+      "equipacion2": {
+        "camiseta": "Celeste (Lisa)",
+        "pantalon": "Blanco",
+        "medias": "Blancas"
+      }
+    },
+    {
+      "id": 2,
+      "nombre": "C.C.D. Curtis",
+      "idFed": "1110",
+      "campo": "Novo (Curtis) - Hierba Artificial (A)",
+      "direccion": "Curtis, 15310, Curtis (A Coruña)",
+      "contacto": "CCD CURTIS",
+      "telefono": "626992941",
+      "equipacion1": {
+        "camiseta": "Roja (Mangas colores)",
+        "pantalon": "Rojo",
+        "medias": "Rojas"
+      },
+      "equipacion2": {
+        "camiseta": "Negra (Lisa)",
+        "pantalon": "Negro",
+        "medias": "Negras"
+      }
+    },
+    {
+      "id": 3,
+      "nombre": "C.D. Sigrás",
+      "idFed": "1068",
+      "campo": "Os Pinares, (Brexo Lema) - Hierba Artificial (A)",
+      "direccion": "Brexo Lema, 15659, Cambre (A Coruña)",
+      "contacto": "Roberto Rumbo A Guiar",
+      "telefono": "646422758",
+      "equipacion1": {
+        "camiseta": "Azul (Rayas anchas)",
+        "pantalon": "Azul",
+        "medias": "Azules"
+      },
+      "equipacion2": {
+        "camiseta": "Amarilla (Lisa)",
+        "pantalon": "Negro",
+        "medias": "Amarillas"
+      }
+    },
+    {
+      "id": 4,
+      "nombre": "Club Deportivo Narón Silver Catering",
+      "idFed": "1907",
+      "campo": "O Cadaval - Hierba Artificial (A)",
+      "direccion": "Av. Miguel de Cervantes, 31T, 15578, Narón (A Coruña)",
+      "contacto": "Xoan Manoel Ramos Reigosa",
+      "telefono": "617410861",
+      "equipacion1": {
+        "camiseta": "Amarilla (Lisa)",
+        "pantalon": "Amarillo",
+        "medias": "Amarillas"
+      },
+      "equipacion2": {
+        "camiseta": "Negra (Lisa)",
+        "pantalon": "Amarillo",
+        "medias": "Amarillas"
+      }
+    },
+    {
+      "id": 5,
+      "nombre": "Campanal de Loureda F. C.",
+      "idFed": "5173",
+      "campo": "Campo de Fútbol de Freán - Hierba Artificial (A)",
+      "direccion": "Lugar Freán, s/n, Desas, 15690 Arteixo (A Coruña)",
+      "contacto": "Víctor Manuel Regueira Espiñeira",
+      "telefono": "659785413",
+      "equipacion1": {
+        "camiseta": "Amarilla (Lisa)",
+        "pantalon": "Negro",
+        "medias": "Negras"
+      },
+      "equipacion2": {
+        "camiseta": "Negra (Lisa)",
+        "pantalon": "Blanco",
+        "medias": "Rojas"
+      }
+    },
+    {
+      "id": 6,
+      "nombre": "Sporting Cambre As Travesas",
+      "idFed": "1017",
+      "campo": "Dani Mallo (Cambre) - Hierba Artificial (A)",
+      "direccion": "Cambre, 15660, Cambre (A Coruña)",
+      "contacto": "S.D.C.R Sporting Cambre",
+      "telefono": "639863976",
+      "equipacion1": {
+        "camiseta": "Blanca (V)",
+        "pantalon": "Blanco",
+        "medias": "Blancas"
+      },
+      "equipacion2": {
+        "camiseta": "Roja (V)",
+        "pantalon": "Azul",
+        "medias": "Rojas"
+      }
+    },
+    {
+      "id": 7,
+      "nombre": "U.D. Narahio",
+      "idFed": "1127",
+      "campo": "Da Piscina - Hierba Artificial (A)",
+      "direccion": "Os Curras, 15560, San Sadurniño (A Coruña)",
+      "contacto": "UDC NARAHIO",
+      "telefono": "981490302",
+      "equipacion1": {
+        "camiseta": "Amarela (Lisa)",
+        "pantalon": "Azul",
+        "medias": "Amarela"
+      },
+      "equipacion2": {
+        "camiseta": "Azul (Lisa)",
+        "pantalon": "Azul",
+        "medias": "Azul"
+      }
+    },
+    {
+      "id": 8,
+      "nombre": "Portazgo S.D.",
+      "idFed": "1008",
+      "campo": "A Lavandeira (Culleredo) - Hierba Artificial (A)",
+      "direccion": "Cacabelos, s/n - O Burgo - Culleredo (A Coruña)",
+      "contacto": "Juan Guzmán",
+      "telefono": "659673417",
+      "equipacion1": {
+        "camiseta": "Roja (Rayas anchas)",
+        "pantalon": "Rojo",
+        "medias": "Rojas"
+      },
+      "equipacion2": {
+        "camiseta": "Azul (Lisa)",
+        "pantalon": "Azul",
+        "medias": "Rojas"
+      }
+    },
+    {
+      "id": 9,
+      "nombre": "Sporting Burgo",
+      "idFed": "1045",
+      "campo": "A Lavandeira (Culleredo) - Hierba Artificial (A)",
+      "direccion": "Cacabelos, s/n - O Burgo - Culleredo (A Coruña)",
+      "contacto": "Arturo Otero López",
+      "telefono": "619506623",
+      "equipacion1": {
+        "camiseta": "Blanca (Franja diagonal Celeste)",
+        "pantalon": "Blanco",
+        "medias": "Blancas"
+      },
+      "equipacion2": {
+        "camiseta": "Roja (Franja diagonal Blanca)",
+        "pantalon": "Rojo",
+        "medias": "Rojas"
+      }
+    },
+    {
+      "id": 10,
+      "nombre": "Liceo de Monelos S.D.",
+      "idFed": "1056",
+      "campo": "Víctor Fernández Alonso - Antigua Leyma - Hierba Artificial (A)",
+      "direccion": "Avda. Salvador de Madariaga s/n, 15008, A Coruña",
+      "contacto": "Liceo de Monelos S.D.",
+      "telefono": "981299670",
+      "equipacion1": {
+        "camiseta": "Roja (Lisa)",
+        "pantalon": "Marino",
+        "medias": "Rojas"
+      },
+      "equipacion2": {
+        "camiseta": "Blanco (Lisa)",
+        "pantalon": "Blanco",
+        "medias": "Blanco"
+      }
+    },
+    {
+      "id": 11,
+      "nombre": "U.D. Paiosaco H.Añon",
+      "idFed": "1063",
+      "campo": "Porta Santa - Hierba Artificial (A)",
+      "direccion": "Paiosaco, 15145, Laracha (A Coruña)",
+      "contacto": "Carlos García Rodo",
+      "telefono": "981605747",
+      "equipacion1": {
+        "camiseta": "Verde e Blanca (Raias horizontais)",
+        "pantalon": "Verde",
+        "medias": "Verdes e Blancas"
+      },
+      "equipacion2": {
+        "camiseta": "Vermella (Raias horizontais)",
+        "pantalon": "Vermello",
+        "medias": "Vermellas"
+      }
+    },
+    {
+      "id": 12,
+      "nombre": "Xuventude Dorneda",
+      "idFed": "1905",
+      "campo": "Campo de Fútbol A Marola - Hierba Artificial (A)",
+      "direccion": "Mera, 15177, Oleiros (A Coruña)",
+      "contacto": "Xuventude Dorneda",
+      "telefono": "629861493",
+      "equipacion1": {
+        "camiseta": "Blanca (Lisa)",
+        "pantalon": "Negro",
+        "medias": "Blancas"
+      },
+      "equipacion2": {
+        "camiseta": "Azul (Lisa)",
+        "pantalon": "Azul",
+        "medias": "Azul"
+      }
+    },
+    {
+      "id": 13,
+      "nombre": "Oza de los Ríos",
+      "idFed": "1932",
+      "campo": "O Loureiro (Oza De Los Ríos) - Hierba Artificial (A)",
+      "direccion": "Oza De Los Ríos, 15380, Oza Dos Ríos (A Coruña)",
+      "contacto": "Jorge José Iglesias Castro",
+      "telefono": "696622912",
+      "equipacion1": {
+        "camiseta": "Azul Celeste (Lisa)",
+        "pantalon": "Blanco",
+        "medias": "Azul Celeste"
+      },
+      "equipacion2": {
+        "camiseta": "Negra (Lisa)",
+        "pantalon": "Negro",
+        "medias": "Negras"
+      }
+    },
+    {
+      "id": 14,
+      "nombre": "Cedeira S.D.",
+      "idFed": "1121",
+      "campo": "Municipal Carmen Maseda (O Beco) - Hierba Artificial (A)",
+      "direccion": "Avda de España 70, 15350, Cedeira (A Coruña)",
+      "contacto": "Esteban Blanco Garrote",
+      "telefono": "593622560",
+      "equipacion1": {
+        "camiseta": "Negra / Blanca (Rayas)",
+        "pantalon": "Negro",
+        "medias": "Negras"
+      },
+      "equipacion2": {
+        "camiseta": "Roja (Lisa)",
+        "pantalon": "Blanco",
+        "medias": "Rojas"
+      }
+    },
+    {
+      "id": 15,
+      "nombre": "Sada F.C. A Nosa Viña",
+      "idFed": "1931",
+      "campo": "As Mariñas - Andrés Pena de Sada - Hierba Artificial (A)",
+      "direccion": "Laguna, s/n - Sada, 15160 (A Coruña)",
+      "contacto": "Santiago Seijo Canosa",
+      "telefono": "663495926",
+      "equipacion1": {
+        "camiseta": "Blanca (Franja horizontal arriba)",
+        "pantalon": "Blanco",
+        "medias": "Blancas"
+      },
+      "equipacion2": {
+        "camiseta": "Azul (Tablero)",
+        "pantalon": "Azul",
+        "medias": "Azules"
+      }
+    },
+    {
+      "id": 16,
+      "nombre": "San Martiño S.D.",
+      "idFed": "1210",
+      "campo": "A Revolta (Queixas) - Hierba Natural (C)",
+      "direccion": "Queixas, 15185, Cerceda (A Coruña)",
+      "contacto": "San Martiño S.D.",
+      "telefono": "609461305",
+      "equipacion1": {
+        "camiseta": "Naranja (Lisa)",
+        "pantalon": "Naranja",
+        "medias": "Naranja"
+      },
+      "equipacion2": {
+        "camiseta": "-",
+        "pantalon": "-",
+        "medias": "-"
+      }
+    }
+  ],
+  "jugadores": [
+    {
+      "nombreCompleto": "David Casado Gonzalez",
+      "nombre": "David",
+      "foto": null,
+      "id": 1,
+      "notas": "",
+      "dorsal": 1,
+      "estado": "Con ficha"
+    },
+    {
+      "estado": "Con ficha",
+      "dorsal": 3,
+      "nombreCompleto": "Oscar Cernadas Souto",
+      "notas": "",
+      "nombre": "Cerni",
+      "id": 3,
+      "foto": null
+    },
+    {
+      "dorsal": 5,
+      "nombreCompleto": "Diego Salpurido Garcia",
+      "estado": "Con ficha",
+      "foto": null,
+      "notas": "",
+      "nombre": "Willow",
+      "id": 5
+    },
+    {
+      "nombreCompleto": "Ángel Novo Sánchez",
+      "notas": "",
+      "dorsal": 6,
+      "estado": "A prueba",
+      "id": 6,
+      "nombre": "Ángel",
+      "foto": null
+    },
+    {
+      "foto": null,
+      "nombre": "Joni",
+      "nombreCompleto": "Jonathan Docampo del Rio",
+      "estado": "Con ficha",
+      "id": 7,
+      "dorsal": 7,
+      "notas": ""
+    },
+    {
+      "id": 8,
+      "foto": null,
+      "nombreCompleto": "José Antonio López López",
+      "nombre": "Antony",
+      "estado": "A prueba",
+      "dorsal": 8,
+      "notas": ""
+    },
+    {
+      "nombre": "Michi",
+      "nombreCompleto": "Miguel A. Requejo Lamas",
+      "id": 9,
+      "notas": "",
+      "estado": "A prueba",
+      "foto": null,
+      "dorsal": 9
+    },
+    {
+      "nombre": "Felix",
+      "id": 10,
+      "notas": "",
+      "foto": null,
+      "dorsal": 10,
+      "nombreCompleto": "Felix Lopez Grana",
+      "estado": "Con ficha"
+    },
+    {
+      "nombre": "Manuly",
+      "foto": null,
+      "notas": "",
+      "dorsal": 11,
+      "nombreCompleto": "Jose M. Bergondo Moreno",
+      "id": 11,
+      "estado": "Con ficha"
+    },
+    {
+      "nombre": "Fonato",
+      "id": 13,
+      "notas": "",
+      "nombreCompleto": "Eduardo Ramos Barderas",
+      "estado": "Con ficha",
+      "foto": null,
+      "dorsal": 13
+    },
+    {
+      "nombre": "Rober",
+      "id": 14,
+      "notas": "Abonado 85€ (restan 35€)",
+      "foto": null,
+      "dorsal": 14,
+      "nombreCompleto": "Roberto Jose Rumbo Suarez",
+      "estado": "Con ficha"
+    },
+    {
+      "estado": "Con ficha",
+      "dorsal": 15,
+      "foto": null,
+      "notas": "",
+      "nombreCompleto": "Francisco Tosar Asorey",
+      "nombre": "Fran",
+      "id": 15
+    },
+    {
+      "nombreCompleto": "Rogelio Jesus Sanchez Fernandez",
+      "dorsal": 17,
+      "notas": "",
+      "estado": "Con ficha",
+      "id": 17,
+      "nombre": "Jesus",
+      "foto": null
+    },
+    {
+      "id": 18,
+      "notas": "",
+      "dorsal": 18,
+      "estado": "Con ficha",
+      "nombre": "Marcos",
+      "foto": null,
+      "nombreCompleto": "Marcos Chico Lago"
+    },
+    {
+      "nombre": "Yess",
+      "id": 20,
+      "notas": "",
+      "foto": null,
+      "estado": "Con ficha",
+      "dorsal": 20,
+      "nombreCompleto": "Jose A. Carvalho Tavares"
+    },
+    {
+      "nombre": "Pablo",
+      "id": 21,
+      "nombreCompleto": "Pablo Allegue Lopez",
+      "notas": "",
+      "estado": "Con ficha",
+      "foto": null,
+      "dorsal": 21
+    },
+    {
+      "notas": "",
+      "dorsal": 22,
+      "id": 22,
+      "estado": "Con ficha",
+      "nombre": "Piwi",
+      "nombreCompleto": "Sergio J Casal Varela",
+      "foto": null
+    },
+    {
+      "nombreCompleto": "Federico Laport Rivas",
+      "id": 24,
+      "estado": "Con ficha",
+      "dorsal": 24,
+      "foto": null,
+      "notas": "",
+      "nombre": "Fede"
+    },
+    {
+      "nombre": "Santi",
+      "notas": "",
+      "estado": "Con ficha",
+      "foto": null,
+      "nombreCompleto": "Santiago Garabal Callon",
+      "id": 26,
+      "dorsal": 26
+    },
+    {
+      "id": 27,
+      "estado": "Con ficha",
+      "dorsal": 27,
+      "notas": "",
+      "foto": null,
+      "nombre": "Lesmes",
+      "nombreCompleto": "Lesmes Sanchez Lopez"
+    },
+    {
+      "dorsal": 28,
+      "foto": null,
+      "notas": "",
+      "estado": "Con ficha",
+      "nombreCompleto": "Jorge Puente Longueira",
+      "nombre": "Jorge",
+      "id": 28
+    },
+    {
+      "nombre": "Mauro",
+      "notas": "",
+      "dorsal": 30,
+      "foto": null,
+      "nombreCompleto": "Sergio Blanco Varela",
+      "id": 30,
+      "estado": "Con ficha"
+    },
+    {
+      "estado": "Con ficha",
+      "dorsal": 32,
+      "nombreCompleto": "Jose Antonio Rivera",
+      "id": 32,
+      "notas": "",
+      "foto": null,
+      "nombre": "Rivera"
+    },
+    {
+      "foto": null,
+      "nombreCompleto": "Ivan Meilan Seoane",
+      "nombre": "Meilan",
+      "estado": "Con ficha",
+      "id": 101,
+      "notas": "",
+      "dorsal": null
+    },
+    {
+      "id": 102,
+      "nombre": "Cata",
+      "notas": "",
+      "nombreCompleto": "Jose Ignacio Garcia Dapia",
+      "estado": "Con ficha",
+      "foto": null,
+      "dorsal": null
+    },
+    {
+      "nombreCompleto": "Roman G. Torreiro Couso",
+      "dorsal": null,
+      "notas": "",
+      "estado": "Con ficha",
+      "foto": null,
+      "nombre": "Roman",
+      "id": 103
+    },
+    {
+      "nombre": "Borja",
+      "nombreCompleto": "Borja Pita Gonzalez",
+      "notas": "",
+      "foto": null,
+      "dorsal": null,
+      "estado": "Con ficha",
+      "id": 104
+    },
+    {
+      "nombreCompleto": "Manuel Blanco Canosa",
+      "dorsal": null,
+      "notas": "",
+      "estado": "Con ficha",
+      "foto": null,
+      "nombre": "Manu",
+      "id": 105
+    },
+    {
+      "dorsal": null,
+      "id": 106,
+      "notas": "",
+      "estado": "Con ficha",
+      "nombreCompleto": "Mario Rei Lacaci",
+      "foto": null,
+      "nombre": "Mario"
+    },
+    {
+      "rol": "Jugador",
+      "nombre": "Boliche",
+      "notas": "",
+      "foto": null,
+      "nombreCompleto": "Bolich",
+      "dorsal": null,
+      "id": 107,
+      "estado": "Con ficha"
+    },
+    {
+      "nombre": "Kata",
+      "id": 108,
+      "notas": "Entrenador",
+      "estado": "Con ficha",
+      "rol": "Entrenador",
+      "nombreCompleto": "Fernando Antonio Gundin Eirin",
+      "foto": null,
+      "dorsal": null
+    }
+  ],
+  "economia": {
+    "saldoAnterior": 430.4,
+    "auth": {
+      "password": "1234",
+      "usuario": "economia"
+    },
+    "cuotaDefecto": 120,
+    "presupuestoEstimado": 3500,
+    "movimientos": [
+      {
+        "importe": 430.4,
+        "pagadorBeneficiario": "Tesorería Club Dorneda",
+        "id": 1,
+        "tipo": "Ingreso",
+        "estado": "Pagado",
+        "concepto": "Cierre Temporada Anterior (Saldo a favor en cuenta)",
+        "fecha": "01/07/2026",
+        "categoria": "Cierre Temporada Anterior",
+        "notas": "Remanente inicial disponible en cuenta"
+      },
+      {
+        "concepto": "Pago 1. Cuota equipo + 16 fichas (60%)",
+        "importe": 882.6,
+        "pagadorBeneficiario": "Federación Gallega (RFGF)",
+        "tipo": "Gasto",
+        "id": 2,
+        "categoria": "Fichas y Mutualidad RFGF",
+        "notas": "Mauro, Piwi, Lesmes, Cerni, Fona, Fran, Manuly, Joni, Willo, Rober, Santi, Pablo Allegue, Marcos, Félix, Jesús, Kata. 1411€ x 60% = 882.60€. (Pendiente 40%: 528.40€)",
+        "fecha": "10/08/2026",
+        "estado": "Pagado"
+      },
+      {
+        "concepto": "Pago 2. 5 fichas (60%)",
+        "tipo": "Gasto",
+        "pagadorBeneficiario": "Federación Gallega (RFGF)",
+        "fecha": "12/08/2026",
+        "importe": 249,
+        "notas": "David, Rivera, Fede, Yess y Jorge (60%). (Pendiente 40%: 166.00€)",
+        "categoria": "Fichas y Mutualidad RFGF",
+        "estado": "Pagado",
+        "id": 3
+      },
+      {
+        "concepto": "Pago 3. 4 fichas (60%)",
+        "notas": "Román, Cata, Borja, Meilán (332€ x 60% = 199.20€)",
+        "id": 4,
+        "fecha": "15/08/2026",
+        "pagadorBeneficiario": "Federación Gallega (RFGF)",
+        "estado": "Pagado",
+        "importe": 199.2,
+        "tipo": "Gasto",
+        "categoria": "Fichas y Mutualidad RFGF"
+      },
+      {
+        "concepto": "Árbitro Rossonero (Amistoso Pret_3)",
+        "estado": "Pagado",
+        "categoria": "Arbitrajes",
+        "pagadorBeneficiario": "Pago a Kata (Reembolso árbitro)",
+        "notas": "Arbitraje en campo Eirís",
+        "importe": 45,
+        "fecha": "23/08/2026",
+        "id": 5,
+        "tipo": "Gasto"
+      },
+      {
+        "pagadorBeneficiario": "Pago a Kata (Fichas federativas)",
+        "concepto": "Pago 4. 2 Fichas (100%)",
+        "importe": 166,
+        "notas": "Mario y Manuel (100%)",
+        "id": 6,
+        "categoria": "Fichas y Mutualidad RFGF",
+        "fecha": "31/08/2026",
+        "estado": "Pagado",
+        "tipo": "Gasto"
+      },
+      {
+        "pagadorBeneficiario": "Federación Gallega (RFGF)",
+        "id": 7,
+        "fecha": "10/08/2026",
+        "categoria": "Fichas y Mutualidad RFGF",
+        "notas": "1411€ x 40% = 528.40€ pendientes de pago",
+        "estado": "Pendiente",
+        "concepto": "Pago 1 (40% pendiente RFGF) - 16 fichas + cuota equipo",
+        "tipo": "Gasto",
+        "importe": 528.4
+      },
+      {
+        "concepto": "Pago 2 (40% pendiente RFGF) - 5 fichas (David, Rivera, Fede, Yess, Jorge)",
+        "id": 8,
+        "importe": 166,
+        "pagadorBeneficiario": "Federación Gallega (RFGF)",
+        "categoria": "Fichas y Mutualidad RFGF",
+        "tipo": "Gasto",
+        "estado": "Pendiente",
+        "fecha": "12/08/2026",
+        "notas": "415€ x 40% = 166.00€ pendientes de pago"
+      },
+      {
+        "categoria": "Fichas y Mutualidad RFGF",
+        "pagadorBeneficiario": "Federación Gallega (RFGF)",
+        "id": 9,
+        "concepto": "Pago 3 (40% pendiente RFGF) - 4 fichas (Román, Cata, Borja, Meilán)",
+        "importe": 132.8,
+        "tipo": "Gasto",
+        "fecha": "15/08/2026",
+        "estado": "Pendiente",
+        "notas": "332€ x 40% = 132.80€ pendientes de pago"
+      }
+    ],
+    "cuotas": [
+      {
+        "nombreCompleto": "David Casado Gonzalez",
+        "jugadorId": 1,
+        "metodo": "Transferencia",
+        "nombre": "David",
+        "dorsal": 1,
+        "cuota": 120,
+        "estado": "Pagado",
+        "estadoFicha": "Con ficha",
+        "pagado": 120,
+        "notas": "Pago 1 completo (FICHA)",
+        "fechaPago": "05/08/2026"
+      },
+      {
+        "estado": "Pagado",
+        "cuota": 120,
+        "pagado": 120,
+        "fechaPago": "03/08/2026",
+        "metodo": "Transferencia",
+        "jugadorId": 3,
+        "nombreCompleto": "Oscar Cernadas Souto",
+        "notas": "Pago 1 completo (FICHA)",
+        "nombre": "Cerni",
+        "estadoFicha": "Con ficha",
+        "dorsal": 3
+      },
+      {
+        "pagado": 120,
+        "jugadorId": 5,
+        "notas": "Pago 1 completo (FICHA)",
+        "estado": "Pagado",
+        "nombreCompleto": "Diego Salpurido Garcia",
+        "nombre": "Willow",
+        "estadoFicha": "Con ficha",
+        "dorsal": 5,
+        "cuota": 120,
+        "fechaPago": "04/08/2026",
+        "metodo": "Transferencia"
+      },
+      {
+        "jugadorId": 6,
+        "nombreCompleto": "Ángel Novo Sánchez",
+        "notas": "",
+        "estadoFicha": "A prueba",
+        "dorsal": 6,
+        "nombre": "Ángel",
+        "metodo": "",
+        "cuota": 120,
+        "pagado": 0,
+        "fechaPago": "",
+        "estado": "Pendiente"
+      },
+      {
+        "estado": "Pendiente",
+        "fechaPago": "",
+        "pagado": 0,
+        "cuota": 120,
+        "nombreCompleto": "Jonathan Docampo del Rio",
+        "metodo": "",
+        "nombre": "Joni",
+        "dorsal": 7,
+        "estadoFicha": "Con ficha",
+        "jugadorId": 7,
+        "notas": "Pendiente pago (FICHA)"
+      },
+      {
+        "metodo": "",
+        "cuota": 120,
+        "fechaPago": "",
+        "nombre": "Antony",
+        "dorsal": 8,
+        "jugadorId": 8,
+        "estadoFicha": "A prueba",
+        "estado": "Pendiente",
+        "notas": "",
+        "pagado": 0,
+        "nombreCompleto": "José Antonio López López"
+      },
+      {
+        "estado": "Pendiente",
+        "fechaPago": "",
+        "nombreCompleto": "Miguel A. Requejo Lamas",
+        "cuota": 120,
+        "pagado": 0,
+        "estadoFicha": "A prueba",
+        "metodo": "",
+        "nombre": "Michi",
+        "dorsal": 9,
+        "jugadorId": 9,
+        "notas": ""
+      },
+      {
+        "nombre": "Felix",
+        "dorsal": 10,
+        "estadoFicha": "Con ficha",
+        "fechaPago": "03/08/2026",
+        "nombreCompleto": "Felix Lopez Grana",
+        "notas": "Pago 1 completo (FICHA)",
+        "metodo": "Transferencia",
+        "jugadorId": 10,
+        "pagado": 120,
+        "estado": "Pagado",
+        "cuota": 120
+      },
+      {
+        "nombre": "Manuly",
+        "notas": "Pago 1 completo (FICHA)",
+        "dorsal": 11,
+        "metodo": "Transferencia",
+        "fechaPago": "05/08/2026",
+        "estadoFicha": "Con ficha",
+        "jugadorId": 11,
+        "pagado": 120,
+        "nombreCompleto": "Jose M. Bergondo Moreno",
+        "cuota": 120,
+        "estado": "Pagado"
+      },
+      {
+        "cuota": 120,
+        "estadoFicha": "Con ficha",
+        "fechaPago": "30/07/2026",
+        "estado": "Pagado",
+        "pagado": 120,
+        "nombreCompleto": "Eduardo Ramos Barderas",
+        "metodo": "Transferencia",
+        "notas": "Pago 1 completo (FICHA)",
+        "dorsal": 13,
+        "jugadorId": 13,
+        "nombre": "Fonato"
+      },
+      {
+        "dorsal": 14,
+        "fechaPago": "",
+        "nombre": "Rober",
+        "notas": "Abonado 85€ (restan 35€ pendientes) (FICHA)",
+        "metodo": "Transferencia",
+        "estadoFicha": "Con ficha",
+        "pagado": 85,
+        "cuota": 120,
+        "jugadorId": 14,
+        "nombreCompleto": "Roberto Jose Rumbo Suarez",
+        "estado": "Parcial"
+      },
+      {
+        "fechaPago": "30/07/2026",
+        "nombreCompleto": "Francisco Tosar Asorey",
+        "pagado": 120,
+        "notas": "Pago 1 completo (FICHA)",
+        "estado": "Pagado",
+        "dorsal": 15,
+        "nombre": "Fran",
+        "estadoFicha": "Con ficha",
+        "cuota": 120,
+        "metodo": "Transferencia",
+        "jugadorId": 15
+      },
+      {
+        "notas": "Pago 1 completo (FICHA)",
+        "jugadorId": 17,
+        "pagado": 120,
+        "estado": "Pagado",
+        "cuota": 120,
+        "estadoFicha": "Con ficha",
+        "dorsal": 17,
+        "nombre": "Jesus",
+        "metodo": "Transferencia",
+        "fechaPago": "04/08/2026",
+        "nombreCompleto": "Rogelio Jesus Sanchez Fernandez"
+      },
+      {
+        "jugadorId": 18,
+        "pagado": 120,
+        "estado": "Pagado",
+        "notas": "Pago 1 completo (FICHA)",
+        "nombre": "Marcos",
+        "dorsal": 18,
+        "nombreCompleto": "Marcos Chico Lago",
+        "estadoFicha": "Con ficha",
+        "fechaPago": "28/07/2026",
+        "cuota": 120,
+        "metodo": "Transferencia"
+      },
+      {
+        "fechaPago": "09/08/2026",
+        "notas": "Pago 1 en mano (FICHA)",
+        "nombreCompleto": "Jose A. Carvalho Tavares",
+        "estadoFicha": "Con ficha",
+        "dorsal": 20,
+        "nombre": "Yess",
+        "metodo": "En mano",
+        "cuota": 120,
+        "pagado": 120,
+        "jugadorId": 20,
+        "estado": "Pagado"
+      },
+      {
+        "cuota": 120,
+        "metodo": "Transferencia",
+        "jugadorId": 21,
+        "dorsal": 21,
+        "nombre": "Pablo",
+        "notas": "Pago 1 completo (FICHA)",
+        "nombreCompleto": "Pablo Allegue Lopez",
+        "estado": "Pagado",
+        "estadoFicha": "Con ficha",
+        "pagado": 120,
+        "fechaPago": "30/07/2026"
+      },
+      {
+        "estadoFicha": "Con ficha",
+        "metodo": "Transferencia",
+        "cuota": 120,
+        "jugadorId": 22,
+        "nombre": "Piwi",
+        "dorsal": 22,
+        "estado": "Pagado",
+        "notas": "Pago 1 completo (FICHA)",
+        "pagado": 120,
+        "nombreCompleto": "Sergio J Casal Varela",
+        "fechaPago": "04/08/2026"
+      },
+      {
+        "nombre": "Fede",
+        "notas": "Pago 1 completo (FICHA)",
+        "dorsal": 24,
+        "nombreCompleto": "Federico Laport Rivas",
+        "metodo": "Transferencia",
+        "estadoFicha": "Con ficha",
+        "jugadorId": 24,
+        "pagado": 120,
+        "cuota": 120,
+        "fechaPago": "05/08/2026",
+        "estado": "Pagado"
+      },
+      {
+        "metodo": "Transferencia",
+        "cuota": 120,
+        "fechaPago": "05/08/2026",
+        "nombreCompleto": "Santiago Garabal Callon",
+        "dorsal": 26,
+        "nombre": "Santi",
+        "notas": "Pago 1 completo (FICHA)",
+        "estadoFicha": "Con ficha",
+        "estado": "Pagado",
+        "jugadorId": 26,
+        "pagado": 120
+      },
+      {
+        "notas": "Pago 1 completo (FICHA)",
+        "dorsal": 27,
+        "nombreCompleto": "Lesmes Sanchez Lopez",
+        "nombre": "Lesmes",
+        "metodo": "Transferencia",
+        "fechaPago": "05/08/2026",
+        "cuota": 120,
+        "pagado": 120,
+        "jugadorId": 27,
+        "estadoFicha": "Con ficha",
+        "estado": "Pagado"
+      },
+      {
+        "notas": "Pago 1 completo (FICHA)",
+        "pagado": 120,
+        "estadoFicha": "Con ficha",
+        "jugadorId": 28,
+        "estado": "Pagado",
+        "cuota": 120,
+        "dorsal": 28,
+        "nombreCompleto": "Jorge Puente Longueira",
+        "nombre": "Jorge",
+        "metodo": "Transferencia",
+        "fechaPago": "04/08/2026"
+      },
+      {
+        "nombreCompleto": "Sergio Blanco Varela",
+        "metodo": "Transferencia",
+        "nombre": "Mauro",
+        "jugadorId": 30,
+        "dorsal": 30,
+        "cuota": 120,
+        "estado": "Pagado",
+        "fechaPago": "28/07/2026",
+        "estadoFicha": "Con ficha",
+        "pagado": 120,
+        "notas": "Pago 1 completo (FICHA)"
+      },
+      {
+        "estadoFicha": "Con ficha",
+        "fechaPago": "30/07/2026",
+        "estado": "Pagado",
+        "pagado": 120,
+        "nombreCompleto": "Jose Antonio Rivera",
+        "cuota": 120,
+        "metodo": "Transferencia",
+        "nombre": "Rivera",
+        "dorsal": 32,
+        "jugadorId": 32,
+        "notas": "Pago 1 completo (FICHA)"
+      },
+      {
+        "notas": "Pendiente pago (FICHA)",
+        "jugadorId": 101,
+        "nombre": "Meilan",
+        "dorsal": null,
+        "metodo": "",
+        "estadoFicha": "Con ficha",
+        "nombreCompleto": "Ivan Meilan Seoane",
+        "pagado": 0,
+        "cuota": 120,
+        "estado": "Pendiente",
+        "fechaPago": ""
+      },
+      {
+        "fechaPago": "12/08/2026",
+        "estado": "Pagado",
+        "nombreCompleto": "Jose Ignacio Garcia Dapia",
+        "cuota": 120,
+        "pagado": 120,
+        "metodo": "Transferencia",
+        "dorsal": null,
+        "notas": "Pago 1 completo (FICHA)",
+        "nombre": "Cata",
+        "jugadorId": 102,
+        "estadoFicha": "Con ficha"
+      },
+      {
+        "pagado": 120,
+        "estado": "Pagado",
+        "notas": "Pago 1 completo (FICHA)",
+        "fechaPago": "13/08/2026",
+        "dorsal": null,
+        "nombre": "Roman",
+        "jugadorId": 103,
+        "nombreCompleto": "Roman G. Torreiro Couso",
+        "cuota": 120,
+        "metodo": "Transferencia",
+        "estadoFicha": "Con ficha"
+      },
+      {
+        "metodo": "Transferencia",
+        "jugadorId": 104,
+        "nombre": "Borja",
+        "dorsal": null,
+        "cuota": 120,
+        "estado": "Pagado",
+        "estadoFicha": "Con ficha",
+        "nombreCompleto": "Borja Pita Gonzalez",
+        "pagado": 120,
+        "fechaPago": "13/08/2026",
+        "notas": "Pago 1 completo (FICHA)"
+      },
+      {
+        "nombre": "Manu",
+        "dorsal": null,
+        "fechaPago": "",
+        "notas": "Pago 1 completo (FICHA)",
+        "metodo": "Transferencia",
+        "pagado": 120,
+        "estadoFicha": "Con ficha",
+        "estado": "Pagado",
+        "nombreCompleto": "Manuel Blanco Canosa",
+        "jugadorId": 105,
+        "cuota": 120
+      },
+      {
+        "cuota": 120,
+        "estado": "Pendiente",
+        "pagado": 0,
+        "fechaPago": "",
+        "estadoFicha": "Con ficha",
+        "metodo": "",
+        "notas": "Pendiente pago (FICHA)",
+        "nombreCompleto": "Mario Rei Lacaci",
+        "jugadorId": 106,
+        "dorsal": null,
+        "nombre": "Mario"
+      },
+      {
+        "metodo": "",
+        "cuota": 120,
+        "nombreCompleto": "Bolich",
+        "dorsal": null,
+        "jugadorId": 107,
+        "nombre": "Boliche",
+        "notas": "",
+        "fechaPago": "",
+        "estadoFicha": "Con ficha",
+        "estado": "Pendiente",
+        "pagado": 0
+      },
+      {
+        "nombreCompleto": "Fernando Antonio Gundin Eirin",
+        "cuota": 0,
+        "metodo": "",
+        "fechaPago": "",
+        "dorsal": null,
+        "nombre": "Kata",
+        "jugadorId": 108,
+        "notas": "Entrenador (Exento - Ficha pagada por el club)",
+        "estado": "Exento",
+        "pagado": 0,
+        "estadoFicha": "Con ficha"
+      }
+    ]
+  },
+  "calendario": [
+    {
+      "estado": "Jugado",
+      "id": 1,
+      "codigo": "Pret_1",
+      "competicion": "Pretemporada",
+      "fecha": "09/08/2026",
+      "obs": "Goles: Meilan 2, Borja 2, Willow 1, Jorge 1.",
+      "condicion": "Local",
+      "rival": "Santa Margarita"
+    },
+    {
+      "competicion": "Pretemporada",
+      "condicion": "Local",
+      "estado": "Jugado",
+      "rival": "Sporting MAP",
+      "fecha": "16/08/2026",
+      "codigo": "Pret_2",
+      "obs": "Goles: Jorge 1, Fran 1.",
+      "id": 2
+    },
+    {
+      "fecha": "23/08/2026",
+      "competicion": "Pretemporada",
+      "condicion": "Visitante",
+      "rival": "F.C. Rossonero",
+      "id": 3,
+      "codigo": "Pret_3",
+      "estado": "Jugado",
+      "obs": "Eiris - goles de Felix y Fran."
+    },
+    {
+      "fecha": "30/08/2026",
+      "rival": "Betanzos Norte",
+      "obs": "A Marola - goles de Jorge y Cata.",
+      "condicion": "Local",
+      "id": 4,
+      "codigo": "Pret_4",
+      "estado": "Jugado",
+      "competicion": "Pretemporada"
+    },
+    {
+      "obs": "Da Piscina (San Sadurniño) · 0-2 (Victoria). Clasificado para 16avos.",
+      "id": 5,
+      "estado": "Jugado",
+      "codigo": "C_32avos",
+      "rival": "U.D. Narahio",
+      "competicion": "Copa Federacion A Coruna",
+      "condicion": "Visitante",
+      "fecha": "06/09/2026"
+    },
+    {
+      "competicion": "Primera Futgal",
+      "condicion": "Local",
+      "id": 6,
+      "fecha": "13/09/2026",
+      "obs": "10:00 · Campo de Fútbol A Marola",
+      "estado": "Oficial",
+      "rival": "U.D. Narahio",
+      "codigo": "J1"
+    },
+    {
+      "condicion": "Visitante",
+      "estado": "Oficial",
+      "fecha": "19/09/2026",
+      "id": 7,
+      "obs": "A Lavandeira (Culleredo)",
+      "competicion": "Primera Futgal",
+      "rival": "Sporting Burgo",
+      "codigo": "J2"
+    },
+    {
+      "estado": "Oficial",
+      "codigo": "J3",
+      "id": 8,
+      "competicion": "Primera Futgal",
+      "obs": "A Marola (Mera, Oleiros)",
+      "rival": "U.D. Paiosaco H.Añon",
+      "condicion": "Local",
+      "fecha": "26/09/2026"
+    },
+    {
+      "fecha": "03/10/2026",
+      "rival": "Oza de los Ríos",
+      "id": 9,
+      "codigo": "J4",
+      "condicion": "Visitante",
+      "estado": "Oficial",
+      "obs": "O Loureiro (Oza De Los Ríos)",
+      "competicion": "Primera Futgal"
+    },
+    {
+      "obs": "A Marola (Mera, Oleiros)",
+      "rival": "Sada F.C. A Nosa Viña",
+      "estado": "Oficial",
+      "id": 10,
+      "codigo": "J5",
+      "competicion": "Primera Futgal",
+      "fecha": "10/10/2026",
+      "condicion": "Local"
+    },
+    {
+      "obs": "Novo (Curtis)",
+      "condicion": "Visitante",
+      "id": 11,
+      "competicion": "Primera Futgal",
+      "rival": "C.C.D. Curtis",
+      "estado": "Oficial",
+      "codigo": "J6",
+      "fecha": "17/10/2026"
+    },
+    {
+      "fecha": "24/10/2026",
+      "competicion": "Primera Futgal",
+      "codigo": "J7",
+      "estado": "Oficial",
+      "condicion": "Local",
+      "rival": "Club Deportivo Narón Silver Catering",
+      "id": 12,
+      "obs": "A Marola (Mera, Oleiros)"
+    },
+    {
+      "codigo": "C_16avos",
+      "rival": "Ural Español C.F. Vuelta Xentes",
+      "competicion": "Copa Federacion A Coruna",
+      "fecha": "31/10/2026",
+      "condicion": "Pendiente",
+      "estado": "Condicional",
+      "id": 13,
+      "obs": "16:00 · Torre Nº 1 (A Coruña) · 16avos de Copa"
+    },
+    {
+      "rival": "Sporting Cambre As Travesas",
+      "obs": "Dani Mallo (Cambre)",
+      "competicion": "Primera Futgal",
+      "fecha": "07/11/2026",
+      "codigo": "J8",
+      "id": 14,
+      "condicion": "Visitante",
+      "estado": "Oficial"
+    },
+    {
+      "codigo": "J9",
+      "rival": "Portazgo S.D.",
+      "fecha": "14/11/2026",
+      "estado": "Oficial",
+      "condicion": "Local",
+      "id": 15,
+      "obs": "A Marola (Mera, Oleiros)",
+      "competicion": "Primera Futgal"
+    },
+    {
+      "obs": "Víctor Fernández Alonso (A Coruña)",
+      "competicion": "Primera Futgal",
+      "id": 16,
+      "estado": "Oficial",
+      "fecha": "21/11/2026",
+      "rival": "Liceo de Monelos S.D.",
+      "condicion": "Visitante",
+      "codigo": "J10"
+    },
+    {
+      "estado": "Oficial",
+      "obs": "A Revolta (Queixas, Cerceda)",
+      "codigo": "J11",
+      "competicion": "Primera Futgal",
+      "condicion": "Visitante",
+      "fecha": "28/11/2026",
+      "id": 17,
+      "rival": "San Martiño S.D."
+    },
+    {
+      "obs": "A Marola (Mera, Oleiros)",
+      "codigo": "J12",
+      "fecha": "05/12/2026",
+      "estado": "Oficial",
+      "rival": "Cedeira S.D.",
+      "id": 18,
+      "competicion": "Primera Futgal",
+      "condicion": "Local"
+    },
+    {
+      "rival": "Betanzos Norte",
+      "competicion": "Primera Futgal",
+      "fecha": "12/12/2026",
+      "condicion": "Visitante",
+      "codigo": "J13",
+      "id": 19,
+      "estado": "Oficial",
+      "obs": "O Carregal (Betanzos)"
+    },
+    {
+      "estado": "Oficial",
+      "codigo": "J14",
+      "competicion": "Primera Futgal",
+      "condicion": "Local",
+      "rival": "C.D. Sigrás",
+      "fecha": "19/12/2026",
+      "id": 20,
+      "obs": "A Marola (Mera, Oleiros)"
+    },
+    {
+      "condicion": "Pendiente",
+      "estado": "Condicional",
+      "obs": "Solo si sigue en Copa.",
+      "competicion": "Copa Federacion A Coruna",
+      "codigo": "C_Octavos",
+      "fecha": "26-27/12/2026",
+      "id": 21,
+      "rival": "Pendiente de sorteo"
+    },
+    {
+      "obs": "Solo si sigue en Copa.",
+      "id": 22,
+      "condicion": "Pendiente",
+      "fecha": "02-03/01/2027",
+      "rival": "Pendiente de sorteo",
+      "codigo": "C_Cuartos",
+      "estado": "Condicional",
+      "competicion": "Copa Federacion A Coruna"
+    },
+    {
+      "obs": "11:00 · Campo de Fútbol de Freán (Arteixo)",
+      "estado": "Oficial",
+      "id": 23,
+      "competicion": "Primera Futgal",
+      "codigo": "J15",
+      "condicion": "Visitante",
+      "fecha": "10/01/2027",
+      "rival": "Campanal de Loureda F. C."
+    },
+    {
+      "condicion": "Visitante",
+      "competicion": "Primera Futgal",
+      "fecha": "16/01/2027",
+      "estado": "Oficial",
+      "id": 24,
+      "rival": "U.D. Narahio",
+      "obs": "Da Piscina (San Sadurniño)",
+      "codigo": "J16"
+    },
+    {
+      "competicion": "Primera Futgal",
+      "id": 25,
+      "condicion": "Local",
+      "obs": "A Marola (Mera, Oleiros)",
+      "fecha": "23/01/2027",
+      "estado": "Oficial",
+      "codigo": "J17",
+      "rival": "Sporting Burgo"
+    },
+    {
+      "fecha": "30/01/2027",
+      "rival": "U.D. Paiosaco H.Añon",
+      "codigo": "J18",
+      "condicion": "Visitante",
+      "competicion": "Primera Futgal",
+      "estado": "Oficial",
+      "id": 26,
+      "obs": "Porta Santa (Laracha)"
+    },
+    {
+      "competicion": "Primera Futgal",
+      "rival": "Oza de los Ríos",
+      "estado": "Oficial",
+      "condicion": "Local",
+      "codigo": "J19",
+      "fecha": "06/02/2027",
+      "id": 27,
+      "obs": "A Marola (Mera, Oleiros)"
+    },
+    {
+      "condicion": "--",
+      "fecha": "13-14/02/2027",
+      "id": null,
+      "rival": "--",
+      "obs": "Fin de semana libre confirmado.",
+      "codigo": "LIBRE",
+      "competicion": "Libre",
+      "estado": "Libre"
+    },
+    {
+      "estado": "Oficial",
+      "competicion": "Primera Futgal",
+      "condicion": "Visitante",
+      "codigo": "J20",
+      "fecha": "20/02/2027",
+      "id": 28,
+      "obs": "As Mariñas - Andrés Pena (Sada)",
+      "rival": "Sada F.C. A Nosa Viña"
+    },
+    {
+      "obs": "A Marola (Mera, Oleiros)",
+      "condicion": "Local",
+      "id": 29,
+      "rival": "C.C.D. Curtis",
+      "estado": "Oficial",
+      "competicion": "Primera Futgal",
+      "codigo": "J21",
+      "fecha": "27/02/2027"
+    },
+    {
+      "id": 30,
+      "rival": "Club Deportivo Narón Silver Catering",
+      "fecha": "06/03/2027",
+      "codigo": "J22",
+      "competicion": "Primera Futgal",
+      "obs": "O Cadaval (Narón)",
+      "condicion": "Visitante",
+      "estado": "Oficial"
+    },
+    {
+      "rival": "Sporting Cambre As Travesas",
+      "fecha": "13/03/2027",
+      "obs": "A Marola (Mera, Oleiros)",
+      "condicion": "Local",
+      "codigo": "J23",
+      "competicion": "Primera Futgal",
+      "id": 31,
+      "estado": "Oficial"
+    },
+    {
+      "id": 32,
+      "rival": "Portazgo S.D.",
+      "fecha": "20/03/2027",
+      "competicion": "Primera Futgal",
+      "obs": "A Lavandeira (Culleredo)",
+      "codigo": "J24",
+      "condicion": "Visitante",
+      "estado": "Oficial"
+    },
+    {
+      "fecha": "27-28/03/2027",
+      "rival": "Pendiente de sorteo",
+      "competicion": "Copa Federacion A Coruna",
+      "obs": "Solo si sigue en Copa.",
+      "codigo": "C_Semis",
+      "id": 33,
+      "estado": "Condicional",
+      "condicion": "Pendiente"
+    },
+    {
+      "estado": "Oficial",
+      "codigo": "J25",
+      "condicion": "Local",
+      "id": 34,
+      "competicion": "Primera Futgal",
+      "rival": "Liceo de Monelos S.D.",
+      "obs": "A Marola (Mera, Oleiros)",
+      "fecha": "03/04/2027"
+    },
+    {
+      "obs": "A Marola (Mera, Oleiros)",
+      "estado": "Oficial",
+      "id": 35,
+      "condicion": "Local",
+      "codigo": "J26",
+      "fecha": "10/04/2027",
+      "rival": "San Martiño S.D.",
+      "competicion": "Primera Futgal"
+    },
+    {
+      "rival": "Cedeira S.D.",
+      "fecha": "17/04/2027",
+      "id": 36,
+      "competicion": "Primera Futgal",
+      "codigo": "J27",
+      "obs": "Municipal Carmen Maseda (O Beco, Cedeira)",
+      "condicion": "Visitante",
+      "estado": "Oficial"
+    },
+    {
+      "obs": "A Marola (Mera, Oleiros)",
+      "estado": "Oficial",
+      "id": 37,
+      "condicion": "Local",
+      "codigo": "J28",
+      "competicion": "Primera Futgal",
+      "fecha": "24/04/2027",
+      "rival": "Betanzos Norte"
+    },
+    {
+      "rival": "C.D. Sigrás",
+      "codigo": "J29",
+      "obs": "Os Pinares (Brexo Lema, Cambre)",
+      "id": 38,
+      "estado": "Oficial",
+      "fecha": "01/05/2027",
+      "condicion": "Visitante",
+      "competicion": "Primera Futgal"
+    },
+    {
+      "rival": "Campanal de Loureda F. C.",
+      "fecha": "08/05/2027",
+      "id": 39,
+      "codigo": "J30",
+      "condicion": "Local",
+      "obs": "Última jornada de Liga. A Marola (Mera, Oleiros)",
+      "competicion": "Primera Futgal",
+      "estado": "Oficial"
+    },
+    {
+      "estado": "Condicional",
+      "codigo": "C_Final",
+      "competicion": "Copa Federacion A Coruna",
+      "fecha": "15-16/05/2027",
+      "condicion": "Neutral",
+      "id": 40,
+      "rival": "Pendiente",
+      "obs": "Final 15 mayo si se clasifica."
+    },
+    {
+      "competicion": "Campeonato Gallego",
+      "rival": "Pendiente",
+      "fecha": "22-23/05/2027",
+      "obs": "Solo si se clasifica.",
+      "codigo": "CG_1",
+      "id": 41,
+      "estado": "Condicional",
+      "condicion": "Pendiente"
+    },
+    {
+      "estado": "Condicional",
+      "codigo": "CG_2",
+      "competicion": "Campeonato Gallego",
+      "obs": "Solo si se clasifica.",
+      "fecha": "29-30/05/2027",
+      "rival": "Pendiente",
+      "condicion": "Pendiente",
+      "id": 42
+    },
+    {
+      "estado": "Condicional",
+      "id": 43,
+      "condicion": "Pendiente",
+      "codigo": "CG_3",
+      "competicion": "Campeonato Gallego",
+      "fecha": "05-06/06/2027",
+      "obs": "Solo si se clasifica.",
+      "rival": "Pendiente"
+    },
+    {
+      "obs": "Solo si se clasifica.",
+      "condicion": "Pendiente",
+      "id": 44,
+      "estado": "Condicional",
+      "fecha": "12-13/06/2027",
+      "rival": "Pendiente",
+      "competicion": "Campeonato Gallego",
+      "codigo": "CG_4"
+    },
+    {
+      "rival": "Pendiente",
+      "obs": "Solo si se clasifica.",
+      "id": 45,
+      "competicion": "Campeonato Gallego",
+      "condicion": "Pendiente",
+      "fecha": "19-20/06/2027",
+      "codigo": "CG_5",
+      "estado": "Condicional"
+    },
+    {
+      "obs": "Fin calendario oficial.",
+      "id": null,
+      "fecha": "26-27/06/2027",
+      "codigo": "LIBRE",
+      "rival": "--",
+      "estado": "Libre",
+      "competicion": "Libre",
+      "condicion": "--"
+    }
+  ],
+  "partidos": [
+    {
+      "incidencias": "",
+      "horaQuedada": "10:30",
+      "tipo": "Amistoso",
+      "jugadorDestacado": "Meilan / Borja",
+      "rival": "Santa Margarita",
+      "observacionesRival": "Dorsal 2: jugador de medio, zurdo y con buen manejo de balon.",
+      "fecha": "09/08/2026",
+      "kataAsistio": true,
+      "resultado": "Victoria",
+      "horaPartido": "11:00",
+      "sistema": "",
+      "gf": 6,
+      "equipacionRival": "Azul / Azul / Azul",
+      "equipacionDorneda": "Blanco / Rojo-Negro / Blanco",
+      "enlaceActa": "",
+      "campo": "Dexo",
+      "resumen": "Xuventude Dorneda se presento con 21 jugadores frente a los 12 del Santa Margarita. Con bastante calor, la diferencia fisica se noto pronto. Dorneda probo 6 jugadores nuevos y domino el partido en todo momento.",
+      "gc": 1,
+      "ausentes": [],
+      "id": 1,
+      "codigo": "Pret_1",
+      "convocados": [
+        {
+          "tipo": "Ficha",
+          "nombre": "David",
+          "titular": true,
+          "goles": 0,
+          "asistencias": 0
+        },
+        {
+          "nombre": "Meilan",
+          "tipo": "A prueba",
+          "titular": true,
+          "goles": 2,
+          "asistencias": 0
+        },
+        {
+          "nombre": "Borja",
+          "titular": true,
+          "tipo": "A prueba",
+          "goles": 2,
+          "asistencias": 0
+        },
+        {
+          "asistencias": 0,
+          "tipo": "Ficha",
+          "nombre": "Willow",
+          "goles": 1,
+          "titular": true
+        },
+        {
+          "goles": 1,
+          "tipo": "A prueba",
+          "titular": true,
+          "asistencias": 0,
+          "nombre": "Jorge"
+        },
+        {
+          "goles": 0,
+          "asistencias": 0,
+          "titular": false,
+          "nombre": "Marcos",
+          "tipo": "Ficha"
+        },
+        {
+          "tipo": "Ficha",
+          "nombre": "Fran",
+          "goles": 0,
+          "asistencias": 0,
+          "titular": false
+        },
+        {
+          "nombre": "Fonato",
+          "tipo": "Ficha",
+          "titular": false,
+          "goles": 0,
+          "asistencias": 0
+        },
+        {
+          "goles": 0,
+          "titular": false,
+          "nombre": "Manuly",
+          "tipo": "Ficha",
+          "asistencias": 0
+        },
+        {
+          "tipo": "Ficha",
+          "nombre": "Yess",
+          "asistencias": 0,
+          "goles": 0,
+          "titular": false
+        },
+        {
+          "goles": 0,
+          "nombre": "Piwi",
+          "asistencias": 0,
+          "titular": false,
+          "tipo": "Ficha"
+        }
+      ],
+      "competicion": "Pretemporada",
+      "condicion": "Local"
+    },
+    {
+      "enlaceActa": "",
+      "gf": 2,
+      "equipacionRival": "",
+      "campo": "Dexo",
+      "codigo": "Pret_2",
+      "resumen": "Victoria 2-1 del Xuventude Dorneda ante Sporting MAP.",
+      "horaPartido": "11:00",
+      "kataAsistio": true,
+      "resultado": "Victoria",
+      "incidencias": "",
+      "horaQuedada": "10:30",
+      "convocados": [
+        {
+          "nombre": "David",
+          "asistencias": 0,
+          "tipo": "Ficha",
+          "titular": true,
+          "goles": 0
+        },
+        {
+          "nombre": "Cerni",
+          "titular": true,
+          "asistencias": 0,
+          "goles": 0,
+          "tipo": "Ficha"
+        },
+        {
+          "tipo": "Ficha",
+          "nombre": "Fonato",
+          "goles": 0,
+          "asistencias": 0,
+          "titular": true
+        },
+        {
+          "asistencias": 0,
+          "titular": true,
+          "tipo": "Ficha",
+          "nombre": "Mauro",
+          "goles": 0
+        },
+        {
+          "goles": 0,
+          "tipo": "Ficha",
+          "titular": true,
+          "asistencias": 0,
+          "nombre": "Marcos"
+        },
+        {
+          "asistencias": 0,
+          "tipo": "Ficha",
+          "nombre": "Fede",
+          "goles": 0,
+          "titular": true
+        },
+        {
+          "asistencias": 0,
+          "nombre": "Rivera",
+          "titular": true,
+          "tipo": "A prueba",
+          "goles": 0
+        },
+        {
+          "nombre": "Fran",
+          "asistencias": 0,
+          "titular": true,
+          "tipo": "Ficha",
+          "goles": 1
+        },
+        {
+          "goles": 0,
+          "tipo": "Ficha",
+          "titular": true,
+          "asistencias": 0,
+          "nombre": "Jesus"
+        },
+        {
+          "titular": true,
+          "goles": 1,
+          "nombre": "Jorge",
+          "tipo": "A prueba",
+          "asistencias": 0
+        },
+        {
+          "goles": 0,
+          "titular": false,
+          "tipo": "Ficha",
+          "asistencias": 0,
+          "nombre": "Piwi"
+        },
+        {
+          "titular": false,
+          "nombre": "Willow",
+          "asistencias": 0,
+          "tipo": "Ficha",
+          "goles": 0
+        },
+        {
+          "asistencias": 0,
+          "titular": false,
+          "goles": 0,
+          "nombre": "Yess",
+          "tipo": "Ficha"
+        },
+        {
+          "tipo": "A prueba",
+          "goles": 0,
+          "asistencias": 0,
+          "nombre": "Meilan",
+          "titular": false
+        },
+        {
+          "nombre": "Borja",
+          "asistencias": 0,
+          "tipo": "A prueba",
+          "titular": false,
+          "goles": 0
+        },
+        {
+          "asistencias": 0,
+          "titular": false,
+          "nombre": "Manu",
+          "tipo": "A prueba",
+          "goles": 0
+        },
+        {
+          "nombre": "Boliche",
+          "titular": false,
+          "tipo": "A prueba",
+          "asistencias": 0,
+          "goles": 0
+        },
+        {
+          "nombre": "Roman",
+          "asistencias": 0,
+          "tipo": "A prueba",
+          "titular": false,
+          "goles": 0
+        },
+        {
+          "titular": false,
+          "goles": 0,
+          "asistencias": 0,
+          "nombre": "Rober",
+          "tipo": "Ficha"
+        }
+      ],
+      "competicion": "Pretemporada",
+      "tipo": "Amistoso",
+      "condicion": "Local",
+      "rival": "Sporting MAP",
+      "gc": 1,
+      "ausentes": [],
+      "equipacionDorneda": "Blanco / Rojo-Negro / Blanco",
+      "fecha": "16/08/2026",
+      "jugadorDestacado": "Jorge / Fran",
+      "sistema": "",
+      "id": 2,
+      "observacionesRival": ""
+    },
+    {
+      "resultado": "Derrota",
+      "rival": "F.C. Rossonero",
+      "tipo": "Amistoso",
+      "fecha": "23/08/2026",
+      "kataAsistio": true,
+      "gf": 2,
+      "resumen": "Partido muy competitivo e igualado hasta aproximadamente el minuto 25. Tras los cambios, el Dorneda perdio presencia en el centro del campo y Rossonero paso a dominar. Felix empatö 1-1 con un gol desde mas alla del medio campo. El 2-1 y el 3-1 llegaron seguidos. A falta de cinco minutos, Fran marco el 3-2 definitivo.",
+      "horaPartido": "12:00",
+      "observacionesRival": "Mejor en el tramo central.",
+      "horaQuedada": "11:30",
+      "enlaceActa": "",
+      "codigo": "Pret_3",
+      "incidencias": "",
+      "competicion": "Pretemporada",
+      "campo": "Eiris",
+      "jugadorDestacado": "",
+      "gc": 3,
+      "equipacionRival": "Rojo-Negro / Negro / Negro",
+      "equipacionDorneda": "Blanco / Rojo-Negro / Blanco",
+      "id": 3,
+      "ausentes": [
+        {
+          "motivo": "bautizo",
+          "nombre": "Cerni"
+        },
+        {
+          "nombre": "Joni",
+          "motivo": "lesion"
+        },
+        {
+          "nombre": "Jesus",
+          "motivo": "lesion"
+        },
+        {
+          "nombre": "Santi",
+          "motivo": "lesion"
+        },
+        {
+          "nombre": "Lesmes",
+          "motivo": "lesion"
+        },
+        {
+          "motivo": "sin informacion",
+          "nombre": "Meilan"
+        },
+        {
+          "nombre": "Cata",
+          "motivo": "sin informacion"
+        },
+        {
+          "motivo": "operacion",
+          "nombre": "Mario"
+        }
+      ],
+      "condicion": "Visitante",
+      "sistema": "1-4-4-2",
+      "convocados": [
+        {
+          "asistencias": 0,
+          "titular": true,
+          "nombre": "David",
+          "goles": 0,
+          "tipo": "Ficha"
+        },
+        {
+          "asistencias": 0,
+          "titular": true,
+          "nombre": "Felix",
+          "goles": 1,
+          "tipo": "Ficha"
+        },
+        {
+          "asistencias": 0,
+          "tipo": "A prueba",
+          "nombre": "Jorge",
+          "goles": 0,
+          "titular": true
+        },
+        {
+          "asistencias": 0,
+          "nombre": "Roman",
+          "titular": true,
+          "tipo": "A prueba",
+          "goles": 0
+        },
+        {
+          "asistencias": 0,
+          "nombre": "Borja",
+          "titular": true,
+          "tipo": "A prueba",
+          "goles": 0
+        },
+        {
+          "tipo": "Ficha",
+          "goles": 1,
+          "nombre": "Fran",
+          "asistencias": 0,
+          "titular": true
+        },
+        {
+          "tipo": "A prueba",
+          "goles": 0,
+          "nombre": "Manu",
+          "asistencias": 0,
+          "titular": true
+        },
+        {
+          "goles": 0,
+          "nombre": "Fonato",
+          "titular": true,
+          "tipo": "Ficha",
+          "asistencias": 0
+        },
+        {
+          "titular": true,
+          "tipo": "Ficha",
+          "asistencias": 0,
+          "nombre": "Fede",
+          "goles": 0
+        },
+        {
+          "titular": true,
+          "tipo": "Ficha",
+          "nombre": "Piwi",
+          "goles": 0,
+          "asistencias": 0
+        },
+        {
+          "titular": true,
+          "goles": 0,
+          "asistencias": 0,
+          "tipo": "A prueba",
+          "nombre": "Rivera"
+        },
+        {
+          "titular": false,
+          "nombre": "Marcos",
+          "asistencias": 0,
+          "tipo": "Ficha",
+          "goles": 0
+        },
+        {
+          "titular": false,
+          "goles": 0,
+          "nombre": "Mauro",
+          "tipo": "Ficha",
+          "asistencias": 0
+        },
+        {
+          "titular": false,
+          "asistencias": 0,
+          "goles": 0,
+          "nombre": "Willow",
+          "tipo": "Ficha"
+        },
+        {
+          "asistencias": 0,
+          "goles": 0,
+          "nombre": "Rober",
+          "titular": false,
+          "tipo": "Ficha"
+        },
+        {
+          "nombre": "Manuly",
+          "titular": false,
+          "tipo": "Ficha",
+          "goles": 0,
+          "asistencias": 0
+        },
+        {
+          "asistencias": 0,
+          "titular": false,
+          "nombre": "Yess",
+          "tipo": "Ficha",
+          "goles": 0
+        },
+        {
+          "goles": 0,
+          "asistencias": 0,
+          "tipo": "Ficha",
+          "titular": false,
+          "nombre": "Pablo"
+        }
+      ]
+    },
+    {
+      "condicion": "Local",
+      "jugadorDestacado": "",
+      "equipacionDorneda": "Blanco / Rojo-Negro / Blanco",
+      "equipacionRival": "Roja / Azul / Roja",
+      "horaQuedada": "09:30",
+      "incidencias": "Ninguna",
+      "gf": 2,
+      "convocados": [
+        {
+          "nombre": "David",
+          "titular": true,
+          "tipo": "Ficha",
+          "asistencias": 0,
+          "goles": 0
+        },
+        {
+          "nombre": "Felix",
+          "titular": true,
+          "tipo": "Ficha",
+          "asistencias": 0,
+          "goles": 0
+        },
+        {
+          "nombre": "Fonato",
+          "tipo": "Ficha",
+          "asistencias": 0,
+          "goles": 0,
+          "titular": true
+        },
+        {
+          "nombre": "Willow",
+          "titular": true,
+          "tipo": "Ficha",
+          "asistencias": 0,
+          "goles": 0
+        },
+        {
+          "nombre": "Marcos",
+          "asistencias": 0,
+          "titular": true,
+          "tipo": "Ficha",
+          "goles": 0
+        },
+        {
+          "tipo": "Ficha",
+          "nombre": "Cerni",
+          "asistencias": 0,
+          "goles": 0,
+          "titular": true
+        },
+        {
+          "goles": 0,
+          "tipo": "A prueba",
+          "asistencias": 1,
+          "titular": true,
+          "nombre": "Meilan"
+        },
+        {
+          "nombre": "Jorge",
+          "asistencias": 0,
+          "tipo": "A prueba",
+          "titular": true,
+          "goles": 1
+        },
+        {
+          "titular": true,
+          "asistencias": 0,
+          "goles": 0,
+          "nombre": "Borja",
+          "tipo": "A prueba"
+        },
+        {
+          "tipo": "Ficha",
+          "nombre": "Manu",
+          "goles": 0,
+          "asistencias": 0,
+          "titular": true
+        },
+        {
+          "asistencias": 0,
+          "goles": 0,
+          "tipo": "Ficha",
+          "titular": true,
+          "nombre": "Fede"
+        },
+        {
+          "titular": false,
+          "goles": 1,
+          "asistencias": 1,
+          "nombre": "Cata",
+          "tipo": "A prueba"
+        },
+        {
+          "asistencias": 0,
+          "nombre": "Rober",
+          "titular": false,
+          "tipo": "Ficha",
+          "goles": 0
+        },
+        {
+          "tipo": "A prueba",
+          "nombre": "Mario",
+          "goles": 0,
+          "asistencias": 0,
+          "titular": false
+        },
+        {
+          "goles": 0,
+          "asistencias": 0,
+          "tipo": "Ficha",
+          "titular": false,
+          "nombre": "Manuly"
+        },
+        {
+          "goles": 0,
+          "nombre": "Pablo",
+          "titular": false,
+          "asistencias": 0,
+          "tipo": "Ficha"
+        },
+        {
+          "titular": false,
+          "goles": 0,
+          "nombre": "Abel",
+          "tipo": "A prueba",
+          "asistencias": 0
+        },
+        {
+          "asistencias": 0,
+          "tipo": "A prueba",
+          "titular": false,
+          "nombre": "Amigo de Yess",
+          "goles": 0
+        },
+        {
+          "titular": false,
+          "tipo": "A prueba",
+          "nombre": "Boliche",
+          "goles": 0,
+          "asistencias": 0
+        }
+      ],
+      "campo": "A Marola",
+      "kataAsistio": true,
+      "resumen": "El Dorneda se puso 2-0 por delante y dispuso de varias ocasiones muy claras para ampliar la ventaja. Tras los cambios, el equipo se desajusto y Betanzos Norte aprovecho el tramo para marcar cuatro goles en aproximadamente 15 minutos, dando la vuelta al partido hasta el 2-4 definitivo.",
+      "horaPartido": "10:00",
+      "gc": 4,
+      "codigo": "Pret_4",
+      "observacionesRival": "Dorsal 21: extremo izquierdo rapido y habilidoso. Central izquierdo muy proton. Dorsal 12: buen jugador como 4 en la salida. Dorsal 24: centrocampista de muy buen nivel.",
+      "competicion": "Pretemporada",
+      "id": 4,
+      "tipo": "Amistoso",
+      "enlaceActa": "",
+      "fecha": "30/08/2026",
+      "sistema": "1-4-2-3-1",
+      "resultado": "Derrota",
+      "rival": "Betanzos Norte",
+      "ausentes": [
+        {
+          "motivo": "lesion",
+          "nombre": "Joni"
+        },
+        {
+          "nombre": "Fran",
+          "motivo": "lesion"
+        },
+        {
+          "nombre": "Jesus",
+          "motivo": "lesion"
+        },
+        {
+          "nombre": "Yess",
+          "motivo": "lesion"
+        },
+        {
+          "motivo": "lesion",
+          "nombre": "Piwi"
+        },
+        {
+          "motivo": "lesion",
+          "nombre": "Santi"
+        },
+        {
+          "motivo": "lesion",
+          "nombre": "Lesmes"
+        },
+        {
+          "motivo": "festival",
+          "nombre": "Mauro"
+        },
+        {
+          "nombre": "Rivera",
+          "motivo": "festival"
+        },
+        {
+          "nombre": "Roman",
+          "motivo": "sin informacion"
+        }
+      ]
+    },
+    {
+      "equipacionDorneda": "Blanca / Negro / Blancas",
+      "campo": "Da Piscina (San Sadurniño)",
+      "cuerpoTecnico": "Fernando Antonio Gundín Eirín (Encargado de Material)",
+      "id": 5,
+      "condicion": "Visitante",
+      "ausentes": [],
+      "horaPartido": "11:00",
+      "convocados": [
+        {
+          "tipo": "Con ficha",
+          "rojas": 0,
+          "goles": 0,
+          "titular": true,
+          "amarillas": 0,
+          "nombreCompleto": "David Casado Gonzalez",
+          "asistencias": 0,
+          "nombre": "David",
+          "dorsal": 1
+        },
+        {
+          "tipo": "Con ficha",
+          "asistencias": 0,
+          "amarillas": 0,
+          "goles": 0,
+          "rojas": 0,
+          "titular": true,
+          "nombreCompleto": "Jose Antonio Rivera",
+          "nombre": "Rivera",
+          "dorsal": 2
+        },
+        {
+          "tipo": "Con ficha",
+          "nombreCompleto": "Ivan Meilan Seoane",
+          "nombre": "Meilan",
+          "titular": true,
+          "dorsal": 4,
+          "goles": 1,
+          "rojas": 0,
+          "amarillas": 0,
+          "asistencias": 0
+        },
+        {
+          "titular": true,
+          "rojas": 0,
+          "goles": 0,
+          "amarillas": 0,
+          "tipo": "Con ficha",
+          "nombreCompleto": "Diego Salpurido Garcia",
+          "nombre": "Willow",
+          "asistencias": 0,
+          "dorsal": 5
+        },
+        {
+          "dorsal": 9,
+          "nombre": "Cata",
+          "nombreCompleto": "Jose Ignacio Garcia Dapia",
+          "rojas": 0,
+          "goles": 0,
+          "asistencias": 0,
+          "amarillas": 0,
+          "titular": true,
+          "tipo": "Con ficha"
+        },
+        {
+          "dorsal": 10,
+          "nombre": "Felix",
+          "nombreCompleto": "Felix Lopez Grana",
+          "titular": true,
+          "asistencias": 0,
+          "goles": 1,
+          "rojas": 0,
+          "amarillas": 0,
+          "tipo": "Con ficha"
+        },
+        {
+          "amarillas": 0,
+          "rojas": 0,
+          "goles": 0,
+          "dorsal": 13,
+          "titular": true,
+          "nombre": "Fonato",
+          "asistencias": 0,
+          "nombreCompleto": "Eduardo Ramos Barderas",
+          "tipo": "Con ficha"
+        },
+        {
+          "nombre": "Piwi",
+          "asistencias": 0,
+          "dorsal": 22,
+          "goles": 0,
+          "titular": true,
+          "rojas": 0,
+          "tipo": "Con ficha",
+          "amarillas": 0,
+          "nombreCompleto": "Sergio J Casal Varela"
+        },
+        {
+          "asistencias": 0,
+          "titular": true,
+          "nombreCompleto": "Federico Laport Rivas",
+          "goles": 0,
+          "rojas": 0,
+          "dorsal": 24,
+          "nombre": "Fede",
+          "amarillas": 0,
+          "tipo": "Con ficha"
+        },
+        {
+          "dorsal": 30,
+          "goles": 0,
+          "rojas": 0,
+          "nombreCompleto": "Sergio Blanco Varela",
+          "nombre": "Mauro",
+          "amarillas": 0,
+          "titular": true,
+          "tipo": "Con ficha",
+          "asistencias": 0
+        },
+        {
+          "nombreCompleto": "Manuel Blanco Canosa",
+          "tipo": "Con ficha",
+          "nombre": "Manu",
+          "amarillas": 0,
+          "dorsal": 31,
+          "rojas": 0,
+          "goles": 0,
+          "asistencias": 0,
+          "titular": true
+        },
+        {
+          "titular": false,
+          "amarillas": 0,
+          "nombreCompleto": "Oscar Cernadas Souto",
+          "tipo": "Con ficha",
+          "rojas": 0,
+          "goles": 0,
+          "asistencias": 0,
+          "dorsal": 3,
+          "nombre": "Cerni"
+        },
+        {
+          "asistencias": 0,
+          "nombre": "Manuly",
+          "dorsal": 11,
+          "titular": false,
+          "tipo": "Con ficha",
+          "nombreCompleto": "Jose M. Bergondo Moreno",
+          "goles": 0,
+          "rojas": 0,
+          "amarillas": 0
+        },
+        {
+          "dorsal": 12,
+          "nombre": "Mario",
+          "asistencias": 0,
+          "goles": 0,
+          "rojas": 0,
+          "nombreCompleto": "Mario Rei Lacaci",
+          "titular": false,
+          "amarillas": 1,
+          "tipo": "Con ficha"
+        },
+        {
+          "titular": false,
+          "rojas": 0,
+          "goles": 0,
+          "asistencias": 0,
+          "tipo": "Con ficha",
+          "nombre": "Marcos",
+          "dorsal": 18,
+          "amarillas": 0,
+          "nombreCompleto": "Marcos Chico Lago"
+        },
+        {
+          "goles": 0,
+          "rojas": 0,
+          "amarillas": 0,
+          "tipo": "Con ficha",
+          "nombre": "Santi",
+          "titular": false,
+          "asistencias": 0,
+          "dorsal": 26,
+          "nombreCompleto": "Santiago Garabal Callon"
+        },
+        {
+          "titular": false,
+          "tipo": "Con ficha",
+          "goles": 0,
+          "rojas": 0,
+          "nombreCompleto": "Jorge Puente Longueira",
+          "nombre": "Jorge",
+          "dorsal": 28,
+          "asistencias": 0,
+          "amarillas": 1
+        }
+      ],
+      "golesDetalle": [
+        {
+          "tipo": "Jugada",
+          "equipo": "Xuventude Dorneda",
+          "parcial": "0-1",
+          "dorsal": 4,
+          "minuto": 25,
+          "jugador": "Iván Meilán"
+        },
+        {
+          "dorsal": 10,
+          "tipo": "Jugada",
+          "minuto": 67,
+          "jugador": "Félix López",
+          "equipo": "Xuventude Dorneda",
+          "parcial": "0-2"
+        }
+      ],
+      "kataAsistio": true,
+      "resultado": "Victoria",
+      "gf": 2,
+      "incidencias": "",
+      "rival": "U.D. Narahio",
+      "sistema": "",
+      "tipo": "Oficial",
+      "jugadorDestacado": "Iván Meilán / Félix",
+      "enlaceActa": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1452780&cod_acta=1452780",
+      "arbitro": "FERNANDEZ VARELA, SAUL",
+      "fechaISO": "2026-09-06",
+      "estado": "Jugado",
+      "competicion": "Copa Federacion A Coruna",
+      "resumen": "Victoria del Xuventude Dorneda 0-2 a domicilio ante la U.D. Narahio en Da Piscina (San Sadurniño). Iván Meilán abrió el marcador en el minuto 25 (0-1) y Félix sentenció en el 67 (0-2). El equipo se clasifica para los 16avos de Copa Federación.",
+      "rivalAlineacion": {
+        "titulares": [
+          {
+            "nombre": "ALVARIÑO GARROTE, JAVIER",
+            "dorsal": 1
+          },
+          {
+            "nombre": "RODRIGUEZ CASAL, IGNACIO",
+            "dorsal": 5
+          },
+          {
+            "nombre": "FREIJO SANTALLA, ESTEBAN",
+            "dorsal": 6
+          },
+          {
+            "dorsal": 9,
+            "nombre": "HERMIDA IGLESIAS, RAUL"
+          },
+          {
+            "dorsal": 11,
+            "nombre": "SILVA CASAS, BORJA"
+          },
+          {
+            "nombre": "RAMOS RAMOS, JULIAN",
+            "dorsal": 15
+          },
+          {
+            "nombre": "SANDE DOPAZO, YAGO",
+            "dorsal": 19
+          },
+          {
+            "nombre": "REY ANTON, SERVANDO I",
+            "dorsal": 22
+          },
+          {
+            "dorsal": 26,
+            "nombre": "GERVENO CASTRO, ALBERTO"
+          },
+          {
+            "dorsal": 28,
+            "nombre": "SABIN BOUZA, ALBERTO"
+          },
+          {
+            "dorsal": 34,
+            "nombre": "LOPEZ PORTA, GONZALO"
+          }
+        ],
+        "suplentes": [
+          {
+            "nombre": "CASTRO BOUZAMAYOR, ANGEL",
+            "dorsal": 10
+          },
+          {
+            "nombre": "TRIÑANES CORRAL, JUAN J",
+            "dorsal": 16
+          },
+          {
+            "nombre": "REGUEIRA MESIA, JOSE R",
+            "dorsal": 17
+          },
+          {
+            "dorsal": 18,
+            "nombre": "MARTINEZ RAMIL, ANGEL"
+          },
+          {
+            "nombre": "SANESTEBAN VILELA, DIEGO",
+            "dorsal": 21
+          },
+          {
+            "nombre": "SEOANE SOTO, JAVIER ANDRES",
+            "dorsal": 24
+          },
+          {
+            "nombre": "CALVO GONZALEZ, FERNANDO",
+            "dorsal": 25
+          }
+        ],
+        "tarjetas": [
+          {
+            "jugador": "SILVA CASAS, BORJA",
+            "minuto": 90,
+            "tipo": "Amarilla"
+          }
+        ]
+      },
+      "observacionesRival": "U.D. Narahio (San Sadurniño) - Eliminatoria a partido único superada.",
+      "codActa": "1452780",
+      "gc": 0,
+      "tarjetasDetalle": [
+        {
+          "dorsal": 28,
+          "tipo": "Amarilla",
+          "minuto": 68,
+          "equipo": "Xuventude Dorneda",
+          "motivo": "Tarjeta Amarilla",
+          "jugador": "Jorge Puente"
+        },
+        {
+          "jugador": "Mario Rei",
+          "tipo": "Amarilla",
+          "minuto": 88,
+          "dorsal": 12,
+          "motivo": "Tarjeta Amarilla",
+          "equipo": "Xuventude Dorneda"
+        },
+        {
+          "jugador": "Silva Casas, Borja",
+          "minuto": 90,
+          "dorsal": 11,
+          "tipo": "Amarilla",
+          "equipo": "U.D. Narahio",
+          "motivo": "Tarjeta Amarilla"
+        }
+      ],
+      "fecha": "06/09/2026",
+      "equipacionRival": "Amarela / Azul / Amarela",
+      "horaQuedada": "09:30",
+      "codigo": "C_32avos"
+    },
+    {
+      "equipacionDorneda": "Blanca / Negro / Blancas",
+      "condicion": "Local",
+      "rival": "U.D. Narahio",
+      "ausentes": [],
+      "gf": null,
+      "codigo": "J1",
+      "id": 6,
+      "enlaceActa": "",
+      "resumen": "",
+      "observacionesRival": "Campo rival: Da Piscina (San Sadurniño)",
+      "campo": "Campo de Fútbol A Marola",
+      "resultado": "",
+      "incidencias": "",
+      "horaPartido": "10:00",
+      "kataAsistio": true,
+      "convocados": [],
+      "fecha": "13/09/2026",
+      "competicion": "Primera Futgal",
+      "sistema": "",
+      "fechaISO": "2026-09-13",
+      "gc": null,
+      "horaQuedada": "08:30",
+      "tipo": "Oficial",
+      "equipacionRival": "Amarela / Azul / Amarela",
+      "jugadorDestacado": ""
+    },
+    {
+      "condicion": "Visitante",
+      "competicion": "Primera Futgal",
+      "enlaceActa": "",
+      "ausentes": [],
+      "jugadorDestacado": "",
+      "gc": null,
+      "fecha": "19/09/2026",
+      "observacionesRival": "Campo: Municipal A Lavandeira (Culleredo)",
+      "codigo": "J2",
+      "resultado": "",
+      "equipacionRival": "Blanca franja diagonal Celeste / Blanco / Blancas",
+      "horaQuedada": "",
+      "resumen": "",
+      "campo": "A Lavandeira (Culleredo)",
+      "gf": null,
+      "sistema": "",
+      "equipacionDorneda": "Blanca / Negro / Blancas",
+      "tipo": "Oficial",
+      "fechaISO": "2026-09-19",
+      "id": 7,
+      "rival": "Sporting Burgo",
+      "convocados": [],
+      "incidencias": "",
+      "horaPartido": "",
+      "kataAsistio": true
+    },
+    {
+      "enlaceActa": "",
+      "gc": null,
+      "competicion": "Primera Futgal",
+      "codigo": "J3",
+      "fecha": "26/09/2026",
+      "observacionesRival": "Campo rival: Porta Santa (Laracha)",
+      "horaQuedada": "",
+      "resumen": "",
+      "ausentes": [],
+      "campo": "A Marola",
+      "sistema": "",
+      "tipo": "Oficial",
+      "fechaISO": "2026-09-26",
+      "id": 8,
+      "condicion": "Local",
+      "incidencias": "",
+      "gf": null,
+      "rival": "U.D. Paiosaco H.Añon",
+      "convocados": [],
+      "equipacionRival": "Verde e Blanca / Verde / Verdes e Blancas",
+      "kataAsistio": true,
+      "resultado": "",
+      "horaPartido": "",
+      "equipacionDorneda": "Blanca / Negro / Blancas",
+      "jugadorDestacado": ""
+    },
+    {
+      "fecha": "03/10/2026",
+      "gf": null,
+      "equipacionRival": "Azul celeste / Blanco / Azul celeste",
+      "horaQuedada": "",
+      "convocados": [],
+      "competicion": "Primera Futgal",
+      "sistema": "",
+      "fechaISO": "2026-10-03",
+      "equipacionDorneda": "Blanca / Negro / Blancas",
+      "id": 9,
+      "rival": "Oza de los Ríos",
+      "jugadorDestacado": "",
+      "codigo": "J4",
+      "resumen": "",
+      "kataAsistio": true,
+      "resultado": "",
+      "horaPartido": "",
+      "observacionesRival": "Campo: O Loureiro (Oza De Los Ríos)",
+      "incidencias": "",
+      "ausentes": [],
+      "campo": "O Loureiro (Oza De Los Ríos)",
+      "condicion": "Visitante",
+      "tipo": "Oficial",
+      "enlaceActa": "",
+      "gc": null
+    },
+    {
+      "equipacionRival": "Blanca / Blanco / Blancas",
+      "competicion": "Primera Futgal",
+      "rival": "Sada F.C. A Nosa Viña",
+      "gc": null,
+      "codigo": "J5",
+      "ausentes": [],
+      "convocados": [],
+      "horaQuedada": "",
+      "tipo": "Oficial",
+      "equipacionDorneda": "Blanca / Negro / Blancas",
+      "campo": "A Marola",
+      "resumen": "",
+      "jugadorDestacado": "",
+      "enlaceActa": "",
+      "fecha": "10/10/2026",
+      "sistema": "",
+      "fechaISO": "2026-10-10",
+      "resultado": "",
+      "id": 10,
+      "gf": null,
+      "kataAsistio": true,
+      "horaPartido": "",
+      "incidencias": "",
+      "condicion": "Local",
+      "observacionesRival": "Campo rival: As Mariñas - Andrés Pena (Sada)"
+    },
+    {
+      "incidencias": "",
+      "fecha": "17/10/2026",
+      "kataAsistio": true,
+      "codigo": "J6",
+      "horaPartido": "",
+      "ausentes": [],
+      "gc": null,
+      "enlaceActa": "",
+      "sistema": "",
+      "jugadorDestacado": "",
+      "condicion": "Visitante",
+      "horaQuedada": "",
+      "rival": "C.C.D. Curtis",
+      "equipacionDorneda": "Blanca / Negro / Blancas",
+      "observacionesRival": "Campo: Novo (Curtis)",
+      "id": 11,
+      "resumen": "",
+      "campo": "Novo (Curtis)",
+      "fechaISO": "2026-10-17",
+      "tipo": "Oficial",
+      "gf": null,
+      "resultado": "",
+      "equipacionRival": "Roja / Rojo / Rojas",
+      "competicion": "Primera Futgal",
+      "convocados": []
+    },
+    {
+      "tipo": "Oficial",
+      "jugadorDestacado": "",
+      "equipacionDorneda": "Blanca / Negro / Blancas",
+      "competicion": "Primera Futgal",
+      "campo": "A Marola",
+      "resultado": "",
+      "convocados": [],
+      "ausentes": [],
+      "condicion": "Local",
+      "horaQuedada": "",
+      "gc": null,
+      "rival": "Club Deportivo Narón Silver Catering",
+      "resumen": "",
+      "codigo": "J7",
+      "enlaceActa": "",
+      "equipacionRival": "Amarilla / Amarillo / Amarillas",
+      "sistema": "",
+      "fechaISO": "2026-10-24",
+      "gf": null,
+      "kataAsistio": true,
+      "horaPartido": "",
+      "id": 12,
+      "incidencias": "",
+      "fecha": "24/10/2026",
+      "observacionesRival": "Campo rival: O Cadaval (Narón)"
+    },
+    {
+      "tipo": "Oficial",
+      "convocados": [],
+      "campo": "Dani Mallo (Cambre)",
+      "id": 13,
+      "condicion": "Visitante",
+      "observacionesRival": "Campo: Dani Mallo (Cambre)",
+      "resultado": "",
+      "gf": null,
+      "sistema": "",
+      "fechaISO": "2026-11-07",
+      "codigo": "J8",
+      "kataAsistio": true,
+      "rival": "Sporting Cambre As Travesas",
+      "horaPartido": "",
+      "equipacionDorneda": "Azul / Azul / Azul",
+      "incidencias": "",
+      "competicion": "Primera Futgal",
+      "resumen": "",
+      "equipacionRival": "Blanca / Blanco / Blancas",
+      "jugadorDestacado": "",
+      "ausentes": [],
+      "gc": null,
+      "enlaceActa": "",
+      "fecha": "07/11/2026",
+      "horaQuedada": ""
+    },
+    {
+      "kataAsistio": true,
+      "horaPartido": "",
+      "enlaceActa": "",
+      "observacionesRival": "Campo rival: A Lavandeira (Culleredo)",
+      "incidencias": "",
+      "codigo": "J9",
+      "equipacionDorneda": "Blanca / Negro / Blancas",
+      "resumen": "",
+      "fechaISO": "2026-11-14",
+      "equipacionRival": "Roja / Rojo / Rojas",
+      "gc": null,
+      "fecha": "14/11/2026",
+      "gf": null,
+      "sistema": "",
+      "horaQuedada": "",
+      "condicion": "Local",
+      "jugadorDestacado": "",
+      "ausentes": [],
+      "campo": "A Marola",
+      "resultado": "",
+      "convocados": [],
+      "competicion": "Primera Futgal",
+      "id": 14,
+      "rival": "Portazgo S.D.",
+      "tipo": "Oficial"
+    },
+    {
+      "condicion": "Visitante",
+      "incidencias": "",
+      "resumen": "",
+      "horaPartido": "",
+      "kataAsistio": true,
+      "fechaISO": "2026-11-21",
+      "fecha": "21/11/2026",
+      "enlaceActa": "",
+      "gc": null,
+      "equipacionDorneda": "Blanca / Negro / Blancas",
+      "jugadorDestacado": "",
+      "tipo": "Oficial",
+      "resultado": "",
+      "equipacionRival": "Roja / Marino / Rojas",
+      "codigo": "J10",
+      "horaQuedada": "",
+      "rival": "Liceo de Monelos S.D.",
+      "id": 15,
+      "sistema": "",
+      "gf": null,
+      "observacionesRival": "Campo: Víctor Fernández Alonso - Antigua Leyma (A Coruña)",
+      "convocados": [],
+      "campo": "Víctor Fernández Alonso (A Coruña)",
+      "competicion": "Primera Futgal",
+      "ausentes": []
+    },
+    {
+      "rival": "San Martiño S.D.",
+      "tipo": "Oficial",
+      "fechaISO": "2026-11-28",
+      "resumen": "",
+      "competicion": "Primera Futgal",
+      "observacionesRival": "Campo: A Revolta (Queixas, Cerceda) - Hierba Natural",
+      "enlaceActa": "",
+      "campo": "A Revolta (Queixas, Cerceda)",
+      "codigo": "J11",
+      "horaQuedada": "",
+      "equipacionRival": "Naranja / Naranja / Naranja",
+      "gc": null,
+      "gf": null,
+      "fecha": "28/11/2026",
+      "resultado": "",
+      "equipacionDorneda": "Blanca / Negro / Blancas",
+      "kataAsistio": true,
+      "jugadorDestacado": "",
+      "sistema": "",
+      "horaPartido": "",
+      "incidencias": "",
+      "condicion": "Visitante",
+      "convocados": [],
+      "ausentes": [],
+      "id": 16
+    },
+    {
+      "rival": "Cedeira S.D.",
+      "incidencias": "",
+      "horaPartido": "",
+      "kataAsistio": true,
+      "resultado": "",
+      "campo": "A Marola",
+      "convocados": [],
+      "condicion": "Local",
+      "sistema": "",
+      "codigo": "J12",
+      "observacionesRival": "Campo rival: Municipal Carmen Maseda - O Beco (Cedeira)",
+      "fechaISO": "2026-12-05",
+      "gc": null,
+      "enlaceActa": "",
+      "fecha": "05/12/2026",
+      "horaQuedada": "",
+      "gf": null,
+      "resumen": "",
+      "ausentes": [],
+      "equipacionDorneda": "Blanca / Negro / Blancas",
+      "tipo": "Oficial",
+      "equipacionRival": "Negra-Blanca / Negro / Negras",
+      "jugadorDestacado": "",
+      "id": 17,
+      "competicion": "Primera Futgal"
+    },
+    {
+      "enlaceActa": "",
+      "rival": "Betanzos Norte",
+      "incidencias": "",
+      "sistema": "",
+      "horaPartido": "",
+      "resultado": "",
+      "gc": null,
+      "kataAsistio": true,
+      "equipacionDorneda": "Blanca / Negro / Blancas",
+      "campo": "O Carregal (Betanzos)",
+      "condicion": "Visitante",
+      "codigo": "J13",
+      "fechaISO": "2026-12-12",
+      "fecha": "12/12/2026",
+      "ausentes": [],
+      "id": 18,
+      "horaQuedada": "",
+      "observacionesRival": "Campo: O Carregal (Betanzos)",
+      "convocados": [],
+      "gf": null,
+      "tipo": "Oficial",
+      "competicion": "Primera Futgal",
+      "equipacionRival": "Roja / Azul / Rojas",
+      "jugadorDestacado": "",
+      "resumen": ""
+    },
+    {
+      "rival": "C.D. Sigrás",
+      "resumen": "",
+      "kataAsistio": true,
+      "horaPartido": "",
+      "equipacionRival": "Azul / Azul / Azules",
+      "incidencias": "",
+      "convocados": [],
+      "campo": "A Marola",
+      "codigo": "J14",
+      "ausentes": [],
+      "gc": null,
+      "fecha": "19/12/2026",
+      "gf": null,
+      "fechaISO": "2026-12-19",
+      "equipacionDorneda": "Blanca / Negro / Blancas",
+      "condicion": "Local",
+      "horaQuedada": "",
+      "competicion": "Primera Futgal",
+      "jugadorDestacado": "",
+      "tipo": "Oficial",
+      "resultado": "",
+      "sistema": "",
+      "observacionesRival": "Campo rival: Os Pinares - Brexo Lema (Cambre)",
+      "id": 19,
+      "enlaceActa": ""
+    },
+    {
+      "gc": null,
+      "kataAsistio": true,
+      "horaPartido": "11:00",
+      "convocados": [],
+      "sistema": "",
+      "incidencias": "",
+      "resultado": "",
+      "equipacionRival": "Amarilla / Negro / Negras",
+      "fecha": "10/01/2027",
+      "condicion": "Visitante",
+      "codigo": "J15",
+      "fechaISO": "2027-01-10",
+      "ausentes": [],
+      "campo": "Campo de Fútbol de Freán (Arteixo)",
+      "tipo": "Oficial",
+      "id": 20,
+      "horaQuedada": "09:30",
+      "observacionesRival": "Campo: Campo de Fútbol de Freán (Arteixo)",
+      "jugadorDestacado": "",
+      "competicion": "Primera Futgal",
+      "equipacionDorneda": "Blanca / Negro / Blancas",
+      "rival": "Campanal de Loureda F. C.",
+      "enlaceActa": "",
+      "gf": null,
+      "resumen": ""
+    },
+    {
+      "convocados": [],
+      "horaPartido": "",
+      "kataAsistio": true,
+      "resumen": "",
+      "incidencias": "",
+      "resultado": "",
+      "ausentes": [],
+      "jugadorDestacado": "",
+      "tipo": "Oficial",
+      "equipacionRival": "Amarela / Azul / Amarela",
+      "gf": null,
+      "campo": "Da Piscina (San Sadurniño)",
+      "id": 21,
+      "observacionesRival": "Campo: Da Piscina (San Sadurniño)",
+      "condicion": "Visitante",
+      "rival": "U.D. Narahio",
+      "codigo": "J16",
+      "horaQuedada": "",
+      "equipacionDorneda": "Blanca / Negro / Blancas",
+      "sistema": "",
+      "enlaceActa": "",
+      "gc": null,
+      "competicion": "Primera Futgal",
+      "fecha": "16/01/2027",
+      "fechaISO": "2027-01-16"
+    },
+    {
+      "resultado": "",
+      "equipacionRival": "Blanca franja diagonal Celeste / Blanco / Blancas",
+      "convocados": [],
+      "fechaISO": "2027-01-23",
+      "kataAsistio": true,
+      "condicion": "Local",
+      "horaPartido": "",
+      "incidencias": "",
+      "fecha": "23/01/2027",
+      "gc": null,
+      "resumen": "",
+      "jugadorDestacado": "",
+      "gf": null,
+      "campo": "A Marola",
+      "equipacionDorneda": "Blanca / Negro / Blancas",
+      "observacionesRival": "Campo rival: Municipal A Lavandeira (Culleredo)",
+      "ausentes": [],
+      "competicion": "Primera Futgal",
+      "tipo": "Oficial",
+      "sistema": "",
+      "codigo": "J17",
+      "rival": "Sporting Burgo",
+      "horaQuedada": "",
+      "enlaceActa": "",
+      "id": 22
+    },
+    {
+      "jugadorDestacado": "",
+      "fechaISO": "2027-01-30",
+      "kataAsistio": true,
+      "tipo": "Oficial",
+      "horaPartido": "",
+      "codigo": "J18",
+      "convocados": [],
+      "observacionesRival": "Campo: Porta Santa (Laracha)",
+      "incidencias": "",
+      "sistema": "",
+      "equipacionRival": "Verde e Blanca / Verde / Verdes e Blancas",
+      "gc": null,
+      "fecha": "30/01/2027",
+      "condicion": "Visitante",
+      "gf": null,
+      "resumen": "",
+      "equipacionDorneda": "Blanca / Negro / Blancas",
+      "campo": "Porta Santa (Laracha)",
+      "horaQuedada": "",
+      "competicion": "Primera Futgal",
+      "ausentes": [],
+      "enlaceActa": "",
+      "id": 23,
+      "resultado": "",
+      "rival": "U.D. Paiosaco H.Añon"
+    },
+    {
+      "gc": null,
+      "convocados": [],
+      "equipacionRival": "Azul celeste / Blanco / Azul celeste",
+      "observacionesRival": "Campo rival: O Loureiro (Oza De Los Ríos)",
+      "campo": "A Marola",
+      "horaQuedada": "",
+      "fechaISO": "2027-02-06",
+      "sistema": "",
+      "rival": "Oza de los Ríos",
+      "jugadorDestacado": "",
+      "competicion": "Primera Futgal",
+      "horaPartido": "",
+      "kataAsistio": true,
+      "id": 24,
+      "incidencias": "",
+      "resultado": "",
+      "resumen": "",
+      "codigo": "J19",
+      "tipo": "Oficial",
+      "fecha": "06/02/2027",
+      "ausentes": [],
+      "enlaceActa": "",
+      "gf": null,
+      "equipacionDorneda": "Blanca / Negro / Blancas",
+      "condicion": "Local"
+    },
+    {
+      "kataAsistio": true,
+      "horaPartido": "",
+      "resumen": "",
+      "incidencias": "",
+      "convocados": [],
+      "equipacionRival": "Blanca / Blanco / Blancas",
+      "rival": "Sada F.C. A Nosa Viña",
+      "resultado": "",
+      "equipacionDorneda": "Azul / Azul / Azul",
+      "id": 25,
+      "jugadorDestacado": "",
+      "gf": null,
+      "codigo": "J20",
+      "condicion": "Visitante",
+      "tipo": "Oficial",
+      "campo": "As Mariñas - Andrés Pena (Sada)",
+      "ausentes": [],
+      "horaQuedada": "",
+      "fechaISO": "2027-02-20",
+      "observacionesRival": "Campo: As Mariñas - Andrés Pena (Sada)",
+      "gc": null,
+      "fecha": "20/02/2027",
+      "sistema": "",
+      "enlaceActa": "",
+      "competicion": "Primera Futgal"
+    },
+    {
+      "equipacionDorneda": "Blanca / Negro / Blancas",
+      "codigo": "J21",
+      "fecha": "27/02/2027",
+      "competicion": "Primera Futgal",
+      "convocados": [],
+      "gc": null,
+      "ausentes": [],
+      "horaQuedada": "",
+      "sistema": "",
+      "jugadorDestacado": "",
+      "observacionesRival": "Campo rival: Novo (Curtis)",
+      "rival": "C.C.D. Curtis",
+      "fechaISO": "2027-02-27",
+      "id": 26,
+      "condicion": "Local",
+      "resumen": "",
+      "kataAsistio": true,
+      "horaPartido": "",
+      "gf": null,
+      "campo": "A Marola",
+      "incidencias": "",
+      "resultado": "",
+      "equipacionRival": "Roja / Rojo / Rojas",
+      "tipo": "Oficial",
+      "enlaceActa": ""
+    },
+    {
+      "sistema": "",
+      "campo": "O Cadaval (Narón)",
+      "codigo": "J22",
+      "ausentes": [],
+      "jugadorDestacado": "",
+      "rival": "Club Deportivo Narón Silver Catering",
+      "tipo": "Oficial",
+      "gc": null,
+      "kataAsistio": true,
+      "enlaceActa": "",
+      "horaPartido": "",
+      "equipacionRival": "Amarilla / Amarillo / Amarillas",
+      "incidencias": "",
+      "competicion": "Primera Futgal",
+      "condicion": "Visitante",
+      "convocados": [],
+      "gf": null,
+      "id": 27,
+      "fecha": "06/03/2027",
+      "equipacionDorneda": "Blanca / Negro / Blancas",
+      "resumen": "",
+      "observacionesRival": "Campo: O Cadaval (Narón)",
+      "horaQuedada": "",
+      "fechaISO": "2027-03-06",
+      "resultado": ""
+    },
+    {
+      "campo": "A Marola",
+      "ausentes": [],
+      "competicion": "Primera Futgal",
+      "sistema": "",
+      "gf": null,
+      "jugadorDestacado": "",
+      "rival": "Sporting Cambre As Travesas",
+      "convocados": [],
+      "id": 28,
+      "equipacionDorneda": "Blanca / Negro / Blancas",
+      "equipacionRival": "Roja / Azul / Rojas",
+      "horaQuedada": "",
+      "enlaceActa": "",
+      "tipo": "Oficial",
+      "codigo": "J23",
+      "condicion": "Local",
+      "gc": null,
+      "fecha": "13/03/2027",
+      "observacionesRival": "Campo rival: Dani Mallo (Cambre)",
+      "fechaISO": "2027-03-13",
+      "incidencias": "",
+      "horaPartido": "",
+      "resultado": "",
+      "resumen": "",
+      "kataAsistio": true
+    },
+    {
+      "competicion": "Primera Futgal",
+      "enlaceActa": "",
+      "condicion": "Visitante",
+      "fecha": "20/03/2027",
+      "jugadorDestacado": "",
+      "fechaISO": "2027-03-20",
+      "gf": null,
+      "resumen": "",
+      "id": 29,
+      "horaQuedada": "",
+      "resultado": "",
+      "tipo": "Oficial",
+      "sistema": "",
+      "rival": "Portazgo S.D.",
+      "equipacionRival": "Roja / Rojo / Rojas",
+      "observacionesRival": "Campo: Municipal A Lavandeira (Culleredo)",
+      "convocados": [],
+      "gc": null,
+      "ausentes": [],
+      "codigo": "J24",
+      "equipacionDorneda": "Blanca / Negro / Blancas",
+      "campo": "A Lavandeira (Culleredo)",
+      "kataAsistio": true,
+      "horaPartido": "",
+      "incidencias": ""
+    },
+    {
+      "equipacionDorneda": "Blanca / Negro / Blancas",
+      "gf": null,
+      "resultado": "",
+      "incidencias": "",
+      "sistema": "",
+      "kataAsistio": true,
+      "tipo": "Oficial",
+      "campo": "A Marola",
+      "horaPartido": "",
+      "condicion": "Local",
+      "observacionesRival": "Campo rival: Víctor Fernández Alonso (A Coruña)",
+      "enlaceActa": "",
+      "id": 30,
+      "ausentes": [],
+      "codigo": "J25",
+      "rival": "Liceo de Monelos S.D.",
+      "fechaISO": "2027-04-04",
+      "horaQuedada": "",
+      "convocados": [],
+      "competicion": "Primera Futgal",
+      "resumen": "",
+      "gc": null,
+      "fecha": "03/04/2027",
+      "equipacionRival": "Roja / Marino / Rojas",
+      "jugadorDestacado": ""
+    },
+    {
+      "incidencias": "",
+      "sistema": "",
+      "kataAsistio": true,
+      "horaPartido": "",
+      "condicion": "Local",
+      "jugadorDestacado": "",
+      "enlaceActa": "",
+      "equipacionDorneda": "Blanca / Negro / Blancas",
+      "equipacionRival": "Naranja / Naranja / Naranja",
+      "gc": null,
+      "resultado": "",
+      "fecha": "10/04/2027",
+      "ausentes": [],
+      "horaQuedada": "",
+      "campo": "A Marola",
+      "fechaISO": "2027-04-10",
+      "tipo": "Oficial",
+      "gf": null,
+      "observacionesRival": "Campo rival: A Revolta (Queixas, Cerceda)",
+      "id": 31,
+      "rival": "San Martiño S.D.",
+      "codigo": "J26",
+      "resumen": "",
+      "competicion": "Primera Futgal",
+      "convocados": []
+    },
+    {
+      "jugadorDestacado": "",
+      "resultado": "",
+      "competicion": "Primera Futgal",
+      "fechaISO": "2027-04-17",
+      "equipacionDorneda": "Azul / Azul / Azul",
+      "tipo": "Oficial",
+      "observacionesRival": "Campo: Municipal Carmen Maseda - O Beco (Cedeira)",
+      "fecha": "17/04/2027",
+      "convocados": [],
+      "horaQuedada": "",
+      "resumen": "",
+      "gc": null,
+      "condicion": "Visitante",
+      "campo": "Municipal Carmen Maseda (O Beco, Cedeira)",
+      "sistema": "",
+      "enlaceActa": "",
+      "gf": null,
+      "kataAsistio": true,
+      "rival": "Cedeira S.D.",
+      "equipacionRival": "Negra-Blanca / Negro / Negras",
+      "horaPartido": "",
+      "id": 32,
+      "codigo": "J27",
+      "incidencias": "",
+      "ausentes": []
+    },
+    {
+      "ausentes": [],
+      "condicion": "Local",
+      "competicion": "Primera Futgal",
+      "rival": "Betanzos Norte",
+      "id": 33,
+      "convocados": [],
+      "resumen": "",
+      "gf": null,
+      "campo": "A Marola",
+      "horaQuedada": "",
+      "jugadorDestacado": "",
+      "resultado": "",
+      "equipacionRival": "Roja / Azul / Rojas",
+      "fecha": "24/04/2027",
+      "equipacionDorneda": "Blanca / Negro / Blancas",
+      "gc": null,
+      "observacionesRival": "Campo rival: O Carregal (Betanzos)",
+      "codigo": "J28",
+      "incidencias": "",
+      "sistema": "",
+      "fechaISO": "2027-04-24",
+      "kataAsistio": true,
+      "tipo": "Oficial",
+      "enlaceActa": "",
+      "horaPartido": ""
+    },
+    {
+      "jugadorDestacado": "",
+      "equipacionDorneda": "Blanca / Negro / Blancas",
+      "id": 34,
+      "enlaceActa": "",
+      "fecha": "01/05/2027",
+      "horaQuedada": "",
+      "competicion": "Primera Futgal",
+      "fechaISO": "2027-05-01",
+      "gf": null,
+      "observacionesRival": "Campo: Os Pinares - Brexo Lema (Cambre)",
+      "resumen": "",
+      "codigo": "J29",
+      "sistema": "",
+      "equipacionRival": "Azul / Azul / Azules",
+      "horaPartido": "",
+      "condicion": "Visitante",
+      "tipo": "Oficial",
+      "ausentes": [],
+      "kataAsistio": true,
+      "gc": null,
+      "rival": "C.D. Sigrás",
+      "incidencias": "",
+      "resultado": "",
+      "convocados": [],
+      "campo": "Os Pinares (Brexo Lema, Cambre)"
+    },
+    {
+      "convocados": [],
+      "sistema": "",
+      "resultado": "",
+      "ausentes": [],
+      "horaQuedada": "",
+      "gc": null,
+      "rival": "Campanal de Loureda F. C.",
+      "tipo": "Oficial",
+      "campo": "A Marola",
+      "competicion": "Primera Futgal",
+      "equipacionRival": "Amarilla / Negro / Negras",
+      "equipacionDorneda": "Blanca / Negro / Blancas",
+      "condicion": "Local",
+      "horaPartido": "",
+      "kataAsistio": true,
+      "incidencias": "",
+      "fecha": "08/05/2027",
+      "id": 35,
+      "jugadorDestacado": "",
+      "observacionesRival": "Última jornada de Liga. Campo rival: Freán (Arteixo)",
+      "codigo": "J30",
+      "gf": null,
+      "enlaceActa": "",
+      "resumen": "",
+      "fechaISO": "2027-05-08"
+    },
+    {
+      "sistema": "",
+      "fecha": "31/10/2026",
+      "gf": null,
+      "equipacionDorneda": "",
+      "enlaceActa": "",
+      "horaPartido": "16:00",
+      "kataAsistio": true,
+      "id": 36,
+      "incidencias": "",
+      "ausentes": [],
+      "equipacionRival": "",
+      "convocados": [],
+      "fechaISO": "2026-10-31",
+      "observacionesRival": "",
+      "rival": "Ural Español C.F. Vuelta Xentes",
+      "competicion": "Copa Federacion A Coruna",
+      "condicion": "Visitante",
+      "resultado": "",
+      "resumen": "Solo si supera 32avos.",
+      "campo": "Torre Nº 1",
+      "horaQuedada": "15:00",
+      "jugadorDestacado": "",
+      "gc": null,
+      "tipo": "Oficial",
+      "codigo": "C_16avos"
+    },
+    {
+      "gf": null,
+      "campo": "",
+      "equipacionRival": "",
+      "horaQuedada": "",
+      "ausentes": [],
+      "enlaceActa": "",
+      "competicion": "Copa Federacion A Coruna",
+      "rival": "Pendiente sorteo",
+      "observacionesRival": "",
+      "id": 37,
+      "sistema": "",
+      "convocados": [],
+      "fechaISO": "2027-01-03",
+      "horaPartido": "",
+      "resumen": "Solo si avanza.",
+      "kataAsistio": true,
+      "condicion": "Pendiente",
+      "incidencias": "",
+      "tipo": "Oficial",
+      "resultado": "",
+      "equipacionDorneda": "",
+      "fecha": "03/01/2027",
+      "gc": null,
+      "jugadorDestacado": "",
+      "codigo": "C_Cuartos"
+    },
+    {
+      "resumen": "Solo si avanza.",
+      "equipacionRival": "",
+      "tipo": "Oficial",
+      "campo": "",
+      "gc": null,
+      "condicion": "Pendiente",
+      "resultado": "",
+      "enlaceActa": "",
+      "incidencias": "",
+      "codigo": "C_Semis",
+      "jugadorDestacado": "",
+      "rival": "Pendiente sorteo",
+      "equipacionDorneda": "",
+      "fechaISO": "2027-03-28",
+      "kataAsistio": true,
+      "horaPartido": "",
+      "convocados": [],
+      "competicion": "Copa Federacion A Coruna",
+      "ausentes": [],
+      "id": 38,
+      "sistema": "",
+      "gf": null,
+      "observacionesRival": "",
+      "horaQuedada": "",
+      "fecha": "28/03/2027"
+    },
+    {
+      "incidencias": "",
+      "fechaISO": "2027-05-16",
+      "campo": "",
+      "kataAsistio": true,
+      "gf": null,
+      "sistema": "",
+      "horaPartido": "",
+      "jugadorDestacado": "",
+      "enlaceActa": "",
+      "rival": "Pendiente",
+      "equipacionRival": "",
+      "tipo": "Oficial",
+      "observacionesRival": "",
+      "id": 39,
+      "horaQuedada": "",
+      "resultado": "",
+      "equipacionDorneda": "",
+      "resumen": "Final de la Copa si se clasifica.",
+      "fecha": "16/05/2027",
+      "condicion": "Neutral",
+      "competicion": "Copa Federacion A Coruna",
+      "ausentes": [],
+      "convocados": [],
+      "codigo": "C_Final",
+      "gc": null
+    }
+  ],
+  "copaJornadas": [
+    {
+      "fecha": "06/09/2026",
+      "codigo": "C_32avos",
+      "partidos": [
+        {
+          "campo": "Campo Pendiente de asignar",
+          "gv": null,
+          "codActa": "",
+          "gl": null,
+          "hora": "--:--",
+          "dorneda": false,
+          "fecha": "05/09/2026",
+          "enlaceActa": "",
+          "id": 101,
+          "local": "CLUB DEPORTIVO NOS CORUÑA",
+          "visitante": "CLUB DEPORTIVO JUVENTUD LATINO",
+          "estado": "Suspendido"
+        },
+        {
+          "fecha": "05/09/2026",
+          "gv": 12,
+          "visitante": "C.F. TEKE TEKE ORDES",
+          "dorneda": false,
+          "codActa": "1452767",
+          "local": "CECEBRE S.D.",
+          "clasificado": "C.F. TEKE TEKE ORDES",
+          "campo": "Os Pinares, (Brexo Lema)",
+          "hora": "16:00",
+          "gl": 1,
+          "estado": "Finalizado",
+          "id": 102,
+          "enlaceActa": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1452767&cod_acta=1452767"
+        },
+        {
+          "id": 103,
+          "enlaceActa": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1452771&cod_acta=1452771",
+          "gl": 0,
+          "dorneda": false,
+          "hora": "16:00",
+          "codActa": "1452771",
+          "clasificado": "BEMANTES VETERANOS CAFÉ QUERCUS",
+          "local": "GALICIA GAITEIRA",
+          "fecha": "05/09/2026",
+          "estado": "Finalizado",
+          "visitante": "BEMANTES VETERANOS CAFÉ QUERCUS",
+          "campo": "Torre Nº 1",
+          "gv": 1
+        },
+        {
+          "visitante": "S.D.C. TEIXEIRO",
+          "gv": 2,
+          "campo": "Anido (O Carballo-Oleiros)",
+          "enlaceActa": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1452765&cod_acta=1452765",
+          "local": "HÉRCULES S.D.",
+          "estado": "Finalizado",
+          "fecha": "05/09/2026",
+          "clasificado": "HÉRCULES S.D.",
+          "gl": 2,
+          "codActa": "1452765",
+          "dorneda": false,
+          "id": 104,
+          "hora": "16:30"
+        },
+        {
+          "dorneda": false,
+          "fecha": "05/09/2026",
+          "codActa": "1452752",
+          "enlaceActa": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1452752&cod_acta=1452752",
+          "visitante": "PAIOSACO S.D.",
+          "id": 105,
+          "local": "BEAT STREET BETANZOS",
+          "campo": "O Carregal (Betanzos)",
+          "gl": 0,
+          "hora": "18:00",
+          "estado": "Finalizado",
+          "gv": 3,
+          "clasificado": "PAIOSACO S.D."
+        },
+        {
+          "gv": 4,
+          "local": "PIADELA C.F.",
+          "fecha": "05/09/2026",
+          "estado": "Finalizado",
+          "clasificado": "CF CRENDES DE VETERANOS",
+          "campo": "As Lamelas - Piadela",
+          "dorneda": false,
+          "gl": 1,
+          "visitante": "CF CRENDES DE VETERANOS",
+          "codActa": "1452769",
+          "enlaceActa": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1452769&cod_acta=1452769",
+          "hora": "18:00",
+          "id": 106
+        },
+        {
+          "gv": 7,
+          "estado": "Finalizado",
+          "hora": "18:00",
+          "enlaceActa": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1452770&cod_acta=1452770",
+          "gl": 2,
+          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo",
+          "visitante": "C.F. BATALLADOR S.D.",
+          "clasificado": "C.F. BATALLADOR S.D.",
+          "codActa": "1452770",
+          "dorneda": false,
+          "local": "SPORTING BURGO",
+          "id": 107,
+          "fecha": "05/09/2026"
+        },
+        {
+          "enlaceActa": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1452772&cod_acta=1452772",
+          "gv": 1,
+          "hora": "18:00",
+          "id": 108,
+          "campo": "Campo de Fútbol de Iñás",
+          "clasificado": "LICEO DE MONELOS S.D.",
+          "local": "MERCURIO S.D.",
+          "visitante": "LICEO DE MONELOS S.D.",
+          "fecha": "05/09/2026",
+          "estado": "Finalizado",
+          "codActa": "1452772",
+          "dorneda": false,
+          "gl": 1
+        },
+        {
+          "hora": "18:00",
+          "fecha": "05/09/2026",
+          "enlaceActa": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1452774&cod_acta=1452774",
+          "local": "CAMBRE CF",
+          "campo": "Os Pinares, (Brexo Lema)",
+          "gv": 3,
+          "id": 109,
+          "dorneda": false,
+          "estado": "Finalizado",
+          "codActa": "1452774",
+          "visitante": "U.D. PAIOSACO H.AÑÓN",
+          "gl": 2,
+          "clasificado": "U.D. PAIOSACO H.AÑÓN"
+        },
+        {
+          "fecha": "05/09/2026",
+          "gv": 5,
+          "local": "RACING SADA Fútbol CLUB",
+          "campo": "Torre Nº 1",
+          "visitante": "ATLÉTICO CASTROS",
+          "enlaceActa": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1452777&cod_acta=1452777",
+          "hora": "18:00",
+          "dorneda": false,
+          "codActa": "1452777",
+          "gl": 2,
+          "estado": "Finalizado",
+          "clasificado": "ATLÉTICO CASTROS",
+          "id": 110
+        },
+        {
+          "clasificado": "CLUB DO MAR",
+          "id": 111,
+          "estado": "Finalizado",
+          "visitante": "CLUB DO MAR",
+          "gl": 1,
+          "local": "MARINO C.F.",
+          "fecha": "05/09/2026",
+          "dorneda": false,
+          "codActa": "1452775",
+          "gv": 1,
+          "campo": "Campo de Fútbol A Marola",
+          "hora": "18:30",
+          "enlaceActa": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1452775&cod_acta=1452775"
+        },
+        {
+          "clasificado": "SADA F.C. A NOSA VIÑA",
+          "id": 112,
+          "gl": 1,
+          "enlaceActa": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1452779&cod_acta=1452779",
+          "local": "C.D. LARÍN",
+          "dorneda": false,
+          "visitante": "SADA F.C. A NOSA VIÑA",
+          "fecha": "05/09/2026",
+          "codActa": "1452779",
+          "hora": "19:00",
+          "estado": "Finalizado",
+          "gv": 4,
+          "campo": "Meicende Grande (Arteixo)"
+        },
+        {
+          "visitante": "PASTORIZA VETERANOS",
+          "campo": "Mpal. Borja Rodríguez Ans (Carral)",
+          "gv": 2,
+          "fecha": "05/09/2026",
+          "clasificado": "UD CARRAL",
+          "estado": "Finalizado",
+          "enlaceActa": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1452751&cod_acta=1452751",
+          "local": "UD CARRAL",
+          "hora": "20:00",
+          "gl": 6,
+          "id": 113,
+          "codActa": "1452751",
+          "dorneda": false
+        },
+        {
+          "gl": 2,
+          "local": "S.C.D. SAN CRISTOBAL DAS VIÑAS",
+          "dorneda": false,
+          "codActa": "1452754",
+          "fecha": "05/09/2026",
+          "id": 114,
+          "hora": "20:00",
+          "clasificado": "S.C.D. SAN CRISTOBAL DAS VIÑAS",
+          "campo": "Os Pinares, (Brexo Lema)",
+          "gv": 0,
+          "estado": "Finalizado",
+          "visitante": "C.D. SIGRÁS",
+          "enlaceActa": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1452754&cod_acta=1452754"
+        },
+        {
+          "gl": 0,
+          "campo": "O Carregal (Betanzos)",
+          "id": 115,
+          "fecha": "05/09/2026",
+          "clasificado": "SPORTING UXES VETERANOS",
+          "visitante": "SPORTING UXES VETERANOS",
+          "estado": "Finalizado",
+          "local": "BETANZOS NORTE",
+          "hora": "20:00",
+          "gv": 3,
+          "codActa": "1452756",
+          "enlaceActa": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1452756&cod_acta=1452756",
+          "dorneda": false
+        },
+        {
+          "visitante": "PORTAZGO S.D.",
+          "gl": null,
+          "local": "CD ESTRELLA A SOLAINA",
+          "enlaceActa": "",
+          "dorneda": false,
+          "gv": null,
+          "codActa": "",
+          "fecha": "06/09/2026",
+          "estado": "Suspendido",
+          "id": 116,
+          "hora": "--:--",
+          "campo": "Campo Pendiente de asignar"
+        },
+        {
+          "clasificado": "CLUB DEPORTIVO NARÓN SILVER CATERING",
+          "id": 117,
+          "hora": "10:00",
+          "gl": 0,
+          "estado": "Finalizado",
+          "enlaceActa": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1452760&cod_acta=1452760",
+          "campo": "O Pote",
+          "gv": 3,
+          "local": "S.D. CULTURAL MANIÑOS",
+          "codActa": "1452760",
+          "dorneda": false,
+          "fecha": "06/09/2026",
+          "visitante": "CLUB DEPORTIVO NARÓN SILVER CATERING"
+        },
+        {
+          "hora": "10:00",
+          "clasificado": "SAN MARTIÑO S.D.",
+          "gv": 3,
+          "campo": "Torre Nº 2",
+          "fecha": "06/09/2026",
+          "codActa": "1452763",
+          "visitante": "SAN MARTIÑO S.D.",
+          "estado": "Finalizado",
+          "dorneda": false,
+          "local": "S.D. SANTA MARGARITA",
+          "gl": 2,
+          "enlaceActa": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1452763&cod_acta=1452763",
+          "id": 118
+        },
+        {
+          "gv": 3,
+          "campo": "Dani Mallo (Cambre)",
+          "enlaceActa": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1452764&cod_acta=1452764",
+          "local": "C.D. CIUDAD",
+          "fecha": "06/09/2026",
+          "visitante": "SPORTING CAMBRE AS TRAVESAS",
+          "clasificado": "SPORTING CAMBRE AS TRAVESAS",
+          "gl": 3,
+          "id": 119,
+          "estado": "Finalizado",
+          "codActa": "1452764",
+          "dorneda": false,
+          "hora": "10:00"
+        },
+        {
+          "visitante": "PENOUQUEIRA S.R.D.",
+          "clasificado": "PENOUQUEIRA S.R.D.",
+          "estado": "Finalizado",
+          "hora": "10:00",
+          "gv": 3,
+          "id": 120,
+          "enlaceActa": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1452768&cod_acta=1452768",
+          "local": "SPM",
+          "fecha": "06/09/2026",
+          "gl": 1,
+          "dorneda": false,
+          "campo": "Meicende Grande (Arteixo)",
+          "codActa": "1452768"
+        },
+        {
+          "estado": "Finalizado",
+          "campo": "Municipal de Mourente",
+          "local": "S.D. VALDOVIÑO",
+          "gv": 3,
+          "fecha": "06/09/2026",
+          "id": 121,
+          "clasificado": "VIOÑO C.F.",
+          "enlaceActa": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1452776&cod_acta=1452776",
+          "gl": 2,
+          "hora": "10:00",
+          "codActa": "1452776",
+          "dorneda": false,
+          "visitante": "VIOÑO C.F."
+        },
+        {
+          "campo": "Campo de Fútbol O Redondo (Montrove)",
+          "clasificado": "ATLÉTICO PERILLO",
+          "gv": 0,
+          "fecha": "06/09/2026",
+          "local": "ATLÉTICO PERILLO",
+          "gl": 1,
+          "hora": "10:00",
+          "codActa": "1452778",
+          "dorneda": false,
+          "enlaceActa": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1452778&cod_acta=1452778",
+          "id": 122,
+          "visitante": "SPORTING CORUÑÉS ASADOR LA CABAÑA \"B\"",
+          "estado": "Finalizado"
+        },
+        {
+          "clasificado": "XUVENTUDE DORNEDA",
+          "campo": "Da Piscina",
+          "gv": 2,
+          "fecha": "06/09/2026",
+          "codActa": "1452780",
+          "visitante": "XUVENTUDE DORNEDA",
+          "estado": "Finalizado",
+          "dorneda": true,
+          "local": "U.D. NARAHIO",
+          "gl": 0,
+          "hora": "11:00",
+          "enlaceActa": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1452780&cod_acta=1452780",
+          "id": 123
+        },
+        {
+          "hora": "11:30",
+          "campo": "Oseiro (Arteixo)",
+          "clasificado": "CAMPANAL DE LOUREDA F. C.",
+          "gl": 3,
+          "visitante": "CAMPANAL DE LOUREDA F. C.",
+          "fecha": "06/09/2026",
+          "id": 124,
+          "codActa": "1452759",
+          "estado": "Finalizado",
+          "enlaceActa": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1452759&cod_acta=1452759",
+          "local": "OSEIRO CLICKFER ARTEIXO",
+          "dorneda": false,
+          "gv": 3
+        },
+        {
+          "clasificado": "ATLÉTICO SOBRADO XUVENTUDE",
+          "gl": 3,
+          "hora": "12:00",
+          "fecha": "06/09/2026",
+          "enlaceActa": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1452753&cod_acta=1452753",
+          "local": "ATLÉTICO ARTEIXO",
+          "id": 125,
+          "estado": "Finalizado",
+          "campo": "Ponte Dos Brozos - Anexo",
+          "gv": 3,
+          "visitante": "ATLÉTICO SOBRADO XUVENTUDE",
+          "dorneda": false,
+          "codActa": "1452753"
+        },
+        {
+          "codActa": "1452755",
+          "dorneda": false,
+          "gv": 4,
+          "visitante": "Fútbol CLUB ROSSONERO",
+          "gl": 2,
+          "estado": "Finalizado",
+          "campo": "Torre Nº 3",
+          "id": 126,
+          "local": "VETERANOS DO RELÁMPAGO",
+          "hora": "12:00",
+          "clasificado": "Fútbol CLUB ROSSONERO",
+          "fecha": "06/09/2026",
+          "enlaceActa": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1452755&cod_acta=1452755"
+        },
+        {
+          "codActa": "1452757",
+          "dorneda": false,
+          "id": 127,
+          "hora": "12:00",
+          "gl": 0,
+          "estado": "Finalizado",
+          "clasificado": "SPORTING MAP",
+          "campo": "Campo de Fútbol Universidad Laboral",
+          "enlaceActa": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1452757&cod_acta=1452757",
+          "local": "MARAVILLAS SD FORD GONZACAR",
+          "visitante": "SPORTING MAP",
+          "gv": 1,
+          "fecha": "06/09/2026"
+        },
+        {
+          "hora": "12:00",
+          "dorneda": false,
+          "codActa": "1452762",
+          "clasificado": "SPORTING MEICENDE",
+          "estado": "Finalizado",
+          "gv": 4,
+          "fecha": "06/09/2026",
+          "enlaceActa": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1452762&cod_acta=1452762",
+          "id": 128,
+          "local": "U.D.J. ALMEIRAS",
+          "gl": 3,
+          "campo": "Campo de Fútbol Os Loureiros, Almeiras",
+          "visitante": "SPORTING MEICENDE"
+        },
+        {
+          "fecha": "06/09/2026",
+          "local": "C.D. MARTE",
+          "clasificado": "C.D. MARTE",
+          "gv": 2,
+          "campo": "Torre Nº 2",
+          "enlaceActa": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1452773&cod_acta=1452773",
+          "hora": "12:00",
+          "dorneda": false,
+          "estado": "Finalizado",
+          "codActa": "1452773",
+          "visitante": "S.D. SIN QUERER LA CON FUSION",
+          "id": 129,
+          "gl": 2
+        },
+        {
+          "enlaceActa": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1452758&cod_acta=1452758",
+          "gl": 0,
+          "id": 130,
+          "local": "SPORTING CORUÑÉS SDC",
+          "estado": "Finalizado",
+          "gv": 4,
+          "fecha": "06/09/2026",
+          "visitante": "CARRAL VETERANOS",
+          "dorneda": false,
+          "codActa": "1452758",
+          "campo": "Mpal. Borja Rodríguez Ans (Carral)",
+          "clasificado": "CARRAL VETERANOS",
+          "hora": "12:30"
+        }
+      ],
+      "nombre": "32avos de Final",
+      "ronda": 1
+    },
+    {
+      "partidos": [
+        {
+          "codActa": "",
+          "dorneda": false,
+          "estado": "Pendiente",
+          "campo": "Mpal. Borja Rodríguez Ans (Carral)",
+          "id": 201,
+          "hora": "--:--",
+          "gv": null,
+          "local": "UD CARRAL",
+          "visitante": "PAIOSACO S.D.",
+          "gl": null,
+          "enlaceActa": "",
+          "fecha": "31/10/2026"
+        },
+        {
+          "fecha": "31/10/2026",
+          "dorneda": false,
+          "gv": null,
+          "codActa": "",
+          "estado": "Pendiente",
+          "local": "S.C.D. SAN CRISTOBAL DAS VIÑAS",
+          "hora": "--:--",
+          "gl": null,
+          "enlaceActa": "",
+          "campo": "Campo Pendiente de asignar",
+          "id": 202,
+          "visitante": "ATLÉTICO SOBRADO XUVENTUDE"
+        },
+        {
+          "gv": null,
+          "hora": "--:--",
+          "enlaceActa": "",
+          "fecha": "31/10/2026",
+          "gl": null,
+          "local": "Fútbol CLUB ROSSONERO",
+          "visitante": "SPORTING UXES VETERANOS",
+          "estado": "Pendiente",
+          "campo": "San Pedro de Visma 1",
+          "dorneda": false,
+          "codActa": "",
+          "id": 203
+        },
+        {
+          "visitante": "CARRAL VETERANOS",
+          "fecha": "31/10/2026",
+          "estado": "Pendiente",
+          "gv": null,
+          "local": "SPORTING MAP",
+          "hora": "--:--",
+          "gl": null,
+          "dorneda": false,
+          "campo": "Torre N� 2",
+          "codActa": "",
+          "id": 204,
+          "enlaceActa": ""
+        },
+        {
+          "codActa": "",
+          "dorneda": false,
+          "visitante": "C.F. TEKE TEKE ORDES",
+          "campo": "San Pedro de Visma 1",
+          "estado": "Pendiente",
+          "id": 205,
+          "local": "CLUB DEPORTIVO NOS CORUÑA",
+          "enlaceActa": "",
+          "gv": null,
+          "hora": "--:--",
+          "fecha": "31/10/2026",
+          "gl": null
+        },
+        {
+          "codActa": "",
+          "id": 206,
+          "hora": "--:--",
+          "campo": "O Pinar - Vizoño",
+          "dorneda": false,
+          "estado": "Pendiente",
+          "visitante": "PENOUQUEIRA S.R.D.",
+          "enlaceActa": "",
+          "fecha": "31/10/2026",
+          "gl": null,
+          "local": "CF CRENDES DE VETERANOS",
+          "gv": null
+        },
+        {
+          "enlaceActa": "",
+          "visitante": "BEMANTES VETERANOS CAFÉ QUERCUS",
+          "dorneda": false,
+          "fecha": "31/10/2026",
+          "codActa": "",
+          "gl": null,
+          "estado": "Pendiente",
+          "local": "C.F. BATALLADOR S.D.",
+          "gv": null,
+          "hora": "--:--",
+          "id": 207,
+          "campo": "San Pedro de Visma 1"
+        },
+        {
+          "estado": "Pendiente",
+          "local": "C.D. MARTE",
+          "id": 208,
+          "fecha": "31/10/2026",
+          "enlaceActa": "",
+          "gv": null,
+          "dorneda": false,
+          "hora": "--:--",
+          "codActa": "",
+          "gl": null,
+          "campo": "Campo Pendiente de asignar",
+          "visitante": "LICEO DE MONELOS S.D."
+        },
+        {
+          "campo": "Campo de Fútbol de Freán",
+          "id": 209,
+          "gv": null,
+          "hora": "--:--",
+          "local": "CAMPANAL DE LOUREDA F. C.",
+          "visitante": "CLUB DEPORTIVO NARÓN SILVER CATERING",
+          "estado": "Pendiente",
+          "gl": null,
+          "codActa": "",
+          "fecha": "31/10/2026",
+          "enlaceActa": "",
+          "dorneda": false
+        },
+        {
+          "gv": null,
+          "campo": "Campo Pendiente de asignar",
+          "gl": null,
+          "local": "CD ESTRELLA A SOLAINA",
+          "visitante": "SPORTING MEICENDE",
+          "enlaceActa": "",
+          "fecha": "31/10/2026",
+          "codActa": "",
+          "estado": "Pendiente",
+          "hora": "--:--",
+          "dorneda": false,
+          "id": 210
+        },
+        {
+          "dorneda": false,
+          "local": "CEDEIRA S.D.",
+          "estado": "Pendiente",
+          "gl": null,
+          "codActa": "",
+          "visitante": "SAN MARTIÑO S.D.",
+          "fecha": "31/10/2026",
+          "gv": null,
+          "id": 211,
+          "enlaceActa": "",
+          "campo": "Municipal Carmen Maseda (O Beco)",
+          "hora": "--:--"
+        },
+        {
+          "local": "HÉRCULES S.D.",
+          "visitante": "SPORTING CAMBRE AS TRAVESAS",
+          "enlaceActa": "",
+          "fecha": "31/10/2026",
+          "id": 212,
+          "gv": null,
+          "estado": "Pendiente",
+          "hora": "--:--",
+          "campo": "Anido (O Carballo-Oleiros)",
+          "dorneda": false,
+          "gl": null,
+          "codActa": ""
+        },
+        {
+          "fecha": "31/10/2026",
+          "dorneda": false,
+          "codActa": "",
+          "enlaceActa": "",
+          "estado": "Pendiente",
+          "gl": null,
+          "local": "CLUB DO MAR",
+          "gv": null,
+          "hora": "--:--",
+          "campo": "Municipal de A Laracha",
+          "id": 213,
+          "visitante": "U.D. PAIOSACO H.AÑÓN"
+        },
+        {
+          "enlaceActa": "",
+          "gv": null,
+          "estado": "Pendiente",
+          "campo": "Elviña Grande (A Coruña)",
+          "gl": null,
+          "local": "VIOÑO C.F.",
+          "codActa": "",
+          "dorneda": false,
+          "id": 214,
+          "fecha": "31/10/2026",
+          "hora": "--:--",
+          "visitante": "ATLÉTICO CASTROS"
+        },
+        {
+          "codActa": "",
+          "gv": null,
+          "hora": "--:--",
+          "enlaceActa": "",
+          "dorneda": false,
+          "campo": "Campo de Fútbol O Redondo (Montrove)",
+          "gl": null,
+          "estado": "Pendiente",
+          "visitante": "SADA F.C. A NOSA VIÑA",
+          "fecha": "31/10/2026",
+          "local": "ATLÉTICO PERILLO",
+          "id": 215
+        },
+        {
+          "enlaceActa": "",
+          "estado": "Pendiente",
+          "id": 216,
+          "campo": "Torre Nº 1",
+          "hora": "--:--",
+          "codActa": "",
+          "local": "URAL ESPAÑOL C.F. VUELTA XENTES",
+          "dorneda": true,
+          "gv": null,
+          "visitante": "XUVENTUDE DORNEDA",
+          "fecha": "31/10/2026",
+          "gl": null
+        }
+      ],
+      "fecha": "31/10/2026",
+      "nombre": "16avos de Final",
+      "codigo": "C_16avos",
+      "ronda": 2
+    },
+    {
+      "nombre": "Octavos de Final",
+      "codigo": "C_Octavos",
+      "ronda": 3,
+      "partidos": [
+        {
+          "dorneda": true,
+          "hora": "--:--",
+          "gv": null,
+          "fecha": "27/12/2026",
+          "gl": null,
+          "local": "Ganador 16avos 1",
+          "campo": "Por determinar",
+          "id": 301,
+          "visitante": "Ganador 16avos 2"
+        },
+        {
+          "visitante": "Ganador 16avos 4",
+          "local": "Ganador 16avos 3",
+          "gv": null,
+          "hora": "--:--",
+          "campo": "Por determinar",
+          "fecha": "27/12/2026",
+          "id": 302,
+          "gl": null
+        }
+      ],
+      "fecha": "27/12/2026"
+    },
+    {
+      "codigo": "C_Cuartos",
+      "ronda": 4,
+      "partidos": [
+        {
+          "campo": "Por determinar",
+          "id": 401,
+          "hora": "--:--",
+          "fecha": "03/01/2027",
+          "gl": null,
+          "visitante": "Ganador Octavos 2",
+          "dorneda": true,
+          "local": "Ganador Octavos 1",
+          "gv": null
+        }
+      ],
+      "nombre": "Cuartos de Final",
+      "fecha": "03/01/2027"
+    },
+    {
+      "fecha": "28/03/2027",
+      "ronda": 5,
+      "codigo": "C_Semis",
+      "partidos": [
+        {
+          "dorneda": true,
+          "gl": null,
+          "fecha": "28/03/2027",
+          "hora": "--:--",
+          "gv": null,
+          "local": "Semifinalista 1",
+          "id": 501,
+          "campo": "Por determinar",
+          "visitante": "Semifinalista 2"
+        }
+      ],
+      "nombre": "Semifinales"
+    },
+    {
+      "partidos": [
+        {
+          "fecha": "16/05/2027",
+          "id": 601,
+          "local": "Finalista 1",
+          "hora": "--:--",
+          "dorneda": true,
+          "campo": "Sede Neutral por determinar",
+          "visitante": "Finalista 2",
+          "gl": null,
+          "gv": null
+        }
+      ],
+      "ronda": 6,
+      "codigo": "C_Final",
+      "fecha": "16/05/2027",
+      "nombre": "Gran Final"
+    }
+  ],
+  "ligaGoleadores": [],
+  "copaGoleadores": [
+    {
+      "penaltis": 1,
+      "pos": 1,
+      "equipo": "C.F. TEKE TEKE ORDES",
+      "jugador": "MENDEZ GARCÍA, JAVIER",
+      "goles": 8,
+      "promedio": "8,0000",
+      "pj": 1
+    },
+    {
+      "pj": 1,
+      "promedio": "3,0000",
+      "equipo": "UD CARRAL",
+      "jugador": "PREGO REY, MANUEL",
+      "penaltis": 0,
+      "goles": 3,
+      "pos": 2
+    },
+    {
+      "penaltis": 0,
+      "equipo": "U.D. PAIOSACO H.AÑÓN",
+      "pj": 1,
+      "promedio": "3,0000",
+      "pos": 3,
+      "goles": 3,
+      "jugador": "ALONSO AÑÓN, JAVIER"
+    },
+    {
+      "goles": 3,
+      "promedio": "3,0000",
+      "jugador": "CASAS VARELA, MARCOS M",
+      "pj": 1,
+      "penaltis": 1,
+      "pos": 4,
+      "equipo": "SAN MARTIÑO S.D."
+    },
+    {
+      "pj": 1,
+      "promedio": "2,0000",
+      "penaltis": 0,
+      "goles": 2,
+      "equipo": "SADA F.C. A NOSA VIÑA",
+      "pos": 5,
+      "jugador": "FERRO ROZAS, GONZALO"
+    },
+    {
+      "pos": 6,
+      "promedio": "2,0000",
+      "penaltis": 0,
+      "jugador": "GONZÁLEZ CABAÑAS, DANIEL",
+      "pj": 1,
+      "goles": 2,
+      "equipo": "C.D. CIUDAD"
+    },
+    {
+      "penaltis": 0,
+      "pj": 1,
+      "goles": 2,
+      "promedio": "2,0000",
+      "pos": 7,
+      "equipo": "CF CRENDES DE VETERANOS",
+      "jugador": "BALDOMIR MATO, MIGUEL"
+    },
+    {
+      "promedio": "2,0000",
+      "jugador": "SOUTO PATIÑO, DAVID",
+      "equipo": "FUTBOL CLUB ROSSONERO",
+      "pj": 1,
+      "pos": 8,
+      "penaltis": 0,
+      "goles": 2
+    },
+    {
+      "goles": 2,
+      "jugador": "SEOANE SANDE, ALBERTO",
+      "pj": 1,
+      "promedio": "2,0000",
+      "penaltis": 0,
+      "equipo": "ATLÉTICO CASTROS",
+      "pos": 9
+    },
+    {
+      "pj": 1,
+      "penaltis": 0,
+      "pos": 10,
+      "promedio": "2,0000",
+      "equipo": "VETERANOS DO RELÁMPAGO",
+      "goles": 2,
+      "jugador": "IGLESIAS FEIJOO, DIEGO"
+    },
+    {
+      "promedio": "2,0000",
+      "equipo": "C.D. MARTE",
+      "penaltis": 0,
+      "pj": 1,
+      "pos": 11,
+      "goles": 2,
+      "jugador": "BEA NEIRA, DANIEL"
+    },
+    {
+      "promedio": "2,0000",
+      "pj": 1,
+      "pos": 12,
+      "penaltis": 0,
+      "goles": 2,
+      "equipo": "VIOÑO C.F.",
+      "jugador": "MARTÍNEZ GONZÁLEZ, RUBEN"
+    },
+    {
+      "goles": 2,
+      "jugador": "NOVO HERNANZ, IGNACIO",
+      "equipo": "S.D. SANTA MARGARIÑA",
+      "pos": 13,
+      "pj": 1,
+      "promedio": "2,0000",
+      "penaltis": 0
+    },
+    {
+      "promedio": "2,0000",
+      "equipo": "U.D.J. ALMEIRAS",
+      "jugador": "CASTREJE DÍAZ, ELOY",
+      "penaltis": 0,
+      "pos": 14,
+      "goles": 2,
+      "pj": 1
+    },
+    {
+      "promedio": "2,0000",
+      "equipo": "C.F. BATALLADOR S.D.",
+      "penaltis": 0,
+      "jugador": "LÓPEZ ACUÑA, ALVARO",
+      "pos": 15,
+      "goles": 2,
+      "pj": 1
+    },
+    {
+      "promedio": "1,0000",
+      "pj": 1,
+      "jugador": "MUI�OS ALVAREZ, LUIS A",
+      "pos": 16,
+      "goles": 1,
+      "penaltis": 0,
+      "equipo": "PASTORIZA VETERANOS"
+    },
+    {
+      "goles": 1,
+      "jugador": "LEIRA JOGLAR, DIEGO",
+      "equipo": "FUTBOL CLUB ROSSONERO",
+      "pos": 17,
+      "promedio": "1,0000",
+      "pj": 1,
+      "penaltis": 0
+    },
+    {
+      "equipo": "PENOUQUEIRA S.R.D.",
+      "jugador": "VILLAR RODRÍGUEZ, JAVIER",
+      "pj": 1,
+      "pos": 18,
+      "penaltis": 0,
+      "promedio": "1,0000",
+      "goles": 1
+    },
+    {
+      "goles": 1,
+      "pj": 1,
+      "jugador": "PÉREZ SABIO, ADRIAN",
+      "pos": 19,
+      "promedio": "1,0000",
+      "equipo": "SPORTING CAMBRE AS TRAVESAS",
+      "penaltis": 0
+    },
+    {
+      "equipo": "PENOUQUEIRA S.R.D.",
+      "jugador": "COSTA RODRÍGUEZ, ALBERTO",
+      "pos": 20,
+      "promedio": "1,0000",
+      "penaltis": 0,
+      "goles": 1,
+      "pj": 1
+    },
+    {
+      "penaltis": 0,
+      "promedio": "1,0000",
+      "pos": 21,
+      "jugador": "TEMPRANO GOLPE, VICTOR M",
+      "pj": 1,
+      "equipo": "C.F. BATALLADOR S.D.",
+      "goles": 1
+    },
+    {
+      "penaltis": 0,
+      "pj": 1,
+      "pos": 22,
+      "promedio": "1,0000",
+      "equipo": "CECEBRE S.D.",
+      "jugador": "DOLDAN PARGA, JOAQUIN EDUARDO",
+      "goles": 1
+    },
+    {
+      "pj": 1,
+      "pos": 23,
+      "equipo": "S.D. VALDOVIÑO",
+      "goles": 1,
+      "jugador": "LÓPEZ GRA�A, IVAN",
+      "penaltis": 0,
+      "promedio": "1,0000"
+    },
+    {
+      "penaltis": 0,
+      "jugador": "MANEIRO RUA, DIEGO",
+      "pj": 1,
+      "goles": 1,
+      "promedio": "1,0000",
+      "pos": 24,
+      "equipo": "ATLÉTICO CASTROS"
+    },
+    {
+      "jugador": "SÁNCHEZ SEOANE, MARCOS",
+      "pos": 25,
+      "pj": 1,
+      "penaltis": 1,
+      "equipo": "CLUB DEPORTIVO NAÑÓN SILVER CATERING",
+      "promedio": "1,0000",
+      "goles": 1
+    },
+    {
+      "penaltis": 0,
+      "promedio": "1,0000",
+      "goles": 1,
+      "pos": 26,
+      "equipo": "MERCURIO S.D.",
+      "pj": 1,
+      "jugador": "CASTRO GAYOSO, ALBERTO D"
+    },
+    {
+      "penaltis": 0,
+      "goles": 1,
+      "promedio": "1,0000",
+      "pj": 1,
+      "equipo": "S.D. SIN QUERER LA CON FUSION",
+      "jugador": "CAMPO SAEZ, JACOBO N",
+      "pos": 27
+    },
+    {
+      "pj": 1,
+      "jugador": "CASAL PALLAS, MIGUEL",
+      "goles": 1,
+      "equipo": "CARRAL VETERANOS",
+      "promedio": "1,0000",
+      "penaltis": 0,
+      "pos": 28
+    },
+    {
+      "jugador": "GÓMEZ LÓPEZ, FRANCISCO J",
+      "goles": 1,
+      "equipo": "CLUB DEPORTIVO NAÑÓN SILVER CATERING",
+      "promedio": "1,0000",
+      "pos": 29,
+      "penaltis": 0,
+      "pj": 1
+    },
+    {
+      "equipo": "UD CARRAL",
+      "penaltis": 0,
+      "goles": 1,
+      "pos": 30,
+      "promedio": "1,0000",
+      "jugador": "PAMPIN CASTI�EIRAS, JAVIER",
+      "pj": 1
+    },
+    {
+      "penaltis": 0,
+      "goles": 1,
+      "pos": 31,
+      "promedio": "1,0000",
+      "pj": 1,
+      "jugador": "NAYA RIVEIRO, JUAN M",
+      "equipo": "C.D. LARIN"
+    },
+    {
+      "penaltis": 0,
+      "goles": 1,
+      "pj": 1,
+      "promedio": "1,0000",
+      "pos": 32,
+      "jugador": "PÉREZ MACEIRA, IVAN S",
+      "equipo": "SPORTING CAMBRE AS TRAVESAS"
+    },
+    {
+      "jugador": "CARRERA PÉREZ, ISAAC",
+      "promedio": "1,0000",
+      "pos": 33,
+      "penaltis": 0,
+      "equipo": "PIADELA C.F.",
+      "goles": 1,
+      "pj": 1
+    },
+    {
+      "promedio": "1,0000",
+      "equipo": "CF CRENDES DE VETERANOS",
+      "pos": 34,
+      "jugador": "EDREIRA LOUREDA, GABRIEL",
+      "penaltis": 1,
+      "goles": 1,
+      "pj": 1
+    },
+    {
+      "goles": 1,
+      "pos": 35,
+      "pj": 1,
+      "penaltis": 0,
+      "jugador": "VARELA CAINZOS, MARCOS A",
+      "equipo": "BEMANTES VETERANOS CAF� QUERCUS",
+      "promedio": "1,0000"
+    },
+    {
+      "pos": 36,
+      "promedio": "1,0000",
+      "jugador": "ABRU�EDO LOMBARDERO, DANIEL",
+      "penaltis": 0,
+      "goles": 1,
+      "equipo": "SPORTING MEICENDE",
+      "pj": 1
+    },
+    {
+      "pos": 37,
+      "penaltis": 0,
+      "equipo": "S.D. SIN QUERER LA CON FUSION",
+      "goles": 1,
+      "pj": 1,
+      "promedio": "1,0000",
+      "jugador": "GALAN PREGO, JENSEN"
+    },
+    {
+      "promedio": "1,0000",
+      "jugador": "BOO FERNÁNDEZ, MIGUEL A",
+      "pj": 1,
+      "equipo": "SADA F.C. A NOSA VIÑA",
+      "penaltis": 0,
+      "pos": 38,
+      "goles": 1
+    },
+    {
+      "pos": 39,
+      "equipo": "C.F. BATALLADOR S.D.",
+      "goles": 1,
+      "jugador": "SILVA SUAREZ, SANTIAGO",
+      "pj": 1,
+      "penaltis": 0,
+      "promedio": "1,0000"
+    },
+    {
+      "penaltis": 0,
+      "pj": 1,
+      "promedio": "1,0000",
+      "jugador": "GARCÍA CAAMAÑO, JESUS",
+      "equipo": "SPORTING UXES VETERANOS",
+      "goles": 1,
+      "pos": 40
+    },
+    {
+      "pj": 1,
+      "penaltis": 0,
+      "goles": 1,
+      "promedio": "1,0000",
+      "jugador": "PEREIRA IGLESIAS, DANIEL",
+      "equipo": "OSEIRO CLICKFER ARTEIXO",
+      "pos": 41
+    },
+    {
+      "goles": 1,
+      "pos": 42,
+      "jugador": "LINARES ALONSO, ANTONIO",
+      "promedio": "1,0000",
+      "penaltis": 0,
+      "pj": 1,
+      "equipo": "ATLÉTICO SOBRADO XUVENTUDE"
+    },
+    {
+      "equipo": "SPORTING CAMBRE AS TRAVESAS",
+      "promedio": "1,0000",
+      "jugador": "CUBEIRO FERNÁNDEZ, BRAIS",
+      "penaltis": 0,
+      "pos": 43,
+      "goles": 1,
+      "pj": 1
+    },
+    {
+      "promedio": "1,0000",
+      "penaltis": 0,
+      "jugador": "TUSET ARIJON, RUBEN",
+      "equipo": "CAMPANAL DE LOUREDA F. C.",
+      "pos": 44,
+      "goles": 1,
+      "pj": 1
+    },
+    {
+      "equipo": "OSEIRO CLICKFER ARTEIXO",
+      "pj": 1,
+      "jugador": "PÉREZ OTERO, MARTÍN",
+      "promedio": "1,0000",
+      "penaltis": 0,
+      "goles": 1,
+      "pos": 45
+    },
+    {
+      "equipo": "C.D. MARTE",
+      "pj": 1,
+      "jugador": "CALATRAVA BLANCO, FERNANDO",
+      "pos": 46,
+      "promedio": "1,0000",
+      "penaltis": 0,
+      "goles": 1
+    },
+    {
+      "goles": 1,
+      "pos": 47,
+      "promedio": "1,0000",
+      "jugador": "LOURIDO RODRÍGUEZ, IVAN",
+      "penaltis": 0,
+      "pj": 1,
+      "equipo": "U.D.J. ALMEIRAS"
+    },
+    {
+      "equipo": "SPORTING BURGO",
+      "promedio": "1,0000",
+      "jugador": "ABUIN RODRÍGUEZ, GERMAN",
+      "penaltis": 0,
+      "pj": 1,
+      "goles": 1,
+      "pos": 48
+    },
+    {
+      "goles": 1,
+      "jugador": "SOBRIDO GARCÍA, OSCAR",
+      "pj": 1,
+      "pos": 49,
+      "penaltis": 0,
+      "promedio": "1,0000",
+      "equipo": "CARRAL VETERANOS"
+    },
+    {
+      "penaltis": 0,
+      "equipo": "C.F. TEKE TEKE ORDES",
+      "promedio": "1,0000",
+      "goles": 1,
+      "pj": 1,
+      "pos": 50,
+      "jugador": "LISTE LÓPEZ, JOSE"
+    },
+    {
+      "promedio": "1,0000",
+      "penaltis": 0,
+      "jugador": "SÁNCHEZ BLANCO, IVAN",
+      "equipo": "CAMPANAL DE LOUREDA F. C.",
+      "pj": 1,
+      "pos": 51,
+      "goles": 1
+    },
+    {
+      "equipo": "SPORTING BURGO",
+      "jugador": "UZAL GOLPE, JUAN M",
+      "pj": 1,
+      "goles": 1,
+      "promedio": "1,0000",
+      "penaltis": 0,
+      "pos": 52
+    },
+    {
+      "pos": 53,
+      "jugador": "FONTENLA SANTISO, JORGE",
+      "promedio": "1,0000",
+      "equipo": "C.F. BATALLADOR S.D.",
+      "penaltis": 0,
+      "goles": 1,
+      "pj": 1
+    },
+    {
+      "penaltis": 0,
+      "pj": 1,
+      "pos": 54,
+      "promedio": "1,0000",
+      "equipo": "SPORTING UXES VETERANOS",
+      "jugador": "BONIGNO SILVA, ALBERTO MANUEL",
+      "goles": 1
+    },
+    {
+      "pj": 1,
+      "pos": 55,
+      "goles": 1,
+      "penaltis": 0,
+      "equipo": "PENOUQUEIRA S.R.D.",
+      "jugador": "CASTRO VENTURA, JOSE R",
+      "promedio": "1,0000"
+    },
+    {
+      "pos": 56,
+      "equipo": "S.D. VALDOVIÑO",
+      "penaltis": 0,
+      "goles": 1,
+      "pj": 1,
+      "jugador": "LÓPEZ LISTE, FRANCISCO J",
+      "promedio": "1,0000"
+    },
+    {
+      "jugador": "RODRÍGUEZ GONZÁLEZ, JORGE",
+      "goles": 1,
+      "pos": 57,
+      "equipo": "CARRAL VETERANOS",
+      "promedio": "1,0000",
+      "penaltis": 0,
+      "pj": 1
+    },
+    {
+      "goles": 1,
+      "penaltis": 0,
+      "pos": 58,
+      "jugador": "GONZÁLEZ BLACH, DIEGO",
+      "equipo": "CLUB DO MAR",
+      "promedio": "1,0000",
+      "pj": 1
+    },
+    {
+      "jugador": "SÁNCHEZ PÉREZ, RUBEN",
+      "goles": 1,
+      "equipo": "CLUB DO MAR",
+      "promedio": "1,0000",
+      "pos": 59,
+      "penaltis": 0,
+      "pj": 1
+    },
+    {
+      "pos": 60,
+      "penaltis": 0,
+      "promedio": "1,0000",
+      "pj": 1,
+      "goles": 1,
+      "equipo": "PAIOSACO S.D.",
+      "jugador": "NOVOA COUSILLAS, ELOY"
+    },
+    {
+      "equipo": "UD CARRAL",
+      "promedio": "1,0000",
+      "pj": 1,
+      "jugador": "CIVES PAZ, SERGIO",
+      "penaltis": 1,
+      "pos": 61,
+      "goles": 1
+    },
+    {
+      "penaltis": 0,
+      "equipo": "PAIOSACO S.D.",
+      "promedio": "1,0000",
+      "goles": 1,
+      "pos": 62,
+      "jugador": "MALLO LUNA, JOSE F",
+      "pj": 1
+    },
+    {
+      "promedio": "1,0000",
+      "pj": 1,
+      "jugador": "PARIS LABANDEIRA, DAMIAN",
+      "penaltis": 1,
+      "goles": 1,
+      "equipo": "SADA F.C. A NOSA VIÑA",
+      "pos": 63
+    },
+    {
+      "promedio": "1,0000",
+      "jugador": "GARCÍA GARCÍA, JORGE",
+      "goles": 1,
+      "penaltis": 0,
+      "equipo": "CARRAL VETERANOS",
+      "pos": 64,
+      "pj": 1
+    },
+    {
+      "pj": 1,
+      "goles": 1,
+      "penaltis": 0,
+      "pos": 65,
+      "promedio": "1,0000",
+      "jugador": "LEON MARTÍNEZ, FRANCISCO",
+      "equipo": "C.D. CIUDAD"
+    },
+    {
+      "pos": 66,
+      "equipo": "C.F. TEKE TEKE ORDES",
+      "goles": 1,
+      "jugador": "MENDEZ GARCÍA, IVAN",
+      "pj": 1,
+      "promedio": "1,0000",
+      "penaltis": 0
+    },
+    {
+      "pj": 1,
+      "goles": 1,
+      "pos": 67,
+      "penaltis": 0,
+      "jugador": "RIVADULLA FERNÁNDEZ, DIEGO",
+      "promedio": "1,0000",
+      "equipo": "S.C.D. SAN CRISTOBAL DAS VIÑAS"
+    },
+    {
+      "pj": 1,
+      "goles": 1,
+      "equipo": "FUTBOL CLUB ROSSONERO",
+      "jugador": "REY VÁZQUEZ, DIEGO",
+      "promedio": "1,0000",
+      "pos": 68,
+      "penaltis": 0
+    },
+    {
+      "equipo": "ATLÉTICO CASTROS",
+      "promedio": "1,0000",
+      "pos": 69,
+      "jugador": "COLLAZO AIRA, ADRIAN",
+      "penaltis": 0,
+      "pj": 1,
+      "goles": 1
+    },
+    {
+      "penaltis": 0,
+      "goles": 1,
+      "jugador": "FERREIRA SOUTO, PABLO",
+      "promedio": "1,0000",
+      "equipo": "C.F. TEKE TEKE ORDES",
+      "pos": 70,
+      "pj": 1
+    },
+    {
+      "pos": 71,
+      "equipo": "CAMPANAL DE LOUREDA F. C.",
+      "goles": 1,
+      "penaltis": 0,
+      "jugador": "MARO�O BOEDO, IVAN",
+      "promedio": "1,0000",
+      "pj": 1
+    },
+    {
+      "jugador": "RICO SOUTO, BRAIS",
+      "equipo": "CAMBRE CF",
+      "promedio": "1,0000",
+      "pos": 72,
+      "pj": 1,
+      "goles": 1,
+      "penaltis": 0
+    },
+    {
+      "promedio": "1,0000",
+      "jugador": "FUENTES RODRÍGUEZ, CHRISTIAN",
+      "goles": 1,
+      "penaltis": 0,
+      "pos": 73,
+      "pj": 1,
+      "equipo": "SPORTING MEICENDE"
+    },
+    {
+      "pos": 74,
+      "equipo": "CLUB DO MAR",
+      "jugador": "AMOR CANDAL, GABRIEL",
+      "promedio": "1,0000",
+      "pj": 1,
+      "penaltis": 0,
+      "goles": 1
+    },
+    {
+      "jugador": "MARTÍNEZ PÉREZ, ISAAC C",
+      "pj": 1,
+      "pos": 75,
+      "equipo": "S.D.C. TEIXEIRO",
+      "penaltis": 0,
+      "goles": 1,
+      "promedio": "1,0000"
+    },
+    {
+      "promedio": "1,0000",
+      "jugador": "MARTÍNEZ MUÑIZ, MICHAEL",
+      "equipo": "SPORTING MEICENDE",
+      "pj": 1,
+      "penaltis": 0,
+      "goles": 1,
+      "pos": 76
+    },
+    {
+      "equipo": "PASTORIZA VETERANOS",
+      "penaltis": 0,
+      "pj": 1,
+      "jugador": "SOUTO CALVETE, BORJA",
+      "promedio": "1,0000",
+      "pos": 77,
+      "goles": 1
+    },
+    {
+      "pj": 1,
+      "goles": 1,
+      "pos": 78,
+      "equipo": "PAIOSACO S.D.",
+      "penaltis": 0,
+      "jugador": "CANOSA CAMBEIRO, DOMINGO M",
+      "promedio": "1,0000"
+    },
+    {
+      "penaltis": 0,
+      "pj": 1,
+      "promedio": "1,0000",
+      "equipo": "CLUB DO MAR",
+      "pos": 79,
+      "goles": 1,
+      "jugador": "MOSQUERA RODRÍGUEZ, DAVID"
+    },
+    {
+      "jugador": "LÓPEZ NOVOA, CRISTIAN",
+      "pos": 80,
+      "goles": 1,
+      "equipo": "SPORTING MEICENDE",
+      "pj": 1,
+      "promedio": "1,0000",
+      "penaltis": 0
+    },
+    {
+      "penaltis": 1,
+      "pj": 1,
+      "goles": 1,
+      "promedio": "1,0000",
+      "equipo": "OSEIRO CLICKFER ARTEIXO",
+      "jugador": "IBA�EZ NICOLAS, MARCOS",
+      "pos": 81
+    },
+    {
+      "promedio": "1,0000",
+      "jugador": "ESPIDO LORENZO, ANGEL",
+      "penaltis": 0,
+      "pj": 1,
+      "pos": 82,
+      "goles": 1,
+      "equipo": "ATLÉTICO SOBRADO XUVENTUDE"
+    },
+    {
+      "goles": 1,
+      "promedio": "1,0000",
+      "pos": 83,
+      "jugador": "PICADO LI�ARES, JAVIER",
+      "penaltis": 0,
+      "pj": 1,
+      "equipo": "HERCULES S.D."
+    },
+    {
+      "jugador": "DEL RIO BAICA, MAXIMILIANO DANIEL",
+      "pos": 84,
+      "equipo": "ATLÉTICO PERILLO",
+      "goles": 1,
+      "pj": 1,
+      "penaltis": 0,
+      "promedio": "1,0000"
+    },
+    {
+      "pos": 85,
+      "promedio": "1,0000",
+      "jugador": "MIRAZ ARES, FRANCISCO JAVIER",
+      "goles": 1,
+      "penaltis": 0,
+      "equipo": "S.D.C. TEIXEIRO",
+      "pj": 1
+    },
+    {
+      "penaltis": 0,
+      "pj": 1,
+      "goles": 1,
+      "pos": 86,
+      "equipo": "CLUB DO MAR",
+      "promedio": "1,0000",
+      "jugador": "MARTÍNEZ JOVE, SERGIO"
+    },
+    {
+      "goles": 1,
+      "pos": 87,
+      "equipo": "CF CRENDES DE VETERANOS",
+      "penaltis": 1,
+      "jugador": "DYULGEROV, GEORGI N",
+      "pj": 1,
+      "promedio": "1,0000"
+    },
+    {
+      "penaltis": 0,
+      "equipo": "ATLÉTICO SOBRADO XUVENTUDE",
+      "promedio": "1,0000",
+      "pj": 1,
+      "goles": 1,
+      "jugador": "MENDEZ CALVO, MANUEL ANTONIO",
+      "pos": 88
+    },
+    {
+      "promedio": "1,0000",
+      "pj": 1,
+      "jugador": "REIMUNDEZ RODRÍGUEZ, LUIS",
+      "goles": 1,
+      "penaltis": 0,
+      "equipo": "UD CARRAL",
+      "pos": 89
+    },
+    {
+      "pj": 1,
+      "promedio": "1,0000",
+      "jugador": "PIQUER LOUZAN, MANUEL ANGEL",
+      "penaltis": 0,
+      "equipo": "SPORTING UXES VETERANOS",
+      "pos": 90,
+      "goles": 1
+    },
+    {
+      "goles": 1,
+      "pos": 91,
+      "pj": 1,
+      "penaltis": 0,
+      "equipo": "VIOÑO C.F.",
+      "promedio": "1,0000",
+      "jugador": "LÓPEZ GESTAL, FRANCISCO JAVIER"
+    },
+    {
+      "equipo": "HERCULES S.D.",
+      "pj": 1,
+      "goles": 1,
+      "penaltis": 0,
+      "jugador": "MANTI�AN SEIJAS, YERAY JAVIER",
+      "pos": 92,
+      "promedio": "1,0000"
+    },
+    {
+      "pj": 1,
+      "pos": 93,
+      "penaltis": 0,
+      "goles": 1,
+      "equipo": "XUVENTUDE DORNEDA",
+      "jugador": "LÓPEZ GRA�A, FELIX",
+      "promedio": "1,0000"
+    },
+    {
+      "goles": 1,
+      "penaltis": 0,
+      "promedio": "1,0000",
+      "pos": 94,
+      "jugador": "MEILAN SEOANE, IVAN",
+      "pj": 1,
+      "equipo": "XUVENTUDE DORNEDA"
+    },
+    {
+      "penaltis": 0,
+      "goles": 1,
+      "promedio": "1,0000",
+      "equipo": "MARINO C.F.",
+      "pos": 95,
+      "pj": 1,
+      "jugador": "GARCÍA MARTÍNEZ, FERNANDO DANIEL"
+    },
+    {
+      "penaltis": 0,
+      "goles": 1,
+      "promedio": "1,0000",
+      "pos": 96,
+      "jugador": "ALVAREZ CU�ARRO, ADRIAN",
+      "equipo": "C.F. BATALLADOR S.D.",
+      "pj": 1
+    },
+    {
+      "pos": 97,
+      "penaltis": 0,
+      "promedio": "1,0000",
+      "equipo": "CAMBRE CF",
+      "pj": 1,
+      "jugador": "CRUZ GARCÍA, MARCELO",
+      "goles": 1
+    },
+    {
+      "pj": 1,
+      "pos": 98,
+      "goles": 1,
+      "penaltis": 0,
+      "equipo": "LICEO DE MONELOS S.D.",
+      "jugador": "COLLAZO PORTEIRO, OSCAR",
+      "promedio": "1,0000"
+    },
+    {
+      "equipo": "C.F. BATALLADOR S.D.",
+      "penaltis": 0,
+      "promedio": "1,0000",
+      "pj": 1,
+      "jugador": "IGLESIAS VICENTE, SANTIAGO",
+      "goles": 1,
+      "pos": 99
+    },
+    {
+      "pos": 100,
+      "jugador": "ESCOLANO CASAS, RUB�N",
+      "equipo": "SPORTING MAP",
+      "promedio": "1,0000",
+      "pj": 1,
+      "goles": 1,
+      "penaltis": 0
+    },
+    {
+      "pj": 1,
+      "goles": 1,
+      "pos": 101,
+      "penaltis": 0,
+      "jugador": "CANZOBRE RIVAS, JOSE M",
+      "promedio": "1,0000",
+      "equipo": "ATLÉTICO ARTEIXO"
+    },
+    {
+      "equipo": "SPM",
+      "promedio": "1,0000",
+      "jugador": "SEOANE RODRÍGUEZ, JOSE ANGEL",
+      "penaltis": 0,
+      "pos": 102,
+      "pj": 1,
+      "goles": 1
+    },
+    {
+      "promedio": "1,0000",
+      "penaltis": 1,
+      "jugador": "JEREZ ROBLES, DOUGLAS JHOAN",
+      "equipo": "RACING SADA F�TBOL CLUB",
+      "pos": 103,
+      "goles": 1,
+      "pj": 1
+    },
+    {
+      "goles": 1,
+      "pos": 104,
+      "jugador": "HERNANZ NOCEDA, ENRIQUE",
+      "promedio": "1,0000",
+      "penaltis": 0,
+      "equipo": "C.F. BATALLADOR S.D.",
+      "pj": 1
+    },
+    {
+      "goles": 1,
+      "penaltis": 0,
+      "promedio": "1,0000",
+      "equipo": "S.C.D. SAN CRISTOBAL DAS VIÑAS",
+      "jugador": "VELASCO PAB�N, FERNANDO JOS�",
+      "pos": 105,
+      "pj": 1
+    },
+    {
+      "penaltis": 0,
+      "promedio": "1,0000",
+      "equipo": "ATLÉTICO CASTROS",
+      "goles": 1,
+      "jugador": "BOQUETE GEYMONAT, NICOLAS FEDERICO",
+      "pos": 106,
+      "pj": 1
+    },
+    {
+      "goles": 1,
+      "pj": 1,
+      "equipo": "ATLÉTICO ARTEIXO",
+      "jugador": "CAO DÍAZ, FRANCISCO",
+      "penaltis": 0,
+      "promedio": "1,0000",
+      "pos": 107
+    },
+    {
+      "pos": 108,
+      "penaltis": 0,
+      "equipo": "ATLÉTICO ARTEIXO",
+      "jugador": "MENDEZ LÓPEZ, DAVID",
+      "goles": 1,
+      "promedio": "1,0000",
+      "pj": 1
+    },
+    {
+      "pj": 1,
+      "promedio": "1,0000",
+      "pos": 109,
+      "penaltis": 0,
+      "goles": 1,
+      "equipo": "RACING SADA F�TBOL CLUB",
+      "jugador": "AMOUR, HEMZA"
+    }
+  ],
+  "futgalSync": {
+    "lastSuccess": "09/09/2026 · 11:46",
+    "lastAttempt": "09/09/2026 · 11:46",
+    "status": "success",
+    "summary": {
+      "ligaJornadasChecked": 30,
+      "copaRondasFound": 2,
+      "partidosActualizados": 2,
+      "nuevosPartidos": 0,
+      "sinCambios": 37
+    },
+    "logs": [
+      {
+        "fecha": "09/09/2026",
+        "hora": "11:46",
+        "detalle": "Liga J15: Horario oficial confirmado 10/01/2027 a las 11:00 en Freán"
+      },
+      {
+        "fecha": "09/09/2026",
+        "hora": "11:46",
+        "detalle": "Liga J1: Horario oficial confirmado 13/09/2026 a las 10:00 en A Marola"
+      },
+      {
+        "fecha": "09/09/2026",
+        "hora": "11:46",
+        "detalle": "Copa 16avos: Confirmado rival Ural Español C.F. el 31/10/2026"
+      }
+    ]
+  }
+}

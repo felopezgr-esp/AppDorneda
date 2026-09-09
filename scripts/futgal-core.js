@@ -304,6 +304,20 @@ function parseDateToISO(dateStr) {
 }
 
 /**
+ * Calcula hora de quedada (90 minutos antes del partido)
+ */
+function calcHoraQuedada(horaStr) {
+  if (!horaStr || !horaStr.includes(':')) return '';
+  const [h, m] = horaStr.split(':').map(Number);
+  if (isNaN(h) || isNaN(m)) return '';
+  const totalM = h * 60 + m - 90;
+  if (totalM < 0) return '';
+  const qH = Math.floor(totalM / 60).toString().padStart(2, '0');
+  const qM = (totalM % 60).toString().padStart(2, '0');
+  return `${qH}:${qM}`;
+}
+
+/**
  * Realiza la sincronización no destructiva de los datos de FUTGAL con el objeto DB
  */
 function mergeFutgalDataIntoDB(currentDB, futgalResults) {
@@ -357,10 +371,11 @@ function mergeFutgalDataIntoDB(currentDB, futgalResults) {
         gl: m.gl,
         gv: m.gv,
         dorneda: m.dorneda,
-        hora: m.hora,
-        campo: m.campo,
-        enlaceActa: m.enlaceActa,
-        estado: m.estado
+        fecha: m.fecha || tj.fecha || '',
+        hora: m.hora || '',
+        campo: m.campo || '',
+        enlaceActa: m.enlaceActa || '',
+        estado: m.estado || 'Oficial'
       }));
 
       // 2. Localizar partido del Xuventude Dorneda
@@ -382,11 +397,11 @@ function mergeFutgalDataIntoDB(currentDB, futgalResults) {
             competicion: 'Primera Futgal',
             fecha: dornedaMatch.fecha,
             fechaISO: parseDateToISO(dornedaMatch.fecha),
-            horaQuedada: '',
+            horaQuedada: dornedaMatch.hora ? calcHoraQuedada(dornedaMatch.hora) : '',
             horaPartido: dornedaMatch.hora,
             rival: dornedaMatch.rivalDorneda,
             condicion: dornedaMatch.condicionDorneda,
-            campo: dornedaMatch.campo || (dornedaMatch.condicionDorneda === 'Local' ? 'A Marola' : ''),
+            campo: dornedaMatch.campo || (dornedaMatch.condicionDorneda === 'Local' ? 'Campo de Fútbol A Marola' : ''),
             gf: dornedaMatch.condicionDorneda === 'Local' ? dornedaMatch.gl : dornedaMatch.gv,
             gc: dornedaMatch.condicionDorneda === 'Local' ? dornedaMatch.gv : dornedaMatch.gl,
             resultado: '',
@@ -419,11 +434,19 @@ function mergeFutgalDataIntoDB(currentDB, futgalResults) {
           if (dornedaMatch.hora && pObj.horaPartido !== dornedaMatch.hora) {
             changeNotes.push(`Hora: ${pObj.horaPartido || '--'} → ${dornedaMatch.hora}`);
             pObj.horaPartido = dornedaMatch.hora;
+            if (!pObj.horaQuedada || pObj.horaQuedada === '') {
+              pObj.horaQuedada = calcHoraQuedada(dornedaMatch.hora);
+            }
             hasChanges = true;
           }
 
           if (dornedaMatch.campo && pObj.campo !== dornedaMatch.campo) {
             pObj.campo = dornedaMatch.campo;
+            hasChanges = true;
+          }
+
+          if (dornedaMatch.rivalDorneda && (!pObj.rival || pObj.rival !== dornedaMatch.rivalDorneda)) {
+            pObj.rival = dornedaMatch.rivalDorneda;
             hasChanges = true;
           }
 
@@ -663,6 +686,7 @@ if (typeof module !== 'undefined' && module.exports) {
     buildFutgalUrl,
     getMadridFormattedTimestamp,
     parseDateToISO,
+    calcHoraQuedada,
     mergeFutgalDataIntoDB
   };
 }

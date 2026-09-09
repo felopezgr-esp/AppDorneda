@@ -322,6 +322,189 @@
       border: 1px solid rgba(255, 59, 32, 0.4) !important;
       font-weight: 800 !important;
     }
+
+    /* PLAYER MODAL INTERACTIVE STATS & MATCH LIST */
+    .player-stats-interactive-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    @media(max-width: 600px) {
+      .player-stats-interactive-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+    }
+    .player-stat-btn {
+      background: var(--surface2);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 6px;
+      text-align: center;
+      cursor: pointer;
+      transition: all var(--transition);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      user-select: none;
+      width: 100%;
+    }
+    .player-stat-btn:hover {
+      border-color: var(--border2);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+      background: var(--surface3);
+    }
+    .player-stat-btn.active {
+      border-color: var(--red);
+      background: rgba(204,0,0,0.08);
+      box-shadow: 0 0 0 1px var(--red);
+    }
+    .player-stat-btn .pstat-key {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 2px;
+      line-height: 1.2;
+    }
+    .player-stat-btn .pstat-val {
+      font-size: 26px;
+      font-weight: 900;
+      line-height: 1.1;
+      color: var(--text);
+    }
+    .player-stat-btn .pstat-hint {
+      font-size: 9.5px;
+      font-weight: 600;
+      color: var(--text-dim);
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+    .player-stat-btn.red .pstat-val { color: var(--red-light); }
+    .player-stat-btn.green .pstat-val { color: var(--success); }
+    .player-stat-btn.blue .pstat-val { color: var(--info); }
+    .player-stat-btn.yellow .pstat-val { color: #f59e0b; }
+
+    .modal-tab-pills {
+      display: flex;
+      gap: 8px;
+      background: var(--surface2);
+      padding: 4px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+    }
+    .modal-tab-pill {
+      flex: 1;
+      padding: 8px 12px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+      background: transparent;
+    }
+    .modal-tab-pill:hover {
+      color: var(--text);
+    }
+    .modal-tab-pill.active {
+      background: var(--surface);
+      color: var(--red-light);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .match-breakdown-filters {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .match-filter-chip {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .match-filter-chip:hover {
+      border-color: var(--border2);
+      color: var(--text);
+    }
+    .match-filter-chip.active {
+      background: var(--red);
+      color: white;
+      border-color: var(--red);
+    }
+
+    .player-match-item {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      margin-bottom: 8px;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+    }
+    .player-match-item:hover {
+      border-color: var(--red);
+      background: var(--surface);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transform: translateY(-1px);
+    }
+    .player-match-item.is-absent {
+      border-left: 4px solid #ef4444;
+      background: rgba(239, 68, 68, 0.04);
+    }
+    .player-match-item.is-titular {
+      border-left: 4px solid #22c55e;
+    }
+    .player-match-item.is-suplente {
+      border-left: 4px solid #3b82f6;
+    }
+    .player-match-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+    .player-match-body {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .player-match-rival {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .player-match-badges {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
     /* MOBILE NAVIGATION TOPBAR & BOTTOM NAV */
     .mobile-topbar{display:none;}
     .mobile-bottom-nav{display:none;}
@@ -1853,7 +2036,7 @@
 
 <!-- MODAL JUGADOR -->
 <div class="modal-overlay" id="modalJugador">
-  <div class="modal" style="max-width:550px">
+  <div class="modal" style="max-width:640px">
     <div class="modal-header">
       <div class="modal-title" id="modalJugadorTitle">Jugador</div>
       <button class="modal-close" onclick="closeModal('modalJugador')">&#10005;</button>
@@ -2227,9 +2410,9 @@
 
       <!-- STATS COMPETITION FILTER TABS -->
       <div class="tabs mb-12">
-        <div class="tab active" id="tabStatLiga" onclick="filterDashStats('Liga',this)">🏆 Liga</div>
-        <div class="tab" id="tabStatPret" onclick="filterDashStats('Pretemporada',this)">⚽ Pretemporada</div>
-        <div class="tab" id="tabStatCopa" onclick="filterDashStats('Copa',this)">🍷 Copa</div>
+        <div class="tab" id="tabStatPret" onclick="filterDashStats('Pretemporada',this)">⏱️ Pretemporada</div>
+        <div class="tab active" id="tabStatLiga" onclick="filterDashStats('Liga',this)">⚽ Liga</div>
+        <div class="tab" id="tabStatCopa" onclick="filterDashStats('Copa',this)">🏆 Copa</div>
         <div class="tab" id="tabStatTodos" onclick="filterDashStats('Todos',this)">🌐 General</div>
       </div>
 
@@ -2239,11 +2422,11 @@
       <!-- JORNADAS WIDGET -->
       <div class="card jornadas-widget-wrap mb-0" style="margin-bottom:20px;margin-top:16px">
         <div class="jornadas-header" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-          <div class="card-title" style="margin-bottom:0">&#127760; Liga &middot; Primera Futgal</div>
+          <div class="card-title" style="margin-bottom:0">⚽ Liga &middot; Primera Futgal</div>
           <span id="jornadasSubtitle" style="font-size:11px;font-weight:700;color:var(--text-muted)"></span>
         </div>
         <div id="jornadasGrid" class="jornadas-grid mb-8"></div>
-        <div class="copa-chips" style="display:flex;align-items:center;gap:8px;padding-top:10px;margin-top:10px;border-top:1px dashed var(--border)"><span class="copa-chip-label" style="font-size:10px;font-weight:800;text-transform:uppercase;color:var(--text-muted);">&#127942; Copa:</span><div id="copaChips"></div></div>
+        <div class="copa-chips" style="display:flex;align-items:center;gap:8px;padding-top:10px;margin-top:10px;border-top:1px dashed var(--border)"><span class="copa-chip-label" style="font-size:10px;font-weight:800;text-transform:uppercase;color:var(--text-muted);">🏆 Copa:</span><div id="copaChips"></div></div>
       </div>
 
       <!-- BOTTOM DASHBOARD GRID: PROXIMO PARTIDO + ULTIMO PARTIDO + TOP GOLEADORES & TOP ASISTENCIAS -->
@@ -2277,13 +2460,12 @@
             <div id="dashSancionadosBox"></div>
           </div>
 
-          <!-- STAT COMPETITION FILTER TABS (LIGA+COPA) -->
+          <!-- STAT COMPETITION FILTER TABS (PRETEMPORADA -> LIGA -> COPA -> GENERAL) -->
           <div class="tabs mb-8" style="gap:4px">
-            <div class="tab active" onclick="setStatFilterComp('L+C', this)">⚽ Liga+Copa</div>
-            <div class="tab" onclick="setStatFilterComp('Liga', this)">🏆 Liga</div>
-            <div class="tab" onclick="setStatFilterComp('Copa', this)">🍷 Copa</div>
-            <div class="tab" onclick="setStatFilterComp('Pretemporada', this)">🔄 Pretemporada</div>
-            <div class="tab" onclick="setStatFilterComp('Total', this)">🌐 Total</div>
+            <div class="tab" onclick="setStatFilterComp('Pretemporada', this)">⏱️ Pretemporada</div>
+            <div class="tab active" onclick="setStatFilterComp('Liga', this)">⚽ Liga</div>
+            <div class="tab" onclick="setStatFilterComp('Copa', this)">🏆 Copa</div>
+            <div class="tab" onclick="setStatFilterComp('Total', this)">🌐 General</div>
           </div>
 
           <div class="dash-stat-grid mb-12">
@@ -2340,19 +2522,32 @@
 
 <section class="section" id="section-partidos">
       <div class="page-header">
-        <div><div class="page-title">Partidos</div><div class="page-subtitle">Historial de la temporada</div></div>
+        <div><div class="page-title">Partidos</div><div class="page-subtitle">Historial de enfrentamientos y calendario de la temporada</div></div>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button type="button" class="btn btn-primary" onclick="syncFromFutgal()" title="Actualizar resultados desde FUTGAL">🔄 Actualizar desde FUTGAL</button>
           <button type="button" class="btn btn-ghost" onclick="openNuevoPartido()">+ Nuevo Partido</button>
         </div>
       </div>
-      <div class="tabs">
-        <div class="tab active" onclick="filtrarPartidos('todos',this)">Todos</div>
-        <div class="tab" onclick="filtrarPartidos('Pretemporada',this)">Pretemporada</div>
-        <div class="tab" onclick="filtrarPartidos('Primera Futgal',this)">Liga</div>
-        <div class="tab" onclick="filtrarPartidos('Copa',this)">Copa</div>
+      <div class="tabs mb-16">
+        <div class="tab" id="tabPartidosPret" onclick="filtrarPartidos('Pretemporada',this)">⏱️ Pretemporada</div>
+        <div class="tab active" id="tabPartidosLiga" onclick="filtrarPartidos('Primera Futgal',this)">⚽ Liga</div>
+        <div class="tab" id="tabPartidosCopa" onclick="filtrarPartidos('Copa',this)">🏆 Copa</div>
+        <div class="tab" id="tabPartidosTodos" onclick="filtrarPartidos('todos',this)">🌐 General</div>
       </div>
-      <div class="match-list" id="partidosList"></div>
+      
+      <div class="card mb-16" style="padding:14px;">
+        <div style="overflow-x:auto;padding-bottom:4px;scrollbar-width:thin;">
+          <div class="copa-list-header" style="display:flex;align-items:center;font-size:10px;font-weight:800;text-transform:uppercase;color:var(--text-dim);background:var(--surface2);padding:6px 10px;border-radius:4px;margin-bottom:6px;min-width:680px;border:1px solid var(--border);">
+            <div style="width:200px;flex-shrink:0;">Competición / Fecha / Campo</div>
+            <div style="flex:1;text-align:right;padding-right:8px;">Equipo Local</div>
+            <div style="width:65px;flex-shrink:0;text-align:center;">Marcador</div>
+            <div style="flex:1;text-align:left;padding-left:8px;">Equipo Visitante</div>
+            <div style="width:130px;flex-shrink:0;text-align:center;">Resultado</div>
+            <div style="width:120px;flex-shrink:0;text-align:right;">Acciones</div>
+          </div>
+          <div class="match-list" id="partidosList" style="display:flex;flex-direction:column;gap:4px;min-width:680px;"></div>
+        </div>
+      </div>
     </section>
 
     <!-- ANALISIS -->
@@ -2446,11 +2641,11 @@
         </div>
       </div>
 
-      <!-- MAIN COMPETITION CATEGORY TABS: Pretemporada (Cronómetro) · Liga (Balón) · Copa (Trofeo de Copa) -->
+      <!-- MAIN COMPETITION CATEGORY TABS: Pretemporada (⏱️) · Liga (⚽) · Copa (🏆) -->
       <div class="tabs mb-16" id="compMainTabs">
-        <div class="tab" onclick="showCompCategory('pretemporada', this)" id="tabCompPret">&#9201;&#65039; Pretemporada</div>
-        <div class="tab active" onclick="showCompCategory('liga', this)" id="tabCompLiga">&#9917; Liga</div>
-        <div class="tab" onclick="showCompCategory('copa', this)" id="tabCompCopa">&#127942; Copa</div>
+        <div class="tab" onclick="showCompCategory('pretemporada', this)" id="tabCompPret">⏱️ Pretemporada</div>
+        <div class="tab active" onclick="showCompCategory('liga', this)" id="tabCompLiga">⚽ Liga</div>
+        <div class="tab" onclick="showCompCategory('copa', this)" id="tabCompCopa">🏆 Copa</div>
       </div>
 
       <!-- ==========================================
@@ -2461,13 +2656,24 @@
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;border-bottom:1px solid var(--border);padding-bottom:12px;flex-wrap:wrap;gap:8px;">
             <div>
               <div style="font-size:16px;font-weight:900;color:var(--text);display:flex;align-items:center;gap:8px;">
-                <span>&#9201;&#65039; Partidos de Pretemporada 2026/27</span>
+                <span>⏱️ Partidos de Pretemporada 2026/27</span>
                 <span class="badge badge-accent" style="font-size:11px">4 Partidos Disputados</span>
               </div>
               <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Fase preparatoria disputada durante el mes de Agosto de 2026</div>
             </div>
           </div>
-          <div id="pretemporadaMatchesList" style="display:grid;grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));gap:14px;"></div>
+          
+          <div style="overflow-x:auto;padding-bottom:4px;scrollbar-width:thin;">
+            <div class="copa-list-header" style="display:flex;align-items:center;font-size:10px;font-weight:800;text-transform:uppercase;color:var(--text-dim);background:var(--surface2);padding:6px 10px;border-radius:4px;margin-bottom:6px;min-width:620px;border:1px solid var(--border);">
+              <div style="width:160px;flex-shrink:0;">Horario / Campo</div>
+              <div style="flex:1;text-align:right;padding-right:8px;">Equipo Local</div>
+              <div style="width:60px;flex-shrink:0;text-align:center;">Marcador</div>
+              <div style="flex:1;text-align:left;padding-left:8px;">Equipo Visitante</div>
+              <div style="width:130px;flex-shrink:0;text-align:center;">Resultado</div>
+              <div style="width:105px;flex-shrink:0;text-align:right;">Acciones</div>
+            </div>
+            <div id="pretemporadaMatchesList" style="display:flex;flex-direction:column;gap:4px;min-width:620px;"></div>
+          </div>
         </div>
       </div>
 
@@ -2486,9 +2692,9 @@
         <!-- 2.1 LIGA CLASIFICACIÓN -->
         <div id="ligaSubViewClasif">
           <div class="card mb-16">
-            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px;border-bottom:1px solid var(--border);padding-bottom:10px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:gap:8px;margin-bottom:12px;border-bottom:1px solid var(--border);padding-bottom:10px;">
               <div>
-                <div class="card-title" style="margin:0">&#9917; Clasificación Oficial &middot; Primera Autonómica Veteranos (A Coruña)</div>
+                <div class="card-title" style="margin:0">⚽ Clasificación Oficial &middot; Primera Autonómica Veteranos (A Coruña)</div>
                 <div style="font-size:11.5px;color:var(--text-muted);margin-top:2px;">Temporada 2026/27 &middot; 16 Equipos participantes</div>
               </div>
               <div style="display:flex;gap:6px;flex-wrap:wrap;">
@@ -2648,7 +2854,7 @@
       <div id="compViewCopa" style="display:none">
         <!-- Sub-tabs bar Copa -->
         <div style="display:flex;gap:6px;overflow-x:auto;padding-bottom:10px;margin-bottom:16px;scrollbar-width:thin;border-bottom:1px solid var(--border);" id="copaSubTabsWrap">
-          <button class="btn btn-sm btn-primary" id="subTabCopaCuadro" onclick="showCopaSubTab('cuadro')" style="font-size:12px;font-weight:800;border-radius:12px;white-space:nowrap;">&#127942; Eliminatorias y Cuadro</button>
+          <button class="btn btn-sm btn-primary" id="subTabCopaCuadro" onclick="showCopaSubTab('cuadro')" style="font-size:12px;font-weight:800;border-radius:12px;white-space:nowrap;">🏆 Eliminatorias y Cuadro</button>
           <button class="btn btn-sm btn-ghost" id="subTabCopaGoleadores" onclick="showCopaSubTab('goleadores')" style="font-size:12px;font-weight:800;border-radius:12px;white-space:nowrap;">&#128095; Goleadores Copa (109)</button>
         </div>
 
@@ -2658,7 +2864,7 @@
             <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:14px;border-bottom:1px solid var(--border);padding-bottom:12px;">
               <div>
                 <div style="font-size:16px;font-weight:900;color:var(--text);display:flex;align-items:center;gap:6px">
-                  <span>&#127942; Copa da Costa &middot; Copa Federación A Coruña</span>
+                  <span>🏆 Copa da Costa &middot; Copa Federación A Coruña</span>
                 </div>
                 <div style="font-size:12px;color:var(--text-muted);margin-top:2px">
                   Temporada 2026/27 &middot; Eliminatorias oficiales a partido único
@@ -2696,7 +2902,7 @@
             <!-- Partidos de la Ronda Seleccionada en Modo Listado Compacto -->
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;flex-wrap:wrap;gap:6px;">
               <div style="font-size:13px;font-weight:800;color:var(--text);display:flex;align-items:center;gap:6px">
-                <span>&#9917; Listado de Eliminatorias y Resultados</span>
+                <span>🏆 Listado de Eliminatorias y Resultados</span>
               </div>
               <div style="font-size:10.5px;color:var(--text-dim);font-weight:600;">
                 Partidos oficiales a eliminatoria directa
@@ -2768,12 +2974,12 @@
         Fines de semana libres: <strong>13-14 Feb 2027</strong> &middot; <strong>26-27 Jun 2027</strong>
       </div>
 
-      <!-- FILTER TABS: TODOS, LIGA, COPA, PRETEMPORADA -->
+      <!-- FILTER TABS: PRETEMPORADA -> LIGA -> COPA -> GENERAL -->
       <div class="tabs mb-16">
-        <div class="tab active" id="tabCalTodos" onclick="filterCalendarioComp('todos', this)">🌐 Todo</div>
-        <div class="tab" id="tabCalLiga" onclick="filterCalendarioComp('Liga', this)">🏆 Liga</div>
-        <div class="tab" id="tabCalCopa" onclick="filterCalendarioComp('Copa', this)">🍷 Copa</div>
-        <div class="tab" id="tabCalPret" onclick="filterCalendarioComp('Pretemporada', this)">⚽ Pretemporada</div>
+        <div class="tab" id="tabCalPret" onclick="filterCalendarioComp('Pretemporada', this)">⏱️ Pretemporada</div>
+        <div class="tab active" id="tabCalLiga" onclick="filterCalendarioComp('Liga', this)">⚽ Liga</div>
+        <div class="tab" id="tabCalCopa" onclick="filterCalendarioComp('Copa', this)">🏆 Copa</div>
+        <div class="tab" id="tabCalTodos" onclick="filterCalendarioComp('todos', this)">🌐 General</div>
       </div>
 
       <div class="cal-toggle"><button class="cal-toggle-btn active" id="btnTimeline" onclick="switchCalView('timeline')">&#128203; Timeline</button><button class="cal-toggle-btn" id="btnGrid" onclick="switchCalView('grid')">&#128197; Cuadr&iacute;cula</button></div>
@@ -5390,7 +5596,7 @@ function loadDB(){
 }
 
 let db = loadDB();
-let currentSection = 'dashboard', currentStep = 0, newMatchData = {}, plantillaFilter = 'Con ficha', partidosFilter = 'todos', nextJugadorId = 200;
+let currentSection = 'dashboard', currentStep = 0, newMatchData = {}, plantillaFilter = 'Con ficha', partidosFilter = 'Primera Futgal', nextJugadorId = 200;
 let isEconAuth = sessionStorage.getItem('dorneda_econ_auth') === 'true';
 let currentEconTab = 'cuotas';
 let cuotasFilter = 'todos';
@@ -5399,7 +5605,7 @@ let diarioFilterCat = 'todas';
 let clasifTabActive = 'liga';
 let currentJornadaNav = 1;
 let currentCopaRondaNav = 1;
-let statFilterComp = 'L+C';
+let statFilterComp = 'Liga';
 let goleadoresSortField = 'goles';
 let goleadoresSortDir = 'desc';
 let participacionSortField = 'jug';
@@ -5687,7 +5893,9 @@ function getInitials(name){return name.split(' ').map(w=>w[0]).join('').toUpperC
 function avatarColor(name){const colors=['#CC0000','#8B0000','#1E3A5F','#1B5E20','#4A1485','#1A237E'];let h=0;for(let c of name)h=c.charCodeAt(0)+((h<<5)-h);return colors[Math.abs(h)%colors.length];}
 function badgeClass(r){if(!r)return 'pendiente';const s=r.toLowerCase();if(s.includes('victoria'))return 'victoria';if(s.includes('derrota'))return 'derrota';if(s.includes('empate'))return 'empate';return 'pendiente';}
 function compBadge(c){if(!c)return 'pendiente';const s=c.toLowerCase();if(s.includes('pretemporada'))return 'pretemporada';if(s.includes('futgal'))return 'liga';if(s.includes('copa')||s.includes('gallego'))return 'copa';return 'pendiente';}
-function calcStats(){const p=db.partidos,v=p.filter(x=>x.resultado==='Victoria').length,e=p.filter(x=>x.resultado==='Empate').length,d=p.filter(x=>x.resultado==='Derrota').length,gf=p.reduce((s,x)=>s+(parseInt(x.gf)||0),0),gc=p.reduce((s,x)=>s+(parseInt(x.gc)||0),0);return{total:p.length,v,e,d,gf,gc};}
+function getCompIcon(c){if(!c)return '🌐';const s=c.toLowerCase();if(s.includes('pretemporada')||s.startsWith('pret'))return '⏱️';if(s.includes('copa')||s.includes('gallego')||s.startsWith('c_')||s.startsWith('cg_'))return '🏆';if(s.includes('futgal')||s.includes('liga')||s.startsWith('j'))return '⚽';return '🌐';}
+window.getCompIcon = getCompIcon;
+function calcStats(){const p=(db.partidos||[]).filter(x=>(x.resultado==='Victoria'||x.resultado==='Empate'||x.resultado==='Derrota')&&x.gf!==null&&x.gf!==undefined&&x.resultado!=='Pendiente'),v=p.filter(x=>x.resultado==='Victoria').length,e=p.filter(x=>x.resultado==='Empate').length,d=p.filter(x=>x.resultado==='Derrota').length,gf=p.reduce((s,x)=>s+(parseInt(x.gf)||0),0),gc=p.reduce((s,x)=>s+(parseInt(x.gc)||0),0);return{total:p.length,v,e,d,gf,gc};}
 
 function setStatFilterComp(comp, el){
   statFilterComp = comp;
@@ -5804,7 +6012,7 @@ function calcAsistidores(filterComp){
 function calcParticipacion(){
   const m = {};
   (db.jugadores || []).forEach(j => {
-    if(j.estado !== 'Vacante'){
+    if(j.estado === 'Con ficha' && !isStaff(j)){
       m[j.nombre] = { dorsal: j.dorsal || 999, conv: 0, tit: 0, jug: 0 };
     }
   });
@@ -5813,13 +6021,23 @@ function calcParticipacion(){
     for(const c of (p.convocados || [])){
       const canonName = getCanonicalPlayerName(c.nombre, c.dorsal);
       if(!canonName) continue;
-      if(!m[canonName]){
-        const jFound = db.jugadores.find(x => x.nombre === canonName || normalizeName(x.nombre) === normalizeName(canonName));
-        m[canonName] = { dorsal: jFound ? (jFound.dorsal || 999) : (c.dorsal || 999), conv: 0, tit: 0, jug: 0 };
+      
+      let targetName = null;
+      if(m[canonName]){
+        targetName = canonName;
+      } else {
+        const jFound = (db.jugadores || []).find(x => (x.nombre === canonName || normalizeName(x.nombre) === normalizeName(canonName)) && x.estado === 'Con ficha' && !isStaff(x));
+        if(jFound){
+          targetName = jFound.nombre;
+          if(!m[targetName]) m[targetName] = { dorsal: jFound.dorsal || 999, conv: 0, tit: 0, jug: 0 };
+        }
       }
-      m[canonName].conv++;
-      if(c.titular) m[canonName].tit++;
-      m[canonName].jug++;
+
+      if(targetName && m[targetName]){
+        m[targetName].conv++;
+        if(c.titular) m[targetName].tit++;
+        m[targetName].jug++;
+      }
     }
   }
 
@@ -5834,7 +6052,244 @@ function calcParticipacion(){
     });
 }
 function getNextMatch(){const t=new Date();return db.calendario.find(c=>{if(c.estado==='Jugado'||c.estado==='Libre')return false;const f=c.fecha.split('-')[0].split('/');if(f.length<3)return false;return new Date(`${f[2]}-${f[1].padStart(2,'0')}-${f[0].padStart(2,'0')}`)>=t;});}
-function getPlayerStats(nombre){const s={goles:0,asistencias:0,partidos:0,titulares:0};const targetCanon=getCanonicalPlayerName(nombre);for(const p of db.partidos){const c=(p.convocados||[]).find(x=>getCanonicalPlayerName(x.nombre, x.dorsal)===targetCanon);if(c){s.goles+=parseInt(c.goles)||0;s.asistencias+=parseInt(c.asistencias)||0;s.partidos++;if(c.titular)s.titulares++;}}return s;}
+function getPlayerFullParticipation(playerOrName, dorsalHint) {
+  const pObj = typeof playerOrName === 'object' && playerOrName ? playerOrName : (db.jugadores || []).find(x => x.nombre === playerOrName || x.id === playerOrName);
+  const pName = pObj ? pObj.nombre : String(playerOrName || '');
+  const pDorsal = pObj ? pObj.dorsal : dorsalHint;
+  const isSt = isStaff(pObj);
+
+  const targetCanon = getCanonicalPlayerName(pName, pDorsal);
+  const targetNorm = normalizeName(pName);
+  const targetFullNameNorm = normalizeName(pObj?.nombreCompleto || '');
+
+  let partidosJugados = 0;
+  let titularesCount = 0;
+  let golesCount = 0;
+  let asistenciasCount = 0;
+  let amarillasCount = 0;
+  let rojasCount = 0;
+  let ausenciasCount = 0;
+  let ausenciasConMotivoCount = 0;
+  let conGolCount = 0;
+
+  let dirigidosCount = 0;
+  let victoriasStaff = 0;
+  let empatesStaff = 0;
+  let derrotasStaff = 0;
+  let ausenciasStaff = 0;
+
+  const matchesList = [];
+
+  const allMatches = [...(db.partidos || [])].sort((a, b) => {
+    const parseD = (str) => {
+      if (!str) return 0;
+      const parts = str.split('/');
+      if (parts.length === 3) return new Date(`${parts[2]}-${parts[1]}-${parts[0]}`).getTime();
+      return 0;
+    };
+    return (parseD(a.fecha) || a.id || 0) - (parseD(b.fecha) || b.id || 0);
+  });
+
+  for (const p of allMatches) {
+    const isPlayed = p.resultado && p.resultado !== 'Pendiente' && p.gf !== null && p.gf !== undefined;
+
+    if (isSt) {
+      const attended = p.kataAsistio !== false;
+      if (isPlayed) {
+        if (attended) {
+          dirigidosCount++;
+          if (p.resultado === 'Victoria') victoriasStaff++;
+          else if (p.resultado === 'Empate') empatesStaff++;
+          else if (p.resultado === 'Derrota') derrotasStaff++;
+        } else {
+          ausenciasStaff++;
+        }
+      }
+
+      matchesList.push({
+        partido: p,
+        isPlayed: isPlayed,
+        jugo: attended && isPlayed,
+        titular: false,
+        goles: 0,
+        golesDetalle: [],
+        asistencias: 0,
+        amarillas: 0,
+        rojas: 0,
+        ausente: !attended && isPlayed,
+        motivo: attended ? '' : 'No asistió al encuentro',
+        tipo: !isPlayed ? 'pendiente' : (attended ? 'dirigido' : 'ausente_staff'),
+        estadoLabel: !isPlayed ? 'Por disputar' : (attended ? 'Dirigido' : 'Ausente')
+      });
+      continue;
+    }
+
+    // Check convocados
+    let convFound = null;
+    if (p.convocados && p.convocados.length) {
+      convFound = p.convocados.find(c => {
+        const cCanon = getCanonicalPlayerName(c.nombre, c.dorsal);
+        if (cCanon && cCanon === targetCanon) return true;
+        if (normalizeName(c.nombre) === targetNorm) return true;
+        if (targetFullNameNorm && c.nombreCompleto && normalizeName(c.nombreCompleto) === targetFullNameNorm) return true;
+        if (pDorsal && c.dorsal && parseInt(pDorsal) === parseInt(c.dorsal) && (normalizeName(c.nombre).includes(targetNorm) || targetNorm.includes(normalizeName(c.nombre)))) return true;
+        return false;
+      });
+    }
+
+    if (convFound) {
+      partidosJugados++;
+      const isTitular = !!convFound.titular;
+      if (isTitular) titularesCount++;
+
+      let pGoles = parseInt(convFound.goles) || 0;
+      const pAsists = parseInt(convFound.asistencias) || 0;
+      const pAmarillas = parseInt(convFound.amarillas) || 0;
+      const pRojas = parseInt(convFound.rojas) || 0;
+
+      const goalDetails = [];
+      if (p.golesDetalle && p.golesDetalle.length) {
+        p.golesDetalle.forEach(g => {
+          const gCanon = getCanonicalPlayerName(g.jugador, g.dorsal);
+          const isDornedaGoal = g.equipo === 'Xuventude Dorneda' || (g.equipo && g.equipo.indexOf('Dorneda') !== -1);
+          if (isDornedaGoal && (gCanon === targetCanon || normalizeName(g.jugador) === targetNorm)) {
+            goalDetails.push(g);
+          }
+        });
+      }
+
+      if (goalDetails.length > pGoles) {
+        pGoles = goalDetails.length;
+      }
+
+      if (pGoles > 0) {
+        golesCount += pGoles;
+        conGolCount++;
+      }
+      asistenciasCount += pAsists;
+      amarillasCount += pAmarillas;
+      rojasCount += pRojas;
+
+      matchesList.push({
+        partido: p,
+        isPlayed: isPlayed,
+        jugo: true,
+        titular: isTitular,
+        goles: pGoles,
+        golesDetalle: goalDetails,
+        asistencias: pAsists,
+        amarillas: pAmarillas,
+        rojas: pRojas,
+        ausente: false,
+        motivo: '',
+        tipo: isTitular ? 'titular' : 'suplente',
+        estadoLabel: isTitular ? 'Titular' : 'Suplente / Convocado'
+      });
+    } else {
+      // Check ausentes
+      let ausFound = null;
+      if (p.ausentes && p.ausentes.length) {
+        ausFound = p.ausentes.find(a => {
+          const aName = typeof a === 'string' ? a : (a.nombre || '');
+          if (normalizeName(aName) === targetNorm) return true;
+          if (getCanonicalPlayerName(aName) === targetCanon) return true;
+          if (targetFullNameNorm && normalizeName(aName) === targetFullNameNorm) return true;
+          return false;
+        });
+      }
+
+      if (ausFound) {
+        ausenciasCount++;
+        ausenciasConMotivoCount++;
+        const motivoRaw = typeof ausFound === 'object' && ausFound.motivo ? ausFound.motivo : 'Ausente';
+        const motivo = motivoRaw.charAt(0).toUpperCase() + motivoRaw.slice(1);
+
+        matchesList.push({
+          partido: p,
+          isPlayed: isPlayed,
+          jugo: false,
+          titular: false,
+          goles: 0,
+          golesDetalle: [],
+          asistencias: 0,
+          amarillas: 0,
+          rojas: 0,
+          ausente: true,
+          motivo: motivo,
+          tipo: 'ausente_motivo',
+          estadoLabel: `Ausente: ${motivo}`
+        });
+      } else if (isPlayed) {
+        ausenciasCount++;
+        matchesList.push({
+          partido: p,
+          isPlayed: true,
+          jugo: false,
+          titular: false,
+          goles: 0,
+          golesDetalle: [],
+          asistencias: 0,
+          amarillas: 0,
+          rojas: 0,
+          ausente: true,
+          motivo: 'No convocado / Sin acta',
+          tipo: 'no_convocado',
+          estadoLabel: 'No convocado'
+        });
+      } else {
+        matchesList.push({
+          partido: p,
+          isPlayed: false,
+          jugo: false,
+          titular: false,
+          goles: 0,
+          golesDetalle: [],
+          asistencias: 0,
+          amarillas: 0,
+          rojas: 0,
+          ausente: false,
+          motivo: 'Por disputar',
+          tipo: 'pendiente',
+          estadoLabel: 'Pendiente'
+        });
+      }
+    }
+  }
+
+  return {
+    isStaff: isSt,
+    partidos: partidosJugados,
+    titulares: titularesCount,
+    goles: golesCount,
+    asistencias: asistenciasCount,
+    amarillas: amarillasCount,
+    rojas: rojasCount,
+    ausencias: ausenciasCount,
+    ausenciasConMotivo: ausenciasConMotivoCount,
+    conGolCount: conGolCount,
+    dirigidos: dirigidosCount,
+    victorias: victoriasStaff,
+    empates: empatesStaff,
+    derrotas: derrotasStaff,
+    ausenciasStaff: ausenciasStaff,
+    efectividad: dirigidosCount ? Math.round(victoriasStaff / dirigidosCount * 100) : 0,
+    matches: matchesList
+  };
+}
+window.getPlayerFullParticipation = getPlayerFullParticipation;
+
+function getPlayerStats(nombre){
+  const part = getPlayerFullParticipation(nombre);
+  return {
+    goles: part.goles,
+    asistencias: part.asistencias,
+    partidos: part.partidos,
+    titulares: part.titulares,
+    ausencias: part.ausencias,
+    conGolCount: part.conGolCount
+  };
+}
+window.getPlayerStats = getPlayerStats;
 function toast(msg,type='info'){const tc=document.getElementById('toastContainer'),el=document.createElement('div');el.className=`toast ${type}`;el.innerHTML=`<span>${type==='success'?'&#9989;':type==='error'?'&#10060;':'&#8505;'}</span> ${msg}`;tc.appendChild(el);requestAnimationFrame(()=>el.classList.add('show'));setTimeout(()=>{el.classList.remove('show');setTimeout(()=>el.remove(),400);},3000);}
 
 // DASHBOARD
@@ -5843,8 +6298,10 @@ var dashCompFilter = 'Liga';
 
 function filterDashStats(comp, el){
   dashCompFilter = comp;
-  document.querySelectorAll('#section-dashboard .tab').forEach(t=>t.classList.remove('active'));
-  if(el) el.classList.add('active');
+  if(el && el.parentElement){
+    el.parentElement.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    el.classList.add('active');
+  }
   renderDashboardStats();
 }
 
@@ -5934,12 +6391,13 @@ function renderDashboardNextMatch(){
   }
 
   var isHome = nextP.condicion === 'Local';
-  var badgeComp = (nextP.competicion || '').indexOf('Copa') !== -1 ? 'copa' : 'liga';
+  var badgeComp = (nextP.competicion || '').indexOf('Copa') !== -1 ? 'copa' : ((nextP.competicion || '').toLowerCase().indexOf('pret') !== -1 ? 'pretemporada' : 'liga');
   var compTitle = nextP.competicion || 'Oficial';
   if(nextP.codigo) compTitle += ' (' + nextP.codigo + ')';
+  var iconComp = getCompIcon(nextP.competicion);
 
   var html = '<div style="margin-bottom:2px">';
-  html += '<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px"><span class="badge ' + badgeComp + '" style="font-size:10px">' + compTitle + '</span>';
+  html += '<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px"><span class="badge ' + badgeComp + '" style="font-size:10px">' + iconComp + ' ' + compTitle + '</span>';
   html += '<span style="font-size:12px;font-weight:700;color:var(--text-muted)">' + (nextP.fecha || 'Próximamente') + '</span></div>';
   html += '<div style="font-size:14px;font-weight:900;color:var(--text);margin-bottom:6px;line-height:1.3;word-break:break-word">' + (isHome ? '<span class="dorneda-highlight">Xuventude Dorneda</span> vs ' + nextP.rival : nextP.rival + ' vs <span class="dorneda-highlight">Xuventude Dorneda</span>') + '</div>';
   html += '<div style="font-size:11px;color:var(--text-dim);display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap">';
@@ -5975,6 +6433,7 @@ function renderDashboardLastMatch(){
   var badgeComp = compLower.indexOf('copa') !== -1 ? 'copa' : (compLower.indexOf('pret') !== -1 ? 'pretemporada' : 'liga');
   var compTitle = lastP.competicion || 'Oficial';
   if(lastP.codigo) compTitle += ' (' + lastP.codigo + ')';
+  var iconComp = getCompIcon(lastP.competicion);
 
   var resBadgeBg = lastP.resultado === 'Victoria' ? '#16a34a' : (lastP.resultado === 'Derrota' ? '#dc2626' : '#d97706');
 
@@ -5994,7 +6453,7 @@ function renderDashboardLastMatch(){
 
   var html = '<div style="margin-bottom:2px">';
   html += '<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px">';
-  html += '<span class="badge ' + badgeComp + '" style="font-size:10px">' + compTitle + '</span>';
+  html += '<span class="badge ' + badgeComp + '" style="font-size:10px">' + iconComp + ' ' + compTitle + '</span>';
   html += '<span style="font-size:12px;font-weight:700;color:var(--text-muted)">' + (lastP.fecha || '') + '</span>';
   html += '</div>';
 
@@ -6321,71 +6780,314 @@ function removePlayerPhoto(id){
 
 function handleFotoUpload(ev,id){const f=ev.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(e){const j=db.jugadores.find(x=>x.id===id);if(j){j.foto=e.target.result;saveDB();renderPlantilla();toast('Foto actualizada','success');}};r.readAsDataURL(f);}
 
-function openJugadorModal(id){
+let currentModalPlayerId = null;
+let currentModalTab = 'datos';
+let currentModalFilter = 'todos';
+
+function renderPlayerMatchesBreakdownHtml(player, filter = 'todos'){
+  const part = getPlayerFullParticipation(player);
+  const isSt = part.isStaff;
+
+  let filteredMatches = part.matches;
+  if(filter === 'jugados'){
+    filteredMatches = part.matches.filter(m => m.jugo);
+  } else if(filter === 'titular'){
+    filteredMatches = part.matches.filter(m => m.titular);
+  } else if(filter === 'goles'){
+    filteredMatches = part.matches.filter(m => m.goles > 0);
+  } else if(filter === 'ausentes'){
+    filteredMatches = part.matches.filter(m => m.ausente);
+  } else if(filter === 'dirigidos'){
+    filteredMatches = part.matches.filter(m => m.jugo);
+  } else if(filter === 'victorias'){
+    filteredMatches = part.matches.filter(m => m.jugo && m.partido.resultado === 'Victoria');
+  }
+
+  let filterChipsHtml = '';
+  if(isSt){
+    filterChipsHtml = `
+      <div class="match-breakdown-filters">
+        <button type="button" class="match-filter-chip ${filter==='todos'?'active':''}" onclick="selectPlayerModalFilter(${player.id}, 'todos')">📋 Todos (${part.matches.length})</button>
+        <button type="button" class="match-filter-chip ${filter==='dirigidos'?'active':''}" onclick="selectPlayerModalFilter(${player.id}, 'dirigidos')">👔 Dirigidos (${part.dirigidos})</button>
+        <button type="button" class="match-filter-chip ${filter==='victorias'?'active':''}" onclick="selectPlayerModalFilter(${player.id}, 'victorias')">🏆 Victorias (${part.victorias})</button>
+        <button type="button" class="match-filter-chip ${filter==='ausentes'?'active':''}" onclick="selectPlayerModalFilter(${player.id}, 'ausentes')">❌ Ausencias (${part.ausenciasStaff})</button>
+      </div>
+    `;
+  } else {
+    filterChipsHtml = `
+      <div class="match-breakdown-filters">
+        <button type="button" class="match-filter-chip ${filter==='todos'?'active':''}" onclick="selectPlayerModalFilter(${player.id}, 'todos')">📋 Todos (${part.matches.length})</button>
+        <button type="button" class="match-filter-chip ${filter==='jugados'?'active':''}" onclick="selectPlayerModalFilter(${player.id}, 'jugados')">🟢 Jugados (${part.partidos})</button>
+        <button type="button" class="match-filter-chip ${filter==='titular'?'active':''}" onclick="selectPlayerModalFilter(${player.id}, 'titular')">⭐ Titulares (${part.titulares})</button>
+        <button type="button" class="match-filter-chip ${filter==='goles'?'active':''}" onclick="selectPlayerModalFilter(${player.id}, 'goles')">⚽ Con Gol (${part.conGolCount})</button>
+        <button type="button" class="match-filter-chip ${filter==='ausentes'?'active':''}" onclick="selectPlayerModalFilter(${player.id}, 'ausentes')">❌ Faltó / Bajas (${part.ausencias})</button>
+      </div>
+    `;
+  }
+
+  let listHtml = '';
+  if(!filteredMatches.length){
+    listHtml = `<div class="empty-state" style="padding:30px 10px"><div class="empty-icon" style="font-size:32px">📭</div><div style="font-size:13px;font-weight:600;color:var(--text-muted)">No hay partidos registrados en este filtro.</div></div>`;
+  } else {
+    listHtml = filteredMatches.map(m => {
+      const p = m.partido;
+      const resClass = badgeClass(p.resultado);
+      
+      let statusBadge = '';
+      if(isSt){
+        if(!m.isPlayed){
+          statusBadge = `<span class="badge" style="background:var(--surface3);color:var(--text-dim);font-size:11px">⏳ Pendiente</span>`;
+        } else if(m.jugo){
+          statusBadge = `<span class="badge" style="background:rgba(245,158,11,0.18);color:#f59e0b;border:1px solid rgba(245,158,11,0.4);font-weight:800;font-size:11px">👔 Dirigido</span>`;
+        } else {
+          statusBadge = `<span class="badge" style="background:rgba(239,68,68,0.18);color:var(--red-light);border:1px solid rgba(239,68,68,0.4);font-weight:800;font-size:11px">❌ No asistió</span>`;
+        }
+      } else {
+        if(m.titular){
+          statusBadge = `<span class="badge" style="background:rgba(34,197,94,0.18);color:var(--success);border:1px solid rgba(34,197,94,0.4);font-weight:800;font-size:11px">⭐ Titular</span>`;
+        } else if(m.jugo){
+          statusBadge = `<span class="badge" style="background:rgba(59,130,246,0.18);color:var(--info);border:1px solid rgba(59,130,246,0.4);font-weight:700;font-size:11px">🔄 Suplente / Convocado</span>`;
+        } else if(m.tipo === 'ausente_motivo'){
+          statusBadge = `<span class="badge" style="background:rgba(239,68,68,0.18);color:var(--red-light);border:1px solid rgba(239,68,68,0.4);font-weight:800;font-size:11px">❌ Faltó: <strong>${m.motivo}</strong></span>`;
+        } else if(m.tipo === 'no_convocado'){
+          statusBadge = `<span class="badge" style="background:var(--surface3);color:var(--text-dim);border:1px solid var(--border);font-weight:600;font-size:11px">⚪ No convocado</span>`;
+        } else {
+          statusBadge = `<span class="badge" style="background:var(--surface3);color:var(--text-dim);font-size:11px">⏳ Pendiente</span>`;
+        }
+      }
+
+      let extraDetails = [];
+      if(m.goles > 0){
+        const minStr = m.golesDetalle.map(g => g.minuto ? `${g.minuto}'` : '').filter(Boolean).join(', ');
+        extraDetails.push(`<span class="badge" style="background:rgba(34,197,94,0.22);color:var(--success);border:1px solid rgba(34,197,94,0.5);font-weight:800;font-size:11px">⚽ ${m.goles} ${m.goles>1?'goles':'gol'}${minStr ? ` (min ${minStr})` : ''}</span>`);
+      }
+      if(m.asistencias > 0){
+        extraDetails.push(`<span class="badge" style="background:rgba(59,130,246,0.2);color:var(--info);font-weight:700;font-size:11px">🎯 ${m.asistencias} Asist.</span>`);
+      }
+      if(m.amarillas > 0){
+        extraDetails.push(`<span class="badge" style="background:rgba(245,158,11,0.2);color:var(--warning);font-weight:700;font-size:11px">🟨 Tarjeta</span>`);
+      }
+      if(m.rojas > 0){
+        extraDetails.push(`<span class="badge" style="background:rgba(220,38,38,0.2);color:var(--red-light);font-weight:800;font-size:11px">🟥 Roja</span>`);
+      }
+
+      const itemBorderClass = m.ausente ? 'is-absent' : (m.titular ? 'is-titular' : (m.jugo ? 'is-suplente' : ''));
+
+      return `
+        <div class="player-match-item ${itemBorderClass}" onclick="closeModal('modalJugador'); showDetallePartido(${p.id});" style="cursor:pointer;" title="Click para abrir la Ficha Oficial del Partido ${p.codigo || ''}">
+          <div class="player-match-header">
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <span class="badge" style="font-size:10px;font-weight:800;background:var(--surface3);color:var(--text)">${p.codigo || 'Partido'}</span>
+              <span class="badge comp-${compBadge(p.competicion)}" style="font-size:10px;font-weight:700;">${getCompIcon(p.competicion)} ${p.competicion || 'Competición'}</span>
+              <span style="color:var(--text-dim);font-size:11px">📅 ${p.fecha || '--'}</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-size:11px;color:var(--text-dim)">📍 ${p.campo || (p.condicion === 'Local' ? 'A Marola' : '--')} (${p.condicion || '--'})</span>
+              <span class="badge badge-accent" style="font-size:9.5px;font-weight:800;padding:2px 7px;display:inline-flex;align-items:center;gap:3px;" title="Ver Ficha y Estadísticas">📋 Ficha &rarr;</span>
+            </div>
+          </div>
+
+          <div class="player-match-body">
+            <div class="player-match-rival">
+              ${m.isPlayed ? `
+                <span>Xuventude Dorneda <span style="font-weight:900;color:var(--text);padding:0 2px">${p.gf} - ${p.gc}</span> ${p.rival}</span>
+              ` : `
+                <span>vs <strong>${p.rival || 'Rival pendiente'}</strong></span>
+              `}
+            </div>
+            <div class="player-match-badges">
+              ${m.isPlayed ? `<span class="badge badge-${resClass}" style="font-size:10.5px;font-weight:700">${p.resultado}</span>` : `<span class="badge" style="font-size:10.5px;background:var(--surface3);color:var(--text-dim)">Por jugar</span>`}
+              ${statusBadge}
+              ${extraDetails.join('')}
+            </div>
+          </div>
+          
+          ${p.resumen ? `
+            <div style="font-size:11px;color:var(--text-muted);border-top:1px dashed var(--border);padding-top:4px;margin-top:2px;line-height:1.4">
+              <em>${p.resumen.slice(0, 140)}${p.resumen.length > 140 ? '...' : ''}</em>
+            </div>
+          ` : ''}
+        </div>
+      `;
+    }).join('');
+  }
+
+  return `
+    <div>
+      ${filterChipsHtml}
+      <div style="max-height:360px;overflow-y:auto;padding-right:4px">
+        ${listHtml}
+      </div>
+    </div>
+  `;
+}
+window.renderPlayerMatchesBreakdownHtml = renderPlayerMatchesBreakdownHtml;
+
+function switchPlayerModalTab(tab){
+  currentModalTab = tab;
+  const tabDatos = document.getElementById('playerTabDatos');
+  const tabPartidos = document.getElementById('playerTabPartidos');
+  const btnDatos = document.getElementById('btnTabDatos');
+  const btnPartidos = document.getElementById('btnTabPartidos');
+
+  if(tabDatos) tabDatos.style.display = tab === 'datos' ? 'block' : 'none';
+  if(tabPartidos) tabPartidos.style.display = tab === 'partidos' ? 'block' : 'none';
+  if(btnDatos) btnDatos.classList.toggle('active', tab === 'datos');
+  if(btnPartidos) btnPartidos.classList.toggle('active', tab === 'partidos');
+}
+window.switchPlayerModalTab = switchPlayerModalTab;
+
+function selectPlayerModalFilter(id, filter){
+  currentModalPlayerId = id;
+  currentModalFilter = filter;
+  currentModalTab = 'partidos';
+  
+  const j = db.jugadores.find(x => x.id === id);
+  if(!j) return;
+
+  switchPlayerModalTab('partidos');
+
+  document.querySelectorAll('.player-stat-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-filter') === filter);
+  });
+
+  const tabPartidos = document.getElementById('playerTabPartidos');
+  if(tabPartidos){
+    tabPartidos.innerHTML = renderPlayerMatchesBreakdownHtml(j, filter);
+  }
+}
+window.selectPlayerModalFilter = selectPlayerModalFilter;
+
+function openJugadorModal(id, initialTab = 'datos', initialFilter = 'todos'){
+  currentModalPlayerId = id;
+  currentModalTab = initialTab;
+  currentModalFilter = initialFilter;
+
   const j = id ? db.jugadores.find(x => x.id === id) : null;
   const isSt = isStaff(j);
-  const st = j && !isSt ? getPlayerStats(j.nombre) : {goles:0,asistencias:0,partidos:0,titulares:0};
-  const sEquipo = calcStats();
+  const part = j ? getPlayerFullParticipation(j) : null;
 
   document.getElementById('modalJugadorTitle').textContent = j ? (isSt ? `Ficha Entrenador: ${j.nombre}` : `Ficha: ${j.nombre}`) : 'Nuevo Miembro / Jugador';
   
   let statsHeader = '';
-  if(j && isSt){
-    statsHeader = `<div class="grid-3 mb-16">
-      <div class="detail-item text-center"><div class="detail-key">Partidos Dirigidos</div><div style="font-size:26px;font-weight:900;color:var(--red-light)">${sEquipo.total}</div></div>
-      <div class="detail-item text-center"><div class="detail-key">Victorias</div><div style="font-size:26px;font-weight:900;color:var(--success)">${sEquipo.v}</div></div>
-      <div class="detail-item text-center"><div class="detail-key">Efectividad</div><div style="font-size:26px;font-weight:900;color:var(--info)">${sEquipo.total ? Math.round(sEquipo.v / sEquipo.total * 100) : 0}%</div></div>
-    </div>`;
-  } else if(j && st.partidos > 0){
-    statsHeader = `<div class="grid-3 mb-16">
-      <div class="detail-item text-center"><div class="detail-key">Partidos</div><div style="font-size:28px;font-weight:900;color:var(--red-light)">${st.partidos}</div></div>
-      <div class="detail-item text-center"><div class="detail-key">Goles</div><div style="font-size:28px;font-weight:900;color:var(--success)">${st.goles}</div></div>
-      <div class="detail-item text-center"><div class="detail-key">Titular</div><div style="font-size:28px;font-weight:900">${st.titulares}</div></div>
-    </div>`;
+  let tabPills = '';
+  
+  if (j) {
+    if (isSt) {
+      statsHeader = `
+        <div class="player-stats-interactive-grid mb-16">
+          <button type="button" class="player-stat-btn red ${currentModalTab==='partidos'&&currentModalFilter==='dirigidos'?'active':''}" data-filter="dirigidos" onclick="selectPlayerModalFilter(${j.id}, 'dirigidos')" title="Pincha para ver partidos dirigidos">
+            <div class="pstat-key">Partidos Dirigidos</div>
+            <div class="pstat-val">${part.dirigidos}</div>
+            <div class="pstat-hint">👔 ${part.dirigidos} de ${part.matches.filter(m=>m.isPlayed).length}</div>
+          </button>
+          <button type="button" class="player-stat-btn green ${currentModalTab==='partidos'&&currentModalFilter==='victorias'?'active':''}" data-filter="victorias" onclick="selectPlayerModalFilter(${j.id}, 'victorias')" title="Pincha para ver victorias">
+            <div class="pstat-key">Victorias</div>
+            <div class="pstat-val">${part.victorias}</div>
+            <div class="pstat-hint">🏆 ${part.victorias}V · ${part.empates}E · ${part.derrotas}D</div>
+          </button>
+          <button type="button" class="player-stat-btn blue ${currentModalTab==='partidos'&&currentModalFilter==='todos'?'active':''}" data-filter="todos" onclick="selectPlayerModalFilter(${j.id}, 'todos')" title="Pincha para ver efectividad">
+            <div class="pstat-key">Efectividad</div>
+            <div class="pstat-val">${part.efectividad}%</div>
+            <div class="pstat-hint">📊 % Victorias</div>
+          </button>
+          <button type="button" class="player-stat-btn yellow ${currentModalTab==='partidos'&&currentModalFilter==='ausentes'?'active':''}" data-filter="ausentes" onclick="selectPlayerModalFilter(${j.id}, 'ausentes')" title="Pincha para ver ausencias">
+            <div class="pstat-key">Ausencias</div>
+            <div class="pstat-val">${part.ausenciasStaff}</div>
+            <div class="pstat-hint">❌ ${part.ausenciasStaff} ausente</div>
+          </button>
+        </div>
+      `;
+    } else {
+      statsHeader = `
+        <div class="player-stats-interactive-grid mb-16">
+          <button type="button" class="player-stat-btn red ${currentModalTab==='partidos'&&currentModalFilter==='jugados'?'active':''}" data-filter="jugados" onclick="selectPlayerModalFilter(${j.id}, 'jugados')" title="Pincha para ver partidos jugados">
+            <div class="pstat-key">Partidos</div>
+            <div class="pstat-val">${part.partidos}</div>
+            <div class="pstat-hint">🟢 ${part.partidos} Jugados</div>
+          </button>
+          <button type="button" class="player-stat-btn green ${currentModalTab==='partidos'&&currentModalFilter==='goles'?'active':''}" data-filter="goles" onclick="selectPlayerModalFilter(${j.id}, 'goles')" title="Pincha para ver partidos con gol">
+            <div class="pstat-key">Goles</div>
+            <div class="pstat-val">${part.goles}</div>
+            <div class="pstat-hint">⚽ ${part.conGolCount} con gol</div>
+          </button>
+          <button type="button" class="player-stat-btn blue ${currentModalTab==='partidos'&&currentModalFilter==='titular'?'active':''}" data-filter="titular" onclick="selectPlayerModalFilter(${j.id}, 'titular')" title="Pincha para ver partidos como titular">
+            <div class="pstat-key">Titular</div>
+            <div class="pstat-val">${part.titulares}</div>
+            <div class="pstat-hint">⭐ XI Inicial</div>
+          </button>
+          <button type="button" class="player-stat-btn yellow ${currentModalTab==='partidos'&&currentModalFilter==='ausentes'?'active':''}" data-filter="ausentes" onclick="selectPlayerModalFilter(${j.id}, 'ausentes')" title="Pincha para ver a qué partidos faltó y motivos">
+            <div class="pstat-key">Faltó / Bajas</div>
+            <div class="pstat-val">${part.ausencias}</div>
+            <div class="pstat-hint">❌ Ver motivos</div>
+          </button>
+        </div>
+      `;
+    }
+
+    tabPills = `
+      <div class="modal-tab-pills">
+        <button type="button" class="modal-tab-pill ${currentModalTab==='datos'?'active':''}" id="btnTabDatos" onclick="switchPlayerModalTab('datos')">👤 Ficha y Datos</button>
+        <button type="button" class="modal-tab-pill ${currentModalTab==='partidos'?'active':''}" id="btnTabPartidos" onclick="switchPlayerModalTab('partidos')">📋 Partidos y Asistencia (${part.matches.length})</button>
+      </div>
+    `;
   }
 
   document.getElementById('modalJugadorContent').innerHTML = `
     ${statsHeader}
-    <form id="formJugador">
+    ${tabPills}
     
-    <!-- FOTO -->
-    <div class="form-group mb-16">
-      <label class="form-label">Foto</label>
-      <div class="flex items-center gap-12">
-        <div class="player-avatar" style="width:50px;height:50px;font-size:18px;background:${j?.foto?'none':avatarColor(j?.nombre||'J')}">
-          ${j?.foto ? `<img src="${j.foto}" alt="${j.nombre}"/>` : `<span>${getInitials(j?.nombre||'J')}</span>`}
+    <!-- PESTAÑA 1: DATOS Y FORMULARIO -->
+    <div id="playerTabDatos" style="display:${currentModalTab==='datos'?'block':'none'}">
+      <form id="formJugador">
+        <!-- FOTO -->
+        <div class="form-group mb-16">
+          <label class="form-label">Foto</label>
+          <div class="flex items-center gap-12">
+            <div class="player-avatar" style="width:50px;height:50px;font-size:18px;background:${j?.foto?'none':avatarColor(j?.nombre||'J')}">
+              ${j?.foto ? `<img src="${j.foto}" alt="${j.nombre}"/>` : `<span>${getInitials(j?.nombre||'J')}</span>`}
+            </div>
+            <button type="button" class="btn btn-ghost btn-sm" onclick="document.getElementById('modalFotoUploadInput').click()">📷 ${j?.foto?'Cambiar foto':'Subir foto'}</button>
+            ${j?.foto ? `<button type="button" class="btn-xs ghost text-red" onclick="removePlayerPhoto(${j.id})">🗑️ Quitar foto</button>` : ''}
+            <input type="file" id="modalFotoUploadInput" accept="image/*" style="display:none" onchange="handleModalFotoUpload(event, ${j?.id||'null'})"/>
+          </div>
         </div>
-        <button type="button" class="btn btn-ghost btn-sm" onclick="document.getElementById('modalFotoUploadInput').click()">📷 ${j?.foto?'Cambiar foto':'Subir foto'}</button>
-        ${j?.foto ? `<button type="button" class="btn-xs ghost text-red" onclick="removePlayerPhoto(${j.id})">🗑️ Quitar foto</button>` : ''}
-        <input type="file" id="modalFotoUploadInput" accept="image/*" style="display:none" onchange="handleModalFotoUpload(event, ${j?.id||'null'})"/>
-      </div>
+
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Apodo *</label><input class="form-control" id="jN" value="${j?j.nombre:''}" placeholder="Ej: Kata, Jorge..." required/></div>
+          <div class="form-group"><label class="form-label">Dorsal</label><input class="form-control" id="jD" type="number" min="1" max="99" value="${j&&j.dorsal?j.dorsal:''}" placeholder="${isSt?'Sin dorsal (Técnico)':'1-99'}"/></div>
+        </div>
+        <div class="form-group"><label class="form-label">Nombre completo</label><input class="form-control" id="jNC" value="${j?j.nombreCompleto:''}" placeholder="Nombre Apellido Apellido"/></div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Rol</label>
+            <select class="form-control" id="jRol">
+              <option value="Jugador" ${!isSt?'selected':''}>Jugador</option>
+              <option value="Entrenador" ${isSt?'selected':''}>Entrenador / Cuerpo Técnico</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Estado de Ficha</label>
+            <select class="form-control" id="jE">
+              <option ${!j||j.estado==='Con ficha'?'selected':''}>Con ficha</option>
+              <option ${j&&j.estado==='A prueba'?'selected':''}>A prueba</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group"><label class="form-label">Notas</label><textarea class="form-control" id="jT">${j?j.notas:''}</textarea></div>
+        <div class="flex gap-8 justify-between mt-20">${j?`<button type="button" class="btn btn-danger" onclick="deleteJugador(${j.id})">&#128465; Eliminar</button>`:'<div></div>'}<button type="submit" class="btn btn-primary">&#128190; Guardar</button></div>
+      </form>
     </div>
 
-    <div class="form-row">
-      <div class="form-group"><label class="form-label">Apodo *</label><input class="form-control" id="jN" value="${j?j.nombre:''}" placeholder="Ej: Kata, Jorge..." required/></div>
-      <div class="form-group"><label class="form-label">Dorsal</label><input class="form-control" id="jD" type="number" min="1" max="99" value="${j&&j.dorsal?j.dorsal:''}" placeholder="${isSt?'Sin dorsal (Técnico)':'1-99'}"/></div>
+    <!-- PESTAÑA 2: LISTADO DE PARTIDOS Y ASISTENCIAS -->
+    <div id="playerTabPartidos" style="display:${currentModalTab==='partidos'?'block':'none'}">
+      ${j ? renderPlayerMatchesBreakdownHtml(j, currentModalFilter) : ''}
     </div>
-    <div class="form-group"><label class="form-label">Nombre completo</label><input class="form-control" id="jNC" value="${j?j.nombreCompleto:''}" placeholder="Nombre Apellido Apellido"/></div>
-    <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">Rol</label>
-        <select class="form-control" id="jRol">
-          <option value="Jugador" ${!isSt?'selected':''}>Jugador</option>
-          <option value="Entrenador" ${isSt?'selected':''}>Entrenador / Cuerpo Técnico</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Estado de Ficha</label>
-        <select class="form-control" id="jE">
-          <option ${!j||j.estado==='Con ficha'?'selected':''}>Con ficha</option>
-          <option ${j&&j.estado==='A prueba'?'selected':''}>A prueba</option>
-        </select>
-      </div>
-    </div>
-    <div class="form-group"><label class="form-label">Notas</label><textarea class="form-control" id="jT">${j?j.notas:''}</textarea></div>
-    <div class="flex gap-8 justify-between mt-20">${j?`<button type="button" class="btn btn-danger" onclick="deleteJugador(${j.id})">&#128465; Eliminar</button>`:'<div></div>'}<button type="submit" class="btn btn-primary">&#128190; Guardar</button></div>
-    </form>`;
-  document.getElementById('formJugador').onsubmit = e => { e.preventDefault(); saveJugador(id); };
+  `;
+
+  if(document.getElementById('formJugador')){
+    document.getElementById('formJugador').onsubmit = e => { e.preventDefault(); saveJugador(id); };
+  }
   openModal('modalJugador');
 }
 function openNuevoJugador(){openJugadorModal(null);}
@@ -6452,45 +7154,91 @@ function renderPartidos(){
   if(!el) return;
 
   if(!p.length){
-    el.innerHTML = '<div style="color:var(--text-dim);font-size:12px;padding:12px">No se encontraron partidos.</div>';
+    el.innerHTML = '<div style="color:var(--text-dim);font-size:12.5px;padding:24px;text-align:center;">No se encontraron partidos para este filtro.</div>';
     return;
   }
 
   el.innerHTML = p.map(function(x){
-    var cardClass = x.resultado === 'Victoria' ? 'victoria-card' : (x.resultado === 'Derrota' ? 'derrota-card' : (x.resultado === 'Empate' ? 'empate-card' : 'pendiente-card'));
     var isHome = x.condicion === 'Local';
-    var isPlayed = x.resultado && x.gf !== null;
-    var scoreStr = isPlayed ? (isHome ? (x.gf + ' - ' + x.gc) : (x.gc + ' - ' + x.gf)) : '';
-    
-    var resClass = x.resultado === 'Victoria' ? 'win' : (x.resultado === 'Derrota' ? 'loss' : (x.resultado === 'Empate' ? 'draw' : 'pending'));
-    var resText = isPlayed ? (scoreStr + ' ' + (x.resultado==='Victoria'?'(V)':(x.resultado==='Derrota'?'(D)':'(E)'))) : 'PENDIENTE';
+    var isPlayed = (x.resultado === 'Victoria' || x.resultado === 'Empate' || x.resultado === 'Derrota') && x.gf !== null && x.gf !== undefined && x.resultado !== 'Pendiente';
+    var localName = isHome ? 'Xuventude Dorneda' : (x.rival || 'Rival');
+    var visitorName = !isHome ? 'Xuventude Dorneda' : (x.rival || 'Rival');
+    var localScore = isPlayed ? (isHome ? x.gf : x.gc) : null;
+    var visitorScore = isPlayed ? (isHome ? x.gc : x.gf) : null;
+    var isLocalWinner = isPlayed && localScore > visitorScore;
+    var isVisitorWinner = isPlayed && visitorScore > localScore;
+    var isTie = isPlayed && localScore === visitorScore;
 
-    var compTag = x.codigo || (x.competicion && x.competicion.indexOf('Copa')!==-1 ? 'COPA' : 'LIGA');
+    var compIcon = getCompIcon(x.competicion);
+    var codeTag = x.codigo || (x.competicion && x.competicion.indexOf('Copa') !== -1 ? 'COPA' : (x.competicion && x.competicion.toLowerCase().includes('pret') ? 'PRET' : 'LIGA'));
+    var badgeCompClass = compBadge(x.competicion);
     var horaVal = x.horaPartido || x.hora || '';
-    var horaClass = horaVal ? 'has-time' : 'no-time';
-    var horaDisplay = horaVal ? '⏰ ' + horaVal : '⏰ --:--';
 
-    return '<div class="match-card ' + cardClass + '" onclick="showDetallePartido(' + x.id + ')">' +
-      '<div class="match-card-top">' +
-        '<div class="match-left-info">' +
-          '<span class="match-code-tag">' + compTag + '</span>' +
-          '<span class="match-date-tag">' + (x.fecha || '') + '</span>' +
-          '<span class="match-time-badge ' + horaClass + '">' + horaDisplay + '</span>' +
-          (x.enlaceActa ? '<a href="' + x.enlaceActa + '" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" style="background:#285b4f;color:#ffffff;font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;text-decoration:none;display:inline-flex;align-items:center;gap:3px;border:1px solid #1e453c;" title="Ver Acta Oficial FUTGAL">📄 Acta ↗</a>' : '') +
-        '</div>' +
-        '<div class="match-venue-text">' +
-          (isHome ? '🏠 ' + (x.campo || 'A Marola') : '✈️ ' + (x.campo || 'Fuera')) +
-        '</div>' +
-      '</div>' +
-      '<div class="match-card-bottom">' +
-        '<div class="match-title-text">' +
-          (isHome ? '<span class="dorneda-highlight">Dorneda</span> vs ' + x.rival : x.rival + ' vs <span class="dorneda-highlight">Dorneda</span>') +
-        '</div>' +
-        '<div class="match-score-badge ' + resClass + '">' +
-          resText +
-        '</div>' +
-      '</div>' +
-    '</div>';
+    var resBadgeHtml = '';
+    if(isPlayed){
+      if(x.resultado === 'Victoria'){
+        resBadgeHtml = '<span class="badge" style="background:#16a34a;color:#fff;font-size:9.5px;font-weight:800;padding:2px 7px;border-radius:3px;">✅ Victoria (V)</span>';
+      } else if(x.resultado === 'Derrota'){
+        resBadgeHtml = '<span class="badge" style="background:#dc2626;color:#fff;font-size:9.5px;font-weight:800;padding:2px 7px;border-radius:3px;">❌ Derrota (D)</span>';
+      } else {
+        resBadgeHtml = '<span class="badge" style="background:#d97706;color:#fff;font-size:9.5px;font-weight:800;padding:2px 7px;border-radius:3px;">🤝 Empate (E)</span>';
+      }
+    } else {
+      resBadgeHtml = '<span class="badge" style="background:var(--surface2);color:var(--text-dim);border:1px solid var(--border);font-size:9.5px;font-weight:600;padding:2px 6px;border-radius:3px;">⏳ Pendiente</span>';
+    }
+
+    var actaBtn = x.enlaceActa ? `<a href="${x.enlaceActa}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" style="background:#285b4f;color:#ffffff;padding:2px 6px;border-radius:3px;font-size:9px;font-weight:700;display:inline-flex;align-items:center;gap:3px;text-decoration:none;border:1px solid #1e453c;white-space:nowrap;line-height:1;" title="Ver Acta Oficial en FUTGAL">📄 Acta ↗</a>` : '';
+
+    return `
+      <div class="copa-match-row dorneda-row" onclick="showDetallePartido(${x.id})" style="cursor:pointer;padding:6px 10px !important;min-height:34px !important;">
+        <!-- Col 1: Competición / Fecha / Horario / Campo -->
+        <div style="width:200px;flex-shrink:0;font-size:10.5px;color:var(--text-dim);display:flex;align-items:center;gap:6px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+          <span class="badge ${badgeCompClass}" style="font-size:9px;font-weight:900;padding:1px 6px;flex-shrink:0;">${compIcon} ${codeTag}</span>
+          <span style="font-weight:700;color:var(--text);flex-shrink:0;">${x.fecha || ''}</span>
+          ${horaVal ? `<span style="font-size:10px;color:var(--text-muted);flex-shrink:0;">⏰ ${horaVal}</span>` : ''}
+          <span style="color:var(--text-dim);font-size:10px;overflow:hidden;text-overflow:ellipsis;" title="${x.campo || (isHome ? 'A Marola' : 'Fuera')}">📍 ${x.campo || (isHome ? 'A Marola' : 'Fuera')}</span>
+        </div>
+
+        <!-- Col 2: Equipo Local -->
+        <div style="flex:1;text-align:right;font-size:12px;font-weight:${isLocalWinner ? '800' : (isHome ? '900' : '600')};color:${isHome ? 'var(--red-light)' : (isPlayed && !isLocalWinner ? 'var(--text-dim)' : 'var(--text)')};overflow:hidden;white-space:nowrap;text-overflow:ellipsis;" title="${localName}">
+          ${isHome ? '<span class="dorneda-highlight">Xuventude Dorneda</span>' : localName} ${isLocalWinner ? '<span style="color:var(--success);font-size:10px;">✅</span>' : ''}
+        </div>
+
+        <!-- Col 3: Marcador / VS -->
+        <div style="width:65px;flex-shrink:0;text-align:center;">
+          ${isPlayed ? `
+            <span style="display:inline-block;padding:2px 6px;font-size:12px;font-weight:900;background:var(--surface3);border:1px solid var(--border);border-radius:4px;color:var(--text);min-width:38px;text-align:center;line-height:1.2;">
+              ${localScore} - ${visitorScore}
+            </span>
+          ` : `
+            <span style="display:inline-block;padding:2px 6px;font-size:9.5px;font-weight:700;background:var(--surface2);border:1px solid var(--border);border-radius:4px;color:var(--text-dim);line-height:1.2;">
+              VS
+            </span>
+          `}
+        </div>
+
+        <!-- Col 4: Equipo Visitante -->
+        <div style="flex:1;text-align:left;font-size:12px;font-weight:${isVisitorWinner ? '800' : (!isHome ? '900' : '600')};color:${!isHome ? 'var(--red-light)' : (isPlayed && !isVisitorWinner ? 'var(--text-dim)' : 'var(--text)')};overflow:hidden;white-space:nowrap;text-overflow:ellipsis;" title="${visitorName}">
+          ${isVisitorWinner ? '<span style="color:var(--success);font-size:10px;">✅</span> ' : ''}${!isHome ? '<span class="dorneda-highlight">Xuventude Dorneda</span>' : visitorName}
+        </div>
+
+        <!-- Col 5: Estado / Resultado -->
+        <div style="width:130px;flex-shrink:0;text-align:center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+          ${resBadgeHtml}
+        </div>
+
+        <!-- Col 6: Botones Acción -->
+        <div style="width:120px;flex-shrink:0;display:flex;align-items:center;justify-content:flex-end;gap:4px;" onclick="event.stopPropagation()">
+          <button type="button" class="btn btn-primary btn-xs" style="font-size:9.5px;font-weight:800;padding:2px 7px;display:inline-flex;align-items:center;gap:3px;white-space:nowrap;border-radius:3px;" onclick="showDetallePartido(${x.id})" title="Ver Ficha y Estadísticas del Partido">
+            📋 Ficha
+          </button>
+          ${actaBtn}
+          <button type="button" class="btn btn-ghost btn-xs" style="font-size:9.5px;font-weight:700;padding:2px 5px;display:inline-flex;align-items:center;border-radius:3px;" onclick="editPartido(${x.id})" title="Editar Datos del Partido">
+            ✏️
+          </button>
+        </div>
+      </div>
+    `;
   }).join('');
 }
 
@@ -7710,12 +8458,12 @@ function showFutgalSyncResultModal(res) {
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
         <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px;text-align:center">
-          <div style="font-size:10px;font-weight:800;text-transform:uppercase;color:var(--text-muted)">🏆 Liga (1ª Div)</div>
+          <div style="font-size:10px;font-weight:800;text-transform:uppercase;color:var(--text-muted)">⚽ Liga (1ª Div)</div>
           <div style="font-size:16px;font-weight:900;color:var(--success);margin:4px 0">✓ ${s.ligaJornadasChecked || 30}</div>
           <div style="font-size:10px;color:var(--text-dim)">Jornadas revisadas</div>
         </div>
         <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px;text-align:center">
-          <div style="font-size:10px;font-weight:800;text-transform:uppercase;color:var(--text-muted)">🍷 Copa Federación</div>
+          <div style="font-size:10px;font-weight:800;text-transform:uppercase;color:var(--text-muted)">🏆 Copa Federación</div>
           <div style="font-size:16px;font-weight:900;color:var(--info);margin:4px 0">✓ ${s.copaRondasFound || 1}</div>
           <div style="font-size:10px;color:var(--text-dim)">Rondas encontradas</div>
         </div>
@@ -8207,59 +8955,61 @@ function renderPretemporadaView(){
     var isWin = p.resultado === 'Victoria';
     var isLoss = p.resultado === 'Derrota';
     var isTie = p.resultado === 'Empate';
-    var resClass = isWin ? 'victoria' : (isLoss ? 'derrota' : 'empate');
     var isHome = p.condicion === 'Local';
     var rival = p.rival || 'Rival';
     var localName = isHome ? 'Xuventude Dorneda' : rival;
     var visitName = isHome ? rival : 'Xuventude Dorneda';
     var gl = isHome ? p.gf : p.gc;
     var gv = isHome ? p.gc : p.gf;
+    var hasScore = (p.gf !== null && p.gf !== undefined && p.gc !== null && p.gc !== undefined);
 
-    // Convocados con goles
-    var scorers = [];
-    if(p.convocados && p.convocados.length){
-      p.convocados.forEach(function(c){
-        if(c.goles && c.goles > 0){
-          scorers.push(c.nombre + ' ' + (c.goles > 1 ? c.goles : '1'));
-        }
-      });
-    }
+    var resBadge = '';
+    if(isWin) resBadge = '<span class="badge badge-success" style="font-size:8.5px;font-weight:800;padding:1px 5px;">✅ Victoria</span>';
+    else if(isLoss) resBadge = '<span class="badge" style="background:#dc2626;color:#fff;font-size:8.5px;font-weight:800;padding:1px 5px;">❌ Derrota</span>';
+    else if(isTie) resBadge = '<span class="badge" style="background:#d97706;color:#fff;font-size:8.5px;font-weight:800;padding:1px 5px;">🤝 Empate</span>';
+    else resBadge = '<span class="badge" style="background:var(--surface2);color:var(--text-dim);font-size:8.5px;font-weight:600;padding:1px 4px;">⏳ Pendiente</span>';
 
     return `
-      <div class="card" style="padding:14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);display:flex;flex-direction:column;justify-content:space-between;gap:10px;box-shadow:var(--shadow);">
-        <!-- Top header info -->
-        <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding-bottom:8px;">
-          <div style="display:flex;align-items:center;gap:6px;">
-            <span class="badge badge-accent" style="font-size:10px;font-weight:900;">${p.codigo || 'Amistoso'}</span>
-            <span style="font-size:11px;font-weight:700;color:var(--text-muted);">&#128197; ${p.fecha}</span>
-            <span style="font-size:11px;color:var(--text-dim);">&#9200; ${p.horaPartido || '--:--'}</span>
-          </div>
-          <span class="badge ${resClass}" style="font-size:10px;font-weight:800;">${p.resultado || 'Disputado'}</span>
+      <div class="copa-match-row dorneda-row" onclick="showDetallePartido(${p.id})" style="cursor:pointer;">
+        <!-- Col 1: Horario / Campo -->
+        <div style="width:160px;flex-shrink:0;font-size:10px;color:var(--text-dim);display:flex;align-items:center;gap:4px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+          <span class="badge badge-accent" style="font-size:8px;font-weight:900;padding:1px 4px;flex-shrink:0;">${p.codigo || 'Pret'}</span>
+          <span style="font-weight:700;color:var(--text);">📅 ${p.fecha}</span>
+          <span style="color:var(--text-dim);overflow:hidden;text-overflow:ellipsis;" title="${p.campo || (isHome ? 'A Marola' : 'Fuera')}">📍 ${p.campo || (isHome ? 'A Marola' : 'Fuera')}</span>
         </div>
 
-        <!-- Teams and score row -->
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 0;">
-          <div style="flex:1;text-align:right;font-size:13px;font-weight:${isHome ? '900' : '600'};color:${isHome ? 'var(--red)' : 'var(--text)'};overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
-            ${isHome ? "&#11088; " : ""}${localName}
-          </div>
-          <div style="padding:3px 8px;font-size:15px;font-weight:900;background:var(--surface3);border-radius:4px;border:1px solid var(--border);color:var(--text);letter-spacing:1px;white-space:nowrap;">
-            ${gl !== null ? gl : '-'} - ${gv !== null ? gv : '-'}
-          </div>
-          <div style="flex:1;text-align:left;font-size:13px;font-weight:${!isHome ? '900' : '600'};color:${!isHome ? 'var(--red)' : 'var(--text)'};overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
-            ${!isHome ? "&#11088; " : ""}${visitName}
-          </div>
+        <!-- Col 2: Equipo Local -->
+        <div style="flex:1;text-align:right;font-size:11.5px;font-weight:${isHome ? '900' : '600'};color:${isHome ? 'var(--text)' : 'var(--text-muted)'};overflow:hidden;white-space:nowrap;text-overflow:ellipsis;" title="${localName}">
+          ${highlightDorneda(localName)} ${isWin && isHome ? '<span style="color:var(--success);font-size:9.5px;">✅</span>' : ''}
         </div>
 
-        <!-- Field and scorers -->
-        <div style="font-size:11px;color:var(--text-muted);display:flex;flex-direction:column;gap:3px;background:var(--surface2);padding:8px 10px;border-radius:6px;">
-          <div><strong>📍 Campo:</strong> ${p.campo || 'No especificado'} (${p.condicion})</div>
-          ${scorers.length ? `<div><strong>⚽ Goles Dorneda:</strong> ${scorers.join(', ')}</div>` : ''}
-          ${p.resumen ? `<div style="font-size:10.5px;color:var(--text-dim);margin-top:2px;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">📝 ${p.resumen}</div>` : ''}
+        <!-- Col 3: Marcador / VS -->
+        <div style="width:60px;flex-shrink:0;text-align:center;">
+          ${hasScore ? `
+            <span style="display:inline-block;padding:1px 4px;font-size:11.5px;font-weight:900;background:var(--surface3);border:1px solid var(--border);border-radius:3px;color:var(--text);min-width:34px;text-align:center;line-height:1.2;">
+              ${gl} - ${gv}
+            </span>
+          ` : `
+            <span style="display:inline-block;padding:1px 4px;font-size:9px;font-weight:700;background:var(--surface2);border:1px solid var(--border);border-radius:3px;color:var(--text-dim);line-height:1.2;">
+              VS
+            </span>
+          `}
         </div>
 
-        <!-- Bottom action button -->
-        <div style="display:flex;justify-content:flex-end;margin-top:2px;">
-          <button type="button" class="btn btn-primary btn-xs" style="font-size:10px;font-weight:800;padding:2px 8px;" onclick="showDetallePartido(${p.id})">&#128203; Ver Ficha Completa
+        <!-- Col 4: Equipo Visitante -->
+        <div style="flex:1;text-align:left;font-size:11.5px;font-weight:${!isHome ? '900' : '600'};color:${!isHome ? 'var(--text)' : 'var(--text-muted)'};overflow:hidden;white-space:nowrap;text-overflow:ellipsis;" title="${visitName}">
+          ${isWin && !isHome ? '<span style="color:var(--success);font-size:9.5px;">✅</span> ' : ''}${highlightDorneda(visitName)}
+        </div>
+
+        <!-- Col 5: Resultado -->
+        <div style="width:130px;flex-shrink:0;text-align:center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+          ${resBadge}
+        </div>
+
+        <!-- Col 6: Botones Acción -->
+        <div style="width:105px;flex-shrink:0;display:flex;align-items:center;justify-content:flex-end;gap:3px;" onclick="event.stopPropagation()">
+          <button type="button" class="btn btn-primary btn-xs" style="font-size:9px;font-weight:800;padding:1px 5px;display:inline-flex;align-items:center;gap:2px;white-space:nowrap;min-height:19px;border-radius:3px;" onclick="showDetallePartido(${p.id})" title="Ver Ficha Completa">
+            ⭐ Ficha
           </button>
         </div>
       </div>
@@ -8461,7 +9211,7 @@ function resetLigaSearch(){
 }
 window.resetLigaSearch = resetLigaSearch;
 
-// Helper para renderizar tarjetas de partidos de una jornada
+// Helper para renderizar tarjetas de partidos de una jornada (Formato compacto en una sola línea)
 function renderMatchesCards(matches, jornadaNum, jornadaFecha, container){
   if(!container) return;
   if(!matches.length){
@@ -8469,7 +9219,13 @@ function renderMatchesCards(matches, jornadaNum, jornadaFecha, container){
     return;
   }
 
-  container.innerHTML = matches.map(function(p, idx){
+  var sortedMatches = [...matches].sort(function(a, b){
+    var isDornedaA = (a.local && a.local.indexOf('Dorneda') !== -1) || (a.visitante && a.visitante.indexOf('Dorneda') !== -1) || a.dorneda;
+    var isDornedaB = (b.local && b.local.indexOf('Dorneda') !== -1) || (b.visitante && b.visitante.indexOf('Dorneda') !== -1) || b.dorneda;
+    return (isDornedaB ? 1 : 0) - (isDornedaA ? 1 : 0);
+  });
+
+  container.innerHTML = sortedMatches.map(function(p, idx){
     var isDornedaMatch = (p.local && p.local.indexOf('Dorneda') !== -1) || (p.visitante && p.visitante.indexOf('Dorneda') !== -1) || p.dorneda;
     var isDornedaLocal = (p.local && p.local.indexOf('Dorneda') !== -1);
     var isDornedaVisitor = (p.visitante && p.visitante.indexOf('Dorneda') !== -1);
@@ -8478,54 +9234,75 @@ function renderMatchesCards(matches, jornadaNum, jornadaFecha, container){
     var isVisitorWinner = hasScore && p.gv > p.gl;
     var isTie = hasScore && p.gl === p.gv;
 
+    var winnerName = isLocalWinner ? p.local : (isVisitorWinner ? p.visitante : null);
     var m = isDornedaMatch ? (db.partidos || []).find(function(x){ return x.codigo === ('J' + jornadaNum); }) : null;
     var actaUrl = p.enlaceActa || (p.codActa ? `https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=${p.codActa}&cod_acta=${p.codActa}` : '');
+    var actaBtn = actaUrl ? `<a href="${actaUrl}" target="_blank" rel="noopener noreferrer" style="background:#285b4f;color:#ffffff;padding:1px 5px;border-radius:3px;font-size:9px;font-weight:700;display:inline-flex;align-items:center;gap:2px;text-decoration:none;border:1px solid #1e453c;white-space:nowrap;min-height:19px;box-sizing:border-box;" title="Ver Acta Oficial en FUTGAL">📄 Acta ↗</a>` : '';
 
     return `
-      <div class="card ${isDornedaMatch ? 'jornada-dorneda-card' : ''}" style="padding:12px;display:flex;flex-direction:column;justify-content:space-between;border:${isDornedaMatch ? '2px solid var(--red)' : '1px solid var(--border)'};border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow);">
-        <!-- Header Info -->
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:10.5px;color:var(--text-dim);border-bottom:1px solid var(--border);padding-bottom:6px;">
-          <div style="display:flex;align-items:center;gap:4px;">
-            <span class="badge" style="font-size:9px;font-weight:800;background:var(--surface2);">J${jornadaNum}</span>
-            <span>&#128197; ${jornadaFecha}</span>
-          </div>
-          ${isDornedaMatch ? '<span class="badge badge-accent" style="font-size:9px;font-weight:900;">&#11088; DORNEDA</span>' : ''}
+      <div class="copa-match-row ${isDornedaMatch ? 'dorneda-row' : 'regular-row'}" ${isDornedaMatch && m ? `onclick="showDetallePartido(${m.id})" style="cursor:pointer;"` : ''}>
+        <!-- Col 1: Horario / Campo -->
+        <div style="width:155px;flex-shrink:0;font-size:10px;color:var(--text-dim);display:flex;align-items:center;gap:4px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+          ${isDornedaMatch ? `<span class="badge badge-accent" style="font-size:7.5px;font-weight:900;padding:1px 3px;flex-shrink:0;">⭐ DORNEDA</span>` : ''}
+          <span style="font-weight:700;color:var(--text);">⏰ ${p.hora || '17:00'}</span>
+          <span style="color:var(--text-dim);overflow:hidden;text-overflow:ellipsis;" title="${p.campo || ''}">📍 ${p.campo || 'Campo oficial'}</span>
         </div>
 
-        <!-- Teams and score row -->
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin:4px 0;">
-          <div style="flex:1;text-align:right;font-size:12.5px;font-weight:${isLocalWinner ? '800' : (isDornedaLocal ? '900' : '600')};color:${isLocalWinner ? 'var(--text)' : (isDornedaLocal ? 'var(--red)' : 'var(--text)')};overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${p.local}">
-            ${highlightDorneda(p.local)}
-          </div>
-          <div style="padding:2px 8px;font-size:14px;font-weight:900;background:var(--surface3);border:1px solid var(--border);border-radius:4px;color:var(--text);letter-spacing:1px;white-space:nowrap;min-width:44px;text-align:center;">
-            ${hasScore ? `${p.gl} - ${p.gv}` : '<span style="font-size:10px;font-weight:700;color:var(--text-dim);">VS</span>'}
-          </div>
-          <div style="flex:1;text-align:left;font-size:12.5px;font-weight:${isVisitorWinner ? '800' : (isDornedaVisitor ? '900' : '600')};color:${isVisitorWinner ? 'var(--text)' : (isDornedaVisitor ? 'var(--red)' : 'var(--text)')};overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${p.visitante}">
-            ${highlightDorneda(p.visitante)}
-          </div>
+        <!-- Col 2: Equipo Local -->
+        <div style="flex:1;text-align:right;font-size:11.5px;font-weight:${isLocalWinner ? '800' : (isDornedaLocal ? '900' : '600')};color:${isLocalWinner ? 'var(--text)' : (hasScore && !isLocalWinner ? 'var(--text-dim)' : 'var(--text)')};overflow:hidden;white-space:nowrap;text-overflow:ellipsis;" title="${p.local}">
+          ${highlightDorneda(p.local)} ${isLocalWinner ? '<span style="color:var(--success);font-size:9.5px;">✅</span>' : ''}
         </div>
 
-        <!-- Field & Actions Footer -->
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;padding-top:6px;border-top:1px solid var(--border);font-size:10px;color:var(--text-dim);">
-          <div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:180px;" title="${p.campo || ''}">
-            📍 ${p.campo || 'Campo oficial'}
-          </div>
-          <div style="display:flex;gap:4px;align-items:center;">
-            ${isDornedaMatch && m ? `
-              <button type="button" class="btn btn-primary btn-xs" style="font-size:9px;font-weight:800;padding:1px 6px;" onclick="showDetallePartido(${m.id})">&#128203; Ficha
-              </button>
-            ` : ''}
-            ${actaUrl ? `
-              <a href="${actaUrl}" target="_blank" rel="noopener noreferrer" style="background:#285b4f;color:#fff;padding:1px 5px;border-radius:3px;font-size:9px;font-weight:700;text-decoration:none;">&#128196; Acta &#8599;</a>
-            ` : ''}
-          </div>
+        <!-- Col 3: Marcador / VS -->
+        <div style="width:60px;flex-shrink:0;text-align:center;">
+          ${hasScore ? `
+            <span style="display:inline-block;padding:1px 4px;font-size:11.5px;font-weight:900;background:var(--surface3);border:1px solid var(--border);border-radius:3px;color:var(--text);min-width:34px;text-align:center;line-height:1.2;">
+              ${p.gl} - ${p.gv}
+            </span>
+          ` : `
+            <span style="display:inline-block;padding:1px 4px;font-size:9px;font-weight:700;background:var(--surface2);border:1px solid var(--border);border-radius:3px;color:var(--text-dim);line-height:1.2;">
+              VS
+            </span>
+          `}
+        </div>
+
+        <!-- Col 4: Equipo Visitante -->
+        <div style="flex:1;text-align:left;font-size:11.5px;font-weight:${isVisitorWinner ? '800' : (isDornedaVisitor ? '900' : '600')};color:${isVisitorWinner ? 'var(--text)' : (hasScore && !isVisitorWinner ? 'var(--text-dim)' : 'var(--text)')};overflow:hidden;white-space:nowrap;text-overflow:ellipsis;" title="${p.visitante}">
+          ${isVisitorWinner ? '<span style="color:var(--success);font-size:9.5px;">✅</span>' : ''} ${highlightDorneda(p.visitante)}
+        </div>
+
+        <!-- Col 5: Ganador / Estado -->
+        <div style="width:130px;flex-shrink:0;text-align:center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+          ${winnerName ? `
+            <span class="badge badge-success" style="font-size:8.5px;font-weight:800;padding:1px 5px;border-radius:3px;max-width:100%;overflow:hidden;text-overflow:ellipsis;display:inline-block;" title="Ganador: ${winnerName}">
+              ✅ Gana: ${winnerName}
+            </span>
+          ` : (isTie ? `
+            <span class="badge" style="background:rgba(245,158,11,0.15);color:var(--warning);border:1px solid rgba(245,158,11,0.3);font-size:8.5px;font-weight:700;padding:1px 4px;border-radius:3px;">
+              🤝 Empate ${p.gl}-${p.gv}
+            </span>
+          ` : `
+            <span class="badge" style="background:var(--surface2);color:var(--text-dim);border:1px solid var(--border);font-size:8.5px;font-weight:600;padding:1px 4px;border-radius:3px;">
+              ⏳ Pendiente
+            </span>
+          `)}
+        </div>
+
+        <!-- Col 6: Botones Acción -->
+        <div style="width:105px;flex-shrink:0;display:flex;align-items:center;justify-content:flex-end;gap:3px;" onclick="event.stopPropagation()">
+          ${isDornedaMatch && m ? `
+            <button type="button" class="btn btn-primary btn-xs" style="font-size:9px;font-weight:800;padding:1px 5px;display:inline-flex;align-items:center;gap:2px;white-space:nowrap;min-height:19px;border-radius:3px;" onclick="showDetallePartido(${m.id})" title="Ver Ficha Completa del Partido">
+              ⭐ Ficha
+            </button>
+          ` : ''}
+          ${actaBtn ? actaBtn : ''}
         </div>
       </div>
     `;
   }).join('');
 }
 
-// Helper para renderizar los 30 partidos del año de un equipo específico
+// Helper para renderizar los 30 partidos del año de un equipo específico (Formato compacto en una sola línea)
 function renderTeamFullCalendarCards(teamMatches, teamName, container){
   if(!container) return;
   if(!teamMatches.length){
@@ -8549,51 +9326,65 @@ function renderTeamFullCalendarCards(teamMatches, teamName, container){
     var isTie = hasScore && myGoals === rivalGoals;
     var resBadge = '';
     if(hasScore){
-      if(isWin) resBadge = '<span class="badge victoria" style="font-size:9px;font-weight:800;">Victoria</span>';
-      else if(isLoss) resBadge = '<span class="badge derrota" style="font-size:9px;font-weight:800;">Derrota</span>';
-      else resBadge = '<span class="badge empate" style="font-size:9px;font-weight:800;">Empate</span>';
+      if(isWin) resBadge = '<span class="badge badge-success" style="font-size:8.5px;font-weight:800;padding:1px 5px;">✅ Victoria</span>';
+      else if(isLoss) resBadge = '<span class="badge" style="background:#dc2626;color:#fff;font-size:8.5px;font-weight:800;padding:1px 5px;">❌ Derrota</span>';
+      else resBadge = '<span class="badge" style="background:#d97706;color:#fff;font-size:8.5px;font-weight:800;padding:1px 5px;">🤝 Empate</span>';
     } else {
-      resBadge = '<span class="badge" style="background:var(--surface3);color:var(--text-dim);font-size:9px;">Pendiente</span>';
+      resBadge = '<span class="badge" style="background:var(--surface2);color:var(--text-dim);border:1px solid var(--border);font-size:8.5px;font-weight:600;padding:1px 4px;">⏳ Pendiente</span>';
     }
 
     var m = isDorneda ? (db.partidos || []).find(function(x){ return x.codigo === ('J' + jNum); }) : null;
+    var actaUrl = p.enlaceActa || (p.codActa ? `https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=${p.codActa}&cod_acta=${p.codActa}` : '');
+    var actaBtn = actaUrl ? `<a href="${actaUrl}" target="_blank" rel="noopener noreferrer" style="background:#285b4f;color:#ffffff;padding:1px 5px;border-radius:3px;font-size:9px;font-weight:700;display:inline-flex;align-items:center;gap:2px;text-decoration:none;border:1px solid #1e453c;white-space:nowrap;min-height:19px;box-sizing:border-box;" title="Ver Acta Oficial en FUTGAL">📄 Acta ↗</a>` : '';
 
     return `
-      <div class="card" style="padding:12px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);display:flex;flex-direction:column;justify-content:space-between;box-shadow:var(--shadow);">
-        <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding-bottom:6px;font-size:10.5px;color:var(--text-dim);">
-          <div style="display:flex;align-items:center;gap:4px;">
-            <span class="badge badge-accent" style="font-size:9.5px;font-weight:900;">Jornada ${jNum}</span>
-            <span>&#128197; ${fecha}</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:4px;">
-            <span class="badge ${isHome ? 'badge-accent' : ''}" style="font-size:8.5px;font-weight:800;">${isHome ? 'CASA' : 'FUERA'}</span>
-            ${resBadge}
-          </div>
+      <div class="copa-match-row ${isDorneda ? 'dorneda-row' : 'regular-row'}" ${isDorneda && m ? `onclick="showDetallePartido(${m.id})" style="cursor:pointer;"` : ''}>
+        <!-- Col 1: Jornada / Fecha / Campo -->
+        <div style="width:155px;flex-shrink:0;font-size:10px;color:var(--text-dim);display:flex;align-items:center;gap:4px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+          <span class="badge badge-accent" style="font-size:8px;font-weight:900;padding:1px 4px;flex-shrink:0;">J${jNum}</span>
+          <span style="font-weight:700;color:var(--text);">📅 ${fecha}</span>
+          <span style="color:var(--text-dim);overflow:hidden;text-overflow:ellipsis;" title="${p.campo || (isHome ? 'Casa' : 'Fuera')}">📍 ${p.campo || (isHome ? 'Casa' : 'Fuera')}</span>
         </div>
 
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin:8px 0;">
-          <div style="flex:1;text-align:right;font-size:12.5px;font-weight:${isHome ? '900' : '600'};color:${isHome ? 'var(--text)' : 'var(--text-muted)'};overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
-            ${highlightDorneda(p.local)}
-          </div>
-          <div style="padding:3px 8px;font-size:14px;font-weight:900;background:var(--surface3);border:1px solid var(--border);border-radius:4px;color:var(--text);white-space:nowrap;letter-spacing:1px;">
-            ${hasScore ? `${p.gl} - ${p.gv}` : '<span style="font-size:10px;font-weight:700;color:var(--text-dim);">VS</span>'}
-          </div>
-          <div style="flex:1;text-align:left;font-size:12.5px;font-weight:${!isHome ? '900' : '600'};color:${!isHome ? 'var(--text)' : 'var(--text-muted)'};overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
-            ${highlightDorneda(p.visitante)}
-          </div>
+        <!-- Col 2: Equipo Local -->
+        <div style="flex:1;text-align:right;font-size:11.5px;font-weight:${isHome ? '900' : '600'};color:${isHome ? 'var(--text)' : 'var(--text-muted)'};overflow:hidden;white-space:nowrap;text-overflow:ellipsis;" title="${p.local}">
+          ${highlightDorneda(p.local)}
         </div>
 
-        <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);padding-top:6px;font-size:10px;color:var(--text-dim);">
-          <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:180px;">📍 ${p.campo || 'Campo oficial'}</span>
-          <div style="display:flex;gap:4px;">
-            <button class="btn btn-ghost btn-xs" style="font-size:9px;font-weight:700;padding:1px 5px;" onclick="onSelectJornadaNavQuick(${jNum})">
-              Ver Jornada ${jNum} &rarr;
+        <!-- Col 3: Marcador / VS -->
+        <div style="width:60px;flex-shrink:0;text-align:center;">
+          ${hasScore ? `
+            <span style="display:inline-block;padding:1px 4px;font-size:11.5px;font-weight:900;background:var(--surface3);border:1px solid var(--border);border-radius:3px;color:var(--text);min-width:34px;text-align:center;line-height:1.2;">
+              ${p.gl} - ${p.gv}
+            </span>
+          ` : `
+            <span style="display:inline-block;padding:1px 4px;font-size:9px;font-weight:700;background:var(--surface2);border:1px solid var(--border);border-radius:3px;color:var(--text-dim);line-height:1.2;">
+              VS
+            </span>
+          `}
+        </div>
+
+        <!-- Col 4: Equipo Visitante -->
+        <div style="flex:1;text-align:left;font-size:11.5px;font-weight:${!isHome ? '900' : '600'};color:${!isHome ? 'var(--text)' : 'var(--text-muted)'};overflow:hidden;white-space:nowrap;text-overflow:ellipsis;" title="${p.visitante}">
+          ${highlightDorneda(p.visitante)}
+        </div>
+
+        <!-- Col 5: Resultado -->
+        <div style="width:130px;flex-shrink:0;text-align:center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+          ${resBadge}
+        </div>
+
+        <!-- Col 6: Acciones -->
+        <div style="width:105px;flex-shrink:0;display:flex;align-items:center;justify-content:flex-end;gap:3px;" onclick="event.stopPropagation()">
+          <button type="button" class="btn btn-ghost btn-xs" style="font-size:8.5px;font-weight:700;padding:1px 4px;min-height:19px;" onclick="onSelectJornadaNavQuick(${jNum})" title="Ir a Jornada ${jNum}">
+            J${jNum} &rarr;
+          </button>
+          ${isDorneda && m ? `
+            <button type="button" class="btn btn-primary btn-xs" style="font-size:9px;font-weight:800;padding:1px 5px;display:inline-flex;align-items:center;gap:2px;white-space:nowrap;min-height:19px;border-radius:3px;" onclick="showDetallePartido(${m.id})" title="Ver Ficha del Partido">
+              ⭐ Ficha
             </button>
-            ${isDorneda && m ? `
-              <button class="btn btn-primary btn-xs" style="font-size:9px;font-weight:800;padding:1px 5px;" onclick="showDetallePartido(${m.id})">&#128203; Ficha
-              </button>
-            ` : ''}
-          </div>
+          ` : ''}
+          ${actaBtn ? actaBtn : ''}
         </div>
       </div>
     `;
@@ -8858,14 +9649,68 @@ window.showAnalisisTab = showAnalisisTab;
 function renderAnalisisEquipo(){
   var mcEl = document.getElementById('analisisMisterChip');
   if(mcEl) mcEl.innerHTML = renderMisterChipBlock();
-  const s=calcStats();
-  document.getElementById('analisisStatsGrid').innerHTML=`<div class="stat-card red"><div class="stat-label">Partidos</div><div class="stat-value">${s.total}</div></div><div class="stat-card green"><div class="stat-label">Victorias</div><div class="stat-value">${s.v}</div><div class="stat-sub">${s.total?Math.round(s.v/s.total*100):0}%</div></div><div class="stat-card yellow"><div class="stat-label">Empates</div><div class="stat-value">${s.e}</div></div><div class="stat-card gray"><div class="stat-label">Derrotas</div><div class="stat-value">${s.d}</div></div><div class="stat-card blue"><div class="stat-label">Goles F</div><div class="stat-value">${s.gf}</div><div class="stat-sub">${s.total?(s.gf/s.total).toFixed(1):0}/p</div></div><div class="stat-card ${s.gc<=s.gf?'green':'red'}"><div class="stat-label">Goles C</div><div class="stat-value">${s.gc}</div><div class="stat-sub">${s.total?(s.gc/s.total).toFixed(1):0}/p</div></div>`;
-  const comps={};for(const p of db.partidos){const c=p.competicion||'Otro';if(!comps[c])comps[c]={v:0,e:0,d:0,total:0,gf:0,gc:0};comps[c].total++;comps[c].gf+=parseInt(p.gf)||0;comps[c].gc+=parseInt(p.gc)||0;if(p.resultado==='Victoria')comps[c].v++;else if(p.resultado==='Empate')comps[c].e++;else if(p.resultado==='Derrota')comps[c].d++;}
-  document.getElementById('rendimientoComp').innerHTML=Object.entries(comps).map(([c,v])=>`<div class="flex items-center justify-between mb-12"><div><div style="font-size:13px;font-weight:700">${c}</div><div style="font-size:11px;color:var(--text-muted)">${v.total}p GF:${v.gf} GC:${v.gc}</div></div><div class="flex gap-8" style="font-size:12px;font-weight:700"><span class="text-success">${v.v}V</span><span class="text-warning">${v.e}E</span><span class="text-red">${v.d}D</span></div></div>`).join('')||'<div style="color:var(--text-dim);font-size:13px">Sin datos.</div>';
-  const L=db.partidos.filter(p=>p.condicion==='Local'),V=db.partidos.filter(p=>p.condicion==='Visitante'),lv=(a,r)=>a.filter(p=>p.resultado===r).length;
-  document.getElementById('localVsVisitante').innerHTML=`<div class="flex justify-between mb-16"><div class="text-center"><div style="font-size:24px;font-weight:900">${L.length}</div><div style="font-size:11px;color:var(--text-muted)">En casa</div><div style="font-size:12px;margin-top:6px"><span class="text-success">${lv(L,'Victoria')}V</span> <span class="text-warning">${lv(L,'Empate')}E</span> <span class="text-red">${lv(L,'Derrota')}D</span></div></div><div style="width:1px;background:var(--border)"></div><div class="text-center"><div style="font-size:24px;font-weight:900">${V.length}</div><div style="font-size:11px;color:var(--text-muted)">Fuera</div><div style="font-size:12px;margin-top:6px"><span class="text-success">${lv(V,'Victoria')}V</span> <span class="text-warning">${lv(V,'Empate')}E</span> <span class="text-red">${lv(V,'Derrota')}D</span></div></div></div><div class="detail-key">GF local: ${L.reduce((s,p)=>s+(parseInt(p.gf)||0),0)} - GC local: ${L.reduce((s,p)=>s+(parseInt(p.gc)||0),0)}</div><div class="detail-key mt-8">GF visitante: ${V.reduce((s,p)=>s+(parseInt(p.gf)||0),0)} - GC visitante: ${V.reduce((s,p)=>s+(parseInt(p.gc)||0),0)}</div>`;
-  const ult=[...db.partidos].reverse().slice(0,8);
-  document.getElementById('rachaActual').innerHTML=ult.length?ult.map(p=>{const cl=p.resultado==='Victoria'?'34,197,94':p.resultado==='Derrota'?'204,0,0':'245,158,11',l=p.resultado==='Victoria'?'V':p.resultado==='Derrota'?'D':'E';return`<div style="width:36px;height:36px;border-radius:8px;background:rgba(${cl},0.15);border:1px solid rgba(${cl},0.3);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800">${l}</div>`;}).join(''):'<span style="color:var(--text-dim);font-size:13px">Sin partidos.</span>';
+  const s = calcStats();
+  document.getElementById('analisisStatsGrid').innerHTML = `<div class="stat-card red"><div class="stat-label">Partidos</div><div class="stat-value">${s.total}</div></div><div class="stat-card green"><div class="stat-label">Victorias</div><div class="stat-value">${s.v}</div><div class="stat-sub">${s.total?Math.round(s.v/s.total*100):0}%</div></div><div class="stat-card yellow"><div class="stat-label">Empates</div><div class="stat-value">${s.e}</div></div><div class="stat-card gray"><div class="stat-label">Derrotas</div><div class="stat-value">${s.d}</div></div><div class="stat-card blue"><div class="stat-label">Goles F</div><div class="stat-value">${s.gf}</div><div class="stat-sub">${s.total?(s.gf/s.total).toFixed(1):0}/p</div></div><div class="stat-card ${s.gc<=s.gf?'green':'red'}"><div class="stat-label">Goles C</div><div class="stat-value">${s.gc}</div><div class="stat-sub">${s.total?(s.gc/s.total).toFixed(1):0}/p</div></div>`;
+  
+  const played = (db.partidos || []).filter(p => (p.resultado === 'Victoria' || p.resultado === 'Empate' || p.resultado === 'Derrota') && p.gf !== null && p.gf !== undefined && p.resultado !== 'Pendiente');
+  
+  const comps = {};
+  for(const p of played){
+    const c = p.competicion || 'Otro';
+    if(!comps[c]) comps[c] = {v:0, e:0, d:0, total:0, gf:0, gc:0};
+    comps[c].total++;
+    comps[c].gf += parseInt(p.gf) || 0;
+    comps[c].gc += parseInt(p.gc) || 0;
+    if(p.resultado === 'Victoria') comps[c].v++;
+    else if(p.resultado === 'Empate') comps[c].e++;
+    else if(p.resultado === 'Derrota') comps[c].d++;
+  }
+  const compOrderKey = (name) => {
+    const s = (name || '').toLowerCase();
+    if(s.indexOf('pret') !== -1) return 1;
+    if(s.indexOf('futgal') !== -1 || s.indexOf('liga') !== -1) return 2;
+    if(s.indexOf('copa') !== -1) return 3;
+    return 4;
+  };
+  const sortedComps = Object.entries(comps).sort((a, b) => compOrderKey(a[0]) - compOrderKey(b[0]));
+  document.getElementById('rendimientoComp').innerHTML = sortedComps.map(([c,v]) => `<div class="flex items-center justify-between mb-12"><div><div style="font-size:13px;font-weight:700">${getCompIcon(c)} ${c}</div><div style="font-size:11px;color:var(--text-muted)">${v.total}p GF:${v.gf} GC:${v.gc}</div></div><div class="flex gap-8" style="font-size:12px;font-weight:700"><span class="text-success">${v.v}V</span><span class="text-warning">${v.e}E</span><span class="text-red">${v.d}D</span></div></div>`).join('') || '<div style="color:var(--text-dim);font-size:13px">Sin datos.</div>';
+  
+  const L = played.filter(p => p.condicion === 'Local');
+  const V = played.filter(p => p.condicion === 'Visitante');
+  const lv = (a, r) => a.filter(p => p.resultado === r).length;
+  document.getElementById('localVsVisitante').innerHTML = `<div class="flex justify-between mb-16"><div class="text-center"><div style="font-size:24px;font-weight:900">${L.length}</div><div style="font-size:11px;color:var(--text-muted)">En casa</div><div style="font-size:12px;margin-top:6px"><span class="text-success">${lv(L,'Victoria')}V</span> <span class="text-warning">${lv(L,'Empate')}E</span> <span class="text-red">${lv(L,'Derrota')}D</span></div></div><div style="width:1px;background:var(--border)"></div><div class="text-center"><div style="font-size:24px;font-weight:900">${V.length}</div><div style="font-size:11px;color:var(--text-muted)">Fuera</div><div style="font-size:12px;margin-top:6px"><span class="text-success">${lv(V,'Victoria')}V</span> <span class="text-warning">${lv(V,'Empate')}E</span> <span class="text-red">${lv(V,'Derrota')}D</span></div></div></div><div class="detail-key">GF local: ${L.reduce((sum,p)=>sum+(parseInt(p.gf)||0),0)} - GC local: ${L.reduce((sum,p)=>sum+(parseInt(p.gc)||0),0)}</div><div class="detail-key mt-8">GF visitante: ${V.reduce((sum,p)=>sum+(parseInt(p.gf)||0),0)} - GC visitante: ${V.reduce((sum,p)=>sum+(parseInt(p.gc)||0),0)}</div>`;
+  
+  const parseMatchDate = (str) => {
+    if (!str) return 0;
+    const parts = str.split('/');
+    if (parts.length === 3) return new Date(`${parts[2]}-${parts[1]}-${parts[0]}`).getTime();
+    return 0;
+  };
+  const sortedPlayed = [...played].sort((a, b) => (parseMatchDate(a.fecha) || a.id || 0) - (parseMatchDate(b.fecha) || b.id || 0));
+  const ult = sortedPlayed.slice(-8);
+  const rachaEl = document.getElementById('rachaActual');
+  if(rachaEl){
+    if(!ult.length){
+      rachaEl.innerHTML = '<span style="color:var(--text-dim);font-size:13px">Sin partidos jugados todavía esta temporada.</span>';
+    } else {
+      rachaEl.innerHTML = ult.map(p => {
+        const isV = p.resultado === 'Victoria';
+        const isD = p.resultado === 'Derrota';
+        const isE = p.resultado === 'Empate';
+        const l = isV ? 'V' : (isD ? 'D' : 'E');
+        const bg = isV ? 'rgba(34,197,94,0.18)' : (isD ? 'rgba(239,68,68,0.18)' : 'rgba(245,158,11,0.18)');
+        const border = isV ? 'rgba(34,197,94,0.45)' : (isD ? 'rgba(239,68,68,0.45)' : 'rgba(245,158,11,0.45)');
+        const color = isV ? '#16a34a' : (isD ? '#dc2626' : '#d97706');
+        const isHome = p.condicion === 'Local';
+        const score = isHome ? `${p.gf}-${p.gc}` : `${p.gc}-${p.gf}`;
+        const rival = p.rival || 'Rival';
+        const comp = p.codigo || p.competicion || 'Partido';
+        const tooltip = `${p.fecha || ''} · ${comp}: ${isHome ? 'Dorneda ' + score + ' ' + rival : rival + ' ' + score + ' Dorneda'} (${p.resultado})`;
+        
+        return `<div title="${tooltip}" onclick="showDetallePartido(${p.id})" style="width:38px;height:38px;border-radius:9px;background:${bg};border:1.5px solid ${border};color:${color};display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;cursor:pointer;transition:transform 0.15s, box-shadow 0.15s;box-shadow:0 1px 3px rgba(0,0,0,0.06);" onmouseenter="this.style.transform='scale(1.1)'" onmouseleave="this.style.transform='none'">${l}</div>`;
+      }).join('');
+    }
+  }
 }
 
 function sortGoleadores(field){
@@ -9147,6 +9992,7 @@ function renderJornadasWidget(){
 function showDetallePartido(id){
   const p = db.partidos.find(x => x.id === id);
   if(!p) return;
+  closeModal('modalJugador');
   const isPlayed = p.resultado && p.gf !== null && p.gf !== undefined;
   const isHome = p.condicion === 'Local';
   const badgeCls = compBadge(p.competicion);
@@ -9156,7 +10002,7 @@ function showDetallePartido(id){
   if(titleEl){
     titleEl.innerHTML = `
       <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-        <span class="badge ${badgeCls}">${p.competicion || 'Partido'}</span>
+        <span class="badge ${badgeCls}">${getCompIcon(p.competicion)} ${p.competicion || 'Partido'}</span>
         <span>${p.codigo || ''} &middot; ${p.fecha || ''}</span>
         ${(p.horaPartido || p.hora) ? `<span class="badge" style="background:rgba(37,99,235,0.12);color:#60a5fa;border:1px solid rgba(37,99,235,0.25);font-size:10px;font-weight:700">⏰ ${p.horaPartido || p.hora}</span>` : ''}
       </div>
@@ -9473,9 +10319,9 @@ function renderMatchStepper(step){
       <div class="form-row">
         <div class="form-group"><label class="form-label">Competición</label>
           <select class="form-control" id="mComp" onchange="newMatchState.competicion=this.value">
-            <option ${newMatchState.competicion==='Primera Futgal'?'selected':''}>Primera Futgal</option>
-            <option ${newMatchState.competicion==='Pretemporada'?'selected':''}>Pretemporada</option>
-            <option ${newMatchState.competicion==='Copa da Costa'||newMatchState.competicion==='Copa Federacion A Coruna'?'selected':''}>Copa da Costa</option>
+            <option value="Primera Futgal" ${newMatchState.competicion==='Primera Futgal'?'selected':''}>⚽ Primera Futgal (Liga)</option>
+            <option value="Pretemporada" ${newMatchState.competicion==='Pretemporada'?'selected':''}>⏱️ Pretemporada</option>
+            <option value="Copa da Costa" ${newMatchState.competicion==='Copa da Costa'||newMatchState.competicion==='Copa Federacion A Coruna'?'selected':''}>🏆 Copa da Costa / Copa Federación</option>
           </select>
         </div>
         <div class="form-group"><label class="form-label">Código (ej. J1, Pret_1, C_32avos)</label>
@@ -9695,7 +10541,7 @@ function deletePartido(id){
 
 // CALENDAR FUNCTIONS
 let calCurrentView = 'timeline';
-let calendarioFilterComp = 'todos';
+let calendarioFilterComp = 'Liga';
 
 function filterCalendarioComp(comp, el){
   calendarioFilterComp = comp;

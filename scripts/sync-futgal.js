@@ -88,7 +88,7 @@ async function getFirestoreDB() {
           if (res.statusCode >= 200 && res.statusCode < 300) {
             const json = JSON.parse(data);
             if (json.fields && json.fields.db) {
-              const dbObj = convertFirestoreMapToObject(json.fields.db);
+              const dbObj = convertFirestoreValue(json.fields.db);
               resolve(dbObj);
             } else {
               resolve(null);
@@ -284,10 +284,59 @@ async function runSync() {
   // 3. Obtener DB actual de Firestore
   console.log(`\n=== Obteniendo datos actuales de Firebase Firestore... ===`);
   let currentDB = await getFirestoreDB();
-  if (!currentDB) {
-    console.warn(`No se pudo obtener DB de Firestore o está vacía. Intentando cargar datos por defecto...`);
-    // Cargar archivo dorneda-app.html para extraer DEFAULT_DATA si fuera necesario
-    currentDB = { partidos: [], calendario: [], todasJornadas: [], copaJornadas: [] };
+
+  // Cargar base de seguridad si Firestore está vacío o incompleto
+  const backupDir = path.join(__dirname, '..', 'Archivos', 'backups');
+  let safetyDB = null;
+  if (fs.existsSync(backupDir)) {
+    const backupFiles = fs.readdirSync(backupDir).filter(f => f.endsWith('.json')).sort().reverse();
+    for (const bf of backupFiles) {
+      try {
+        let raw = fs.readFileSync(path.join(backupDir, bf), 'utf8');
+        if (raw.charCodeAt(0) === 0xFEFF) raw = raw.slice(1);
+        const parsed = JSON.parse(raw);
+        const candidate = parsed.fields && parsed.fields.db ? convertFirestoreValue(parsed.fields.db) : parsed;
+        if (candidate && candidate.jugadores && candidate.jugadores.length >= 25) {
+          safetyDB = candidate;
+          console.log(`✓ Base de datos de seguridad cargada desde backup ${bf}`);
+          break;
+        }
+      } catch (e) {}
+    }
+  }
+
+  if (!currentDB || !currentDB.jugadores || currentDB.jugadores.length < 25 || !currentDB.partidos || currentDB.partidos.length < 30) {
+    console.warn(`Firestore contiene datos parciales o vacíos. Restaurando base completa desde seguridad...`);
+    if (safetyDB) {
+      currentDB = JSON.parse(JSON.stringify(safetyDB));
+    } else {
+      currentDB = { jugadores: [], partidos: [], calendario: [], todasJornadas: [], copaJornadas: [], economia: { cuotas: [] }, clasificacion: [] };
+    }
+  } else if (safetyDB) {
+    // Fusión de campos clave de seguridad (fotos, notas, cuotas)
+    if (safetyDB.jugadores && currentDB.jugadores) {
+      safetyDB.jugadores.forEach(sj => {
+        const cj = currentDB.jugadores.find(j => j.id === sj.id || (j.nombre && sj.nombre && j.nombre.toLowerCase() === sj.nombre.toLowerCase()));
+        if (cj) {
+          if (sj.foto && !cj.foto) cj.foto = sj.foto;
+          if (sj.notas && !cj.notas) cj.notas = sj.notas;
+        } else {
+          currentDB.jugadores.push(sj);
+        }
+      });
+    }
+    if (safetyDB.partidos && currentDB.partidos) {
+      safetyDB.partidos.forEach(sp => {
+        if (sp.codigo && sp.codigo.startsWith('Pret_')) {
+          if (!currentDB.partidos.some(p => p.codigo === sp.codigo)) {
+            currentDB.partidos.unshift(sp);
+          }
+        }
+      });
+    }
+    if (safetyDB.economia && (!currentDB.economia || !currentDB.economia.cuotas || currentDB.economia.cuotas.length === 0)) {
+      currentDB.economia = safetyDB.economia;
+    }
   }
 
   // 4. Merge no destructivo
@@ -304,6 +353,12 @@ async function runSync() {
   if (logs.length > 0) {
     console.log(`\nCambios detectados:`);
     logs.forEach(l => console.log(`  • [${l.fecha} ${l.hora}] ${l.detalle}`));
+  }
+
+  // Validación de integridad estricta antes de escribir en Firestore
+  if (!updatedDB.jugadores || updatedDB.jugadores.length < 25 || !updatedDB.partidos || updatedDB.partidos.length < 35) {
+    console.error(`✗ ERROR: La base de datos resultante no supera el test de integridad (jugadores: ${updatedDB.jugadores?.length}, partidos: ${updatedDB.partidos?.length}). Abortando escritura en Firestore para proteger datos.`);
+    return;
   }
 
   // 5. Guardar en Firestore
@@ -339,4 +394,11 @@ if (require.main === module) {
   });
 }
 
-module.exports = { runSync, fetchWithCookies, getFirestoreDB, saveFirestoreDB };
+module.exports = {
+  runSync,
+  fetchWithCookies,
+  getFirestoreDB,
+  saveFirestoreDB,
+  convertFirestoreValue,
+  convertFirestoreMapToObject
+};
