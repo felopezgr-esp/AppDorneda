@@ -9373,7 +9373,10 @@ function renderEquiposView(){
   const equipos = db.equipos || DEFAULT_DATA.equipos || [];
   grid.innerHTML = equipos.map(eq => {
     const isDorneda = (eq.nombre || '').indexOf('Dorneda') !== -1;
-    const cardBorder = isDorneda ? 'border:2px solid var(--red-primary);background:rgba(220,38,38,0.04);' : 'border:1px solid var(--border);background:var(--surface2);';
+    const cardBorder = isDorneda ? 'border:2px solid var(--red-light);background:rgba(204,0,0,0.04);' : 'border:1px solid var(--border);background:var(--surface2);';
+    const plantilla = eq.plantilla || [];
+    const cuerpoTecnico = eq.cuerpoTecnico || [];
+    const toggleId = `roster-team-${eq.id}`;
 
     return `<div class="card" style="${cardBorder}padding:14px;border-radius:var(--radius-md);display:flex;flex-direction:column;gap:10px;">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;border-bottom:1px solid var(--border);padding-bottom:8px;">
@@ -9387,17 +9390,72 @@ function renderEquiposView(){
       <div style="font-size:12px;display:flex;flex-direction:column;gap:4px;color:var(--text);">
         <div>🏟️ <strong>Campo:</strong> ${eq.campo}</div>
         <div>📍 <strong>Dirección:</strong> <span style="color:var(--text-muted)">${eq.direccion}</span></div>
-        <div>📞 <strong>Contacto:</strong> ${eq.contacto} ${eq.telefono ? `&middot; <a href="tel:${eq.telefono}" style="color:var(--primary);text-decoration:none;font-weight:700;">${eq.telefono}</a>` : ''}</div>
+        <div>📞 <strong>Contacto:</strong> ${eq.contacto} ${eq.telefono ? `&middot; <a href="tel:${eq.telefono}" style="color:var(--info);text-decoration:none;font-weight:700;">${eq.telefono}</a>` : ''}</div>
       </div>
 
       <div style="background:var(--surface3);border-radius:6px;padding:8px 10px;font-size:11.5px;display:flex;flex-direction:column;gap:4px;">
         <div>👕 <strong>1ª Equipación:</strong> ${eq.equipacion1 ? `${eq.equipacion1.camiseta} / ${eq.equipacion1.pantalon} / ${eq.equipacion1.medias}` : '-'}</div>
         <div>🎽 <strong>2ª Equipación:</strong> ${eq.equipacion2 ? `${eq.equipacion2.camiseta} / ${eq.equipacion2.pantalon} / ${eq.equipacion2.medias}` : '-'}</div>
       </div>
+
+      <!-- SECCIÓN PLANTILLA Y CUERPO TÉCNICO -->
+      <div style="margin-top:2px;border-top:1px solid var(--border);padding-top:8px;">
+        <button type="button" class="btn btn-ghost btn-sm" onclick="toggleTeamRoster('${toggleId}')" style="width:100%;justify-content:space-between;font-size:11px;font-weight:700;padding:6px 10px;background:var(--surface);border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;">
+          <span>👥 Plantilla y Cuerpo Técnico (${plantilla.length} Jugadores${cuerpoTecnico.length ? ` · ${cuerpoTecnico.length} Técnicos` : ''})</span>
+          <span id="arrow-${toggleId}" style="transition:transform 0.2s;font-size:10px;">▼</span>
+        </button>
+
+        <div id="${toggleId}" style="display:none;margin-top:8px;flex-direction:column;gap:8px;">
+          ${cuerpoTecnico.length > 0 ? `
+            <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px 10px;">
+              <div style="font-size:10px;font-weight:800;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">👔 Cuerpo Técnico</div>
+              <div style="display:flex;flex-wrap:wrap;gap:5px;">
+                ${cuerpoTecnico.map(ct => `
+                  <span class="badge" style="background:var(--surface2);border:1px solid var(--border);font-size:10.5px;padding:3px 7px;display:inline-flex;gap:4px;">
+                    <strong style="color:var(--info);">${ct.cargo || 'Técnico'}:</strong> <span>${ct.nombre}</span>
+                  </span>
+                `).join('')}
+              </div>
+            </div>
+          ` : ''}
+
+          ${plantilla.length > 0 ? `
+            <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px 10px;">
+              <div style="font-size:10px;font-weight:800;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">⚽ Jugadores (${plantilla.length})</div>
+              <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(130px, 1fr));gap:5px;">
+                ${plantilla.map((p, pIdx) => `
+                  <div style="font-size:11px;padding:4px 6px;background:var(--surface2);border:1px solid var(--border);border-radius:4px;display:flex;align-items:center;gap:5px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+                    <span style="font-weight:800;color:var(--text-dim);font-size:9.5px;min-width:16px;">${p.dorsal ? `#${p.dorsal}` : `${pIdx + 1}`}</span>
+                    <span style="font-weight:600;color:var(--text);overflow:hidden;text-overflow:ellipsis;" title="${p.nombre}">${p.nombre}</span>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          ` : `
+            <div style="padding:8px;font-size:11px;color:var(--text-dim);text-align:center;font-style:italic;background:var(--surface);border:1px solid var(--border);border-radius:6px;">
+              ℹ️ Plantilla oficial en proceso de inscripción federativa.
+            </div>
+          `}
+        </div>
+      </div>
     </div>`;
   }).join('');
 }
 window.renderEquiposView = renderEquiposView;
+
+function toggleTeamRoster(id){
+  const el = document.getElementById(id);
+  const arrow = document.getElementById('arrow-' + id);
+  if(!el) return;
+  if(el.style.display === 'none' || el.style.display === ''){
+    el.style.display = 'flex';
+    if(arrow) arrow.style.transform = 'rotate(180deg)';
+  } else {
+    el.style.display = 'none';
+    if(arrow) arrow.style.transform = 'rotate(0deg)';
+  }
+}
+window.toggleTeamRoster = toggleTeamRoster;
 
 
 // ==========================================
