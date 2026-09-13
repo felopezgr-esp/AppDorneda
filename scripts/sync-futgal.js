@@ -299,28 +299,66 @@ async function runSync() {
     }
   }
 
-  // 4. Sincronizar Actas de partidos jugados de Dorneda
-  console.log(`\n=== Consultando ACTAS oficiales de partidos jugados... ===`);
-  const allDornedaMatches = [];
+  // 4. Sincronizar Actas de todos los partidos de Liga disputados (para Goleadores / Pichichi) y de Dorneda
+  console.log(`\n=== Consultando ACTAS oficiales de todos los partidos jugados en la Liga... ===`);
+  const allPlayedLeagueMatches = [];
   if (futgalResults.liga) {
-    futgalResults.liga.forEach(jl => jl.forEach(m => { if (m.dorneda && m.enlaceActa && (m.gl !== null || m.estado === 'Finalizado')) allDornedaMatches.push(m); }));
+    futgalResults.liga.forEach(jl => jl.forEach(m => {
+      if (m.enlaceActa && (m.gl !== null || m.estado === 'Finalizado' || (m.gl === null && m.gv === null && m.fecha && /2026/.test(m.fecha)))) {
+        // Incluir si tiene enlace de acta
+        allPlayedLeagueMatches.push(m);
+      }
+    }));
   }
-  if (futgalResults.copa) {
-    futgalResults.copa.forEach(cl => cl.forEach(m => { if (m.dorneda && m.enlaceActa && (m.gl !== null || m.estado === 'Finalizado')) allDornedaMatches.push(m); }));
-  }
-  for (const dm of allDornedaMatches) {
+
+  const scorersMap = {}; // { 'Jugador|Equipo': { jugador, equipo, goles, penaltis, pj } }
+
+  for (const lm of allPlayedLeagueMatches) {
     try {
-      console.log(`  🔍 Descargando acta: ${dm.enlaceActa}...`);
-      const { html } = await fetchWithCookies(dm.enlaceActa);
+      console.log(`  🔍 Consultando acta: J${lm.jornada} ${lm.local} vs ${lm.visitante}...`);
+      const { html } = await fetchWithCookies(lm.enlaceActa);
       const actaData = parseFutgalActaHtml(html);
       if (actaData) {
-        dm.actaParsed = actaData;
-        console.log(`  ✓ Acta procesada: ${actaData.allGoles ? actaData.allGoles.length : 0} goles registrados`);
+        lm.actaParsed = actaData;
+        if (actaData.arbitro && !lm.arbitro) lm.arbitro = actaData.arbitro;
+        if (actaData.campo && !lm.campo) lm.campo = actaData.campo;
+
+        // Procesar goles para la tabla de Pichichi / Goleadores de Liga
+        if (actaData.allGoles && actaData.allGoles.length > 0) {
+          actaData.allGoles.forEach(g => {
+            if (!g.rawScorer) return;
+            // Identificar equipo del goleador si es posible o usar local/visitante
+            const team = lm.dorneda ? (lm.condicionDorneda === 'Local' ? lm.local : lm.visitante) : (lm.local || 'Equipo');
+            const key = `${g.rawScorer}|${team}`;
+            if (!scorersMap[key]) {
+              scorersMap[key] = {
+                jugador: g.rawScorer,
+                equipo: team,
+                goles: 0,
+                penaltis: 0,
+                pj: 1
+              };
+            }
+            scorersMap[key].goles += 1;
+            if (g.penalti) scorersMap[key].penaltis += 1;
+          });
+        }
       }
     } catch (err) {
-      console.error(`  ✗ Error al descargar acta ${dm.enlaceActa}:`, err.message);
+      console.error(`  ✗ Error al consultar acta ${lm.enlaceActa}:`, err.message);
     }
-    await new Promise(r => setTimeout(r, 200));
+    await new Promise(r => setTimeout(r, 150));
+  }
+
+  // Convertir mapa de goleadores a lista ordenada
+  const leagueScorersList = Object.values(scorersMap).sort((a, b) => {
+    if (b.goles !== a.goles) return b.goles - a.goles;
+    return a.jugador.localeCompare(b.jugador);
+  });
+
+  if (leagueScorersList.length > 0) {
+    console.log(`  ✓ Tabla de Goleadores (Pichichi) compilada: ${leagueScorersList.length} goleadores.`);
+    futgalResults.ligaGoleadores = leagueScorersList;
   }
 
   // 5. Obtener DB actual de Firestore

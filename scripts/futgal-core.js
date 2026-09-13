@@ -654,6 +654,11 @@ function mergeFutgalDataIntoDB(currentDB, futgalResults) {
     db.clasificacion = futgalResults.clasificacion;
   }
 
+  // 4. Procesar Goleadores (Pichichi) de Liga
+  if (futgalResults.ligaGoleadores && futgalResults.ligaGoleadores.length > 0) {
+    db.ligaGoleadores = futgalResults.ligaGoleadores;
+  }
+
   // Actualizar metadatos de sincronización
   db.futgalSync.lastSuccess = timestampStr;
   db.futgalSync.status = 'success';
@@ -749,6 +754,70 @@ function parseFutgalClasificacionHtml(html) {
   return result;
 }
 
+// Diccionario de correspondencia de nombres federativos oficiales de la RFGF a los alias del Xuventude Dorneda
+const DORNEDA_PLAYER_ALIASES = [
+  { alias: 'Coté', names: ['aguado pernas, jose l', 'aguado pernas, jose luis', 'aguado, jose', 'cote'] },
+  { alias: 'Cata', names: ['garcia dapia, jose ignacio', 'garcia dapia, jose i', 'garcia, jose ignacio', 'cata'] },
+  { alias: 'Boliche', names: ['sanchez vieiro, sergio', 'sanchez, sergio', 'boliche'] },
+  { alias: 'Nolas', names: ['barrenechea padin, jose', 'barrenechea, jose', 'nolas'] },
+  { alias: 'Manu', names: ['blanco canosa, manuel', 'blanco, manuel', 'manu'] },
+  { alias: 'Felipe', names: ['lopez granado, felipe', 'lopez, felipe', 'felipe'] },
+  { alias: 'Meilan', names: ['meilan fernandez, pablo', 'meilan, pablo', 'meilan'] },
+  { alias: 'Carro', names: ['carro canosa, diego', 'carro, diego', 'carro'] },
+  { alias: 'Suso', names: ['vazquez varela, jesus', 'vazquez, jesus', 'suso'] },
+  { alias: 'David', names: ['diaz lago, david', 'diaz, david', 'david'] },
+  { alias: 'Marcos', names: ['otero blanco, marcos', 'otero, marcos', 'marcos'] },
+  { alias: 'Nacho', names: ['garcia vazquez, ignacio', 'garcia, ignacio', 'nacho'] },
+  { alias: 'Jorge', names: ['castro rodriguez, jorge', 'castro, jorge', 'jorge'] },
+  { alias: 'Alberto', names: ['mendez blanco, alberto', 'mendez, alberto', 'alberto'] },
+  { alias: 'Fran', names: ['martinez perez, francisco', 'martinez, francisco', 'fran'] },
+  { alias: 'Manuly', names: ['santos varela, manuel', 'santos, manuel', 'manuly'] },
+  { alias: 'Pena', names: ['rejo gomez, jorge', 'rejo, jorge', 'pena'] },
+  { alias: 'Fonato', names: ['vidal gonzalez, alfonso', 'vidal, alfonso', 'fonato'] },
+  { alias: 'Brais', names: ['rodriguez vazquez, brais', 'rodriguez, brais', 'brais'] },
+  { alias: 'Oscar', names: ['vazquez mallo, oscar', 'vazquez, oscar', 'oscar'] },
+  { alias: 'Javi', names: ['suarez fernandez, javier', 'suarez, javier', 'javi'] },
+  { alias: 'Borja', names: ['ferreiro varela, borja', 'ferreiro, borja', 'borja'] },
+  { alias: 'Casti', names: ['castineiras iglesias, miguel', 'castineiras, miguel', 'casti'] },
+  { alias: 'Hugo', names: ['villar fontenla, hugo', 'villar, hugo', 'hugo'] },
+  { alias: 'Alfonso', names: ['souto lopez, alfonso', 'souto, alfonso', 'alfonso'] }
+];
+
+/**
+ * Empareja un nombre federativo oficial con el alias de la plantilla del Dorneda
+ */
+function matchPlayerNameToDornedaAlias(officialName, currentSquad = []) {
+  if (!officialName) return '';
+  const normOfficial = normalizeNameStr(officialName);
+
+  // 1. Buscar en diccionario estático de alias conocidos
+  for (const item of DORNEDA_PLAYER_ALIASES) {
+    if (item.names.some(n => normOfficial.includes(n) || n.includes(normOfficial))) {
+      return item.alias;
+    }
+  }
+
+  // 2. Buscar por coincidencia con la lista actual de jugadores
+  if (currentSquad && currentSquad.length > 0) {
+    for (const j of currentSquad) {
+      const normJ = normalizeNameStr(j.nombre);
+      const normOf = normalizeNameStr(j.nombreOficial || '');
+      if (normOfficial.includes(normJ) || (normOf && normOfficial.includes(normOf))) {
+        return j.nombre;
+      }
+    }
+  }
+
+  // 3. Si no coincide, formatear el nombre original (Nombre + Primer Apellido)
+  const parts = officialName.split(',').map(s => s.trim());
+  if (parts.length === 2) {
+    const firstName = parts[1].split(' ')[0];
+    const lastName = parts[0].split(' ')[0];
+    return `${firstName} ${lastName}`;
+  }
+  return officialName.trim();
+}
+
 function parseFutgalActaHtml(input) {
   if (!input || typeof input !== 'string') return null;
   const str = input.trim();
@@ -768,7 +837,6 @@ function parseFutgalActaHtml(input) {
 
   let localTeam = '';
   let visitTeam = '';
-  let competition = '';
   let jornada = null;
   let fecha = '';
   let horaPartido = '';
@@ -778,15 +846,13 @@ function parseFutgalActaHtml(input) {
   let codActa = '';
   let enlaceActa = '';
   
-  let dornedaTitulares = [];
-  let dornedaSuplentes = [];
-  let dornedaTarjetas = [];
-  let dornedaStaff = [];
-  
-  let rivalTitulares = [];
-  let rivalSuplentes = [];
-  let rivalTarjetas = [];
-  let rivalStaff = [];
+  let localTitulares = [];
+  let localSuplentes = [];
+  let visitTitulares = [];
+  let visitSuplentes = [];
+
+  let localTarjetas = [];
+  let visitTarjetas = [];
 
   let allGoles = [];
 
@@ -802,14 +868,14 @@ function parseFutgalActaHtml(input) {
   if (teamVMatch) visitTeam = clean(teamVMatch[1].replace(/<[^>]*>/g, ''));
 
   const jMatch = str.match(/Jornada\s*(\d+)/i);
-  if (jMatch) jornada = parseInt(jMatch[1]);
+  if (jMatch) jornada = parseInt(jMatch[1], 10);
   const fMatch = str.match(/(\d{2}[-/]\d{2}[-/]\d{4})/);
   if (fMatch) fecha = fMatch[1].replace(/-/g, '/');
   const hMatch = str.match(/(\d{2}:\d{2})\s*h/i) || str.match(/(\d{2}:\d{2})/);
   if (hMatch) horaPartido = hMatch[1];
 
-  const arbMatch = str.match(/&Aacute;rbitro[:\s]*<\/strong>\s*&nbsp;([^<]+)|Árbitro[:\s]*<strong>([^<]+)/i);
-  if (arbMatch) arbitro = clean(arbMatch[1] || arbMatch[2]);
+  const arbMatch = str.match(/&Aacute;rbitro[:\s]*<\/strong>\s*&nbsp;([^<]+)|Árbitro[:\s]*<strong>([^<]+)|&Aacute;rbitro:\s*([^<]+)/i);
+  if (arbMatch) arbitro = clean(arbMatch[1] || arbMatch[2] || arbMatch[3]);
 
   const campoMatch = str.match(/NFG_VisCampos[^>]*>([^<]+)<\/a>/i);
   if (campoMatch) campo = clean(campoMatch[1]);
@@ -817,25 +883,52 @@ function parseFutgalActaHtml(input) {
   const ciudadMatch = str.match(/Ciudad:\s*([^<]+)/i);
   if (ciudadMatch) ciudad = clean(ciudadMatch[1]);
 
-  // Extract goals
-  const golBlockMatch = str.match(/<div[^>]*class=["'][^"']*dashboard-stat[^"']*["'][^>]*>[\s\S]*?Goles[\s\S]*?<\/table>/i);
-  if (golBlockMatch) {
+  // Extraer Jugadores de Alineaciones
+  // Buscar tablas o bloques de titulares y suplentes
+  const playerRegex = /NFG_VisJugador\?cod_primaria=1000121&codigo_jugador=(\d+)[^>]*>([^<]+)<\/a>/gi;
+  
+  // Dividir el HTML en bloques de local y visitante si es posible
+  const isLocalDorneda = isDornedaTeam(localTeam);
+  const isVisitanteDorneda = isDornedaTeam(visitTeam);
+
+  // Parsear lista de jugadores genérica
+  const allPlayersInActa = [];
+  let pm;
+  while ((pm = playerRegex.exec(str)) !== null) {
+    allPlayersInActa.push({
+      id: pm[1],
+      nombreOficial: clean(pm[2])
+    });
+  }
+
+  // Extraer goles con autor y minuto
+  const golBlockRegex = /<tr[^>]*>[\s\S]*?(?:minuto|\(\d+[\'’]?\))[\s\S]*?<\/tr>/gi;
+  // Búsqueda más precisa de goles
+  const directGoalRegex = /(?:(\d+)[\'’]?\s*(?:minuto|min)?\s*[-–:]?\s*)?([A-ZÁÉÍÓÚÑa-záéíóúñ\s,.-]+?)\s*(?:\((\d+)[\'’]?\))(?:\s*\(p\s*(?:enalti)?\))?/gi;
+  
+  // Buscar filas en la sección de goles
+  const golesSection = str.match(/<div[^>]*class=["'][^"']*dashboard-stat[^"']*["'][^>]*>[\s\S]*?Goles[\s\S]*?<\/table>/i);
+  if (golesSection) {
     const trRegex = /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
     let trM;
-    while ((trM = trRegex.exec(golBlockMatch[0])) !== null) {
+    while ((trM = trRegex.exec(golesSection[0])) !== null) {
       const row = trM[1];
-      const minM = row.match(/\((\d+)[\'’]?\)/);
-      const minuto = minM ? parseInt(minM[1]) : null;
-      const textCell = row.replace(/<[^>]*>/g, ' ').replace(/\(\d+[\'’]?\)/, '');
+      if (row.includes('<th')) continue;
+      const minM = row.match(/\((\d+)[\'’]?\)/) || row.match(/(\d+)[\'’]/);
+      const minuto = minM ? parseInt(minM[1], 10) : null;
+      const isPenalti = /penalti|\(p\)/i.test(row);
+      const textCell = row.replace(/<[^>]*>/g, ' ').replace(/\(\d+[\'’]?\)/g, '').replace(/penalti|\(p\)/gi, '');
       const rawScorer = clean(textCell);
-      if (minuto || rawScorer) {
-        allGoles.push({ minuto, rawScorer, tipo: 'Jugada' });
+      if (rawScorer) {
+        allGoles.push({
+          minuto,
+          rawScorer,
+          penalti: isPenalti,
+          tipo: isPenalti ? 'Penalti' : 'Jugada'
+        });
       }
     }
   }
-
-  const isLocalDorneda = isDornedaTeam(localTeam);
-  const isVisitanteDorneda = isDornedaTeam(visitTeam);
 
   return {
     localTeam,
@@ -850,6 +943,7 @@ function parseFutgalActaHtml(input) {
     enlaceActa,
     isLocalDorneda,
     isVisitanteDorneda,
+    allPlayersInActa,
     allGoles
   };
 }
@@ -860,8 +954,10 @@ if (typeof module !== 'undefined' && module.exports) {
     FUTGAL_COMPETITIONS,
     DORNEDA_INFO,
     NOVANET_D_ARRAY,
+    DORNEDA_PLAYER_ALIASES,
     normalizeNameStr,
     isDornedaTeam,
+    matchPlayerNameToDornedaAlias,
     decodeFutgalScoreSpan,
     parseFutgalJornadaHtml,
     parseFutgalClasificacionHtml,
@@ -873,4 +969,5 @@ if (typeof module !== 'undefined' && module.exports) {
     mergeFutgalDataIntoDB
   };
 }
+
 

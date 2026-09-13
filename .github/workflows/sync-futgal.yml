@@ -2,8 +2,14 @@ name: Sincronización Automática con FUTGAL
 
 on:
   schedule:
-    # Ejecución automática diaria a las 04:00 UTC (06:00 hora peninsular española / Madrid)
-    - cron: '0 4 * * *'
+    # 1. Sábados a las 23:00 hora española peninsular (21:00 UTC)
+    - cron: '0 21 * * 6'
+    # 2. Domingos a las 15:00 hora española peninsular (13:00 UTC)
+    - cron: '0 13 * * 0'
+    # 3. Domingos a las 23:00 hora española peninsular (21:00 UTC)
+    - cron: '0 21 * * 0'
+    # 4. Lunes a las 06:00 hora española peninsular (04:00 UTC)
+    - cron: '0 4 * * 1'
   workflow_dispatch:
     # Permite la ejecución manual bajo demanda desde GitHub Actions o API
 
