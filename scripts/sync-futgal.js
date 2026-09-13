@@ -10,6 +10,8 @@ const path = require('path');
 const {
   FUTGAL_COMPETITIONS,
   parseFutgalJornadaHtml,
+  parseFutgalClasificacionHtml,
+  parseFutgalActaHtml,
   buildFutgalUrl,
   mergeFutgalDataIntoDB,
   getMadridFormattedTimestamp
@@ -281,7 +283,47 @@ async function runSync() {
     }
   }
 
-  // 3. Obtener DB actual de Firestore
+  // 3. Sincronizar Clasificación
+  if (ligaConfig) {
+    console.log(`\n=== Consultando CLASIFICACIÓN (${ligaConfig.nombre}) ===`);
+    const clasifUrl = `https://www.futgal.es/pnfg/NPcd/NFG_VisClasificacion?cod_primaria=1000120&codcompeticion=${ligaConfig.codCompeticion}&codgrupo=${ligaConfig.codGrupo}&cod_agrupacion=1`;
+    try {
+      const { html } = await fetchWithCookies(clasifUrl);
+      const clasifData = parseFutgalClasificacionHtml(html);
+      if (clasifData && clasifData.length > 0) {
+        console.log(`  ✓ Clasificación descargada: ${clasifData.length} equipos`);
+        futgalResults.clasificacion = clasifData;
+      }
+    } catch (err) {
+      console.error(`  ✗ Error al consultar Clasificación:`, err.message);
+    }
+  }
+
+  // 4. Sincronizar Actas de partidos jugados de Dorneda
+  console.log(`\n=== Consultando ACTAS oficiales de partidos jugados... ===`);
+  const allDornedaMatches = [];
+  if (futgalResults.liga) {
+    futgalResults.liga.forEach(jl => jl.forEach(m => { if (m.dorneda && m.enlaceActa && (m.gl !== null || m.estado === 'Finalizado')) allDornedaMatches.push(m); }));
+  }
+  if (futgalResults.copa) {
+    futgalResults.copa.forEach(cl => cl.forEach(m => { if (m.dorneda && m.enlaceActa && (m.gl !== null || m.estado === 'Finalizado')) allDornedaMatches.push(m); }));
+  }
+  for (const dm of allDornedaMatches) {
+    try {
+      console.log(`  🔍 Descargando acta: ${dm.enlaceActa}...`);
+      const { html } = await fetchWithCookies(dm.enlaceActa);
+      const actaData = parseFutgalActaHtml(html);
+      if (actaData) {
+        dm.actaParsed = actaData;
+        console.log(`  ✓ Acta procesada: ${actaData.allGoles ? actaData.allGoles.length : 0} goles registrados`);
+      }
+    } catch (err) {
+      console.error(`  ✗ Error al descargar acta ${dm.enlaceActa}:`, err.message);
+    }
+    await new Promise(r => setTimeout(r, 200));
+  }
+
+  // 5. Obtener DB actual de Firestore
   console.log(`\n=== Obteniendo datos actuales de Firebase Firestore... ===`);
   let currentDB = await getFirestoreDB();
 

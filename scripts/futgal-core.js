@@ -649,6 +649,9 @@ function mergeFutgalDataIntoDB(currentDB, futgalResults) {
         }
       }
     });
+  // 3. Procesar Clasificación
+  if (futgalResults.clasificacion && futgalResults.clasificacion.length > 0) {
+    db.clasificacion = futgalResults.clasificacion;
   }
 
   // Actualizar metadatos de sincronización
@@ -673,6 +676,160 @@ function mergeFutgalDataIntoDB(currentDB, futgalResults) {
   };
 }
 
+function parseFutgalClasificacionHtml(html) {
+  const result = [];
+  if (!html) return result;
+  const tableRegex = /<table[^>]*>([\s\S]*?)<\/table>/gi;
+  let m;
+  while ((m = tableRegex.exec(html)) !== null) {
+    if (m[1].includes('NFG_VisEquipos')) {
+      const trRegex = /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
+      let trM;
+      let pos = 1;
+      while ((trM = trRegex.exec(m[1])) !== null) {
+        const row = trM[1];
+        if (row.includes('<th') || !row.includes('NFG_VisEquipos')) continue;
+        const teamMatch = row.match(/NFG_VisEquipos[^>]*>([^<]+)<\/a>/i);
+        if (!teamMatch) continue;
+        const equipo = teamMatch[1].trim();
+        const tdRegex = /<td[^>]*>([\s\S]*?)<\/td>/gi;
+        const tds = [];
+        let tdM;
+        while ((tdM = tdRegex.exec(row)) !== null) {
+          tds.push(tdM[1].replace(/<[^>]*>/g, '').trim());
+        }
+        let teamIdx = -1;
+        for (let i = 0; i < tds.length; i++) {
+          if (tds[i].toUpperCase().includes(equipo.substring(0, 5).toUpperCase())) {
+            teamIdx = i;
+            break;
+          }
+        }
+        if (teamIdx !== -1 && tds.length > teamIdx + 7) {
+          result.push({
+            pos: pos++,
+            equipo,
+            pts: parseInt(tds[teamIdx + 1]) || 0,
+            pj: parseInt(tds[teamIdx + 2]) || 0,
+            g: parseInt(tds[teamIdx + 3]) || 0,
+            e: parseInt(tds[teamIdx + 4]) || 0,
+            p: parseInt(tds[teamIdx + 5]) || 0,
+            gf: parseInt(tds[teamIdx + 6]) || 0,
+            gc: parseInt(tds[teamIdx + 7]) || 0
+          });
+        }
+      }
+      break;
+    }
+  }
+  return result;
+}
+
+function parseFutgalActaHtml(input) {
+  if (!input || typeof input !== 'string') return null;
+  const str = input.trim();
+  if (!str) return null;
+
+  function clean(s) {
+    if (!s) return '';
+    return s.replace(/&nbsp;/gi, ' ')
+            .replace(/&aacute;/gi, 'á').replace(/&Aacute;/gi, 'Á')
+            .replace(/&eacute;/gi, 'é').replace(/&Eacute;/gi, 'É')
+            .replace(/&iacute;/gi, 'í').replace(/&Iacute;/gi, 'Í')
+            .replace(/&oacute;/gi, 'ó').replace(/&Oacute;/gi, 'Ó')
+            .replace(/&uacute;/gi, 'ú').replace(/&Uacute;/gi, 'Ú')
+            .replace(/&ntilde;/gi, 'ñ').replace(/&Ntilde;/gi, 'Ñ')
+            .replace(/\s+/g, ' ').trim();
+  }
+
+  let localTeam = '';
+  let visitTeam = '';
+  let competition = '';
+  let jornada = null;
+  let fecha = '';
+  let horaPartido = '';
+  let arbitro = '';
+  let campo = '';
+  let ciudad = '';
+  let codActa = '';
+  let enlaceActa = '';
+  
+  let dornedaTitulares = [];
+  let dornedaSuplentes = [];
+  let dornedaTarjetas = [];
+  let dornedaStaff = [];
+  
+  let rivalTitulares = [];
+  let rivalSuplentes = [];
+  let rivalTarjetas = [];
+  let rivalStaff = [];
+
+  let allGoles = [];
+
+  const codActaMatch = str.match(/CodActa=(\d+)|cod_acta=(\d+)|codacta=(\d+)/i);
+  if (codActaMatch) {
+    codActa = codActaMatch[1] || codActaMatch[2] || codActaMatch[3];
+    enlaceActa = `https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=${codActa}&cod_acta=${codActa}`;
+  }
+
+  const teamLMatch = str.match(/class=["']font_widgetL["'][^>]*>([\s\S]*?)<\//i);
+  const teamVMatch = str.match(/class=["']font_widgetV["'][^>]*>([\s\S]*?)<\//i);
+  if (teamLMatch) localTeam = clean(teamLMatch[1].replace(/<[^>]*>/g, ''));
+  if (teamVMatch) visitTeam = clean(teamVMatch[1].replace(/<[^>]*>/g, ''));
+
+  const jMatch = str.match(/Jornada\s*(\d+)/i);
+  if (jMatch) jornada = parseInt(jMatch[1]);
+  const fMatch = str.match(/(\d{2}[-/]\d{2}[-/]\d{4})/);
+  if (fMatch) fecha = fMatch[1].replace(/-/g, '/');
+  const hMatch = str.match(/(\d{2}:\d{2})\s*h/i) || str.match(/(\d{2}:\d{2})/);
+  if (hMatch) horaPartido = hMatch[1];
+
+  const arbMatch = str.match(/&Aacute;rbitro[:\s]*<\/strong>\s*&nbsp;([^<]+)|Árbitro[:\s]*<strong>([^<]+)/i);
+  if (arbMatch) arbitro = clean(arbMatch[1] || arbMatch[2]);
+
+  const campoMatch = str.match(/NFG_VisCampos[^>]*>([^<]+)<\/a>/i);
+  if (campoMatch) campo = clean(campoMatch[1]);
+
+  const ciudadMatch = str.match(/Ciudad:\s*([^<]+)/i);
+  if (ciudadMatch) ciudad = clean(ciudadMatch[1]);
+
+  // Extract goals
+  const golBlockMatch = str.match(/<div[^>]*class=["'][^"']*dashboard-stat[^"']*["'][^>]*>[\s\S]*?Goles[\s\S]*?<\/table>/i);
+  if (golBlockMatch) {
+    const trRegex = /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
+    let trM;
+    while ((trM = trRegex.exec(golBlockMatch[0])) !== null) {
+      const row = trM[1];
+      const minM = row.match(/\((\d+)[\'’]?\)/);
+      const minuto = minM ? parseInt(minM[1]) : null;
+      const textCell = row.replace(/<[^>]*>/g, ' ').replace(/\(\d+[\'’]?\)/, '');
+      const rawScorer = clean(textCell);
+      if (minuto || rawScorer) {
+        allGoles.push({ minuto, rawScorer, tipo: 'Jugada' });
+      }
+    }
+  }
+
+  const isLocalDorneda = isDornedaTeam(localTeam);
+  const isVisitanteDorneda = isDornedaTeam(visitTeam);
+
+  return {
+    localTeam,
+    visitTeam,
+    jornada,
+    fecha,
+    horaPartido,
+    arbitro,
+    campo,
+    ciudad,
+    codActa,
+    enlaceActa,
+    isLocalDorneda,
+    isVisitanteDorneda,
+    allGoles
+  };
+}
+
 // Exportar para Node.js o navegador
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
@@ -683,6 +840,8 @@ if (typeof module !== 'undefined' && module.exports) {
     isDornedaTeam,
     decodeFutgalScoreSpan,
     parseFutgalJornadaHtml,
+    parseFutgalClasificacionHtml,
+    parseFutgalActaHtml,
     buildFutgalUrl,
     getMadridFormattedTimestamp,
     parseDateToISO,
@@ -690,3 +849,4 @@ if (typeof module !== 'undefined' && module.exports) {
     mergeFutgalDataIntoDB
   };
 }
+
