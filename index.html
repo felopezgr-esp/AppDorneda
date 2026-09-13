@@ -8221,7 +8221,7 @@ function renderCopaView(){
           <!-- Col 1: Horario / Campo -->
           <div style="width:155px;flex-shrink:0;font-size:10px;color:var(--text-dim);display:flex;align-items:center;gap:4px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
             ${isDornedaMatch ? `<span class="badge badge-accent" style="font-size:7.5px;font-weight:900;padding:1px 3px;flex-shrink:0;">⭐ DORNEDA</span>` : ''}
-            <span style="font-weight:700;color:var(--text);">⏰ ${p.hora || '10:00'}</span>
+            ${p.hora ? `<span style="font-weight:700;color:var(--text);">⏰ ${p.hora}</span>` : `<span style="font-size:9.5px;color:var(--text-dim);font-style:italic;">⏰ Por fijar</span>`}
             <span style="color:var(--text-dim);overflow:hidden;text-overflow:ellipsis;" title="${p.campo || ''}">📍 ${p.campo || 'Por determinar'}</span>
           </div>
 
@@ -10296,8 +10296,8 @@ function renderMatchesCards(matches, jornadaNum, jornadaFecha, container){
         <!-- Col 1: Horario / Campo -->
         <div style="width:155px;flex-shrink:0;font-size:10px;color:var(--text-dim);display:flex;align-items:center;gap:4px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
           ${isDornedaMatch ? `<span class="badge badge-accent" style="font-size:7.5px;font-weight:900;padding:1px 3px;flex-shrink:0;">⭐ DORNEDA</span>` : ''}
-          <span style="font-weight:700;color:var(--text);">⏰ ${p.hora || '17:00'}</span>
-          <span style="color:var(--text-dim);overflow:hidden;text-overflow:ellipsis;" title="${p.campo || ''}">📍 ${p.campo || 'Campo oficial'}</span>
+          ${p.hora ? `<span style="font-weight:700;color:var(--text);">⏰ ${p.hora}</span>` : `<span style="font-size:9.5px;color:var(--text-dim);font-style:italic;">⏰ Por fijar</span>`}
+          <span style="color:var(--text-dim);overflow:hidden;text-overflow:ellipsis;" title="${p.campo || ''}">📍 ${p.campo || 'Por determinar'}</span>
         </div>
 
         <!-- Col 2: Equipo Local -->
