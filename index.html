@@ -5365,7 +5365,7 @@ window.highlightDorneda = highlightDorneda;
 function calcHoraQuedada(horaStr) {
   if (!horaStr || !horaStr.includes(':')) return '';
   const [h, m] = horaStr.split(':').map(Number);
-  const totalM = h * 60 + m - 90;
+  const totalM = h * 60 + m - 30;
   if (totalM < 0) return '';
   const qH = Math.floor(totalM / 60).toString().padStart(2, '0');
   const qM = (totalM % 60).toString().padStart(2, '0');
@@ -5950,12 +5950,12 @@ function parseFutgalActaHtml(input) {
 
   let gf = null;
   let gc = null;
-  if (gl !== null && gv !== null) {
-    gf = condicion === 'Local' ? gl : gv;
-    gc = condicion === 'Local' ? gv : gl;
-  } else if (allGoles.length > 0) {
+  if (allGoles.length > 0 && (dornedaGolesCount > 0 || rivalGolesCount > 0 || allGoles.length > 0)) {
     gf = dornedaGolesCount;
     gc = rivalGolesCount;
+  } else if (gl !== null && gv !== null) {
+    gf = condicion === 'Local' ? gl : gv;
+    gc = condicion === 'Local' ? gv : gl;
   }
 
   let resultado = '';
@@ -6556,7 +6556,7 @@ function badgeClass(r){if(!r)return 'pendiente';const s=r.toLowerCase();if(s.inc
 function compBadge(c){if(!c)return 'pendiente';const s=c.toLowerCase();if(s.includes('pretemporada'))return 'pretemporada';if(s.includes('futgal'))return 'liga';if(s.includes('copa')||s.includes('gallego'))return 'copa';return 'pendiente';}
 function getCompIcon(c){if(!c)return '🌐';const s=c.toLowerCase();if(s.includes('pretemporada')||s.startsWith('pret'))return '⏱️';if(s.includes('copa')||s.includes('gallego')||s.startsWith('c_')||s.startsWith('cg_'))return '🏆';if(s.includes('futgal')||s.includes('liga')||s.startsWith('j'))return '⚽';return '🌐';}
 window.getCompIcon = getCompIcon;
-function calcStats(){const p=(db.partidos||[]).filter(x=>(x.resultado==='Victoria'||x.resultado==='Empate'||x.resultado==='Derrota')&&x.gf!==null&&x.gf!==undefined&&x.resultado!=='Pendiente'),v=p.filter(x=>x.resultado==='Victoria').length,e=p.filter(x=>x.resultado==='Empate').length,d=p.filter(x=>x.resultado==='Derrota').length,gf=p.reduce((s,x)=>s+(parseInt(x.gf)||0),0),gc=p.reduce((s,x)=>s+(parseInt(x.gc)||0),0);return{total:p.length,v,e,d,gf,gc};}
+function calcStats(){const p=(db.partidos||[]).filter(x=>(x.resultado==='Victoria'||x.resultado==='Empate'||x.resultado==='Derrota')&&x.gf!==null&&x.gf!==undefined&&x.resultado!=='Pendiente'&&((x.competicion||'').toLowerCase().indexOf('futgal')!==-1||(x.competicion||'').toLowerCase().indexOf('liga')!==-1)),v=p.filter(x=>x.resultado==='Victoria').length,e=p.filter(x=>x.resultado==='Empate').length,d=p.filter(x=>x.resultado==='Derrota').length,gf=p.reduce((s,x)=>s+(parseInt(x.gf)||0),0),gc=p.reduce((s,x)=>s+(parseInt(x.gc)||0),0);return{total:p.length,v,e,d,gf,gc};}
 
 function setStatFilterComp(comp, el){
   statFilterComp = comp;
@@ -8520,6 +8520,56 @@ function parseFutgalJornadaHtml(html, jornadaNum, compConfig) {
 }
 window.parseFutgalJornadaHtml = parseFutgalJornadaHtml;
 
+function parseFutgalClasificacionHtml(html) {
+  const result = [];
+  if (!html) return result;
+  const tableRegex = /<table[^>]*>([\s\S]*?)<\/table>/gi;
+  let m;
+  while ((m = tableRegex.exec(html)) !== null) {
+    if (m[1].includes('NFG_VisEquipos')) {
+      const trRegex = /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
+      let trM;
+      let pos = 1;
+      while ((trM = trRegex.exec(m[1])) !== null) {
+        const row = trM[1];
+        if (row.includes('<th') || !row.includes('NFG_VisEquipos')) continue;
+        const teamMatch = row.match(/NFG_VisEquipos[^>]*>([^<]+)<\/a>/i);
+        if (!teamMatch) continue;
+        const equipo = teamMatch[1].trim();
+        const tdRegex = /<td[^>]*>([\s\S]*?)<\/td>/gi;
+        const tds = [];
+        let tdM;
+        while ((tdM = tdRegex.exec(row)) !== null) {
+          tds.push(tdM[1].replace(/<[^>]*>/g, '').trim());
+        }
+        let teamIdx = -1;
+        for (let i = 0; i < tds.length; i++) {
+          if (tds[i].toUpperCase().includes(equipo.substring(0, 5).toUpperCase())) {
+            teamIdx = i;
+            break;
+          }
+        }
+        if (teamIdx !== -1 && tds.length > teamIdx + 7) {
+          result.push({
+            pos: pos++,
+            equipo,
+            pts: parseInt(tds[teamIdx + 1]) || 0,
+            pj: parseInt(tds[teamIdx + 2]) || 0,
+            g: parseInt(tds[teamIdx + 3]) || 0,
+            e: parseInt(tds[teamIdx + 4]) || 0,
+            p: parseInt(tds[teamIdx + 5]) || 0,
+            gf: parseInt(tds[teamIdx + 6]) || 0,
+            gc: parseInt(tds[teamIdx + 7]) || 0
+          });
+        }
+      }
+      break;
+    }
+  }
+  return result;
+}
+window.parseFutgalClasificacionHtml = parseFutgalClasificacionHtml;
+
 function buildFutgalUrl(compConfig, jornadaNum) {
   return `https://www.futgal.es/pnfg/NPcd/NFG_CmpJornada?cod_primaria=1000120&CodCompeticion=${compConfig.codCompeticion}&CodGrupo=${compConfig.codGrupo}&CodTemporada=${compConfig.codTemporada}&CodJornada=${jornadaNum}&Sch_Codigo_Delegacion=1&codigo_tipo_juego=1`;
 }
@@ -8866,6 +8916,10 @@ function mergeFutgalDataIntoDB(currentDB, futgalResults) {
     });
   }
 
+  if (futgalResults.clasificacion && futgalResults.clasificacion.length > 0) {
+    targetDb.clasificacion = futgalResults.clasificacion;
+  }
+
   targetDb.futgalSync.lastSuccess = timestampStr;
   targetDb.futgalSync.status = 'success';
   targetDb.futgalSync.summary = {
@@ -9034,7 +9088,17 @@ async function syncFromFutgal() {
       }
     }
 
-    // 4. Si la consulta directa a través de proxies no funcionó, sincronizar desde Firebase Firestore
+    // 4. Clasificación de Liga
+    if (ligaConfig) {
+      setSyncButtonsText('<span>⏳ Clasificación...</span>');
+      const clasifUrl = `https://www.futgal.es/pnfg/NPcd/NFG_VisClasificacion?cod_primaria=1000120&codcompeticion=${ligaConfig.codCompeticion}&codgrupo=${ligaConfig.codGrupo}&cod_agrupacion=1`;
+      const clasifHtml = await fetchFutgalHtmlWithFallback(clasifUrl, 3500);
+      if (clasifHtml) {
+        futgalResults.clasificacion = parseFutgalClasificacionHtml(clasifHtml);
+      }
+    }
+
+    // 5. Si la consulta directa a través de proxies no funcionó, sincronizar desde Firebase Firestore
     if (!hadNetworkSuccess && typeof firestoreDocRef !== 'undefined' && firestoreDocRef) {
       setSyncButtonsText('<span>☁️ Consultando Nube...</span>');
       try {
@@ -10540,7 +10604,7 @@ function renderAnalisisEquipo(){
   const s = calcStats();
   document.getElementById('analisisStatsGrid').innerHTML = `<div class="stat-card red"><div class="stat-label">Partidos</div><div class="stat-value">${s.total}</div></div><div class="stat-card green"><div class="stat-label">Victorias</div><div class="stat-value">${s.v}</div><div class="stat-sub">${s.total?Math.round(s.v/s.total*100):0}%</div></div><div class="stat-card yellow"><div class="stat-label">Empates</div><div class="stat-value">${s.e}</div></div><div class="stat-card gray"><div class="stat-label">Derrotas</div><div class="stat-value">${s.d}</div></div><div class="stat-card blue"><div class="stat-label">Goles F</div><div class="stat-value">${s.gf}</div><div class="stat-sub">${s.total?(s.gf/s.total).toFixed(1):0}/p</div></div><div class="stat-card ${s.gc<=s.gf?'green':'red'}"><div class="stat-label">Goles C</div><div class="stat-value">${s.gc}</div><div class="stat-sub">${s.total?(s.gc/s.total).toFixed(1):0}/p</div></div>`;
   
-  const played = (db.partidos || []).filter(p => (p.resultado === 'Victoria' || p.resultado === 'Empate' || p.resultado === 'Derrota') && p.gf !== null && p.gf !== undefined && p.resultado !== 'Pendiente');
+  const played = (db.partidos || []).filter(p => (p.resultado === 'Victoria' || p.resultado === 'Empate' || p.resultado === 'Derrota') && p.gf !== null && p.gf !== undefined && p.resultado !== 'Pendiente' && ((p.competicion||'').toLowerCase().indexOf('futgal')!==-1||(p.competicion||'').toLowerCase().indexOf('liga')!==-1));
   
   const comps = {};
   for(const p of played){

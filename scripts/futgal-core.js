@@ -310,7 +310,7 @@ function calcHoraQuedada(horaStr) {
   if (!horaStr || !horaStr.includes(':')) return '';
   const [h, m] = horaStr.split(':').map(Number);
   if (isNaN(h) || isNaN(m)) return '';
-  const totalM = h * 60 + m - 90;
+  const totalM = h * 60 + m - 30;
   if (totalM < 0) return '';
   const qH = Math.floor(totalM / 60).toString().padStart(2, '0');
   const qM = (totalM % 60).toString().padStart(2, '0');
