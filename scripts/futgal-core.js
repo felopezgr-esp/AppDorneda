@@ -364,21 +364,25 @@ function mergeFutgalDataIntoDB(currentDB, futgalResults) {
       }
       if (matchList[0].fecha) tj.fecha = matchList[0].fecha;
 
-      // Actualizar partidos de la jornada
-      tj.partidos = matchList.map(m => ({
-        local: m.local,
-        visitante: m.visitante,
-        gl: m.gl,
-        gv: m.gv,
-        dorneda: m.dorneda,
-        fecha: m.fecha || tj.fecha || '',
-        hora: m.hora || '',
-        campo: m.campo || '',
-        enlaceActa: m.enlaceActa || '',
-        codActa: m.codActa || '',
-        actaData: m.actaParsed || null,
-        estado: m.estado || 'Oficial'
-      }));
+      // Actualizar partidos de la jornada preservando actaData existente
+      tj.partidos = matchList.map(m => {
+        const prev = (tj.partidos || []).find(p => p.codActa === m.codActa || (p.local === m.local && p.visitante === m.visitante));
+        return {
+          local: m.local,
+          visitante: m.visitante,
+          gl: m.gl !== null && m.gl !== undefined ? m.gl : (prev ? prev.gl : null),
+          gv: m.gv !== null && m.gv !== undefined ? m.gv : (prev ? prev.gv : null),
+          dorneda: m.dorneda,
+          fecha: m.fecha || (prev ? prev.fecha : '') || tj.fecha || '',
+          hora: m.hora || (prev ? prev.hora : '') || '',
+          campo: m.campo || (prev ? prev.campo : '') || '',
+          arbitro: m.arbitro || (prev ? prev.arbitro : '') || '',
+          enlaceActa: m.enlaceActa || (prev ? prev.enlaceActa : '') || '',
+          codActa: m.codActa || (prev ? prev.codActa : '') || '',
+          actaData: m.actaParsed || (prev ? prev.actaData : null) || null,
+          estado: m.estado || (prev ? prev.estado : 'Oficial')
+        };
+      });
 
       // 2. Localizar partido del Xuventude Dorneda
       const dornedaMatch = matchList.find(m => m.dorneda);
@@ -521,21 +525,25 @@ function mergeFutgalDataIntoDB(currentDB, futgalResults) {
       }
       if (matchList[0].fecha) cj.fecha = matchList[0].fecha;
 
-      cj.partidos = matchList.map((m, pIdx) => ({
-        id: (rondaNum * 100) + pIdx + 1,
-        local: m.local,
-        visitante: m.visitante,
-        gl: m.gl,
-        gv: m.gv,
-        fecha: m.fecha,
-        hora: m.hora,
-        campo: m.campo,
-        dorneda: m.dorneda,
-        enlaceActa: m.enlaceActa,
-        codActa: m.codActa || '',
-        actaData: m.actaParsed || null,
-        estado: m.estado
-      }));
+      cj.partidos = matchList.map((m, pIdx) => {
+        const prev = (cj.partidos || []).find(p => p.codActa === m.codActa || (p.local === m.local && p.visitante === m.visitante));
+        return {
+          id: (rondaNum * 100) + pIdx + 1,
+          local: m.local,
+          visitante: m.visitante,
+          gl: m.gl !== null && m.gl !== undefined ? m.gl : (prev ? prev.gl : null),
+          gv: m.gv !== null && m.gv !== undefined ? m.gv : (prev ? prev.gv : null),
+          fecha: m.fecha || (prev ? prev.fecha : ''),
+          hora: m.hora || (prev ? prev.hora : ''),
+          campo: m.campo || (prev ? prev.campo : ''),
+          arbitro: m.arbitro || (prev ? prev.arbitro : ''),
+          dorneda: m.dorneda,
+          enlaceActa: m.enlaceActa || (prev ? prev.enlaceActa : ''),
+          codActa: m.codActa || (prev ? prev.codActa : '') || '',
+          actaData: m.actaParsed || (prev ? prev.actaData : null) || null,
+          estado: m.estado || (prev ? prev.estado : 'Oficial')
+        };
+      });
 
       // Localizar partido del Xuventude Dorneda en Copa
       const dornedaCopaMatch = matchList.find(m => m.dorneda);
@@ -869,8 +877,8 @@ function parseFutgalActaHtml(input) {
     enlaceActa = `https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=${codActa}&cod_acta=${codActa}`;
   }
 
-  const teamLMatch = str.match(/class=["']font_widgetL["'][^>]*>([\s\S]*?)<\//i);
-  const teamVMatch = str.match(/class=["']font_widgetV["'][^>]*>([\s\S]*?)<\//i);
+  const teamLMatch = str.match(/class=["']font_widgetL["'][^>]*>([\s\S]*?)<\//i) || str.match(/class=["']td_widgetL["'][^>]*><div[^>]*>([\s\S]*?)<\/div>/i);
+  const teamVMatch = str.match(/class=["']font_widgetV["'][^>]*>([\s\S]*?)<\//i) || str.match(/class=["']td_widgetV["'][^>]*><div[^>]*>([\s\S]*?)<\/div>/i);
   if (teamLMatch) localTeam = clean(teamLMatch[1].replace(/<[^>]*>/g, ''));
   if (teamVMatch) visitTeam = clean(teamVMatch[1].replace(/<[^>]*>/g, ''));
 
@@ -881,7 +889,7 @@ function parseFutgalActaHtml(input) {
   const hMatch = str.match(/(\d{2}:\d{2})\s*h/i) || str.match(/(\d{2}:\d{2})/);
   if (hMatch) horaPartido = hMatch[1];
 
-  const arbMatch = str.match(/&Aacute;rbitro[:\s]*<\/strong>\s*&nbsp;([^<]+)|Árbitro[:\s]*<strong>([^<]+)|&Aacute;rbitro:\s*([^<]+)/i);
+  const arbMatch = str.match(/<strong>[^<]*rbitro[^<]*<\/strong>&nbsp;&nbsp;&nbsp;([^<]+)/i) || str.match(/&Aacute;rbitro[:\s]*<\/strong>\s*&nbsp;([^<]+)|Árbitro[:\s]*<strong>([^<]+)|&Aacute;rbitro:\s*([^<]+)/i);
   if (arbMatch) arbitro = clean(arbMatch[1] || arbMatch[2] || arbMatch[3]);
 
   const campoMatch = str.match(/NFG_VisCampos[^>]*>([^<]+)<\/a>/i);
@@ -899,13 +907,17 @@ function parseFutgalActaHtml(input) {
     while ((trM = trRegex.exec(blockHtml)) !== null) {
       const row = trM[1];
       if (row.includes('<th')) continue;
-      const playerM = row.match(/NFG_VisJugador\?cod_primaria=1000121&codigo_jugador=(\d+)[^>]*>([^<]+)<\/a>/i);
-      if (playerM) {
-        const id = playerM[1];
-        const nombre = clean(playerM[2]);
-        // Buscar dorsal (número en primera celda o texto antes del enlace)
-        const dorsalM = row.match(/<td[^>]*>\s*(\d{1,2})\s*<\/td>/i) || row.match(/(\d{1,2})\s*<a/i);
-        const dorsal = dorsalM ? parseInt(dorsalM[1], 10) : null;
+      const playerM = row.match(/NFG_VisJugador\?cod_primaria=1000121&codigo_jugador=(\d+)[^>]*>([^<]+)<\/a>/i) || row.match(/<td[^>]*class=font_responsive[^>]*>([\s\S]*?)<\/td>/i);
+      const id = playerM && playerM[1] && /^\d+$/.test(playerM[1]) ? playerM[1] : null;
+      let rawName = playerM ? (playerM[2] || playerM[1]) : row;
+      let nombre = clean(rawName.replace(/<[^>]*>/g, ''));
+
+      // Buscar dorsal (número en primera celda o texto antes del enlace)
+      const dorsalM = row.match(/<td[^>]*align=center[^>]*>\s*(\d{1,2})\s*<\/td>/i) || row.match(/<td[^>]*>\s*(\d{1,2})\s*<\/td>/i) || row.match(/(\d{1,2})\s*<a/i);
+      const dorsal = dorsalM ? parseInt(dorsalM[1], 10) : null;
+      nombre = nombre.replace(/^\d+\s*/, '').trim();
+
+      if (nombre) {
         list.push({ id, dorsal, nombre });
       }
     }
@@ -916,20 +928,18 @@ function parseFutgalActaHtml(input) {
   function parseStaff(blockHtml) {
     if (!blockHtml) return [];
     const staff = [];
-    const patterns = [
-      { cargo: 'Entrenador', regex: /Entrenador[:\s]*<strong>([^<]+)|Entrenador:\s*([^<]+)/i },
-      { cargo: '2º Entrenador', regex: /2[ºo]\s*Entrenador[:\s]*<strong>([^<]+)|2[ºo]\s*Entrenador:\s*([^<]+)/i },
-      { cargo: 'Delegado de Campo', regex: /Delegado\s+de\s+campo[:\s]*<strong>([^<]+)|Delegado\s+de\s+campo:\s*([^<]+)/i },
-      { cargo: 'Delegado de Equipo', regex: /Delegado\s+de\s+equipo[:\s]*<strong>([^<]+)|Delegado\s+de\s+equipo:\s*([^<]+)/i },
-      { cargo: 'Encargado de Material', regex: /ENCGDO\.?\s*MATERIAL[:\s]*<strong>([^<]+)|ENCGDO\.?\s*MATERIAL:\s*([^<]+)/i },
-      { cargo: 'Fisioterapeuta', regex: /Fisioterapeuta[:\s]*<strong>([^<]+)|Fisioterapeuta:\s*([^<]+)/i }
-    ];
-    for (const p of patterns) {
-      const m = blockHtml.match(p.regex);
-      if (m) {
-        const val = clean(m[1] || m[2]);
-        if (val && !/no presenta/i.test(val)) {
-          staff.push({ cargo: p.cargo, nombre: val });
+    const tableM = blockHtml.match(/<strong>Cuerpo T[eé]cnico<\/strong><\/h5>\s*<table[^>]*>([\s\S]*?)<\/table>/i);
+    if (tableM) {
+      const trRegex = /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
+      let trM;
+      while ((trM = trRegex.exec(tableM[1])) !== null) {
+        const row = trM[1];
+        if (row.includes('<th')) continue;
+        const tds = row.match(/<td[^>]*>([\s\S]*?)<\/td>/gi);
+        if (tds && tds.length >= 2) {
+          const cargo = clean(tds[0].replace(/<[^>]*>/g, ''));
+          const nombre = clean(tds[1].replace(/<[^>]*>/g, ''));
+          if (nombre) staff.push({ cargo, nombre });
         }
       }
     }
@@ -940,37 +950,40 @@ function parseFutgalActaHtml(input) {
   function parseCards(blockHtml) {
     if (!blockHtml) return [];
     const cards = [];
-    const trRegex = /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
-    let trM;
-    while ((trM = trRegex.exec(blockHtml)) !== null) {
-      const row = trM[1];
-      if (row.includes('<th')) continue;
-      const minM = row.match(/\((\d+)[\'’]?\)/) || row.match(/(\d+)[\'’]/);
-      const minuto = minM ? parseInt(minM[1], 10) : null;
-      const isRed = /roja|expulsi/i.test(row) || row.includes('tarjeta_roja') || row.includes('red');
-      const textCell = clean(row.replace(/<[^>]*>/g, ' ').replace(/\(\d+[\'’]?\)/g, ''));
-      if (textCell) {
-        cards.push({
-          minuto,
-          tipo: isRed ? 'Roja' : 'Amarilla',
-          nombre: textCell
-        });
+    const tableM = blockHtml.match(/Tarjetas<\/h4>\s*<table[^>]*>([\s\S]*?)<\/table>/i);
+    if (tableM) {
+      const trRegex = /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
+      let trM;
+      while ((trM = trRegex.exec(tableM[1])) !== null) {
+        const row = trM[1];
+        if (row.includes('<th')) continue;
+        const minM = row.match(/\((\d+)[\'’]?\)/) || row.match(/(\d+)[\'’]/);
+        const minuto = minM ? parseInt(minM[1], 10) : null;
+        const isRed = /tarj_roja|roja|expulsi/i.test(row);
+        const textCell = clean(row.replace(/<[^>]*>/g, ' ').replace(/\(\d+[\'’]?\)/g, ''));
+        if (textCell) {
+          cards.push({
+            minuto,
+            tipo: isRed ? 'Roja' : 'Amarilla',
+            nombre: textCell
+          });
+        }
       }
     }
     return cards;
   }
 
-  // Dividir el HTML en bloques de local y visitante si es posible
-  // Bloque Local vs Bloque Visitante (usualmente dividido en columnas de widget o tablas)
-  const widgetsMatch = str.match(/class=["']widgetL["'][\s\S]*?class=["']widgetV["'][\s\S]*$/i);
+  // Dividir el HTML en bloques de local y visitante dividiendo por las dos secciones de Titulares
+  const firstTitIdx = str.indexOf("<strong>Titulares</strong>");
+  const secondTitIdx = firstTitIdx !== -1 ? str.indexOf("<strong>Titulares</strong>", firstTitIdx + 20) : -1;
+
   let localHtml = str;
   let visitHtml = str;
 
-  const wL = str.match(/<div[^>]*class=["'][^"']*widgetL[^"']*["'][^>]*>([\s\S]*?)<\/div>\s*<div[^>]*class=["'][^"']*widgetV/i);
-  const wV = str.match(/<div[^>]*class=["'][^"']*widgetV[^"']*["'][^>]*>([\s\S]*?)$/i);
-  if (wL && wV) {
-    localHtml = wL[1];
-    visitHtml = wV[1];
+  if (firstTitIdx !== -1 && secondTitIdx > firstTitIdx) {
+    const localStart = Math.max(0, firstTitIdx - 200);
+    localHtml = str.substring(localStart, secondTitIdx - localStart);
+    visitHtml = str.substring(secondTitIdx - 200);
   }
 
   // Parsear secciones específicas
@@ -987,17 +1000,15 @@ function parseFutgalActaHtml(input) {
   localStaff = parseStaff(localHtml);
   visitStaff = parseStaff(visitHtml);
 
-  const localTarjBlock = localHtml.match(/Tarjetas[\s\S]*?<\/table>/i);
-  const visitTarjBlock = visitHtml.match(/Tarjetas[\s\S]*?<\/table>/i);
-  localTarjetas = localTarjBlock ? parseCards(localTarjBlock[0]) : [];
-  visitTarjetas = visitTarjBlock ? parseCards(visitTarjBlock[0]) : [];
+  localTarjetas = parseCards(localHtml);
+  visitTarjetas = parseCards(visitHtml);
 
   // Parsear todos los goles con progresión (ej. 1 - 0, 2 - 0, 2 - 1, etc.)
-  const golesSection = str.match(/<div[^>]*class=["'][^"']*dashboard-stat[^"']*["'][^>]*>[\s\S]*?Goles[\s\S]*?<\/table>/i);
+  const golesSection = str.match(/<div[^>]*class=["'][^"']*number[^"']*["'][^>]*>Goles<\/div>\s*<div[^>]*class=desc[^>]*>\s*<table[^>]*>([\s\S]*?)<\/table>/i);
   if (golesSection) {
     const trRegex = /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
     let trM;
-    while ((trM = trRegex.exec(golesSection[0])) !== null) {
+    while ((trM = trRegex.exec(golesSection[1])) !== null) {
       const row = trM[1];
       if (row.includes('<th')) continue;
       const minM = row.match(/\((\d+)[\'’]?\)/) || row.match(/(\d+)[\'’]/);
