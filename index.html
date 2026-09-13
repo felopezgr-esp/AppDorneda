@@ -5524,6 +5524,18 @@ function matchPlayerInDB(rawName, dorsalHint) {
     const j = jugadores.find(x => normalizeName(x.nombre) === 'antony' || normalizeName(x.nombreCompleto).includes('lopez lopez'));
     if (j) return j;
   }
+  if (normFull1.includes('aguado') || normFull2.includes('aguado') || normFull1.includes('pernas')) {
+    const j = jugadores.find(x => normalizeName(x.nombre) === 'michi' || normalizeName(x.nombreCompleto).includes('aguado'));
+    if (j) return j;
+  }
+  if (normFull1.includes('barrenechea') || normFull2.includes('barrenechea') || normFull1.includes('padin')) {
+    const j = jugadores.find(x => normalizeName(x.nombre) === 'boliche' || normalizeName(x.nombreCompleto).includes('barrenechea'));
+    if (j) return j;
+  }
+  if (normFull1.includes('vieiro') || normFull2.includes('vieiro')) {
+    const j = jugadores.find(x => normalizeName(x.nombre) === 'mario' || normalizeName(x.nombreCompleto).includes('vieiro'));
+    if (j) return j;
+  }
   if (normFull1.includes('bolich') || normFull2.includes('bolich')) {
     const j = jugadores.find(x => normalizeName(x.nombre) === 'boliche' || normalizeName(x.nombreCompleto).includes('bolich'));
     if (j) return j;
