@@ -1,0 +1,19 @@
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime / Temp data
+cookies.txt
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# Node dependencies (if any)
+node_modules/
+
+# Local editor settings
+.vscode/
+.idea/

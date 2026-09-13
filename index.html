@@ -671,22 +671,89 @@
       padding: 2px 8px !important;
       margin: 0 0 1px 0 !important;
       min-height: 26px !important;
-      border-radius: 3px;
+      border-radius: 4px;
       box-sizing: border-box !important;
-      transition: background 0.1s ease, border-color 0.1s ease;
+      transition: background 0.12s ease, border-color 0.12s ease;
       font-size: 11.5px;
       border: 1px solid var(--border);
       background: var(--surface);
     }
     .copa-match-row:hover {
       background: var(--surface2) !important;
+      border-color: var(--border2);
     }
-    .copa-match-row.dorneda-row {
-      background: rgba(220,38,38,0.06) !important;
-      border: 1px solid var(--red) !important;
-      border-left: 4px solid var(--red) !important;
-      box-shadow: 0 1px 3px rgba(220,38,38,0.08);
+
+    /* PARTIDOS YA JUGADOS: Gris más oscuro */
+    .copa-match-row.match-played,
+    .copa-match-row.is-played {
+      background: #E2E8F0 !important;
+      border: 1px solid #CBD5E1 !important;
+      border-left: 4px solid #64748B !important;
     }
+    .copa-match-row.match-played.result-win {
+      border-left: 4px solid #16A34A !important;
+    }
+    .copa-match-row.match-played.result-loss {
+      border-left: 4px solid #DC2626 !important;
+    }
+    .copa-match-row.match-played.result-draw {
+      border-left: 4px solid #D97706 !important;
+    }
+    .copa-match-row.match-played:hover {
+      background: #CBD5E1 !important;
+    }
+
+    /* PARTIDOS PENDIENTES / POR JUGAR: Gris más claro */
+    .copa-match-row.match-pending,
+    .copa-match-row.is-pending {
+      background: #FFFFFF !important;
+      border: 1px solid #E2E8F0 !important;
+      border-left: 4px solid #94A3B8 !important;
+    }
+    .copa-match-row.match-pending:hover {
+      background: #F8FAFC !important;
+      border-color: #CBD5E1 !important;
+    }
+
+    /* Dorneda highlight inside match rows */
+    .copa-match-row .dorneda-highlight {
+      color: var(--text) !important;
+      font-weight: 800 !important;
+    }
+
+    /* Dark theme overrides for match rows */
+    [data-theme="dark"] .copa-match-row.match-played,
+    [data-theme="dark"] .copa-match-row.is-played {
+      background: #23272F !important;
+      border: 1px solid rgba(255,255,255,0.12) !important;
+      border-left: 4px solid #64748B !important;
+    }
+    [data-theme="dark"] .copa-match-row.match-played.result-win {
+      border-left: 4px solid #22C55E !important;
+    }
+    [data-theme="dark"] .copa-match-row.match-played.result-loss {
+      border-left: 4px solid #EF4444 !important;
+    }
+    [data-theme="dark"] .copa-match-row.match-played.result-draw {
+      border-left: 4px solid #F59E0B !important;
+    }
+    [data-theme="dark"] .copa-match-row.match-played:hover {
+      background: #2C313A !important;
+    }
+    [data-theme="dark"] .copa-match-row.match-pending,
+    [data-theme="dark"] .copa-match-row.is-pending {
+      background: #141416 !important;
+      border: 1px solid rgba(255,255,255,0.06) !important;
+      border-left: 4px solid #475569 !important;
+    }
+    [data-theme="dark"] .copa-match-row.match-pending:hover {
+      background: #1A1A1E !important;
+    }
+    [data-theme="dark"] .copa-match-row .dorneda-highlight {
+      color: #F0F0F0 !important;
+      font-weight: 800 !important;
+    }
+
     .copa-clasif-box {
       background: var(--surface2);
       border: 1px solid var(--border);
@@ -7685,6 +7752,8 @@ function openJugadorModal(id, initialTab = 'datos', initialFilter = 'todos'){
   openModal('modalJugador');
 }
 function openNuevoJugador(){openJugadorModal(null);}
+window.openNuevoJugador = openNuevoJugador;
+
 function saveJugador(id){
   const nombre = document.getElementById('jN').value.trim();
   const dorsal = parseInt(document.getElementById('jD').value) || null;
@@ -7700,13 +7769,15 @@ function saveJugador(id){
     Object.assign(j, {nombre, dorsal, nombreCompleto, rol, estado, notas});
     if(foto) j.foto = foto;
   } else {
-    db.jugadores.push({id: nextJugadorId++, dorsal, nombre, nombreCompleto, rol, estado, foto: foto, notas});
+    const newId = (db.jugadores || []).reduce((max, j) => Math.max(max, j.id || 0), 100) + 1;
+    db.jugadores.push({id: newId, dorsal, nombre, nombreCompleto, rol, estado, foto: foto, notas});
   }
   saveDB();
   closeModal('modalJugador');
   renderPlantilla();
   toast('Guardado correctamente','success');
 }
+window.saveJugador = saveJugador;
 
 function deleteJugador(id){
   if(!confirm('¿Eliminar este miembro?')) return;
@@ -7714,8 +7785,9 @@ function deleteJugador(id){
   saveDB();
   closeModal('modalJugador');
   renderPlantilla();
-  toast('Eliminado correctamente', 'info');
+  toast('Miembro eliminado', 'info');
 }
+window.deleteJugador = deleteJugador;
 
 function filtrarPartidos(filter, el){
   partidosFilter = filter;
@@ -7768,13 +7840,18 @@ function renderPartidos(){
     var badgeCompClass = compBadge(x.competicion);
     var horaVal = x.horaPartido || x.hora || '';
 
+    var statusClass = isPlayed ? 'match-played' : 'match-pending';
+    var resClass = '';
     var resBadgeHtml = '';
     if(isPlayed){
       if(x.resultado === 'Victoria'){
+        resClass = 'result-win';
         resBadgeHtml = '<span class="badge" style="background:#16a34a;color:#fff;font-size:9.5px;font-weight:800;padding:2px 7px;border-radius:3px;">✅ Victoria (V)</span>';
       } else if(x.resultado === 'Derrota'){
+        resClass = 'result-loss';
         resBadgeHtml = '<span class="badge" style="background:#dc2626;color:#fff;font-size:9.5px;font-weight:800;padding:2px 7px;border-radius:3px;">❌ Derrota (D)</span>';
       } else {
+        resClass = 'result-draw';
         resBadgeHtml = '<span class="badge" style="background:#d97706;color:#fff;font-size:9.5px;font-weight:800;padding:2px 7px;border-radius:3px;">🤝 Empate (E)</span>';
       }
     } else {
@@ -7784,7 +7861,7 @@ function renderPartidos(){
     var actaBtn = x.enlaceActa ? `<a href="${x.enlaceActa}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" style="background:#285b4f;color:#ffffff;padding:2px 6px;border-radius:3px;font-size:9px;font-weight:700;display:inline-flex;align-items:center;gap:3px;text-decoration:none;border:1px solid #1e453c;white-space:nowrap;line-height:1;" title="Ver Acta Oficial en FUTGAL">📄 Acta ↗</a>` : '';
 
     return `
-      <div class="copa-match-row dorneda-row" onclick="showDetallePartido(${x.id})" style="cursor:pointer;padding:6px 10px !important;min-height:34px !important;">
+      <div class="copa-match-row ${statusClass} ${resClass}" onclick="showDetallePartido(${x.id})" style="cursor:pointer;padding:6px 10px !important;min-height:34px !important;">
         <!-- Col 1: Competición / Fecha / Horario / Campo -->
         <div style="width:200px;flex-shrink:0;font-size:10.5px;color:var(--text-dim);display:flex;align-items:center;gap:6px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
           <span class="badge ${badgeCompClass}" style="font-size:9px;font-weight:900;padding:1px 6px;flex-shrink:0;">${compIcon} ${codeTag}</span>
@@ -7794,14 +7871,14 @@ function renderPartidos(){
         </div>
 
         <!-- Col 2: Equipo Local -->
-        <div style="flex:1;text-align:right;font-size:12px;font-weight:${isLocalWinner ? '800' : (isHome ? '900' : '600')};color:${isHome ? 'var(--red-light)' : (isPlayed && !isLocalWinner ? 'var(--text-dim)' : 'var(--text)')};overflow:hidden;white-space:nowrap;text-overflow:ellipsis;" title="${localName}">
-          ${isHome ? '<span class="dorneda-highlight">Xuventude Dorneda</span>' : localName} ${isLocalWinner ? '<span style="color:var(--success);font-size:10px;">✅</span>' : ''}
+        <div style="flex:1;text-align:right;font-size:12px;font-weight:${isHome ? '800' : (isPlayed && isLocalWinner ? '700' : '500')};color:${isPlayed ? (isLocalWinner ? 'var(--text)' : 'var(--text-dim)') : (isHome ? 'var(--text)' : 'var(--text-muted)')};overflow:hidden;white-space:nowrap;text-overflow:ellipsis;" title="${localName}">
+          ${isHome ? '<strong style="font-weight:800;color:var(--text);">Xuventude Dorneda</strong>' : localName} ${isLocalWinner ? '<span style="color:var(--success);font-size:10px;">✅</span>' : ''}
         </div>
 
         <!-- Col 3: Marcador / VS -->
         <div style="width:65px;flex-shrink:0;text-align:center;">
           ${isPlayed ? `
-            <span style="display:inline-block;padding:2px 6px;font-size:12px;font-weight:900;background:var(--surface3);border:1px solid var(--border);border-radius:4px;color:var(--text);min-width:38px;text-align:center;line-height:1.2;">
+            <span style="display:inline-block;padding:2px 6px;font-size:12px;font-weight:900;background:var(--surface);border:1px solid var(--border2);border-radius:4px;color:var(--text);min-width:38px;text-align:center;line-height:1.2;">
               ${localScore} - ${visitorScore}
             </span>
           ` : `
@@ -7812,8 +7889,8 @@ function renderPartidos(){
         </div>
 
         <!-- Col 4: Equipo Visitante -->
-        <div style="flex:1;text-align:left;font-size:12px;font-weight:${isVisitorWinner ? '800' : (!isHome ? '900' : '600')};color:${!isHome ? 'var(--red-light)' : (isPlayed && !isVisitorWinner ? 'var(--text-dim)' : 'var(--text)')};overflow:hidden;white-space:nowrap;text-overflow:ellipsis;" title="${visitorName}">
-          ${isVisitorWinner ? '<span style="color:var(--success);font-size:10px;">✅</span> ' : ''}${!isHome ? '<span class="dorneda-highlight">Xuventude Dorneda</span>' : visitorName}
+        <div style="flex:1;text-align:left;font-size:12px;font-weight:${!isHome ? '800' : (isPlayed && isVisitorWinner ? '700' : '500')};color:${isPlayed ? (isVisitorWinner ? 'var(--text)' : 'var(--text-dim)') : (!isHome ? 'var(--text)' : 'var(--text-muted)')};overflow:hidden;white-space:nowrap;text-overflow:ellipsis;" title="${visitorName}">
+          ${isVisitorWinner ? '<span style="color:var(--success);font-size:10px;">✅</span> ' : ''}${!isHome ? '<strong style="font-weight:800;color:var(--text);">Xuventude Dorneda</strong>' : visitorName}
         </div>
 
         <!-- Col 5: Estado / Resultado -->
@@ -8128,10 +8205,11 @@ function renderCopaView(){
       const actaUrl = p.enlaceActa || (p.codActa ? `https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=${p.codActa}&cod_acta=${p.codActa}` : '');
       const actaBtn = actaUrl ? `<a href="${actaUrl}" target="_blank" rel="noopener noreferrer" style="background:#285b4f;color:#ffffff;padding:1px 5px;border-radius:3px;font-size:9px;font-weight:700;display:inline-flex;align-items:center;gap:2px;text-decoration:none;border:1px solid #1e453c;white-space:nowrap;min-height:19px;box-sizing:border-box;" title="Ver Acta Oficial en FUTGAL">📄 Acta ↗</a>` : '';
 
-      const m = isDornedaMatch ? (db.partidos || []).find(x => x.id === 5 || x.codigo === currentR.codigo || (x.competicion && x.competicion.toLowerCase().indexOf('copa') !== -1)) : null;
+      const statusClass = hasScore ? 'match-played' : 'match-pending';
+      const resClass = (hasScore && isDornedaMatch) ? (isLocalWinner && isDornedaLocal ? 'result-win' : (isVisitorWinner && isDornedaVisitor ? 'result-win' : (isTie ? 'result-draw' : 'result-loss'))) : '';
 
       return `
-        <div class="copa-match-row ${isDornedaMatch ? 'dorneda-row' : 'regular-row'}">
+        <div class="copa-match-row ${statusClass} ${resClass}">
           <!-- Col 1: Horario / Campo -->
           <div style="width:155px;flex-shrink:0;font-size:10px;color:var(--text-dim);display:flex;align-items:center;gap:4px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
             ${isDornedaMatch ? `<span class="badge badge-accent" style="font-size:7.5px;font-weight:900;padding:1px 3px;flex-shrink:0;">⭐ DORNEDA</span>` : ''}
@@ -9154,243 +9232,41 @@ function parseAndSaveCopaFromInput() {
 window.parseAndSaveCopaFromInput = parseAndSaveCopaFromInput;
 
 function showClasifTab(tab, el){
-  clasifTabActive = tab;
-  try {
-    localStorage.setItem('dorneda_active_clasif_tab', tab);
-  } catch(e){}
-
-  if(!el){
-    el = document.querySelector('#section-clasificacion .tabs .tab[onclick*="\'' + tab + '\'"]');
+  if(tab === 'copa') {
+    showCompCategory('copa');
+  } else if(tab === 'jornadas') {
+    showCompCategory('liga');
+    showLigaSubTab('resultados');
+  } else if(tab === 'equipos') {
+    showCompCategory('liga');
+    showLigaSubTab('equipos');
+  } else {
+    showCompCategory('liga');
+    showLigaSubTab('clasificacion');
   }
-  if(el){
-    var parent = el.parentElement;
-    if(parent) parent.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
-    el.classList.add('active');
-  }
-  var elL = document.getElementById('clasifViewLiga');
-  var elJ = document.getElementById('clasifViewJornadas');
-  var elE = document.getElementById('clasifViewEquipos');
-  var elC = document.getElementById('clasifViewCopa');
-
-  if(elL) elL.style.display = (tab === 'liga') ? 'block' : 'none';
-  if(elJ) elJ.style.display = (tab === 'jornadas') ? 'block' : 'none';
-  if(elE) elE.style.display = (tab === 'equipos') ? 'block' : 'none';
-  if(elC) elC.style.display = (tab === 'copa') ? 'block' : 'none';
-
-  if(tab === 'liga') renderClasificacion();
-  if(tab === 'jornadas') renderTodasJornadasView();
-  if(tab === 'equipos') renderEquiposView();
-  if(tab === 'copa') renderCopaView();
 }
 window.showClasifTab = showClasifTab;
 
 function changeJornadaNav(delta){
   currentJornadaNav = Math.max(1, Math.min(30, currentJornadaNav + delta));
-  renderTodasJornadasView();
+  currentLigaSearchJornada = currentJornadaNav.toString();
+  var selectJ = document.getElementById('searchLigaJornada');
+  if(selectJ) selectJ.value = currentLigaSearchJornada;
+  renderLigaResultadosView();
 }
 window.changeJornadaNav = changeJornadaNav;
 
 function onSelectJornadaChange(val){
   currentJornadaNav = parseInt(val, 10) || 1;
-  renderTodasJornadasView();
+  currentLigaSearchJornada = currentJornadaNav.toString();
+  var selectJ = document.getElementById('searchLigaJornada');
+  if(selectJ) selectJ.value = currentLigaSearchJornada;
+  renderLigaResultadosView();
 }
 window.onSelectJornadaChange = onSelectJornadaChange;
 
 function renderTodasJornadasView(){
-  const jornadas = db.todasJornadas || DEFAULT_DATA.todasJornadas || [];
-  if(!jornadas.length) return;
-
-  const currentJ = jornadas.find(j => j.jornada === currentJornadaNav) || jornadas[0];
-  const mDorneda = (db.partidos || []).find(x => x.codigo === ('J' + currentJ.jornada));
-  const isDornedaPlayed = mDorneda && mDorneda.resultado && (mDorneda.gf !== null && mDorneda.gf !== undefined);
-  const anyMatchPlayed = currentJ.partidos && currentJ.partidos.some(p => p.gl !== null && p.gv !== null && p.gl !== undefined && p.gv !== undefined);
-  const isJornadaPlayed = isDornedaPlayed || anyMatchPlayed;
-
-  // Update header text & status
-  const headerEl = document.getElementById('jornadaFechaHeader');
-  if(headerEl){
-    let statusBadge = '';
-    if(isDornedaPlayed){
-      const isHome = mDorneda ? (mDorneda.condicion === 'Local') : true;
-      const dScore = isHome ? `${mDorneda.gf} - ${mDorneda.gc}` : `${mDorneda.gc} - ${mDorneda.gf}`;
-      const resBadgeCls = mDorneda.resultado === 'Victoria' ? 'victoria' : (mDorneda.resultado === 'Derrota' ? 'derrota' : 'empate');
-      statusBadge = `<span class="badge ${resBadgeCls}" style="margin-left:8px;font-size:11px;font-weight:800;">${mDorneda.resultado} Dorneda (${dScore})</span>`;
-    } else if(anyMatchPlayed){
-      statusBadge = `<span class="badge" style="margin-left:8px;font-size:11px;background:rgba(34,197,94,0.15);color:var(--success);border:1px solid rgba(34,197,94,0.3);font-weight:700;">✅ Jornada Disputada</span>`;
-    } else {
-      statusBadge = `<span class="badge" style="margin-left:8px;font-size:11px;background:var(--surface3);color:var(--text-dim);border:1px solid var(--border)">⏳ Jornada Pendiente</span>`;
-    }
-
-    headerEl.innerHTML = `<strong>Jornada ${currentJ.jornada}</strong> (Vuelta ${currentJ.vuelta || (currentJ.jornada <= 15 ? 1 : 2)}) &middot; Sábado ${currentJ.fecha} ${statusBadge}`;
-  }
-
-  // Update dropdown options
-  const dropdown = document.getElementById('selectJornadaDropdown');
-  if(dropdown){
-    dropdown.innerHTML = jornadas.map(j => {
-      const mD = (db.partidos || []).find(x => x.codigo === ('J' + j.jornada));
-      const isHome = mD ? (mD.condicion === 'Local') : true;
-      const isDone = (mD && mD.resultado && mD.gf !== null) || (j.partidos && j.partidos.some(p => p.gl !== null && p.gv !== null));
-      const dScore = (mD && mD.resultado && mD.gf !== null) ? (isHome ? `${mD.gf}-${mD.gc}` : `${mD.gc}-${mD.gf}`) : '';
-      const resPrefix = dScore ? ` [${mD.resultado.charAt(0)} ${dScore}]` : (isDone ? ' [Jugada]' : '');
-      return `<option value="${j.jornada}" ${j.jornada === currentJornadaNav ? 'selected' : ''}>Jornada ${j.jornada} (${j.fecha})${resPrefix}</option>`;
-    }).join('');
-  }
-
-  // Update prev / next buttons
-  const btnPrev = document.getElementById('btnPrevJornada');
-  const btnNext = document.getElementById('btnNextJornada');
-  if(btnPrev) btnPrev.disabled = (currentJornadaNav <= 1);
-  if(btnNext) btnNext.disabled = (currentJornadaNav >= 30);
-
-  // Update pills wrap - differentiate played vs pending jornadas!
-  const pillsWrap = document.getElementById('jornadasPillsWrap');
-  if(pillsWrap){
-    pillsWrap.innerHTML = jornadas.map(j => {
-      const isAct = j.jornada === currentJornadaNav;
-      const mD = (db.partidos || []).find(x => x.codigo === ('J' + j.jornada));
-      const isHome = mD ? (mD.condicion === 'Local') : true;
-      const dornedaPlayed = mD && mD.resultado && (mD.gf !== null && mD.gf !== undefined);
-      const dScore = dornedaPlayed ? (isHome ? `${mD.gf}-${mD.gc}` : `${mD.gc}-${mD.gf}`) : '';
-      const anyPlayed = j.partidos && j.partidos.some(p => p.gl !== null && p.gv !== null && p.gl !== undefined && p.gv !== undefined);
-      const isDone = dornedaPlayed || anyPlayed;
-
-      let pillBg = 'var(--surface2)';
-      let pillBorder = 'var(--border)';
-      let pillColor = 'var(--text-muted)';
-      let statusDot = '';
-
-      if(dornedaPlayed){
-        if(mD.resultado === 'Victoria'){
-          pillBg = 'rgba(34, 197, 94, 0.14)';
-          pillBorder = 'rgba(34, 197, 94, 0.4)';
-          pillColor = '#16a34a';
-          statusDot = ' <span style="font-size:9px;">🟢</span>';
-        } else if(mD.resultado === 'Derrota'){
-          pillBg = 'rgba(220, 38, 38, 0.14)';
-          pillBorder = 'rgba(220, 38, 38, 0.4)';
-          pillColor = '#dc2626';
-          statusDot = ' <span style="font-size:9px;">🔴</span>';
-        } else {
-          pillBg = 'rgba(217, 119, 6, 0.14)';
-          pillBorder = 'rgba(217, 119, 6, 0.4)';
-          pillColor = '#d97706';
-          statusDot = ' <span style="font-size:9px;">🟡</span>';
-        }
-      } else if(anyPlayed){
-        pillBg = 'var(--surface3)';
-        pillBorder = 'var(--border2)';
-        pillColor = 'var(--text)';
-        statusDot = ' <span style="font-size:9px;">✓</span>';
-      }
-
-      if(isAct){
-        pillBg = 'var(--red)';
-        pillBorder = 'var(--red)';
-        pillColor = '#ffffff';
-      }
-
-      const shadow = isAct ? 'box-shadow:0 2px 8px rgba(204,0,0,0.4);transform:scale(1.05);' : '';
-      return `<button onclick="onSelectJornadaChange(${j.jornada})" style="padding:5px 11px;font-size:11.5px;font-weight:${isAct||isDone?'800':'600'};border-radius:14px;white-space:nowrap;cursor:pointer;border:1px solid ${pillBorder};background:${pillBg};color:${pillColor};transition:var(--transition);${shadow}" title="Jornada ${j.jornada} (${j.fecha})${dornedaPlayed ? ' · ' + mD.resultado + ' (' + dScore + ')' : (isDone ? ' · Disputada' : ' · Pendiente')}">J${j.jornada}${statusDot}</button>`;
-    }).join('');
-  }
-
-  // Update matches grid
-  const grid = document.getElementById('jornadaMatchesGrid');
-  if(grid){
-    grid.innerHTML = (currentJ.partidos || []).map(p => {
-      const isDornedaMatch = (p.local && p.local.indexOf('Dorneda') !== -1) || (p.visitante && p.visitante.indexOf('Dorneda') !== -1) || p.dorneda;
-      
-      // Dorneda Match Card
-      if(isDornedaMatch){
-        const m = (db.partidos || []).find(x => x.codigo === ('J' + currentJ.jornada));
-        const isHome = m ? (m.condicion === 'Local') : (p.local && p.local.indexOf('Dorneda') !== -1);
-        const isPlayed = (m && m.resultado && m.gf !== null && m.gf !== undefined) || (p.gl !== null && p.gv !== null && p.gl !== undefined && p.gv !== undefined);
-        
-        let scoreGl = p.gl;
-        let scoreGv = p.gv;
-        if(m && m.gf !== null && m.gf !== undefined){
-          scoreGl = isHome ? m.gf : m.gc;
-          scoreGv = isHome ? m.gc : m.gf;
-        }
-
-        let resLabel = m && m.resultado ? m.resultado : (scoreGl !== null && scoreGv !== null ? (scoreGl > scoreGv ? (isHome ? 'Victoria' : 'Derrota') : (scoreGl < scoreGv ? (isHome ? 'Derrota' : 'Victoria') : 'Empate')) : '');
-        let cardCls = resLabel === 'Victoria' ? 'victoria-card' : (resLabel === 'Derrota' ? 'derrota-card' : (resLabel === 'Empate' ? 'empate-card' : 'pendiente-card'));
-        let scoreCls = resLabel === 'Victoria' ? 'win' : (resLabel === 'Derrota' ? 'loss' : (resLabel === 'Empate' ? 'draw' : 'pending'));
-        
-        const horaVal = m ? (m.horaPartido || m.hora || '') : '';
-        const campoVal = m ? (m.campo || (isHome ? 'A Marola (Mera)' : 'Campo Rival')) : (isHome ? 'A Marola (Mera)' : 'Campo Rival');
-        const fechaVal = m && m.fecha ? m.fecha : currentJ.fecha;
-        const actaLink = m && (m.enlaceActa || m.codActa) ? (m.enlaceActa || `https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=${m.codActa}&cod_acta=${m.codActa}`) : '';
-
-        // Goles detail snippet if any
-        let golesSnippet = '';
-        if(m && m.golesDetalle && m.golesDetalle.length){
-          const gList = m.golesDetalle.map(g => `${g.jugador || g.nombre || 'Gol'}${g.minuto ? ' ' + g.minuto + "'" : ''}`).join(', ');
-          golesSnippet = `<div style="font-size:11px;color:var(--success);background:rgba(22,163,74,0.08);padding:4px 8px;border-radius:4px;margin-bottom:8px;display:flex;align-items:center;gap:4px;"><span>⚽</span> <strong>Goles:</strong> <span>${gList}</span></div>`;
-        } else if(m && m.resumen){
-          golesSnippet = `<div style="font-size:11px;color:var(--text-muted);background:var(--surface3);padding:4px 8px;border-radius:4px;margin-bottom:8px;display:flex;align-items:center;gap:4px;"><span>📝</span> <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${m.resumen}</span></div>`;
-        }
-
-        const scoreText = isPlayed ? `${scoreGl} - ${scoreGv} ${resLabel==='Victoria'?'(V)':(resLabel==='Derrota'?'(D)':(resLabel==='Empate'?'(E)':''))}` : 'VS';
-
-        return `<div class="match-card ${cardCls}" style="grid-column: 1 / -1; border-width: 2px; background: var(--surface2); padding: 12px 16px; border-radius: var(--radius); cursor: pointer;" ${m ? `onclick="showDetallePartido(${m.id})"` : ''}>
-          <div class="match-card-top">
-            <div class="match-left-info">
-              <span class="match-code-tag" style="background:var(--red);color:white;font-weight:900;">⭐ PARTIDO DORNEDA</span>
-              <span class="match-code-tag">J${currentJ.jornada}</span>
-              <span class="match-date-tag">📅 ${fechaVal}</span>
-              <span class="match-time-badge ${horaVal ? 'has-time' : 'no-time'}">⏰ ${horaVal || '--:--'}</span>
-              ${actaLink ? `<a href="${actaLink}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" style="background:#285b4f;color:#ffffff;font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;text-decoration:none;display:inline-flex;align-items:center;gap:3px;border:1px solid #1e453c;" title="Ver Acta Oficial FUTGAL">📄 Acta ↗</a>` : ''}
-            </div>
-            <div class="match-venue-text" style="font-size:11px;font-weight:600;color:var(--text-dim);">
-              ${isHome ? '🏠 ' + campoVal : '✈️ ' + campoVal}
-            </div>
-          </div>
-          <div class="match-card-bottom" style="margin: 10px 0 8px 0;">
-            <div class="match-title-text" style="font-size:14px;">
-              ${isHome ? '<span class="dorneda-highlight" style="font-weight:900;color:var(--red-light);">Xuventude Dorneda</span> vs ' + (p.visitante || (m ? m.rival : 'Rival')) : (p.local || (m ? m.rival : 'Rival')) + ' vs <span class="dorneda-highlight" style="font-weight:900;color:var(--red-light);">Xuventude Dorneda</span>'}
-            </div>
-            <div class="match-score-badge ${scoreCls}" style="font-size:13px;font-weight:900;padding:4px 10px;border-radius:6px;">
-              ${scoreText}
-            </div>
-          </div>
-          ${golesSnippet}
-          ${m ? `<button type="button" class="btn btn-primary btn-xs" style="width:100%;font-size:11.5px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px;padding:6px 12px;margin-top:2px;" onclick="event.stopPropagation();showDetallePartido(${m.id})">
-            <span>📋</span> <span>${isPlayed ? 'Ver Ficha y Estadísticas del Partido' : 'Ver Ficha y Convocatoria del Partido'}</span>
-          </button>` : ''}
-        </div>`;
-      }
-
-      // Other Matches in the Jornada
-      const hasScore = (p.gl !== null && p.gl !== undefined) && (p.gv !== null && p.gv !== undefined);
-      if(hasScore){
-        return `<div class="card" style="border:1px solid var(--border);background:var(--surface2);border-left:4px solid var(--border2);padding:10px 14px;border-radius:var(--radius-sm);display:flex;flex-direction:column;justify-content:space-between;gap:6px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;font-size:10.5px;color:var(--text-dim);">
-            <span class="badge" style="background:rgba(34,197,94,0.12);color:var(--success);border:1px solid rgba(34,197,94,0.25);font-size:9.5px;font-weight:700;">✅ Finalizado</span>
-            <span>Jornada ${currentJ.jornada} &middot; ${currentJ.fecha}</span>
-          </div>
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin:3px 0;">
-            <div style="flex:1;font-weight:700;font-size:12.5px;color:var(--text);">${highlightDorneda(p.local)}</div>
-            <div style="flex-shrink:0;font-size:14px;font-weight:900;color:var(--text);padding:2px 8px;background:var(--surface3);border-radius:4px;border:1px solid var(--border);">${p.gl} - ${p.gv}</div>
-            <div style="flex:1;text-align:right;font-weight:700;font-size:12.5px;color:var(--text);">${highlightDorneda(p.visitante)}</div>
-          </div>
-        </div>`;
-      } else {
-        return `<div class="card" style="border:1px dashed var(--border);background:var(--surface);padding:10px 14px;border-radius:var(--radius-sm);display:flex;flex-direction:column;justify-content:space-between;gap:6px;opacity:0.85;">
-          <div style="display:flex;justify-content:space-between;align-items:center;font-size:10.5px;color:var(--text-dim);">
-            <span class="badge" style="background:var(--surface3);color:var(--text-dim);font-size:9.5px;font-weight:600;">⏳ Por disputar</span>
-            <span>Jornada ${currentJ.jornada} &middot; ${currentJ.fecha}</span>
-          </div>
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin:3px 0;">
-            <div style="flex:1;font-weight:600;font-size:12px;color:var(--text-muted);">${highlightDorneda(p.local)}</div>
-            <div style="flex-shrink:0;font-size:11px;font-weight:800;color:var(--text-dim);padding:2px 7px;background:var(--surface2);border-radius:4px;border:1px solid var(--border);">VS</div>
-            <div style="flex:1;text-align:right;font-weight:600;font-size:12px;color:var(--text-muted);">${highlightDorneda(p.visitante)}</div>
-          </div>
-        </div>`;
-      }
-    }).join('');
-  }
+  renderLigaResultadosView();
 }
 window.renderTodasJornadasView = renderTodasJornadasView;
 
@@ -10040,6 +9916,8 @@ function renderPretemporadaView(){
     var gl = isHome ? p.gf : p.gc;
     var gv = isHome ? p.gc : p.gf;
     var hasScore = (p.gf !== null && p.gf !== undefined && p.gc !== null && p.gc !== undefined);
+    var statusClass = hasScore ? 'match-played' : 'match-pending';
+    var resClass = isWin ? 'result-win' : (isLoss ? 'result-loss' : (isTie ? 'result-draw' : ''));
 
     var resBadge = '';
     if(isWin) resBadge = '<span class="badge badge-success" style="font-size:8.5px;font-weight:800;padding:1px 5px;">✅ Victoria</span>';
@@ -10048,7 +9926,7 @@ function renderPretemporadaView(){
     else resBadge = '<span class="badge" style="background:var(--surface2);color:var(--text-dim);font-size:8.5px;font-weight:600;padding:1px 4px;">⏳ Pendiente</span>';
 
     return `
-      <div class="copa-match-row dorneda-row" onclick="showDetallePartido(${p.id})" style="cursor:pointer;">
+      <div class="copa-match-row ${statusClass} ${resClass}" onclick="showDetallePartido(${p.id})" style="cursor:pointer;">
         <!-- Col 1: Horario / Campo -->
         <div style="width:160px;flex-shrink:0;font-size:10px;color:var(--text-dim);display:flex;align-items:center;gap:4px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
           <span class="badge badge-accent" style="font-size:8px;font-weight:900;padding:1px 4px;flex-shrink:0;">${p.codigo || 'Pret'}</span>
@@ -10599,116 +10477,41 @@ window.filterCopaGoleadores = filterCopaGoleadores;
 function renderClasificacion(){
   const s = [...(db.clasificacion || [])].sort((a,b) => b.pts - a.pts || (b.gf - b.gc) - (a.gf - a.gc));
   
-  const tbody = document.querySelector('#mainClasifTable tbody');
-  if(tbody){
-    tbody.innerHTML = s.map((eq, i) => {
-      const isDorneda = (eq.equipo || '').indexOf('Dorneda') !== -1;
-      const rowCls = isDorneda ? 'dorneda-row' : '';
-      const dg = eq.gf - eq.gc;
-      const dgStr = dg > 0 ? '+' + dg : (dg < 0 ? dg : '0');
-      const dgColor = dg > 0 ? 'color:var(--success);font-weight:700;' : (dg < 0 ? 'color:var(--red-light);' : 'color:var(--text-muted);');
-      
-      let posHtml = `<span class="pos-pill normal">${i + 1}</span>`;
-      if(i === 0) posHtml = `<span class="pos-pill top-1" title="Líder">1</span>`;
-      else if(i === 1) posHtml = `<span class="pos-pill top-2" title="2º Clasificado">2</span>`;
-      else if(i === 2) posHtml = `<span class="pos-pill top-3" title="3º Clasificado">3</span>`;
+  const rowsHtml = s.map((eq, i) => {
+    const isDorneda = (eq.equipo || '').indexOf('Dorneda') !== -1;
+    const rowCls = isDorneda ? 'dorneda-row' : '';
+    const dg = eq.gf - eq.gc;
+    const dgStr = dg > 0 ? '+' + dg : (dg < 0 ? dg : '0');
+    const dgColor = dg > 0 ? 'color:var(--success);font-weight:700;' : (dg < 0 ? 'color:var(--red-light);' : 'color:var(--text-muted);');
+    
+    let posHtml = `<span class="pos-pill normal">${i + 1}</span>`;
+    if(i === 0) posHtml = `<span class="pos-pill top-1" title="Líder">1</span>`;
+    else if(i === 1) posHtml = `<span class="pos-pill top-2" title="2º Clasificado">2</span>`;
+    else if(i === 2) posHtml = `<span class="pos-pill top-3" title="3º Clasificado">3</span>`;
 
-      return `<tr class="${rowCls}">
-        <td style="width:34px;padding:3px 2px;">${posHtml}</td>
-        <td>${highlightDorneda(eq.equipo)} ${isDorneda ? '⭐' : ''}</td>
-        <td style="font-weight:700;">${eq.pj}</td>
-        <td>${eq.g}</td>
-        <td>${eq.e}</td>
-        <td>${eq.p}</td>
-        <td class="td-muted">${eq.gf}</td>
-        <td class="td-muted">${eq.gc}</td>
-        <td style="${dgColor}">${dgStr}</td>
-        <td style="font-size:12.5px;font-weight:900;color:var(--success);">${eq.pts}</td>
-      </tr>`;
-    }).join('');
-  }
+    return `<tr class="${rowCls}">
+      <td style="width:34px;padding:3px 2px;">${posHtml}</td>
+      <td>${highlightDorneda(eq.equipo)} ${isDorneda ? '⭐' : ''}</td>
+      <td style="font-weight:700;">${eq.pj}</td>
+      <td>${eq.g}</td>
+      <td>${eq.e}</td>
+      <td>${eq.p}</td>
+      <td class="td-muted">${eq.gf}</td>
+      <td class="td-muted">${eq.gc}</td>
+      <td style="${dgColor}">${dgStr}</td>
+      <td style="font-size:12.5px;font-weight:900;color:var(--success);">${eq.pts}</td>
+    </tr>`;
+  }).join('');
+
+  const tbMain = document.querySelector('#mainClasifTable tbody');
+  if(tbMain) tbMain.innerHTML = rowsHtml;
+
+  const tbAnalisis = document.getElementById('tablaClasifBody');
+  if(tbAnalisis) tbAnalisis.innerHTML = rowsHtml;
 
   if(clasifTabActive === 'copa') renderCopaView();
 }
-
-
-
-function renderGoalTimingSection(){
-  const el = document.getElementById('goalTimingContainer');
-  if(!el) return;
-  
-  // Calculate goal timing distribution (0-15', 16-30', 31-45', 46-60', 61-75', 76-90')
-  const timing = { '1-15':0, '16-30':0, '31-45':0, '46-60':0, '61-75':0, '76-90':0 };
-  let total = 0;
-
-  (db.partidos || []).forEach(p => {
-    (p.golesDetalle || []).forEach(g => {
-      const min = parseInt(g.minuto) || 0;
-      if(min > 0){
-        total++;
-        if(min <= 15) timing['1-15']++;
-        else if(min <= 30) timing['16-30']++;
-        else if(min <= 45) timing['31-45']++;
-        else if(min <= 60) timing['46-60']++;
-        else if(min <= 75) timing['61-75']++;
-        else timing['76-90']++;
-      }
-    });
-  });
-
-  const slots = [
-    { label: '01-15 min', val: timing['1-15'] },
-    { label: '16-30 min', val: timing['16-30'] },
-    { label: '31-45 min', val: timing['31-45'] },
-    { label: '46-60 min', val: timing['46-60'] },
-    { label: '61-75 min', val: timing['61-75'] },
-    { label: '76-90 min', val: timing['76-90'] }
-  ];
-
-  let html = '<div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(110px, 1fr));gap:8px">';
-  slots.forEach(s => {
-    const pct = total > 0 ? Math.round((s.val / total) * 100) : 0;
-    html += `<div class="card text-center" style="background:var(--surface2);padding:10px;border:1px solid var(--border)">
-      <div style="font-size:10px;color:var(--text-muted);font-weight:700">${s.label}</div>
-      <div style="font-size:20px;font-weight:900;color:var(--red-light);margin:4px 0">${s.val} ⚽</div>
-      <div style="font-size:9px;color:var(--text-dim)">${pct}% del total</div>
-    </div>`;
-  });
-  html += '</div>';
-
-  el.innerHTML = html;
-}
-
-
-
-function renderTiposGolesSection(){
-  const el = document.getElementById('tiposGolesContainer');
-  if(!el) return;
-  
-  const types = { 'Jugada':0, 'Penalti':0, 'Falta directa':0, 'Córner':0, 'Cabeza':0, 'Propia puerta':0 };
-  let total = 0;
-
-  (db.partidos || []).forEach(p => {
-    (p.golesDetalle || []).forEach(g => {
-      total++;
-      const t = g.tipo || 'Jugada';
-      types[t] = (types[t] || 0) + 1;
-    });
-  });
-
-  let html = '<div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(130px, 1fr));gap:8px">';
-  Object.entries(types).forEach(([t, count]) => {
-    const pct = total > 0 ? Math.round((count / total) * 100) : 0;
-    html += `<div class="card text-center" style="background:var(--surface2);padding:10px;border:1px solid var(--border)">
-      <div style="font-size:11px;color:var(--text-muted);font-weight:700">${t}</div>
-      <div style="font-size:20px;font-weight:900;color:var(--success);margin:4px 0">${count}</div>
-      <div style="font-size:9px;color:var(--text-dim)">${pct}%</div>
-    </div>`;
-  });
-  html += '</div>';
-
-  el.innerHTML = html;
-}
+window.renderClasificacion = renderClasificacion;
 
 
 function showAnalisisTab(tab, el){
@@ -11979,33 +11782,44 @@ function parseFutgalActa(){
 
 // DATA EXPORT & IMPORT
 function exportJSON(){
-  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(db, null, 2));
+  const dataStr = JSON.stringify(db, null, 2);
+  const blob = new Blob([dataStr], { type: 'application/json;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
   const dlAnchorElem = document.createElement('a');
-  dlAnchorElem.setAttribute("href", dataStr);
+  dlAnchorElem.setAttribute("href", url);
   dlAnchorElem.setAttribute("download", `dorneda_backup_${new Date().toISOString().slice(0,10)}.json`);
+  document.body.appendChild(dlAnchorElem);
   dlAnchorElem.click();
+  document.body.removeChild(dlAnchorElem);
+  URL.revokeObjectURL(url);
   toast('Backup JSON descargado', 'success');
 }
+window.exportJSON = exportJSON;
 
 function exportCSV(){
-  let csvContent = "data:text/csv;charset=utf-8,";
-  csvContent += "Dorsal,Apodo,Nombre Completo,Estado,PJ,Titular,Goles,Asistencias\n";
+  let csvContent = "Dorsal,Apodo,Nombre Completo,Estado,PJ,Titular,Goles,Asistencias\n";
   (db.jugadores || []).forEach(j => {
     const st = getPlayerStats(j.nombre);
     csvContent += `"${j.dorsal||''}","${j.nombre||''}","${j.nombreCompleto||''}","${j.estado||''}","${st.partidos}","${st.titulares}","${st.goles}","${st.asistencias}"\n`;
   });
-  const encodedUri = encodeURI(csvContent);
+  const blob = new Blob(["\uFEFF" + csvContent], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
-  link.setAttribute("href", encodedUri);
+  link.setAttribute("href", url);
   link.setAttribute("download", `dorneda_plantilla_${new Date().toISOString().slice(0,10)}.csv`);
+  document.body.appendChild(link);
   link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
   toast('Estadísticas CSV exportadas', 'success');
 }
+window.exportCSV = exportCSV;
 
 function triggerImport(){
   const fi = document.getElementById('importFile');
   if(fi) fi.click();
 }
+window.triggerImport = triggerImport;
 
 function importJSON(event){
   const file = event.target.files[0];
@@ -13390,6 +13204,7 @@ function renderEconHoja(){
 function printEconSheet(){
   window.print();
 }
+window.printEconSheet = printEconSheet;
 
 function exportEconCSV(){
   let csv = "Dorsal,Apodo,Nombre Completo,Estado Actual,Total Pagado,Pago 1,Fecha,Modo,Anotaciones\n";
@@ -13405,13 +13220,18 @@ function exportEconCSV(){
   movs.filter(m => m.tipo === 'Gasto').forEach(m => {
     csv += `"${m.concepto}","${m.importe} €","${m.notas||''}"\n`;
   });
-  const encoded = encodeURI("data:text/csv;charset=utf-8," + csv);
+  const blob = new Blob(["\uFEFF" + csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
   const l = document.createElement("a");
-  l.setAttribute("href", encoded);
+  l.setAttribute("href", url);
   l.setAttribute("download", `dorneda_economia_oficial_${new Date().toISOString().slice(0,10)}.csv`);
+  document.body.appendChild(l);
   l.click();
+  document.body.removeChild(l);
+  URL.revokeObjectURL(url);
   toast('Hoja Oficial exportada en CSV', 'success');
 }
+window.exportEconCSV = exportEconCSV;
 
 function renderEconomia(){
   updateEconLockUI();
