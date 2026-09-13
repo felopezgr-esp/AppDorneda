@@ -679,47 +679,71 @@ function mergeFutgalDataIntoDB(currentDB, futgalResults) {
 function parseFutgalClasificacionHtml(html) {
   const result = [];
   if (!html) return result;
+
+  function decodeSpan(spanHtml, fullHtml) {
+    if (!spanHtml) return 0;
+    const idM = spanHtml.match(/id=["']?([a-zA-Z0-9_-]+)["']?/);
+    if (idM) {
+      const elemId = idM[1];
+      const ntypeM = fullHtml.match(new RegExp(`ntype\\(["']${elemId}["'],\\s*(\\d+),\\s*(\\d+)`, 'i'));
+      if (ntypeM) {
+        const n = parseInt(ntypeM[1]);
+        const i = parseInt(ntypeM[2]);
+        const idx = (i * 10) + n;
+        if (idx >= 0 && idx < NOVANET_D_ARRAY.length) {
+          return NOVANET_D_ARRAY[idx];
+        }
+      }
+      const cssM = fullHtml.match(new RegExp(`#${elemId}[^{]*\\{[^}]*content:\\s*["'](?:\\\\003)?(\\d)["']`, 'i'));
+      if (cssM) return parseInt(cssM[1]);
+    }
+    const clean = spanHtml.replace(/<[^>]*>/g, '').trim();
+    const num = parseInt(clean);
+    return isNaN(num) ? 0 : num;
+  }
+
   const tableRegex = /<table[^>]*>([\s\S]*?)<\/table>/gi;
   let m;
   while ((m = tableRegex.exec(html)) !== null) {
-    if (m[1].includes('NFG_VisEquipos')) {
+    if (m[1].includes('NFG_VisCompeticiones_Grupo') || m[1].includes('NFG_VisEquipos')) {
       const trRegex = /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
       let trM;
       let pos = 1;
       while ((trM = trRegex.exec(m[1])) !== null) {
         const row = trM[1];
-        if (row.includes('<th') || !row.includes('NFG_VisEquipos')) continue;
-        const teamMatch = row.match(/NFG_VisEquipos[^>]*>([^<]+)<\/a>/i);
+        if (row.includes('<th') || (!row.includes('NFG_VisCompeticiones_Grupo') && !row.includes('NFG_VisEquipos'))) continue;
+        const teamMatch = row.match(/NFG_Vis[^>]*>([^<]+)<\/a>/i);
         if (!teamMatch) continue;
         const equipo = teamMatch[1].trim();
         const tdRegex = /<td[^>]*>([\s\S]*?)<\/td>/gi;
         const tds = [];
         let tdM;
         while ((tdM = tdRegex.exec(row)) !== null) {
-          tds.push(tdM[1].replace(/<[^>]*>/g, '').trim());
+          tds.push(tdM[1]);
         }
-        let teamIdx = -1;
-        for (let i = 0; i < tds.length; i++) {
-          if (tds[i].toUpperCase().includes(equipo.substring(0, 5).toUpperCase())) {
-            teamIdx = i;
-            break;
-          }
-        }
-        if (teamIdx !== -1 && tds.length > teamIdx + 7) {
+        if (tds.length >= 11) {
+          const pj = decodeSpan(tds[5], html);
+          const g = decodeSpan(tds[6], html);
+          const e = decodeSpan(tds[7], html);
+          const p = decodeSpan(tds[8], html);
+          const gf = decodeSpan(tds[9], html);
+          const gc = decodeSpan(tds[10], html);
+          const pts = (g * 3) + e;
+
           result.push({
             pos: pos++,
             equipo,
-            pts: parseInt(tds[teamIdx + 1]) || 0,
-            pj: parseInt(tds[teamIdx + 2]) || 0,
-            g: parseInt(tds[teamIdx + 3]) || 0,
-            e: parseInt(tds[teamIdx + 4]) || 0,
-            p: parseInt(tds[teamIdx + 5]) || 0,
-            gf: parseInt(tds[teamIdx + 6]) || 0,
-            gc: parseInt(tds[teamIdx + 7]) || 0
+            pts,
+            pj: pj || 1,
+            g,
+            e,
+            p,
+            gf,
+            gc
           });
         }
       }
-      break;
+      if (result.length > 0) break;
     }
   }
   return result;
