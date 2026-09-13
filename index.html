@@ -2629,6 +2629,21 @@
   </div>
 </div>
 
+<!-- MODAL FICHA DE ACTA OFICIAL (TODOS LOS PARTIDOS) -->
+<div class="modal-overlay" id="modalFichaActaOficial">
+  <div class="modal" style="max-width:960px;width:95%;max-height:92vh;display:flex;flex-direction:column;">
+    <div class="modal-header" style="border-bottom:1px solid var(--border);padding:12px 18px;">
+      <div class="modal-title" id="fichaActaTitle" style="font-size:15px;font-weight:900;display:flex;align-items:center;gap:8px;">
+        📄 Ficha Oficial del Partido
+      </div>
+      <button class="modal-close" onclick="closeModal('modalFichaActaOficial')">&#10005;</button>
+    </div>
+    <div class="modal-body" id="fichaActaContent" style="padding:16px 18px;overflow-y:auto;flex:1;">
+      <!-- Contenido dinámico 3 columnas -->
+    </div>
+  </div>
+</div>
+
 <!-- MODAL JUGADOR -->
 <div class="modal-overlay" id="modalJugador">
   <div class="modal" style="max-width:640px">
@@ -8217,7 +8232,7 @@ function renderCopaView(){
       const resClass = (hasScore && isDornedaMatch) ? (isLocalWinner && isDornedaLocal ? 'result-win' : (isVisitorWinner && isDornedaVisitor ? 'result-win' : (isTie ? 'result-draw' : 'result-loss'))) : '';
 
       return `
-        <div class="copa-match-row ${statusClass} ${resClass}">
+        <div class="copa-match-row ${statusClass} ${resClass}" onclick="openFichaActaOficial(${currentCopaRondaNav || p.ronda || 1}, '${(p.local || '').replace(/'/g, "\\'")}', '${(p.visitante || '').replace(/'/g, "\\'")}', '${p.enlaceActa || ''}', '${p.codActa || ''}')" style="cursor:pointer;">
           <!-- Col 1: Horario / Campo -->
           <div style="width:155px;flex-shrink:0;font-size:10px;color:var(--text-dim);display:flex;align-items:center;gap:4px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
             ${isDornedaMatch ? `<span class="badge badge-accent" style="font-size:7.5px;font-weight:900;padding:1px 3px;flex-shrink:0;">⭐ DORNEDA</span>` : ''}
@@ -8266,12 +8281,10 @@ function renderCopaView(){
           </div>
 
           <!-- Col 6: Botones Acción -->
-          <div style="width:105px;flex-shrink:0;display:flex;align-items:center;justify-content:flex-end;gap:3px;">
-            ${isDornedaMatch && m ? `
-              <button type="button" class="btn btn-primary btn-xs" style="font-size:9px;font-weight:800;padding:1px 5px;display:inline-flex;align-items:center;gap:2px;white-space:nowrap;min-height:19px;border-radius:3px;" onclick="showDetallePartido(${m.id})" title="Ver Ficha Completa del Partido">
-                ⭐ Ficha
-              </button>
-            ` : ''}
+          <div style="width:115px;flex-shrink:0;display:flex;align-items:center;justify-content:flex-end;gap:3px;" onclick="event.stopPropagation()">
+            <button type="button" class="btn ${isDornedaMatch ? 'btn-primary' : 'btn-ghost'} btn-xs" style="font-size:9px;font-weight:800;padding:1px 6px;display:inline-flex;align-items:center;gap:2px;white-space:nowrap;min-height:19px;border-radius:3px;border:1px solid var(--border);" onclick="openFichaActaOficial(${currentCopaRondaNav || p.ronda || 1}, '${(p.local || '').replace(/'/g, "\\'")}', '${(p.visitante || '').replace(/'/g, "\\'")}', '${p.enlaceActa || ''}', '${p.codActa || ''}')" title="Ver Ficha y Acta Oficial del Partido">
+              ${isDornedaMatch ? '⭐ Ficha' : '📋 Ficha'}
+            </button>
             ${actaBtn ? actaBtn : ''}
           </div>
         </div>
@@ -10350,7 +10363,7 @@ function renderMatchesCards(matches, jornadaNum, jornadaFecha, container){
     var actaBtn = actaUrl ? `<a href="${actaUrl}" target="_blank" rel="noopener noreferrer" style="background:#285b4f;color:#ffffff;padding:1px 5px;border-radius:3px;font-size:9px;font-weight:700;display:inline-flex;align-items:center;gap:2px;text-decoration:none;border:1px solid #1e453c;white-space:nowrap;min-height:19px;box-sizing:border-box;" title="Ver Acta Oficial en FUTGAL">📄 Acta ↗</a>` : '';
 
     return `
-      <div class="copa-match-row ${isDornedaMatch ? 'dorneda-row' : 'regular-row'}" ${isDornedaMatch && m ? `onclick="showDetallePartido(${m.id})" style="cursor:pointer;"` : ''}>
+      <div class="copa-match-row ${isDornedaMatch ? 'dorneda-row' : 'regular-row'}" onclick="openFichaActaOficial(${jornadaNum}, '${(p.local || '').replace(/'/g, "\\'")}', '${(p.visitante || '').replace(/'/g, "\\'")}', '${p.enlaceActa || ''}', '${p.codActa || ''}')" style="cursor:pointer;">
         <!-- Col 1: Horario / Campo -->
         <div style="width:155px;flex-shrink:0;font-size:10px;color:var(--text-dim);display:flex;align-items:center;gap:4px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
           ${isDornedaMatch ? `<span class="badge badge-accent" style="font-size:7.5px;font-weight:900;padding:1px 3px;flex-shrink:0;">⭐ DORNEDA</span>` : ''}
@@ -10399,18 +10412,318 @@ function renderMatchesCards(matches, jornadaNum, jornadaFecha, container){
         </div>
 
         <!-- Col 6: Botones Acción -->
-        <div style="width:105px;flex-shrink:0;display:flex;align-items:center;justify-content:flex-end;gap:3px;" onclick="event.stopPropagation()">
-          ${isDornedaMatch && m ? `
-            <button type="button" class="btn btn-primary btn-xs" style="font-size:9px;font-weight:800;padding:1px 5px;display:inline-flex;align-items:center;gap:2px;white-space:nowrap;min-height:19px;border-radius:3px;" onclick="showDetallePartido(${m.id})" title="Ver Ficha Completa del Partido">
-              ⭐ Ficha
-            </button>
-          ` : ''}
+        <div style="width:115px;flex-shrink:0;display:flex;align-items:center;justify-content:flex-end;gap:3px;" onclick="event.stopPropagation()">
+          <button type="button" class="btn ${isDornedaMatch ? 'btn-primary' : 'btn-ghost'} btn-xs" style="font-size:9px;font-weight:800;padding:1px 6px;display:inline-flex;align-items:center;gap:2px;white-space:nowrap;min-height:19px;border-radius:3px;border:1px solid var(--border);" onclick="openFichaActaOficial(${jornadaNum}, '${(p.local || '').replace(/'/g, "\\'")}', '${(p.visitante || '').replace(/'/g, "\\'")}', '${p.enlaceActa || ''}', '${p.codActa || ''}')" title="Ver Ficha y Acta Oficial del Partido">
+            ${isDornedaMatch ? '⭐ Ficha' : '📋 Ficha'}
+          </button>
           ${actaBtn ? actaBtn : ''}
         </div>
       </div>
     `;
   }).join('');
 }
+
+function openFichaActaOficial(jornadaNum, localTeam, visitTeam, enlaceActa, codActa){
+  var titleEl = document.getElementById('fichaActaTitle');
+  var bodyEl = document.getElementById('fichaActaContent');
+  if(!bodyEl) return;
+
+  // 1. Buscar el partido en todasJornadas o copaJornadas o partidos
+  var match = null;
+  var jornadas = (db.todasJornadas || DEFAULT_DATA.todasJornadas || []);
+  var jObj = jornadas.find(function(j){ return j.jornada === jornadaNum; });
+  if(jObj && jObj.partidos){
+    match = jObj.partidos.find(function(p){
+      return (p.local && p.local.toLowerCase() === (localTeam || '').toLowerCase()) ||
+             (p.visitante && p.visitante.toLowerCase() === (visitTeam || '').toLowerCase());
+    });
+  }
+  if(!match && db.copaJornadas){
+    for(var c of db.copaJornadas){
+      var cp = (c.partidos || []).find(function(p){
+        return (p.local && p.local.toLowerCase() === (localTeam || '').toLowerCase()) ||
+               (p.visitante && p.visitante.toLowerCase() === (visitTeam || '').toLowerCase());
+      });
+      if(cp){ match = cp; break; }
+    }
+  }
+
+  if(!match){
+    match = {
+      local: localTeam,
+      visitante: visitTeam,
+      jornada: jornadaNum,
+      enlaceActa: enlaceActa || '',
+      codActa: codActa || '',
+      fecha: jObj ? jObj.fecha : '',
+      hora: '',
+      campo: '',
+      gl: null,
+      gv: null
+    };
+  }
+
+  var isDornedaMatch = (match.local && match.local.indexOf('Dorneda') !== -1) || (match.visitante && match.visitante.indexOf('Dorneda') !== -1);
+  var hasScore = (match.gl !== null && match.gl !== undefined) && (match.gv !== null && match.gv !== undefined);
+  var actaUrl = match.enlaceActa || (match.codActa ? `https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=${match.codActa}&cod_acta=${match.codActa}` : (enlaceActa || ''));
+
+  if(titleEl){
+    titleEl.innerHTML = `
+      <span class="badge badge-primary" style="font-size:11px;font-weight:800;">Jornada ${jornadaNum || match.jornada || ''}</span>
+      <span>${match.local} vs ${match.visitante}</span>
+    `;
+  }
+
+  // 2. Extraer o completar datos del acta
+  var acta = match.actaData || {};
+  if((!acta.localTitulares || !acta.localTitulares.length) && isDornedaMatch){
+    var pDorneda = (db.partidos || []).find(function(x){ return x.codigo === ('J' + jornadaNum) || x.jornada === jornadaNum; });
+    if(pDorneda && pDorneda.convocados && pDorneda.convocados.length){
+      var isHome = pDorneda.condicion === 'Local';
+      var dTit = pDorneda.convocados.filter(function(c){ return c.titular; }).map(function(c, i){ return { dorsal: c.dorsal || (i+1), nombre: c.nombre }; });
+      var dSup = pDorneda.convocados.filter(function(c){ return !c.titular; }).map(function(c, i){ return { dorsal: c.dorsal || (12+i), nombre: c.nombre }; });
+      if(isHome){
+        acta.localTitulares = acta.localTitulares || dTit;
+        acta.localSuplentes = acta.localSuplentes || dSup;
+      } else {
+        acta.visitTitulares = acta.visitTitulares || dTit;
+        acta.visitSuplentes = acta.visitSuplentes || dSup;
+      }
+      if(pDorneda.campo && !match.campo) match.campo = pDorneda.campo;
+      if(pDorneda.arbitro && !acta.arbitro) acta.arbitro = pDorneda.arbitro;
+    }
+  }
+
+  var localTitulares = acta.localTitulares || [];
+  var localSuplentes = acta.localSuplentes || [];
+  var localStaff = acta.localStaff || [];
+  var localTarjetas = acta.localTarjetas || [];
+
+  var visitTitulares = acta.visitTitulares || [];
+  var visitSuplentes = acta.visitSuplentes || [];
+  var visitStaff = acta.visitStaff || [];
+  var visitTarjetas = acta.visitTarjetas || [];
+
+  var goles = acta.allGoles || [];
+  var arbitro = acta.arbitro || match.arbitro || 'Por designar';
+  var campo = acta.campo || match.campo || 'Por determinar';
+  var ciudad = acta.ciudad || (campo.indexOf('Marola') !== -1 ? 'Oleiros' : '');
+
+  // 3. Renderizar 3 Column Layout (Foto 2)
+  var html = `
+    <!-- HEADER MARCADOR -->
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;">
+      <div style="flex:1;text-align:center;">
+        <div style="font-size:16px;font-weight:900;color:${match.local.indexOf('Dorneda') !== -1 ? 'var(--red-light)' : 'var(--text)'};">${match.local}</div>
+        <div style="font-size:11px;color:var(--text-muted);margin-top:2px;">Equipo Local</div>
+      </div>
+      <div style="text-align:center;padding:0 16px;">
+        <div style="font-size:34px;font-weight:900;letter-spacing:2px;color:var(--text);line-height:1;">
+          ${hasScore ? `${match.gl} - ${match.gv}` : '<span style="font-size:20px;color:var(--text-dim);">VS</span>'}
+        </div>
+        <div style="font-size:11px;color:var(--text-dim);font-weight:700;margin-top:6px;">
+          ${match.fecha || ''} ${match.hora ? `· ⏰ ${match.hora}` : ''}
+        </div>
+      </div>
+      <div style="flex:1;text-align:center;">
+        <div style="font-size:16px;font-weight:900;color:${match.visitante.indexOf('Dorneda') !== -1 ? 'var(--red-light)' : 'var(--text)'};">${match.visitante}</div>
+        <div style="font-size:11px;color:var(--text-muted);margin-top:2px;">Equipo Visitante</div>
+      </div>
+    </div>
+
+    <!-- 3 COLUMNS MATCH SHEET LAYOUT -->
+    <div style="display:grid;grid-template-columns:1fr 1.1fr 1fr;gap:14px;align-items:start;">
+      
+      <!-- COLUMNA 1: EQUIPO LOCAL -->
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:12px;">
+        <div style="font-size:13px;font-weight:900;color:var(--text);border-bottom:2px solid var(--border);padding-bottom:6px;text-align:center;">
+          ${match.local}
+        </div>
+
+        <!-- Titulares -->
+        <div>
+          <div style="font-size:11px;font-weight:800;color:var(--success);text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:4px;">
+            <span>👥 Titulares (${localTitulares.length || (hasScore ? 11 : 0)})</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:3px;">
+            ${localTitulares.length ? localTitulares.map(function(t, idx){
+              return `<div style="font-size:11px;padding:3px 6px;background:var(--surface2);border-radius:4px;display:flex;align-items:center;gap:6px;">
+                <span style="font-weight:800;color:var(--text-dim);font-size:10px;min-width:16px;">${t.dorsal || (idx+1)}</span>
+                <span style="font-weight:600;color:var(--text);">${t.nombre}</span>
+              </div>`;
+            }).join('') : `<div style="font-size:11px;color:var(--text-dim);font-style:italic;padding:4px;">Alineación disponible en acta oficial</div>`}
+          </div>
+        </div>
+
+        <!-- Suplentes -->
+        <div>
+          <div style="font-size:11px;font-weight:800;color:var(--info);text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:4px;">
+            <span>🔄 Suplentes (${localSuplentes.length})</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:3px;">
+            ${localSuplentes.length ? localSuplentes.map(function(s, idx){
+              return `<div style="font-size:11px;padding:3px 6px;background:var(--surface2);border-radius:4px;display:flex;align-items:center;gap:6px;">
+                <span style="font-weight:800;color:var(--text-dim);font-size:10px;min-width:16px;">${s.dorsal || (idx+12)}</span>
+                <span style="font-weight:500;color:var(--text);">${s.nombre}</span>
+              </div>`;
+            }).join('') : `<div style="font-size:11px;color:var(--text-dim);font-style:italic;padding:4px;">Sin suplentes registrados</div>`}
+          </div>
+        </div>
+
+        <!-- Cuerpo Técnico -->
+        ${localStaff.length ? `
+          <div>
+            <div style="font-size:10.5px;font-weight:800;color:var(--text-dim);text-transform:uppercase;margin-bottom:4px;">👔 Cuerpo Técnico</div>
+            <div style="display:flex;flex-direction:column;gap:3px;">
+              ${localStaff.map(function(st){
+                return `<div style="font-size:10.5px;color:var(--text);padding:2px 4px;background:var(--surface3);border-radius:3px;">
+                  <strong style="color:var(--info);">${st.cargo}:</strong> ${st.nombre}
+                </div>`;
+              }).join('')}
+            </div>
+          </div>
+        ` : ''}
+
+        <!-- Tarjetas Local -->
+        ${localTarjetas.length ? `
+          <div>
+            <div style="font-size:10.5px;font-weight:800;color:var(--warning);text-transform:uppercase;margin-bottom:4px;">🟨 Tarjetas</div>
+            <div style="display:flex;flex-direction:column;gap:3px;">
+              ${localTarjetas.map(function(tj){
+                return `<div style="font-size:10.5px;padding:2px 4px;border-radius:3px;background:rgba(245,158,11,0.1);color:var(--text);display:flex;gap:4px;">
+                  <span>${tj.tipo === 'Roja' ? '🟥' : '🟨'}</span>
+                  <span style="font-weight:700;">(${tj.minuto || '--'}')</span>
+                  <span>${tj.nombre}</span>
+                </div>`;
+              }).join('')}
+            </div>
+          </div>
+        ` : ''}
+      </div>
+
+      <!-- COLUMNA 2: CENTRO (ÁRBITRO, GOLES, CAMPO) -->
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        
+        <!-- Árbitros -->
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;">
+          <div style="font-size:10.5px;font-weight:800;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">👨‍⚖️ Árbitro Oficial</div>
+          <div style="font-size:12.5px;font-weight:800;color:var(--text);">${arbitro}</div>
+        </div>
+
+        <!-- Goles Cronológicos -->
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px;">
+          <div style="font-size:11px;font-weight:800;color:var(--text);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;text-align:center;border-bottom:1px solid var(--border);padding-bottom:4px;">
+            ⚽ Secuencia de Goles (${goles.length})
+          </div>
+          ${goles.length ? `
+            <div style="display:flex;flex-direction:column;gap:5px;">
+              ${goles.map(function(g){
+                return `<div style="font-size:11.5px;padding:5px 8px;background:var(--surface2);border-radius:6px;border:1px solid var(--border);display:flex;align-items:center;gap:6px;">
+                  <span style="font-size:13px;">⚽</span>
+                  ${g.scoreProgression ? `<span style="font-weight:900;color:var(--text);">${g.scoreProgression}</span>` : ''}
+                  <span style="font-weight:700;color:var(--info);">(${g.minuto || '--'}')</span>
+                  <span style="font-weight:600;color:var(--text);flex:1;">${g.rawScorer}</span>
+                  ${g.penalti ? `<span class="badge badge-warning" style="font-size:9px;padding:1px 4px;">(p)</span>` : ''}
+                </div>`;
+              }).join('')}
+            </div>
+          ` : `
+            <div style="font-size:11px;color:var(--text-dim);text-align:center;padding:10px;font-style:italic;">
+              ${hasScore ? (match.gl === 0 && match.gv === 0 ? 'Partido finalizado sin goles (0 - 0)' : 'Goles registrados en acta oficial') : 'Goles pendientes de disputa'}
+            </div>
+          `}
+        </div>
+
+        <!-- Estadio y Ciudad -->
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;">
+          <div style="font-size:10.5px;font-weight:800;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">🏟️ Estadio y Sede</div>
+          <div style="font-size:12px;font-weight:700;color:var(--text);">${campo}</div>
+          ${ciudad ? `<div style="font-size:11px;color:var(--text-muted);margin-top:2px;">📍 Ciudad: ${ciudad}</div>` : ''}
+        </div>
+
+        <!-- Enlace Oficial Futgal -->
+        ${actaUrl ? `
+          <a href="${actaUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm" style="width:100%;justify-content:center;text-decoration:none;font-weight:700;font-size:11.5px;border:1px solid var(--border);border-radius:8px;padding:8px;gap:6px;">
+            <span>📄 Ver Acta Oficial en FUTGAL.es</span>
+            <span>↗</span>
+          </a>
+        ` : ''}
+      </div>
+
+      <!-- COLUMNA 3: EQUIPO VISITANTE -->
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:12px;">
+        <div style="font-size:13px;font-weight:900;color:var(--text);border-bottom:2px solid var(--border);padding-bottom:6px;text-align:center;">
+          ${match.visitante}
+        </div>
+
+        <!-- Titulares -->
+        <div>
+          <div style="font-size:11px;font-weight:800;color:var(--success);text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:4px;">
+            <span>👥 Titulares (${visitTitulares.length || (hasScore ? 11 : 0)})</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:3px;">
+            ${visitTitulares.length ? visitTitulares.map(function(t, idx){
+              return `<div style="font-size:11px;padding:3px 6px;background:var(--surface2);border-radius:4px;display:flex;align-items:center;gap:6px;">
+                <span style="font-weight:800;color:var(--text-dim);font-size:10px;min-width:16px;">${t.dorsal || (idx+1)}</span>
+                <span style="font-weight:600;color:var(--text);">${t.nombre}</span>
+              </div>`;
+            }).join('') : `<div style="font-size:11px;color:var(--text-dim);font-style:italic;padding:4px;">Alineación disponible en acta oficial</div>`}
+          </div>
+        </div>
+
+        <!-- Suplentes -->
+        <div>
+          <div style="font-size:11px;font-weight:800;color:var(--info);text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:4px;">
+            <span>🔄 Suplentes (${visitSuplentes.length})</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:3px;">
+            ${visitSuplentes.length ? visitSuplentes.map(function(s, idx){
+              return `<div style="font-size:11px;padding:3px 6px;background:var(--surface2);border-radius:4px;display:flex;align-items:center;gap:6px;">
+                <span style="font-weight:800;color:var(--text-dim);font-size:10px;min-width:16px;">${s.dorsal || (idx+12)}</span>
+                <span style="font-weight:500;color:var(--text);">${s.nombre}</span>
+              </div>`;
+            }).join('') : `<div style="font-size:11px;color:var(--text-dim);font-style:italic;padding:4px;">Sin suplentes registrados</div>`}
+          </div>
+        </div>
+
+        <!-- Cuerpo Técnico -->
+        ${visitStaff.length ? `
+          <div>
+            <div style="font-size:10.5px;font-weight:800;color:var(--text-dim);text-transform:uppercase;margin-bottom:4px;">👔 Cuerpo Técnico</div>
+            <div style="display:flex;flex-direction:column;gap:3px;">
+              ${visitStaff.map(function(st){
+                return `<div style="font-size:10.5px;color:var(--text);padding:2px 4px;background:var(--surface3);border-radius:3px;">
+                  <strong style="color:var(--info);">${st.cargo}:</strong> ${st.nombre}
+                </div>`;
+              }).join('')}
+            </div>
+          </div>
+        ` : ''}
+
+        <!-- Tarjetas Visitante -->
+        ${visitTarjetas.length ? `
+          <div>
+            <div style="font-size:10.5px;font-weight:800;color:var(--warning);text-transform:uppercase;margin-bottom:4px;">🟨 Tarjetas</div>
+            <div style="display:flex;flex-direction:column;gap:3px;">
+              ${visitTarjetas.map(function(tj){
+                return `<div style="font-size:10.5px;padding:2px 4px;border-radius:3px;background:rgba(245,158,11,0.1);color:var(--text);display:flex;gap:4px;">
+                  <span>${tj.tipo === 'Roja' ? '🟥' : '🟨'}</span>
+                  <span style="font-weight:700;">(${tj.minuto || '--'}')</span>
+                  <span>${tj.nombre}</span>
+                </div>`;
+              }).join('')}
+            </div>
+          </div>
+        ` : ''}
+      </div>
+
+    </div>
+  `;
+
+  bodyEl.innerHTML = html;
+  openModal('modalFichaActaOficial');
+}
+window.openFichaActaOficial = openFichaActaOficial;
 
 // Helper para renderizar los 30 partidos del año de un equipo específico (Formato compacto en una sola línea)
 function renderTeamFullCalendarCards(teamMatches, teamName, container){
@@ -10448,7 +10761,7 @@ function renderTeamFullCalendarCards(teamMatches, teamName, container){
     var actaBtn = actaUrl ? `<a href="${actaUrl}" target="_blank" rel="noopener noreferrer" style="background:#285b4f;color:#ffffff;padding:1px 5px;border-radius:3px;font-size:9px;font-weight:700;display:inline-flex;align-items:center;gap:2px;text-decoration:none;border:1px solid #1e453c;white-space:nowrap;min-height:19px;box-sizing:border-box;" title="Ver Acta Oficial en FUTGAL">📄 Acta ↗</a>` : '';
 
     return `
-      <div class="copa-match-row ${isDorneda ? 'dorneda-row' : 'regular-row'}" ${isDorneda && m ? `onclick="showDetallePartido(${m.id})" style="cursor:pointer;"` : ''}>
+      <div class="copa-match-row ${isDorneda ? 'dorneda-row' : 'regular-row'}" onclick="openFichaActaOficial(${jNum}, '${(p.local || '').replace(/'/g, "\\'")}', '${(p.visitante || '').replace(/'/g, "\\'")}', '${p.enlaceActa || ''}', '${p.codActa || ''}')" style="cursor:pointer;">
         <!-- Col 1: Jornada / Fecha / Campo -->
         <div style="width:155px;flex-shrink:0;font-size:10px;color:var(--text-dim);display:flex;align-items:center;gap:4px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
           <span class="badge badge-accent" style="font-size:8px;font-weight:900;padding:1px 4px;flex-shrink:0;">J${jNum}</span>
@@ -10485,15 +10798,10 @@ function renderTeamFullCalendarCards(teamMatches, teamName, container){
         </div>
 
         <!-- Col 6: Acciones -->
-        <div style="width:105px;flex-shrink:0;display:flex;align-items:center;justify-content:flex-end;gap:3px;" onclick="event.stopPropagation()">
-          <button type="button" class="btn btn-ghost btn-xs" style="font-size:8.5px;font-weight:700;padding:1px 4px;min-height:19px;" onclick="onSelectJornadaNavQuick(${jNum})" title="Ir a Jornada ${jNum}">
-            J${jNum} &rarr;
+        <div style="width:115px;flex-shrink:0;display:flex;align-items:center;justify-content:flex-end;gap:3px;" onclick="event.stopPropagation()">
+          <button type="button" class="btn ${isDorneda ? 'btn-primary' : 'btn-ghost'} btn-xs" style="font-size:9px;font-weight:800;padding:1px 6px;display:inline-flex;align-items:center;gap:2px;white-space:nowrap;min-height:19px;border-radius:3px;border:1px solid var(--border);" onclick="openFichaActaOficial(${jNum}, '${(p.local || '').replace(/'/g, "\\'")}', '${(p.visitante || '').replace(/'/g, "\\'")}', '${p.enlaceActa || ''}', '${p.codActa || ''}')" title="Ver Ficha y Acta Oficial del Partido">
+            ${isDorneda ? '⭐ Ficha' : '📋 Ficha'}
           </button>
-          ${isDorneda && m ? `
-            <button type="button" class="btn btn-primary btn-xs" style="font-size:9px;font-weight:800;padding:1px 5px;display:inline-flex;align-items:center;gap:2px;white-space:nowrap;min-height:19px;border-radius:3px;" onclick="showDetallePartido(${m.id})" title="Ver Ficha del Partido">
-              ⭐ Ficha
-            </button>
-          ` : ''}
           ${actaBtn ? actaBtn : ''}
         </div>
       </div>

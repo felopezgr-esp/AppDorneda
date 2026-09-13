@@ -375,6 +375,8 @@ function mergeFutgalDataIntoDB(currentDB, futgalResults) {
         hora: m.hora || '',
         campo: m.campo || '',
         enlaceActa: m.enlaceActa || '',
+        codActa: m.codActa || '',
+        actaData: m.actaParsed || null,
         estado: m.estado || 'Oficial'
       }));
 
@@ -530,6 +532,8 @@ function mergeFutgalDataIntoDB(currentDB, futgalResults) {
         campo: m.campo,
         dorneda: m.dorneda,
         enlaceActa: m.enlaceActa,
+        codActa: m.codActa || '',
+        actaData: m.actaParsed || null,
         estado: m.estado
       }));
 
@@ -851,6 +855,9 @@ function parseFutgalActaHtml(input) {
   let visitTitulares = [];
   let visitSuplentes = [];
 
+  let localStaff = [];
+  let visitStaff = [];
+
   let localTarjetas = [];
   let visitTarjetas = [];
 
@@ -883,30 +890,109 @@ function parseFutgalActaHtml(input) {
   const ciudadMatch = str.match(/Ciudad:\s*([^<]+)/i);
   if (ciudadMatch) ciudad = clean(ciudadMatch[1]);
 
-  // Extraer Jugadores de Alineaciones
-  // Buscar tablas o bloques de titulares y suplentes
-  const playerRegex = /NFG_VisJugador\?cod_primaria=1000121&codigo_jugador=(\d+)[^>]*>([^<]+)<\/a>/gi;
-  
-  // Dividir el HTML en bloques de local y visitante si es posible
-  const isLocalDorneda = isDornedaTeam(localTeam);
-  const isVisitanteDorneda = isDornedaTeam(visitTeam);
-
-  // Parsear lista de jugadores genérica
-  const allPlayersInActa = [];
-  let pm;
-  while ((pm = playerRegex.exec(str)) !== null) {
-    allPlayersInActa.push({
-      id: pm[1],
-      nombreOficial: clean(pm[2])
-    });
+  // Helper para parsear filas de jugadores con dorsal y nombre
+  function parsePlayerRows(blockHtml) {
+    if (!blockHtml) return [];
+    const list = [];
+    const trRegex = /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
+    let trM;
+    while ((trM = trRegex.exec(blockHtml)) !== null) {
+      const row = trM[1];
+      if (row.includes('<th')) continue;
+      const playerM = row.match(/NFG_VisJugador\?cod_primaria=1000121&codigo_jugador=(\d+)[^>]*>([^<]+)<\/a>/i);
+      if (playerM) {
+        const id = playerM[1];
+        const nombre = clean(playerM[2]);
+        // Buscar dorsal (número en primera celda o texto antes del enlace)
+        const dorsalM = row.match(/<td[^>]*>\s*(\d{1,2})\s*<\/td>/i) || row.match(/(\d{1,2})\s*<a/i);
+        const dorsal = dorsalM ? parseInt(dorsalM[1], 10) : null;
+        list.push({ id, dorsal, nombre });
+      }
+    }
+    return list;
   }
 
-  // Extraer goles con autor y minuto
-  const golBlockRegex = /<tr[^>]*>[\s\S]*?(?:minuto|\(\d+[\'’]?\))[\s\S]*?<\/tr>/gi;
-  // Búsqueda más precisa de goles
-  const directGoalRegex = /(?:(\d+)[\'’]?\s*(?:minuto|min)?\s*[-–:]?\s*)?([A-ZÁÉÍÓÚÑa-záéíóúñ\s,.-]+?)\s*(?:\((\d+)[\'’]?\))(?:\s*\(p\s*(?:enalti)?\))?/gi;
-  
-  // Buscar filas en la sección de goles
+  // Helper para parsear cuerpo técnico
+  function parseStaff(blockHtml) {
+    if (!blockHtml) return [];
+    const staff = [];
+    const patterns = [
+      { cargo: 'Entrenador', regex: /Entrenador[:\s]*<strong>([^<]+)|Entrenador:\s*([^<]+)/i },
+      { cargo: '2º Entrenador', regex: /2[ºo]\s*Entrenador[:\s]*<strong>([^<]+)|2[ºo]\s*Entrenador:\s*([^<]+)/i },
+      { cargo: 'Delegado de Campo', regex: /Delegado\s+de\s+campo[:\s]*<strong>([^<]+)|Delegado\s+de\s+campo:\s*([^<]+)/i },
+      { cargo: 'Delegado de Equipo', regex: /Delegado\s+de\s+equipo[:\s]*<strong>([^<]+)|Delegado\s+de\s+equipo:\s*([^<]+)/i },
+      { cargo: 'Encargado de Material', regex: /ENCGDO\.?\s*MATERIAL[:\s]*<strong>([^<]+)|ENCGDO\.?\s*MATERIAL:\s*([^<]+)/i },
+      { cargo: 'Fisioterapeuta', regex: /Fisioterapeuta[:\s]*<strong>([^<]+)|Fisioterapeuta:\s*([^<]+)/i }
+    ];
+    for (const p of patterns) {
+      const m = blockHtml.match(p.regex);
+      if (m) {
+        const val = clean(m[1] || m[2]);
+        if (val && !/no presenta/i.test(val)) {
+          staff.push({ cargo: p.cargo, nombre: val });
+        }
+      }
+    }
+    return staff;
+  }
+
+  // Helper para parsear tarjetas
+  function parseCards(blockHtml) {
+    if (!blockHtml) return [];
+    const cards = [];
+    const trRegex = /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
+    let trM;
+    while ((trM = trRegex.exec(blockHtml)) !== null) {
+      const row = trM[1];
+      if (row.includes('<th')) continue;
+      const minM = row.match(/\((\d+)[\'’]?\)/) || row.match(/(\d+)[\'’]/);
+      const minuto = minM ? parseInt(minM[1], 10) : null;
+      const isRed = /roja|expulsi/i.test(row) || row.includes('tarjeta_roja') || row.includes('red');
+      const textCell = clean(row.replace(/<[^>]*>/g, ' ').replace(/\(\d+[\'’]?\)/g, ''));
+      if (textCell) {
+        cards.push({
+          minuto,
+          tipo: isRed ? 'Roja' : 'Amarilla',
+          nombre: textCell
+        });
+      }
+    }
+    return cards;
+  }
+
+  // Dividir el HTML en bloques de local y visitante si es posible
+  // Bloque Local vs Bloque Visitante (usualmente dividido en columnas de widget o tablas)
+  const widgetsMatch = str.match(/class=["']widgetL["'][\s\S]*?class=["']widgetV["'][\s\S]*$/i);
+  let localHtml = str;
+  let visitHtml = str;
+
+  const wL = str.match(/<div[^>]*class=["'][^"']*widgetL[^"']*["'][^>]*>([\s\S]*?)<\/div>\s*<div[^>]*class=["'][^"']*widgetV/i);
+  const wV = str.match(/<div[^>]*class=["'][^"']*widgetV[^"']*["'][^>]*>([\s\S]*?)$/i);
+  if (wL && wV) {
+    localHtml = wL[1];
+    visitHtml = wV[1];
+  }
+
+  // Parsear secciones específicas
+  const localTitBlock = localHtml.match(/Titulares[\s\S]*?<\/table>/i);
+  const localSupBlock = localHtml.match(/Suplentes[\s\S]*?<\/table>/i);
+  const visitTitBlock = visitHtml.match(/Titulares[\s\S]*?<\/table>/i);
+  const visitSupBlock = visitHtml.match(/Suplentes[\s\S]*?<\/table>/i);
+
+  localTitulares = localTitBlock ? parsePlayerRows(localTitBlock[0]) : [];
+  localSuplentes = localSupBlock ? parsePlayerRows(localSupBlock[0]) : [];
+  visitTitulares = visitTitBlock ? parsePlayerRows(visitTitBlock[0]) : [];
+  visitSuplentes = visitSupBlock ? parsePlayerRows(visitSupBlock[0]) : [];
+
+  localStaff = parseStaff(localHtml);
+  visitStaff = parseStaff(visitHtml);
+
+  const localTarjBlock = localHtml.match(/Tarjetas[\s\S]*?<\/table>/i);
+  const visitTarjBlock = visitHtml.match(/Tarjetas[\s\S]*?<\/table>/i);
+  localTarjetas = localTarjBlock ? parseCards(localTarjBlock[0]) : [];
+  visitTarjetas = visitTarjBlock ? parseCards(visitTarjBlock[0]) : [];
+
+  // Parsear todos los goles con progresión (ej. 1 - 0, 2 - 0, 2 - 1, etc.)
   const golesSection = str.match(/<div[^>]*class=["'][^"']*dashboard-stat[^"']*["'][^>]*>[\s\S]*?Goles[\s\S]*?<\/table>/i);
   if (golesSection) {
     const trRegex = /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
@@ -917,11 +1003,14 @@ function parseFutgalActaHtml(input) {
       const minM = row.match(/\((\d+)[\'’]?\)/) || row.match(/(\d+)[\'’]/);
       const minuto = minM ? parseInt(minM[1], 10) : null;
       const isPenalti = /penalti|\(p\)/i.test(row);
-      const textCell = row.replace(/<[^>]*>/g, ' ').replace(/\(\d+[\'’]?\)/g, '').replace(/penalti|\(p\)/gi, '');
-      const rawScorer = clean(textCell);
+      const scoreProgM = row.match(/(\d+\s*-\s*\d+)/);
+      const scoreProgression = scoreProgM ? scoreProgM[1].replace(/\s+/g, ' ') : '';
+      const textCell = clean(row.replace(/<[^>]*>/g, ' ').replace(/\(\d+[\'’]?\)/g, '').replace(/penalti|\(p\)/gi, '').replace(/\d+\s*-\s*\d+/, ''));
+      const rawScorer = textCell;
       if (rawScorer) {
         allGoles.push({
           minuto,
+          scoreProgression,
           rawScorer,
           penalti: isPenalti,
           tipo: isPenalti ? 'Penalti' : 'Jugada'
@@ -929,6 +1018,9 @@ function parseFutgalActaHtml(input) {
       }
     }
   }
+
+  const isLocalDorneda = isDornedaTeam(localTeam);
+  const isVisitanteDorneda = isDornedaTeam(visitTeam);
 
   return {
     localTeam,
@@ -943,7 +1035,14 @@ function parseFutgalActaHtml(input) {
     enlaceActa,
     isLocalDorneda,
     isVisitanteDorneda,
-    allPlayersInActa,
+    localTitulares,
+    localSuplentes,
+    localStaff,
+    localTarjetas,
+    visitTitulares,
+    visitSuplentes,
+    visitStaff,
+    visitTarjetas,
     allGoles
   };
 }
