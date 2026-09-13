@@ -7935,6 +7935,34 @@ function validateAndMigrateDB(dbObj){
       dbObj.ligaGoleadores = [];
       modified = true;
     }
+        // Auto-merge y actualizaciÃ³n estricta de resultados y actas oficiales en todasJornadas desde DEFAULT_DATA
+    if(dbObj.todasJornadas && DEFAULT_DATA.todasJornadas){
+      DEFAULT_DATA.todasJornadas.forEach(function(defJ){
+        var targetJ = dbObj.todasJornadas.find(function(j){ return j.jornada === defJ.jornada; });
+        if(targetJ && targetJ.partidos && defJ.partidos){
+          defJ.partidos.forEach(function(dp){
+            var matchFound = targetJ.partidos.find(function(m){
+              return (dp.codActa && m.codActa && dp.codActa === m.codActa) ||
+                     (normalizeName(m.local) === normalizeName(dp.local) && normalizeName(m.visitante) === normalizeName(dp.visitante));
+            });
+            if(matchFound){
+              if(dp.gl !== null && dp.gl !== undefined && matchFound.gl !== dp.gl){ matchFound.gl = dp.gl; modified = true; }
+              if(dp.gv !== null && dp.gv !== undefined && matchFound.gv !== dp.gv){ matchFound.gv = dp.gv; modified = true; }
+              if(dp.enlaceActa && !matchFound.enlaceActa){ matchFound.enlaceActa = dp.enlaceActa; modified = true; }
+              if(dp.codActa && !matchFound.codActa){ matchFound.codActa = dp.codActa; modified = true; }
+              if(dp.campo && matchFound.campo !== dp.campo){ matchFound.campo = dp.campo; modified = true; }
+              if(dp.hora && matchFound.hora !== dp.hora){ matchFound.hora = dp.hora; modified = true; }
+              if(dp.arbitro && matchFound.arbitro !== dp.arbitro){ matchFound.arbitro = dp.arbitro; modified = true; }
+              if(dp.actaData && (!matchFound.actaData || !matchFound.actaData.localTitulares || !matchFound.actaData.localTitulares.length)){
+                matchFound.actaData = dp.actaData;
+                modified = true;
+              }
+            }
+          });
+        }
+      });
+    }
+
     if(!dbObj.copaJornadas || dbObj.copaJornadas.length < 2 || (dbObj.copaJornadas[0] && (!dbObj.copaJornadas[0].partidos || dbObj.copaJornadas[0].partidos.length < 30))){
         dbObj.copaJornadas = JSON.parse(JSON.stringify(DEFAULT_DATA.copaJornadas));
         modified = true;
@@ -12170,6 +12198,25 @@ function renderMatchesCards(matches, jornadaNum, jornadaFecha, container){
     var isDornedaMatch = (p.local && p.local.indexOf('Dorneda') !== -1) || (p.visitante && p.visitante.indexOf('Dorneda') !== -1) || p.dorneda;
     var isDornedaLocal = (p.local && p.local.indexOf('Dorneda') !== -1);
     var isDornedaVisitor = (p.visitante && p.visitante.indexOf('Dorneda') !== -1);
+        // Fallback de resultado desde DEFAULT_DATA si el partido aÃºn no tiene marcador en el estado local
+    if((p.gl === null || p.gl === undefined) && DEFAULT_DATA.todasJornadas){
+      var defJ = DEFAULT_DATA.todasJornadas.find(function(j){ return j.jornada === Number(jornadaNum); });
+      if(defJ && defJ.partidos){
+        var defP = defJ.partidos.find(function(dp){
+          return (dp.codActa && p.codActa && dp.codActa === p.codActa) ||
+                 (normalizeName(dp.local) === normalizeName(p.local) && normalizeName(dp.visitante) === normalizeName(p.visitante)) ||
+                 (dp.local && p.local && dp.local.toLowerCase() === p.local.toLowerCase());
+        });
+        if(defP && defP.gl !== null && defP.gl !== undefined){
+          p.gl = defP.gl;
+          p.gv = defP.gv;
+          if(!p.hora && defP.hora) p.hora = defP.hora;
+          if(!p.campo && defP.campo) p.campo = defP.campo;
+          if(!p.arbitro && defP.arbitro) p.arbitro = defP.arbitro;
+          if(!p.actaData && defP.actaData) p.actaData = defP.actaData;
+        }
+      }
+    }
     var hasScore = (p.gl !== null && p.gl !== undefined) && (p.gv !== null && p.gv !== undefined);
     var isLocalWinner = hasScore && p.gl > p.gv;
     var isVisitorWinner = hasScore && p.gv > p.gl;
@@ -12635,6 +12682,25 @@ function renderTeamFullCalendarCards(teamMatches, teamName, container){
     var fecha = item.fecha;
     var isHome = item.isLocal;
     var rival = isHome ? p.visitante : p.local;
+        // Fallback de resultado desde DEFAULT_DATA si el partido aÃºn no tiene marcador en el estado local
+    if((p.gl === null || p.gl === undefined) && DEFAULT_DATA.todasJornadas){
+      var defJ = DEFAULT_DATA.todasJornadas.find(function(j){ return j.jornada === Number(jornadaNum); });
+      if(defJ && defJ.partidos){
+        var defP = defJ.partidos.find(function(dp){
+          return (dp.codActa && p.codActa && dp.codActa === p.codActa) ||
+                 (normalizeName(dp.local) === normalizeName(p.local) && normalizeName(dp.visitante) === normalizeName(p.visitante)) ||
+                 (dp.local && p.local && dp.local.toLowerCase() === p.local.toLowerCase());
+        });
+        if(defP && defP.gl !== null && defP.gl !== undefined){
+          p.gl = defP.gl;
+          p.gv = defP.gv;
+          if(!p.hora && defP.hora) p.hora = defP.hora;
+          if(!p.campo && defP.campo) p.campo = defP.campo;
+          if(!p.arbitro && defP.arbitro) p.arbitro = defP.arbitro;
+          if(!p.actaData && defP.actaData) p.actaData = defP.actaData;
+        }
+      }
+    }
     var hasScore = (p.gl !== null && p.gl !== undefined) && (p.gv !== null && p.gv !== undefined);
     var myGoals = isHome ? p.gl : p.gv;
     var rivalGoals = isHome ? p.gv : p.gl;
@@ -15711,4 +15777,5 @@ if (document.readyState === 'loading') {
 </script>
 </body>
 </html>
+
 
