@@ -17,6 +17,9 @@ jobs:
   sync:
     name: Sincronizar Partidos de Liga y Copa
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
 
     steps:
       - name: Descargar Código del Repositorio

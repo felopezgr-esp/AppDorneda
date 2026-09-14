@@ -830,9 +830,117 @@ function matchPlayerNameToDornedaAlias(officialName, currentSquad = []) {
   return officialName.trim();
 }
 
+const SPANISH_NAME_DIACRITICS = {
+  // Nombres
+  "ruben": "Rubén", "ivan": "Iván", "martin": "Martín", "oscar": "Óscar", "adrian": "Adrián",
+  "jesus": "Jesús", "angel": "Ángel", "raul": "Raúl", "alvaro": "Álvaro", "inigo": "Íñigo",
+  "jose": "José", "ramon": "Ramón", "victor": "Víctor", "hector": "Héctor", "andres": "Andrés",
+  "damian": "Damián", "julian": "Julián", "joaquin": "Joaquín", "tomas": "Tomás", "moises": "Moisés",
+  "cesar": "César", "felix": "Félix", "german": "Germán", "agustin": "Agustín", "matias": "Matías",
+  "xoan": "Xoán", "anxo": "Anxo", "reider": "Reider", "humberto": "Humberto", "elisardo": "Elisardo",
+  "senar": "Senar", "yannick": "Yannick", "cote": "Coté", "manu": "Manu", "felipe": "Felipe",
+  "cata": "Cata", "nolas": "Nolas", "boliche": "Boliche", "suso": "Suso", "carro": "Carro",
+  "nacho": "Nacho", "fran": "Fran", "manuly": "Manuly", "pena": "Pena", "fonato": "Fonato",
+  "brais": "Brais", "javi": "Javi", "casti": "Casti", "borja": "Borja", "hugo": "Hugo",
+
+  // Apellidos
+  "fernandez": "Fernández", "rodriguez": "Rodríguez", "gonzalez": "González", "perez": "Pérez",
+  "gomez": "Gómez", "sanchez": "Sánchez", "lopez": "López", "martinez": "Martínez",
+  "alvarez": "Álvarez", "vazquez": "Vázquez", "diaz": "Díaz", "garcia": "García",
+  "suarez": "Suárez", "nunez": "Núñez", "nuñez": "Núñez", "gimenez": "Giménez", "gutierrez": "Gutiérrez",
+  "dominguez": "Domínguez", "hernandez": "Hernández", "dieguez": "Diéguez", "menendez": "Menéndez",
+  "patino": "Patiño", "patiño": "Patiño", "castineiras": "Castiñeiras", "castiñeiras": "Castiñeiras",
+  "remuinan": "Remuiñán", "remuiñan": "Remuiñán", "remuiñán": "Remuiñán", "branas": "Brañas",
+  "brañas": "Brañas", "fandino": "Fandiño", "fandiño": "Fandiño", "meilan": "Meilán",
+  "penas": "Peñas", "valino": "Valiño", "valiño": "Valiño", "marina": "Mariña", "mariña": "Mariña",
+  "grana": "Graña", "graña": "Graña", "munoz": "Muñoz", "muñoz": "Muñoz", "bano": "Baño",
+  "baño": "Baño", "magan": "Magán", "padin": "Padín", "anon": "Añón", "narahio": "Narahío",
+  "sigras": "Sigrás", "naron": "Narón", "rios": "Ríos", "santiso": "Santiso", "aneiros": "Aneiros",
+  "dorado": "Dorado", "monteagudo": "Monteagudo", "quiroga": "Quiroga", "barreiro": "Barreiro",
+  "souto": "Souto", "pernas": "Pernas", "mallo": "Mallo", "segade": "Segade", "boo": "Boo",
+  "pita": "Pita", "lomba": "Lomba", "mata": "Mata", "espido": "Espido", "kumor": "Kumor",
+  "otero": "Otero", "mella": "Mella", "vicente": "Vicente", "hortelano": "Hortelano",
+  "juncal": "Juncal", "belmonte": "Belmonte", "martell": "Martell", "fiuza": "Fiuza", "amor": "Amor",
+  "picado": "Picado", "zas": "Zas", "paredes": "Paredes", "codesal": "Codesal", "crespo": "Crespo",
+  "freire": "Freire", "deibe": "Deibe", "ruzo": "Ruzo", "ramos": "Ramos", "castro": "Castro",
+  "malca": "Malca", "fasavi": "Fasavi", "mosteiro": "Mosteiro", "dopico": "Dopico", "germade": "Germade",
+  "campos": "Campos", "bra": "Bra", "sar": "Sar", "varela": "Varela", "bertoa": "Bertoa",
+  "seoane": "Seoane", "puente": "Puente", "longueira": "Longueira", "hermida": "Hermida", "iglesias": "Iglesias"
+};
+
+function fixMojibake(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/Ã¡/g, 'á').replace(/Ã©/g, 'é').replace(/Ã­/g, 'í').replace(/Ã³/g, 'ó').replace(/Ãº/g, 'ú')
+    .replace(/Ã /g, 'Á').replace(/Ã‰/g, 'É').replace(/Ã /g, 'Í').replace(/Ã“/g, 'Ó').replace(/Ãš/g, 'Ú')
+    .replace(/Ã±/g, 'ñ').replace(/Ã‘/g, 'Ñ')
+    .replace(/Â·/g, '·').replace(/Â/g, '')
+    .replace(/\bAON\b/g, 'AÑÓN').replace(/\bAon\b/g, 'Añón')
+    .replace(/H\.AON/gi, 'H.AÑÓN').replace(/H\.AÑON/gi, 'H.AÑÓN')
+    .trim();
+}
+
+function formatWordWithAccents(word) {
+  if (!word) return '';
+  const w = fixMojibake(word);
+  if (w.length === 1 && /^[a-zA-Z]$/.test(w)) return w.toUpperCase() + '.';
+  if (w.length === 2 && w.endsWith('.')) return w.toUpperCase();
+
+  const lower = w.toLowerCase();
+  const unaccented = lower.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+  if (SPANISH_NAME_DIACRITICS[unaccented]) {
+    return SPANISH_NAME_DIACRITICS[unaccented];
+  }
+  if (SPANISH_NAME_DIACRITICS[lower]) {
+    return SPANISH_NAME_DIACRITICS[lower];
+  }
+
+  return w.charAt(0).toUpperCase() + w.slice(1).toLowerCase();
+}
+
+function formatOfficialPersonName(rawName) {
+  if (!rawName) return '';
+  let str = fixMojibake(rawName);
+
+  let prefix = '';
+  const numMatch = str.match(/^([#]?\d{1,2}\s+)(.*)$/);
+  if (numMatch) {
+    prefix = numMatch[1];
+    str = numMatch[2];
+  }
+
+  if (str.includes(',')) {
+    const parts = str.split(',');
+    const apellidos = parts[0].trim();
+    const nombre = parts.slice(1).join(',').trim();
+
+    const formattedNombre = nombre.split(/\s+/).filter(Boolean).map(formatWordWithAccents).join(' ');
+    const formattedApellidos = apellidos.split(/\s+/).filter(Boolean).map(formatWordWithAccents).join(' ');
+
+    const res = `${formattedNombre} ${formattedApellidos}`.trim();
+    return (prefix + res).trim();
+  } else {
+    const words = str.split(/\s+/).filter(Boolean).map(formatWordWithAccents);
+    return (prefix + words.join(' ')).trim();
+  }
+}
+
+function formatCleanTeamName(teamName) {
+  if (!teamName) return '';
+  let name = fixMojibake(teamName);
+  name = name.replace(/AON/gi, 'AÑÓN').replace(/H\.AON/gi, 'H.AÑÓN').replace(/H\.AÑON/gi, 'H.AÑÓN');
+  name = name.replace(/SIGRAS/gi, 'SIGRÁS').replace(/NARAHIO/gi, 'NARAHÍO').replace(/NARON/gi, 'NARÓN');
+  name = name.replace(/MARTIO/gi, 'MARTIÑO').replace(/VIA/gi, 'VIÑA').replace(/ROS/gi, 'RÍOS');
+  return name;
+}
+
 function parseFutgalActaHtml(input) {
   if (!input || typeof input !== 'string') return null;
-  const str = input.trim();
+  // 1. Eliminar completamente etiquetas script y style con su contenido interno
+  let str = input.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+                 .replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, '')
+                 .trim();
   if (!str) return null;
 
   function clean(s) {
@@ -844,6 +952,9 @@ function parseFutgalActaHtml(input) {
             .replace(/&oacute;/gi, 'ó').replace(/&Oacute;/gi, 'Ó')
             .replace(/&uacute;/gi, 'ú').replace(/&Uacute;/gi, 'Ú')
             .replace(/&ntilde;/gi, 'ñ').replace(/&Ntilde;/gi, 'Ñ')
+            .replace(/eval\(function[\s\S]*?\}\)\);?/gi, '')
+            .replace(/ntype\(["'][^"']*["'],\s*\d+,\s*\d+[^)]*\);?/gi, '')
+            .replace(/#[a-zA-Z0-9_-]+:[^{]*\{[^}]*\}/gi, '')
             .replace(/\s+/g, ' ').trim();
   }
 
@@ -879,8 +990,8 @@ function parseFutgalActaHtml(input) {
 
   const teamLMatch = str.match(/class=["']font_widgetL["'][^>]*>([\s\S]*?)<\//i) || str.match(/class=["']td_widgetL["'][^>]*><div[^>]*>([\s\S]*?)<\/div>/i);
   const teamVMatch = str.match(/class=["']font_widgetV["'][^>]*>([\s\S]*?)<\//i) || str.match(/class=["']td_widgetV["'][^>]*><div[^>]*>([\s\S]*?)<\/div>/i);
-  if (teamLMatch) localTeam = clean(teamLMatch[1].replace(/<[^>]*>/g, ''));
-  if (teamVMatch) visitTeam = clean(teamVMatch[1].replace(/<[^>]*>/g, ''));
+  if (teamLMatch) localTeam = formatCleanTeamName(clean(teamLMatch[1].replace(/<[^>]*>/g, '')));
+  if (teamVMatch) visitTeam = formatCleanTeamName(clean(teamVMatch[1].replace(/<[^>]*>/g, '')));
 
   const jMatch = str.match(/Jornada\s*(\d+)/i);
   if (jMatch) jornada = parseInt(jMatch[1], 10);
@@ -890,7 +1001,7 @@ function parseFutgalActaHtml(input) {
   if (hMatch) horaPartido = hMatch[1];
 
   const arbMatch = str.match(/<strong>[^<]*rbitro[^<]*<\/strong>&nbsp;&nbsp;&nbsp;([^<]+)/i) || str.match(/&Aacute;rbitro[:\s]*<\/strong>\s*&nbsp;([^<]+)|Árbitro[:\s]*<strong>([^<]+)|&Aacute;rbitro:\s*([^<]+)/i);
-  if (arbMatch) arbitro = clean(arbMatch[1] || arbMatch[2] || arbMatch[3]);
+  if (arbMatch) arbitro = formatOfficialPersonName(clean(arbMatch[1] || arbMatch[2] || arbMatch[3]));
 
   const campoMatch = str.match(/NFG_VisCampos[^>]*>([^<]+)<\/a>/i);
   if (campoMatch) campo = clean(campoMatch[1]);
@@ -898,7 +1009,7 @@ function parseFutgalActaHtml(input) {
   const ciudadMatch = str.match(/Ciudad:\s*([^<]+)/i);
   if (ciudadMatch) ciudad = clean(ciudadMatch[1]);
 
-  // Helper para parsear filas de jugadores con dorsal y nombre
+  // Helper para parsear filas de jugadores con dorsal y nombre formateado
   function parsePlayerRows(blockHtml) {
     if (!blockHtml) return [];
     const list = [];
@@ -912,13 +1023,12 @@ function parseFutgalActaHtml(input) {
       let rawName = playerM ? (playerM[2] || playerM[1]) : row;
       let nombre = clean(rawName.replace(/<[^>]*>/g, ''));
 
-      // Buscar dorsal (número en primera celda o texto antes del enlace)
       const dorsalM = row.match(/<td[^>]*align=center[^>]*>\s*(\d{1,2})\s*<\/td>/i) || row.match(/<td[^>]*>\s*(\d{1,2})\s*<\/td>/i) || row.match(/(\d{1,2})\s*<a/i);
       const dorsal = dorsalM ? parseInt(dorsalM[1], 10) : null;
       nombre = nombre.replace(/^\d+\s*/, '').trim();
 
       if (nombre) {
-        list.push({ id, dorsal, nombre });
+        list.push({ id, dorsal, nombre: formatOfficialPersonName(nombre) });
       }
     }
     return list;
@@ -938,7 +1048,7 @@ function parseFutgalActaHtml(input) {
         const tds = row.match(/<td[^>]*>([\s\S]*?)<\/td>/gi);
         if (tds && tds.length >= 2) {
           const cargo = clean(tds[0].replace(/<[^>]*>/g, ''));
-          const nombre = clean(tds[1].replace(/<[^>]*>/g, ''));
+          const nombre = formatOfficialPersonName(clean(tds[1].replace(/<[^>]*>/g, '')));
           if (nombre) staff.push({ cargo, nombre });
         }
       }
@@ -960,7 +1070,8 @@ function parseFutgalActaHtml(input) {
         const minM = row.match(/\((\d+)[\'’]?\)/) || row.match(/(\d+)[\'’]/);
         const minuto = minM ? parseInt(minM[1], 10) : null;
         const isRed = /tarj_roja|roja|expulsi/i.test(row);
-        const textCell = clean(row.replace(/<[^>]*>/g, ' ').replace(/\(\d+[\'’]?\)/g, ''));
+        let textCell = clean(row.replace(/<[^>]*>/g, ' ').replace(/\(\d+[\'’]?\)/g, ''));
+        textCell = formatOfficialPersonName(textCell);
         if (textCell) {
           cards.push({
             minuto,
@@ -973,7 +1084,7 @@ function parseFutgalActaHtml(input) {
     return cards;
   }
 
-  // Dividir el HTML en bloques de local y visitante dividiendo por las dos secciones de Titulares
+  // Dividir el HTML en bloques de local y visitante
   const firstTitIdx = str.indexOf("<strong>Titulares</strong>");
   const secondTitIdx = firstTitIdx !== -1 ? str.indexOf("<strong>Titulares</strong>", firstTitIdx + 20) : -1;
 
@@ -986,16 +1097,10 @@ function parseFutgalActaHtml(input) {
     visitHtml = str.substring(secondTitIdx - 200);
   }
 
-  // Parsear secciones específicas
-  const localTitBlock = localHtml.match(/Titulares[\s\S]*?<\/table>/i);
-  const localSupBlock = localHtml.match(/Suplentes[\s\S]*?<\/table>/i);
-  const visitTitBlock = visitHtml.match(/Titulares[\s\S]*?<\/table>/i);
-  const visitSupBlock = visitHtml.match(/Suplentes[\s\S]*?<\/table>/i);
-
-  localTitulares = localTitBlock ? parsePlayerRows(localTitBlock[0]) : [];
-  localSuplentes = localSupBlock ? parsePlayerRows(localSupBlock[0]) : [];
-  visitTitulares = visitTitBlock ? parsePlayerRows(visitTitBlock[0]) : [];
-  visitSuplentes = visitSupBlock ? parsePlayerRows(visitSupBlock[0]) : [];
+  localTitulares = localHtml.match(/Titulares[\s\S]*?<\/table>/i) ? parsePlayerRows(localHtml.match(/Titulares[\s\S]*?<\/table>/i)[0]) : [];
+  localSuplentes = localHtml.match(/Suplentes[\s\S]*?<\/table>/i) ? parsePlayerRows(localHtml.match(/Suplentes[\s\S]*?<\/table>/i)[0]) : [];
+  visitTitulares = visitHtml.match(/Titulares[\s\S]*?<\/table>/i) ? parsePlayerRows(visitHtml.match(/Titulares[\s\S]*?<\/table>/i)[0]) : [];
+  visitSuplentes = visitHtml.match(/Suplentes[\s\S]*?<\/table>/i) ? parsePlayerRows(visitHtml.match(/Suplentes[\s\S]*?<\/table>/i)[0]) : [];
 
   localStaff = parseStaff(localHtml);
   visitStaff = parseStaff(visitHtml);
@@ -1003,7 +1108,7 @@ function parseFutgalActaHtml(input) {
   localTarjetas = parseCards(localHtml);
   visitTarjetas = parseCards(visitHtml);
 
-  // Parsear todos los goles con progresión (ej. 1 - 0, 2 - 0, 2 - 1, etc.)
+  // Parsear todos los goles con progresión y nombre limpio
   const golesSection = str.match(/<div[^>]*class=["'][^"']*number[^"']*["'][^>]*>Goles<\/div>\s*<div[^>]*class=desc[^>]*>\s*<table[^>]*>([\s\S]*?)<\/table>/i);
   if (golesSection) {
     const trRegex = /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
@@ -1016,8 +1121,9 @@ function parseFutgalActaHtml(input) {
       const isPenalti = /penalti|\(p\)/i.test(row);
       const scoreProgM = row.match(/(\d+\s*-\s*\d+)/);
       const scoreProgression = scoreProgM ? scoreProgM[1].replace(/\s+/g, ' ') : '';
-      const textCell = clean(row.replace(/<[^>]*>/g, ' ').replace(/\(\d+[\'’]?\)/g, '').replace(/penalti|\(p\)/gi, '').replace(/\d+\s*-\s*\d+/, ''));
-      const rawScorer = textCell;
+      let textCell = clean(row.replace(/<[^>]*>/g, ' ').replace(/\(\d+[\'’]?\)/g, '').replace(/penalti|\(p\)/gi, '').replace(/\d+\s*-\s*\d+/, ''));
+      textCell = textCell.replace(/^[\d\s\-:;]+/, '').trim();
+      const rawScorer = formatOfficialPersonName(textCell);
       if (rawScorer) {
         allGoles.push({
           minuto,
