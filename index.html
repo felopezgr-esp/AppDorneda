@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es" data-theme="light">
 <head>
   <meta charset="UTF-8" />
@@ -3126,7 +3126,6 @@
           <div class="players-grid" id="playersGrid"></div>
         </div>
       </div>
-      <div id="analisisProximoRival" style="display:none"></div>
     </section>
 
     <!-- PARTIDOS -->
@@ -3159,7 +3158,6 @@
           <div class="match-list" id="partidosList" style="display:flex;flex-direction:column;gap:4px;min-width:680px;"></div>
         </div>
       </div>
-      <div id="analisisProximoRival" style="display:none"></div>
     </section>
 
     <!-- ANALISIS -->
@@ -3634,7 +3632,6 @@
           </div>
         </div>
       </div>
-      <div id="analisisProximoRival" style="display:none"></div>
     </section>
 
     <section class="section" id="section-calendario">
@@ -13182,14 +13179,17 @@ function showAnalisisTab(tab, el){
   var elE = document.getElementById('analisisEquipo');
   var elI = document.getElementById('analisisIndividual');
   var elC = document.getElementById('analisisClasificacion');
+  var elR = document.getElementById('analisisProximoRival');
 
   if(elE) elE.style.display = (tab === 'equipo') ? 'block' : 'none';
   if(elI) elI.style.display = (tab === 'individual') ? 'block' : 'none';
   if(elC) elC.style.display = (tab === 'clasificacion') ? 'block' : 'none';
+  if(elR) elR.style.display = (tab === 'proximoRival') ? 'block' : 'none';
 
   if(tab === 'equipo') renderAnalisisEquipo();
   if(tab === 'individual') renderAnalisisIndividual();
   if(tab === 'clasificacion') renderClasificacion();
+  if(tab === 'proximoRival') renderAnalisisProximoRival();
 }
 window.showAnalisisTab = showAnalisisTab;
 
@@ -16655,5 +16655,4 @@ if (document.readyState === 'loading') {
 </script>
 </body>
 </html>
-
 
