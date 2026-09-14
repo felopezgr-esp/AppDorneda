@@ -10011,9 +10011,11 @@ function renderPartidos(){
 
 
 function renderAnalisis(){
-  renderAnalisisEquipo();
-  renderAnalisisIndividual();
-  renderClasificacion();
+  var saved = 'equipo';
+  try {
+    saved = localStorage.getItem('dorneda_active_analisis_tab') || analisisTabActive || 'equipo';
+  } catch(e){}
+  showAnalisisTab(saved);
 }
 
 function renderMisterChipBlock(){
@@ -13170,12 +13172,28 @@ function renderClasificacion(){
 window.renderClasificacion = renderClasificacion;
 
 
+var analisisTabActive = 'equipo';
+
 function showAnalisisTab(tab, el){
-  if(el){
-    var parent = el.parentElement;
-    if(parent) parent.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
-    el.classList.add('active');
+  analisisTabActive = tab || 'equipo';
+  try {
+    localStorage.setItem('dorneda_active_analisis_tab', analisisTabActive);
+  } catch(e){}
+
+  // Actualizar clases de las pestaÃ±as
+  var tabsContainer = document.querySelector('#section-analisis .tabs');
+  if(tabsContainer){
+    tabsContainer.querySelectorAll('.tab').forEach(function(t){
+      t.classList.remove('active');
+    });
+    if(el && el.classList){
+      el.classList.add('active');
+    } else {
+      var found = tabsContainer.querySelector(`.tab[onclick*="'${analisisTabActive}'"]`);
+      if(found) found.classList.add('active');
+    }
   }
+
   var elE = document.getElementById('analisisEquipo');
   var elI = document.getElementById('analisisIndividual');
   var elC = document.getElementById('analisisClasificacion');
@@ -13187,9 +13205,9 @@ function showAnalisisTab(tab, el){
   if(elR) elR.style.display = (tab === 'proximoRival') ? 'block' : 'none';
 
   if(tab === 'equipo') renderAnalisisEquipo();
-  if(tab === 'individual') renderAnalisisIndividual();
-  if(tab === 'clasificacion') renderClasificacion();
-  if(tab === 'proximoRival') renderAnalisisProximoRival();
+  else if(tab === 'individual') renderAnalisisIndividual();
+  else if(tab === 'clasificacion') renderClasificacion();
+  else if(tab === 'proximoRival') renderAnalisisProximoRival();
 }
 window.showAnalisisTab = showAnalisisTab;
 
@@ -13203,7 +13221,7 @@ function getNextUpcomingOpponent(){
   var partidos = (db && db.partidos && db.partidos.length) ? db.partidos : (DEFAULT_DATA.partidos || []);
   var pendingMatch = partidos.find(function(p){
     var isLiga = !p.competicion || p.competicion.toLowerCase().indexOf('futgal') !== -1 || p.competicion.toLowerCase().indexOf('primera') !== -1;
-    var isPending = (p.gf === null || p.gf === undefined) && p.resultado !== 'Victoria' && p.resultado !== 'Derrota' && p.resultado !== 'Empate' && p.estado !== 'Jugado';
+    var isPending = (p.gf === null || p.gf === undefined || p.gf === '') && p.resultado !== 'Victoria' && p.resultado !== 'Derrota' && p.resultado !== 'Empate' && p.estado !== 'Jugado' && p.rival && p.rival !== 'Pendiente';
     return isLiga && isPending;
   });
   if(pendingMatch && pendingMatch.rival){
@@ -13213,7 +13231,7 @@ function getNextUpcomingOpponent(){
       match: pendingMatch
     };
   }
-  // Fallback a J2
+  // Fallback a J2 (Sporting Burgo)
   var j2 = partidos.find(function(p){ return p.codigo === 'J2' || p.jornada === 2; });
   if(j2 && j2.rival){
     return {
@@ -13223,8 +13241,8 @@ function getNextUpcomingOpponent(){
     };
   }
   return {
-    nombre: 'Sporting Meicende',
-    rawNombre: 'Sporting Meicende',
+    nombre: 'Sporting Burgo',
+    rawNombre: 'Sporting Burgo',
     match: null
   };
 }
@@ -13233,585 +13251,674 @@ function renderAnalisisProximoRival(selectedTeam){
   var container = document.getElementById('analisisProximoRival');
   if(!container) return;
 
-  var nextOpp = getNextUpcomingOpponent();
-  var activeRival = selectedTeam || currentScoutingRival || nextOpp.nombre;
-  currentScoutingRival = activeRival;
-
   function norm(s){ return (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim(); }
-  var normActive = norm(activeRival);
 
-  // 1. Obtener lista de todos los equipos de la liga para el selector
-  var allTeams = [];
-  var clasif = (db && db.clasificacion && db.clasificacion.length) ? db.clasificacion : (DEFAULT_DATA.clasificacion || []);
-  clasif.forEach(function(row){
-    if(row && row.equipo && !allTeams.includes(row.equipo)){
-      allTeams.push(row.equipo);
+  try {
+    var nextOpp = getNextUpcomingOpponent();
+    var activeRival = selectedTeam || currentScoutingRival || nextOpp.nombre;
+    currentScoutingRival = activeRival;
+    var normActive = norm(activeRival);
+
+    // 1. Obtener lista completa de rivales de la liga (15 rivales + Dorneda)
+    var allTeams = [];
+    var equiposDef = (DEFAULT_DATA && DEFAULT_DATA.equipos) ? DEFAULT_DATA.equipos : [];
+    equiposDef.forEach(function(eq){
+      if(eq && eq.nombre && !allTeams.includes(eq.nombre)) allTeams.push(eq.nombre);
+    });
+    var clasif = (db && db.clasificacion && db.clasificacion.length) ? db.clasificacion : (DEFAULT_DATA.clasificacion || []);
+    clasif.forEach(function(row){
+      if(row && row.equipo && !allTeams.includes(row.equipo)){
+        allTeams.push(row.equipo);
+      }
+    });
+    if(!allTeams.length){
+      allTeams = ['Sporting Burgo', 'U.D. Narahio', 'Betanzos Norte', 'C.D. Sigr\u00e1s', 'C.C.D. Curtis', 'Club Deportivo Nar\u00f3n Silver Catering', 'Campanal de Loureda F. C.', 'Sporting Cambre As Travesas', 'Portazgo S.D.', 'Liceo de Monelos S.D.', 'U.D. Paiosaco H.A\u00f1on', 'Oza de los R\u00edos', 'Cedeira S.D.', 'Sada F.C. A Nosa Vi\u00f1a', 'San Marti\u00f1o S.D.', 'Xuventude Dorneda'];
     }
-  });
-  if(!allTeams.length){
-    allTeams = ['Sporting Meicende', 'U.D. Narah\u00edo', 'Betanzos Norte', 'C.D. Sigr\u00e1s', 'S.D. Brexo Lema', 'Club Deportivo Boimorto', 'S.D. Oza dos R\u00edos', 'Xuventude Dorneda'];
-  }
-  // Filtrar fuera a Dorneda del selector de rivales
-  var rivalOptions = allTeams.filter(function(t){ return norm(t).indexOf('dorneda') === -1; });
+    // Filtrar fuera a Dorneda del selector de rivales
+    var rivalOptions = allTeams.filter(function(t){ return norm(t).indexOf('dorneda') === -1; });
 
-  // 2. Extraer datos del prÃ³ximo partido de Dorneda contra este rival
-  var partidosDorneda = (db && db.partidos && db.partidos.length) ? db.partidos : (DEFAULT_DATA.partidos || []);
-  var nextMatchVsRival = partidosDorneda.find(function(p){
-    return norm(p.rival) === normActive || norm(p.rival).includes(normActive) || normActive.includes(norm(p.rival));
-  });
+    // 2. Extraer datos del prÃ³ximo partido de Dorneda contra este rival
+    var partidosDorneda = (db && db.partidos && db.partidos.length) ? db.partidos : (DEFAULT_DATA.partidos || []);
+    var nextMatchVsRival = partidosDorneda.find(function(p){
+      return norm(p.rival) === normActive || norm(p.rival).includes(normActive) || normActive.includes(norm(p.rival));
+    });
 
-  // 3. PosiciÃ³n en la tabla de clasificaciÃ³n
-  var rivalClasif = clasif.find(function(r){
-    return norm(r.equipo) === normActive || norm(r.equipo).includes(normActive) || normActive.includes(norm(r.equipo));
-  }) || { pos: '-', pts: 0, pj: 0, pg: 0, pe: 0, pp: 0, gf: 0, gc: 0, dg: 0 };
+    // 3. PosiciÃ³n en la tabla de clasificaciÃ³n
+    var rivalClasif = clasif.find(function(r){
+      return norm(r.equipo) === normActive || norm(r.equipo).includes(normActive) || normActive.includes(norm(r.equipo));
+    }) || { pos: '-', pts: 0, pj: 0, pg: 0, pe: 0, pp: 0, gf: 0, gc: 0, dg: 0 };
 
-  // 4. Recopilar todos los partidos de este rival en todasJornadas
-  var todasJ = (db && db.todasJornadas && db.todasJornadas.length) ? db.todasJornadas : (DEFAULT_DATA.todasJornadas || []);
-  var rivalMatches = [];
-  var plantillaMap = {};
-  var goleadoresMap = {};
-  var tarjetasMap = {};
-  var gfSlots = { '0-15': 0, '16-30': 0, '31-45': 0, '46-60': 0, '61-75': 0, '76-90': 0 };
-  var gcSlots = { '0-15': 0, '16-30': 0, '31-45': 0, '46-60': 0, '61-75': 0, '76-90': 0 };
-  var statsLocal = { pj: 0, v: 0, e: 0, d: 0, gf: 0, gc: 0, pts: 0 };
-  var statsVis = { pj: 0, v: 0, e: 0, d: 0, gf: 0, gc: 0, pts: 0 };
+    // 4. Recopilar todos los partidos de este rival en todasJornadas
+    var todasJ = (db && db.todasJornadas && db.todasJornadas.length) ? db.todasJornadas : (DEFAULT_DATA.todasJornadas || []);
+    var defTodasJ = DEFAULT_DATA.todasJornadas || [];
+    var rivalMatches = [];
+    var plantillaMap = {};
+    var goleadoresMap = {};
+    var tarjetasMap = {};
+    var gfSlots = { '0-15': 0, '16-30': 0, '31-45': 0, '46-60': 0, '61-75': 0, '76-90': 0 };
+    var gcSlots = { '0-15': 0, '16-30': 0, '31-45': 0, '46-60': 0, '61-75': 0, '76-90': 0 };
+    var statsLocal = { pj: 0, v: 0, e: 0, d: 0, gf: 0, gc: 0, pts: 0 };
+    var statsVis = { pj: 0, v: 0, e: 0, d: 0, gf: 0, gc: 0, pts: 0 };
 
-  function getSlot(minStr){
-    var m = parseInt(minStr, 10) || 0;
-    if(m <= 15) return '0-15';
-    if(m <= 30) return '16-30';
-    if(m <= 45) return '31-45';
-    if(m <= 60) return '46-60';
-    if(m <= 75) return '61-75';
-    return '76-90';
-  }
+    function getSlot(minStr){
+      var m = parseInt(minStr, 10) || 0;
+      if(m <= 15) return '0-15';
+      if(m <= 30) return '16-30';
+      if(m <= 45) return '31-45';
+      if(m <= 60) return '46-60';
+      if(m <= 75) return '61-75';
+      return '76-90';
+    }
 
-  todasJ.forEach(function(jornada){
-    (jornada.partidos || []).forEach(function(match){
-      var isLocal = norm(match.local) === normActive || norm(match.local).includes(normActive) || normActive.includes(norm(match.local));
-      var isVisit = norm(match.visitante) === normActive || norm(match.visitante).includes(normActive) || normActive.includes(norm(match.visitante));
-      if(!isLocal && !isVisit) return;
+    todasJ.forEach(function(jornada){
+      (jornada.partidos || []).forEach(function(match){
+        var isLocal = norm(match.local) === normActive || norm(match.local).includes(normActive) || normActive.includes(norm(match.local));
+        var isVisit = norm(match.visitante) === normActive || norm(match.visitante).includes(normActive) || normActive.includes(norm(match.visitante));
+        if(!isLocal && !isVisit) return;
 
-      var hasScore = (match.gl !== null && match.gl !== undefined && match.gv !== null && match.gv !== undefined);
-      var gf = isLocal ? match.gl : match.gv;
-      var gc = isLocal ? match.gv : match.gl;
-      var matchRival = isLocal ? match.visitante : match.local;
-      var res = 'Pendiente';
-      if(hasScore){
-        if(gf > gc) res = 'Victoria';
-        else if(gf === gc) res = 'Empate';
-        else res = 'Derrota';
+        var hasScore = (match.gl !== null && match.gl !== undefined && match.gv !== null && match.gv !== undefined);
+        var gf = isLocal ? match.gl : match.gv;
+        var gc = isLocal ? match.gv : match.gl;
+        var matchRival = isLocal ? match.visitante : match.local;
+        var res = 'Pendiente';
+        if(hasScore){
+          if(gf > gc) res = 'Victoria';
+          else if(gf === gc) res = 'Empate';
+          else res = 'Derrota';
+        }
+
+        rivalMatches.push({
+          jornada: jornada.jornada,
+          fecha: match.fecha || jornada.fecha,
+          hora: match.hora || '',
+          campo: match.campo || '',
+          isLocal: isLocal,
+          rival: formatCleanTeamName(matchRival),
+          hasScore: hasScore,
+          gf: gf,
+          gc: gc,
+          resultado: res,
+          matchObj: match
+        });
+
+        // Stats local / visitante
+        if(hasScore){
+          var st = isLocal ? statsLocal : statsVis;
+          st.pj++;
+          st.gf += (gf || 0);
+          st.gc += (gc || 0);
+          if(res === 'Victoria'){ st.v++; st.pts += 3; }
+          else if(res === 'Empate'){ st.e++; st.pts += 1; }
+          else if(res === 'Derrota'){ st.d++; }
+        }
+
+        // Buscar actaData (con fallback a DEFAULT_DATA)
+        var acta = match.actaData || {};
+        if(!acta.localTitulares || !acta.localTitulares.length){
+          var defJ = defTodasJ.find(function(dj){ return dj.jornada === jornada.jornada; });
+          if(defJ && defJ.partidos){
+            var defM = defJ.partidos.find(function(dm){
+              return (dm.codActa && dm.codActa === match.codActa) || (norm(dm.local) === norm(match.local) && norm(dm.visitante) === norm(match.visitante));
+            });
+            if(defM && defM.actaData) acta = defM.actaData;
+          }
+        }
+
+        var titulares = isLocal ? (acta.localTitulares || []) : (acta.visitTitulares || []);
+        var suplentes = isLocal ? (acta.localSuplentes || []) : (acta.visitSuplentes || []);
+        var tarjetas = isLocal ? (acta.localTarjetas || []) : (acta.visitTarjetas || []);
+
+        titulares.forEach(function(t){
+          if(!t || !t.nombre) return;
+          var pKey = norm(t.nombre);
+          if(!plantillaMap[pKey]){
+            plantillaMap[pKey] = {
+              dorsal: t.dorsal ? '#' + t.dorsal : '#--',
+              numDorsal: parseInt(t.dorsal, 10) || 999,
+              nombre: formatOfficialPersonName(t.nombre),
+              rawNombre: t.nombre,
+              pj: 0,
+              titular: 0,
+              suplente: 0,
+              goles: 0,
+              amarillas: 0,
+              rojas: 0
+            };
+          }
+          if(t.dorsal && plantillaMap[pKey].dorsal === '#--'){
+            plantillaMap[pKey].dorsal = '#' + t.dorsal;
+            plantillaMap[pKey].numDorsal = parseInt(t.dorsal, 10);
+          }
+          plantillaMap[pKey].pj++;
+          plantillaMap[pKey].titular++;
+        });
+
+        suplentes.forEach(function(s){
+          if(!s || !s.nombre) return;
+          var pKey = norm(s.nombre);
+          if(!plantillaMap[pKey]){
+            plantillaMap[pKey] = {
+              dorsal: s.dorsal ? '#' + s.dorsal : '#--',
+              numDorsal: parseInt(s.dorsal, 10) || 999,
+              nombre: formatOfficialPersonName(s.nombre),
+              rawNombre: s.nombre,
+              pj: 0,
+              titular: 0,
+              suplente: 0,
+              goles: 0,
+              amarillas: 0,
+              rojas: 0
+            };
+          }
+          if(s.dorsal && plantillaMap[pKey].dorsal === '#--'){
+            plantillaMap[pKey].dorsal = '#' + s.dorsal;
+            plantillaMap[pKey].numDorsal = parseInt(s.dorsal, 10);
+          }
+          plantillaMap[pKey].pj++;
+          plantillaMap[pKey].suplente++;
+        });
+
+        // Goles del partido y minutos
+        var golesList = acta.allGoles || acta.goles || [];
+        golesList.forEach(function(g){
+          var cleanG = cleanAndFormatGoal(g);
+          if(!cleanG) return;
+          var scorerKey = norm(cleanG.scorerName);
+          var isScoredByRival = false;
+
+          // Comprobar si el goleador pertenece a este equipo
+          if(plantillaMap[scorerKey]){
+            isScoredByRival = true;
+          } else if(g.rawScorer && (norm(g.rawScorer).includes(normActive) || normActive.includes(norm(g.rawScorer)))){
+            isScoredByRival = true;
+          } else if(g.equipo && norm(g.equipo).includes(normActive)){
+            isScoredByRival = true;
+          }
+
+          var slot = getSlot(cleanG.minuto);
+          if(isScoredByRival){
+            gfSlots[slot] = (gfSlots[slot] || 0) + 1;
+            if(!goleadoresMap[scorerKey]){
+              var dTag = (plantillaMap[scorerKey] && plantillaMap[scorerKey].dorsal !== '#--') ? plantillaMap[scorerKey].dorsal : (g.dorsal ? '#' + g.dorsal : '#--');
+              goleadoresMap[scorerKey] = {
+                nombre: cleanG.scorerName,
+                dorsal: dTag,
+                goles: 0,
+                minutos: []
+              };
+            }
+            goleadoresMap[scorerKey].goles++;
+            if(cleanG.minuto) goleadoresMap[scorerKey].minutos.push(cleanG.minuto + "'");
+            if(plantillaMap[scorerKey]) plantillaMap[scorerKey].goles++;
+          } else {
+            // Gol en contra encajado por el rival
+            gcSlots[slot] = (gcSlots[slot] || 0) + 1;
+          }
+        });
+
+        // Tarjetas del rival
+        tarjetas.forEach(function(t){
+          if(!t || !t.nombre) return;
+          var pKey = norm(t.nombre);
+          var cleanN = formatOfficialPersonName(t.nombre);
+          var dTag = (plantillaMap[pKey] && plantillaMap[pKey].dorsal !== '#--') ? plantillaMap[pKey].dorsal : (t.dorsal ? '#' + t.dorsal : '#--');
+          if(!tarjetasMap[pKey]){
+            tarjetasMap[pKey] = {
+              nombre: cleanN,
+              dorsal: dTag,
+              amarillas: 0,
+              rojas: 0,
+              minutos: []
+            };
+          }
+          if(t.tipo === 'Roja' || t.tipo === 'Doble Amarilla'){
+            tarjetasMap[pKey].rojas++;
+          } else {
+            tarjetasMap[pKey].amarillas++;
+          }
+          if(t.minuto) tarjetasMap[pKey].minutos.push((t.tipo === 'Roja' ? '\ud83d\udfe5 ' : '\ud83d\udfe8 ') + t.minuto + "'");
+          if(plantillaMap[pKey]){
+            if(t.tipo === 'Roja' || t.tipo === 'Doble Amarilla') plantillaMap[pKey].rojas++;
+            else plantillaMap[pKey].amarillas++;
+          }
+        });
+      });
+    });
+
+    // 5. TambiÃ©n comprobar si Dorneda jugÃ³ contra este rival en db.partidos
+    partidosDorneda.forEach(function(pDorneda){
+      if(!pDorneda || !pDorneda.rival) return;
+      var isThisRival = norm(pDorneda.rival) === normActive || norm(pDorneda.rival).includes(normActive) || normActive.includes(norm(pDorneda.rival));
+      if(!isThisRival) return;
+
+      if(pDorneda.rivalAlineacion){
+        (pDorneda.rivalAlineacion.titulares || []).forEach(function(t){
+          if(!t || !t.nombre) return;
+          var pKey = norm(t.nombre);
+          if(!plantillaMap[pKey]){
+            plantillaMap[pKey] = {
+              dorsal: t.dorsal ? '#' + t.dorsal : '#--',
+              numDorsal: parseInt(t.dorsal, 10) || 999,
+              nombre: formatOfficialPersonName(t.nombre),
+              rawNombre: t.nombre,
+              pj: 1,
+              titular: 1,
+              suplente: 0,
+              goles: 0,
+              amarillas: 0,
+              rojas: 0
+            };
+          }
+        });
+        (pDorneda.rivalAlineacion.suplentes || []).forEach(function(s){
+          if(!s || !s.nombre) return;
+          var pKey = norm(s.nombre);
+          if(!plantillaMap[pKey]){
+            plantillaMap[pKey] = {
+              dorsal: s.dorsal ? '#' + s.dorsal : '#--',
+              numDorsal: parseInt(s.dorsal, 10) || 999,
+              nombre: formatOfficialPersonName(s.nombre),
+              rawNombre: s.nombre,
+              pj: 1,
+              titular: 0,
+              suplente: 1,
+              goles: 0,
+              amarillas: 0,
+              rojas: 0
+            };
+          }
+        });
       }
 
-      rivalMatches.push({
-        jornada: jornada.jornada,
-        fecha: match.fecha || jornada.fecha,
-        hora: match.hora || '',
-        campo: match.campo || '',
-        isLocal: isLocal,
-        rival: formatCleanTeamName(matchRival),
-        hasScore: hasScore,
-        gf: gf,
-        gc: gc,
-        resultado: res,
-        matchObj: match
-      });
-
-      // Stats local / visitante
-      if(hasScore){
-        var st = isLocal ? statsLocal : statsVis;
-        st.pj++;
-        st.gf += (gf || 0);
-        st.gc += (gc || 0);
-        if(res === 'Victoria'){ st.v++; st.pts += 3; }
-        else if(res === 'Empate'){ st.e++; st.pts += 1; }
-        else if(res === 'Derrota'){ st.d++; }
-      }
-
-      // Procesar Acta / Plantilla
-      var acta = match.actaData || {};
-      var titulares = isLocal ? (acta.localTitulares || []) : (acta.visitTitulares || []);
-      var suplentes = isLocal ? (acta.localSuplentes || []) : (acta.visitSuplentes || []);
-      var tarjetas = isLocal ? (acta.localTarjetas || []) : (acta.visitTarjetas || []);
-
-      titulares.forEach(function(t){
-        if(!t || !t.nombre) return;
-        var pKey = norm(t.nombre);
-        if(!plantillaMap[pKey]){
-          plantillaMap[pKey] = {
-            dorsal: t.dorsal ? '#' + t.dorsal : '#--',
-            numDorsal: parseInt(t.dorsal, 10) || 999,
-            nombre: formatOfficialPersonName(t.nombre),
-            rawNombre: t.nombre,
-            pj: 0,
-            titular: 0,
-            suplente: 0,
-            goles: 0,
-            amarillas: 0,
-            rojas: 0
-          };
-        }
-        if(t.dorsal && plantillaMap[pKey].dorsal === '#--'){
-          plantillaMap[pKey].dorsal = '#' + t.dorsal;
-          plantillaMap[pKey].numDorsal = parseInt(t.dorsal, 10);
-        }
-        plantillaMap[pKey].pj++;
-        plantillaMap[pKey].titular++;
-      });
-
-      suplentes.forEach(function(s){
-        if(!s || !s.nombre) return;
-        var pKey = norm(s.nombre);
-        if(!plantillaMap[pKey]){
-          plantillaMap[pKey] = {
-            dorsal: s.dorsal ? '#' + s.dorsal : '#--',
-            numDorsal: parseInt(s.dorsal, 10) || 999,
-            nombre: formatOfficialPersonName(s.nombre),
-            rawNombre: s.nombre,
-            pj: 0,
-            titular: 0,
-            suplente: 0,
-            goles: 0,
-            amarillas: 0,
-            rojas: 0
-          };
-        }
-        if(s.dorsal && plantillaMap[pKey].dorsal === '#--'){
-          plantillaMap[pKey].dorsal = '#' + s.dorsal;
-          plantillaMap[pKey].numDorsal = parseInt(s.dorsal, 10);
-        }
-        plantillaMap[pKey].pj++;
-        plantillaMap[pKey].suplente++;
-      });
-
-      // Goles del partido y minutos
-      var golesList = acta.allGoles || acta.goles || [];
-      golesList.forEach(function(g){
-        var cleanG = cleanAndFormatGoal(g);
-        if(!cleanG) return;
-        var scorerKey = norm(cleanG.scorerName);
-        var isScoredByRival = false;
-
-        // Comprobar si el goleador pertenece a este equipo
-        if(plantillaMap[scorerKey]){
-          isScoredByRival = true;
-        } else if(g.rawScorer && (norm(g.rawScorer).includes(normActive) || normActive.includes(norm(g.rawScorer)))){
-          isScoredByRival = true;
-        } else if(g.equipo && norm(g.equipo).includes(normActive)){
-          isScoredByRival = true;
-        }
-
-        var slot = getSlot(cleanG.minuto);
-        if(isScoredByRival){
+      // Goles anotados por este rival
+      (pDorneda.golesDetalle || []).forEach(function(g){
+        var isRivalGoal = g.equipo && norm(g.equipo).indexOf('dorneda') === -1;
+        if(isRivalGoal){
+          var pKey = norm(g.jugador);
+          var slot = getSlot(g.minuto);
           gfSlots[slot] = (gfSlots[slot] || 0) + 1;
-          if(!goleadoresMap[scorerKey]){
-            // Buscar dorsal en plantilla
-            var dTag = (plantillaMap[scorerKey] && plantillaMap[scorerKey].dorsal !== '#--') ? plantillaMap[scorerKey].dorsal : (g.dorsal ? '#' + g.dorsal : '#--');
-            goleadoresMap[scorerKey] = {
-              nombre: cleanG.scorerName,
+          if(!goleadoresMap[pKey]){
+            var dTag = (plantillaMap[pKey] && plantillaMap[pKey].dorsal !== '#--') ? plantillaMap[pKey].dorsal : (g.dorsal ? '#' + g.dorsal : '#--');
+            goleadoresMap[pKey] = {
+              nombre: formatOfficialPersonName(g.jugador),
               dorsal: dTag,
               goles: 0,
               minutos: []
             };
           }
-          goleadoresMap[scorerKey].goles++;
-          if(cleanG.minuto) goleadoresMap[scorerKey].minutos.push(cleanG.minuto + "'");
-          if(plantillaMap[scorerKey]) plantillaMap[scorerKey].goles++;
-        } else {
-          // Gol en contra encajado por el rival
-          gcSlots[slot] = (gcSlots[slot] || 0) + 1;
-        }
-      });
-
-      // Tarjetas del rival
-      tarjetas.forEach(function(t){
-        if(!t || !t.nombre) return;
-        var pKey = norm(t.nombre);
-        var cleanN = formatOfficialPersonName(t.nombre);
-        var dTag = (plantillaMap[pKey] && plantillaMap[pKey].dorsal !== '#--') ? plantillaMap[pKey].dorsal : (t.dorsal ? '#' + t.dorsal : '#--');
-        if(!tarjetasMap[pKey]){
-          tarjetasMap[pKey] = {
-            nombre: cleanN,
-            dorsal: dTag,
-            amarillas: 0,
-            rojas: 0,
-            minutos: []
-          };
-        }
-        if(t.tipo === 'Roja' || t.tipo === 'Doble Amarilla'){
-          tarjetasMap[pKey].rojas++;
-        } else {
-          tarjetasMap[pKey].amarillas++;
-        }
-        if(t.minuto) tarjetasMap[pKey].minutos.push((t.tipo === 'Roja' ? 'ðŸŸ¥ ' : 'ðŸŸ¨ ') + t.minuto + "'");
-        if(plantillaMap[pKey]){
-          if(t.tipo === 'Roja' || t.tipo === 'Doble Amarilla') plantillaMap[pKey].rojas++;
-          else plantillaMap[pKey].amarillas++;
+          goleadoresMap[pKey].goles++;
+          if(g.minuto) goleadoresMap[pKey].minutos.push(g.minuto + "'");
+          if(plantillaMap[pKey]) plantillaMap[pKey].goles++;
         }
       });
     });
-  });
 
-  // Totales
-  var totalPJ = (statsLocal.pj + statsVis.pj);
-  var totalGF = (statsLocal.gf + statsVis.gf);
-  var totalGC = (statsLocal.gc + statsVis.gc);
-  var totalV = (statsLocal.v + statsVis.v);
-  var totalE = (statsLocal.e + statsVis.e);
-  var totalD = (statsLocal.d + statsVis.d);
-  var totalPts = (statsLocal.pts + statsVis.pts);
+    // Totales
+    var totalPJ = (statsLocal.pj + statsVis.pj);
+    var totalGF = (statsLocal.gf + statsVis.gf);
+    var totalGC = (statsLocal.gc + statsVis.gc);
+    var totalV = (statsLocal.v + statsVis.v);
+    var totalE = (statsLocal.e + statsVis.e);
+    var totalD = (statsLocal.d + statsVis.d);
+    var totalPts = (statsLocal.pts + statsVis.pts);
 
-  // Top 4 Goleadores
-  var top4Goleadores = Object.values(goleadoresMap).sort(function(a, b){ return b.goles - a.goles; }).slice(0, 4);
+    // Top 4 Goleadores
+    var top4Goleadores = Object.values(goleadoresMap).sort(function(a, b){ return b.goles - a.goles; }).slice(0, 4);
 
-  // Lista de Jugadores Amonestados
-  var jugadoresTarjetas = Object.values(tarjetasMap).sort(function(a, b){ return (b.rojas * 5 + b.amarillas) - (a.rojas * 5 + a.amarillas); });
-  var totalAmarillas = jugadoresTarjetas.reduce(function(sum, x){ return sum + x.amarillas; }, 0);
-  var totalRojas = jugadoresTarjetas.reduce(function(sum, x){ return sum + x.rojas; }, 0);
+    // Lista de Jugadores Amonestados
+    var jugadoresTarjetas = Object.values(tarjetasMap).sort(function(a, b){ return (b.rojas * 5 + b.amarillas) - (a.rojas * 5 + a.amarillas); });
+    var totalAmarillas = jugadoresTarjetas.reduce(function(sum, x){ return sum + x.amarillas; }, 0);
+    var totalRojas = jugadoresTarjetas.reduce(function(sum, x){ return sum + x.rojas; }, 0);
 
-  // Racha ordenada por jornada
-  rivalMatches.sort(function(a, b){ return (a.jornada || 0) - (b.jornada || 0); });
-  var playedMatches = rivalMatches.filter(function(m){ return m.hasScore; });
+    // Racha ordenada por jornada
+    rivalMatches.sort(function(a, b){ return (a.jornada || 0) - (b.jornada || 0); });
+    var playedMatches = rivalMatches.filter(function(m){ return m.hasScore; });
 
-  // Lista de Plantilla ordenada por dorsal
-  var plantillaList = Object.values(plantillaMap).sort(function(a, b){ return a.numDorsal - b.numDorsal; });
+    // Lista de Plantilla ordenada por dorsal
+    var plantillaList = Object.values(plantillaMap).sort(function(a, b){ return a.numDorsal - b.numDorsal; });
 
-  // Calcular Tramos Clave para Conclusiones
-  var maxGfSlot = Object.keys(gfSlots).reduce(function(a, b){ return gfSlots[a] >= gfSlots[b] ? a : b; }, '0-15');
-  var maxGcSlot = Object.keys(gcSlots).reduce(function(a, b){ return gcSlots[a] >= gcSlots[b] ? a : b; }, '0-15');
+    // Calcular Tramos Clave para Conclusiones
+    var maxGfSlot = Object.keys(gfSlots).reduce(function(a, b){ return gfSlots[a] >= gfSlots[b] ? a : b; }, '0-15');
+    var maxGcSlot = Object.keys(gcSlots).reduce(function(a, b){ return gcSlots[a] >= gcSlots[b] ? a : b; }, '0-15');
 
-  // Generar Conclusiones TÃ¡cticas en Modo Lista
-  var conclusiones = [];
-  
-  // 1. Peligro Ofensivo
-  if(top4Goleadores.length > 0){
-    var artillerosStr = top4Goleadores.map(function(g){ return '<strong>' + g.dorsal + ' ' + g.nombre + '</strong> (' + g.goles + ' ' + (g.goles === 1 ? 'gol' : 'goles') + (g.minutos.length ? ' en mins ' + g.minutos.join(', ') : '') + ')'; }).join(', ');
-    conclusiones.push('ðŸŽ¯ <strong>ArtillerÃ­a & Referencias Ofensivas:</strong> Mayor peligro canalizado en ' + artillerosStr + '.');
-  } else {
-    conclusiones.push('ðŸŽ¯ <strong>ProducciÃ³n Ofensiva:</strong> AÃºn no registran goleadores individuales destacados en las actas oficiales de esta temporada.');
-  }
+    // Generar Conclusiones TÃ¡cticas en Modo Lista
+    var conclusiones = [];
+    
+    // 1. Peligro Ofensivo
+    if(top4Goleadores.length > 0){
+      var artillerosStr = top4Goleadores.map(function(g){ return '<strong>' + g.dorsal + ' ' + g.nombre + '</strong> (' + g.goles + ' ' + (g.goles === 1 ? 'gol' : 'goles') + (g.minutos.length ? ' en mins ' + g.minutos.join(', ') : '') + ')'; }).join(', ');
+      conclusiones.push('\ud83c\udfaf <strong>Artiller\u00eda & Referencias Ofensivas:</strong> Mayor peligro canalizado en ' + artillerosStr + '.');
+    } else {
+      conclusiones.push('\ud83c\udfaf <strong>Producci\u00f3n Ofensiva:</strong> A\u00fan no registran goleadores individuales en las actas consultadas de esta temporada.');
+    }
 
-  // 2. Tramo crÃ­tico de ataque
-  if(totalGF > 0 && gfSlots[maxGfSlot] > 0){
-    conclusiones.push('â±ï¸ <strong>Ventana de Mayor Peligro:</strong> Concentran el mayor porcentaje de sus goles en el intervalo de minutos <strong>' + maxGfSlot + '\'</strong> (' + gfSlots[maxGfSlot] + ' de ' + totalGF + ' goles a favor). MÃ¡xima concentraciÃ³n tÃ¡ctica requerida en ese periodo.');
-  } else {
-    conclusiones.push('â±ï¸ <strong>Ritmo de Partido:</strong> Promedio anotador de ' + (totalPJ > 0 ? (totalGF / totalPJ).toFixed(2) : '0') + ' goles por encuentro.');
-  }
+    // 2. Tramo crÃ­tico de ataque
+    if(totalGF > 0 && gfSlots[maxGfSlot] > 0){
+      conclusiones.push('\u23f1\ufe0f <strong>Ventana de Mayor Peligro:</strong> Concentran el mayor porcentaje de sus goles en el intervalo de minutos <strong>' + maxGfSlot + '\'</strong> (' + gfSlots[maxGfSlot] + ' de ' + totalGF + ' goles a favor). M\u00e1xima concentraci\u00f3n t\u00e1ctica requerida en ese periodo.');
+    } else {
+      conclusiones.push('\u23f1\ufe0f <strong>Ritmo de Partido:</strong> Promedio anotador de ' + (totalPJ > 0 ? (totalGF / totalPJ).toFixed(2) : '0') + ' goles por encuentro.');
+    }
 
-  // 3. Debilidad y vulnerabilidad defensiva
-  if(totalGC > 0 && gcSlots[maxGcSlot] > 0){
-    conclusiones.push('ðŸ›¡ï¸ <strong>Momento de Vulnerabilidad:</strong> Es mÃ¡s propenso a conceder y encajar goles en el tramo <strong>' + maxGcSlot + '\'</strong> (' + gcSlots[maxGcSlot] + ' goles recibidos). Gran oportunidad para presionar alto y buscar transiciones rÃ¡pidas en ese lapso.');
-  } else if(totalPJ > 0){
-    conclusiones.push('ðŸ›¡ï¸ <strong>Solidez Defensiva:</strong> Promedio de ' + (totalGC / totalPJ).toFixed(2) + ' goles encajados por partido.');
-  }
+    // 3. Debilidad y vulnerabilidad defensiva
+    if(totalGC > 0 && gcSlots[maxGcSlot] > 0){
+      conclusiones.push('\ud83d\udee1\ufe0f <strong>Momento de Vulnerabilidad:</strong> Es m\u00e1s propenso a conceder goles en el tramo <strong>' + maxGcSlot + '\'</strong> (' + gcSlots[maxGcSlot] + ' goles recibidos). Oportunidad para presionar alto y buscar transiciones r\u00e1pidas en ese lapso.');
+    } else if(totalPJ > 0){
+      conclusiones.push('\ud83d\udee1\ufe0f <strong>Solidez Defensiva:</strong> Promedio de ' + (totalGC / totalPJ).toFixed(2) + ' goles encajados por partido.');
+    } else {
+      conclusiones.push('\ud83d\udee1\ufe0f <strong>Defensa:</strong> Estructura ordenada que requerir\u00e1 paciencia en la circulaci\u00f3n y basculaci\u00f3n r\u00e1pida de bal\u00f3n.');
+    }
 
-  // 4. Factor Disciplinario
-  if(jugadoresTarjetas.length > 0){
-    var sancionadosStr = jugadoresTarjetas.slice(0, 3).map(function(t){ return '<strong>' + t.dorsal + ' ' + t.nombre + '</strong> (' + t.amarillas + 'ðŸŸ¨' + (t.rojas ? ' ' + t.rojas + 'ðŸŸ¥' : '') + ')'; }).join(', ');
-    conclusiones.push('âš ï¸ <strong>PresiÃ³n & Disciplina:</strong> Acumulan un total de ' + totalAmarillas + ' amarillas' + (totalRojas > 0 ? ' y ' + totalRojas + ' rojas' : '') + '. Futbolistas con mayor nÃºmero de sanciones: ' + sancionadosStr + '.');
-  } else {
-    conclusiones.push('âš ï¸ <strong>Disciplina:</strong> Sin tarjetas registradas en su historial reciente.');
-  }
+    // 4. Factor Disciplinario
+    if(jugadoresTarjetas.length > 0){
+      var sancionadosStr = jugadoresTarjetas.slice(0, 3).map(function(t){ return '<strong>' + t.dorsal + ' ' + t.nombre + '</strong> (' + t.amarillas + '\ud83d\udfe8' + (t.rojas ? ' ' + t.rojas + '\ud83d\udfe5' : '') + ')'; }).join(', ');
+      conclusiones.push('\u26a0\ufe0f <strong>Presi\u00f3n & Disciplina:</strong> Acumulan un total de ' + totalAmarillas + ' amarillas' + (totalRojas > 0 ? ' y ' + totalRojas + ' rojas' : '') + '. Futbolistas con mayor n\u00famero de sanciones: ' + sancionadosStr + '.');
+    } else {
+      conclusiones.push('\u26a0\ufe0f <strong>Disciplina:</strong> Sin tarjetas registradas en su historial reciente.');
+    }
 
-  // 5. Factor Local / Visitante
-  var matchCond = nextMatchVsRival ? (nextMatchVsRival.condicion === 'Local' ? 'Visitante' : 'Local') : 'Visitante';
-  if(matchCond === 'Visitante'){
-    var winPctV = statsVis.pj > 0 ? Math.round((statsVis.v / statsVis.pj) * 100) : 0;
-    conclusiones.push('ðŸŸï¸ <strong>DesempeÃ±o a Domicilio:</strong> En el prÃ³ximo encuentro jugarÃ¡n como <strong>Visitantes</strong> en nuestro campo. Fuera de casa registran ' + statsVis.v + 'V - ' + statsVis.e + 'E - ' + statsVis.d + 'D (' + winPctV + '% victorias) con ' + statsVis.gf + ' GF y ' + statsVis.gc + ' GC.');
-  } else {
-    var winPctL = statsLocal.pj > 0 ? Math.round((statsLocal.v / statsLocal.pj) * 100) : 0;
-    conclusiones.push('ðŸŸï¸ <strong>DesempeÃ±o en su Estadio:</strong> En el prÃ³ximo encuentro jugarÃ¡n como <strong>Locales</strong> en su campo. En casa registran ' + statsLocal.v + 'V - ' + statsLocal.e + 'E - ' + statsLocal.d + 'D (' + winPctL + '% victorias) con ' + statsLocal.gf + ' GF y ' + statsLocal.gc + ' GC.');
-  }
+    // 5. Factor Local / Visitante
+    var matchCond = nextMatchVsRival ? (nextMatchVsRival.condicion === 'Local' ? 'Visitante' : 'Local') : 'Visitante';
+    if(matchCond === 'Visitante'){
+      var winPctV = statsVis.pj > 0 ? Math.round((statsVis.v / statsVis.pj) * 100) : 0;
+      conclusiones.push('\ud83c\udfdf\ufe0f <strong>Desempe\u00f1o a Domicilio:</strong> En el pr\u00f3ximo encuentro jugar\u00e1n como <strong>Visitantes</strong> en nuestro campo. Fuera de casa registran ' + statsVis.v + 'V - ' + statsVis.e + 'E - ' + statsVis.d + 'D (' + winPctV + '% victorias) con ' + statsVis.gf + ' GF y ' + statsVis.gc + ' GC.');
+    } else {
+      var winPctL = statsLocal.pj > 0 ? Math.round((statsLocal.v / statsLocal.pj) * 100) : 0;
+      conclusiones.push('\ud83c\udfdf\ufe0f <strong>Desempe\u00f1o en su Estadio:</strong> En el pr\u00f3ximo encuentro jugar\u00e1n como <strong>Locales</strong> en su campo. En casa registran ' + statsLocal.v + 'V - ' + statsLocal.e + 'E - ' + statsLocal.d + 'D (' + winPctL + '% victorias) con ' + statsLocal.gf + ' GF y ' + statsLocal.gc + ' GC.');
+    }
 
-  // RENDERIZADO DEL HTML
-  var html = `
-    <!-- BARRA SUPERIOR: SELECTOR DE RIVAL Y ACCESO RÃPIDO -->
-    <div class="card mb-16" style="background:var(--surface2);border:1px solid var(--border);padding:14px 18px;border-radius:12px;">
-      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
-        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-          <span style="font-size:24px;">ðŸŽ¯</span>
+    // RENDERIZADO DEL HTML
+    var html = `
+      <!-- BARRA SUPERIOR: SELECTOR DE RIVAL Y ACCESO RÃPIDO -->
+      <div class="card mb-16" style="background:var(--surface2);border:1px solid var(--border);padding:14px 18px;border-radius:12px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+            <span style="font-size:24px;">\ud83c\udfaf</span>
+            <div>
+              <div style="font-size:15px;font-weight:900;color:var(--text);">Scouting & Radiograf\u00eda del Pr\u00f3ximo Rival</div>
+              <div style="font-size:11.5px;color:var(--text-muted);">Informaci\u00f3n t\u00e1ctica, plantilla con dorsales, minutos de gol, disciplina y conclusiones</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <label style="font-size:12px;font-weight:800;color:var(--text);">Seleccionar Rival:</label>
+            <select id="selectRivalScouting" onchange="renderAnalisisProximoRival(this.value)" class="form-control" style="font-size:12.5px;font-weight:800;padding:6px 12px;border-radius:8px;border:1.5px solid var(--primary);background:var(--surface);color:var(--text);cursor:pointer;">
+              ${rivalOptions.map(function(t){
+                var isSel = norm(t) === normActive;
+                return `<option value="${t}" ${isSel ? 'selected' : ''}>${t} ${norm(t) === norm(nextOpp.nombre) ? ' (\u2b50 Pr\u00f3ximo)' : ''}</option>`;
+              }).join('')}
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- HERO HEADER DEL ENFRENTAMIENTO -->
+      <div class="card mb-16" style="background:linear-gradient(135deg, rgba(37,99,235,0.08), rgba(22,163,74,0.05));border:1.5px solid var(--border);border-radius:14px;padding:18px 20px;">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:16px;align-items:center;">
           <div>
-            <div style="font-size:15px;font-weight:900;color:var(--text);">Scouting & Radiograf\u00eda del Pr\u00f3ximo Rival</div>
-            <div style="font-size:11.5px;color:var(--text-muted);">Informaci\u00f3n t\u00e1ctica, plantilla con dorsales, minutos de gol, disciplina y conclusiones</div>
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
+              <span class="badge badge-accent" style="font-size:9.5px;font-weight:900;">PR\u00d3XIMO ENCUENTRO</span>
+              <span class="badge badge-info" style="font-size:9.5px;font-weight:800;">${nextMatchVsRival ? (nextMatchVsRival.codigo || 'Jornada') : 'Liga'}</span>
+            </div>
+            <div style="font-size:22px;font-weight:900;color:var(--text);line-height:1.2;">
+              ${formatCleanTeamName(activeRival)}
+            </div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">
+              ${nextMatchVsRival ? `\ud83d\udcc5 ${nextMatchVsRival.fecha || '--'} ${nextMatchVsRival.horaPartido || nextMatchVsRival.hora ? '\u00b7 \u23f0 ' + (nextMatchVsRival.horaPartido || nextMatchVsRival.hora) : ''} \u00b7 \ud83d\udccd ${nextMatchVsRival.campo || (nextMatchVsRival.condicion === 'Local' ? 'A Marola' : 'Campo Rival')} (${nextMatchVsRival.condicion === 'Local' ? 'Dorneda Local' : 'Dorneda Visitante'})` : '\ud83d\udcc5 Partido regular de temporada'}
+            </div>
           </div>
-        </div>
-        <div style="display:flex;align-items:center;gap:8px;">
-          <label style="font-size:12px;font-weight:800;color:var(--text);">Seleccionar Rival:</label>
-          <select id="selectRivalScouting" onchange="renderAnalisisProximoRival(this.value)" class="form-control" style="font-size:12.5px;font-weight:800;padding:6px 12px;border-radius:8px;border:1.5px solid var(--primary);background:var(--surface);color:var(--text);cursor:pointer;">
-            ${rivalOptions.map(function(t){
-              var isSel = norm(t) === normActive;
-              return `<option value="${t}" ${isSel ? 'selected' : ''}>${t} ${norm(t) === norm(nextOpp.nombre) ? ' (â­ Pr&oacute;ximo)' : ''}</option>`;
-            }).join('')}
-          </select>
-        </div>
-      </div>
-    </div>
 
-    <!-- HERO HEADER DEL ENFRENTAMIENTO -->
-    <div class="card mb-16" style="background:linear-gradient(135deg, rgba(37,99,235,0.08), rgba(22,163,74,0.05));border:1.5px solid var(--border);border-radius:14px;padding:18px 20px;">
-      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:16px;align-items:center;">
-        <div>
-          <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
-            <span class="badge badge-accent" style="font-size:9.5px;font-weight:900;">PRÃ“XIMO ENCUENTRO</span>
-            <span class="badge badge-info" style="font-size:9.5px;font-weight:800;">${nextMatchVsRival ? (nextMatchVsRival.codigo || 'Jornada') : 'Liga'}</span>
-          </div>
-          <div style="font-size:22px;font-weight:900;color:var(--text);line-height:1.2;">
-            ${formatCleanTeamName(activeRival)}
-          </div>
-          <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">
-            ${nextMatchVsRival ? `ðŸ“… ${nextMatchVsRival.fecha || '--'} ${nextMatchVsRival.horaPartido || nextMatchVsRival.hora ? '\u00b7 â° ' + (nextMatchVsRival.horaPartido || nextMatchVsRival.hora) : ''} \u00b7 ðŸ“ ${nextMatchVsRival.campo || (nextMatchVsRival.condicion === 'Local' ? 'A Marola' : 'Campo Rival')} (${nextMatchVsRival.condicion === 'Local' ? 'Dorneda Local' : 'Dorneda Visitante'})` : 'ðŸ“… Partido regular de temporada'}
-          </div>
-        </div>
-
-        <div style="display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;">
-          <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:8px 14px;text-align:center;min-width:70px;">
-            <div style="font-size:10px;font-weight:800;color:var(--text-dim);text-transform:uppercase;">PosiciÃ³n</div>
-            <div style="font-size:20px;font-weight:900;color:var(--primary);">${rivalClasif.pos || '-'}Âº</div>
-          </div>
-          <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:8px 14px;text-align:center;min-width:70px;">
-            <div style="font-size:10px;font-weight:800;color:var(--text-dim);text-transform:uppercase;">Puntos</div>
-            <div style="font-size:20px;font-weight:900;color:var(--success);">${rivalClasif.pts || 0}</div>
-          </div>
-          <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:8px 14px;text-align:center;min-width:70px;">
-            <div style="font-size:10px;font-weight:800;color:var(--text-dim);text-transform:uppercase;">V - E - D</div>
-            <div style="font-size:16px;font-weight:900;color:var(--text);">${rivalClasif.pg || 0}-${rivalClasif.pe || 0}-${rivalClasif.pp || 0}</div>
-          </div>
-          <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:8px 14px;text-align:center;min-width:70px;">
-            <div style="font-size:10px;font-weight:800;color:var(--text-dim);text-transform:uppercase;">Goles F/C</div>
-            <div style="font-size:16px;font-weight:900;color:var(--text);">${rivalClasif.gf || totalGF}/${rivalClasif.gc || totalGC}</div>
+          <div style="display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;">
+            <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:8px 14px;text-align:center;min-width:70px;">
+              <div style="font-size:10px;font-weight:800;color:var(--text-dim);text-transform:uppercase;">Posici\u00f3n</div>
+              <div style="font-size:20px;font-weight:900;color:var(--primary);">${rivalClasif.pos || '-'}Âº</div>
+            </div>
+            <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:8px 14px;text-align:center;min-width:70px;">
+              <div style="font-size:10px;font-weight:800;color:var(--text-dim);text-transform:uppercase;">Puntos</div>
+              <div style="font-size:20px;font-weight:900;color:var(--success);">${rivalClasif.pts || 0}</div>
+            </div>
+            <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:8px 14px;text-align:center;min-width:70px;">
+              <div style="font-size:10px;font-weight:800;color:var(--text-dim);text-transform:uppercase;">V - E - D</div>
+              <div style="font-size:16px;font-weight:900;color:var(--text);">${rivalClasif.pg || rivalClasif.g || 0}-${rivalClasif.pe || rivalClasif.e || 0}-${rivalClasif.pp || rivalClasif.p || 0}</div>
+            </div>
+            <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:8px 14px;text-align:center;min-width:70px;">
+              <div style="font-size:10px;font-weight:800;color:var(--text-dim);text-transform:uppercase;">Goles F/C</div>
+              <div style="font-size:16px;font-weight:900;color:var(--text);">${rivalClasif.gf || totalGF}/${rivalClasif.gc || totalGC}</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- CONCLUSIONES TÃCTICAS (MODO LISTA) -->
-    <div class="card mb-16" style="border:1.5px solid var(--primary);border-radius:14px;background:var(--surface2);">
-      <div class="card-title" style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
-        <span style="font-size:20px;">ðŸ“‹</span>
-        <span>Conclusiones TÃ¡cticas & Claves de Scouting</span>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:10px;">
-        ${conclusiones.map(function(c){
-          return `<div style="padding:10px 14px;background:var(--surface);border-radius:8px;border:1px solid var(--border);font-size:12.5px;color:var(--text);line-height:1.5;">${c}</div>`;
-        }).join('')}
-      </div>
-    </div>
-
-    <!-- SECCIÃ“N DE RENDIMIENTO OFENSIVO Y DEFENSIVO POR MINUTOS -->
-    <div class="grid-2 mb-16">
-      
-      <!-- GOLES A FAVOR Y TRAMOS -->
-      <div class="card">
-        <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-          <span>âš½ Goles a Favor (${totalGF})</span>
-          <span class="badge badge-success" style="font-size:11px;font-weight:800;">${totalPJ > 0 ? (totalGF / totalPJ).toFixed(1) : 0} goles/p</span>
+      <!-- CONCLUSIONES TÃCTICAS (MODO LISTA) -->
+      <div class="card mb-16" style="border:1.5px solid var(--primary);border-radius:14px;background:var(--surface2);">
+        <div class="card-title" style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+          <span style="font-size:20px;">\ud83d\udccb</span>
+          <span>Conclusiones T\u00e1cticas & Claves de Scouting</span>
         </div>
-        <div style="font-size:11.5px;color:var(--text-muted);margin-bottom:10px;">Â¿En quÃ© minutos suelen marcar goles?</div>
-        <div style="display:flex;flex-direction:column;gap:8px;">
-          ${Object.keys(gfSlots).map(function(slot){
-            var count = gfSlots[slot];
-            var pct = totalGF > 0 ? Math.round((count / totalGF) * 100) : 0;
-            var isMax = slot === maxGfSlot && count > 0;
-            return `
-              <div>
-                <div style="display:flex;justify-content:space-between;font-size:11px;font-weight:700;margin-bottom:3px;">
-                  <span>â±ï¸ ${slot}' ${isMax ? 'ðŸ”¥ <strong style="color:var(--success)">Tramo mÃ¡s letal</strong>' : ''}</span>
-                  <span><strong>${count}</strong> goles (${pct}%)</span>
-                </div>
-                <div style="height:7px;background:var(--surface3);border-radius:4px;overflow:hidden;">
-                  <div style="height:100%;width:${pct}%;background:${isMax ? 'var(--success)' : 'var(--primary)'};border-radius:4px;"></div>
-                </div>
-              </div>
-            `;
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          ${conclusiones.map(function(c){
+            return `<div style="padding:10px 14px;background:var(--surface);border-radius:8px;border:1px solid var(--border);font-size:12.5px;color:var(--text);line-height:1.5;">${c}</div>`;
           }).join('')}
         </div>
       </div>
 
-      <!-- GOLES EN CONTRA Y TRAMOS -->
-      <div class="card">
-        <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-          <span>ðŸ›¡ï¸ Goles en Contra (${totalGC})</span>
-          <span class="badge ${totalGC > totalGF ? 'badge-error' : 'badge-warning'}" style="font-size:11px;font-weight:800;">${totalPJ > 0 ? (totalGC / totalPJ).toFixed(1) : 0} goles/p</span>
-        </div>
-        <div style="font-size:11.5px;color:var(--text-muted);margin-bottom:10px;">Â¿En quÃ© minutos suelen encajar goles?</div>
-        <div style="display:flex;flex-direction:column;gap:8px;">
-          ${Object.keys(gcSlots).map(function(slot){
-            var count = gcSlots[slot];
-            var pct = totalGC > 0 ? Math.round((count / totalGC) * 100) : 0;
-            var isMax = slot === maxGcSlot && count > 0;
-            return `
-              <div>
-                <div style="display:flex;justify-content:space-between;font-size:11px;font-weight:700;margin-bottom:3px;">
-                  <span>â±ï¸ ${slot}' ${isMax ? 'âš ï¸ <strong style="color:var(--red)">Tramo mÃ¡s vulnerable</strong>' : ''}</span>
-                  <span><strong>${count}</strong> goles (${pct}%)</span>
-                </div>
-                <div style="height:7px;background:var(--surface3);border-radius:4px;overflow:hidden;">
-                  <div style="height:100%;width:${pct}%;background:${isMax ? 'var(--red)' : 'var(--warning)'};border-radius:4px;"></div>
-                </div>
-              </div>
-            `;
-          }).join('')}
-        </div>
-      </div>
-
-    </div>
-
-    <!-- TOP 4 GOLEADORES Y TARJETAS/DISCIPLINA -->
-    <div class="grid-2 mb-16">
-      
-      <!-- TOP 4 GOLEADORES (CON DORSALES SIEMPRE) -->
-      <div class="card">
-        <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-          <span>ðŸ‘Ÿ Top 4 Goleadores</span>
-          <span style="font-size:11px;color:var(--text-dim);">${top4Goleadores.length} futbolistas</span>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:8px;">
-          ${top4Goleadores.length ? top4Goleadores.map(function(g, idx){
-            return `
-              <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--surface2);border-radius:8px;border:1px solid var(--border);">
-                <div style="display:flex;align-items:center;gap:8px;">
-                  <span class="badge" style="background:var(--surface3);font-size:10px;font-weight:900;min-width:28px;text-align:center;">${g.dorsal}</span>
-                  <div>
-                    <strong style="font-size:12.5px;color:var(--text);">${g.nombre}</strong>
-                    ${g.minutos.length ? `<div style="font-size:10px;color:var(--text-dim);">Minutos: ${g.minutos.join(', ')}</div>` : ''}
-                  </div>
-                </div>
-                <span class="badge badge-success" style="font-size:11px;font-weight:900;">${g.goles} âš½</span>
-              </div>
-            `;
-          }).join('') : '<div style="color:var(--text-dim);font-size:12px;text-align:center;padding:12px;">Sin goles registrados todavÃ­a en actas de liga.</div>'}
-        </div>
-      </div>
-
-      <!-- DISCIPLINA Y TARJETAS (CON DORSALES SIEMPRE) -->
-      <div class="card">
-        <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-          <span>ðŸŸ¨ Disciplina y Amonestaciones</span>
-          <span style="font-size:11.5px;font-weight:800;">${totalAmarillas} ðŸŸ¨ \u00b7 ${totalRojas} ðŸŸ¥</span>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:8px;">
-          ${jugadoresTarjetas.length ? jugadoresTarjetas.map(function(t){
-            return `
-              <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--surface2);border-radius:8px;border:1px solid var(--border);">
-                <div style="display:flex;align-items:center;gap:8px;">
-                  <span class="badge" style="background:var(--surface3);font-size:10px;font-weight:900;min-width:28px;text-align:center;">${t.dorsal}</span>
-                  <div>
-                    <strong style="font-size:12.5px;color:var(--text);">${t.nombre}</strong>
-                    ${t.minutos.length ? `<div style="font-size:10px;color:var(--text-dim);">${t.minutos.join(' \u00b7 ')}</div>` : ''}
-                  </div>
-                </div>
-                <div style="display:flex;gap:4px;">
-                  ${t.amarillas > 0 ? `<span class="badge badge-card-yellow" style="font-size:10px;font-weight:900;">${t.amarillas} ðŸŸ¨</span>` : ''}
-                  ${t.rojas > 0 ? `<span class="badge badge-card-red" style="font-size:10px;font-weight:900;">${t.rojas} ðŸŸ¥</span>` : ''}
-                </div>
-              </div>
-            `;
-          }).join('') : '<div style="color:var(--text-dim);font-size:12px;text-align:center;padding:12px;">Sin tarjetas registradas en actas oficiales.</div>'}
-        </div>
-      </div>
-
-    </div>
-
-    <!-- LOCAL VS VISITANTE Y RACHA DE PARTIDOS -->
-    <div class="grid-2 mb-16">
-      
-      <!-- DESGLOSE LOCAL VS VISITANTE -->
-      <div class="card">
-        <div class="card-title" style="margin-bottom:12px;">ðŸŸï¸ Rendimiento Local vs Visitante</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:center;">
-          <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px;">
-            <div style="font-size:11px;font-weight:800;color:var(--text-muted);text-transform:uppercase;">En Casa (Local)</div>
-            <div style="font-size:22px;font-weight:900;color:var(--text);margin:4px 0;">${statsLocal.v}V <span style="font-size:15px;color:var(--text-dim);">${statsLocal.e}E ${statsLocal.d}D</span></div>
-            <div style="font-size:11px;color:var(--text-dim);">PJ: ${statsLocal.pj} \u00b7 Pts: ${statsLocal.pts}</div>
-            <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">GF: ${statsLocal.gf} - GC: ${statsLocal.gc}</div>
+      <!-- SECCIÃ“N DE RENDIMIENTO OFENSIVO Y DEFENSIVO POR MINUTOS -->
+      <div class="grid-2 mb-16">
+        
+        <!-- GOLES A FAVOR Y TRAMOS -->
+        <div class="card">
+          <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+            <span>\u26bd Goles a Favor (${totalGF})</span>
+            <span class="badge badge-success" style="font-size:11px;font-weight:800;">${totalPJ > 0 ? (totalGF / totalPJ).toFixed(1) : 0} goles/p</span>
           </div>
-          <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px;">
-            <div style="font-size:11px;font-weight:800;color:var(--text-muted);text-transform:uppercase;">Fuera (Visitante)</div>
-            <div style="font-size:22px;font-weight:900;color:var(--text);margin:4px 0;">${statsVis.v}V <span style="font-size:15px;color:var(--text-dim);">${statsVis.e}E ${statsVis.d}D</span></div>
-            <div style="font-size:11px;color:var(--text-dim);">PJ: ${statsVis.pj} \u00b7 Pts: ${statsVis.pts}</div>
-            <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">GF: ${statsVis.gf} - GC: ${statsVis.gc}</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- RACHA DE PARTIDOS RECIENTES -->
-      <div class="card">
-        <div class="card-title" style="margin-bottom:12px;">âš¡ Racha y Ãšltimos Partidos</div>
-        <div style="display:flex;flex-direction:column;gap:6px;">
-          ${playedMatches.length ? playedMatches.slice(-5).map(function(m){
-            var isV = m.resultado === 'Victoria';
-            var isD = m.resultado === 'Derrota';
-            var badgeCls = isV ? 'badge-success' : (isD ? 'badge-error' : 'badge-warning');
-            var resLetter = isV ? 'V' : (isD ? 'D' : 'E');
-
-            return `
-              <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 10px;background:var(--surface2);border-radius:6px;border:1px solid var(--border);font-size:11.5px;">
-                <div style="display:flex;align-items:center;gap:6px;">
-                  <span class="badge ${badgeCls}" style="font-size:10px;font-weight:900;min-width:20px;text-align:center;">${resLetter}</span>
-                  <span style="font-weight:700;color:var(--text);">J${m.jornada}</span>
-                  <span style="color:var(--text-dim);">vs ${m.rival} (${m.isLocal ? 'C' : 'F'})</span>
-                </div>
-                <div style="display:flex;align-items:center;gap:8px;">
-                  <strong style="font-size:12px;color:var(--text);">${m.gf} - ${m.gc}</strong>
-                  ${m.matchObj && m.matchObj.codActa ? `<button class="btn btn-ghost btn-xs" onclick="openFichaActaOficial(${m.jornada}, '${(m.matchObj.local||'').replace(/'/g,"\\'")}', '${(m.matchObj.visitante||'').replace(/'/g,"\\'")}', '${m.matchObj.enlaceActa||''}', '${m.matchObj.codActa||''}')" style="font-size:9.5px;padding:2px 6px;">ðŸ“„ Acta</button>` : ''}
-                </div>
-              </div>
-            `;
-          }).join('') : '<div style="color:var(--text-dim);font-size:12px;text-align:center;padding:12px;">Sin partidos disputados en liga todavÃ­a.</div>'}
-        </div>
-      </div>
-
-    </div>
-
-    <!-- TABLA DE PLANTILLA COMPLETA DETECTADA (CON DORSALES SIEMPRE) -->
-    <div class="card">
-      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
-        <div>
-          <div class="card-title" style="margin-bottom:2px;">ðŸ‘¥ Plantilla Oficial Detectada en Actas (${plantillaList.length} futbolistas)</div>
-          <div style="font-size:11px;color:var(--text-muted);">Jugadores alineados y convocados por ${formatCleanTeamName(activeRival)} esta temporada</div>
-        </div>
-      </div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th style="width:50px;text-align:center;">#</th>
-              <th>Jugador</th>
-              <th style="text-align:center;">PJ</th>
-              <th style="text-align:center;">Titular</th>
-              <th style="text-align:center;">Suplente</th>
-              <th style="text-align:center;">Goles âš½</th>
-              <th style="text-align:center;">Tarjetas ðŸŸ¨/ðŸŸ¥</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${plantillaList.length ? plantillaList.map(function(j){
+          <div style="font-size:11.5px;color:var(--text-muted);margin-bottom:10px;">\u00bfEn qu\u00e9 minutos suelen marcar goles?</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            ${Object.keys(gfSlots).map(function(slot){
+              var count = gfSlots[slot];
+              var pct = totalGF > 0 ? Math.round((count / totalGF) * 100) : 0;
+              var isMax = slot === maxGfSlot && count > 0;
               return `
-                <tr>
-                  <td style="text-align:center;"><span class="badge" style="background:var(--surface3);font-size:10.5px;font-weight:900;">${j.dorsal}</span></td>
-                  <td><strong style="font-size:12.5px;color:var(--text);">${j.nombre}</strong></td>
-                  <td style="text-align:center;font-weight:700;">${j.pj}</td>
-                  <td style="text-align:center;color:var(--text-muted);">${j.titular}</td>
-                  <td style="text-align:center;color:var(--text-muted);">${j.suplente}</td>
-                  <td style="text-align:center;">${j.goles > 0 ? `<span class="badge badge-success" style="font-weight:900;">${j.goles} âš½</span>` : '-'}</td>
-                  <td style="text-align:center;">
-                    ${(j.amarillas > 0 || j.rojas > 0) ? `
-                      <span style="font-weight:800;">
-                        ${j.amarillas > 0 ? `<span style="color:var(--warning);">${j.amarillas}ðŸŸ¨</span> ` : ''}
-                        ${j.rojas > 0 ? `<span style="color:var(--red);">${j.rojas}ðŸŸ¥</span>` : ''}
-                      </span>
-                    ` : '-'}
-                  </td>
-                </tr>
+                <div>
+                  <div style="display:flex;justify-content:space-between;font-size:11px;font-weight:700;margin-bottom:3px;">
+                    <span>\u23f1\ufe0f ${slot}' ${isMax ? '\ud83d\udd25 <strong style="color:var(--success)">Tramo m\u00e1s letal</strong>' : ''}</span>
+                    <span><strong>${count}</strong> goles (${pct}%)</span>
+                  </div>
+                  <div style="height:7px;background:var(--surface3);border-radius:4px;overflow:hidden;">
+                    <div style="height:100%;width:${pct}%;background:${isMax ? 'var(--success)' : 'var(--primary)'};border-radius:4px;"></div>
+                  </div>
+                </div>
               `;
-            }).join('') : `<tr><td colspan="7" style="text-align:center;color:var(--text-dim);padding:16px;">Sin datos de plantilla registrados en actas.</td></tr>`}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  `;
+            }).join('')}
+          </div>
+        </div>
 
-  container.innerHTML = html;
+        <!-- GOLES EN CONTRA Y TRAMOS -->
+        <div class="card">
+          <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+            <span>\ud83d\udee1\ufe0f Goles en Contra (${totalGC})</span>
+            <span class="badge ${totalGC > totalGF ? 'badge-error' : 'badge-warning'}" style="font-size:11px;font-weight:800;">${totalPJ > 0 ? (totalGC / totalPJ).toFixed(1) : 0} goles/p</span>
+          </div>
+          <div style="font-size:11.5px;color:var(--text-muted);margin-bottom:10px;">\u00bfEn qu\u00e9 minutos suelen encajar goles?</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            ${Object.keys(gcSlots).map(function(slot){
+              var count = gcSlots[slot];
+              var pct = totalGC > 0 ? Math.round((count / totalGC) * 100) : 0;
+              var isMax = slot === maxGcSlot && count > 0;
+              return `
+                <div>
+                  <div style="display:flex;justify-content:space-between;font-size:11px;font-weight:700;margin-bottom:3px;">
+                    <span>\u23f1\ufe0f ${slot}' ${isMax ? '\u26a0\ufe0f <strong style="color:var(--red)">Tramo m\u00e1s vulnerable</strong>' : ''}</span>
+                    <span><strong>${count}</strong> goles (${pct}%)</span>
+                  </div>
+                  <div style="height:7px;background:var(--surface3);border-radius:4px;overflow:hidden;">
+                    <div style="height:100%;width:${pct}%;background:${isMax ? 'var(--red)' : 'var(--warning)'};border-radius:4px;"></div>
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </div>
+
+      </div>
+
+      <!-- TOP 4 GOLEADORES Y TARJETAS/DISCIPLINA -->
+      <div class="grid-2 mb-16">
+        
+        <!-- TOP 4 GOLEADORES (CON DORSALES SIEMPRE) -->
+        <div class="card">
+          <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+            <span>\ud83d\udc5f Top 4 Goleadores</span>
+            <span style="font-size:11px;color:var(--text-dim);">${top4Goleadores.length} futbolistas</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            ${top4Goleadores.length ? top4Goleadores.map(function(g, idx){
+              return `
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--surface2);border-radius:8px;border:1px solid var(--border);">
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <span class="badge" style="background:var(--surface3);font-size:10px;font-weight:900;min-width:28px;text-align:center;">${g.dorsal}</span>
+                    <div>
+                      <strong style="font-size:12.5px;color:var(--text);">${g.nombre}</strong>
+                      ${g.minutos.length ? `<div style="font-size:10px;color:var(--text-dim);">Minutos: ${g.minutos.join(', ')}</div>` : ''}
+                    </div>
+                  </div>
+                  <span class="badge badge-success" style="font-size:11px;font-weight:900;">${g.goles} \u26bd</span>
+                </div>
+              `;
+            }).join('') : '<div style="color:var(--text-dim);font-size:12px;text-align:center;padding:12px;">Sin goles individuales registrados en actas de liga.</div>'}
+          </div>
+        </div>
+
+        <!-- DISCIPLINA Y TARJETAS (CON DORSALES SIEMPRE) -->
+        <div class="card">
+          <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+            <span>\ud83d\udfe8 Disciplina y Amonestaciones</span>
+            <span style="font-size:11.5px;font-weight:800;">${totalAmarillas} \ud83d\udfe8 \u00b7 ${totalRojas} \ud83d\udfe5</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            ${jugadoresTarjetas.length ? jugadoresTarjetas.map(function(t){
+              return `
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--surface2);border-radius:8px;border:1px solid var(--border);">
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <span class="badge" style="background:var(--surface3);font-size:10px;font-weight:900;min-width:28px;text-align:center;">${t.dorsal}</span>
+                    <div>
+                      <strong style="font-size:12.5px;color:var(--text);">${t.nombre}</strong>
+                      ${t.minutos.length ? `<div style="font-size:10px;color:var(--text-dim);">${t.minutos.join(' \u00b7 ')}</div>` : ''}
+                    </div>
+                  </div>
+                  <div style="display:flex;gap:4px;">
+                    ${t.amarillas > 0 ? `<span class="badge badge-card-yellow" style="font-size:10px;font-weight:900;">${t.amarillas} \ud83d\udfe8</span>` : ''}
+                    ${t.rojas > 0 ? `<span class="badge badge-card-red" style="font-size:10px;font-weight:900;">${t.rojas} \ud83d\udfe5</span>` : ''}
+                  </div>
+                </div>
+              `;
+            }).join('') : '<div style="color:var(--text-dim);font-size:12px;text-align:center;padding:12px;">Sin tarjetas registradas en actas oficiales.</div>'}
+          </div>
+        </div>
+
+      </div>
+
+      <!-- LOCAL VS VISITANTE Y RACHA DE PARTIDOS -->
+      <div class="grid-2 mb-16">
+        
+        <!-- DESGLOSE LOCAL VS VISITANTE -->
+        <div class="card">
+          <div class="card-title" style="margin-bottom:12px;">\ud83c\udfdf\ufe0f Rendimiento Local vs Visitante</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:center;">
+            <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px;">
+              <div style="font-size:11px;font-weight:800;color:var(--text-muted);text-transform:uppercase;">En Casa (Local)</div>
+              <div style="font-size:22px;font-weight:900;color:var(--text);margin:4px 0;">${statsLocal.v}V <span style="font-size:15px;color:var(--text-dim);">${statsLocal.e}E ${statsLocal.d}D</span></div>
+              <div style="font-size:11px;color:var(--text-dim);">PJ: ${statsLocal.pj} \u00b7 Pts: ${statsLocal.pts}</div>
+              <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">GF: ${statsLocal.gf} - GC: ${statsLocal.gc}</div>
+            </div>
+            <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px;">
+              <div style="font-size:11px;font-weight:800;color:var(--text-muted);text-transform:uppercase;">Fuera (Visitante)</div>
+              <div style="font-size:22px;font-weight:900;color:var(--text);margin:4px 0;">${statsVis.v}V <span style="font-size:15px;color:var(--text-dim);">${statsVis.e}E ${statsVis.d}D</span></div>
+              <div style="font-size:11px;color:var(--text-dim);">PJ: ${statsVis.pj} \u00b7 Pts: ${statsVis.pts}</div>
+              <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">GF: ${statsVis.gf} - GC: ${statsVis.gc}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RACHA DE PARTIDOS RECIENTES -->
+        <div class="card">
+          <div class="card-title" style="margin-bottom:12px;">\u26a1 Racha y \u00daltimos Partidos</div>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            ${playedMatches.length ? playedMatches.slice(-5).map(function(m){
+              var isV = m.resultado === 'Victoria';
+              var isD = m.resultado === 'Derrota';
+              var badgeCls = isV ? 'badge-success' : (isD ? 'badge-error' : 'badge-warning');
+              var resLetter = isV ? 'V' : (isD ? 'D' : 'E');
+
+              return `
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 10px;background:var(--surface2);border-radius:6px;border:1px solid var(--border);font-size:11.5px;">
+                  <div style="display:flex;align-items:center;gap:6px;">
+                    <span class="badge ${badgeCls}" style="font-size:10px;font-weight:900;min-width:20px;text-align:center;">${resLetter}</span>
+                    <span style="font-weight:700;color:var(--text);">J${m.jornada}</span>
+                    <span style="color:var(--text-dim);">vs ${m.rival} (${m.isLocal ? 'C' : 'F'})</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <strong style="font-size:12px;color:var(--text);">${m.gf} - ${m.gc}</strong>
+                    ${m.matchObj && m.matchObj.codActa ? `<button class="btn btn-ghost btn-xs" onclick="openFichaActaOficial(${m.jornada}, '${(m.matchObj.local||'').replace(/'/g,"\\'")}', '${(m.matchObj.visitante||'').replace(/'/g,"\\'")}', '${m.matchObj.enlaceActa||''}', '${m.matchObj.codActa||''}')" style="font-size:9.5px;padding:2px 6px;">\ud83d\udcc4 Acta</button>` : ''}
+                  </div>
+                </div>
+              `;
+            }).join('') : '<div style="color:var(--text-dim);font-size:12px;text-align:center;padding:12px;">Sin partidos disputados en liga todav\u00eda.</div>'}
+          </div>
+        </div>
+
+      </div>
+
+      <!-- TABLA DE PLANTILLA COMPLETA DETECTADA (CON DORSALES SIEMPRE) -->
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
+          <div>
+            <div class="card-title" style="margin-bottom:2px;">\ud83d\udc65 Plantilla Oficial Detectada en Actas (${plantillaList.length} futbolistas)</div>
+            <div style="font-size:11px;color:var(--text-muted);">Jugadores alineados y convocados por ${formatCleanTeamName(activeRival)} esta temporada</div>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:50px;text-align:center;">#</th>
+                <th>Jugador</th>
+                <th style="text-align:center;">PJ</th>
+                <th style="text-align:center;">Titular</th>
+                <th style="text-align:center;">Suplente</th>
+                <th style="text-align:center;">Goles \u26bd</th>
+                <th style="text-align:center;">Tarjetas \ud83d\udfe8/\ud83d\udfe5</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${plantillaList.length ? plantillaList.map(function(j){
+                return `
+                  <tr>
+                    <td style="text-align:center;"><span class="badge" style="background:var(--surface3);font-size:10.5px;font-weight:900;">${j.dorsal}</span></td>
+                    <td><strong style="font-size:12.5px;color:var(--text);">${j.nombre}</strong></td>
+                    <td style="text-align:center;font-weight:700;">${j.pj}</td>
+                    <td style="text-align:center;color:var(--text-muted);">${j.titular}</td>
+                    <td style="text-align:center;color:var(--text-muted);">${j.suplente}</td>
+                    <td style="text-align:center;">${j.goles > 0 ? `<span class="badge badge-success" style="font-weight:900;">${j.goles} \u26bd</span>` : '-'}</td>
+                    <td style="text-align:center;">
+                      ${(j.amarillas > 0 || j.rojas > 0) ? `
+                        <span style="font-weight:800;">
+                          ${j.amarillas > 0 ? `<span style="color:var(--warning);">${j.amarillas}\ud83d\udfe8</span> ` : ''}
+                          ${j.rojas > 0 ? `<span style="color:var(--red);">${j.rojas}\ud83d\udfe5</span>` : ''}
+                        </span>
+                      ` : '-'}
+                    </td>
+                  </tr>
+                `;
+              }).join('') : `<tr><td colspan="7" style="text-align:center;color:var(--text-dim);padding:16px;">Sin datos de plantilla registrados en actas.</td></tr>`}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+
+    container.innerHTML = html;
+  } catch(err) {
+    console.error("Error in renderAnalisisProximoRival:", err);
+    container.innerHTML = `<div class="card" style="padding:24px;text-align:center;"><div style="font-size:18px;font-weight:800;color:var(--red);margin-bottom:8px;">\u26a0\ufe0f No se pudo cargar el an\u00e1lisis del rival</div><div style="font-size:12px;color:var(--text-muted);">${err.message || err}</div></div>`;
+  }
 }
 window.renderAnalisisProximoRival = renderAnalisisProximoRival;
 window.getNextUpcomingOpponent = getNextUpcomingOpponent;
@@ -16564,6 +16671,8 @@ function initApp(){
     if(savedLigaSubTab) ligaSubTabActive = savedLigaSubTab;
     const savedCopaSubTab = localStorage.getItem('dorneda_active_copa_subtab');
     if(savedCopaSubTab) copaSubTabActive = savedCopaSubTab;
+    const savedAnalisisTab = localStorage.getItem('dorneda_active_analisis_tab');
+    if(savedAnalisisTab) analisisTabActive = savedAnalisisTab;
   } catch(e){}
 
   // Detect section from URL hash or localStorage
@@ -16574,6 +16683,9 @@ function initApp(){
   if(rawHash){
     if(validSections.includes(rawHash)){
       initialSection = rawHash;
+    } else if(rawHash === 'proximo-rival' || rawHash === 'proximorival' || rawHash === 'rival' || rawHash === 'scouting'){
+      initialSection = 'analisis';
+      analisisTabActive = 'proximoRival';
     } else if(rawHash === 'copa' || rawHash === 'copa-cuadro' || rawHash === 'cuadro' || rawHash === 'cuadro-copa'){
       initialSection = 'clasificacion';
       compCategoryActive = 'copa';
@@ -16621,6 +16733,8 @@ function initApp(){
     showCompCategory(compCategoryActive);
   } else if(initialSection === 'economia'){
     showEconTab(currentEconTab);
+  } else if(initialSection === 'analisis'){
+    showAnalisisTab(analisisTabActive);
   }
 
   // Handle browser back/forward buttons
