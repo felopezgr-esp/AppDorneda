@@ -7340,6 +7340,31 @@ function normalizeName(n){
 }
 window.normalizeName = normalizeName;
 
+function isSamePlayer(p1Name, p1Dorsal, p2Name, p2Dorsal) {
+  if (p1Dorsal && p2Dorsal && parseInt(p1Dorsal, 10) > 0 && parseInt(p1Dorsal, 10) === parseInt(p2Dorsal, 10)) {
+    return true;
+  }
+  var n1 = normalizeName(p1Name);
+  var n2 = normalizeName(p2Name);
+  if (!n1 || !n2) return false;
+  if (n1 === n2 || n1.indexOf(n2) !== -1 || n2.indexOf(n1) !== -1) return true;
+  var parts1 = n1.split(/[\s,]+/).filter(function(w){ return w.length > 2; });
+  var parts2 = n2.split(/[\s,]+/).filter(function(w){ return w.length > 2; });
+  for (var i = 0; i < parts1.length; i++) {
+    for (var j = 0; j < parts2.length; j++) {
+      if (parts1[i] === parts2[j]) return true;
+    }
+  }
+  return false;
+}
+window.isSamePlayer = isSamePlayer;
+
+function getCanonicalPlayerName(name, dorsal) {
+  if (!name && !dorsal) return '';
+  return normalizeName(name) + (dorsal ? '_' + dorsal : '');
+}
+window.getCanonicalPlayerName = getCanonicalPlayerName;
+
 function isStaff(x){
   if(!x) return false;
   if(x.rol === 'Entrenador' || x.rol === 'Cuerpo Técnico') return true;
@@ -8077,6 +8102,50 @@ function validateAndMigrateDB(dbObj){
           c32.rivalAlineacion = JSON.parse(JSON.stringify(DEFAULT_DATA.partidos[4].rivalAlineacion));
           modified = true;
         }
+      }
+
+            // Actualizar J1 al resultado oficial jugado (2-3) con todos los datos del acta y tarjetas
+      var j1 = dbObj.partidos.find(function(p){ 
+        return p && (p.codigo === 'J1' || (p.jornada === 1 && (p.competicion && p.competicion.toLowerCase().indexOf('primera') !== -1))); 
+      });
+      if(j1){
+        var defJ1 = DEFAULT_DATA.partidos[5]; // id: 6, codigo: 'J1'
+        if(defJ1){
+          if(!j1.tarjetasDetalle || !j1.tarjetasDetalle.length){
+            j1.tarjetasDetalle = JSON.parse(JSON.stringify(defJ1.tarjetasDetalle));
+            modified = true;
+          }
+          if(!j1.golesDetalle || !j1.golesDetalle.length){
+            j1.golesDetalle = JSON.parse(JSON.stringify(defJ1.golesDetalle));
+            modified = true;
+          }
+          if(!j1.convocados || j1.convocados.length < 10){
+            j1.convocados = JSON.parse(JSON.stringify(defJ1.convocados));
+            modified = true;
+          }
+          if(!j1.enlaceActa && defJ1.enlaceActa){
+            j1.enlaceActa = defJ1.enlaceActa;
+            j1.codActa = defJ1.codActa;
+            modified = true;
+          }
+          if(!j1.arbitro && defJ1.arbitro){
+            j1.arbitro = defJ1.arbitro;
+            modified = true;
+          }
+        }
+      }
+
+      // Sincronizar tarjetasDetalle para cualquier partido jugado de DEFAULT_DATA si falta en dbObj.partidos
+      if(dbObj.partidos && DEFAULT_DATA.partidos){
+        DEFAULT_DATA.partidos.forEach(function(dp){
+          if(dp.tarjetasDetalle && dp.tarjetasDetalle.length){
+            var target = dbObj.partidos.find(function(p){ return p.codigo === dp.codigo || p.id === dp.id; });
+            if(target && (!target.tarjetasDetalle || !target.tarjetasDetalle.length)){
+              target.tarjetasDetalle = JSON.parse(JSON.stringify(dp.tarjetasDetalle));
+              modified = true;
+            }
+          }
+        });
       }
 
       var calC32 = dbObj.calendario && dbObj.calendario.find(function(c){ return c && (c.codigo === 'C_32avos' || (c.rival && c.rival.indexOf('Narahio') !== -1 && c.id === 5)); });
@@ -13471,6 +13540,26 @@ function renderJornadasWidget(){
 function showDetallePartido(id){
   const p = db.partidos.find(x => x.id === id);
   if(!p) return;
+
+  // Fallbacks de datos completos (tarjetas, goles, Ã¡rbitro) si faltan en el estado local de db.partidos
+  if(DEFAULT_DATA.partidos){
+    const defP = DEFAULT_DATA.partidos.find(x => x.id === p.id || x.codigo === p.codigo);
+    if(defP){
+      if((!p.tarjetasDetalle || !p.tarjetasDetalle.length) && defP.tarjetasDetalle && defP.tarjetasDetalle.length){
+        p.tarjetasDetalle = JSON.parse(JSON.stringify(defP.tarjetasDetalle));
+      }
+      if((!p.golesDetalle || !p.golesDetalle.length) && defP.golesDetalle && defP.golesDetalle.length){
+        p.golesDetalle = JSON.parse(JSON.stringify(defP.golesDetalle));
+      }
+      if((!p.arbitro || p.arbitro === 'Sin registrar') && defP.arbitro){
+        p.arbitro = defP.arbitro;
+      }
+      if((!p.enlaceActa) && defP.enlaceActa){
+        p.enlaceActa = defP.enlaceActa;
+        p.codActa = defP.codActa;
+      }
+    }
+  }
   closeModal('modalJugador');
   const isPlayed = p.resultado && p.gf !== null && p.gf !== undefined;
   const isHome = p.condicion === 'Local';
@@ -13514,7 +13603,7 @@ function showDetallePartido(id){
       <div class="detail-item"><div class="detail-key">📅 Fecha</div><div class="detail-val">${p.fecha || '--'}</div></div>
       <div class="detail-item"><div class="detail-key">⏰ Horarios</div><div class="detail-val">Quedada: <strong>${p.horaQuedada || '--'}</strong> | Partido: <strong>${p.horaPartido || '--'}</strong></div></div>
       <div class="detail-item"><div class="detail-key">📍 Campo y Lugar</div><div class="detail-val">${p.campo || (isHome ? 'A Marola' : '--')} (${p.condicion || '--'})</div></div>
-      <div class="detail-item"><div class="detail-key">👤 Árbitro</div><div class="detail-val">${p.arbitro || 'Sin registrar'}</div></div>
+      <div class="detail-item"><div class="detail-key">👤 Árbitro</div><div class="detail-val">${formatOfficialPersonName(p.arbitro) || 'Sin registrar'}</div></div>
       <div class="detail-item"><div class="detail-key">👕 Equipación Dorneda</div><div class="detail-val">${p.equipacionDorneda || 'Blanca / Negro / Blancas'}</div></div>
       <div class="detail-item"><div class="detail-key">👔 Cuerpo Técnico / Kata</div><div class="detail-val">${p.cuerpoTecnico || (p.kataAsistio ? 'Fernando "Kata" Gundín (Presente)' : 'Sin registrar')}</div></div>
     </div>
@@ -13553,7 +13642,7 @@ function showDetallePartido(id){
                   </span>
                   <span style="font-size:16px">⚽</span>
                   <div>
-                    <strong style="font-size:13px;color:var(--text)">${g.jugador || 'Gol'}</strong>
+                    <strong style="font-size:13px;color:var(--text)">${formatOfficialPersonName(g.jugador) || 'Gol'}</strong>
                     ${g.dorsal ? `<span style="font-size:11px;color:var(--text-muted);margin-left:4px">(#${g.dorsal})</span>` : ''}
                     <div style="font-size:10.5px;color:var(--text-dim)">${g.equipo || ''} ${g.tipo ? '· ' + g.tipo : ''}</div>
                   </div>
@@ -13588,7 +13677,7 @@ function showDetallePartido(id){
                   </span>
                   <span class="soccer-card ${cardClass}" title="${tipoLabel}"></span>
                   <div>
-                    <strong style="font-size:13px;color:var(--text)">${t.jugador}</strong>
+                    <strong style="font-size:13px;color:var(--text)">${formatOfficialPersonName(t.jugador)}</strong>
                     ${t.dorsal ? `<span style="font-size:11px;color:var(--text-muted);margin-left:4px">(#${t.dorsal})</span>` : ''}
                     <div style="font-size:10.5px;color:var(--text-dim)">${t.equipo || ''} · ${tipoLabel}</div>
                   </div>
@@ -13610,8 +13699,8 @@ function showDetallePartido(id){
         <div class="detail-conv-col">
           <div class="detail-conv-header detail-titular-header">🟢 11 Titulares (${convTitulares.length})</div>
           ${convTitulares.length ? convTitulares.map(c => {
-            const playerGoals = (p.golesDetalle || []).filter(g => (g.equipo === 'Xuventude Dorneda' || (g.equipo && g.equipo.indexOf('Dorneda') !== -1)) && (getCanonicalPlayerName(g.jugador, g.dorsal) === getCanonicalPlayerName(c.nombre, c.dorsal)));
-            const playerCards = (p.tarjetasDetalle || []).filter(t => (t.equipo === 'Xuventude Dorneda' || (t.equipo && t.equipo.indexOf('Dorneda') !== -1)) && (getCanonicalPlayerName(t.jugador, t.dorsal) === getCanonicalPlayerName(c.nombre, c.dorsal)));
+            const playerGoals = (p.golesDetalle || []).filter(g => { const isDorn = !g.equipo || g.equipo === 'Xuventude Dorneda' || g.equipo.indexOf('Dorneda') !== -1; return isDorn && (isSamePlayer(g.jugador, g.dorsal, c.nombre, c.dorsal) || isSamePlayer(g.jugador, g.dorsal, c.nombreCompleto, c.dorsal)); });
+            const playerCards = (p.tarjetasDetalle || []).filter(t => { const isDorn = !t.equipo || t.equipo === 'Xuventude Dorneda' || t.equipo.indexOf('Dorneda') !== -1; return isDorn && (isSamePlayer(t.jugador, t.dorsal, c.nombre, c.dorsal) || isSamePlayer(t.jugador, t.dorsal, c.nombreCompleto, c.dorsal)); }); const yellowCards = playerCards.filter(t => t.tipo === 'Amarilla'); const redCards = playerCards.filter(t => t.tipo === 'Roja' || t.tipo === 'Doble Amarilla');
 
             return `
               <div class="detail-conv-row" style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-bottom:1px solid var(--border)">
@@ -13625,8 +13714,8 @@ function showDetallePartido(id){
                 <div style="display:flex;align-items:center;gap:6px">
                   ${c.goles > 0 ? `<span class="badge" style="background:rgba(22,163,74,0.15);color:var(--success);border:1px solid rgba(22,163,74,0.3);font-size:10.5px;font-weight:800">${c.goles} ⚽ ${playerGoals.length && playerGoals[0].minuto ? `(${playerGoals.map(g=>g.minuto+"'").join(', ')})` : ''}</span>` : ''}
                   ${c.asistencias > 0 ? `<span class="badge" style="background:rgba(37,99,235,0.15);color:var(--info);border:1px solid rgba(37,99,235,0.3);font-size:10.5px;font-weight:800">${c.asistencias} 🎯</span>` : ''}
-                  ${(c.amarillas > 0 || playerCards.some(t=>t.tipo==='Amarilla')) ? `<span class="badge badge-card-yellow" style="font-size:10px;font-weight:800;display:inline-flex;align-items:center;gap:3px;"><span class="soccer-card yellow" style="width:8px;height:11px;"></span> ${playerCards.filter(t=>t.tipo==='Amarilla').length && playerCards[0].minuto ? `(${playerCards[0].minuto}')` : ''}</span>` : ''}
-                  ${(c.rojas > 0 || playerCards.some(t=>t.tipo==='Roja')) ? `<span class="badge badge-card-red" style="font-size:10px;font-weight:800;display:inline-flex;align-items:center;gap:3px;"><span class="soccer-card red" style="width:8px;height:11px;"></span></span>` : ''}
+                  ${(c.amarillas > 0 || yellowCards.length > 0) ? `<span class="badge badge-card-yellow" style="font-size:10px;font-weight:800;display:inline-flex;align-items:center;gap:3px;"><span class="soccer-card yellow" style="width:8px;height:11px;"></span> ${yellowCards.length && yellowCards[0].minuto ? `(${yellowCards.map(t=>t.minuto+"'").join(', ')})` : ''}</span>` : ''}
+                  ${(c.rojas > 0 || redCards.length > 0) ? `<span class="badge badge-card-red" style="font-size:10px;font-weight:800;display:inline-flex;align-items:center;gap:3px;"><span class="soccer-card red" style="width:8px;height:11px;"></span> ${redCards.length && redCards[0].minuto ? `(${redCards.map(t=>t.minuto+"'").join(', ')})` : ''}</span>` : ''}
                 </div>
               </div>
             `;
@@ -13635,8 +13724,8 @@ function showDetallePartido(id){
         <div class="detail-conv-col">
           <div class="detail-conv-header detail-suplente-header">🔵 Suplentes (${convSuplentes.length})</div>
           ${convSuplentes.length ? convSuplentes.map(c => {
-            const playerGoals = (p.golesDetalle || []).filter(g => (g.equipo === 'Xuventude Dorneda' || (g.equipo && g.equipo.indexOf('Dorneda') !== -1)) && (getCanonicalPlayerName(g.jugador, g.dorsal) === getCanonicalPlayerName(c.nombre, c.dorsal)));
-            const playerCards = (p.tarjetasDetalle || []).filter(t => (t.equipo === 'Xuventude Dorneda' || (t.equipo && t.equipo.indexOf('Dorneda') !== -1)) && (getCanonicalPlayerName(t.jugador, t.dorsal) === getCanonicalPlayerName(c.nombre, c.dorsal)));
+            const playerGoals = (p.golesDetalle || []).filter(g => { const isDorn = !g.equipo || g.equipo === 'Xuventude Dorneda' || g.equipo.indexOf('Dorneda') !== -1; return isDorn && (isSamePlayer(g.jugador, g.dorsal, c.nombre, c.dorsal) || isSamePlayer(g.jugador, g.dorsal, c.nombreCompleto, c.dorsal)); });
+            const playerCards = (p.tarjetasDetalle || []).filter(t => { const isDorn = !t.equipo || t.equipo === 'Xuventude Dorneda' || t.equipo.indexOf('Dorneda') !== -1; return isDorn && (isSamePlayer(t.jugador, t.dorsal, c.nombre, c.dorsal) || isSamePlayer(t.jugador, t.dorsal, c.nombreCompleto, c.dorsal)); }); const yellowCards = playerCards.filter(t => t.tipo === 'Amarilla'); const redCards = playerCards.filter(t => t.tipo === 'Roja' || t.tipo === 'Doble Amarilla');
 
             return `
               <div class="detail-conv-row" style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-bottom:1px solid var(--border)">
@@ -13650,8 +13739,8 @@ function showDetallePartido(id){
                 <div style="display:flex;align-items:center;gap:6px">
                   ${c.goles > 0 ? `<span class="badge" style="background:rgba(22,163,74,0.15);color:var(--success);border:1px solid rgba(22,163,74,0.3);font-size:10.5px;font-weight:800">${c.goles} ⚽</span>` : ''}
                   ${c.asistencias > 0 ? `<span class="badge" style="background:rgba(37,99,235,0.15);color:var(--info);border:1px solid rgba(37,99,235,0.3);font-size:10.5px;font-weight:800">${c.asistencias} 🎯</span>` : ''}
-                  ${(c.amarillas > 0 || playerCards.some(t=>t.tipo==='Amarilla')) ? `<span class="badge badge-card-yellow" style="font-size:10px;font-weight:800;display:inline-flex;align-items:center;gap:3px;"><span class="soccer-card yellow" style="width:8px;height:11px;"></span> ${playerCards.filter(t=>t.tipo==='Amarilla').length && playerCards[0].minuto ? `(${playerCards[0].minuto}')` : ''}</span>` : ''}
-                  ${(c.rojas > 0 || playerCards.some(t=>t.tipo==='Roja')) ? `<span class="badge badge-card-red" style="font-size:10px;font-weight:800;display:inline-flex;align-items:center;gap:3px;"><span class="soccer-card red" style="width:8px;height:11px;"></span></span>` : ''}
+                  ${(c.amarillas > 0 || yellowCards.length > 0) ? `<span class="badge badge-card-yellow" style="font-size:10px;font-weight:800;display:inline-flex;align-items:center;gap:3px;"><span class="soccer-card yellow" style="width:8px;height:11px;"></span> ${yellowCards.length && yellowCards[0].minuto ? `(${yellowCards.map(t=>t.minuto+"'").join(', ')})` : ''}</span>` : ''}
+                  ${(c.rojas > 0 || redCards.length > 0) ? `<span class="badge badge-card-red" style="font-size:10px;font-weight:800;display:inline-flex;align-items:center;gap:3px;"><span class="soccer-card red" style="width:8px;height:11px;"></span> ${redCards.length && redCards[0].minuto ? `(${redCards.map(t=>t.minuto+"'").join(', ')})` : ''}</span>` : ''}
                 </div>
               </div>
             `;
