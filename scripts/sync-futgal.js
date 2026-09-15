@@ -225,6 +225,14 @@ async function runSync() {
     copa: []
   };
 
+  // 0. Inicializar sesión y cookies en la portada de FUTGAL
+  try {
+    console.log("Conectando con portada de FUTGAL para obtener sesión...");
+    await fetchWithCookies('https://www.futgal.es/');
+  } catch(e) {
+    console.warn("Aviso al obtener cookies de portada:", e.message);
+  }
+
   // 1. Sincronizar Liga (30 jornadas)
   const ligaConfig = FUTGAL_COMPETITIONS.find(c => c.tipo === 'liga');
   if (ligaConfig) {

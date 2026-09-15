@@ -1,4 +1,4 @@
-/**
+﻿/**
  * futgal-core.js - Motor centralizado de configuración, parsing y sincronización de FUTGAL
  * Xuventude Dorneda - Temporada 2026/27
  */
@@ -81,6 +81,23 @@ function isDornedaTeam(teamName, teamId) {
 /**
  * Decodifica un dígito o marcador ofuscado de Novanet/FUTGAL
  */
+function decodeNovanetString(str) {
+  if (!str) return '';
+  let s = String(str);
+  s = s.replace(/#[a-zA-Z0-9_-]+:(?:before|after)\s*\{\s*content:\s*["'](?:\\003)?(\d)["']\s*\}\s*;?\s*\d*/gi, '$1');
+  s = s.replace(/ntype\(["'][^"']*["'],\s*(\d+),\s*(\d+)[^)]*\)\s*;?\s*\d*/gi, function(match, nStr, iStr) {
+    const n = parseInt(nStr, 10);
+    const i = parseInt(iStr, 10);
+    const idx = (i * 10) + n;
+    if (idx >= 0 && idx < NOVANET_D_ARRAY.length) {
+      return String(NOVANET_D_ARRAY[idx]);
+    }
+    return '';
+  });
+  s = s.replace(/eval\(function[\s\S]*?\}\)\);?/gi, '');
+  return s;
+}
+
 function decodeFutgalScoreSpan(spanHtml, tableHtml) {
   if (!spanHtml) return null;
 
@@ -1108,20 +1125,22 @@ function parseFutgalActaHtml(input) {
   localTarjetas = parseCards(localHtml);
   visitTarjetas = parseCards(visitHtml);
 
-  // Parsear todos los goles con progresión y nombre limpio
+  // Parsear todos los goles con progresiÃ³n y nombre limpio
   const golesSection = str.match(/<div[^>]*class=["'][^"']*number[^"']*["'][^>]*>Goles<\/div>\s*<div[^>]*class=desc[^>]*>\s*<table[^>]*>([\s\S]*?)<\/table>/i);
   if (golesSection) {
     const trRegex = /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
     let trM;
     while ((trM = trRegex.exec(golesSection[1])) !== null) {
-      const row = trM[1];
+      let row = trM[1];
       if (row.includes('<th')) continue;
-      const minM = row.match(/\((\d+)[\'’]?\)/) || row.match(/(\d+)[\'’]/);
+      row = decodeNovanetString(row);
+      const minM = row.match(/\((\d+)[\'â€™]?\)/) || row.match(/(\d+)[\'â€™]/);
       const minuto = minM ? parseInt(minM[1], 10) : null;
       const isPenalti = /penalti|\(p\)/i.test(row);
+      const isOwnGoal = /propia puerta|\(p\.p\.\)|\(pp\)/i.test(row);
       const scoreProgM = row.match(/(\d+\s*-\s*\d+)/);
       const scoreProgression = scoreProgM ? scoreProgM[1].replace(/\s+/g, ' ') : '';
-      let textCell = clean(row.replace(/<[^>]*>/g, ' ').replace(/\(\d+[\'’]?\)/g, '').replace(/penalti|\(p\)/gi, '').replace(/\d+\s*-\s*\d+/, ''));
+      let textCell = clean(row.replace(/<[^>]*>/g, ' ').replace(/\(\d+[\'â€™]?\)/g, '').replace(/penalti|\(p\)|\(p\.p\.\)|\(pp\)/gi, '').replace(/\d+\s*-\s*\d+/, ''));
       textCell = textCell.replace(/^[\d\s\-:;]+/, '').trim();
       const rawScorer = formatOfficialPersonName(textCell);
       if (rawScorer) {
@@ -1130,7 +1149,8 @@ function parseFutgalActaHtml(input) {
           scoreProgression,
           rawScorer,
           penalti: isPenalti,
-          tipo: isPenalti ? 'Penalti' : 'Jugada'
+          propiaPuerta: isOwnGoal,
+          tipo: isPenalti ? 'Penalti' : (isOwnGoal ? 'Propia Puerta' : 'Jugada')
         });
       }
     }
