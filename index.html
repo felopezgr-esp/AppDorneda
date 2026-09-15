@@ -13806,27 +13806,7 @@ function renderAnalisisProximoRival(selectedTeam){
         </div>
       </div>
 
-      <!-- OBSERVACIONES DIRECTAS DE SCOUTING EN FICHAS PREVIAS DE DORNEDA (SI EXISTEN) -->
-      ${directNotes.length ? `
-        <div class="card mb-16" style="border-left:4px solid var(--warning);background:var(--surface2);">
-          <div class="card-title" style="color:var(--warning);display:flex;align-items:center;gap:6px;">
-            <span>\ud83d\udcdd</span> Notas de Scouting de Partidos Previos contra Dorneda
-          </div>
-          <div style="display:flex;flex-direction:column;gap:8px;">
-            ${directNotes.map(function(n){
-              return `
-                <div style="background:var(--surface);padding:10px 14px;border-radius:8px;border:1px solid var(--border);font-size:12px;">
-                  <div style="font-weight:800;color:var(--text);margin-bottom:4px;">
-                    ${n.codigo} (${n.fecha}) ${n.resultado ? '\u00b7 Resultado: <strong>' + n.resultado + '</strong>' : ''}
-                  </div>
-                  ${n.obs ? `<div style="color:var(--text);margin-bottom:2px;"><strong>Informe:</strong> ${n.obs}</div>` : ''}
-                  ${n.resumen ? `<div style="color:var(--text-muted);"><strong>Resumen del partido:</strong> ${n.resumen}</div>` : ''}
-                </div>
-              `;
-            }).join('')}
-          </div>
-        </div>
-      ` : ''}
+
 
       <!-- CONCLUSIONES T\u00c1CTICAS (MODO LISTA) -->
       <div class="card mb-16" style="border:1.5px solid var(--primary);border-radius:14px;background:var(--surface2);">
@@ -14008,49 +13988,28 @@ function renderAnalisisProximoRival(selectedTeam){
       </div>
 
       <!-- TABLA DE PLANTILLA COMPLETA DETECTADA (CON DORSALES SIEMPRE) -->
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
-          <div>
-            <div class="card-title" style="margin-bottom:2px;">\ud83d\udc65 Plantilla Oficial Detectada en Actas (${plantillaList.length} futbolistas)</div>
-            <div style="font-size:11px;color:var(--text-muted);">Jugadores alineados y convocados por ${formatCleanTeamName(activeRival)} esta temporada</div>
+      <div class="card" style="padding:14px 18px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
+          <div style="font-weight:800;font-size:12.5px;color:var(--text);display:flex;align-items:center;gap:6px;">
+            <span>\ud83d\udc65 Plantilla en Actas (${plantillaList.length} futbolistas)</span>
           </div>
+          <span style="font-size:11px;color:var(--text-muted);font-weight:600;">${formatCleanTeamName(activeRival)}</span>
         </div>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th style="width:50px;text-align:center;">#</th>
-                <th>Jugador</th>
-                <th style="text-align:center;">PJ</th>
-                <th style="text-align:center;">Titular</th>
-                <th style="text-align:center;">Suplente</th>
-                <th style="text-align:center;">Goles \u26bd</th>
-                <th style="text-align:center;">Tarjetas \ud83d\udfe8/\ud83d\udfe5</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${plantillaList.length ? plantillaList.map(function(j){
-                return `
-                  <tr>
-                    <td style="text-align:center;"><span class="badge" style="background:var(--surface3);font-size:10.5px;font-weight:900;">${j.dorsal}</span></td>
-                    <td><strong style="font-size:12.5px;color:var(--text);">${j.nombre}</strong></td>
-                    <td style="text-align:center;font-weight:700;">${j.pj}</td>
-                    <td style="text-align:center;color:var(--text-muted);">${j.titular}</td>
-                    <td style="text-align:center;color:var(--text-muted);">${j.suplente}</td>
-                    <td style="text-align:center;">${j.goles > 0 ? `<span class="badge badge-success" style="font-weight:900;">${j.goles} \u26bd</span>` : '-'}</td>
-                    <td style="text-align:center;">
-                      ${(j.amarillas > 0 || j.rojas > 0) ? `
-                        <span style="font-weight:800;">
-                          ${j.amarillas > 0 ? `<span style="color:var(--warning);">${j.amarillas}\ud83d\udfe8</span> ` : ''}
-                          ${j.rojas > 0 ? `<span style="color:var(--red);">${j.rojas}\ud83d\udfe5</span>` : ''}
-                        </span>
-                      ` : '-'}
-                    </td>
-                  </tr>
-                `;
-              }).join('') : `<tr><td colspan="7" style="text-align:center;color:var(--text-dim);padding:16px;">Sin datos de plantilla registrados en actas.</td></tr>`}
-            </tbody>
-          </table>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+          ${plantillaList.length ? plantillaList.map(function(j){
+            var extra = [];
+            if(j.goles > 0) extra.push('<strong style="color:var(--success);">' + j.goles + ' \u26bd</strong>');
+            if(j.amarillas > 0) extra.push('<span style="color:var(--warning);">' + j.amarillas + ' \ud83d\udfe8</span>');
+            if(j.rojas > 0) extra.push('<span style="color:var(--red);">' + j.rojas + ' \ud83d\udfe5</span>');
+            var extraStr = extra.length ? ' &middot; ' + extra.join(' ') : '';
+            return `
+              <span style="display:inline-flex;align-items:center;gap:5px;padding:4px 9px;background:var(--surface2);border:1px solid var(--border);border-radius:7px;font-size:11.5px;color:var(--text);">
+                <span style="font-weight:900;color:var(--red);font-size:10.5px;">${j.dorsal}</span>
+                <span style="font-weight:700;">${j.nombre}</span>
+                <span style="font-size:10.5px;color:var(--text-dim);">(${j.pj} PJ${extraStr})</span>
+              </span>
+            `;
+          }).join('') : '<div style="font-size:11.5px;color:var(--text-dim);">Sin datos de plantilla registrados.</div>'}
         </div>
       </div>
     `;
