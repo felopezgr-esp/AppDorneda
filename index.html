@@ -13279,6 +13279,13 @@ function renderAnalisisProximoRival(selectedTeam){
 
   function norm(s){ return (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim(); }
 
+  function normP(name){
+    if(!name) return '';
+    var clean = formatOfficialPersonName(name);
+    var n = (clean || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]/g, ' ').trim();
+    return n.split(/\s+/).filter(Boolean).sort().join(' ');
+  }
+
   try {
     var nextOpp = getNextUpcomingOpponent();
     var activeRival = selectedTeam || currentScoutingRival || nextOpp.nombre;
@@ -13335,6 +13342,59 @@ function renderAnalisisProximoRival(selectedTeam){
       if(m <= 60) return '46-60';
       if(m <= 75) return '61-75';
       return '76-90';
+    }
+
+    function registerPlayer(rawName, dorsalNum, isTitular){
+      if(!rawName) return null;
+      var cleanName = formatOfficialPersonName(rawName);
+      var keyP = normP(rawName);
+      if(!plantillaMap[keyP]){
+        plantillaMap[keyP] = {
+          dorsal: dorsalNum ? '#' + dorsalNum : '#--',
+          numDorsal: parseInt(dorsalNum, 10) || 999,
+          nombre: cleanName,
+          rawNombre: rawName,
+          pj: 0,
+          titular: 0,
+          suplente: 0,
+          goles: 0,
+          amarillas: 0,
+          rojas: 0
+        };
+      }
+      if(dorsalNum && plantillaMap[keyP].dorsal === '#--'){
+        plantillaMap[keyP].dorsal = '#' + dorsalNum;
+        plantillaMap[keyP].numDorsal = parseInt(dorsalNum, 10);
+      }
+      plantillaMap[keyP].pj++;
+      if(isTitular) plantillaMap[keyP].titular++;
+      else plantillaMap[keyP].suplente++;
+
+      return plantillaMap[keyP];
+    }
+
+    function findPlayerInPlantilla(nameOrRaw){
+      if(!nameOrRaw) return null;
+      var k1 = normP(nameOrRaw);
+      if(plantillaMap[k1]) return plantillaMap[k1];
+      var k2 = norm(nameOrRaw);
+      if(plantillaMap[k2]) return plantillaMap[k2];
+      var cleanN = formatOfficialPersonName(nameOrRaw);
+      var k3 = norm(cleanN);
+      if(plantillaMap[k3]) return plantillaMap[k3];
+      
+      // Fuzzy matching por palabras relevantes del nombre
+      var words = k1.split(' ').filter(function(w){ return w.length > 2; });
+      if(words.length){
+        for(var pk in plantillaMap){
+          var pWords = pk.split(' ');
+          var matches = words.filter(function(w){ return pWords.includes(w); });
+          if(matches.length >= Math.min(2, words.length)){
+            return plantillaMap[pk];
+          }
+        }
+      }
+      return null;
     }
 
     todasJ.forEach(function(jornada){
@@ -13400,52 +13460,12 @@ function renderAnalisisProximoRival(selectedTeam){
 
         titulares.forEach(function(t){
           if(!t || !t.nombre) return;
-          var pKey = norm(t.nombre);
-          if(!plantillaMap[pKey]){
-            plantillaMap[pKey] = {
-              dorsal: t.dorsal ? '#' + t.dorsal : '#--',
-              numDorsal: parseInt(t.dorsal, 10) || 999,
-              nombre: formatOfficialPersonName(t.nombre),
-              rawNombre: t.nombre,
-              pj: 0,
-              titular: 0,
-              suplente: 0,
-              goles: 0,
-              amarillas: 0,
-              rojas: 0
-            };
-          }
-          if(t.dorsal && plantillaMap[pKey].dorsal === '#--'){
-            plantillaMap[pKey].dorsal = '#' + t.dorsal;
-            plantillaMap[pKey].numDorsal = parseInt(t.dorsal, 10);
-          }
-          plantillaMap[pKey].pj++;
-          plantillaMap[pKey].titular++;
+          registerPlayer(t.nombre, t.dorsal, true);
         });
 
         suplentes.forEach(function(s){
           if(!s || !s.nombre) return;
-          var pKey = norm(s.nombre);
-          if(!plantillaMap[pKey]){
-            plantillaMap[pKey] = {
-              dorsal: s.dorsal ? '#' + s.dorsal : '#--',
-              numDorsal: parseInt(s.dorsal, 10) || 999,
-              nombre: formatOfficialPersonName(s.nombre),
-              rawNombre: s.nombre,
-              pj: 0,
-              titular: 0,
-              suplente: 0,
-              goles: 0,
-              amarillas: 0,
-              rojas: 0
-            };
-          }
-          if(s.dorsal && plantillaMap[pKey].dorsal === '#--'){
-            plantillaMap[pKey].dorsal = '#' + s.dorsal;
-            plantillaMap[pKey].numDorsal = parseInt(s.dorsal, 10);
-          }
-          plantillaMap[pKey].pj++;
-          plantillaMap[pKey].suplente++;
+          registerPlayer(s.nombre, s.dorsal, false);
         });
 
         // Goles del partido y minutos
@@ -13454,32 +13474,36 @@ function renderAnalisisProximoRival(selectedTeam){
           if(!g) return;
           var cleanG = cleanAndFormatGoal(g);
           if(!cleanG) return;
-          var scorerKey = norm(cleanG.scorerName);
+
+          var foundPlayer = findPlayerInPlantilla(cleanG.scorerName) || findPlayerInPlantilla(g.rawScorer) || findPlayerInPlantilla(g.jugador);
           var isScoredByRival = false;
 
-          if(plantillaMap[scorerKey]){
+          if(foundPlayer){
+            isScoredByRival = true;
+          } else if(g.equipo && (norm(g.equipo).includes(normActive) || normActive.includes(norm(g.equipo)))){
             isScoredByRival = true;
           } else if(g.rawScorer && (norm(g.rawScorer).includes(normActive) || normActive.includes(norm(g.rawScorer)))){
-            isScoredByRival = true;
-          } else if(g.equipo && norm(g.equipo).includes(normActive)){
             isScoredByRival = true;
           }
 
           var slot = getSlot(cleanG.minuto);
           if(isScoredByRival){
             gfSlots[slot] = (gfSlots[slot] || 0) + 1;
-            if(!goleadoresMap[scorerKey]){
-              var dTag = (plantillaMap[scorerKey] && plantillaMap[scorerKey].dorsal !== '#--') ? plantillaMap[scorerKey].dorsal : (g.dorsal ? '#' + g.dorsal : '#--');
-              goleadoresMap[scorerKey] = {
-                nombre: cleanG.scorerName,
+            var pKey = foundPlayer ? normP(foundPlayer.rawNombre) : normP(cleanG.scorerName);
+            var pDisplayName = foundPlayer ? foundPlayer.nombre : cleanG.scorerName;
+            var dTag = (foundPlayer && foundPlayer.dorsal !== '#--') ? foundPlayer.dorsal : (g.dorsal ? '#' + g.dorsal : '#--');
+
+            if(!goleadoresMap[pKey]){
+              goleadoresMap[pKey] = {
+                nombre: pDisplayName,
                 dorsal: dTag,
                 goles: 0,
                 minutos: []
               };
             }
-            goleadoresMap[scorerKey].goles++;
-            if(cleanG.minuto) goleadoresMap[scorerKey].minutos.push(cleanG.minuto + "'");
-            if(plantillaMap[scorerKey]) plantillaMap[scorerKey].goles++;
+            goleadoresMap[pKey].goles++;
+            if(cleanG.minuto) goleadoresMap[pKey].minutos.push(cleanG.minuto + "'");
+            if(foundPlayer) foundPlayer.goles++;
           } else {
             gcSlots[slot] = (gcSlots[slot] || 0) + 1;
           }
@@ -13490,9 +13514,11 @@ function renderAnalisisProximoRival(selectedTeam){
           if(!t) return;
           var tNom = t.nombre || t.jugador || '';
           if(!tNom) return;
-          var pKey = norm(tNom);
-          var cleanN = formatOfficialPersonName(tNom);
-          var dTag = (plantillaMap[pKey] && plantillaMap[pKey].dorsal !== '#--') ? plantillaMap[pKey].dorsal : (t.dorsal ? '#' + t.dorsal : '#--');
+          var foundP = findPlayerInPlantilla(tNom);
+          var pKey = foundP ? normP(foundP.rawNombre) : normP(tNom);
+          var cleanN = foundP ? foundP.nombre : formatOfficialPersonName(tNom);
+          var dTag = (foundP && foundP.dorsal !== '#--') ? foundP.dorsal : (t.dorsal ? '#' + t.dorsal : '#--');
+
           if(!tarjetasMap[pKey]){
             tarjetasMap[pKey] = {
               nombre: cleanN,
@@ -13508,9 +13534,9 @@ function renderAnalisisProximoRival(selectedTeam){
             tarjetasMap[pKey].amarillas++;
           }
           if(t.minuto) tarjetasMap[pKey].minutos.push((t.tipo === 'Roja' ? '\ud83d\udfe5 ' : '\ud83d\udfe8 ') + t.minuto + "'");
-          if(plantillaMap[pKey]){
-            if(t.tipo === 'Roja' || t.tipo === 'Doble Amarilla') plantillaMap[pKey].rojas++;
-            else plantillaMap[pKey].amarillas++;
+          if(foundP){
+            if(t.tipo === 'Roja' || t.tipo === 'Doble Amarilla') foundP.rojas++;
+            else foundP.amarillas++;
           }
         });
       });
@@ -13535,49 +13561,22 @@ function renderAnalisisProximoRival(selectedTeam){
       if(pDorneda.rivalAlineacion){
         toArr(pDorneda.rivalAlineacion.titulares).forEach(function(t){
           if(!t || !t.nombre) return;
-          var pKey = norm(t.nombre);
-          if(!plantillaMap[pKey]){
-            plantillaMap[pKey] = {
-              dorsal: t.dorsal ? '#' + t.dorsal : '#--',
-              numDorsal: parseInt(t.dorsal, 10) || 999,
-              nombre: formatOfficialPersonName(t.nombre),
-              rawNombre: t.nombre,
-              pj: 1,
-              titular: 1,
-              suplente: 0,
-              goles: 0,
-              amarillas: 0,
-              rojas: 0
-            };
-          }
+          registerPlayer(t.nombre, t.dorsal, true);
         });
         toArr(pDorneda.rivalAlineacion.suplentes).forEach(function(s){
           if(!s || !s.nombre) return;
-          var pKey = norm(s.nombre);
-          if(!plantillaMap[pKey]){
-            plantillaMap[pKey] = {
-              dorsal: s.dorsal ? '#' + s.dorsal : '#--',
-              numDorsal: parseInt(s.dorsal, 10) || 999,
-              nombre: formatOfficialPersonName(s.nombre),
-              rawNombre: s.nombre,
-              pj: 1,
-              titular: 0,
-              suplente: 1,
-              goles: 0,
-              amarillas: 0,
-              rojas: 0
-            };
-          }
+          registerPlayer(s.nombre, s.dorsal, false);
         });
         toArr(pDorneda.rivalAlineacion.tarjetas).forEach(function(t){
           if(!t) return;
           var tNom = t.jugador || t.nombre || '';
           if(!tNom) return;
-          var pKey = norm(tNom);
+          var foundP = findPlayerInPlantilla(tNom);
+          var pKey = foundP ? normP(foundP.rawNombre) : normP(tNom);
           if(!tarjetasMap[pKey]){
-            var dTag = (plantillaMap[pKey] && plantillaMap[pKey].dorsal !== '#--') ? plantillaMap[pKey].dorsal : (t.dorsal ? '#' + t.dorsal : '#--');
+            var dTag = (foundP && foundP.dorsal !== '#--') ? foundP.dorsal : (t.dorsal ? '#' + t.dorsal : '#--');
             tarjetasMap[pKey] = {
-              nombre: formatOfficialPersonName(tNom),
+              nombre: foundP ? foundP.nombre : formatOfficialPersonName(tNom),
               dorsal: dTag,
               amarillas: 0,
               rojas: 0,
@@ -13594,13 +13593,14 @@ function renderAnalisisProximoRival(selectedTeam){
         if(!g) return;
         var isRivalGoal = g.equipo && norm(g.equipo).indexOf('dorneda') === -1;
         if(isRivalGoal){
-          var pKey = norm(g.jugador);
+          var foundPlayer = findPlayerInPlantilla(g.jugador);
+          var pKey = foundPlayer ? normP(foundPlayer.rawNombre) : normP(g.jugador);
           var slot = getSlot(g.minuto);
           gfSlots[slot] = (gfSlots[slot] || 0) + 1;
           if(!goleadoresMap[pKey]){
-            var dTag = (plantillaMap[pKey] && plantillaMap[pKey].dorsal !== '#--') ? plantillaMap[pKey].dorsal : (g.dorsal ? '#' + g.dorsal : '#--');
+            var dTag = (foundPlayer && foundPlayer.dorsal !== '#--') ? foundPlayer.dorsal : (g.dorsal ? '#' + g.dorsal : '#--');
             goleadoresMap[pKey] = {
-              nombre: formatOfficialPersonName(g.jugador),
+              nombre: foundPlayer ? foundPlayer.nombre : formatOfficialPersonName(g.jugador),
               dorsal: dTag,
               goles: 0,
               minutos: []
@@ -13608,7 +13608,7 @@ function renderAnalisisProximoRival(selectedTeam){
           }
           goleadoresMap[pKey].goles++;
           if(g.minuto) goleadoresMap[pKey].minutos.push(g.minuto + "'");
-          if(plantillaMap[pKey]) plantillaMap[pKey].goles++;
+          if(foundPlayer) foundPlayer.goles++;
         }
       });
     });
