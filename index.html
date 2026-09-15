@@ -8195,37 +8195,42 @@ function validateAndMigrateDB(dbObj){
       dbObj.ligaGoleadores = [];
       modified = true;
     }
-        // Auto-merge y actualizaciÓn estricta de resultados y actas oficiales en todasJornadas desde DEFAULT_DATA
-    if(dbObj.todasJornadas && DEFAULT_DATA.todasJornadas){
-      DEFAULT_DATA.todasJornadas.forEach(function(defJ){
-        var targetJ = dbObj.todasJornadas.find(function(j){ return j.jornada === defJ.jornada; });
-        if(targetJ && targetJ.partidos && defJ.partidos){
-          defJ.partidos.forEach(function(dp){
-            var matchFound = targetJ.partidos.find(function(m){
-              return (dp.codActa && m.codActa && dp.codActa === m.codActa) ||
-                     (normalizeName(m.local) === normalizeName(dp.local) && normalizeName(m.visitante) === normalizeName(dp.visitante));
-            });
-            if(matchFound){
-              if(dp.gl !== null && dp.gl !== undefined && matchFound.gl !== dp.gl){ matchFound.gl = dp.gl; modified = true; }
-              if(dp.hora && matchFound.hora !== dp.hora){ matchFound.hora = dp.hora; modified = true; }
-              if(dp.fecha && matchFound.fecha !== dp.fecha){ matchFound.fecha = dp.fecha; modified = true; }
-              if(dp.campo && matchFound.campo !== dp.campo){ matchFound.campo = dp.campo; modified = true; }
-              if(dp.codActa && matchFound.codActa !== dp.codActa){ matchFound.codActa = dp.codActa; modified = true; }
-              if(dp.enlaceActa && matchFound.enlaceActa !== dp.enlaceActa){ matchFound.enlaceActa = dp.enlaceActa; modified = true; }
-              if(dp.gv !== null && dp.gv !== undefined && matchFound.gv !== dp.gv){ matchFound.gv = dp.gv; modified = true; }
-              if(dp.enlaceActa && !matchFound.enlaceActa){ matchFound.enlaceActa = dp.enlaceActa; modified = true; }
-              if(dp.codActa && !matchFound.codActa){ matchFound.codActa = dp.codActa; modified = true; }
-              if(dp.campo && matchFound.campo !== dp.campo){ matchFound.campo = dp.campo; modified = true; }
-              if(dp.hora && matchFound.hora !== dp.hora){ matchFound.hora = dp.hora; modified = true; }
-              if(dp.arbitro && matchFound.arbitro !== dp.arbitro){ matchFound.arbitro = dp.arbitro; modified = true; }
-              if(dp.actaData && (!matchFound.actaData || !matchFound.actaData.localTitulares || !matchFound.actaData.localTitulares.length)){
-                matchFound.actaData = dp.actaData;
-                modified = true;
+        // Auto-merge y actualizaciÃ³n estricta de resultados y actas oficiales en todasJornadas desde DEFAULT_DATA
+    if(DEFAULT_DATA.todasJornadas){
+      if(!dbObj.todasJornadas || !dbObj.todasJornadas.length){
+        dbObj.todasJornadas = JSON.parse(JSON.stringify(DEFAULT_DATA.todasJornadas));
+        modified = true;
+      } else {
+        DEFAULT_DATA.todasJornadas.forEach(function(defJ){
+          var targetJ = dbObj.todasJornadas.find(function(j){ return j.jornada === defJ.jornada; });
+          if(targetJ && targetJ.partidos && defJ.partidos){
+            defJ.partidos.forEach(function(dp){
+              var matchFound = targetJ.partidos.find(function(m){
+                return (dp.codActa && m.codActa && dp.codActa === m.codActa) ||
+                       (normalizeName(m.local) === normalizeName(dp.local) && normalizeName(m.visitante) === normalizeName(dp.visitante));
+              });
+              if(matchFound){
+                if(dp.gl !== null && dp.gl !== undefined && matchFound.gl !== dp.gl){ matchFound.gl = dp.gl; modified = true; }
+                if(dp.gv !== null && dp.gv !== undefined && matchFound.gv !== dp.gv){ matchFound.gv = dp.gv; modified = true; }
+                if(dp.hora && matchFound.hora !== dp.hora){ matchFound.hora = dp.hora; modified = true; }
+                if(dp.fecha && matchFound.fecha !== dp.fecha){ matchFound.fecha = dp.fecha; modified = true; }
+                if(dp.campo && matchFound.campo !== dp.campo){ matchFound.campo = dp.campo; modified = true; }
+                if(dp.arbitro && matchFound.arbitro !== dp.arbitro){ matchFound.arbitro = dp.arbitro; modified = true; }
+                if(dp.codActa && matchFound.codActa !== dp.codActa){ matchFound.codActa = dp.codActa; modified = true; }
+                if(dp.enlaceActa && matchFound.enlaceActa !== dp.enlaceActa){ matchFound.enlaceActa = dp.enlaceActa; modified = true; }
+                
+                // Merge/refresh actaData
+                if(dp.actaData){
+                  if(!matchFound.actaData || !matchFound.actaData.localTitulares || !matchFound.actaData.localTitulares.length || (dp.actaData.allGoles && (!matchFound.actaData.allGoles || !matchFound.actaData.allGoles.length))){
+                    matchFound.actaData = JSON.parse(JSON.stringify(dp.actaData));
+                    modified = true;
+                  }
+                }
               }
-            }
-          });
-        }
-      });
+            });
+          }
+        });
+      }
     }
 
     if(!dbObj.copaJornadas || dbObj.copaJornadas.length < 2 || (dbObj.copaJornadas[0] && (!dbObj.copaJornadas[0].partidos || dbObj.copaJornadas[0].partidos.length < 30))){
@@ -13340,7 +13345,6 @@ function renderAnalisisProximoRival(selectedTeam){
     if(!allTeams.length){
       allTeams = ['Sporting Burgo', 'U.D. Narahio', 'Betanzos Norte', 'C.D. Sigr\u00e1s', 'C.C.D. Curtis', 'Club Deportivo Nar\u00f3n Silver Catering', 'Campanal de Loureda F. C.', 'Sporting Cambre As Travesas', 'Portazgo S.D.', 'Liceo de Monelos S.D.', 'U.D. Paiosaco H.A\u00f1on', 'Oza de los R\u00edos', 'Cedeira S.D.', 'Sada F.C. A Nosa Vi\u00f1a', 'San Marti\u00f1o S.D.', 'Xuventude Dorneda'];
     }
-    // Filtrar fuera a Dorneda del selector de rivales
     var rivalOptions = allTeams.filter(function(t){ return norm(t).indexOf('dorneda') === -1; });
 
     // 2. Extraer datos del pr\u00f3ximo partido de Dorneda contra este rival
@@ -13416,7 +13420,6 @@ function renderAnalisisProximoRival(selectedTeam){
       var k3 = norm(cleanN);
       if(plantillaMap[k3]) return plantillaMap[k3];
       
-      // Fuzzy matching por palabras relevantes del nombre
       var words = k1.split(' ').filter(function(w){ return w.length > 2; });
       if(words.length){
         for(var pk in plantillaMap){
@@ -13438,9 +13441,20 @@ function renderAnalisisProximoRival(selectedTeam){
         var isVisit = norm(match.visitante) === normActive || norm(match.visitante).includes(normActive) || normActive.includes(norm(match.visitante));
         if(!isLocal && !isVisit) return;
 
-        var hasScore = (match.gl !== null && match.gl !== undefined && match.gv !== null && match.gv !== undefined);
-        var gf = isLocal ? match.gl : match.gv;
-        var gc = isLocal ? match.gv : match.gl;
+        // Buscar fallback de DEFAULT_DATA para marcador y acta
+        var defJ = defTodasJ.find(function(dj){ return dj && dj.jornada === jornada.jornada; });
+        var defM = null;
+        if(defJ && defJ.partidos){
+          defM = toArr(defJ.partidos).find(function(dm){
+            return (dm.codActa && dm.codActa === match.codActa) || (norm(dm.local) === norm(match.local) && norm(dm.visitante) === norm(match.visitante));
+          });
+        }
+
+        var gl = (match.gl !== null && match.gl !== undefined) ? match.gl : (defM ? defM.gl : null);
+        var gv = (match.gv !== null && match.gv !== undefined) ? match.gv : (defM ? defM.gv : null);
+        var hasScore = (gl !== null && gv !== null);
+        var gf = isLocal ? gl : gv;
+        var gc = isLocal ? gv : gl;
         var matchRival = isLocal ? match.visitante : match.local;
         var res = 'Pendiente';
         if(hasScore){
@@ -13451,9 +13465,9 @@ function renderAnalisisProximoRival(selectedTeam){
 
         rivalMatches.push({
           jornada: jornada.jornada,
-          fecha: match.fecha || jornada.fecha,
-          hora: match.hora || '',
-          campo: match.campo || '',
+          fecha: match.fecha || jornada.fecha || (defM ? defM.fecha : ''),
+          hora: match.hora || (defM ? defM.hora : ''),
+          campo: match.campo || (defM ? defM.campo : ''),
           isLocal: isLocal,
           rival: formatCleanTeamName(matchRival),
           hasScore: hasScore,
@@ -13477,14 +13491,8 @@ function renderAnalisisProximoRival(selectedTeam){
         // Buscar actaData (con fallback a DEFAULT_DATA)
         var acta = match.actaData || {};
         var actLocalTit = toArr(acta.localTitulares);
-        if(!actLocalTit.length){
-          var defJ = defTodasJ.find(function(dj){ return dj && dj.jornada === jornada.jornada; });
-          if(defJ && defJ.partidos){
-            var defM = toArr(defJ.partidos).find(function(dm){
-              return (dm.codActa && dm.codActa === match.codActa) || (norm(dm.local) === norm(match.local) && norm(dm.visitante) === norm(match.visitante));
-            });
-            if(defM && defM.actaData) acta = defM.actaData;
-          }
+        if(!actLocalTit.length && defM && defM.actaData){
+          acta = defM.actaData;
         }
 
         var titulares = toArr(isLocal ? acta.localTitulares : acta.visitTitulares);
@@ -13503,28 +13511,46 @@ function renderAnalisisProximoRival(selectedTeam){
 
         // Goles del partido y minutos
         var golesList = toArr(acta.allGoles || acta.goles);
+        if(!golesList.length && defM && defM.actaData && defM.actaData.allGoles){
+          golesList = toArr(defM.actaData.allGoles);
+        }
+
+        var curL = 0, curV = 0;
         golesList.forEach(function(g){
           if(!g) return;
           var cleanG = cleanAndFormatGoal(g);
           if(!cleanG) return;
 
-          var foundPlayer = findPlayerInPlantilla(cleanG.scorerName) || findPlayerInPlantilla(g.rawScorer) || findPlayerInPlantilla(g.jugador);
+          var slot = getSlot(cleanG.minuto);
           var isScoredByRival = false;
 
-          if(foundPlayer){
-            isScoredByRival = true;
-          } else if(g.equipo && (norm(g.equipo).includes(normActive) || normActive.includes(norm(g.equipo)))){
-            isScoredByRival = true;
-          } else if(g.rawScorer && (norm(g.rawScorer).includes(normActive) || normActive.includes(norm(g.rawScorer)))){
-            isScoredByRival = true;
+          var prog = cleanG.scoreProgression;
+          var progM = prog ? prog.match(/(\d+)\s*-\s*(\d+)/) : null;
+          if(progM){
+            var nextL = parseInt(progM[1], 10);
+            var nextV = parseInt(progM[2], 10);
+            if(isLocal && nextL > curL){
+              isScoredByRival = true;
+            } else if(!isLocal && nextV > curV){
+              isScoredByRival = true;
+            }
+            curL = nextL;
+            curV = nextV;
+          } else {
+            var foundPlayer = findPlayerInPlantilla(cleanG.scorerName) || findPlayerInPlantilla(g.rawScorer) || findPlayerInPlantilla(g.jugador);
+            if(foundPlayer && !cleanG.propiaPuerta){
+              isScoredByRival = true;
+            } else if(g.equipo && (norm(g.equipo).includes(normActive) || normActive.includes(norm(g.equipo)))){
+              isScoredByRival = true;
+            }
           }
 
-          var slot = getSlot(cleanG.minuto);
           if(isScoredByRival){
             gfSlots[slot] = (gfSlots[slot] || 0) + 1;
-            var pKey = foundPlayer ? normP(foundPlayer.rawNombre) : normP(cleanG.scorerName);
-            var pDisplayName = foundPlayer ? foundPlayer.nombre : cleanG.scorerName;
-            var dTag = (foundPlayer && foundPlayer.dorsal !== '#--') ? foundPlayer.dorsal : (g.dorsal ? '#' + g.dorsal : '#--');
+            var foundP = findPlayerInPlantilla(cleanG.scorerName) || findPlayerInPlantilla(g.rawScorer) || findPlayerInPlantilla(g.jugador);
+            var pKey = foundP ? normP(foundP.rawNombre) : normP(cleanG.scorerName);
+            var pDisplayName = foundP ? foundP.nombre : cleanG.scorerName;
+            var dTag = (foundP && foundP.dorsal !== '#--') ? foundP.dorsal : (g.dorsal ? '#' + g.dorsal : '#--');
 
             if(!goleadoresMap[pKey]){
               goleadoresMap[pKey] = {
@@ -13536,7 +13562,7 @@ function renderAnalisisProximoRival(selectedTeam){
             }
             goleadoresMap[pKey].goles++;
             if(cleanG.minuto) goleadoresMap[pKey].minutos.push(cleanG.minuto + "'");
-            if(foundPlayer) foundPlayer.goles++;
+            if(foundP) foundP.goles++;
           } else {
             gcSlots[slot] = (gcSlots[slot] || 0) + 1;
           }
@@ -13575,7 +13601,7 @@ function renderAnalisisProximoRival(selectedTeam){
       });
     });
 
-    // 5. Tambi\u00e9n comprobar si Dorneda jug\u00f3 contra este rival en db.partidos
+    // 5. Partidos directos contra Dorneda
     partidosDorneda.forEach(function(pDorneda){
       if(!pDorneda || !pDorneda.rival) return;
       var isThisRival = norm(pDorneda.rival) === normActive || norm(pDorneda.rival).includes(normActive) || normActive.includes(norm(pDorneda.rival));
@@ -13680,14 +13706,14 @@ function renderAnalisisProximoRival(selectedTeam){
     // 1. Peligro Ofensivo
     if(top4Goleadores.length > 0){
       var artillerosStr = top4Goleadores.map(function(g){ return '<strong>' + g.dorsal + ' ' + g.nombre + '</strong> (' + g.goles + ' ' + (g.goles === 1 ? 'gol' : 'goles') + (g.minutos.length ? ' en mins ' + g.minutos.join(', ') : '') + ')'; }).join(', ');
-      conclusiones.push('\ud83c\udfaf <strong>Artiller\u00eda & Referencias Ofensivas:</strong> Mayor peligro canalizado en ' + artillerosStr + '.');
+      conclusiones.push('\u26bd <strong>Peligro Ofensivo Principal:</strong> ' + artillerosStr + '.');
     } else {
-      conclusiones.push('\ud83c\udfaf <strong>Producci\u00f3n Ofensiva:</strong> A\u00fan no registran goleadores individuales en las actas consultadas de esta temporada.');
+      conclusiones.push('\u26bd <strong>Peligro Ofensivo:</strong> No constan goleadores individuales registrados en los partidos disputados.');
     }
 
-    // 2. Tramo cr\u00edtico de ataque
+    // 2. Tramo m\u00e1s anotador
     if(totalGF > 0 && gfSlots[maxGfSlot] > 0){
-      conclusiones.push('\u23f1\ufe0f <strong>Ventana de Mayor Peligro:</strong> Concentran el mayor porcentaje de sus goles en el intervalo de minutos <strong>' + maxGfSlot + '\'</strong> (' + gfSlots[maxGfSlot] + ' de ' + totalGF + ' goles a favor). M\u00e1xima concentraci\u00f3n t\u00e1ctica requerida en ese periodo.');
+      conclusiones.push('\u23f1\ufe0f <strong>Tramo m\u00e1s Letal:</strong> Mayor concentraci\u00f3n anotadora en el tramo <strong>' + maxGfSlot + '\'</strong> (' + gfSlots[maxGfSlot] + ' goles marcados). Requiere atenci\u00f3n t\u00e1ctica m\u00e1xima en esos minutos.');
     } else {
       conclusiones.push('\u23f1\ufe0f <strong>Ritmo de Partido:</strong> Promedio anotador de ' + (totalPJ > 0 ? (totalGF / totalPJ).toFixed(2) : '0') + ' goles por encuentro.');
     }
@@ -13766,11 +13792,11 @@ function renderAnalisisProximoRival(selectedTeam){
             </div>
             <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:8px 14px;text-align:center;min-width:70px;">
               <div style="font-size:10px;font-weight:800;color:var(--text-dim);text-transform:uppercase;">Puntos</div>
-              <div style="font-size:20px;font-weight:900;color:var(--success);">${rivalClasif.pts || 0}</div>
+              <div style="font-size:20px;font-weight:900;color:var(--success);">${rivalClasif.pts || totalPts}</div>
             </div>
             <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:8px 14px;text-align:center;min-width:70px;">
               <div style="font-size:10px;font-weight:800;color:var(--text-dim);text-transform:uppercase;">V - E - D</div>
-              <div style="font-size:16px;font-weight:900;color:var(--text);">${rivalClasif.pg || rivalClasif.g || 0}-${rivalClasif.pe || rivalClasif.e || 0}-${rivalClasif.pp || rivalClasif.p || 0}</div>
+              <div style="font-size:16px;font-weight:900;color:var(--text);">${rivalClasif.pg || rivalClasif.g || totalV}-${rivalClasif.pe || rivalClasif.e || totalE}-${rivalClasif.pp || rivalClasif.p || totalD}</div>
             </div>
             <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:8px 14px;text-align:center;min-width:70px;">
               <div style="font-size:10px;font-weight:800;color:var(--text-dim);text-transform:uppercase;">Goles F/C</div>
