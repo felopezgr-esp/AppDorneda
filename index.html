@@ -3862,7 +3862,7 @@
 </div>
 
 <script>
-const DB_KEY='dorneda_2627_v18';
+const DB_KEY='dorneda_2627_v19';
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyCGDgGaAX2uqi0CwmY6ejVH_4SDhiLz1AA",
   authDomain: "appdorneda.firebaseapp.com",
@@ -4731,8 +4731,8 @@ const DEFAULT_DATA={
                      {
                          "local":  "LICEO DE MONELOS S.D.",
                          "visitante":  "SPORTING BURGO",
-                         "gl":  2,
-                         "gv":  3,
+                         "gl":  1,
+                         "gv":  4,
                          "fecha":  "13/09/2026",
                          "hora":  "12:00",
                          "campo":  "San Pedro de Visma 2",
@@ -13670,6 +13670,11 @@ function renderAnalisisProximoRival(selectedTeam){
     // Totales
     var totalPJ = (statsLocal.pj + statsVis.pj);
     var totalGF = (statsLocal.gf + statsVis.gf);
+    var totalGC = (statsLocal.gc + statsVis.gc);
+    var gfSlotsSum = Object.keys(gfSlots).reduce(function(s, k){ return s + (gfSlots[k] || 0); }, 0);
+    var gcSlotsSum = Object.keys(gcSlots).reduce(function(s, k){ return s + (gcSlots[k] || 0); }, 0);
+    if(gfSlotsSum > totalGF) totalGF = gfSlotsSum;
+    if(gcSlotsSum > totalGC) totalGC = gcSlotsSum;
     var totalGC = (statsLocal.gc + statsVis.gc);
     var totalV = (statsLocal.v + statsVis.v);
     var totalE = (statsLocal.e + statsVis.e);
