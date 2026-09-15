@@ -16,7 +16,7 @@
       --bg-page:#F8FAFC;--black:#0F172A;--surface:#FFFFFF;--surface2:#F1F5F9;--surface3:#E2E8F0;
       --border:#CBD5E1;--border2:#94A3B8;
       --text:#0F172A;--text-muted:#334155;--text-dim:#64748B;
-      --success:#16A34A;--warning:#D97706;--info:#2563EB;
+      --primary:#16A34A;--primary-light:#22C55E;--success:#16A34A;--warning:#D97706;--info:#2563EB;
       --radius:12px;--radius-sm:8px;--radius-lg:18px;
       --shadow:0 1px 4px rgba(0,0,0,0.06);--shadow-red:0 4px 18px rgba(204,0,0,0.15);
       --transition:0.2s cubic-bezier(.4,0,.2,1);
@@ -26,7 +26,7 @@
       --bg-page:#0D0D0D;--black:#0D0D0D;--surface:#161616;--surface2:#1F1F1F;--surface3:#2A2A2A;
       --border:rgba(255,255,255,0.08);--border2:rgba(204,0,0,0.25);
       --text:#F0F0F0;--text-muted:#9A9A9A;--text-dim:#666666;
-      --success:#22C55E;--warning:#F59E0B;--info:#3B82F6;
+      --primary:#22C55E;--primary-light:#4ADE80;--success:#22C55E;--warning:#F59E0B;--info:#3B82F6;
       --shadow:0 4px 24px rgba(0,0,0,0.5);--shadow-red:0 4px 24px rgba(204,0,0,0.25);
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -13863,7 +13863,7 @@ function renderAnalisisProximoRival(selectedTeam){
                     <span><strong>${count}</strong> goles (${pct}%)</span>
                   </div>
                   <div style="height:7px;background:var(--surface3);border-radius:4px;overflow:hidden;">
-                    <div style="height:100%;width:${pct}%;background:${isMax ? 'var(--success)' : 'var(--primary)'};border-radius:4px;"></div>
+                    <div style="height:100%;width:${pct}%;background:${isMax ? "var(--success)" : (count > 0 ? "#22c55e" : "transparent")};border-radius:4px;"></div>
                   </div>
                 </div>
               `;
