@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es" data-theme="light">
 <head>
   <meta charset="UTF-8" />
@@ -10523,86 +10523,73 @@ window.isDornedaTeam = isDornedaTeam;
 
 function decodeFutgalScoreSpan(spanHtml, tableHtml) {
   if (!spanHtml) return null;
+  const contextHtml = (tableHtml || "") + " " + spanHtml;
 
-  // 1. Clases FontAwesome directas fa-X (e.g. class=fa-6 o class="fa-6")
-  const faRegex = /\bfa-(\d)\b/g;
-  let faMatch;
-  let faDigits = "";
-  while ((faMatch = faRegex.exec(spanHtml)) !== null) {
-    faDigits += faMatch[1];
-  }
-  if (faDigits.length > 0) {
-    const num = parseInt(faDigits, 10);
-    if (!isNaN(num)) return num;
-  }
+  // 1. Extraer ID del elemento si existe (e.g. id=idh1965202 o id="idh1965202")
+  const idMatch = spanHtml.match(/id=["']?([a-zA-Z0-9_-]+)["']?/i);
+  if (idMatch) {
+    const elemId = idMatch[1];
 
-  // 2. Span oculto con el dÃ­gito <span style="display:none;">6
-  const hiddenSpanMatch = spanHtml.match(/<span[^>]*style=["'][^"']*display:\s*none[^"']*["'][^>]*>(\d+)/i);
-  if (hiddenSpanMatch) {
-    const num = parseInt(hiddenSpanMatch[1], 10);
-    if (!isNaN(num)) return num;
-  }
-
-  // 3. Extraer todos los IDs presentes en el span
-  const idRegex = /id=["']?([a-zA-Z0-9_-]+)["']?/g;
-  let match;
-  let digits = "";
-
-  while ((match = idRegex.exec(spanHtml)) !== null) {
-    const elemId = match[1];
-
-    // Llamada ntype con fa-X especÃ­fica para este elemId: ntype("id", n, i, "fa-6")
-    const elemNtypeFa = tableHtml ? tableHtml.match(new RegExp(`ntype\\(["']${elemId}["'],\\s*\\d+,\\s*\\d+,\\s*["']fa-(\\d)["']`, 'i')) : null;
-    if (elemNtypeFa) {
-      digits += elemNtypeFa[1];
-      continue;
-    }
-
-    // 1. Llamada a la funciÃ³n JS ntype("id", n, i, ...)
+    // Regla A: Novanet ntype(id, n, i, ...) -> d[(i*10)+n]
     const ntypeRegex = new RegExp(`ntype\\(["']${elemId}["'],\\s*(\\d+),\\s*(\\d+)`, 'i');
-    const ntypeMatch = tableHtml ? tableHtml.match(ntypeRegex) : null;
+    const ntypeMatch = contextHtml.match(ntypeRegex);
     if (ntypeMatch) {
       const n = parseInt(ntypeMatch[1], 10);
       const i = parseInt(ntypeMatch[2], 10);
       const idx = (i * 10) + n;
       if (idx >= 0 && idx < NOVANET_D_ARRAY.length) {
-        digits += String(NOVANET_D_ARRAY[idx]);
-        continue;
+        return NOVANET_D_ARRAY[idx];
       }
     }
 
-    // 2. Estilos CSS pseudo-elementos #id:before o #id:after con content:"\003X" o content:"X"
-    const cssRegex = new RegExp(`#${elemId}[^{]*\\{[^}]*content:\\s*["'](?:\\\\003)?(\\d)["']`, 'i');
-    const cssMatch = tableHtml ? tableHtml.match(cssRegex) : null;
+    // Regla B: CSS pseudo-elementos (#elemId:before o #elemId:after)
+    // CUIDADO: Si contiene 'display:none', es un señuelo (honeypot) de Novanet!
+    const cssStyleRegex = new RegExp(`#${elemId}[^{]*\\{([^}]*)\\}`, 'i');
+    const cssMatch = contextHtml.match(cssStyleRegex);
     if (cssMatch) {
-      digits += String(cssMatch[1]);
-      continue;
+      const cssRules = cssMatch[1];
+      if (!/display:\s*none/i.test(cssRules)) {
+        const cMatch = cssRules.match(/content:\s*["'](?:\\003)?(\d)["']/i);
+        if (cMatch) {
+          return parseInt(cMatch[1], 10);
+        }
+      }
     }
 
-    // 3. Texto inline dentro del elemento si no estÃ¡ oculto
-    const inlineRegex = new RegExp(`<span\\s+id=["']?${elemId}["']?>(\\d+)<`, 'i');
-    const inlineMatch = spanHtml.match(inlineRegex);
-    if (inlineMatch) {
-      digits += String(inlineMatch[1]);
-      continue;
+    // Regla C: Texto inline directo en #elemId, descartando hijos con display:none
+    let cleanSpan = spanHtml
+      .replace(/<span[^>]*style=["'][^"']*display:\s*none[^"']*["'][^>]*>.*?<\/span>/gi, '')
+      .replace(/<span[^>]*style=["'][^"']*display:\s*none[^"']*["'][^>]*>[^<]*/gi, '');
+    const inlineRegex = new RegExp(`<[^>]*id=["']?${elemId}["']?[^>]*>([^<]*)`, 'i');
+    const inlineMatch = cleanSpan.match(inlineRegex);
+    if (inlineMatch && inlineMatch[1].trim() !== "") {
+      const inlineDigits = inlineMatch[1].replace(/\D/g, '');
+      if (inlineDigits.length > 0) {
+        return parseInt(inlineDigits, 10);
+      }
     }
   }
 
-  // 4. Si no hubo IDs o es un valor directo <i class=fa-solid>DIGIT</i>
-  if (digits === "") {
-    const directMatch = spanHtml.match(/<i\s+class=["']?fa-solid["']?>(\d+)<\/i>/i);
-    if (directMatch) {
-      digits = directMatch[1];
-    }
+  // 2. Valor directo en <i class=fa-solid>DIGIT</i>
+  const directMatch = spanHtml.match(/<i\s+class=["']?fa-solid["']?>\s*(\d+)\s*<\/i>/i);
+  if (directMatch) {
+    return parseInt(directMatch[1], 10);
   }
 
-  if (digits !== "") {
+  // 3. Texto plano directo descartando estilos, scripts y elementos con display:none
+  let cleanText = spanHtml
+    .replace(/<style[\s\S]*?<\/style>/gi, '')
+    .replace(/<script[\s\S]*?<\/script>/gi, '')
+    .replace(/<span[^>]*style=["'][^"']*display:\s*none[^"']*["'][^>]*>.*?<\/span>/gi, '')
+    .replace(/<span[^>]*style=["'][^"']*display:\s*none[^"']*["'][^>]*>[^<]*/gi, '')
+    .replace(/<[^>]*>/g, '')
+    .trim();
+  const digits = cleanText.replace(/\D/g, '');
+  if (digits.length > 0) {
     return parseInt(digits, 10);
   }
 
-  const cleanText = spanHtml.replace(/<[^>]*>/g, '').trim();
-  const directNum = parseInt(cleanText, 10);
-  return isNaN(directNum) ? null : directNum;
+  return null;
 }
 window.decodeFutgalScoreSpan = decodeFutgalScoreSpan;
 
