@@ -2,14 +2,20 @@ name: Sincronización Automática con FUTGAL
 
 on:
   schedule:
-    # 1. Sábados a las 23:00 hora española peninsular (21:00 UTC)
-    - cron: '0 21 * * 6'
-    # 2. Domingos a las 15:00 hora española peninsular (13:00 UTC)
-    - cron: '0 13 * * 0'
-    # 3. Domingos a las 23:00 hora española peninsular (21:00 UTC)
-    - cron: '0 21 * * 0'
-    # 4. Lunes a las 06:00 hora española peninsular (04:00 UTC)
-    - cron: '0 4 * * 1'
+    # 1. Sábados: cada 30 minutos de 14:00 a 22:30 UTC (16:00 a 00:30 hora española peninsular)
+    - cron: '*/30 14-22 * * 6'
+    # 2. Domingos: cada 30 minutos de 08:00 a 21:30 UTC (10:00 a 23:30 hora española peninsular)
+    - cron: '*/30 8-21 * * 0'
+    # 3. Lunes: mañanas, tardes y noches (actas oficiales cerradas y resoluciones de comités)
+    - cron: '0 5,12,20 * * 1'
+    # 4. Jueves y Viernes: actualización de horarios oficiales y designaciones arbitrales
+    - cron: '0 11,19 * * 4,5'
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/sync-futgal.yml'
+      - 'scripts/**'
   workflow_dispatch:
     # Permite la ejecución manual bajo demanda desde GitHub Actions o API
 
@@ -19,7 +25,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-
 
     steps:
       - name: Descargar Código del Repositorio
@@ -45,5 +50,6 @@ jobs:
             echo "Sin cambios en archivos locales para commit."
           else
             git commit -m "chore(sync): actualizar snapshot de datos FUTGAL [skip ci]"
+            git pull --rebase origin main || true
             git push || echo "Push omitido"
           fi

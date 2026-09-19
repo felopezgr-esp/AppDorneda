@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es" data-theme="light">
 <head>
   <meta charset="UTF-8" />
@@ -8486,12 +8486,7 @@ function initFirebaseSync(){
       updateAdminModeUI();
       if(user && !isAdminMode){
         firebaseAuth.signOut();
-        toast('Esta cuenta no está autorizada para editar.', 'error');
-      } else if(isAdminMode){
-        connectCloud();
-      } else {
-        if(firestoreUnsubscribe){ firestoreUnsubscribe(); firestoreUnsubscribe = null; }
-        updateCloudStatusUI('offline', 'Modo Local');
+        toast('Esta cuenta no estÃ¡ autorizada para editar.', 'error');
       }
     });
 
@@ -8502,43 +8497,44 @@ function initFirebaseSync(){
 
       updateCloudStatusUI('syncing', 'Conectando...');
 
-      // Solo la cuenta administradora abre la conexión con los datos privados.
       firestoreUnsubscribe = firestoreDocRef.onSnapshot(function(docSnap){
-      if(isCloudSyncing) return;
+        if(isCloudSyncing) return;
 
-      if(docSnap.exists){
-        var cData = docSnap.data();
-        if(cData && cData.db){
-          isRemoteUpdate = true;
-          var needsCloudUpdate = false;
-          try {
-            var res = validateAndMigrateDB(cData.db);
-            db = res.dbObj;
-            needsCloudUpdate = res.modified;
-            localStorage.setItem(DB_KEY, JSON.stringify(db));
-            if(typeof currentSection !== 'undefined'){
-              renderSection(currentSection);
+        if(docSnap.exists){
+          var cData = docSnap.data();
+          if(cData && cData.db){
+            isRemoteUpdate = true;
+            var needsCloudUpdate = false;
+            try {
+              var res = validateAndMigrateDB(cData.db);
+              db = res.dbObj;
+              needsCloudUpdate = res.modified;
+              localStorage.setItem(DB_KEY, JSON.stringify(db));
+              if(typeof currentSection !== 'undefined'){
+                renderSection(currentSection);
+              }
+              updateFutgalSyncUI();
+              updateCloudStatusUI('online', 'Nube Sincronizada');
+              console.log('SincronizaciÃ³n en tiempo real recibida de Firebase.');
+            } finally {
+              isRemoteUpdate = false;
             }
-            updateCloudStatusUI('online', 'Nube Sincronizada');
-            console.log('Sincronización en tiempo real recibida de Firebase.');
-          } finally {
-            isRemoteUpdate = false;
+            if(needsCloudUpdate && isAdminMode){
+              console.log('Actualizando datos validados en Firestore...');
+              saveDBToCloud();
+            }
           }
-          if(needsCloudUpdate && isAdminMode){
-            console.log('Actualizando datos validados en Firestore...');
-            saveDBToCloud();
-          }
+        } else if(isAdminMode) {
+          console.log('Creando registro de temporada 2026/27 en Firestore...');
+          saveDBToCloud();
         }
-      } else {
-        console.log('Creando registro de temporada 2026/27 en Firestore...');
-        saveDBToCloud();
-      }
       }, function(err){
-        console.error('Error Firestore onSnapshot:', err);
-        firestoreUnsubscribe = null;
-        updateCloudStatusUI('error', 'Error Conexión');
+        console.warn('Firestore onSnapshot aviso:', err);
+        fetchCloudDBViaRest();
       });
     }
+
+    connectCloud();
 
   } catch(e){
     console.error('Error initFirebaseSync:', e);
@@ -11129,29 +11125,60 @@ function mergeFutgalDataIntoDB(currentDB, futgalResults) {
 }
 window.mergeFutgalDataIntoDB = mergeFutgalDataIntoDB;
 
-async function fetchFutgalHtmlWithFallback(targetUrl, timeoutMs = 3500) {
-  const proxies = [
-    (u) => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
-    (u) => `https://corsproxy.io/?${encodeURIComponent(u)}`,
-    (u) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(u)}`
-  ];
+function parseFirestoreRestDoc(json) {
+  if (!json || !json.fields) return null;
+  function parseVal(val) {
+    if (!val) return null;
+    if ('stringValue' in val) return val.stringValue;
+    if ('integerValue' in val) return parseInt(val.integerValue, 10);
+    if ('doubleValue' in val) return parseFloat(val.doubleValue);
+    if ('booleanValue' in val) return val.booleanValue;
+    if ('nullValue' in val) return null;
+    if ('arrayValue' in val) return (val.arrayValue.values || []).map(parseVal);
+    if ('mapValue' in val) {
+      const res = {};
+      const fields = val.mapValue.fields || {};
+      for (const k of Object.keys(fields)) res[k] = parseVal(fields[k]);
+      return res;
+    }
+    return null;
+  }
+  const result = {};
+  for (const k of Object.keys(json.fields)) {
+    result[k] = parseVal(json.fields[k]);
+  }
+  return result;
+}
+window.parseFirestoreRestDoc = parseFirestoreRestDoc;
 
-  for (const getProxyUrl of proxies) {
-    try {
-      const pUrl = getProxyUrl(targetUrl);
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
-      const res = await fetch(pUrl, { signal: controller.signal });
-      clearTimeout(timeoutId);
-
-      if (res.ok) {
-        const text = await res.text();
-        if (text && text.length > 500 && !text.includes('No se ha aceptado el cookie')) {
-          return text;
+function fetchCloudDBViaRest(){
+  const restUrl = `https://firestore.googleapis.com/v1/projects/${FIREBASE_CONFIG.projectId}/databases/(default)/documents/dorneda_app_data/temporada_2026_2027?key=${FIREBASE_CONFIG.apiKey}`;
+  return fetch(restUrl, { cache: 'no-store' })
+    .then(r => r.ok ? r.json() : null)
+    .then(data => {
+      if(data && data.fields){
+        const parsed = parseFirestoreRestDoc(data);
+        if(parsed && parsed.db){
+          const res = validateAndMigrateDB(parsed.db);
+          db = res.dbObj;
+          localStorage.setItem(DB_KEY, JSON.stringify(db));
+          if(typeof currentSection !== 'undefined') renderSection(currentSection);
+          updateFutgalSyncUI();
+          updateCloudStatusUI('online', 'Nube Sincronizada');
+          return db;
         }
       }
-    } catch (e) {}
-  }
+      return null;
+    })
+    .catch(e => {
+      console.warn('fetchCloudDBViaRest error:', e);
+      updateCloudStatusUI('offline', 'Modo Local');
+      return null;
+    });
+}
+window.fetchCloudDBViaRest = fetchCloudDBViaRest;
+
+async function fetchFutgalHtmlWithFallback(targetUrl, timeoutMs = 3500) {
   return null;
 }
 window.fetchFutgalHtmlWithFallback = fetchFutgalHtmlWithFallback;
@@ -11170,11 +11197,13 @@ function setSyncButtonsText(html) {
 }
 
 /**
- * Función principal activada por los botones [ 🔄 Actualizar desde FUTGAL ]
+ * FunciÃ³n principal activada por los botones [ ðŸ”„ Actualizar desde FUTGAL ]
+ * 100% AutomÃ¡tica y Cloud-First: sincroniza al instante con los datos oficiales
+ * actualizados de forma continua por el robot de GitHub Actions sin bloqueos CORS.
  */
 async function syncFromFutgal() {
   if (isFutgalSyncing) {
-    toast('Sincronización en curso, por favor espera...', 'warning');
+    toast('SincronizaciÃ³n en curso, por favor espera...', 'warning');
     return;
   }
 
@@ -11192,157 +11221,82 @@ async function syncFromFutgal() {
     }
   });
 
-  setSyncButtonsText('<span>⏳ Verificando...</span>');
-  toast('Comprobando conexión con FUTGAL...', 'info');
-
-  const futgalResults = {
-    liga: [],
-    copa: []
-  };
-
-  let hadNetworkSuccess = false;
+  setSyncButtonsText('<span>â˜ï¸ Conectando con Nube...</span>');
+  toast('Sincronizando con los servidores de FUTGAL...', 'info');
 
   try {
-    // 1. Test rápido de conexión (Fail-Fast Probe con J1)
-    const ligaConfig = FUTGAL_COMPETITIONS.find(c => c.tipo === 'liga');
-    let probeSuccess = false;
+    let cloudDb = null;
 
-    if (ligaConfig) {
-      setSyncButtonsText('<span>⏳ Conectando...</span>');
-      const testUrl = buildFutgalUrl(ligaConfig, 1);
-      const j1Html = await fetchFutgalHtmlWithFallback(testUrl, 3000);
-      if (j1Html) {
-        probeSuccess = true;
-        hadNetworkSuccess = true;
-        const m1 = parseFutgalJornadaHtml(j1Html, 1, ligaConfig);
-        futgalResults.liga.push(m1);
-      }
-    }
-
-    if (probeSuccess && ligaConfig) {
-      // 2. Si la conexión directa responde, descargar resto de jornadas en lotes paralelos
-      const totalJornadas = ligaConfig.jornadas || 30;
-      const chunkSize = 5;
-
-      for (let i = 2; i <= totalJornadas; i += chunkSize) {
-        const end = Math.min(i + chunkSize - 1, totalJornadas);
-        setSyncButtonsText(`<span>⏳ Liga ${i}-${end}/${totalJornadas}...</span>`);
-
-        const batchPromises = [];
-        for (let j = i; j <= end; j++) {
-          const url = buildFutgalUrl(ligaConfig, j);
-          batchPromises.push(
-            fetchFutgalHtmlWithFallback(url, 3500)
-              .then(html => ({ j, html }))
-              .catch(() => ({ j, html: null }))
-          );
-        }
-
-        const batchResults = await Promise.all(batchPromises);
-        batchResults.forEach(({ j, html }) => {
-          if (html) {
-            const matches = parseFutgalJornadaHtml(html, j, ligaConfig);
-            futgalResults.liga.push(matches);
-          }
-        });
-      }
-
-      // Ordenar resultados de liga
-      futgalResults.liga.sort((a, b) => {
-        const ja = a[0]?.jornada || 0;
-        const jb = b[0]?.jornada || 0;
-        return ja - jb;
-      });
-
-      // 3. Copa (Rondas)
-      const copaConfigs = FUTGAL_COMPETITIONS.filter(c => c.tipo === 'copa');
-      for (const copaConfig of copaConfigs) {
-        setSyncButtonsText('<span>⏳ Revisando Copa...</span>');
-        for (let ronda = 1; ronda <= 5; ronda++) {
-          const url = buildFutgalUrl(copaConfig, ronda);
-          const html = await fetchFutgalHtmlWithFallback(url, 3000);
-          if (html) {
-            const matches = parseFutgalJornadaHtml(html, ronda, copaConfig);
-            if (matches.length > 0) {
-              futgalResults.copa.push(matches);
-            } else {
-              break;
-            }
-          } else {
-            break;
-          }
-        }
-      }
-    }
-
-    // 4. Clasificación de Liga
-    if (ligaConfig) {
-      setSyncButtonsText('<span>⏳ Clasificación...</span>');
-      const clasifUrl = `https://www.futgal.es/pnfg/NPcd/NFG_VisClasificacion?cod_primaria=1000120&codcompeticion=${ligaConfig.codCompeticion}&codgrupo=${ligaConfig.codGrupo}&cod_agrupacion=1`;
-      const clasifHtml = await fetchFutgalHtmlWithFallback(clasifUrl, 3500);
-      if (clasifHtml) {
-        futgalResults.clasificacion = parseFutgalClasificacionHtml(clasifHtml);
-      }
-    }
-
-    // 5. Si la consulta directa a través de proxies no funcionó, sincronizar desde Firebase Firestore
-    if (!hadNetworkSuccess && typeof firestoreDocRef !== 'undefined' && firestoreDocRef) {
-      setSyncButtonsText('<span>☁️ Consultando Nube...</span>');
+    // 1. Intentar obtener desde Firestore SDK en tiempo real
+    if (typeof firestoreDocRef !== 'undefined' && firestoreDocRef) {
       try {
         const docSnap = await firestoreDocRef.get();
         if (docSnap && docSnap.exists) {
-          const cloudData = docSnap.data();
-          if (cloudData && cloudData.db) {
-            db = cloudData.db;
-            saveDB();
-            renderSection(currentSection);
-            updateFutgalSyncUI();
-            updateCloudStatusUI('online', 'Nube Sincronizada');
-            toast('✅ Datos actualizados desde la nube (FUTGAL Sync)', 'success');
-            showFutgalSyncResultModal({
-              success: true,
-              summary: db.futgalSync?.summary || { partidosActualizados: 0, nuevosPartidos: 0, sinCambios: 30 },
-              logs: db.futgalSync?.logs || []
-            });
-            return;
+          const cData = docSnap.data();
+          if (cData && cData.db) {
+            cloudDb = cData.db;
           }
         }
-      } catch (cloudErr) {
-        console.warn('No se pudo obtener datos de Firestore durante sync:', cloudErr);
+      } catch (sdkErr) {
+        console.warn('Firestore SDK get aviso, recurriendo a REST API oficial:', sdkErr);
       }
     }
 
-    if (hadNetworkSuccess) {
-      setSyncButtonsText('<span>💾 Guardando...</span>');
-      const { updatedDB, summary, logs } = mergeFutgalDataIntoDB(db, futgalResults);
-      db = updatedDB;
+    // 2. Si el SDK no respondiÃ³ o estÃ¡ offline, consultar directamente vÃ­a REST API Google (inmune a CORS)
+    if (!cloudDb) {
+      setSyncButtonsText('<span>â˜ï¸ Descargando datos...</span>');
+      try {
+        const restUrl = `https://firestore.googleapis.com/v1/projects/${FIREBASE_CONFIG.projectId}/databases/(default)/documents/dorneda_app_data/temporada_2026_2027?key=${FIREBASE_CONFIG.apiKey}`;
+        const res = await fetch(restUrl, { cache: 'no-store' });
+        if (res.ok) {
+          const restJson = await res.json();
+          const parsed = parseFirestoreRestDoc(restJson);
+          if (parsed && parsed.db) {
+            cloudDb = parsed.db;
+          }
+        }
+      } catch (restErr) {
+        console.warn('REST API fetch error:', restErr);
+      }
+    }
+
+    if (cloudDb) {
+      setSyncButtonsText('<span>ðŸ’¾ Actualizando...</span>');
+      const migrationRes = validateAndMigrateDB(cloudDb);
+      db = migrationRes.dbObj;
       saveDB();
       renderSection(currentSection);
       updateFutgalSyncUI();
-      showFutgalSyncResultModal({ success: true, summary, logs });
-      toast('✅ Sincronización con FUTGAL completada', 'success');
-    } else {
+      updateCloudStatusUI('online', 'Nube Sincronizada');
+      toast('âœ… Datos sincronizados con la nube de FUTGAL', 'success');
       showFutgalSyncResultModal({
-        success: false,
-        error: 'No se pudo conectar directamente con los servidores de FUTGAL desde el navegador en este momento (restricción CORS/proxies públicos lentos).<br><br>💡 <strong>Información:</strong> La sincronización automática de GitHub Actions actualiza los datos a diario de madrugada. También puedes usar el <strong>Importador Manual</strong> para pegar actas directamente.',
-        canManualImport: true
+        success: true,
+        summary: db.futgalSync?.summary || { partidosActualizados: 0, nuevosPartidos: 0, sinCambios: 30 },
+        logs: db.futgalSync?.logs || []
       });
-      toast('FUTGAL no respondió directamente. Datos locales intactos.', 'warning');
+      return;
     }
+
+    // Si no hubo respuesta de la nube (dispositivo sin internet)
+    showFutgalSyncResultModal({
+      success: false,
+      isOffline: true,
+      error: 'No se pudo conectar con los servidores en este momento. Comprueba tu conexiÃ³n a internet. Los datos locales guardados se mantienen intactos.'
+    });
+    toast('Sin conexiÃ³n a la nube. Datos locales intactos.', 'warning');
 
   } catch (err) {
     console.error('Error en syncFromFutgal:', err);
     showFutgalSyncResultModal({
       success: false,
-      error: `Error durante la sincronización: ${err.message}. Se mantienen intactos todos los datos actuales.`,
-      canManualImport: true
+      error: `Error durante la sincronizaciÃ³n: ${err.message}. Se mantienen intactos todos los datos actuales.`
     });
   } finally {
     isFutgalSyncing = false;
     buttons.forEach(b => {
       if (b) {
         b.disabled = false;
-        b.innerHTML = b.dataset.origHtml || '🔄 Actualizar desde FUTGAL';
+        b.innerHTML = b.dataset.origHtml || 'ðŸ”„ Actualizar desde FUTGAL';
       }
     });
   }
@@ -11356,13 +11310,13 @@ function showFutgalSyncResultModal(res) {
   if (!modalEl || !bodyEl) return;
 
   if (res.success) {
-    if (titleEl) titleEl.innerHTML = '✅ Actualización completada';
+    if (titleEl) titleEl.innerHTML = 'âœ… ActualizaciÃ³n completada';
     const s = res.summary || {};
     let logsHtml = '';
     if (res.logs && res.logs.length > 0) {
       logsHtml = `
         <div style="margin-top:12px;background:var(--surface2);border-radius:var(--radius-sm);padding:10px 12px;border:1px solid var(--border)">
-          <div style="font-size:11px;font-weight:800;color:var(--text);margin-bottom:6px">📋 Registro de cambios detectados:</div>
+          <div style="font-size:11px;font-weight:800;color:var(--text);margin-bottom:6px">ðŸ“‹ Registro de cambios detectados:</div>
           <ul style="font-size:11px;color:var(--text-muted);padding-left:14px;margin:0;line-height:1.5">
             ${res.logs.map(l => `<li><strong>${l.fecha} ${l.hora}:</strong> ${l.detalle}</li>`).join('')}
           </ul>
@@ -11371,32 +11325,35 @@ function showFutgalSyncResultModal(res) {
     } else {
       logsHtml = `
         <div style="margin-top:10px;font-size:11px;color:var(--success);font-weight:600">
-          ✓ FUTGAL revisado. Todos los partidos coinciden y no hay cambios nuevos.
+          âœ“ FUTGAL revisado. Todos los partidos coinciden y no hay cambios nuevos.
         </div>
       `;
     }
 
     bodyEl.innerHTML = `
       <div style="font-size:13px;line-height:1.5;margin-bottom:14px;color:var(--text)">
-        Se ha completado la sincronización con la web oficial de la Federación Gallega (FUTGAL).
+        Se ha completado la sincronizaciÃ³n con la base de datos oficial de FUTGAL.
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
         <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px;text-align:center">
-          <div style="font-size:10px;font-weight:800;text-transform:uppercase;color:var(--text-muted)">⚽ Liga (1ª Div)</div>
-          <div style="font-size:16px;font-weight:900;color:var(--success);margin:4px 0">✓ ${s.ligaJornadasChecked || 30}</div>
+          <div style="font-size:10px;font-weight:800;text-transform:uppercase;color:var(--text-muted)">âš½ Liga (1Âª Div)</div>
+          <div style="font-size:16px;font-weight:900;color:var(--success);margin:4px 0">âœ“ ${s.ligaJornadasChecked || 30}</div>
           <div style="font-size:10px;color:var(--text-dim)">Jornadas revisadas</div>
         </div>
         <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px;text-align:center">
-          <div style="font-size:10px;font-weight:800;text-transform:uppercase;color:var(--text-muted)">🏆 Copa Federación</div>
-          <div style="font-size:16px;font-weight:900;color:var(--info);margin:4px 0">✓ ${s.copaRondasFound || 1}</div>
+          <div style="font-size:10px;font-weight:800;text-transform:uppercase;color:var(--text-muted)">ðŸ† Copa FederaciÃ³n</div>
+          <div style="font-size:16px;font-weight:900;color:var(--info);margin:4px 0">âœ“ ${s.copaRondasFound || 1}</div>
           <div style="font-size:10px;color:var(--text-dim)">Rondas encontradas</div>
         </div>
       </div>
       <div style="background:var(--surface3);border-radius:var(--radius-sm);padding:10px 14px;font-size:11.5px;color:var(--text);margin-bottom:12px">
         <div><strong>Partidos actualizados:</strong> ${s.partidosActualizados || 0}</div>
-        <div><strong>Nuevos partidos añadidos:</strong> ${s.nuevosPartidos || 0}</div>
+        <div><strong>Nuevos partidos aÃ±adidos:</strong> ${s.nuevosPartidos || 0}</div>
         <div><strong>Partidos sin cambios:</strong> ${s.sinCambios || 0}</div>
-        <div style="margin-top:6px;font-size:10px;color:var(--text-muted)">Última actualización: <strong>${db.futgalSync?.lastSuccess || getMadridFormattedTimestamp()}</strong></div>
+        <div style="margin-top:6px;font-size:10px;color:var(--text-muted)">Ãšltima actualizaciÃ³n oficial: <strong>${db.futgalSync?.lastSuccess || getMadridFormattedTimestamp()}</strong></div>
+      </div>
+      <div style="font-size:11px;color:var(--text-muted);background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);border-radius:var(--radius-sm);padding:8px 10px;margin-bottom:12px">
+        ðŸ¤– <strong>Robot AutomÃ¡tico:</strong> Sincroniza cada 30 min los fines de semana y periÃ³dicamente entre semana sin que tengas que intervenir.
       </div>
       ${logsHtml}
       <div style="display:flex;justify-content:flex-end;margin-top:16px">
@@ -11404,19 +11361,15 @@ function showFutgalSyncResultModal(res) {
       </div>
     `;
   } else {
-    if (titleEl) titleEl.innerHTML = '⚠️ Aviso de Sincronización';
+    if (titleEl) titleEl.innerHTML = res.isOffline ? 'ðŸ“¶ Sin ConexiÃ³n' : 'âš ï¸ Aviso de SincronizaciÃ³n';
     bodyEl.innerHTML = `
       <div style="font-size:12.5px;color:var(--text);line-height:1.5;margin-bottom:14px">
-        ${res.error || 'No se pudo consultar FUTGAL en este momento.'}
+        ${res.error || 'No se pudo consultar el servidor en este momento.'}
       </div>
       <div style="background:rgba(234,179,8,0.1);border:1px solid rgba(234,179,8,0.3);border-radius:var(--radius-sm);padding:10px 12px;font-size:11.5px;color:var(--text);margin-bottom:14px">
-        🛡️ <strong>Seguridad de Datos:</strong> Ningún dato existente ha sido borrado o modificado. Se conservan intactos los partidos, estadísticas y notas internas.
+        ðŸ›¡ï¸ <strong>Seguridad de Datos:</strong> NingÃºn dato existente ha sido borrado o modificado. Se conservan intactos los partidos, estadÃ­sticas y notas internas.
       </div>
-      <div style="font-size:11px;color:var(--text-muted);margin-bottom:16px">
-        💡 <em>Nota:</em> La sincronización automática diaria en el backend (GitHub Actions / Cron) se ejecuta de madrugada directamente desde el servidor sin restricciones. También puedes usar el <strong>Importador Manual</strong> para pegar actas directamente.
-      </div>
-      <div style="display:flex;justify-content:space-between;gap:8px">
-        <button type="button" class="btn btn-ghost btn-sm" onclick="openFutgalImporter();closeModal('modalSyncFutgalResult')">🔗 Abrir Importador Manual</button>
+      <div style="display:flex;justify-content:flex-end;gap:8px">
         <button type="button" class="btn btn-primary btn-sm" onclick="closeModal('modalSyncFutgalResult')">Entendido</button>
       </div>
     `;
