@@ -7,6 +7,7 @@ const https = require('https');
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const {
   FUTGAL_COMPETITIONS,
   parseFutgalJornadaHtml,
@@ -19,10 +20,67 @@ const {
 
 const FIRESTORE_PROJECT = "appdorneda";
 const FIRESTORE_DOC_PATH = "dorneda_app_data/temporada_2026_2027";
-const FIRESTORE_API_KEY = "AIzaSyCGDgGaAX2uqi0CwmY6ejVH_4SDhiLz1AA";
 const USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36";
 
 let sessionCookies = "";
+let firestoreAccessToken = null;
+
+function base64Url(value) {
+  return Buffer.from(value).toString('base64url');
+}
+
+/**
+ * Obtiene un token OAuth temporal usando la cuenta de servicio guardada
+ * exclusivamente como secreto de GitHub Actions.
+ */
+async function getFirestoreAccessToken() {
+  if (firestoreAccessToken) return firestoreAccessToken;
+
+  const rawCredentials = process.env.FIREBASE_SERVICE_ACCOUNT_JSON;
+  if (!rawCredentials) {
+    throw new Error('Falta el secreto FIREBASE_SERVICE_ACCOUNT_JSON. Se cancela la sincronización para no usar acceso anónimo.');
+  }
+
+  let credentials;
+  try {
+    credentials = JSON.parse(rawCredentials);
+  } catch (error) {
+    throw new Error('FIREBASE_SERVICE_ACCOUNT_JSON no contiene un JSON válido.');
+  }
+
+  if (!credentials.client_email || !credentials.private_key) {
+    throw new Error('La credencial de Firebase no contiene client_email y private_key.');
+  }
+
+  const now = Math.floor(Date.now() / 1000);
+  const header = base64Url(JSON.stringify({ alg: 'RS256', typ: 'JWT' }));
+  const claims = base64Url(JSON.stringify({
+    iss: credentials.client_email,
+    scope: 'https://www.googleapis.com/auth/datastore',
+    aud: 'https://oauth2.googleapis.com/token',
+    iat: now,
+    exp: now + 3600
+  }));
+  const unsignedJwt = `${header}.${claims}`;
+  const signature = crypto.sign('RSA-SHA256', Buffer.from(unsignedJwt), credentials.private_key).toString('base64url');
+  const assertion = `${unsignedJwt}.${signature}`;
+
+  const response = await fetch('https://oauth2.googleapis.com/token', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+      assertion
+    })
+  });
+  const body = await response.json();
+  if (!response.ok || !body.access_token) {
+    throw new Error(`No se pudo autenticar la cuenta de servicio (${response.status}).`);
+  }
+
+  firestoreAccessToken = body.access_token;
+  return firestoreAccessToken;
+}
 
 /**
  * Realiza una petición HTTPS con soporte de cookies y seguimiento de redirecciones
@@ -79,10 +137,11 @@ function fetchWithCookies(url, customHeaders = {}) {
  * Lee el documento actual desde Firebase Firestore vía REST API
  */
 async function getFirestoreDB() {
-  const url = `https://firestore.googleapis.com/v1/projects/${FIRESTORE_PROJECT}/databases/(default)/documents/${FIRESTORE_DOC_PATH}?key=${FIRESTORE_API_KEY}`;
+  const url = `https://firestore.googleapis.com/v1/projects/${FIRESTORE_PROJECT}/databases/(default)/documents/${FIRESTORE_DOC_PATH}`;
+  const accessToken = await getFirestoreAccessToken();
   
   return new Promise((resolve, reject) => {
-    https.get(url, (res) => {
+    https.get(url, { headers: { Authorization: `Bearer ${accessToken}` } }, (res) => {
       let data = '';
       res.on('data', chunk => data += chunk);
       res.on('end', () => {
@@ -178,7 +237,8 @@ function convertObjectToFirestoreValue(val) {
  * Guarda el objeto DB en Firebase Firestore vía REST API
  */
 async function saveFirestoreDB(dbObj) {
-  const url = `https://firestore.googleapis.com/v1/projects/${FIRESTORE_PROJECT}/databases/(default)/documents/${FIRESTORE_DOC_PATH}?key=${FIRESTORE_API_KEY}`;
+  const url = `https://firestore.googleapis.com/v1/projects/${FIRESTORE_PROJECT}/databases/(default)/documents/${FIRESTORE_DOC_PATH}`;
+  const accessToken = await getFirestoreAccessToken();
   
   const payload = JSON.stringify({
     fields: {
@@ -193,6 +253,7 @@ async function saveFirestoreDB(dbObj) {
     const req = https.request(parsed, {
       method: 'PATCH',
       headers: {
+        'Authorization': `Bearer ${accessToken}`,
         'Content-Type': 'application/json',
         'Content-Length': Buffer.byteLength(payload)
       }
