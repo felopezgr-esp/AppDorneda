@@ -678,6 +678,8 @@ function mergeFutgalDataIntoDB(currentDB, futgalResults) {
         }
       }
     });
+  }
+
   // 3. Procesar Clasificación
   if (futgalResults.clasificacion && futgalResults.clasificacion.length > 0) {
     db.clasificacion = futgalResults.clasificacion;
