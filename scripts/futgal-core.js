@@ -1,4 +1,4 @@
-﻿/**
+/**
  * futgal-core.js - Motor centralizado de configuración, parsing y sincronización de FUTGAL
  * Xuventude Dorneda - Temporada 2026/27
  */
@@ -101,7 +101,26 @@ function decodeNovanetString(str) {
 function decodeFutgalScoreSpan(spanHtml, tableHtml) {
   if (!spanHtml) return null;
 
-  // Extraer todos los IDs presentes en el span
+  // 1. Clases FontAwesome directas fa-X (e.g. class=fa-6 o class="fa-6")
+  const faRegex = /\bfa-(\d)\b/g;
+  let faMatch;
+  let faDigits = "";
+  while ((faMatch = faRegex.exec(spanHtml)) !== null) {
+    faDigits += faMatch[1];
+  }
+  if (faDigits.length > 0) {
+    const num = parseInt(faDigits, 10);
+    if (!isNaN(num)) return num;
+  }
+
+  // 2. Span oculto con el dígito <span style="display:none;">6
+  const hiddenSpanMatch = spanHtml.match(/<span[^>]*style=["'][^"']*display:\s*none[^"']*["'][^>]*>(\d+)/i);
+  if (hiddenSpanMatch) {
+    const num = parseInt(hiddenSpanMatch[1], 10);
+    if (!isNaN(num)) return num;
+  }
+
+  // 3. Extraer todos los IDs presentes en el span
   const idRegex = /id=["']?([a-zA-Z0-9_-]+)["']?/g;
   let match;
   let digits = "";
@@ -109,9 +128,16 @@ function decodeFutgalScoreSpan(spanHtml, tableHtml) {
   while ((match = idRegex.exec(spanHtml)) !== null) {
     const elemId = match[1];
 
+    // Llamada ntype con fa-X específica para este elemId: ntype("id", n, i, "fa-6")
+    const elemNtypeFa = tableHtml ? tableHtml.match(new RegExp(`ntype\\(["']${elemId}["'],\\s*\\d+,\\s*\\d+,\\s*["']fa-(\\d)["']`, 'i')) : null;
+    if (elemNtypeFa) {
+      digits += elemNtypeFa[1];
+      continue;
+    }
+
     // 1. Llamada a la función JS ntype("id", n, i, ...)
     const ntypeRegex = new RegExp(`ntype\\(["']${elemId}["'],\\s*(\\d+),\\s*(\\d+)`, 'i');
-    const ntypeMatch = tableHtml.match(ntypeRegex);
+    const ntypeMatch = tableHtml ? tableHtml.match(ntypeRegex) : null;
     if (ntypeMatch) {
       const n = parseInt(ntypeMatch[1], 10);
       const i = parseInt(ntypeMatch[2], 10);
@@ -124,7 +150,7 @@ function decodeFutgalScoreSpan(spanHtml, tableHtml) {
 
     // 2. Estilos CSS pseudo-elementos #id:before o #id:after con content:"\003X" o content:"X"
     const cssRegex = new RegExp(`#${elemId}[^{]*\\{[^}]*content:\\s*["'](?:\\\\003)?(\\d)["']`, 'i');
-    const cssMatch = tableHtml.match(cssRegex);
+    const cssMatch = tableHtml ? tableHtml.match(cssRegex) : null;
     if (cssMatch) {
       digits += String(cssMatch[1]);
       continue;
@@ -150,7 +176,10 @@ function decodeFutgalScoreSpan(spanHtml, tableHtml) {
   if (digits !== "") {
     return parseInt(digits, 10);
   }
-  return null;
+
+  const cleanText = spanHtml.replace(/<[^>]*>/g, '').trim();
+  const directNum = parseInt(cleanText, 10);
+  return isNaN(directNum) ? null : directNum;
 }
 
 /**

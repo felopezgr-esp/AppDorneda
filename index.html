@@ -10524,6 +10524,26 @@ window.isDornedaTeam = isDornedaTeam;
 function decodeFutgalScoreSpan(spanHtml, tableHtml) {
   if (!spanHtml) return null;
 
+  // 1. Clases FontAwesome directas fa-X (e.g. class=fa-6 o class="fa-6")
+  const faRegex = /\bfa-(\d)\b/g;
+  let faMatch;
+  let faDigits = "";
+  while ((faMatch = faRegex.exec(spanHtml)) !== null) {
+    faDigits += faMatch[1];
+  }
+  if (faDigits.length > 0) {
+    const num = parseInt(faDigits, 10);
+    if (!isNaN(num)) return num;
+  }
+
+  // 2. Span oculto con el dÃ­gito <span style="display:none;">6
+  const hiddenSpanMatch = spanHtml.match(/<span[^>]*style=["'][^"']*display:\s*none[^"']*["'][^>]*>(\d+)/i);
+  if (hiddenSpanMatch) {
+    const num = parseInt(hiddenSpanMatch[1], 10);
+    if (!isNaN(num)) return num;
+  }
+
+  // 3. Extraer todos los IDs presentes en el span
   const idRegex = /id=["']?([a-zA-Z0-9_-]+)["']?/g;
   let match;
   let digits = "";
@@ -10531,9 +10551,16 @@ function decodeFutgalScoreSpan(spanHtml, tableHtml) {
   while ((match = idRegex.exec(spanHtml)) !== null) {
     const elemId = match[1];
 
-    // 1. Llamada ntype("id", n, i, ...)
+    // Llamada ntype con fa-X especÃ­fica para este elemId: ntype("id", n, i, "fa-6")
+    const elemNtypeFa = tableHtml ? tableHtml.match(new RegExp(`ntype\\(["']${elemId}["'],\\s*\\d+,\\s*\\d+,\\s*["']fa-(\\d)["']`, 'i')) : null;
+    if (elemNtypeFa) {
+      digits += elemNtypeFa[1];
+      continue;
+    }
+
+    // 1. Llamada a la funciÃ³n JS ntype("id", n, i, ...)
     const ntypeRegex = new RegExp(`ntype\\(["']${elemId}["'],\\s*(\\d+),\\s*(\\d+)`, 'i');
-    const ntypeMatch = tableHtml.match(ntypeRegex);
+    const ntypeMatch = tableHtml ? tableHtml.match(ntypeRegex) : null;
     if (ntypeMatch) {
       const n = parseInt(ntypeMatch[1], 10);
       const i = parseInt(ntypeMatch[2], 10);
@@ -10546,13 +10573,13 @@ function decodeFutgalScoreSpan(spanHtml, tableHtml) {
 
     // 2. Estilos CSS pseudo-elementos #id:before o #id:after con content:"\003X" o content:"X"
     const cssRegex = new RegExp(`#${elemId}[^{]*\\{[^}]*content:\\s*["'](?:\\\\003)?(\\d)["']`, 'i');
-    const cssMatch = tableHtml.match(cssRegex);
+    const cssMatch = tableHtml ? tableHtml.match(cssRegex) : null;
     if (cssMatch) {
       digits += String(cssMatch[1]);
       continue;
     }
 
-    // 3. Texto inline dentro del elemento
+    // 3. Texto inline dentro del elemento si no estÃ¡ oculto
     const inlineRegex = new RegExp(`<span\\s+id=["']?${elemId}["']?>(\\d+)<`, 'i');
     const inlineMatch = spanHtml.match(inlineRegex);
     if (inlineMatch) {
@@ -10561,7 +10588,7 @@ function decodeFutgalScoreSpan(spanHtml, tableHtml) {
     }
   }
 
-  // 4. Texto directo <i class=fa-solid>DIGIT</i>
+  // 4. Si no hubo IDs o es un valor directo <i class=fa-solid>DIGIT</i>
   if (digits === "") {
     const directMatch = spanHtml.match(/<i\s+class=["']?fa-solid["']?>(\d+)<\/i>/i);
     if (directMatch) {
@@ -10572,7 +10599,10 @@ function decodeFutgalScoreSpan(spanHtml, tableHtml) {
   if (digits !== "") {
     return parseInt(digits, 10);
   }
-  return null;
+
+  const cleanText = spanHtml.replace(/<[^>]*>/g, '').trim();
+  const directNum = parseInt(cleanText, 10);
+  return isNaN(directNum) ? null : directNum;
 }
 window.decodeFutgalScoreSpan = decodeFutgalScoreSpan;
 
