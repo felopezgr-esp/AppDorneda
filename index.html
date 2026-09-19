@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <!-- Google Firebase SDK (Compat) -->
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
   <style>
     :root, [data-theme="light"] {
@@ -3837,23 +3838,19 @@
           </div>
         </div>
       </div>
-    <!-- MODAL ADMIN PIN / MODO EDICIÓN -->
+    <!-- MODAL DE ACCESO SEGURO / MODO EDICIÓN -->
     <div class="modal-backdrop" id="modalAdminPIN" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);z-index:9999;align-items:center;justify-content:center;" onclick="if(event.target===this)closeAdminPINModal()">
       <div class="modal card" style="max-width:360px;width:90%;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
-          <div style="font-weight:800;font-size:16px;color:var(--text);display:flex;align-items:center;gap:6px;" id="modalAdminPINTitle">🔒 Acceso Modo Editor</div>
+          <div style="font-weight:800;font-size:16px;color:var(--text);display:flex;align-items:center;gap:6px;" id="modalAdminPINTitle">🔒 Acceso seguro</div>
           <button type="button" class="btn-xs ghost" onclick="closeAdminPINModal()" style="font-size:14px;padding:4px 8px;">✕</button>
         </div>
         <div style="font-size:12px;color:var(--text-muted);margin-bottom:16px;line-height:1.4;" id="modalAdminPINDesc">
-          Introduce el PIN de Administrador para desbloquear la edición de resultados, plantilla y sincronización en la nube.
+          Inicia sesión con la cuenta de Google autorizada para editar resultados, plantilla y datos de la nube.
         </div>
-        <div class="form-group mb-16">
-          <label class="form-label" style="font-size:11px;font-weight:700;">PIN de Seguridad (4 dígitos)</label>
-          <input type="password" maxlength="6" id="inputAdminPIN" class="form-control" placeholder="••••" style="font-size:22px;text-align:center;letter-spacing:6px;font-weight:900;padding:10px;" onkeydown="if(event.key==='Enter')verifyAdminPIN()" />
-        </div>
-        <div id="adminPINError" style="color:#ef4444;font-size:12px;margin-bottom:14px;display:none;font-weight:600;text-align:center;">PIN incorrecto. Inténtalo de nuevo.</div>
+        <div id="adminPINError" style="color:#ef4444;font-size:12px;margin-bottom:14px;display:none;font-weight:600;text-align:center;">Esta cuenta no está autorizada.</div>
         <div style="display:flex;gap:8px;">
-          <button type="button" class="btn btn-primary" style="flex:1;justify-content:center;padding:10px;" onclick="verifyAdminPIN()">🔓 Desbloquear</button>
+          <button type="button" class="btn btn-primary" style="flex:1;justify-content:center;padding:10px;" onclick="verifyAdminPIN()">Continuar con Google</button>
           <button type="button" class="btn btn-ghost" onclick="closeAdminPINModal()" style="padding:10px;">Cancelar</button>
         </div>
       </div>
@@ -3933,13 +3930,15 @@ let isFutgalSyncing = false;
 window.isFutgalSyncing = isFutgalSyncing;
 
 let firebaseApp = null;
+let firebaseAuth = null;
 let firestoreDb = null;
 let firestoreDocRef = null;
 let isCloudSyncing = false;
 let isRemoteUpdate = false;
 let cloudSyncTimeout = null;
-let isAdminMode = localStorage.getItem('dorneda_admin_mode') !== 'false';
-let adminPin = localStorage.getItem('dorneda_admin_pin') || '1926';
+let firestoreUnsubscribe = null;
+let isAdminMode = false;
+const ADMIN_EMAIL = 'felopezgr@gmail.com';
 
 const DEFAULT_DATA={
   jugadores:[
@@ -8481,13 +8480,30 @@ function initFirebaseSync(){
     } else {
       firebaseApp = firebase.app();
     }
-    firestoreDb = firebase.firestore();
-    firestoreDocRef = firestoreDb.collection('dorneda_app_data').doc('temporada_2026_2027');
+    firebaseAuth = firebase.auth();
+    firebaseAuth.onAuthStateChanged(function(user){
+      isAdminMode = !!(user && user.email && user.email.toLowerCase() === ADMIN_EMAIL);
+      updateAdminModeUI();
+      if(user && !isAdminMode){
+        firebaseAuth.signOut();
+        toast('Esta cuenta no está autorizada para editar.', 'error');
+      } else if(isAdminMode){
+        connectCloud();
+      } else {
+        if(firestoreUnsubscribe){ firestoreUnsubscribe(); firestoreUnsubscribe = null; }
+        updateCloudStatusUI('offline', 'Modo Local');
+      }
+    });
 
-    updateCloudStatusUI('syncing', 'Conectando...');
+    function connectCloud(){
+      if(firestoreUnsubscribe) return;
+      firestoreDb = firebase.firestore();
+      firestoreDocRef = firestoreDb.collection('dorneda_app_data').doc('temporada_2026_2027');
 
-    // Listener en tiempo real
-    firestoreDocRef.onSnapshot(function(docSnap){
+      updateCloudStatusUI('syncing', 'Conectando...');
+
+      // Solo la cuenta administradora abre la conexión con los datos privados.
+      firestoreUnsubscribe = firestoreDocRef.onSnapshot(function(docSnap){
       if(isCloudSyncing) return;
 
       if(docSnap.exists){
@@ -8508,7 +8524,7 @@ function initFirebaseSync(){
           } finally {
             isRemoteUpdate = false;
           }
-          if(needsCloudUpdate){
+          if(needsCloudUpdate && isAdminMode){
             console.log('Actualizando datos validados en Firestore...');
             saveDBToCloud();
           }
@@ -8517,10 +8533,12 @@ function initFirebaseSync(){
         console.log('Creando registro de temporada 2026/27 en Firestore...');
         saveDBToCloud();
       }
-    }, function(err){
-      console.error('Error Firestore onSnapshot:', err);
-      updateCloudStatusUI('error', 'Error Conexión');
-    });
+      }, function(err){
+        console.error('Error Firestore onSnapshot:', err);
+        firestoreUnsubscribe = null;
+        updateCloudStatusUI('error', 'Error Conexión');
+      });
+    }
 
   } catch(e){
     console.error('Error initFirebaseSync:', e);
@@ -8531,6 +8549,10 @@ window.initFirebaseSync = initFirebaseSync;
 
 function saveDBToCloud(){
   if(!firestoreDocRef || isRemoteUpdate) return;
+  if(!isAdminMode || !firebaseAuth || !firebaseAuth.currentUser){
+    updateCloudStatusUI('online', 'Guardado local');
+    return;
+  }
   if(cloudSyncTimeout) clearTimeout(cloudSyncTimeout);
   
   updateCloudStatusUI('syncing', 'Guardando...');
@@ -8564,7 +8586,7 @@ function saveDB(){
 window.saveDB = saveDB;
 
 // ==========================================
-// ADMIN MODE & PIN CONTROLLER
+// ADMIN MODE WITH GOOGLE AUTHENTICATION
 // ==========================================
 function updateAdminModeUI(){
   var btnLabel = document.getElementById('adminModeLabel');
@@ -8582,11 +8604,12 @@ window.updateAdminModeUI = updateAdminModeUI;
 
 function toggleAdminPINModal(){
   if(isAdminMode){
-    if(confirm('¿Deseas bloquear el Modo Editor y pasar a Modo Lectura para proteger los datos?')){
-      isAdminMode = false;
-      localStorage.setItem('dorneda_admin_mode', 'false');
-      updateAdminModeUI();
-      toast('Modo Lectura activado 🔒', 'info');
+    if(confirm('¿Deseas cerrar la sesión de edición y volver al Modo Lectura?')){
+      firebaseAuth.signOut().then(function(){
+        isAdminMode = false;
+        updateAdminModeUI();
+        toast('Modo Lectura activado 🔒', 'info');
+      });
     }
   } else {
     openAdminPINModal();
@@ -8596,13 +8619,10 @@ window.toggleAdminPINModal = toggleAdminPINModal;
 
 function openAdminPINModal(){
   var m = document.getElementById('modalAdminPIN');
-  var inp = document.getElementById('inputAdminPIN');
   var err = document.getElementById('adminPINError');
-  if(inp) inp.value = '';
   if(err) err.style.display = 'none';
   if(m) {
     m.style.display = 'flex';
-    setTimeout(function(){ if(inp) inp.focus(); }, 150);
   }
 }
 window.openAdminPINModal = openAdminPINModal;
@@ -8614,20 +8634,29 @@ function closeAdminPINModal(){
 window.closeAdminPINModal = closeAdminPINModal;
 
 function verifyAdminPIN(){
-  var inp = document.getElementById('inputAdminPIN');
   var err = document.getElementById('adminPINError');
-  var val = inp ? inp.value.trim() : '';
-  
-  if(val === adminPin || val === '1926' || val === '1234'){
+  if(!firebaseAuth){
+    if(err){ err.textContent = 'Firebase todavía no está disponible. Inténtalo de nuevo.'; err.style.display = 'block'; }
+    return;
+  }
+  var provider = new firebase.auth.GoogleAuthProvider();
+  provider.setCustomParameters({ prompt: 'select_account' });
+  firebaseAuth.signInWithPopup(provider).then(function(result){
+    var email = result.user && result.user.email ? result.user.email.toLowerCase() : '';
+    if(email !== ADMIN_EMAIL){
+      return firebaseAuth.signOut().then(function(){ throw new Error('unauthorized'); });
+    }
     isAdminMode = true;
-    localStorage.setItem('dorneda_admin_mode', 'true');
     updateAdminModeUI();
     closeAdminPINModal();
-    toast('¡Modo Editor Desbloqueado! 🔓', 'success');
-  } else {
-    if(err) err.style.display = 'block';
-    if(inp) { inp.value = ''; inp.focus(); }
-  }
+    toast('Modo Editor autorizado con Google 🔓', 'success');
+  }).catch(function(error){
+    if(error && error.code === 'auth/popup-closed-by-user') return;
+    if(err){
+      err.textContent = error && error.message === 'unauthorized' ? 'Esta cuenta no está autorizada.' : 'No se pudo iniciar sesión. Inténtalo de nuevo.';
+      err.style.display = 'block';
+    }
+  });
 }
 window.verifyAdminPIN = verifyAdminPIN;
 

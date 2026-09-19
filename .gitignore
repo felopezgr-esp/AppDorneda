@@ -6,6 +6,8 @@ yarn-error.log*
 
 # Runtime / Temp data
 cookies.txt
+*service-account*.json
+firebase-adminsdk*.json
 *.tmp
 *.temp
 .DS_Store
