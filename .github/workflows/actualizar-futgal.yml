@@ -1,0 +1,82 @@
+name: Actualizar FUTGAL
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: actualizar-futgal
+  cancel-in-progress: false
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    env:
+      CI: "true"
+      TZ: Europe/Madrid
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Instalar dependencias
+        working-directory: tools/futgal
+        run: npm install --no-audit --no-fund
+
+      - name: Instalar Chromium de Playwright
+        working-directory: tools/futgal
+        run: npx playwright install --with-deps chromium
+
+      - name: Ejecutar Paso10E en la nube
+        working-directory: tools/futgal
+        run: node actualizar-futgal.js
+
+      - name: Validar salida antes de publicar
+        working-directory: tools/futgal
+        run: node verificar-salida-github.js
+
+      - name: Preparar JSON público para AppDorneda
+        run: |
+          cp tools/futgal/competicion.json ./competicion.json
+          cp tools/futgal/validacion-competicion.json ./validacion-competicion.json
+          cp tools/futgal/diagnostico-cambios-calendario.json ./diagnostico-cambios-calendario.json
+
+      - name: Guardar diagnóstico de la ejecución
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: futgal-diagnostico-${{ github.run_number }}
+          if-no-files-found: ignore
+          retention-days: 14
+          path: |
+            tools/futgal/competicion.json
+            tools/futgal/validacion-competicion.json
+            tools/futgal/diagnostico-cambios-calendario.json
+            tools/futgal/diagnostico-actas.json
+            tools/futgal/diagnostico-navegacion.json
+            tools/futgal/salida-integracion.txt
+            tools/futgal/error-integracion.png
+            tools/futgal/errores/
+
+      - name: Publicar solo si todo fue correcto
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add             competicion.json             validacion-competicion.json             diagnostico-cambios-calendario.json             tools/futgal/checkpoint-actas.json             tools/futgal/checkpoint-calendario.json             tools/futgal/checkpoint-calendario-parcial.json
+
+          if git diff --cached --quiet; then
+            echo "No hay cambios que publicar."
+          else
+            git commit -m "Actualizar datos FUTGAL"
+            git push
+          fi

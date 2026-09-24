@@ -1,0 +1,14 @@
+{
+  "name": "appdorneda-futgal-cloud",
+  "version": "11.0.0",
+  "private": true,
+  "description": "Paso10E adaptado a GitHub Actions sin cambiar la lógica de extracción",
+  "main": "actualizar-futgal.js",
+  "scripts": {
+    "actualizar": "node actualizar-futgal.js",
+    "validar": "node verificar-salida-github.js"
+  },
+  "dependencies": {
+    "playwright": "^1.55.0"
+  }
+}

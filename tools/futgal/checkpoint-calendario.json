@@ -1,0 +1,2036 @@
+{
+  "fecha": "2026-09-24T10:09:37.873Z",
+  "metodo": "url_directa_aislada_con_checkpoint",
+  "totalEquipos": 16,
+  "jornadasEsperadas": 30,
+  "jornadas": [
+    {
+      "numero": 1,
+      "totalPartidos": 8,
+      "validacionCalendario": {
+        "correcto": true,
+        "errores": []
+      },
+      "partidos": [
+        {
+          "local": "PORTAZGO S.D.",
+          "visitante": "U.D. PAIOSACO H.AÑON",
+          "fecha": "12-09-2026",
+          "hora": "18:00",
+          "campo": "Municip. De Tarrio, (Culleredo)"
+        },
+        {
+          "local": "SPORTING CAMBRE AS TRAVESAS",
+          "visitante": "OZA DE LOS RÍOS",
+          "fecha": "12-09-2026",
+          "hora": "18:00",
+          "campo": "Dani Mallo (Cambre)"
+        },
+        {
+          "local": "BETANZOS NORTE",
+          "visitante": "C.D. SIGRAS",
+          "fecha": "12-09-2026",
+          "hora": "20:00",
+          "campo": "O Carregal (Betanzos)"
+        },
+        {
+          "local": "XUVENTUDE DORNEDA",
+          "visitante": "U.D. NARAHIO",
+          "fecha": "13-09-2026",
+          "hora": "10:00",
+          "campo": "Campo de Fútbol A Marola"
+        },
+        {
+          "local": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "visitante": "SADA F.C. A NOSA VIÑA",
+          "fecha": "13-09-2026",
+          "hora": "10:00",
+          "campo": "O Cadaval"
+        },
+        {
+          "local": "SAN MARTIÑO S.D.",
+          "visitante": "C.C.D. CURTIS",
+          "fecha": "13-09-2026",
+          "hora": "10:00",
+          "campo": "Anexo O Roxo (Cerceda)"
+        },
+        {
+          "local": "CAMPANAL DE LOUREDA F. C.",
+          "visitante": "CEDEIRA S.D.",
+          "fecha": "13-09-2026",
+          "hora": "12:00",
+          "campo": "Campo de Fútbol de Freán"
+        },
+        {
+          "local": "LICEO DE MONELOS S.D.",
+          "visitante": "SPORTING BURGO",
+          "fecha": "13-09-2026",
+          "hora": "12:00",
+          "campo": "San Pedro de Visma 2"
+        }
+      ],
+      "actaUrls": [
+        "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478212&cod_acta=1478212",
+        "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478213&cod_acta=1478213",
+        "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478208&cod_acta=1478208",
+        "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478210&cod_acta=1478210",
+        "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478214&cod_acta=1478214",
+        "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478215&cod_acta=1478215",
+        "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478329&cod_acta=1478329",
+        "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478211&cod_acta=1478211"
+      ]
+    },
+    {
+      "numero": 2,
+      "totalPartidos": 8,
+      "validacionCalendario": {
+        "correcto": true,
+        "errores": []
+      },
+      "partidos": [
+        {
+          "local": "C.D. SIGRAS",
+          "visitante": "SAN MARTIÑO S.D.",
+          "fecha": "19-09-2026",
+          "hora": "18:00",
+          "campo": "Os Pinares, (Brexo Lema)"
+        },
+        {
+          "local": "SPORTING BURGO",
+          "visitante": "XUVENTUDE DORNEDA",
+          "fecha": "19-09-2026",
+          "hora": "18:00",
+          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
+        },
+        {
+          "local": "U.D. PAIOSACO H.AÑON",
+          "visitante": "LICEO DE MONELOS S.D.",
+          "fecha": "19-09-2026",
+          "hora": "18:00",
+          "campo": "Porta Santa"
+        },
+        {
+          "local": "C.C.D. CURTIS",
+          "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "fecha": "19-09-2026",
+          "hora": "18:00",
+          "campo": "Novo ( Curtis )"
+        },
+        {
+          "local": "U.D. NARAHIO",
+          "visitante": "CEDEIRA S.D.",
+          "fecha": "19-09-2026",
+          "hora": "19:00",
+          "campo": "Da Piscina"
+        },
+        {
+          "local": "OZA DE LOS RÍOS",
+          "visitante": "PORTAZGO S.D.",
+          "fecha": "20-09-2026",
+          "hora": "10:00",
+          "campo": "O Loureiro (Oza De Los Ríos)"
+        },
+        {
+          "local": "SADA F.C. A NOSA VIÑA",
+          "visitante": "SPORTING CAMBRE AS TRAVESAS",
+          "fecha": "20-09-2026",
+          "hora": "10:00",
+          "campo": "Dani Mallo (Cambre)"
+        },
+        {
+          "local": "CAMPANAL DE LOUREDA F. C.",
+          "visitante": "BETANZOS NORTE",
+          "fecha": "20-09-2026",
+          "hora": "11:00",
+          "campo": "Campo de Fútbol de Freán"
+        }
+      ],
+      "actaUrls": [
+        "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478216&cod_acta=1478216",
+        "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478219&cod_acta=1478219",
+        "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478220&cod_acta=1478220",
+        "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478223&cod_acta=1478223",
+        "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478218&cod_acta=1478218",
+        "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478221&cod_acta=1478221",
+        "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478222&cod_acta=1478222",
+        "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478217&cod_acta=1478217"
+      ]
+    },
+    {
+      "numero": 3,
+      "totalPartidos": 8,
+      "validacionCalendario": {
+        "correcto": true,
+        "errores": []
+      },
+      "partidos": [
+        {
+          "local": "XUVENTUDE DORNEDA",
+          "visitante": "U.D. PAIOSACO H.AÑON",
+          "fecha": "26-09-2026",
+          "hora": "17:30",
+          "campo": "Campo de Fútbol A Marola"
+        },
+        {
+          "local": "SPORTING CAMBRE AS TRAVESAS",
+          "visitante": "C.C.D. CURTIS",
+          "fecha": "26-09-2026",
+          "hora": "18:00",
+          "campo": "Dani Mallo (Cambre)"
+        },
+        {
+          "local": "CEDEIRA S.D.",
+          "visitante": "SPORTING BURGO",
+          "fecha": "26-09-2026",
+          "hora": "18:45",
+          "campo": "Municipal Carmen Maseda (O Beco)"
+        },
+        {
+          "local": "BETANZOS NORTE",
+          "visitante": "U.D. NARAHIO",
+          "fecha": "26-09-2026",
+          "hora": "20:00",
+          "campo": "O Carregal (Betanzos)"
+        },
+        {
+          "local": "C.D. SIGRAS",
+          "visitante": "CAMPANAL DE LOUREDA F. C.",
+          "fecha": "27-09-2026",
+          "hora": "10:00",
+          "campo": "Os Pinares, (Brexo Lema)"
+        },
+        {
+          "local": "SAN MARTIÑO S.D.",
+          "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "fecha": "27-09-2026",
+          "hora": "10:00",
+          "campo": "Anexo O Roxo (Cerceda)"
+        },
+        {
+          "local": "LICEO DE MONELOS S.D.",
+          "visitante": "OZA DE LOS RÍOS",
+          "fecha": "27-09-2026",
+          "hora": "12:00",
+          "campo": "San Pedro de Visma 2"
+        },
+        {
+          "local": "PORTAZGO S.D.",
+          "visitante": "SADA F.C. A NOSA VIÑA",
+          "fecha": "27-09-2026",
+          "hora": "12:00",
+          "campo": "Municip. De Tarrio, (Culleredo)"
+        }
+      ],
+      "actaUrls": []
+    },
+    {
+      "numero": 4,
+      "totalPartidos": 8,
+      "validacionCalendario": {
+        "correcto": true,
+        "errores": []
+      },
+      "partidos": [
+        {
+          "local": "U.D. NARAHIO",
+          "visitante": "C.D. SIGRAS",
+          "fecha": "03-10-2026",
+          "hora": null,
+          "campo": "Da Piscina"
+        },
+        {
+          "local": "SPORTING BURGO",
+          "visitante": "BETANZOS NORTE",
+          "fecha": "03-10-2026",
+          "hora": null,
+          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
+        },
+        {
+          "local": "U.D. PAIOSACO H.AÑON",
+          "visitante": "CEDEIRA S.D.",
+          "fecha": "03-10-2026",
+          "hora": null,
+          "campo": "Porta Santa"
+        },
+        {
+          "local": "OZA DE LOS RÍOS",
+          "visitante": "XUVENTUDE DORNEDA",
+          "fecha": "03-10-2026",
+          "hora": null,
+          "campo": "O Loureiro (Oza De Los Ríos)"
+        },
+        {
+          "local": "SADA F.C. A NOSA VIÑA",
+          "visitante": "LICEO DE MONELOS S.D.",
+          "fecha": "03-10-2026",
+          "hora": null,
+          "campo": "Campo de Fútbol As Mariñas - Andrés Pena de Sada"
+        },
+        {
+          "local": "C.C.D. CURTIS",
+          "visitante": "PORTAZGO S.D.",
+          "fecha": "03-10-2026",
+          "hora": null,
+          "campo": "Novo ( Curtis )"
+        },
+        {
+          "local": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "visitante": "SPORTING CAMBRE AS TRAVESAS",
+          "fecha": "03-10-2026",
+          "hora": null,
+          "campo": "O Cadaval"
+        },
+        {
+          "local": "CAMPANAL DE LOUREDA F. C.",
+          "visitante": "SAN MARTIÑO S.D.",
+          "fecha": "04-10-2026",
+          "hora": "11:00",
+          "campo": "Campo de Fútbol de Freán"
+        }
+      ],
+      "actaUrls": []
+    },
+    {
+      "numero": 5,
+      "totalPartidos": 8,
+      "validacionCalendario": {
+        "correcto": true,
+        "errores": []
+      },
+      "partidos": [
+        {
+          "local": "BETANZOS NORTE",
+          "visitante": "U.D. PAIOSACO H.AÑON",
+          "fecha": "10-10-2026",
+          "hora": null,
+          "campo": "O Carregal (Betanzos)"
+        },
+        {
+          "local": "CEDEIRA S.D.",
+          "visitante": "OZA DE LOS RÍOS",
+          "fecha": "10-10-2026",
+          "hora": null,
+          "campo": "Municipal Carmen Maseda (O Beco)"
+        },
+        {
+          "local": "XUVENTUDE DORNEDA",
+          "visitante": "SADA F.C. A NOSA VIÑA",
+          "fecha": "10-10-2026",
+          "hora": null,
+          "campo": "Campo de Fútbol A Marola"
+        },
+        {
+          "local": "LICEO DE MONELOS S.D.",
+          "visitante": "C.C.D. CURTIS",
+          "fecha": "10-10-2026",
+          "hora": null,
+          "campo": "Víctor Fernández Alonso - Antigua Leyma"
+        },
+        {
+          "local": "PORTAZGO S.D.",
+          "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "fecha": "10-10-2026",
+          "hora": null,
+          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
+        },
+        {
+          "local": "SAN MARTIÑO S.D.",
+          "visitante": "SPORTING CAMBRE AS TRAVESAS",
+          "fecha": "10-10-2026",
+          "hora": null,
+          "campo": "A Revolta (Queixas)"
+        },
+        {
+          "local": "C.D. SIGRAS",
+          "visitante": "SPORTING BURGO",
+          "fecha": "10-10-2026",
+          "hora": "18:00",
+          "campo": "Os Pinares, (Brexo Lema)"
+        },
+        {
+          "local": "CAMPANAL DE LOUREDA F. C.",
+          "visitante": "U.D. NARAHIO",
+          "fecha": "11-10-2026",
+          "hora": "11:00",
+          "campo": "Campo de Fútbol de Freán"
+        }
+      ],
+      "actaUrls": []
+    },
+    {
+      "numero": 6,
+      "totalPartidos": 8,
+      "validacionCalendario": {
+        "correcto": true,
+        "errores": []
+      },
+      "partidos": [
+        {
+          "local": "U.D. NARAHIO",
+          "visitante": "SAN MARTIÑO S.D.",
+          "fecha": "17-10-2026",
+          "hora": null,
+          "campo": "Da Piscina"
+        },
+        {
+          "local": "SPORTING BURGO",
+          "visitante": "CAMPANAL DE LOUREDA F. C.",
+          "fecha": "17-10-2026",
+          "hora": null,
+          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
+        },
+        {
+          "local": "U.D. PAIOSACO H.AÑON",
+          "visitante": "C.D. SIGRAS",
+          "fecha": "17-10-2026",
+          "hora": null,
+          "campo": "Porta Santa"
+        },
+        {
+          "local": "OZA DE LOS RÍOS",
+          "visitante": "BETANZOS NORTE",
+          "fecha": "17-10-2026",
+          "hora": null,
+          "campo": "O Loureiro (Oza De Los Ríos)"
+        },
+        {
+          "local": "SADA F.C. A NOSA VIÑA",
+          "visitante": "CEDEIRA S.D.",
+          "fecha": "17-10-2026",
+          "hora": null,
+          "campo": "Campo de Fútbol As Mariñas - Andrés Pena de Sada"
+        },
+        {
+          "local": "C.C.D. CURTIS",
+          "visitante": "XUVENTUDE DORNEDA",
+          "fecha": "17-10-2026",
+          "hora": null,
+          "campo": "Novo ( Curtis )"
+        },
+        {
+          "local": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "visitante": "LICEO DE MONELOS S.D.",
+          "fecha": "17-10-2026",
+          "hora": null,
+          "campo": "O Cadaval"
+        },
+        {
+          "local": "SPORTING CAMBRE AS TRAVESAS",
+          "visitante": "PORTAZGO S.D.",
+          "fecha": "17-10-2026",
+          "hora": null,
+          "campo": "Dani Mallo (Cambre)"
+        }
+      ],
+      "actaUrls": []
+    },
+    {
+      "numero": 7,
+      "totalPartidos": 8,
+      "validacionCalendario": {
+        "correcto": true,
+        "errores": []
+      },
+      "partidos": [
+        {
+          "local": "U.D. NARAHIO",
+          "visitante": "SPORTING BURGO",
+          "fecha": "24-10-2026",
+          "hora": null,
+          "campo": "Da Piscina"
+        },
+        {
+          "local": "BETANZOS NORTE",
+          "visitante": "SADA F.C. A NOSA VIÑA",
+          "fecha": "24-10-2026",
+          "hora": null,
+          "campo": "O Carregal (Betanzos)"
+        },
+        {
+          "local": "CEDEIRA S.D.",
+          "visitante": "C.C.D. CURTIS",
+          "fecha": "24-10-2026",
+          "hora": null,
+          "campo": "Municipal Carmen Maseda (O Beco)"
+        },
+        {
+          "local": "XUVENTUDE DORNEDA",
+          "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "fecha": "24-10-2026",
+          "hora": null,
+          "campo": "Campo de Fútbol A Marola"
+        },
+        {
+          "local": "LICEO DE MONELOS S.D.",
+          "visitante": "SPORTING CAMBRE AS TRAVESAS",
+          "fecha": "24-10-2026",
+          "hora": null,
+          "campo": "Víctor Fernández Alonso - Antigua Leyma"
+        },
+        {
+          "local": "SAN MARTIÑO S.D.",
+          "visitante": "PORTAZGO S.D.",
+          "fecha": "24-10-2026",
+          "hora": null,
+          "campo": "A Revolta (Queixas)"
+        },
+        {
+          "local": "C.D. SIGRAS",
+          "visitante": "OZA DE LOS RÍOS",
+          "fecha": "24-10-2026",
+          "hora": "18:00",
+          "campo": "Os Pinares, (Brexo Lema)"
+        },
+        {
+          "local": "CAMPANAL DE LOUREDA F. C.",
+          "visitante": "U.D. PAIOSACO H.AÑON",
+          "fecha": "25-10-2026",
+          "hora": "11:00",
+          "campo": "Campo de Fútbol de Freán"
+        }
+      ],
+      "actaUrls": []
+    },
+    {
+      "numero": 8,
+      "totalPartidos": 8,
+      "validacionCalendario": {
+        "correcto": true,
+        "errores": []
+      },
+      "partidos": [
+        {
+          "local": "SPORTING BURGO",
+          "visitante": "SAN MARTIÑO S.D.",
+          "fecha": "07-11-2026",
+          "hora": null,
+          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
+        },
+        {
+          "local": "U.D. PAIOSACO H.AÑON",
+          "visitante": "U.D. NARAHIO",
+          "fecha": "07-11-2026",
+          "hora": null,
+          "campo": "Porta Santa"
+        },
+        {
+          "local": "OZA DE LOS RÍOS",
+          "visitante": "CAMPANAL DE LOUREDA F. C.",
+          "fecha": "07-11-2026",
+          "hora": null,
+          "campo": "O Loureiro (Oza De Los Ríos)"
+        },
+        {
+          "local": "SADA F.C. A NOSA VIÑA",
+          "visitante": "C.D. SIGRAS",
+          "fecha": "07-11-2026",
+          "hora": null,
+          "campo": "Campo de Fútbol As Mariñas - Andrés Pena de Sada"
+        },
+        {
+          "local": "C.C.D. CURTIS",
+          "visitante": "BETANZOS NORTE",
+          "fecha": "07-11-2026",
+          "hora": null,
+          "campo": "Novo ( Curtis )"
+        },
+        {
+          "local": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "visitante": "CEDEIRA S.D.",
+          "fecha": "07-11-2026",
+          "hora": null,
+          "campo": "O Cadaval"
+        },
+        {
+          "local": "SPORTING CAMBRE AS TRAVESAS",
+          "visitante": "XUVENTUDE DORNEDA",
+          "fecha": "07-11-2026",
+          "hora": null,
+          "campo": "Dani Mallo (Cambre)"
+        },
+        {
+          "local": "PORTAZGO S.D.",
+          "visitante": "LICEO DE MONELOS S.D.",
+          "fecha": "07-11-2026",
+          "hora": null,
+          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
+        }
+      ],
+      "actaUrls": []
+    },
+    {
+      "numero": 9,
+      "totalPartidos": 8,
+      "validacionCalendario": {
+        "correcto": true,
+        "errores": []
+      },
+      "partidos": [
+        {
+          "local": "SPORTING BURGO",
+          "visitante": "U.D. PAIOSACO H.AÑON",
+          "fecha": "14-11-2026",
+          "hora": null,
+          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
+        },
+        {
+          "local": "U.D. NARAHIO",
+          "visitante": "OZA DE LOS RÍOS",
+          "fecha": "14-11-2026",
+          "hora": null,
+          "campo": "Da Piscina"
+        },
+        {
+          "local": "BETANZOS NORTE",
+          "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "fecha": "14-11-2026",
+          "hora": null,
+          "campo": "O Carregal (Betanzos)"
+        },
+        {
+          "local": "CEDEIRA S.D.",
+          "visitante": "SPORTING CAMBRE AS TRAVESAS",
+          "fecha": "14-11-2026",
+          "hora": null,
+          "campo": "Municipal Carmen Maseda (O Beco)"
+        },
+        {
+          "local": "XUVENTUDE DORNEDA",
+          "visitante": "PORTAZGO S.D.",
+          "fecha": "14-11-2026",
+          "hora": null,
+          "campo": "Campo de Fútbol A Marola"
+        },
+        {
+          "local": "SAN MARTIÑO S.D.",
+          "visitante": "LICEO DE MONELOS S.D.",
+          "fecha": "14-11-2026",
+          "hora": null,
+          "campo": "A Revolta (Queixas)"
+        },
+        {
+          "local": "C.D. SIGRAS",
+          "visitante": "C.C.D. CURTIS",
+          "fecha": "14-11-2026",
+          "hora": "18:00",
+          "campo": "Os Pinares, (Brexo Lema)"
+        },
+        {
+          "local": "CAMPANAL DE LOUREDA F. C.",
+          "visitante": "SADA F.C. A NOSA VIÑA",
+          "fecha": "15-11-2026",
+          "hora": "11:00",
+          "campo": "Campo de Fútbol de Freán"
+        }
+      ],
+      "actaUrls": []
+    },
+    {
+      "numero": 10,
+      "totalPartidos": 8,
+      "validacionCalendario": {
+        "correcto": true,
+        "errores": []
+      },
+      "partidos": [
+        {
+          "local": "U.D. PAIOSACO H.AÑON",
+          "visitante": "SAN MARTIÑO S.D.",
+          "fecha": "21-11-2026",
+          "hora": null,
+          "campo": "Porta Santa"
+        },
+        {
+          "local": "OZA DE LOS RÍOS",
+          "visitante": "SPORTING BURGO",
+          "fecha": "21-11-2026",
+          "hora": null,
+          "campo": "O Loureiro (Oza De Los Ríos)"
+        },
+        {
+          "local": "SADA F.C. A NOSA VIÑA",
+          "visitante": "U.D. NARAHIO",
+          "fecha": "21-11-2026",
+          "hora": null,
+          "campo": "Campo de Fútbol As Mariñas - Andrés Pena de Sada"
+        },
+        {
+          "local": "C.C.D. CURTIS",
+          "visitante": "CAMPANAL DE LOUREDA F. C.",
+          "fecha": "21-11-2026",
+          "hora": null,
+          "campo": "Novo ( Curtis )"
+        },
+        {
+          "local": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "visitante": "C.D. SIGRAS",
+          "fecha": "21-11-2026",
+          "hora": null,
+          "campo": "O Cadaval"
+        },
+        {
+          "local": "SPORTING CAMBRE AS TRAVESAS",
+          "visitante": "BETANZOS NORTE",
+          "fecha": "21-11-2026",
+          "hora": null,
+          "campo": "Dani Mallo (Cambre)"
+        },
+        {
+          "local": "PORTAZGO S.D.",
+          "visitante": "CEDEIRA S.D.",
+          "fecha": "21-11-2026",
+          "hora": null,
+          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
+        },
+        {
+          "local": "LICEO DE MONELOS S.D.",
+          "visitante": "XUVENTUDE DORNEDA",
+          "fecha": "21-11-2026",
+          "hora": null,
+          "campo": "Víctor Fernández Alonso - Antigua Leyma"
+        }
+      ],
+      "actaUrls": []
+    },
+    {
+      "numero": 11,
+      "totalPartidos": 8,
+      "validacionCalendario": {
+        "correcto": true,
+        "errores": []
+      },
+      "partidos": [
+        {
+          "local": "U.D. PAIOSACO H.AÑON",
+          "visitante": "OZA DE LOS RÍOS",
+          "fecha": "28-11-2026",
+          "hora": null,
+          "campo": "Porta Santa"
+        },
+        {
+          "local": "SPORTING BURGO",
+          "visitante": "SADA F.C. A NOSA VIÑA",
+          "fecha": "28-11-2026",
+          "hora": null,
+          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
+        },
+        {
+          "local": "U.D. NARAHIO",
+          "visitante": "C.C.D. CURTIS",
+          "fecha": "28-11-2026",
+          "hora": null,
+          "campo": "Da Piscina"
+        },
+        {
+          "local": "BETANZOS NORTE",
+          "visitante": "PORTAZGO S.D.",
+          "fecha": "28-11-2026",
+          "hora": null,
+          "campo": "O Carregal (Betanzos)"
+        },
+        {
+          "local": "CEDEIRA S.D.",
+          "visitante": "LICEO DE MONELOS S.D.",
+          "fecha": "28-11-2026",
+          "hora": null,
+          "campo": "Municipal Carmen Maseda (O Beco)"
+        },
+        {
+          "local": "SAN MARTIÑO S.D.",
+          "visitante": "XUVENTUDE DORNEDA",
+          "fecha": "28-11-2026",
+          "hora": null,
+          "campo": "A Revolta (Queixas)"
+        },
+        {
+          "local": "C.D. SIGRAS",
+          "visitante": "SPORTING CAMBRE AS TRAVESAS",
+          "fecha": "28-11-2026",
+          "hora": "18:00",
+          "campo": "Os Pinares, (Brexo Lema)"
+        },
+        {
+          "local": "CAMPANAL DE LOUREDA F. C.",
+          "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "fecha": "29-11-2026",
+          "hora": "11:00",
+          "campo": "Campo de Fútbol de Freán"
+        }
+      ],
+      "actaUrls": []
+    },
+    {
+      "numero": 12,
+      "totalPartidos": 8,
+      "validacionCalendario": {
+        "correcto": true,
+        "errores": []
+      },
+      "partidos": [
+        {
+          "local": "OZA DE LOS RÍOS",
+          "visitante": "SAN MARTIÑO S.D.",
+          "fecha": "05-12-2026",
+          "hora": null,
+          "campo": "O Loureiro (Oza De Los Ríos)"
+        },
+        {
+          "local": "SADA F.C. A NOSA VIÑA",
+          "visitante": "U.D. PAIOSACO H.AÑON",
+          "fecha": "05-12-2026",
+          "hora": null,
+          "campo": "Campo de Fútbol As Mariñas - Andrés Pena de Sada"
+        },
+        {
+          "local": "C.C.D. CURTIS",
+          "visitante": "SPORTING BURGO",
+          "fecha": "05-12-2026",
+          "hora": null,
+          "campo": "Novo ( Curtis )"
+        },
+        {
+          "local": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "visitante": "U.D. NARAHIO",
+          "fecha": "05-12-2026",
+          "hora": null,
+          "campo": "O Cadaval"
+        },
+        {
+          "local": "SPORTING CAMBRE AS TRAVESAS",
+          "visitante": "CAMPANAL DE LOUREDA F. C.",
+          "fecha": "05-12-2026",
+          "hora": null,
+          "campo": "Dani Mallo (Cambre)"
+        },
+        {
+          "local": "PORTAZGO S.D.",
+          "visitante": "C.D. SIGRAS",
+          "fecha": "05-12-2026",
+          "hora": null,
+          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
+        },
+        {
+          "local": "LICEO DE MONELOS S.D.",
+          "visitante": "BETANZOS NORTE",
+          "fecha": "05-12-2026",
+          "hora": null,
+          "campo": "Víctor Fernández Alonso - Antigua Leyma"
+        },
+        {
+          "local": "XUVENTUDE DORNEDA",
+          "visitante": "CEDEIRA S.D.",
+          "fecha": "05-12-2026",
+          "hora": null,
+          "campo": "Campo de Fútbol A Marola"
+        }
+      ],
+      "actaUrls": []
+    },
+    {
+      "numero": 13,
+      "totalPartidos": 8,
+      "validacionCalendario": {
+        "correcto": true,
+        "errores": []
+      },
+      "partidos": [
+        {
+          "local": "OZA DE LOS RÍOS",
+          "visitante": "SADA F.C. A NOSA VIÑA",
+          "fecha": "12-12-2026",
+          "hora": null,
+          "campo": "O Loureiro (Oza De Los Ríos)"
+        },
+        {
+          "local": "U.D. PAIOSACO H.AÑON",
+          "visitante": "C.C.D. CURTIS",
+          "fecha": "12-12-2026",
+          "hora": null,
+          "campo": "Porta Santa"
+        },
+        {
+          "local": "SPORTING BURGO",
+          "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "fecha": "12-12-2026",
+          "hora": null,
+          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
+        },
+        {
+          "local": "U.D. NARAHIO",
+          "visitante": "SPORTING CAMBRE AS TRAVESAS",
+          "fecha": "12-12-2026",
+          "hora": null,
+          "campo": "Da Piscina"
+        },
+        {
+          "local": "BETANZOS NORTE",
+          "visitante": "XUVENTUDE DORNEDA",
+          "fecha": "12-12-2026",
+          "hora": null,
+          "campo": "O Carregal (Betanzos)"
+        },
+        {
+          "local": "SAN MARTIÑO S.D.",
+          "visitante": "CEDEIRA S.D.",
+          "fecha": "12-12-2026",
+          "hora": null,
+          "campo": "A Revolta (Queixas)"
+        },
+        {
+          "local": "C.D. SIGRAS",
+          "visitante": "LICEO DE MONELOS S.D.",
+          "fecha": "12-12-2026",
+          "hora": "18:00",
+          "campo": "Os Pinares, (Brexo Lema)"
+        },
+        {
+          "local": "CAMPANAL DE LOUREDA F. C.",
+          "visitante": "PORTAZGO S.D.",
+          "fecha": "13-12-2026",
+          "hora": "11:00",
+          "campo": "Campo de Fútbol de Freán"
+        }
+      ],
+      "actaUrls": []
+    },
+    {
+      "numero": 14,
+      "totalPartidos": 8,
+      "validacionCalendario": {
+        "correcto": true,
+        "errores": []
+      },
+      "partidos": [
+        {
+          "local": "SAN MARTIÑO S.D.",
+          "visitante": "SADA F.C. A NOSA VIÑA",
+          "fecha": "19-12-2026",
+          "hora": null,
+          "campo": "A Revolta (Queixas)"
+        },
+        {
+          "local": "C.C.D. CURTIS",
+          "visitante": "OZA DE LOS RÍOS",
+          "fecha": "19-12-2026",
+          "hora": null,
+          "campo": "Novo ( Curtis )"
+        },
+        {
+          "local": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "visitante": "U.D. PAIOSACO H.AÑON",
+          "fecha": "19-12-2026",
+          "hora": null,
+          "campo": "O Cadaval"
+        },
+        {
+          "local": "SPORTING CAMBRE AS TRAVESAS",
+          "visitante": "SPORTING BURGO",
+          "fecha": "19-12-2026",
+          "hora": null,
+          "campo": "Dani Mallo (Cambre)"
+        },
+        {
+          "local": "PORTAZGO S.D.",
+          "visitante": "U.D. NARAHIO",
+          "fecha": "19-12-2026",
+          "hora": null,
+          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
+        },
+        {
+          "local": "LICEO DE MONELOS S.D.",
+          "visitante": "CAMPANAL DE LOUREDA F. C.",
+          "fecha": "19-12-2026",
+          "hora": null,
+          "campo": "Víctor Fernández Alonso - Antigua Leyma"
+        },
+        {
+          "local": "XUVENTUDE DORNEDA",
+          "visitante": "C.D. SIGRAS",
+          "fecha": "19-12-2026",
+          "hora": null,
+          "campo": "Campo de Fútbol A Marola"
+        },
+        {
+          "local": "CEDEIRA S.D.",
+          "visitante": "BETANZOS NORTE",
+          "fecha": "19-12-2026",
+          "hora": null,
+          "campo": "Municipal Carmen Maseda (O Beco)"
+        }
+      ],
+      "actaUrls": []
+    },
+    {
+      "numero": 15,
+      "totalPartidos": 8,
+      "validacionCalendario": {
+        "correcto": true,
+        "errores": []
+      },
+      "partidos": [
+        {
+          "local": "SADA F.C. A NOSA VIÑA",
+          "visitante": "C.C.D. CURTIS",
+          "fecha": "09-01-2027",
+          "hora": null,
+          "campo": "Campo de Fútbol As Mariñas - Andrés Pena de Sada"
+        },
+        {
+          "local": "OZA DE LOS RÍOS",
+          "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "fecha": "09-01-2027",
+          "hora": null,
+          "campo": "O Loureiro (Oza De Los Ríos)"
+        },
+        {
+          "local": "U.D. PAIOSACO H.AÑON",
+          "visitante": "SPORTING CAMBRE AS TRAVESAS",
+          "fecha": "09-01-2027",
+          "hora": null,
+          "campo": "Porta Santa"
+        },
+        {
+          "local": "SPORTING BURGO",
+          "visitante": "PORTAZGO S.D.",
+          "fecha": "09-01-2027",
+          "hora": null,
+          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
+        },
+        {
+          "local": "U.D. NARAHIO",
+          "visitante": "LICEO DE MONELOS S.D.",
+          "fecha": "09-01-2027",
+          "hora": null,
+          "campo": "Da Piscina"
+        },
+        {
+          "local": "BETANZOS NORTE",
+          "visitante": "SAN MARTIÑO S.D.",
+          "fecha": "09-01-2027",
+          "hora": null,
+          "campo": "O Carregal (Betanzos)"
+        },
+        {
+          "local": "C.D. SIGRAS",
+          "visitante": "CEDEIRA S.D.",
+          "fecha": "09-01-2027",
+          "hora": "18:00",
+          "campo": "Os Pinares, (Brexo Lema)"
+        },
+        {
+          "local": "CAMPANAL DE LOUREDA F. C.",
+          "visitante": "XUVENTUDE DORNEDA",
+          "fecha": "10-01-2027",
+          "hora": "11:00",
+          "campo": "Campo de Fútbol de Freán"
+        }
+      ],
+      "actaUrls": []
+    },
+    {
+      "numero": 16,
+      "totalPartidos": 8,
+      "validacionCalendario": {
+        "correcto": true,
+        "errores": []
+      },
+      "partidos": [
+        {
+          "local": "CEDEIRA S.D.",
+          "visitante": "CAMPANAL DE LOUREDA F. C.",
+          "fecha": "16-01-2027",
+          "hora": null,
+          "campo": "Municipal Carmen Maseda (O Beco)"
+        },
+        {
+          "local": "U.D. NARAHIO",
+          "visitante": "XUVENTUDE DORNEDA",
+          "fecha": "16-01-2027",
+          "hora": null,
+          "campo": "Da Piscina"
+        },
+        {
+          "local": "SPORTING BURGO",
+          "visitante": "LICEO DE MONELOS S.D.",
+          "fecha": "16-01-2027",
+          "hora": null,
+          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
+        },
+        {
+          "local": "U.D. PAIOSACO H.AÑON",
+          "visitante": "PORTAZGO S.D.",
+          "fecha": "16-01-2027",
+          "hora": null,
+          "campo": "Porta Santa"
+        },
+        {
+          "local": "OZA DE LOS RÍOS",
+          "visitante": "SPORTING CAMBRE AS TRAVESAS",
+          "fecha": "16-01-2027",
+          "hora": null,
+          "campo": "O Loureiro (Oza De Los Ríos)"
+        },
+        {
+          "local": "SADA F.C. A NOSA VIÑA",
+          "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "fecha": "16-01-2027",
+          "hora": null,
+          "campo": "Campo de Fútbol As Mariñas - Andrés Pena de Sada"
+        },
+        {
+          "local": "C.C.D. CURTIS",
+          "visitante": "SAN MARTIÑO S.D.",
+          "fecha": "16-01-2027",
+          "hora": null,
+          "campo": "Novo ( Curtis )"
+        },
+        {
+          "local": "C.D. SIGRAS",
+          "visitante": "BETANZOS NORTE",
+          "fecha": "16-01-2027",
+          "hora": "18:00",
+          "campo": "Os Pinares, (Brexo Lema)"
+        }
+      ],
+      "actaUrls": []
+    },
+    {
+      "numero": 17,
+      "totalPartidos": 8,
+      "validacionCalendario": {
+        "correcto": true,
+        "errores": []
+      },
+      "partidos": [
+        {
+          "local": "SAN MARTIÑO S.D.",
+          "visitante": "C.D. SIGRAS",
+          "fecha": "23-01-2027",
+          "hora": null,
+          "campo": "A Revolta (Queixas)"
+        },
+        {
+          "local": "BETANZOS NORTE",
+          "visitante": "CAMPANAL DE LOUREDA F. C.",
+          "fecha": "23-01-2027",
+          "hora": null,
+          "campo": "O Carregal (Betanzos)"
+        },
+        {
+          "local": "CEDEIRA S.D.",
+          "visitante": "U.D. NARAHIO",
+          "fecha": "23-01-2027",
+          "hora": null,
+          "campo": "Municipal Carmen Maseda (O Beco)"
+        },
+        {
+          "local": "XUVENTUDE DORNEDA",
+          "visitante": "SPORTING BURGO",
+          "fecha": "23-01-2027",
+          "hora": null,
+          "campo": "Campo de Fútbol A Marola"
+        },
+        {
+          "local": "LICEO DE MONELOS S.D.",
+          "visitante": "U.D. PAIOSACO H.AÑON",
+          "fecha": "23-01-2027",
+          "hora": null,
+          "campo": "Víctor Fernández Alonso - Antigua Leyma"
+        },
+        {
+          "local": "PORTAZGO S.D.",
+          "visitante": "OZA DE LOS RÍOS",
+          "fecha": "23-01-2027",
+          "hora": null,
+          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
+        },
+        {
+          "local": "SPORTING CAMBRE AS TRAVESAS",
+          "visitante": "SADA F.C. A NOSA VIÑA",
+          "fecha": "23-01-2027",
+          "hora": null,
+          "campo": "Dani Mallo (Cambre)"
+        },
+        {
+          "local": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "visitante": "C.C.D. CURTIS",
+          "fecha": "23-01-2027",
+          "hora": null,
+          "campo": "O Cadaval"
+        }
+      ],
+      "actaUrls": []
+    },
+    {
+      "numero": 18,
+      "totalPartidos": 8,
+      "validacionCalendario": {
+        "correcto": true,
+        "errores": []
+      },
+      "partidos": [
+        {
+          "local": "U.D. NARAHIO",
+          "visitante": "BETANZOS NORTE",
+          "fecha": "30-01-2027",
+          "hora": null,
+          "campo": "Da Piscina"
+        },
+        {
+          "local": "SPORTING BURGO",
+          "visitante": "CEDEIRA S.D.",
+          "fecha": "30-01-2027",
+          "hora": null,
+          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
+        },
+        {
+          "local": "U.D. PAIOSACO H.AÑON",
+          "visitante": "XUVENTUDE DORNEDA",
+          "fecha": "30-01-2027",
+          "hora": null,
+          "campo": "Porta Santa"
+        },
+        {
+          "local": "OZA DE LOS RÍOS",
+          "visitante": "LICEO DE MONELOS S.D.",
+          "fecha": "30-01-2027",
+          "hora": null,
+          "campo": "O Loureiro (Oza De Los Ríos)"
+        },
+        {
+          "local": "SADA F.C. A NOSA VIÑA",
+          "visitante": "PORTAZGO S.D.",
+          "fecha": "30-01-2027",
+          "hora": null,
+          "campo": "Campo de Fútbol As Mariñas - Andrés Pena de Sada"
+        },
+        {
+          "local": "C.C.D. CURTIS",
+          "visitante": "SPORTING CAMBRE AS TRAVESAS",
+          "fecha": "30-01-2027",
+          "hora": null,
+          "campo": "Novo ( Curtis )"
+        },
+        {
+          "local": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "visitante": "SAN MARTIÑO S.D.",
+          "fecha": "30-01-2027",
+          "hora": null,
+          "campo": "O Cadaval"
+        },
+        {
+          "local": "CAMPANAL DE LOUREDA F. C.",
+          "visitante": "C.D. SIGRAS",
+          "fecha": "31-01-2027",
+          "hora": "11:00",
+          "campo": "Campo de Fútbol de Freán"
+        }
+      ],
+      "actaUrls": []
+    },
+    {
+      "numero": 19,
+      "totalPartidos": 8,
+      "validacionCalendario": {
+        "correcto": true,
+        "errores": []
+      },
+      "partidos": [
+        {
+          "local": "SAN MARTIÑO S.D.",
+          "visitante": "CAMPANAL DE LOUREDA F. C.",
+          "fecha": "06-02-2027",
+          "hora": null,
+          "campo": "A Revolta (Queixas)"
+        },
+        {
+          "local": "BETANZOS NORTE",
+          "visitante": "SPORTING BURGO",
+          "fecha": "06-02-2027",
+          "hora": null,
+          "campo": "O Carregal (Betanzos)"
+        },
+        {
+          "local": "CEDEIRA S.D.",
+          "visitante": "U.D. PAIOSACO H.AÑON",
+          "fecha": "06-02-2027",
+          "hora": null,
+          "campo": "Municipal Carmen Maseda (O Beco)"
+        },
+        {
+          "local": "XUVENTUDE DORNEDA",
+          "visitante": "OZA DE LOS RÍOS",
+          "fecha": "06-02-2027",
+          "hora": null,
+          "campo": "Campo de Fútbol A Marola"
+        },
+        {
+          "local": "LICEO DE MONELOS S.D.",
+          "visitante": "SADA F.C. A NOSA VIÑA",
+          "fecha": "06-02-2027",
+          "hora": null,
+          "campo": "Víctor Fernández Alonso - Antigua Leyma"
+        },
+        {
+          "local": "PORTAZGO S.D.",
+          "visitante": "C.C.D. CURTIS",
+          "fecha": "06-02-2027",
+          "hora": null,
+          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
+        },
+        {
+          "local": "SPORTING CAMBRE AS TRAVESAS",
+          "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "fecha": "06-02-2027",
+          "hora": null,
+          "campo": "Dani Mallo (Cambre)"
+        },
+        {
+          "local": "C.D. SIGRAS",
+          "visitante": "U.D. NARAHIO",
+          "fecha": "06-02-2027",
+          "hora": "18:00",
+          "campo": "Os Pinares, (Brexo Lema)"
+        }
+      ],
+      "actaUrls": []
+    },
+    {
+      "numero": 20,
+      "totalPartidos": 8,
+      "validacionCalendario": {
+        "correcto": true,
+        "errores": []
+      },
+      "partidos": [
+        {
+          "local": "U.D. NARAHIO",
+          "visitante": "CAMPANAL DE LOUREDA F. C.",
+          "fecha": "20-02-2027",
+          "hora": null,
+          "campo": "Da Piscina"
+        },
+        {
+          "local": "SPORTING BURGO",
+          "visitante": "C.D. SIGRAS",
+          "fecha": "20-02-2027",
+          "hora": null,
+          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
+        },
+        {
+          "local": "U.D. PAIOSACO H.AÑON",
+          "visitante": "BETANZOS NORTE",
+          "fecha": "20-02-2027",
+          "hora": null,
+          "campo": "Porta Santa"
+        },
+        {
+          "local": "OZA DE LOS RÍOS",
+          "visitante": "CEDEIRA S.D.",
+          "fecha": "20-02-2027",
+          "hora": null,
+          "campo": "O Loureiro (Oza De Los Ríos)"
+        },
+        {
+          "local": "SADA F.C. A NOSA VIÑA",
+          "visitante": "XUVENTUDE DORNEDA",
+          "fecha": "20-02-2027",
+          "hora": null,
+          "campo": "Campo de Fútbol As Mariñas - Andrés Pena de Sada"
+        },
+        {
+          "local": "C.C.D. CURTIS",
+          "visitante": "LICEO DE MONELOS S.D.",
+          "fecha": "20-02-2027",
+          "hora": null,
+          "campo": "Novo ( Curtis )"
+        },
+        {
+          "local": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "visitante": "PORTAZGO S.D.",
+          "fecha": "20-02-2027",
+          "hora": null,
+          "campo": "O Cadaval"
+        },
+        {
+          "local": "SPORTING CAMBRE AS TRAVESAS",
+          "visitante": "SAN MARTIÑO S.D.",
+          "fecha": "20-02-2027",
+          "hora": null,
+          "campo": "Dani Mallo (Cambre)"
+        }
+      ],
+      "actaUrls": []
+    },
+    {
+      "numero": 21,
+      "totalPartidos": 8,
+      "validacionCalendario": {
+        "correcto": true,
+        "errores": []
+      },
+      "partidos": [
+        {
+          "local": "SAN MARTIÑO S.D.",
+          "visitante": "U.D. NARAHIO",
+          "fecha": "27-02-2027",
+          "hora": null,
+          "campo": "A Revolta (Queixas)"
+        },
+        {
+          "local": "BETANZOS NORTE",
+          "visitante": "OZA DE LOS RÍOS",
+          "fecha": "27-02-2027",
+          "hora": null,
+          "campo": "O Carregal (Betanzos)"
+        },
+        {
+          "local": "CEDEIRA S.D.",
+          "visitante": "SADA F.C. A NOSA VIÑA",
+          "fecha": "27-02-2027",
+          "hora": null,
+          "campo": "Municipal Carmen Maseda (O Beco)"
+        },
+        {
+          "local": "XUVENTUDE DORNEDA",
+          "visitante": "C.C.D. CURTIS",
+          "fecha": "27-02-2027",
+          "hora": null,
+          "campo": "Campo de Fútbol A Marola"
+        },
+        {
+          "local": "LICEO DE MONELOS S.D.",
+          "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "fecha": "27-02-2027",
+          "hora": null,
+          "campo": "Víctor Fernández Alonso - Antigua Leyma"
+        },
+        {
+          "local": "PORTAZGO S.D.",
+          "visitante": "SPORTING CAMBRE AS TRAVESAS",
+          "fecha": "27-02-2027",
+          "hora": null,
+          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
+        },
+        {
+          "local": "C.D. SIGRAS",
+          "visitante": "U.D. PAIOSACO H.AÑON",
+          "fecha": "27-02-2027",
+          "hora": "18:00",
+          "campo": "Os Pinares, (Brexo Lema)"
+        },
+        {
+          "local": "CAMPANAL DE LOUREDA F. C.",
+          "visitante": "SPORTING BURGO",
+          "fecha": "28-02-2027",
+          "hora": "11:00",
+          "campo": "Campo de Fútbol de Freán"
+        }
+      ],
+      "actaUrls": []
+    },
+    {
+      "numero": 22,
+      "totalPartidos": 8,
+      "validacionCalendario": {
+        "correcto": true,
+        "errores": []
+      },
+      "partidos": [
+        {
+          "local": "SPORTING BURGO",
+          "visitante": "U.D. NARAHIO",
+          "fecha": "06-03-2027",
+          "hora": null,
+          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
+        },
+        {
+          "local": "U.D. PAIOSACO H.AÑON",
+          "visitante": "CAMPANAL DE LOUREDA F. C.",
+          "fecha": "06-03-2027",
+          "hora": null,
+          "campo": "Porta Santa"
+        },
+        {
+          "local": "OZA DE LOS RÍOS",
+          "visitante": "C.D. SIGRAS",
+          "fecha": "06-03-2027",
+          "hora": null,
+          "campo": "O Loureiro (Oza De Los Ríos)"
+        },
+        {
+          "local": "SADA F.C. A NOSA VIÑA",
+          "visitante": "BETANZOS NORTE",
+          "fecha": "06-03-2027",
+          "hora": null,
+          "campo": "Campo de Fútbol As Mariñas - Andrés Pena de Sada"
+        },
+        {
+          "local": "C.C.D. CURTIS",
+          "visitante": "CEDEIRA S.D.",
+          "fecha": "06-03-2027",
+          "hora": null,
+          "campo": "Novo ( Curtis )"
+        },
+        {
+          "local": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "visitante": "XUVENTUDE DORNEDA",
+          "fecha": "06-03-2027",
+          "hora": null,
+          "campo": "O Cadaval"
+        },
+        {
+          "local": "SPORTING CAMBRE AS TRAVESAS",
+          "visitante": "LICEO DE MONELOS S.D.",
+          "fecha": "06-03-2027",
+          "hora": null,
+          "campo": "Dani Mallo (Cambre)"
+        },
+        {
+          "local": "PORTAZGO S.D.",
+          "visitante": "SAN MARTIÑO S.D.",
+          "fecha": "06-03-2027",
+          "hora": null,
+          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
+        }
+      ],
+      "actaUrls": []
+    },
+    {
+      "numero": 23,
+      "totalPartidos": 8,
+      "validacionCalendario": {
+        "correcto": true,
+        "errores": []
+      },
+      "partidos": [
+        {
+          "local": "SAN MARTIÑO S.D.",
+          "visitante": "SPORTING BURGO",
+          "fecha": "13-03-2027",
+          "hora": null,
+          "campo": "A Revolta (Queixas)"
+        },
+        {
+          "local": "U.D. NARAHIO",
+          "visitante": "U.D. PAIOSACO H.AÑON",
+          "fecha": "13-03-2027",
+          "hora": null,
+          "campo": "Da Piscina"
+        },
+        {
+          "local": "BETANZOS NORTE",
+          "visitante": "C.C.D. CURTIS",
+          "fecha": "13-03-2027",
+          "hora": null,
+          "campo": "O Carregal (Betanzos)"
+        },
+        {
+          "local": "CEDEIRA S.D.",
+          "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "fecha": "13-03-2027",
+          "hora": null,
+          "campo": "Municipal Carmen Maseda (O Beco)"
+        },
+        {
+          "local": "XUVENTUDE DORNEDA",
+          "visitante": "SPORTING CAMBRE AS TRAVESAS",
+          "fecha": "13-03-2027",
+          "hora": null,
+          "campo": "Campo de Fútbol A Marola"
+        },
+        {
+          "local": "LICEO DE MONELOS S.D.",
+          "visitante": "PORTAZGO S.D.",
+          "fecha": "13-03-2027",
+          "hora": null,
+          "campo": "Víctor Fernández Alonso - Antigua Leyma"
+        },
+        {
+          "local": "C.D. SIGRAS",
+          "visitante": "SADA F.C. A NOSA VIÑA",
+          "fecha": "13-03-2027",
+          "hora": "18:00",
+          "campo": "Os Pinares, (Brexo Lema)"
+        },
+        {
+          "local": "CAMPANAL DE LOUREDA F. C.",
+          "visitante": "OZA DE LOS RÍOS",
+          "fecha": "14-03-2027",
+          "hora": "11:00",
+          "campo": "Campo de Fútbol de Freán"
+        }
+      ],
+      "actaUrls": []
+    },
+    {
+      "numero": 24,
+      "totalPartidos": 8,
+      "validacionCalendario": {
+        "correcto": true,
+        "errores": []
+      },
+      "partidos": [
+        {
+          "local": "U.D. PAIOSACO H.AÑON",
+          "visitante": "SPORTING BURGO",
+          "fecha": "20-03-2027",
+          "hora": null,
+          "campo": "Porta Santa"
+        },
+        {
+          "local": "OZA DE LOS RÍOS",
+          "visitante": "U.D. NARAHIO",
+          "fecha": "20-03-2027",
+          "hora": null,
+          "campo": "O Loureiro (Oza De Los Ríos)"
+        },
+        {
+          "local": "SADA F.C. A NOSA VIÑA",
+          "visitante": "CAMPANAL DE LOUREDA F. C.",
+          "fecha": "20-03-2027",
+          "hora": null,
+          "campo": "Campo de Fútbol As Mariñas - Andrés Pena de Sada"
+        },
+        {
+          "local": "C.C.D. CURTIS",
+          "visitante": "C.D. SIGRAS",
+          "fecha": "20-03-2027",
+          "hora": null,
+          "campo": "Novo ( Curtis )"
+        },
+        {
+          "local": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "visitante": "BETANZOS NORTE",
+          "fecha": "20-03-2027",
+          "hora": null,
+          "campo": "O Cadaval"
+        },
+        {
+          "local": "SPORTING CAMBRE AS TRAVESAS",
+          "visitante": "CEDEIRA S.D.",
+          "fecha": "20-03-2027",
+          "hora": null,
+          "campo": "Dani Mallo (Cambre)"
+        },
+        {
+          "local": "PORTAZGO S.D.",
+          "visitante": "XUVENTUDE DORNEDA",
+          "fecha": "20-03-2027",
+          "hora": null,
+          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
+        },
+        {
+          "local": "LICEO DE MONELOS S.D.",
+          "visitante": "SAN MARTIÑO S.D.",
+          "fecha": "20-03-2027",
+          "hora": null,
+          "campo": "Víctor Fernández Alonso - Antigua Leyma"
+        }
+      ],
+      "actaUrls": []
+    },
+    {
+      "numero": 25,
+      "totalPartidos": 8,
+      "validacionCalendario": {
+        "correcto": true,
+        "errores": []
+      },
+      "partidos": [
+        {
+          "local": "SAN MARTIÑO S.D.",
+          "visitante": "U.D. PAIOSACO H.AÑON",
+          "fecha": "03-04-2027",
+          "hora": null,
+          "campo": "A Revolta (Queixas)"
+        },
+        {
+          "local": "SPORTING BURGO",
+          "visitante": "OZA DE LOS RÍOS",
+          "fecha": "03-04-2027",
+          "hora": null,
+          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
+        },
+        {
+          "local": "U.D. NARAHIO",
+          "visitante": "SADA F.C. A NOSA VIÑA",
+          "fecha": "03-04-2027",
+          "hora": null,
+          "campo": "Da Piscina"
+        },
+        {
+          "local": "BETANZOS NORTE",
+          "visitante": "SPORTING CAMBRE AS TRAVESAS",
+          "fecha": "03-04-2027",
+          "hora": null,
+          "campo": "O Carregal (Betanzos)"
+        },
+        {
+          "local": "CEDEIRA S.D.",
+          "visitante": "PORTAZGO S.D.",
+          "fecha": "03-04-2027",
+          "hora": null,
+          "campo": "Municipal Carmen Maseda (O Beco)"
+        },
+        {
+          "local": "XUVENTUDE DORNEDA",
+          "visitante": "LICEO DE MONELOS S.D.",
+          "fecha": "03-04-2027",
+          "hora": null,
+          "campo": "Campo de Fútbol A Marola"
+        },
+        {
+          "local": "C.D. SIGRAS",
+          "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "fecha": "03-04-2027",
+          "hora": "18:00",
+          "campo": "Os Pinares, (Brexo Lema)"
+        },
+        {
+          "local": "CAMPANAL DE LOUREDA F. C.",
+          "visitante": "C.C.D. CURTIS",
+          "fecha": "04-04-2027",
+          "hora": "11:00",
+          "campo": "Campo de Fútbol de Freán"
+        }
+      ],
+      "actaUrls": []
+    },
+    {
+      "numero": 26,
+      "totalPartidos": 8,
+      "validacionCalendario": {
+        "correcto": true,
+        "errores": []
+      },
+      "partidos": [
+        {
+          "local": "OZA DE LOS RÍOS",
+          "visitante": "U.D. PAIOSACO H.AÑON",
+          "fecha": "10-04-2027",
+          "hora": null,
+          "campo": "O Loureiro (Oza De Los Ríos)"
+        },
+        {
+          "local": "SADA F.C. A NOSA VIÑA",
+          "visitante": "SPORTING BURGO",
+          "fecha": "10-04-2027",
+          "hora": null,
+          "campo": "Campo de Fútbol As Mariñas - Andrés Pena de Sada"
+        },
+        {
+          "local": "C.C.D. CURTIS",
+          "visitante": "U.D. NARAHIO",
+          "fecha": "10-04-2027",
+          "hora": null,
+          "campo": "Novo ( Curtis )"
+        },
+        {
+          "local": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "visitante": "CAMPANAL DE LOUREDA F. C.",
+          "fecha": "10-04-2027",
+          "hora": null,
+          "campo": "O Cadaval"
+        },
+        {
+          "local": "SPORTING CAMBRE AS TRAVESAS",
+          "visitante": "C.D. SIGRAS",
+          "fecha": "10-04-2027",
+          "hora": null,
+          "campo": "Dani Mallo (Cambre)"
+        },
+        {
+          "local": "PORTAZGO S.D.",
+          "visitante": "BETANZOS NORTE",
+          "fecha": "10-04-2027",
+          "hora": null,
+          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
+        },
+        {
+          "local": "LICEO DE MONELOS S.D.",
+          "visitante": "CEDEIRA S.D.",
+          "fecha": "10-04-2027",
+          "hora": null,
+          "campo": "Víctor Fernández Alonso - Antigua Leyma"
+        },
+        {
+          "local": "XUVENTUDE DORNEDA",
+          "visitante": "SAN MARTIÑO S.D.",
+          "fecha": "10-04-2027",
+          "hora": null,
+          "campo": "Campo de Fútbol A Marola"
+        }
+      ],
+      "actaUrls": []
+    },
+    {
+      "numero": 27,
+      "totalPartidos": 8,
+      "validacionCalendario": {
+        "correcto": true,
+        "errores": []
+      },
+      "partidos": [
+        {
+          "local": "SAN MARTIÑO S.D.",
+          "visitante": "OZA DE LOS RÍOS",
+          "fecha": "17-04-2027",
+          "hora": null,
+          "campo": "A Revolta (Queixas)"
+        },
+        {
+          "local": "U.D. PAIOSACO H.AÑON",
+          "visitante": "SADA F.C. A NOSA VIÑA",
+          "fecha": "17-04-2027",
+          "hora": null,
+          "campo": "Porta Santa"
+        },
+        {
+          "local": "SPORTING BURGO",
+          "visitante": "C.C.D. CURTIS",
+          "fecha": "17-04-2027",
+          "hora": null,
+          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
+        },
+        {
+          "local": "U.D. NARAHIO",
+          "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "fecha": "17-04-2027",
+          "hora": null,
+          "campo": "Da Piscina"
+        },
+        {
+          "local": "BETANZOS NORTE",
+          "visitante": "LICEO DE MONELOS S.D.",
+          "fecha": "17-04-2027",
+          "hora": null,
+          "campo": "O Carregal (Betanzos)"
+        },
+        {
+          "local": "CEDEIRA S.D.",
+          "visitante": "XUVENTUDE DORNEDA",
+          "fecha": "17-04-2027",
+          "hora": null,
+          "campo": "Municipal Carmen Maseda (O Beco)"
+        },
+        {
+          "local": "C.D. SIGRAS",
+          "visitante": "PORTAZGO S.D.",
+          "fecha": "17-04-2027",
+          "hora": "18:00",
+          "campo": "Os Pinares, (Brexo Lema)"
+        },
+        {
+          "local": "CAMPANAL DE LOUREDA F. C.",
+          "visitante": "SPORTING CAMBRE AS TRAVESAS",
+          "fecha": "18-04-2027",
+          "hora": "11:00",
+          "campo": "Campo de Fútbol de Freán"
+        }
+      ],
+      "actaUrls": []
+    },
+    {
+      "numero": 28,
+      "totalPartidos": 8,
+      "validacionCalendario": {
+        "correcto": true,
+        "errores": []
+      },
+      "partidos": [
+        {
+          "local": "SADA F.C. A NOSA VIÑA",
+          "visitante": "OZA DE LOS RÍOS",
+          "fecha": "24-04-2027",
+          "hora": null,
+          "campo": "Campo de Fútbol As Mariñas - Andrés Pena de Sada"
+        },
+        {
+          "local": "C.C.D. CURTIS",
+          "visitante": "U.D. PAIOSACO H.AÑON",
+          "fecha": "24-04-2027",
+          "hora": null,
+          "campo": "Novo ( Curtis )"
+        },
+        {
+          "local": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "visitante": "SPORTING BURGO",
+          "fecha": "24-04-2027",
+          "hora": null,
+          "campo": "O Cadaval"
+        },
+        {
+          "local": "SPORTING CAMBRE AS TRAVESAS",
+          "visitante": "U.D. NARAHIO",
+          "fecha": "24-04-2027",
+          "hora": null,
+          "campo": "Dani Mallo (Cambre)"
+        },
+        {
+          "local": "PORTAZGO S.D.",
+          "visitante": "CAMPANAL DE LOUREDA F. C.",
+          "fecha": "24-04-2027",
+          "hora": null,
+          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
+        },
+        {
+          "local": "LICEO DE MONELOS S.D.",
+          "visitante": "C.D. SIGRAS",
+          "fecha": "24-04-2027",
+          "hora": null,
+          "campo": "Víctor Fernández Alonso - Antigua Leyma"
+        },
+        {
+          "local": "XUVENTUDE DORNEDA",
+          "visitante": "BETANZOS NORTE",
+          "fecha": "24-04-2027",
+          "hora": null,
+          "campo": "Campo de Fútbol A Marola"
+        },
+        {
+          "local": "CEDEIRA S.D.",
+          "visitante": "SAN MARTIÑO S.D.",
+          "fecha": "24-04-2027",
+          "hora": null,
+          "campo": "Municipal Carmen Maseda (O Beco)"
+        }
+      ],
+      "actaUrls": []
+    },
+    {
+      "numero": 29,
+      "totalPartidos": 8,
+      "validacionCalendario": {
+        "correcto": true,
+        "errores": []
+      },
+      "partidos": [
+        {
+          "local": "SADA F.C. A NOSA VIÑA",
+          "visitante": "SAN MARTIÑO S.D.",
+          "fecha": "01-05-2027",
+          "hora": null,
+          "campo": "Campo de Fútbol As Mariñas - Andrés Pena de Sada"
+        },
+        {
+          "local": "OZA DE LOS RÍOS",
+          "visitante": "C.C.D. CURTIS",
+          "fecha": "01-05-2027",
+          "hora": null,
+          "campo": "O Loureiro (Oza De Los Ríos)"
+        },
+        {
+          "local": "U.D. PAIOSACO H.AÑON",
+          "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "fecha": "01-05-2027",
+          "hora": null,
+          "campo": "Porta Santa"
+        },
+        {
+          "local": "SPORTING BURGO",
+          "visitante": "SPORTING CAMBRE AS TRAVESAS",
+          "fecha": "01-05-2027",
+          "hora": null,
+          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
+        },
+        {
+          "local": "U.D. NARAHIO",
+          "visitante": "PORTAZGO S.D.",
+          "fecha": "01-05-2027",
+          "hora": null,
+          "campo": "Da Piscina"
+        },
+        {
+          "local": "BETANZOS NORTE",
+          "visitante": "CEDEIRA S.D.",
+          "fecha": "01-05-2027",
+          "hora": null,
+          "campo": "O Carregal (Betanzos)"
+        },
+        {
+          "local": "C.D. SIGRAS",
+          "visitante": "XUVENTUDE DORNEDA",
+          "fecha": "01-05-2027",
+          "hora": "18:00",
+          "campo": "Os Pinares, (Brexo Lema)"
+        },
+        {
+          "local": "CAMPANAL DE LOUREDA F. C.",
+          "visitante": "LICEO DE MONELOS S.D.",
+          "fecha": "02-05-2027",
+          "hora": "11:00",
+          "campo": "Campo de Fútbol de Freán"
+        }
+      ],
+      "actaUrls": []
+    },
+    {
+      "numero": 30,
+      "totalPartidos": 8,
+      "validacionCalendario": {
+        "correcto": true,
+        "errores": []
+      },
+      "partidos": [
+        {
+          "local": "C.C.D. CURTIS",
+          "visitante": "SADA F.C. A NOSA VIÑA",
+          "fecha": "08-05-2027",
+          "hora": null,
+          "campo": "Novo ( Curtis )"
+        },
+        {
+          "local": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "visitante": "OZA DE LOS RÍOS",
+          "fecha": "08-05-2027",
+          "hora": null,
+          "campo": "O Cadaval"
+        },
+        {
+          "local": "SPORTING CAMBRE AS TRAVESAS",
+          "visitante": "U.D. PAIOSACO H.AÑON",
+          "fecha": "08-05-2027",
+          "hora": null,
+          "campo": "Dani Mallo (Cambre)"
+        },
+        {
+          "local": "PORTAZGO S.D.",
+          "visitante": "SPORTING BURGO",
+          "fecha": "08-05-2027",
+          "hora": null,
+          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
+        },
+        {
+          "local": "LICEO DE MONELOS S.D.",
+          "visitante": "U.D. NARAHIO",
+          "fecha": "08-05-2027",
+          "hora": null,
+          "campo": "Víctor Fernández Alonso - Antigua Leyma"
+        },
+        {
+          "local": "XUVENTUDE DORNEDA",
+          "visitante": "CAMPANAL DE LOUREDA F. C.",
+          "fecha": "08-05-2027",
+          "hora": null,
+          "campo": "Campo de Fútbol A Marola"
+        },
+        {
+          "local": "CEDEIRA S.D.",
+          "visitante": "C.D. SIGRAS",
+          "fecha": "08-05-2027",
+          "hora": null,
+          "campo": "Municipal Carmen Maseda (O Beco)"
+        },
+        {
+          "local": "SAN MARTIÑO S.D.",
+          "visitante": "BETANZOS NORTE",
+          "fecha": "08-05-2027",
+          "hora": null,
+          "campo": "A Revolta (Queixas)"
+        }
+      ],
+      "actaUrls": []
+    }
+  ]
+}
