@@ -1,4 +1,6 @@
 {
+  "fecha": "2026-09-24T18:20:50.272Z",
+  "modo": "10E_fresco_con_respaldo",
   "totalEquipos": 16,
   "jornadasEsperadas": 30,
   "jornadas": [
@@ -76,7 +78,9 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478215&cod_acta=1478215",
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478329&cod_acta=1478329",
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478211&cod_acta=1478211"
-      ]
+      ],
+      "origenDatos": "FUTGAL_FRESCO",
+      "fechaLecturaFresca": "2026-09-24T18:16:42.809Z"
     },
     {
       "numero": 2,
@@ -152,7 +156,9 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478221&cod_acta=1478221",
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478222&cod_acta=1478222",
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478217&cod_acta=1478217"
-      ]
+      ],
+      "origenDatos": "FUTGAL_FRESCO",
+      "fechaLecturaFresca": "2026-09-24T18:16:49.626Z"
     },
     {
       "numero": 3,
@@ -219,7 +225,9 @@
           "campo": "Municip. De Tarrio, (Culleredo)"
         }
       ],
-      "actaUrls": []
+      "actaUrls": [],
+      "origenDatos": "FUTGAL_FRESCO",
+      "fechaLecturaFresca": "2026-09-24T18:16:56.531Z"
     },
     {
       "numero": 4,
@@ -242,13 +250,6 @@
           "fecha": "03-10-2026",
           "hora": null,
           "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
-        },
-        {
-          "local": "U.D. PAIOSACO H.AÑON",
-          "visitante": "CEDEIRA S.D.",
-          "fecha": "03-10-2026",
-          "hora": null,
-          "campo": "Porta Santa"
         },
         {
           "local": "OZA DE LOS RÍOS",
@@ -279,6 +280,13 @@
           "campo": "O Cadaval"
         },
         {
+          "local": "U.D. PAIOSACO H.AÑON",
+          "visitante": "CEDEIRA S.D.",
+          "fecha": "03-10-2026",
+          "hora": "18:00",
+          "campo": "Porta Santa"
+        },
+        {
           "local": "CAMPANAL DE LOUREDA F. C.",
           "visitante": "SAN MARTIÑO S.D.",
           "fecha": "04-10-2026",
@@ -286,7 +294,9 @@
           "campo": "Campo de Fútbol de Freán"
         }
       ],
-      "actaUrls": []
+      "actaUrls": [],
+      "origenDatos": "FUTGAL_FRESCO",
+      "fechaLecturaFresca": "2026-09-24T18:17:03.275Z"
     },
     {
       "numero": 5,
@@ -353,7 +363,9 @@
           "campo": "Campo de Fútbol de Freán"
         }
       ],
-      "actaUrls": []
+      "actaUrls": [],
+      "origenDatos": "FUTGAL_FRESCO",
+      "fechaLecturaFresca": "2026-09-24T18:17:17.653Z"
     },
     {
       "numero": 6,
@@ -420,7 +432,9 @@
           "campo": "Dani Mallo (Cambre)"
         }
       ],
-      "actaUrls": []
+      "actaUrls": [],
+      "origenDatos": "FUTGAL_FRESCO",
+      "fechaLecturaFresca": "2026-09-24T18:17:23.991Z"
     },
     {
       "numero": 7,
@@ -487,7 +501,9 @@
           "campo": "Campo de Fútbol de Freán"
         }
       ],
-      "actaUrls": []
+      "actaUrls": [],
+      "origenDatos": "FUTGAL_FRESCO",
+      "fechaLecturaFresca": "2026-09-24T18:17:30.779Z"
     },
     {
       "numero": 8,
@@ -554,7 +570,9 @@
           "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
         }
       ],
-      "actaUrls": []
+      "actaUrls": [],
+      "origenDatos": "FUTGAL_FRESCO",
+      "fechaLecturaFresca": "2026-09-24T18:17:37.304Z"
     },
     {
       "numero": 9,
@@ -621,7 +639,9 @@
           "campo": "Campo de Fútbol de Freán"
         }
       ],
-      "actaUrls": []
+      "actaUrls": [],
+      "origenDatos": "FUTGAL_FRESCO",
+      "fechaLecturaFresca": "2026-09-24T18:17:52.258Z"
     },
     {
       "numero": 10,
@@ -688,7 +708,9 @@
           "campo": "Víctor Fernández Alonso - Antigua Leyma"
         }
       ],
-      "actaUrls": []
+      "actaUrls": [],
+      "origenDatos": "FUTGAL_FRESCO",
+      "fechaLecturaFresca": "2026-09-24T18:17:58.477Z"
     },
     {
       "numero": 11,
@@ -755,7 +777,9 @@
           "campo": "Campo de Fútbol de Freán"
         }
       ],
-      "actaUrls": []
+      "actaUrls": [],
+      "origenDatos": "FUTGAL_FRESCO",
+      "fechaLecturaFresca": "2026-09-24T18:18:05.346Z"
     },
     {
       "numero": 12,
@@ -822,7 +846,9 @@
           "campo": "Campo de Fútbol A Marola"
         }
       ],
-      "actaUrls": []
+      "actaUrls": [],
+      "origenDatos": "FUTGAL_FRESCO",
+      "fechaLecturaFresca": "2026-09-24T18:18:11.656Z"
     },
     {
       "numero": 13,
@@ -889,7 +915,9 @@
           "campo": "Campo de Fútbol de Freán"
         }
       ],
-      "actaUrls": []
+      "actaUrls": [],
+      "origenDatos": "FUTGAL_FRESCO",
+      "fechaLecturaFresca": "2026-09-24T18:18:26.396Z"
     },
     {
       "numero": 14,
@@ -956,7 +984,9 @@
           "campo": "Municipal Carmen Maseda (O Beco)"
         }
       ],
-      "actaUrls": []
+      "actaUrls": [],
+      "origenDatos": "FUTGAL_FRESCO",
+      "fechaLecturaFresca": "2026-09-24T18:18:32.980Z"
     },
     {
       "numero": 15,
@@ -1023,7 +1053,9 @@
           "campo": "Campo de Fútbol de Freán"
         }
       ],
-      "actaUrls": []
+      "actaUrls": [],
+      "origenDatos": "FUTGAL_FRESCO",
+      "fechaLecturaFresca": "2026-09-24T18:18:39.442Z"
     },
     {
       "numero": 16,
@@ -1090,7 +1122,9 @@
           "campo": "Os Pinares, (Brexo Lema)"
         }
       ],
-      "actaUrls": []
+      "actaUrls": [],
+      "origenDatos": "FUTGAL_FRESCO",
+      "fechaLecturaFresca": "2026-09-24T18:18:45.915Z"
     },
     {
       "numero": 17,
@@ -1157,7 +1191,9 @@
           "campo": "O Cadaval"
         }
       ],
-      "actaUrls": []
+      "actaUrls": [],
+      "origenDatos": "FUTGAL_FRESCO",
+      "fechaLecturaFresca": "2026-09-24T18:19:00.480Z"
     },
     {
       "numero": 18,
@@ -1224,7 +1260,9 @@
           "campo": "Campo de Fútbol de Freán"
         }
       ],
-      "actaUrls": []
+      "actaUrls": [],
+      "origenDatos": "FUTGAL_FRESCO",
+      "fechaLecturaFresca": "2026-09-24T18:19:06.778Z"
     },
     {
       "numero": 19,
@@ -1291,7 +1329,9 @@
           "campo": "Os Pinares, (Brexo Lema)"
         }
       ],
-      "actaUrls": []
+      "actaUrls": [],
+      "origenDatos": "FUTGAL_FRESCO",
+      "fechaLecturaFresca": "2026-09-24T18:19:13.705Z"
     },
     {
       "numero": 20,
@@ -1358,7 +1398,9 @@
           "campo": "Dani Mallo (Cambre)"
         }
       ],
-      "actaUrls": []
+      "actaUrls": [],
+      "origenDatos": "FUTGAL_FRESCO",
+      "fechaLecturaFresca": "2026-09-24T18:19:20.365Z"
     },
     {
       "numero": 21,
@@ -1425,7 +1467,9 @@
           "campo": "Campo de Fútbol de Freán"
         }
       ],
-      "actaUrls": []
+      "actaUrls": [],
+      "origenDatos": "FUTGAL_FRESCO",
+      "fechaLecturaFresca": "2026-09-24T18:19:34.881Z"
     },
     {
       "numero": 22,
@@ -1492,7 +1536,9 @@
           "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
         }
       ],
-      "actaUrls": []
+      "actaUrls": [],
+      "origenDatos": "FUTGAL_FRESCO",
+      "fechaLecturaFresca": "2026-09-24T18:19:41.225Z"
     },
     {
       "numero": 23,
@@ -1559,7 +1605,9 @@
           "campo": "Campo de Fútbol de Freán"
         }
       ],
-      "actaUrls": []
+      "actaUrls": [],
+      "origenDatos": "FUTGAL_FRESCO",
+      "fechaLecturaFresca": "2026-09-24T18:19:47.971Z"
     },
     {
       "numero": 24,
@@ -1626,7 +1674,9 @@
           "campo": "Víctor Fernández Alonso - Antigua Leyma"
         }
       ],
-      "actaUrls": []
+      "actaUrls": [],
+      "origenDatos": "FUTGAL_FRESCO",
+      "fechaLecturaFresca": "2026-09-24T18:19:54.330Z"
     },
     {
       "numero": 25,
@@ -1693,7 +1743,9 @@
           "campo": "Campo de Fútbol de Freán"
         }
       ],
-      "actaUrls": []
+      "actaUrls": [],
+      "origenDatos": "FUTGAL_FRESCO",
+      "fechaLecturaFresca": "2026-09-24T18:20:09.742Z"
     },
     {
       "numero": 26,
@@ -1760,7 +1812,9 @@
           "campo": "Campo de Fútbol A Marola"
         }
       ],
-      "actaUrls": []
+      "actaUrls": [],
+      "origenDatos": "FUTGAL_FRESCO",
+      "fechaLecturaFresca": "2026-09-24T18:20:16.206Z"
     },
     {
       "numero": 27,
@@ -1827,7 +1881,9 @@
           "campo": "Campo de Fútbol de Freán"
         }
       ],
-      "actaUrls": []
+      "actaUrls": [],
+      "origenDatos": "FUTGAL_FRESCO",
+      "fechaLecturaFresca": "2026-09-24T18:20:22.686Z"
     },
     {
       "numero": 28,
@@ -1894,7 +1950,9 @@
           "campo": "Municipal Carmen Maseda (O Beco)"
         }
       ],
-      "actaUrls": []
+      "actaUrls": [],
+      "origenDatos": "FUTGAL_FRESCO",
+      "fechaLecturaFresca": "2026-09-24T18:20:29.084Z"
     },
     {
       "numero": 29,
@@ -1961,7 +2019,9 @@
           "campo": "Campo de Fútbol de Freán"
         }
       ],
-      "actaUrls": []
+      "actaUrls": [],
+      "origenDatos": "FUTGAL_FRESCO",
+      "fechaLecturaFresca": "2026-09-24T18:20:43.511Z"
     },
     {
       "numero": 30,
@@ -2028,7 +2088,9 @@
           "campo": "A Revolta (Queixas)"
         }
       ],
-      "actaUrls": []
+      "actaUrls": [],
+      "origenDatos": "FUTGAL_FRESCO",
+      "fechaLecturaFresca": "2026-09-24T18:20:50.272Z"
     }
   ]
 }

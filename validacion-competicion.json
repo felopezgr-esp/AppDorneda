@@ -1,0 +1,229 @@
+{
+  "fecha": "2026-09-24T18:20:52.485Z",
+  "arquitectura": "datos_frescos_dos_fases_checkpoint_solo_respaldo",
+  "metodoArranque": "checkpoint_local_sin_arranque_futgal",
+  "metodoRecorrido": "10E_fresco_url_directa_aislada_con_fallback_a_checkpoint",
+  "jornadasEsperadas": 30,
+  "jornadasIntegradas": 30,
+  "partidosEsperados": 240,
+  "partidosIntegrados": 240,
+  "actasDetectadas": 16,
+  "actasIntegradas": 16,
+  "actasPendientes": [],
+  "jornadasConFallback": [],
+  "cambiosCalendarioDetectados": 1,
+  "todasCorrectas": true,
+  "erroresGlobales": [],
+  "resumenJornadas": [
+    {
+      "jornada": 1,
+      "correcto": true,
+      "errores": [],
+      "actasDetectadas": 8,
+      "actasIntegradas": 8
+    },
+    {
+      "jornada": 2,
+      "correcto": true,
+      "errores": [],
+      "actasDetectadas": 8,
+      "actasIntegradas": 8
+    },
+    {
+      "jornada": 3,
+      "correcto": true,
+      "errores": [],
+      "actasDetectadas": 0,
+      "actasIntegradas": 0
+    },
+    {
+      "jornada": 4,
+      "correcto": true,
+      "errores": [],
+      "actasDetectadas": 0,
+      "actasIntegradas": 0
+    },
+    {
+      "jornada": 5,
+      "correcto": true,
+      "errores": [],
+      "actasDetectadas": 0,
+      "actasIntegradas": 0
+    },
+    {
+      "jornada": 6,
+      "correcto": true,
+      "errores": [],
+      "actasDetectadas": 0,
+      "actasIntegradas": 0
+    },
+    {
+      "jornada": 7,
+      "correcto": true,
+      "errores": [],
+      "actasDetectadas": 0,
+      "actasIntegradas": 0
+    },
+    {
+      "jornada": 8,
+      "correcto": true,
+      "errores": [],
+      "actasDetectadas": 0,
+      "actasIntegradas": 0
+    },
+    {
+      "jornada": 9,
+      "correcto": true,
+      "errores": [],
+      "actasDetectadas": 0,
+      "actasIntegradas": 0
+    },
+    {
+      "jornada": 10,
+      "correcto": true,
+      "errores": [],
+      "actasDetectadas": 0,
+      "actasIntegradas": 0
+    },
+    {
+      "jornada": 11,
+      "correcto": true,
+      "errores": [],
+      "actasDetectadas": 0,
+      "actasIntegradas": 0
+    },
+    {
+      "jornada": 12,
+      "correcto": true,
+      "errores": [],
+      "actasDetectadas": 0,
+      "actasIntegradas": 0
+    },
+    {
+      "jornada": 13,
+      "correcto": true,
+      "errores": [],
+      "actasDetectadas": 0,
+      "actasIntegradas": 0
+    },
+    {
+      "jornada": 14,
+      "correcto": true,
+      "errores": [],
+      "actasDetectadas": 0,
+      "actasIntegradas": 0
+    },
+    {
+      "jornada": 15,
+      "correcto": true,
+      "errores": [],
+      "actasDetectadas": 0,
+      "actasIntegradas": 0
+    },
+    {
+      "jornada": 16,
+      "correcto": true,
+      "errores": [],
+      "actasDetectadas": 0,
+      "actasIntegradas": 0
+    },
+    {
+      "jornada": 17,
+      "correcto": true,
+      "errores": [],
+      "actasDetectadas": 0,
+      "actasIntegradas": 0
+    },
+    {
+      "jornada": 18,
+      "correcto": true,
+      "errores": [],
+      "actasDetectadas": 0,
+      "actasIntegradas": 0
+    },
+    {
+      "jornada": 19,
+      "correcto": true,
+      "errores": [],
+      "actasDetectadas": 0,
+      "actasIntegradas": 0
+    },
+    {
+      "jornada": 20,
+      "correcto": true,
+      "errores": [],
+      "actasDetectadas": 0,
+      "actasIntegradas": 0
+    },
+    {
+      "jornada": 21,
+      "correcto": true,
+      "errores": [],
+      "actasDetectadas": 0,
+      "actasIntegradas": 0
+    },
+    {
+      "jornada": 22,
+      "correcto": true,
+      "errores": [],
+      "actasDetectadas": 0,
+      "actasIntegradas": 0
+    },
+    {
+      "jornada": 23,
+      "correcto": true,
+      "errores": [],
+      "actasDetectadas": 0,
+      "actasIntegradas": 0
+    },
+    {
+      "jornada": 24,
+      "correcto": true,
+      "errores": [],
+      "actasDetectadas": 0,
+      "actasIntegradas": 0
+    },
+    {
+      "jornada": 25,
+      "correcto": true,
+      "errores": [],
+      "actasDetectadas": 0,
+      "actasIntegradas": 0
+    },
+    {
+      "jornada": 26,
+      "correcto": true,
+      "errores": [],
+      "actasDetectadas": 0,
+      "actasIntegradas": 0
+    },
+    {
+      "jornada": 27,
+      "correcto": true,
+      "errores": [],
+      "actasDetectadas": 0,
+      "actasIntegradas": 0
+    },
+    {
+      "jornada": 28,
+      "correcto": true,
+      "errores": [],
+      "actasDetectadas": 0,
+      "actasIntegradas": 0
+    },
+    {
+      "jornada": 29,
+      "correcto": true,
+      "errores": [],
+      "actasDetectadas": 0,
+      "actasIntegradas": 0
+    },
+    {
+      "jornada": 30,
+      "correcto": true,
+      "errores": [],
+      "actasDetectadas": 0,
+      "actasIntegradas": 0
+    }
+  ]
+}
