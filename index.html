@@ -2564,6 +2564,42 @@
 <body>
 <div class="toast-container" id="toastContainer"></div>
 
+<!-- PASO 11C · ACTUALIZACIÓN FUTGAL EN LA NUBE -->
+<div class="modal-overlay" id="modalFutgalCloud">
+  <div class="modal" style="max-width:620px">
+    <div class="modal-header">
+      <div class="modal-title">☁ Actualizar FUTGAL · GitHub Actions</div>
+      <button class="modal-close" onclick="closeModal('modalFutgalCloud')">&#10005;</button>
+    </div>
+    <div style="padding:11px 13px;border-radius:9px;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.22);font-size:11.5px;line-height:1.45;margin-bottom:12px">
+      Ejecuta en GitHub el extractor FUTGAL validado. Al terminar,
+      <strong>Resultados y Búsqueda se actualiza automáticamente</strong>.
+      No modifica clasificación, Copa, plantilla ni tus datos manuales.
+    </div>
+
+    <div style="margin-bottom:10px">
+      <label class="form-label" style="font-size:10.5px">PIN de actualización</label>
+      <input id="futgalCloudPin" class="form-control" type="password" autocomplete="current-password" placeholder="PIN">
+    </div>
+
+    <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px">
+      <button type="button" class="btn btn-ghost" onclick="probarConexionFutgalCloud()">Comprobar conexión</button>
+      <button type="button" class="btn btn-primary" id="btnFutgalCloudStart" onclick="lanzarActualizacionFutgalCloud()">☁ Actualizar ahora</button>
+      <button type="button" class="btn btn-ghost" onclick="cancelarSeguimientoFutgalCloud()">Detener seguimiento</button>
+    </div>
+
+    <div id="futgalCloudStatus" style="padding:12px 13px;border:1px solid var(--border);border-radius:9px;font-size:11.5px;line-height:1.5">
+      Listo para conectar con GitHub Actions.
+    </div>
+
+    <div style="margin-top:10px;font-size:10px;color:var(--text-muted);line-height:1.4">
+      El PIN solo se conserva durante esta sesión. El token de GitHub permanece protegido en Cloudflare y nunca se envía a esta web.
+    </div>
+  </div>
+</div>
+<input type="file" id="futgalOfficialFileInput" accept=".json,application/json" style="display:none" onchange="cargarFutgalJsonManual(event)">
+
+
 <!-- MODAL NUEVO PARTIDO -->
 <div class="modal-overlay" id="modalNuevoPartido">
   <div class="modal">
@@ -2935,17 +2971,20 @@
       </div>
     </nav>
     <div class="sidebar-footer">
-      <!-- FUTGAL STATUS & SYNC BUTTON -->
+      <!-- FUTGAL OFICIAL · PASO 11C -->
       <div id="futgalSidebarCard" style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 10px;margin-bottom:10px">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-          <span style="font-size:10px;font-weight:800;color:var(--text);letter-spacing:0.4px">FUTGAL OFICIAL</span>
-          <span id="futgalSidebarBadge" class="badge" style="background:rgba(22,163,74,0.15);color:#16a34a;border:1px solid rgba(22,163,74,0.3);font-size:8.5px;padding:1px 5px">✓ Activo</span>
+          <span style="font-size:10px;font-weight:800;color:var(--text);letter-spacing:0.4px">FUTGAL · NUBE</span>
+          <span id="futgalSidebarBadge" class="badge" style="background:rgba(59,130,246,0.12);color:#2563eb;border:1px solid rgba(59,130,246,0.25);font-size:8.5px;padding:1px 5px">Cargando</span>
         </div>
         <div id="futgalLastSyncSidebar" style="font-size:9.5px;color:var(--text-muted);margin-bottom:6px;line-height:1.2">
-          Última: <span id="futgalLastSyncTime">06/09/2026 · 19:47</span>
+          Datos oficiales: <span id="futgalLastSyncTime">cargando…</span>
         </div>
-        <button type="button" class="btn btn-primary btn-xs" id="btnSyncFutgalSidebar" onclick="syncFromFutgal()" style="width:100%;justify-content:center;font-weight:700;padding:5px 8px;font-size:10.5px" title="Sincronizar Liga y Copa con los datos oficiales de FUTGAL">
-          🔄 Actualizar desde FUTGAL
+        <button type="button" class="btn btn-primary btn-xs" id="btnSyncFutgalSidebar" onclick="abrirActualizacionFutgalCloud()" style="width:100%;justify-content:center;font-weight:700;padding:5px 8px;font-size:10.5px" title="Ejecutar el extractor FUTGAL en GitHub Actions">
+          ☁ Actualizar desde FUTGAL
+        </button>
+        <button type="button" class="btn btn-ghost btn-xs" onclick="seleccionarFutgalJsonManual()" style="width:100%;justify-content:center;font-weight:700;padding:4px 8px;font-size:9.5px;margin-top:5px" title="Cargar un competicion.json manual como respaldo">
+          📥 Cargar JSON manual
         </button>
       </div>
 
@@ -3279,7 +3318,7 @@
           
           <div style="overflow-x:auto;padding-bottom:4px;scrollbar-width:thin;">
             <div class="copa-list-header" style="display:flex;align-items:center;font-size:9.5px;font-weight:800;text-transform:uppercase;color:var(--text-dim);background:var(--surface2);padding:5px 8px;border-radius:4px;margin-bottom:4px;min-width:620px;border:1px solid var(--border);">
-              <div style="width:160px;flex-shrink:0;">Horario / Campo</div>
+              <div style="width:210px;flex-shrink:0;">Fecha / Horario / Campo</div>
               <div style="flex:1;text-align:right;padding-right:8px;">Equipo Local</div>
               <div style="width:60px;flex-shrink:0;text-align:center;">Marcador</div>
               <div style="flex:1;text-align:left;padding-left:8px;">Equipo Visitante</div>
@@ -3343,8 +3382,11 @@
           <div class="card mb-16">
             <!-- Buscador Avanzado: 3 tipos de búsqueda (a: Jornada, b: Equipo, c: Jornada + Equipo) -->
             <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:16px;">
-              <div style="font-size:13px;font-weight:800;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:6px;">
+              <div style="font-size:13px;font-weight:800;color:var(--text);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;">
                 <span>&#128269; Buscador de Partidos y Resultados de Liga</span>
+                <button type="button" class="btn btn-primary btn-xs" onclick="abrirActualizacionFutgalCloud()" title="Actualizar los datos oficiales mediante GitHub Actions">
+                  ☁ Actualizar desde FUTGAL
+                </button>
               </div>
               <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:10px;align-items:end;">
                 <!-- Desplegable A: Jornada -->
@@ -3395,7 +3437,7 @@
             <!-- Matches Results Container (Compact Table Row Format) -->
             <div style="overflow-x:auto;padding-bottom:4px;scrollbar-width:thin;">
               <div class="copa-list-header" style="display:flex;align-items:center;font-size:10px;font-weight:800;text-transform:uppercase;color:var(--text-dim);background:var(--surface2);padding:6px 10px;border-radius:4px;margin-bottom:6px;min-width:620px;border:1px solid var(--border);">
-                <div style="width:155px;flex-shrink:0;">Horario / Campo</div>
+                <div style="width:205px;flex-shrink:0;">Fecha / Horario / Campo</div>
                 <div style="flex:1;text-align:right;padding-right:8px;">Equipo Local</div>
                 <div style="width:60px;flex-shrink:0;text-align:center;">Marcador</div>
                 <div style="flex:1;text-align:left;padding-left:8px;">Equipo Visitante</div>
@@ -11397,25 +11439,51 @@ function showFutgalSyncResultModal(res) {
 window.showFutgalSyncResultModal = showFutgalSyncResultModal;
 
 function updateFutgalSyncUI() {
-  const syncObj = db.futgalSync || {};
   const timeEl = document.getElementById('futgalLastSyncTime');
   const badgeEl = document.getElementById('futgalSidebarBadge');
-  if (timeEl && syncObj.lastSuccess) {
-    timeEl.textContent = syncObj.lastSuccess;
-  }
-  if (badgeEl) {
-    if (syncObj.status === 'success') {
-      badgeEl.innerHTML = '✓ Actualizado';
+
+  const meta =
+    window.FutgalOfficial &&
+    typeof window.FutgalOfficial.getMeta === 'function'
+      ? window.FutgalOfficial.getMeta()
+      : null;
+
+  if (meta) {
+    const when = meta.extractedAt
+      ? window.FutgalOfficial.formatDateTime(meta.extractedAt)
+      : window.FutgalOfficial.formatDateTime(meta.loadedAt);
+
+    if (timeEl) timeEl.textContent = when || 'cargado';
+
+    if (badgeEl) {
+      badgeEl.innerHTML = '✓ Oficial';
       badgeEl.style.background = 'rgba(22,163,74,0.15)';
       badgeEl.style.color = '#16a34a';
       badgeEl.style.borderColor = 'rgba(22,163,74,0.3)';
-    } else if (syncObj.status === 'error') {
-      badgeEl.innerHTML = '⚠️ Fallo';
-      badgeEl.style.background = 'rgba(239,68,68,0.15)';
-      badgeEl.style.color = '#ef4444';
-      badgeEl.style.borderColor = 'rgba(239,68,68,0.3)';
     }
+    return;
   }
+
+  const status =
+    window.FutgalOfficial &&
+    typeof window.FutgalOfficial.getStatus === 'function'
+      ? window.FutgalOfficial.getStatus()
+      : null;
+
+  if (status && status.loading) {
+    if (timeEl) timeEl.textContent = 'cargando…';
+    if (badgeEl) {
+      badgeEl.innerHTML = 'Cargando';
+      badgeEl.style.background = 'rgba(59,130,246,0.12)';
+      badgeEl.style.color = '#2563eb';
+      badgeEl.style.borderColor = 'rgba(59,130,246,0.25)';
+    }
+    return;
+  }
+
+  // Fallback visual para las funciones antiguas ajenas a Resultados y Búsqueda.
+  const syncObj = db.futgalSync || {};
+  if (timeEl && syncObj.lastSuccess) timeEl.textContent = syncObj.lastSuccess;
 }
 window.updateFutgalSyncUI = updateFutgalSyncUI;
 
@@ -12274,23 +12342,99 @@ const LIGA_TEAMS_LIST = [
 ];
 
 // 2.2 RENDER RESULTADOS Y BÚSQUEDA DE LIGA (Buscador flexible por Jornada, Equipo o Jornada + Equipo)
+
+// PASO 11C · La pantalla Resultados y Búsqueda usa exclusivamente competicion.json.
+function getLigaJornadasOficiales(){
+  if(window.FutgalOfficial && typeof window.FutgalOfficial.getJornadas === 'function'){
+    return window.FutgalOfficial.getJornadas() || [];
+  }
+  return [];
+}
+
+function parseFechaLigaDMY(fecha){
+  var m = String(fecha || '').match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+  if(!m) return null;
+  var d = new Date(Number(m[3]), Number(m[2]) - 1, Number(m[1]));
+  return isNaN(d.getTime()) ? null : d;
+}
+
+function nombreDiaLiga(fecha){
+  var d = parseFechaLigaDMY(fecha);
+  if(!d) return '';
+  var n = d.toLocaleDateString('es-ES', { weekday:'long' });
+  return n ? n.charAt(0).toUpperCase() + n.slice(1) : '';
+}
+
+function fechasUnicasJornada(jornada){
+  var fechas = [];
+  (jornada && jornada.partidos ? jornada.partidos : []).forEach(function(p){
+    if(p && p.fecha && !fechas.includes(p.fecha)) fechas.push(p.fecha);
+  });
+  if(!fechas.length && jornada && jornada.fecha) fechas.push(jornada.fecha);
+  return fechas.sort(function(a,b){
+    var da = parseFechaLigaDMY(a), dbb = parseFechaLigaDMY(b);
+    return (da ? da.getTime() : 0) - (dbb ? dbb.getTime() : 0);
+  });
+}
+
+function resumenFechasJornada(jornada, conDiaSemana){
+  var fechas = fechasUnicasJornada(jornada);
+  if(!fechas.length) return 'Fecha por confirmar';
+  if(fechas.length === 1){
+    return conDiaSemana ? `${nombreDiaLiga(fechas[0])} ${fechas[0]}` : fechas[0];
+  }
+
+  var primera = fechas[0], ultima = fechas[fechas.length - 1];
+  var a = primera.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+  var b = ultima.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+  if(a && b && a[2] === b[2] && a[3] === b[3]){
+    if(conDiaSemana){
+      return `${nombreDiaLiga(primera)} ${a[1]} – ${nombreDiaLiga(ultima)} ${b[1]}/${b[2]}/${b[3]}`;
+    }
+    return `${a[1]}–${b[1]}/${b[2]}/${b[3]}`;
+  }
+  return conDiaSemana
+    ? `${nombreDiaLiga(primera)} ${primera} – ${nombreDiaLiga(ultima)} ${ultima}`
+    : `${primera} – ${ultima}`;
+}
+
+function ligaNombreNormalizado(v){
+  return String(v || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/\./g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function equipoCoincideLiga(nombre, filtro){
+  var a = ligaNombreNormalizado(nombre);
+  var b = ligaNombreNormalizado(filtro);
+  return !!a && !!b && (a.includes(b) || b.includes(a));
+}
+
 function renderLigaResultadosView(){
-  var jornadas = db.todasJornadas || DEFAULT_DATA.todasJornadas || [];
-  if(!jornadas.length) return;
+  var jornadas = getLigaJornadasOficiales();
+  if(!jornadas.length){
+    var empty = document.getElementById('ligaMatchesResultContainer');
+    if(empty) empty.innerHTML = '<div style="padding:24px;text-align:center;color:var(--text-muted)">Cargando datos oficiales de FUTGAL…</div>';
+    return;
+  }
 
   // 1. Populate Dropdowns if not done
   var selectJ = document.getElementById('searchLigaJornada');
   var selectE = document.getElementById('searchLigaEquipo');
 
-  if(selectJ && selectJ.options.length <= 1){
+  if(selectJ){
     var jHtml = '<option value="">-- Todas las Jornadas (1 a 30) --</option>';
     jornadas.forEach(function(j){
-      jHtml += `<option value="${j.jornada}">Jornada ${j.jornada} (${j.fecha})</option>`;
+      jHtml += `<option value="${j.jornada}">Jornada ${j.jornada} (${resumenFechasJornada(j, false)})</option>`;
     });
     selectJ.innerHTML = jHtml;
   }
 
-  if(selectE && selectE.options.length <= 1){
+  if(selectE){
     var eHtml = '<option value="">-- Todos los Equipos (16) --</option>';
     LIGA_TEAMS_LIST.forEach(function(t){
       eHtml += `<option value="${t}">${t === "Xuventude Dorneda" ? "&#11088; " + t : t}</option>`;
@@ -12318,7 +12462,7 @@ function renderLigaResultadosView(){
     if(navQuickWrap) navQuickWrap.style.display = 'flex';
 
     var currentJ = jornadas.find(function(j){ return j.jornada === jFilter; }) || jornadas[0];
-    if(titleEl) titleEl.innerHTML = `&#128197; <strong>Jornada ${currentJ.jornada}</strong> &middot; Sábado ${currentJ.fecha}`;
+    if(titleEl) titleEl.innerHTML = `&#128197; <strong>Jornada ${currentJ.jornada}</strong> &middot; ${resumenFechasJornada(currentJ, true)}`;
     if(subtitleEl) subtitleEl.innerHTML = `Mostrando todos los 8 partidos oficiales de la Jornada ${currentJ.jornada}`;
 
     renderJornadasPills(jornadas, currentJ.jornada);
@@ -12337,13 +12481,13 @@ function renderLigaResultadosView(){
     var teamMatches = [];
     jornadas.forEach(function(j){
       (j.partidos || []).forEach(function(p){
-        var isLocal = (p.local && p.local.toLowerCase().indexOf(eqFilter.toLowerCase()) !== -1);
-        var isVisitor = (p.visitante && p.visitante.toLowerCase().indexOf(eqFilter.toLowerCase()) !== -1);
+        var isLocal = equipoCoincideLiga(p.local, eqFilter);
+        var isVisitor = equipoCoincideLiga(p.visitante, eqFilter);
         if(isLocal || isVisitor){
           teamMatches.push({
             partido: p,
             jornada: j.jornada,
-            fecha: j.fecha,
+            fecha: p.fecha || j.fecha,
             isLocal: isLocal
           });
         }
@@ -12363,13 +12507,12 @@ function renderLigaResultadosView(){
     var matchFound = null;
     if(targetJ && targetJ.partidos){
       matchFound = targetJ.partidos.find(function(p){
-        return (p.local && p.local.toLowerCase().indexOf(eqFilter.toLowerCase()) !== -1) ||
-               (p.visitante && p.visitante.toLowerCase().indexOf(eqFilter.toLowerCase()) !== -1);
+        return equipoCoincideLiga(p.local, eqFilter) || equipoCoincideLiga(p.visitante, eqFilter);
       });
     }
 
     if(titleEl) titleEl.innerHTML = `📌 <strong>Jornada ${jFilter}</strong> &middot; ${eqFilter}`;
-    if(subtitleEl) subtitleEl.innerHTML = targetJ ? `Sábado ${targetJ.fecha} &middot; Partido oficial` : '';
+    if(subtitleEl) subtitleEl.innerHTML = targetJ ? `${resumenFechasJornada(targetJ, true)} &middot; Partido oficial` : '';
 
     if(matchFound){
       renderMatchesCards([matchFound], jFilter, targetJ.fecha, container);
@@ -12384,7 +12527,7 @@ function renderLigaResultadosView(){
   if(navQuickWrap) navQuickWrap.style.display = 'flex';
 
   var defJ = jornadas.find(function(j){ return j.jornada === currentJornadaNav; }) || jornadas[0];
-  if(titleEl) titleEl.innerHTML = `&#128197; <strong>Jornada ${defJ.jornada}</strong> &middot; Sábado ${defJ.fecha}`;
+  if(titleEl) titleEl.innerHTML = `&#128197; <strong>Jornada ${defJ.jornada}</strong> &middot; ${resumenFechasJornada(defJ, true)}`;
   if(subtitleEl) subtitleEl.innerHTML = `Mostrando los 8 partidos oficiales de la Jornada ${defJ.jornada} (selecciona equipo o jornada para filtrar)`;
 
   renderJornadasPills(jornadas, defJ.jornada);
@@ -12460,34 +12603,21 @@ function renderMatchesCards(matches, jornadaNum, jornadaFecha, container){
     return (isDornedaB ? 1 : 0) - (isDornedaA ? 1 : 0);
   });
 
+  // Paso 2F:
+  // Si una jornada se disputa en más de una fecha, mostramos la fecha
+  // en TODAS las filas. Así se identifican también los partidos del
+  // primer día (sábado) y no solo los del segundo (domingo).
+  var fechasDistintasJornada = Array.from(new Set(
+    matches.map(function(p){ return p.fecha || ''; }).filter(Boolean)
+  ));
+  var mostrarFechaEnTodasLasFilas = fechasDistintasJornada.length > 1;
+
   container.innerHTML = sortedMatches.map(function(p, idx){
     var isDornedaMatch = (p.local && p.local.indexOf('Dorneda') !== -1) || (p.visitante && p.visitante.indexOf('Dorneda') !== -1) || p.dorneda;
     var isDornedaLocal = (p.local && p.local.indexOf('Dorneda') !== -1);
     var isDornedaVisitor = (p.visitante && p.visitante.indexOf('Dorneda') !== -1);
-        // Fallback de resultado desde DEFAULT_DATA si el partido aÚn no tiene marcador en el estado local
-    if(DEFAULT_DATA.todasJornadas){
-      var defJ = DEFAULT_DATA.todasJornadas.find(function(j){ return j.jornada === Number(jornadaNum); });
-      if(defJ && defJ.partidos){
-        var defP = defJ.partidos.find(function(dp){
-          return (dp.codActa && p.codActa && dp.codActa === p.codActa) ||
-                 (normalizeName(dp.local) === normalizeName(p.local) && normalizeName(dp.visitante) === normalizeName(p.visitante)) ||
-                 (dp.local && p.local && dp.local.toLowerCase() === p.local.toLowerCase());
-        });
-        if(defP){
-          if(defP.gl !== null && defP.gl !== undefined && (p.gl === null || p.gl === undefined)){
-            p.gl = defP.gl;
-            p.gv = defP.gv;
-          }
-          if(defP.hora && p.hora !== defP.hora) p.hora = defP.hora;
-          if(defP.campo && p.campo !== defP.campo) p.campo = defP.campo;
-          if(defP.fecha && p.fecha !== defP.fecha) p.fecha = defP.fecha;
-          if(defP.arbitro && p.arbitro !== defP.arbitro) p.arbitro = defP.arbitro;
-          if(defP.codActa && p.codActa !== defP.codActa) p.codActa = defP.codActa;
-          if(defP.enlaceActa && p.enlaceActa !== defP.enlaceActa) p.enlaceActa = defP.enlaceActa;
-          if(!p.actaData && defP.actaData) p.actaData = defP.actaData;
-        }
-      }
-    }
+    // Paso 2D: no se consulta DEFAULT_DATA. Este partido ya procede de db.todasJornadas,
+    // reconstruido desde competicion.json.
     var hasScore = (p.gl !== null && p.gl !== undefined) && (p.gv !== null && p.gv !== undefined);
     var isLocalWinner = hasScore && p.gl > p.gv;
     var isVisitorWinner = hasScore && p.gv > p.gl;
@@ -12497,13 +12627,16 @@ function renderMatchesCards(matches, jornadaNum, jornadaFecha, container){
     var m = isDornedaMatch ? (db.partidos || []).find(function(x){ return x.codigo === ('J' + jornadaNum); }) : null;
     var actaUrl = p.enlaceActa || (p.codActa ? `https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=${p.codActa}&cod_acta=${p.codActa}` : '');
     var actaBtn = actaUrl ? `<a href="${actaUrl}" target="_blank" rel="noopener noreferrer" style="background:#285b4f;color:#ffffff;padding:1px 5px;border-radius:3px;font-size:9px;font-weight:700;display:inline-flex;align-items:center;gap:2px;text-decoration:none;border:1px solid #1e453c;white-space:nowrap;min-height:19px;box-sizing:border-box;" title="Ver Acta Oficial en FUTGAL">📄 Acta ↗</a>` : '';
+    var mostrarFechaPartido = mostrarFechaEnTodasLasFilas && p.fecha;
+    var fechaCorta = p.fecha ? String(p.fecha).slice(0,5) : '';
 
     return `
       <div class="copa-match-row ${isDornedaMatch ? 'dorneda-row' : 'regular-row'}" onclick="openFichaActaOficial(${jornadaNum}, '${(p.local || '').replace(/'/g, "\\'")}', '${(p.visitante || '').replace(/'/g, "\\'")}', '${p.enlaceActa || ''}', '${p.codActa || ''}')" style="cursor:pointer;">
         <!-- Col 1: Horario / Campo -->
-        <div style="width:155px;flex-shrink:0;font-size:10px;color:var(--text-dim);display:flex;align-items:center;gap:4px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+        <div style="width:205px;flex-shrink:0;font-size:10px;color:var(--text-dim);display:flex;align-items:center;gap:4px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
           ${isDornedaMatch ? `<span class="badge badge-accent" style="font-size:7.5px;font-weight:900;padding:1px 3px;flex-shrink:0;">⭐ DORNEDA</span>` : ''}
-          ${p.hora ? `<span style="font-weight:700;color:var(--text);">⏰ ${p.hora}</span>` : `<span style="font-size:9.5px;color:var(--text-dim);font-style:italic;">⏰ Por fijar</span>`}
+          ${mostrarFechaPartido ? `<span style="font-weight:800;color:var(--info);flex-shrink:0;" title="${p.fecha}">📅 ${fechaCorta}</span>` : ''}
+          ${p.hora ? `<span style="font-weight:700;color:var(--text);flex-shrink:0;">⏰ ${p.hora}</span>` : `<span style="font-size:9.5px;color:var(--text-dim);font-style:italic;flex-shrink:0;">⏰ Por fijar</span>`}
           <span style="color:var(--text-dim);overflow:hidden;text-overflow:ellipsis;" title="${p.campo || ''}">📍 ${p.campo || 'Por determinar'}</span>
         </div>
 
@@ -12568,7 +12701,7 @@ function openFichaActaOficial(jornadaNum, localTeam, visitTeam, enlaceActa, codA
   function normT(s){ return (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim(); }
 
   var match = null;
-  var jornadas = (db.todasJornadas && db.todasJornadas.length ? db.todasJornadas : (DEFAULT_DATA.todasJornadas || []));
+  var jornadas = getLigaJornadasOficiales();
   var jObj = jornadas.find(function(j){ return j.jornada === Number(jornadaNum); });
   if(jObj && jObj.partidos){
     match = jObj.partidos.find(function(p){
@@ -12589,16 +12722,8 @@ function openFichaActaOficial(jornadaNum, localTeam, visitTeam, enlaceActa, codA
     }
   }
 
-  if(!match && DEFAULT_DATA.todasJornadas){
-    var defJ = DEFAULT_DATA.todasJornadas.find(function(j){ return j.jornada === Number(jornadaNum); });
-    if(defJ && defJ.partidos){
-      match = defJ.partidos.find(function(p){
-        if(codActa && p.codActa && String(p.codActa).trim() === String(codActa).trim()) return true;
-        var pL = normT(p.local), pV = normT(p.visitante), qL = normT(localTeam), qV = normT(visitTeam);
-        return (pL === qL && pV === qV) || (pL && qL && (pL.includes(qL) || qL.includes(pL))) || (pV && qV && (pV.includes(qV) || qV.includes(pV)));
-      });
-    }
-  }
+  // Paso 2D: para Liga no se recuperan partidos de DEFAULT_DATA.
+
 
   if(!match){
     match = {
@@ -12616,23 +12741,7 @@ function openFichaActaOficial(jornadaNum, localTeam, visitTeam, enlaceActa, codA
   }
 
   var acta = match.actaData;
-  if(!acta || !acta.localTitulares || !acta.localTitulares.length){
-    var defJornada = (DEFAULT_DATA.todasJornadas || []).find(function(j){ return j.jornada === (Number(jornadaNum) || match.jornada); });
-    if(defJornada && defJornada.partidos){
-      var defMatch = defJornada.partidos.find(function(p){
-        return (p.codActa && (p.codActa === match.codActa || p.codActa === codActa)) ||
-               (normT(p.local) === normT(match.local) && normT(p.visitante) === normT(match.visitante)) ||
-               (normT(p.local).includes(normT(match.local)) || normT(match.local).includes(normT(p.local)));
-      });
-      if(defMatch && defMatch.actaData){
-        acta = defMatch.actaData;
-        if(!match.campo && defMatch.campo) match.campo = defMatch.campo;
-        if(!match.arbitro && defMatch.arbitro) match.arbitro = defMatch.arbitro;
-        if((match.gl === null || match.gl === undefined) && defMatch.gl !== null) match.gl = defMatch.gl;
-        if((match.gv === null || match.gv === undefined) && defMatch.gv !== null) match.gv = defMatch.gv;
-      }
-    }
-  }
+  // Paso 2D: acta oficial exclusivamente desde el partido importado en db.todasJornadas.
   acta = acta || {};
 
   var isDornedaMatch = (match.local && match.local.indexOf('Dorneda') !== -1) || (match.visitante && match.visitante.indexOf('Dorneda') !== -1);
@@ -12958,30 +13067,7 @@ function renderTeamFullCalendarCards(teamMatches, teamName, container){
     var fecha = item.fecha;
     var isHome = item.isLocal;
     var rival = isHome ? p.visitante : p.local;
-        // Fallback de resultado desde DEFAULT_DATA si el partido aÚn no tiene marcador en el estado local
-    if(DEFAULT_DATA.todasJornadas){
-      var defJ = DEFAULT_DATA.todasJornadas.find(function(j){ return j.jornada === Number(jNum); });
-      if(defJ && defJ.partidos){
-        var defP = defJ.partidos.find(function(dp){
-          return (dp.codActa && p.codActa && dp.codActa === p.codActa) ||
-                 (normalizeName(dp.local) === normalizeName(p.local) && normalizeName(dp.visitante) === normalizeName(p.visitante)) ||
-                 (dp.local && p.local && dp.local.toLowerCase() === p.local.toLowerCase());
-        });
-        if(defP){
-          if(defP.gl !== null && defP.gl !== undefined && (p.gl === null || p.gl === undefined)){
-            p.gl = defP.gl;
-            p.gv = defP.gv;
-          }
-          if(defP.hora && p.hora !== defP.hora) p.hora = defP.hora;
-          if(defP.campo && p.campo !== defP.campo) p.campo = defP.campo;
-          if(defP.fecha && p.fecha !== defP.fecha) p.fecha = defP.fecha;
-          if(defP.arbitro && p.arbitro !== defP.arbitro) p.arbitro = defP.arbitro;
-          if(defP.codActa && p.codActa !== defP.codActa) p.codActa = defP.codActa;
-          if(defP.enlaceActa && p.enlaceActa !== defP.enlaceActa) p.enlaceActa = defP.enlaceActa;
-          if(!p.actaData && defP.actaData) p.actaData = defP.actaData;
-        }
-      }
-    }
+    // Paso 2D: datos oficiales ya presentes en p; sin fallback a DEFAULT_DATA.
     var hasScore = (p.gl !== null && p.gl !== undefined) && (p.gv !== null && p.gv !== undefined);
     var myGoals = isHome ? p.gl : p.gv;
     var rivalGoals = isHome ? p.gv : p.gl;
@@ -16979,6 +17065,8 @@ if (document.readyState === 'loading') {
 }
 
 </script>
+<script src="scripts/futgal-official.js"></script>
+<script src="scripts/futgal-cloud.js"></script>
 </body>
 </html>
 
