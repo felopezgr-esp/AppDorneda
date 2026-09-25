@@ -2559,6 +2559,242 @@
       }
     }
 
+
+/* ==========================================================
+   PASO 12A · RESULTADOS MÓVIL
+   Diseño específico para <= 760 px.
+   No modifica la visualización de escritorio.
+   ========================================================== */
+@media (max-width: 760px) {
+  /* La pantalla de resultados ocupa todo el ancho útil */
+  #ligaSubViewResultados .card {
+    padding: 8px !important;
+    margin-bottom: 8px !important;
+    border-radius: 14px !important;
+  }
+
+  /* Filtros: una columna, cómodos para tocar */
+  #ligaSubViewResultados .card > div:first-child {
+    padding: 8px !important;
+    margin-bottom: 10px !important;
+  }
+  #ligaSubViewResultados .card > div:first-child > div {
+    grid-template-columns: 1fr !important;
+    gap: 7px !important;
+  }
+  #ligaSubViewResultados #searchLigaJornada,
+  #ligaSubViewResultados #searchLigaEquipo {
+    height: 42px !important;
+    font-size: 15px !important;
+    border-radius: 10px !important;
+    padding: 6px 10px !important;
+  }
+
+  /* Cabecera de jornada */
+  #ligaSearchResultTitle {
+    font-size: 16px !important;
+    line-height: 1.2 !important;
+  }
+  #ligaJornadaNavQuickWrap button {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    padding: 0 !important;
+    border-radius: 10px !important;
+    font-size: 21px !important;
+  }
+
+  /* En móvil no hay tabla */
+  #ligaSubViewResultados .copa-list-header {
+    display: none !important;
+  }
+  #ligaSubViewResultados .card > div[style*="overflow-x:auto"] {
+    overflow: visible !important;
+    padding: 0 !important;
+  }
+  #ligaMatchesResultContainer {
+    min-width: 0 !important;
+    width: 100% !important;
+    gap: 10px !important;
+  }
+
+  /* Tarjeta de partido móvil */
+  .liga-mobile-card {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    background: var(--surface);
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(15,23,42,.04);
+  }
+  .liga-mobile-card.dorneda-mobile-card {
+    border-left: 4px solid var(--red);
+    background: rgba(204,0,0,.045);
+  }
+
+  .liga-mobile-main {
+    display: grid;
+    grid-template-columns: 34px 1fr 74px;
+    grid-template-rows: auto auto;
+    column-gap: 8px;
+    row-gap: 8px;
+    align-items: center;
+    padding: 11px 10px 8px;
+  }
+  .liga-mobile-score {
+    font-size: 23px;
+    line-height: 1;
+    font-weight: 900;
+    text-align: center;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+  }
+  .liga-mobile-score.pending {
+    color: var(--text-dim);
+    font-size: 18px;
+  }
+
+  .liga-mobile-team {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 15px;
+    line-height: 1.15;
+    font-weight: 650;
+    color: var(--text);
+  }
+  .liga-mobile-team.winner {
+    font-weight: 900;
+  }
+  .liga-mobile-team.dorneda {
+    font-weight: 900;
+    color: var(--text);
+  }
+
+  .liga-mobile-badge {
+    width: 29px;
+    height: 29px;
+    flex: 0 0 29px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--surface2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    line-height: 1;
+    font-weight: 900;
+    letter-spacing: -.2px;
+    color: var(--text-muted);
+  }
+  .liga-mobile-badge.dorneda {
+    border-color: rgba(204,0,0,.35);
+    background: rgba(204,0,0,.08);
+    color: var(--red);
+  }
+
+  .liga-mobile-team-name {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .liga-mobile-date {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    align-self: center;
+    text-align: right;
+    color: var(--text-muted);
+    font-size: 12px;
+    line-height: 1.25;
+    font-weight: 700;
+  }
+  .liga-mobile-date strong {
+    color: var(--text);
+    font-size: 12.5px;
+  }
+
+  .liga-mobile-footer {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 9px;
+    border-top: 1px solid var(--border);
+    background: var(--surface2);
+  }
+  .liga-mobile-field {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: var(--text-muted);
+    font-size: 11px;
+  }
+  .liga-mobile-actions {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 5px;
+  }
+  .liga-mobile-actions .btn,
+  .liga-mobile-actions a {
+    min-height: 28px !important;
+    padding: 4px 8px !important;
+    font-size: 10.5px !important;
+    border-radius: 7px !important;
+    box-sizing: border-box;
+  }
+
+  /* Subpestañas: desplazamiento horizontal natural */
+  #ligaSubTabsWrap {
+    gap: 5px !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+  }
+  #ligaSubTabsWrap > button {
+    scroll-snap-align: start;
+    flex: 0 0 auto;
+    font-size: 11px !important;
+    padding: 6px 9px !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .liga-mobile-main {
+    grid-template-columns: 31px 1fr 70px;
+    column-gap: 6px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .liga-mobile-team {
+    font-size: 14px;
+  }
+  .liga-mobile-badge {
+    width: 27px;
+    height: 27px;
+    flex-basis: 27px;
+    font-size: 8.5px;
+  }
+  .liga-mobile-score {
+    font-size: 21px;
+  }
+  .liga-mobile-date {
+    font-size: 11px;
+  }
+}
+
+
+@media (max-width: 760px) {
+  #ligaSubViewResultados .liga-results-scroll {
+    overflow: visible !important;
+    padding-bottom: 0 !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -3390,7 +3626,7 @@
             </div>
 
             <!-- Matches Results Container (Compact Table Row Format) -->
-            <div style="overflow-x:auto;padding-bottom:4px;scrollbar-width:thin;">
+            <div class="liga-results-scroll" style="overflow-x:auto;padding-bottom:4px;scrollbar-width:thin;">
               <div class="copa-list-header" style="display:flex;align-items:center;font-size:9.5px;font-weight:800;text-transform:uppercase;color:var(--text-dim);background:var(--surface2);padding:5px 9px;border-radius:4px;margin-bottom:5px;min-width:620px;border:1px solid var(--border);">
                 <div style="width:205px;flex-shrink:0;">Fecha / Hora / Campo</div>
                 <div style="flex:1;text-align:right;padding-right:8px;">Local</div>
@@ -12543,9 +12779,171 @@ function resetLigaSearch(){
 }
 window.resetLigaSearch = resetLigaSearch;
 
+
+// PASO 12A · Render específico de Resultados en móvil.
+function ligaResultadosEsMovil(){
+  return window.matchMedia && window.matchMedia('(max-width: 760px)').matches;
+}
+
+function ligaInicialesEquipo(nombre){
+  var limpio = String(nombre || '')
+    .replace(/\b(C\.?D\.?|S\.?D\.?|F\.?C\.?|C\.?C\.?D\.?|U\.?D\.?|A\.?S\.?)\b/gi, ' ')
+    .replace(/[^\p{L}\p{N}\s]/gu, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  if(!limpio) return 'EQ';
+
+  var partes = limpio.split(' ').filter(Boolean);
+  var letras = partes.slice(0, 2).map(function(p){ return p.charAt(0); }).join('');
+  return (letras || limpio.slice(0,2)).toUpperCase().slice(0,2);
+}
+
+function ligaNombreMovil(nombre){
+  return String(nombre || '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function renderLigaMobileMatchCards(matches, jornadaNum, container){
+  if(!container) return;
+
+  if(!matches || !matches.length){
+    container.innerHTML = '<div style="padding:18px;text-align:center;color:var(--text-muted);">No hay partidos programados.</div>';
+    return;
+  }
+
+  var sorted = [...matches].sort(function(a, b){
+    var ad = /Dorneda/i.test(String(a.local || '')) || /Dorneda/i.test(String(a.visitante || '')) || a.dorneda;
+    var bd = /Dorneda/i.test(String(b.local || '')) || /Dorneda/i.test(String(b.visitante || '')) || b.dorneda;
+    return Number(bd) - Number(ad);
+  });
+
+  container.innerHTML = sorted.map(function(p){
+    var isDornedaMatch = /Dorneda/i.test(String(p.local || '')) || /Dorneda/i.test(String(p.visitante || '')) || p.dorneda;
+    var isDornedaLocal = /Dorneda/i.test(String(p.local || ''));
+    var isDornedaVisit = /Dorneda/i.test(String(p.visitante || ''));
+
+    var hasScore =
+      p.gl !== null && p.gl !== undefined &&
+      p.gv !== null && p.gv !== undefined;
+
+    var localWinner = hasScore && Number(p.gl) > Number(p.gv);
+    var visitWinner = hasScore && Number(p.gv) > Number(p.gl);
+
+    var fecha = p.fecha ? String(p.fecha).slice(0,5) : '';
+    var hora = p.hora || 'Por fijar';
+    var campo = p.campo || 'Campo por determinar';
+
+    var actaUrl = p.enlaceActa || (
+      p.codActa
+        ? `https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=${p.codActa}&cod_acta=${p.codActa}`
+        : ''
+    );
+
+    var localEsc = (p.local || '').replace(/'/g, "\\'");
+    var visitEsc = (p.visitante || '').replace(/'/g, "\\'");
+
+    var localScore = hasScore ? p.gl : '–';
+    var visitScore = hasScore ? p.gv : '–';
+
+    return `
+      <div class="liga-mobile-card ${isDornedaMatch ? 'dorneda-mobile-card' : ''}"
+           onclick="openFichaActaOficial(${jornadaNum}, '${localEsc}', '${visitEsc}', '${p.enlaceActa || ''}', '${p.codActa || ''}')">
+        <div class="liga-mobile-main">
+          <div class="liga-mobile-score ${hasScore ? '' : 'pending'}">${localScore}</div>
+          <div class="liga-mobile-team ${localWinner ? 'winner' : ''} ${isDornedaLocal ? 'dorneda' : ''}">
+            <span class="liga-mobile-badge ${isDornedaLocal ? 'dorneda' : ''}">${ligaInicialesEquipo(p.local)}</span>
+            <span class="liga-mobile-team-name">${ligaNombreMovil(p.local)}</span>
+            ${localWinner ? '<span style="color:var(--success);font-size:13px;">✓</span>' : ''}
+          </div>
+
+          <div class="liga-mobile-date">
+            <strong>${fecha || '—'}</strong><br>${hora}
+          </div>
+
+          <div class="liga-mobile-score ${hasScore ? '' : 'pending'}">${visitScore}</div>
+          <div class="liga-mobile-team ${visitWinner ? 'winner' : ''} ${isDornedaVisit ? 'dorneda' : ''}">
+            <span class="liga-mobile-badge ${isDornedaVisit ? 'dorneda' : ''}">${ligaInicialesEquipo(p.visitante)}</span>
+            <span class="liga-mobile-team-name">${ligaNombreMovil(p.visitante)}</span>
+            ${visitWinner ? '<span style="color:var(--success);font-size:13px;">✓</span>' : ''}
+          </div>
+        </div>
+
+        <div class="liga-mobile-footer" onclick="event.stopPropagation()">
+          <div class="liga-mobile-field" title="${campo}">📍 ${campo}</div>
+          <div class="liga-mobile-actions">
+            <button type="button"
+                    class="btn ${isDornedaMatch ? 'btn-primary' : 'btn-ghost'} btn-xs"
+                    onclick="openFichaActaOficial(${jornadaNum}, '${localEsc}', '${visitEsc}', '${p.enlaceActa || ''}', '${p.codActa || ''}')">
+              Ficha
+            </button>
+            ${actaUrl ? `<a href="${actaUrl}" target="_blank" rel="noopener noreferrer" style="background:#285b4f;color:#fff;text-decoration:none;border:1px solid #1e453c;">Acta ↗</a>` : ''}
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderLigaMobileTeamCalendarCards(teamMatches, teamName, container){
+  if(!container) return;
+
+  if(!teamMatches || !teamMatches.length){
+    container.innerHTML = `<div style="padding:18px;text-align:center;color:var(--text-muted);">No se encontraron partidos para ${teamName}.</div>`;
+    return;
+  }
+
+  container.innerHTML = teamMatches.map(function(item){
+    var p = item.partido;
+    var fecha = p.fecha || item.fecha || '';
+
+    var wrap = {
+      local: p.local,
+      visitante: p.visitante,
+      fecha: fecha,
+      hora: p.hora || '',
+      campo: p.campo || '',
+      gl: p.gl,
+      gv: p.gv,
+      enlaceActa: p.enlaceActa || '',
+      codActa: p.codActa || '',
+      dorneda: /Dorneda/i.test(String(p.local || '')) || /Dorneda/i.test(String(p.visitante || ''))
+    };
+
+    var temp = document.createElement('div');
+    renderLigaMobileMatchCards([wrap], item.jornada, temp);
+    return temp.innerHTML;
+  }).join('');
+}
+
+(function(){
+  var mobileState = ligaResultadosEsMovil();
+  var t = null;
+
+  window.addEventListener('resize', function(){
+    clearTimeout(t);
+    t = setTimeout(function(){
+      var now = ligaResultadosEsMovil();
+      if(now !== mobileState){
+        mobileState = now;
+        if(typeof window.renderLigaResultadosView === 'function'){
+          window.renderLigaResultadosView();
+        }
+      }
+    }, 120);
+  });
+})();
+
+
 // Helper para renderizar tarjetas de partidos de una jornada (Formato compacto en una sola línea)
 function renderMatchesCards(matches, jornadaNum, jornadaFecha, container){
   if(!container) return;
+
+  if(ligaResultadosEsMovil()){
+    renderLigaMobileMatchCards(matches, jornadaNum, container);
+    return;
+  }
   if(!matches.length){
     container.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text-muted);grid-column:1/-1;">No hay partidos programados.</div>';
     return;
@@ -12993,6 +13391,11 @@ window.openFichaActaOficial = openFichaActaOficial;
 // Helper para renderizar los 30 partidos del año de un equipo específico (Formato compacto en una sola línea)
 function renderTeamFullCalendarCards(teamMatches, teamName, container){
   if(!container) return;
+
+  if(ligaResultadosEsMovil()){
+    renderLigaMobileTeamCalendarCards(teamMatches, teamName, container);
+    return;
+  }
   if(!teamMatches.length){
     container.innerHTML = `<div style="padding:20px;text-align:center;color:var(--text-muted);grid-column:1/-1;">No se encontraron partidos para ${teamName}.</div>`;
     return;
