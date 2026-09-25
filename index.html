@@ -2974,43 +2974,25 @@
       <!-- FUTGAL OFICIAL · PASO 11C -->
       <div id="futgalSidebarCard" style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 10px;margin-bottom:10px">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-          <span style="font-size:10px;font-weight:800;color:var(--text);letter-spacing:0.4px">FUTGAL · NUBE</span>
+          <span style="font-size:10px;font-weight:800;color:var(--text);letter-spacing:0.4px">FUTGAL OFICIAL</span>
           <span id="futgalSidebarBadge" class="badge" style="background:rgba(59,130,246,0.12);color:#2563eb;border:1px solid rgba(59,130,246,0.25);font-size:8.5px;padding:1px 5px">Cargando</span>
         </div>
         <div id="futgalLastSyncSidebar" style="font-size:9.5px;color:var(--text-muted);margin-bottom:6px;line-height:1.2">
-          Datos oficiales: <span id="futgalLastSyncTime">cargando…</span>
+          Última actualización: <span id="futgalLastSyncTime">cargando…</span>
         </div>
         <button type="button" class="btn btn-primary btn-xs" id="btnSyncFutgalSidebar" onclick="abrirActualizacionFutgalCloud()" style="width:100%;justify-content:center;font-weight:700;padding:5px 8px;font-size:10.5px" title="Ejecutar el extractor FUTGAL en GitHub Actions">
           ☁ Actualizar desde FUTGAL
         </button>
-        <button type="button" class="btn btn-ghost btn-xs" onclick="seleccionarFutgalJsonManual()" style="width:100%;justify-content:center;font-weight:700;padding:4px 8px;font-size:9.5px;margin-top:5px" title="Cargar un competicion.json manual como respaldo">
-          📥 Cargar JSON manual
-        </button>
-      </div>
-
-      <!-- CLOUD STATUS BADGE -->
-      <div id="cloudStatusBadge" style="font-size:11px;font-weight:700;padding:6px 10px;border-radius:6px;border:1px solid rgba(255,255,255,0.1);background:var(--surface2);margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;cursor:pointer" onclick="initFirebaseSync()" title="Pulsa para forzar sincronización">
-        <span style="display:flex;align-items:center;gap:4px">
-          <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#f59e0b"></span>
-          <span>Conectando...</span>
-        </span>
-        <span style="font-size:10px;opacity:0.6">🔄</span>
       </div>
 
       <!-- ADMIN PIN MODE TOGGLE -->
-      <div id="adminModeBtn" style="font-size:11px;font-weight:700;padding:6px 10px;border-radius:6px;border:1px solid rgba(255,255,255,0.1);background:var(--surface2);margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;cursor:pointer" onclick="toggleAdminPINModal()" title="Modo Edición / Administrador">
+      <div id="adminModeBtn" style="font-size:11px;font-weight:700;padding:6px 10px;border-radius:6px;border:1px solid rgba(255,255,255,0.1);background:var(--surface2);margin-bottom:0;display:flex;align-items:center;justify-content:space-between;cursor:pointer" onclick="toggleAdminPINModal()" title="Modo Edición / Administrador">
         <span id="adminModeLabel" style="display:flex;align-items:center;gap:4px">
           <span>🔓</span> Modo Editor
         </span>
         <span style="font-size:10px;color:var(--text-muted)">PIN</span>
       </div>
 
-      <div class="nav-section-label" style="margin-top:0;margin-bottom:8px">Datos y Copias</div>
-      <div class="export-btns">
-        <button class="btn-xs primary" onclick="exportJSON()">&#128190; JSON</button>
-        <button class="btn-xs ghost" onclick="exportCSV()">&#128202; CSV</button>
-        <button class="btn-xs ghost" onclick="triggerImport()">&#128194; Importar</button>
-      </div>
       <input type="file" id="importFile" accept=".json" style="display:none" onchange="importJSON(event)" />
     </div>
   </aside>
@@ -3382,11 +3364,8 @@
           <div class="card mb-16">
             <!-- Buscador Avanzado: 3 tipos de búsqueda (a: Jornada, b: Equipo, c: Jornada + Equipo) -->
             <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:16px;">
-              <div style="font-size:13px;font-weight:800;color:var(--text);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;">
+              <div style="font-size:13px;font-weight:800;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:6px;">
                 <span>&#128269; Buscador de Partidos y Resultados de Liga</span>
-                <button type="button" class="btn btn-primary btn-xs" onclick="abrirActualizacionFutgalCloud()" title="Actualizar los datos oficiales mediante GitHub Actions">
-                  ☁ Actualizar desde FUTGAL
-                </button>
               </div>
               <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:10px;align-items:end;">
                 <!-- Desplegable A: Jornada -->
