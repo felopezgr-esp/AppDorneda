@@ -1,5 +1,5 @@
 /*
- * AppDorneda · Paso 11C
+ * AppDorneda · Paso 11D · protección anti-duplicados
  * Web -> Cloudflare Worker -> GitHub Actions -> FUTGAL -> Resultados y Búsqueda.
  */
 (function () {
@@ -92,7 +92,9 @@
   }
 
   async function probarConexionFutgalCloud() {
-    setEstado('Comprobando el servicio…', 'normal');
+    if (!guardarPin()) return;
+
+    setEstado('Comprobando el servicio y buscando actualizaciones activas…', 'normal');
 
     try {
       const res = await fetch(WORKER_URL + '/health', { cache: 'no-store' });
@@ -102,9 +104,25 @@
         throw new Error(data?.error || 'El Worker no respondió correctamente.');
       }
 
+      const active = await api('/active');
+
+      if (active?.active && active?.request_id) {
+        localStorage.setItem(REQUEST_KEY, active.request_id);
+
+        setEstado(
+          `Servicio conectado.<br>` +
+          `<strong>Ya hay una actualización en curso.</strong> ` +
+          `Me conecto a la ejecución #${esc(active.run_number || '')}.`,
+          'warning'
+        );
+
+        consultarEstadoFutgalCloud(active.request_id);
+        return;
+      }
+
       setEstado(
         `Servicio conectado.<br><strong>Repositorio:</strong> ${esc(data.repo)} · ` +
-        `<strong>Rama:</strong> ${esc(data.ref)}`,
+        `<strong>Rama:</strong> ${esc(data.ref)} · No hay otra actualización activa.`,
         'ok'
       );
     } catch (err) {
@@ -242,6 +260,15 @@
       }
 
       localStorage.setItem(REQUEST_KEY, result.request_id);
+
+      if (result.existing) {
+        setEstado(
+          `<strong>Ya había una actualización en curso.</strong><br>` +
+          `No he creado otra. Me conecto a la ejecución #${esc(result.run_number || '')}.`,
+          'warning'
+        );
+      }
+
       await consultarEstadoFutgalCloud(result.request_id);
 
     } catch (err) {
@@ -284,6 +311,24 @@
         : 'Listo para ejecutar el extractor FUTGAL en GitHub.',
       'normal'
     );
+
+    // localStorage no se comparte entre file:// y GitHub Pages ni entre navegadores.
+    // Si tenemos PIN, preguntamos al Worker si ya existe una ejecución activa.
+    if (getPin()) {
+      api('/active')
+        .then(active => {
+          if (active?.active && active?.request_id) {
+            localStorage.setItem(REQUEST_KEY, active.request_id);
+            setEstado(
+              `<strong>Ya hay una actualización en curso.</strong><br>` +
+              `Me conecto a la ejecución #${esc(active.run_number || '')}; no se lanzará otra.`,
+              'warning'
+            );
+            consultarEstadoFutgalCloud(active.request_id);
+          }
+        })
+        .catch(() => {});
+    }
   }
 
   function cancelarSeguimientoFutgalCloud() {
