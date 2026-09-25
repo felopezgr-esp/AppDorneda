@@ -1,18 +1,1 @@
-[
-  {
-    "jornada": 4,
-    "cambios": [
-      {
-        "tipo": "cambio_programacion",
-        "local": "U.D. PAIOSACO H.AÑON",
-        "visitante": "CEDEIRA S.D.",
-        "diferencias": {
-          "hora": {
-            "antes": null,
-            "ahora": "18:00"
-          }
-        }
-      }
-    ]
-  }
-]
+[]
