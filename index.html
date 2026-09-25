@@ -2974,14 +2974,14 @@
       <!-- FUTGAL OFICIAL · PASO 11C -->
       <div id="futgalSidebarCard" style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 10px;margin-bottom:10px">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-          <span style="font-size:10px;font-weight:800;color:var(--text);letter-spacing:0.4px">FUTGAL OFICIAL</span>
+          <span style="font-size:10px;font-weight:800;color:var(--text);letter-spacing:0.35px">FUTGAL</span>
           <span id="futgalSidebarBadge" class="badge" style="background:rgba(59,130,246,0.12);color:#2563eb;border:1px solid rgba(59,130,246,0.25);font-size:8.5px;padding:1px 5px">Cargando</span>
         </div>
         <div id="futgalLastSyncSidebar" style="font-size:9.5px;color:var(--text-muted);margin-bottom:6px;line-height:1.2">
-          Última actualización: <span id="futgalLastSyncTime">cargando…</span>
+          Actualizado: <span id="futgalLastSyncTime">cargando…</span>
         </div>
         <button type="button" class="btn btn-primary btn-xs" id="btnSyncFutgalSidebar" onclick="abrirActualizacionFutgalCloud()" style="width:100%;justify-content:center;font-weight:700;padding:5px 8px;font-size:10.5px" title="Ejecutar el extractor FUTGAL en GitHub Actions">
-          ☁ Actualizar desde FUTGAL
+          ☁ Actualizar
         </button>
       </div>
 
@@ -3362,54 +3362,41 @@
         <!-- 2.2 LIGA RESULTADOS Y BÚSQUEDA -->
         <div id="ligaSubViewResultados" style="display:none">
           <div class="card mb-16">
-            <!-- Filtros compactos -->
-            <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 10px;margin-bottom:10px;">
-              <div style="display:grid;grid-template-columns:minmax(180px,0.95fr) minmax(220px,1.15fr) minmax(150px,0.70fr);gap:8px;align-items:end;">
+            <!-- Filtros simples: se aplican automáticamente -->
+            <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 10px;margin-bottom:9px;">
+              <div style="display:grid;grid-template-columns:minmax(180px,0.9fr) minmax(240px,1.1fr);gap:8px;align-items:end;">
                 <div>
-                  <label class="form-label" style="font-size:10px;font-weight:800;margin-bottom:3px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.25px;">Jornada</label>
-                  <select id="searchLigaJornada" class="form-control" style="font-size:12px;font-weight:700;padding:5px 9px;height:32px;">
+                  <label class="form-label" style="font-size:9.5px;font-weight:800;margin-bottom:3px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.25px;">Jornada</label>
+                  <select id="searchLigaJornada" class="form-control" onchange="executeLigaSearch()" style="font-size:12px;font-weight:700;padding:5px 9px;height:31px;">
                     <option value="">Todas las jornadas</option>
                   </select>
                 </div>
                 <div>
-                  <label class="form-label" style="font-size:10px;font-weight:800;margin-bottom:3px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.25px;">Equipo</label>
-                  <select id="searchLigaEquipo" class="form-control" style="font-size:12px;font-weight:700;padding:5px 9px;height:32px;">
+                  <label class="form-label" style="font-size:9.5px;font-weight:800;margin-bottom:3px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.25px;">Equipo</label>
+                  <select id="searchLigaEquipo" class="form-control" onchange="executeLigaSearch()" style="font-size:12px;font-weight:700;padding:5px 9px;height:31px;">
                     <option value="">Todos los equipos</option>
                   </select>
-                </div>
-                <div style="display:flex;gap:5px;">
-                  <button type="button" class="btn btn-primary btn-sm" style="flex:1;font-weight:800;font-size:11.5px;height:32px;padding:5px 10px;" onclick="executeLigaSearch()">
-                    &#128269; Buscar
-                  </button>
-                  <button type="button" class="btn btn-ghost btn-sm" style="font-weight:700;font-size:11.5px;height:32px;padding:5px 9px;" onclick="resetLigaSearch()" title="Limpiar filtros">
-                    &#8635;
-                  </button>
                 </div>
               </div>
             </div>
 
             <!-- Jornada / resultado activo -->
-            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:7px;border-bottom:1px solid var(--border);padding-bottom:6px;">
-              <div style="font-size:13px;font-weight:900;color:var(--text);" id="ligaSearchResultTitle">&#128197; Jornada 1 &middot; Sábado 12/09/2026</div>
-              <!-- Navegación rápida de Jornada cuando no hay filtro de equipo -->
-              <div id="ligaJornadaNavQuickWrap" style="display:flex;align-items:center;gap:4px;">
-                <button class="btn btn-ghost btn-xs" onclick="changeJornadaNav(-1)" id="btnPrevJornada" style="font-size:10.5px;padding:3px 7px;" title="Jornada anterior">&#9664; Anterior</button>
-                <button class="btn btn-ghost btn-xs" onclick="changeJornadaNav(1)" id="btnNextJornada" style="font-size:10.5px;padding:3px 7px;" title="Jornada siguiente">Siguiente &#9654;</button>
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:7px;border-bottom:1px solid var(--border);padding:1px 1px 6px;">
+              <div style="font-size:13px;font-weight:900;color:var(--text);" id="ligaSearchResultTitle">Jornada 1 · 12–13/09/2026</div>
+              <div id="ligaJornadaNavQuickWrap" style="display:flex;align-items:center;gap:3px;">
+                <button class="btn btn-ghost btn-xs" onclick="changeJornadaNav(-1)" id="btnPrevJornada" style="font-size:16px;font-weight:900;line-height:1;padding:2px 8px;min-width:30px;" title="Jornada anterior">‹</button>
+                <button class="btn btn-ghost btn-xs" onclick="changeJornadaNav(1)" id="btnNextJornada" style="font-size:16px;font-weight:900;line-height:1;padding:2px 8px;min-width:30px;" title="Jornada siguiente">›</button>
               </div>
             </div>
 
-            <!-- Jornadas Pills Selector (cuando se visualiza por jornada) -->
-            <div id="jornadasPillsWrap" style="display:flex;gap:3px;overflow-x:auto;padding:1px 0 5px;margin-bottom:7px;scrollbar-width:thin;"></div>
-
             <!-- Matches Results Container (Compact Table Row Format) -->
             <div style="overflow-x:auto;padding-bottom:4px;scrollbar-width:thin;">
-              <div class="copa-list-header" style="display:flex;align-items:center;font-size:10px;font-weight:800;text-transform:uppercase;color:var(--text-dim);background:var(--surface2);padding:5px 9px;border-radius:4px;margin-bottom:5px;min-width:620px;border:1px solid var(--border);">
-                <div style="width:205px;flex-shrink:0;">Fecha / Horario / Campo</div>
-                <div style="flex:1;text-align:right;padding-right:8px;">Equipo Local</div>
+              <div class="copa-list-header" style="display:flex;align-items:center;font-size:9.5px;font-weight:800;text-transform:uppercase;color:var(--text-dim);background:var(--surface2);padding:5px 9px;border-radius:4px;margin-bottom:5px;min-width:620px;border:1px solid var(--border);">
+                <div style="width:205px;flex-shrink:0;">Fecha / Hora / Campo</div>
+                <div style="flex:1;text-align:right;padding-right:8px;">Local</div>
                 <div style="width:60px;flex-shrink:0;text-align:center;">Marcador</div>
-                <div style="flex:1;text-align:left;padding-left:8px;">Equipo Visitante</div>
-                <div style="width:130px;flex-shrink:0;text-align:center;">Estado</div>
-                <div style="width:105px;flex-shrink:0;text-align:right;">Acciones</div>
+                <div style="flex:1;text-align:left;padding-left:8px;">Visitante</div>
+                <div style="width:115px;flex-shrink:0;text-align:right;">Acciones</div>
               </div>
               <div id="ligaMatchesResultContainer" style="display:flex;flex-direction:column;gap:3px;min-width:620px;"></div>
             </div>
@@ -12429,7 +12416,7 @@ function renderLigaResultadosView(){
     if(navQuickWrap) navQuickWrap.style.display = 'flex';
 
     var currentJ = jornadas.find(function(j){ return j.jornada === jFilter; }) || jornadas[0];
-    if(titleEl) titleEl.innerHTML = `&#128197; <strong>Jornada ${currentJ.jornada}</strong> &middot; ${resumenFechasJornada(currentJ, true)}`;
+    if(titleEl) titleEl.innerHTML = `<strong>Jornada ${currentJ.jornada}</strong> · ${resumenFechasJornada(currentJ, false)}`;
     
 
     renderJornadasPills(jornadas, currentJ.jornada);
@@ -12442,7 +12429,7 @@ function renderLigaResultadosView(){
     if(pillsWrap) pillsWrap.style.display = 'none';
     if(navQuickWrap) navQuickWrap.style.display = 'none';
 
-    if(titleEl) titleEl.innerHTML = `&#128197; Calendario Completo &middot; <strong>${eqFilter}</strong>`;
+    if(titleEl) titleEl.innerHTML = `Calendario completo · <strong>${eqFilter}</strong>`;
     
 
     var teamMatches = [];
@@ -12478,7 +12465,7 @@ function renderLigaResultadosView(){
       });
     }
 
-    if(titleEl) titleEl.innerHTML = `📌 <strong>Jornada ${jFilter}</strong> &middot; ${eqFilter}`;
+    if(titleEl) titleEl.innerHTML = `<strong>Jornada ${jFilter}</strong> · ${eqFilter}`;
     
 
     if(matchFound){
@@ -12494,7 +12481,7 @@ function renderLigaResultadosView(){
   if(navQuickWrap) navQuickWrap.style.display = 'flex';
 
   var defJ = jornadas.find(function(j){ return j.jornada === currentJornadaNav; }) || jornadas[0];
-  if(titleEl) titleEl.innerHTML = `&#128197; <strong>Jornada ${defJ.jornada}</strong> &middot; ${resumenFechasJornada(defJ, true)}`;
+  if(titleEl) titleEl.innerHTML = `<strong>Jornada ${defJ.jornada}</strong> · ${resumenFechasJornada(defJ, false)}`;
   
 
   renderJornadasPills(jornadas, defJ.jornada);
@@ -12630,24 +12617,7 @@ function renderMatchesCards(matches, jornadaNum, jornadaFecha, container){
           ${isVisitorWinner ? '<span style="color:var(--success);font-size:9.5px;">✅</span>' : ''} ${highlightDorneda(p.visitante)}
         </div>
 
-        <!-- Col 5: Ganador / Estado -->
-        <div style="width:130px;flex-shrink:0;text-align:center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
-          ${winnerName ? `
-            <span class="badge badge-success" style="font-size:8.5px;font-weight:800;padding:1px 5px;border-radius:3px;max-width:100%;overflow:hidden;text-overflow:ellipsis;display:inline-block;" title="Ganador: ${winnerName}">
-              ✅ Gana: ${winnerName}
-            </span>
-          ` : (isTie ? `
-            <span class="badge" style="background:rgba(245,158,11,0.15);color:var(--warning);border:1px solid rgba(245,158,11,0.3);font-size:8.5px;font-weight:700;padding:1px 4px;border-radius:3px;">
-              🤝 Empate ${p.gl}-${p.gv}
-            </span>
-          ` : `
-            <span class="badge" style="background:var(--surface2);color:var(--text-dim);border:1px solid var(--border);font-size:8.5px;font-weight:600;padding:1px 4px;border-radius:3px;">
-              ⏳ Pendiente
-            </span>
-          `)}
-        </div>
-
-        <!-- Col 6: Botones Acción -->
+        <!-- Col 5: Acciones -->
         <div style="width:115px;flex-shrink:0;display:flex;align-items:center;justify-content:flex-end;gap:3px;" onclick="event.stopPropagation()">
           <button type="button" class="btn ${isDornedaMatch ? 'btn-primary' : 'btn-ghost'} btn-xs" style="font-size:9px;font-weight:800;padding:1px 6px;display:inline-flex;align-items:center;gap:2px;white-space:nowrap;min-height:19px;border-radius:3px;border:1px solid var(--border);" onclick="openFichaActaOficial(${jornadaNum}, '${(p.local || '').replace(/'/g, "\\'")}', '${(p.visitante || '').replace(/'/g, "\\'")}', '${p.enlaceActa || ''}', '${p.codActa || ''}')" title="Ver Ficha y Acta Oficial del Partido">
             ${isDornedaMatch ? '⭐ Ficha' : '📋 Ficha'}
@@ -13088,12 +13058,7 @@ function renderTeamFullCalendarCards(teamMatches, teamName, container){
           ${highlightDorneda(p.visitante)}
         </div>
 
-        <!-- Col 5: Resultado -->
-        <div style="width:130px;flex-shrink:0;text-align:center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
-          ${resBadge}
-        </div>
-
-        <!-- Col 6: Acciones -->
+        <!-- Col 5: Acciones -->
         <div style="width:115px;flex-shrink:0;display:flex;align-items:center;justify-content:flex-end;gap:3px;" onclick="event.stopPropagation()">
           <button type="button" class="btn ${isDorneda ? 'btn-primary' : 'btn-ghost'} btn-xs" style="font-size:9px;font-weight:800;padding:1px 6px;display:inline-flex;align-items:center;gap:2px;white-space:nowrap;min-height:19px;border-radius:3px;border:1px solid var(--border);" onclick="openFichaActaOficial(${jNum}, '${(p.local || '').replace(/'/g, "\\'")}', '${(p.visitante || '').replace(/'/g, "\\'")}', '${p.enlaceActa || ''}', '${p.codActa || ''}')" title="Ver Ficha y Acta Oficial del Partido">
             ${isDorneda ? '⭐ Ficha' : '📋 Ficha'}
