@@ -1,7 +1,13 @@
 name: Actualizar FUTGAL
+run-name: Actualizar FUTGAL · ${{ inputs.request_id || 'manual' }}
 
 on:
   workflow_dispatch:
+    inputs:
+      request_id:
+        description: "Identificador de la solicitud web"
+        required: false
+        type: string
 
 permissions:
   contents: write
@@ -72,7 +78,13 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add             competicion.json             validacion-competicion.json             diagnostico-cambios-calendario.json             tools/futgal/checkpoint-actas.json             tools/futgal/checkpoint-calendario.json             tools/futgal/checkpoint-calendario-parcial.json
+          git add \
+            competicion.json \
+            validacion-competicion.json \
+            diagnostico-cambios-calendario.json \
+            tools/futgal/checkpoint-actas.json \
+            tools/futgal/checkpoint-calendario.json \
+            tools/futgal/checkpoint-calendario-parcial.json
 
           if git diff --cached --quiet; then
             echo "No hay cambios que publicar."
