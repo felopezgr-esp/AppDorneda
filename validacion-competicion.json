@@ -1,5 +1,5 @@
 {
-  "fecha": "2026-09-25T08:49:50.884Z",
+  "fecha": "2026-09-25T09:19:57.992Z",
   "arquitectura": "datos_frescos_dos_fases_checkpoint_solo_respaldo",
   "metodoArranque": "checkpoint_local_sin_arranque_futgal",
   "metodoRecorrido": "10E_fresco_url_directa_aislada_con_fallback_a_checkpoint",
