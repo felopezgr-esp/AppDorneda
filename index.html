@@ -2795,6 +2795,134 @@
   }
 }
 
+
+/* ==========================================================
+   PASO 13A · CLASIFICACIÓN AUTOMÁTICA
+   ========================================================== */
+#mainClasifTable .clasif-adjust {
+  display:inline-block;
+  margin-left:4px;
+  padding:1px 4px;
+  border-radius:5px;
+  font-size:8.5px;
+  line-height:1.2;
+  font-weight:900;
+  background:rgba(220,38,38,.09);
+  color:var(--red);
+  border:1px solid rgba(220,38,38,.18);
+}
+#mainClasifTable .clasif-team-note {
+  display:block;
+  margin-top:1px;
+  color:var(--text-dim);
+  font-size:8.5px;
+  font-weight:500;
+}
+@media (max-width:760px){
+  #ligaSubViewClasif .card {
+    padding:9px !important;
+  }
+  #ligaSubViewClasif .table-wrap {
+    overflow-x:auto !important;
+    -webkit-overflow-scrolling:touch;
+  }
+  #mainClasifTable {
+    min-width:610px;
+    font-size:11px;
+  }
+  #mainClasifTable th,
+  #mainClasifTable td {
+    padding:5px 6px !important;
+  }
+  #mainClasifTable th:nth-child(1),
+  #mainClasifTable td:nth-child(1){
+    position:sticky;
+    left:0;
+    z-index:3;
+    background:var(--surface);
+  }
+  #mainClasifTable th:nth-child(2),
+  #mainClasifTable td:nth-child(2){
+    position:sticky;
+    left:34px;
+    z-index:2;
+    background:var(--surface);
+    min-width:155px;
+  }
+  #mainClasifTable tr.dorneda-row td:nth-child(1),
+  #mainClasifTable tr.dorneda-row td:nth-child(2){
+    background:var(--danger-soft, rgba(220,38,38,.08));
+  }
+  #clasifAutoMeta {
+    max-width:260px;
+    line-height:1.25;
+  }
+}
+
+
+/* ==========================================================
+   PASO 13B · GOLEADORES AUTOMÁTICOS DESDE ACTAS FUTGAL
+   ========================================================== */
+#ligaGoleadoresTable .gol-rank {
+  display:inline-flex;
+  min-width:22px;
+  height:22px;
+  align-items:center;
+  justify-content:center;
+  border-radius:6px;
+  font-size:10px;
+  font-weight:900;
+  background:var(--surface2);
+  border:1px solid var(--border);
+}
+#ligaGoleadoresTable .gol-rank.top1 {
+  background:rgba(234,179,8,.15);
+  border-color:rgba(234,179,8,.35);
+}
+#ligaGoleadoresTable .gol-player-dorneda {
+  color:var(--red);
+  font-weight:900;
+}
+#ligaGoleadoresTable .gol-count {
+  font-size:14px;
+  font-weight:900;
+  color:var(--success);
+}
+#ligaGoleadoresTable .gol-team {
+  color:var(--text-muted);
+}
+@media (max-width:760px){
+  #ligaSubViewGoleadores .card {
+    padding:9px !important;
+  }
+  #ligaSubViewGoleadores .table-wrap {
+    overflow-x:auto !important;
+    -webkit-overflow-scrolling:touch;
+  }
+  #ligaGoleadoresTable {
+    min-width:760px;
+  }
+  #ligaGoleadoresTable th,
+  #ligaGoleadoresTable td {
+    padding:5px 6px !important;
+  }
+  #ligaGoleadoresTable th:nth-child(1),
+  #ligaGoleadoresTable td:nth-child(1) {
+    position:sticky;
+    left:0;
+    z-index:3;
+    background:var(--surface);
+  }
+  #ligaGoleadoresTable th:nth-child(2),
+  #ligaGoleadoresTable td:nth-child(2) {
+    position:sticky;
+    left:40px;
+    z-index:2;
+    background:var(--surface);
+    min-width:210px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -3493,7 +3621,7 @@
         <div class="card">
           <div class="table-wrap">
             <table id="tablaClasif">
-              <thead><tr><th class="clasif-pos">#</th><th>Equipo</th><th>PJ</th><th>G</th><th>E</th><th>P</th><th>GF</th><th>GC</th><th>DG</th><th>Pts</th></tr></thead>
+              <thead><tr><th class="clasif-pos">#</th><th>Equipo</th><th>Pts</th><th>PJ</th><th>G</th><th>E</th><th>P</th><th>GF</th><th>GC</th><th>DG</th></tr></thead>
               <tbody id="tablaClasifBody"></tbody>
             </table>
           </div>
@@ -3563,14 +3691,16 @@
         <!-- 2.1 LIGA CLASIFICACIÓN -->
         <div id="ligaSubViewClasif">
           <div class="card mb-16" style="padding:12px 14px;margin-bottom:12px;">
-            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:8px;border-bottom:1px solid var(--border);padding-bottom:8px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px;border-bottom:1px solid var(--border);padding-bottom:8px;">
               <div>
-                <div class="card-title" style="margin:0;font-size:14px;font-weight:900;">⚽ Clasificación Oficial &middot; Primera Autonómica Veteranos (A Coruña)</div>
-                <div style="font-size:11px;color:var(--text-muted);margin-top:1px;">Temporada 2026/27 &middot; 16 Equipos participantes</div>
+                <div class="card-title" style="margin:0;font-size:14px;font-weight:900;">⚽ Clasificación &middot; 1ª División Veteranos</div>
+                <div id="clasifAutoMeta" style="font-size:11px;color:var(--text-muted);margin-top:2px;">Calculando desde los resultados oficiales FUTGAL…</div>
               </div>
-              <div style="display:flex;gap:4px;flex-wrap:wrap;">
-                <button class="btn btn-ghost btn-sm" onclick="openModalClasif()" style="font-size:11px;padding:4px 8px;">&#9999;&#65039; Editar Tabla</button>
-                <button class="btn btn-primary btn-sm" onclick="openFutgalImporter()" style="font-size:11px;padding:4px 8px;">&#128259; Actualizar desde Futgal</button>
+              <div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap;">
+                <span id="clasifAutoBadge" class="badge" style="background:rgba(59,130,246,.10);color:var(--info);border:1px solid rgba(59,130,246,.22);font-size:9.5px;font-weight:800;">AUTOMÁTICA</span>
+                <button class="btn btn-ghost btn-sm" onclick="openModalClasif()" style="font-size:10.5px;padding:4px 8px;" title="Aplicar únicamente resoluciones disciplinarias que alteren los puntos">
+                  ⚖ Ajustes disciplinarios
+                </button>
               </div>
             </div>
             <div class="table-wrap">
@@ -3579,6 +3709,7 @@
                   <tr>
                     <th style="width:34px">Pos</th>
                     <th>Equipo</th>
+                    <th style="text-align:center">Pts</th>
                     <th>PJ</th>
                     <th>PG</th>
                     <th>PE</th>
@@ -3586,7 +3717,6 @@
                     <th>GF</th>
                     <th>GC</th>
                     <th>DG</th>
-                    <th>Pts</th>
                   </tr>
                 </thead>
                 <tbody></tbody>
@@ -3645,9 +3775,10 @@
             <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:14px;border-bottom:1px solid var(--border);padding-bottom:10px;">
               <div>
                 <div style="font-size:16px;font-weight:900;color:var(--text);display:flex;align-items:center;gap:6px;">
-                  <span>&#128095; Tabla de Goleadores (Pichichi) &middot; Primera Futgal</span>
+                  <span>⚽ Goleadores &middot; 1ª División Veteranos</span>
+                  <span id="ligaGoleadoresAutoBadge" class="badge" style="background:rgba(34,197,94,.10);color:var(--success);border:1px solid rgba(34,197,94,.22);font-size:9px;font-weight:900;">ACTAS FUTGAL</span>
                 </div>
-                <div style="font-size:12px;color:var(--text-muted);">Registro oficial RFGF de máximos anotadores de la liga</div>
+                <div id="ligaGoleadoresMeta" style="font-size:12px;color:var(--text-muted);margin-top:2px;">Calculando todas las actas oficiales integradas…</div>
               </div>
               <div style="display:flex;align-items:center;gap:8px;">
                 <label style="font-size:11.5px;font-weight:700;color:var(--text-muted);">Filtrar por Equipo:</label>
@@ -3661,20 +3792,21 @@
               <table id="ligaGoleadoresTable">
                 <thead>
                   <tr>
-                    <th style="width:40px">#</th>
+                    <th style="width:40px">Pos</th>
                     <th>Jugador</th>
                     <th>Equipo</th>
-                    <th style="text-align:center">Partidos</th>
                     <th style="text-align:center">Goles</th>
-                    <th style="text-align:center">Penaltis</th>
-                    <th style="text-align:center">Goles / Partido</th>
+                    <th style="text-align:center">PJ</th>
+                    <th style="text-align:center">P. con gol</th>
+                    <th style="text-align:center">Pen.</th>
+                    <th style="text-align:center">G/P</th>
                   </tr>
                 </thead>
                 <tbody id="ligaGoleadoresTbody"></tbody>
               </table>
             </div>
             <div id="ligaGoleadoresEmptyBanner" style="padding:20px;text-align:center;color:var(--text-muted);font-size:12.5px;display:none;">
-              &#8987; La Primera Futgal comienza el <strong>12/09/2026</strong>. La tabla de goleadores se sincronizará automáticamente desde las actas de Futgal.es según se disputen los partidos.
+              ⏳ Todavía no hay actas FUTGAL integradas con goles para construir el listado.
             </div>
           </div>
         </div>
@@ -13473,21 +13605,215 @@ function renderTeamFullCalendarCards(teamMatches, teamName, container){
   }).join('');
 }
 
-// 2.3 RENDER GOLEADORES DE LIGA
-function renderLigaGoleadoresView(){
-  var selectE = document.getElementById('goleadoresLigaFiltroEquipo');
-  if(selectE && selectE.options.length <= 1){
-    var eHtml = '<option value="">-- Todos los Equipos --</option>';
-    LIGA_TEAMS_LIST.forEach(function(t){
-      eHtml += `<option value="${t}">${t === "Xuventude Dorneda" ? "&#11088; " + t : t}</option>`;
-    });
-    selectE.innerHTML = eHtml;
-  }
-  if(selectE && selectE.value !== currentLigaGoleadorEquipo) selectE.value = currentLigaGoleadorEquipo;
+// 2.3 GOLEADORES DE LIGA · AUTOMÁTICOS DESDE TODAS LAS ACTAS FUTGAL
 
-  var scorers = db.ligaGoleadores || DEFAULT_DATA.ligaGoleadores || [];
+function goleadoresNorm(v){
+  return String(v || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toUpperCase()
+    .replace(/[^A-Z0-9]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function goleadoresRosterMap(actaData, partido){
+  var map = new Map();
+
+  function addPlayers(lista, equipo){
+    (lista || []).forEach(function(p){
+      var nombre = p && (p.nombre || p.jugador) ? (p.nombre || p.jugador) : '';
+      var key = goleadoresNorm(nombre);
+      if(!key) return;
+      map.set(key, {
+        jugador:nombre,
+        equipo:equipo
+      });
+    });
+  }
+
+  addPlayers(actaData.localTitulares, partido.local);
+  addPlayers(actaData.localSuplentes, partido.local);
+  addPlayers(actaData.visitTitulares, partido.visitante);
+  addPlayers(actaData.visitSuplentes, partido.visitante);
+
+  return map;
+}
+
+function calcularLigaGoleadoresOficiales(){
+  var jornadas = getLigaJornadasOficiales ? (getLigaJornadasOficiales() || []) : [];
+  var players = new Map();
+  var actasProcesadas = 0;
+  var golesActa = 0;
+  var autogoles = 0;
+  var sinAsignar = 0;
+
+  function ensurePlayer(equipo, jugador){
+    var key = goleadoresNorm(equipo) + '||' + goleadoresNorm(jugador);
+    if(!players.has(key)){
+      players.set(key, {
+        key:key,
+        jugador:jugador,
+        equipo:equipo,
+        goles:0,
+        penaltis:0,
+        pj:0,
+        partidosConGol:0,
+        jornadasConGol:[],
+        _partidosJugados:new Set(),
+        _partidosGol:new Set()
+      });
+    }
+    return players.get(key);
+  }
+
+  jornadas.forEach(function(j){
+    (j.partidos || []).forEach(function(p, pIndex){
+      var a = p.actaData;
+      if(!a) return;
+
+      actasProcesadas += 1;
+
+      var matchKey = String(j.jornada || '') + '|' + goleadoresNorm(p.local) + '|' + goleadoresNorm(p.visitante);
+      var roster = goleadoresRosterMap(a, p);
+
+      // En Veteranos, titulares + suplentes que constan en acta se consideran
+      // participantes a efectos de este contador de PJ.
+      roster.forEach(function(info){
+        var pl = ensurePlayer(info.equipo, info.jugador);
+        if(!pl._partidosJugados.has(matchKey)){
+          pl._partidosJugados.add(matchKey);
+          pl.pj += 1;
+        }
+      });
+
+      (a.allGoles || []).forEach(function(g){
+        golesActa += 1;
+
+        if(g.propiaPuerta){
+          // Un gol en propia puerta suma al marcador del rival,
+          // pero NO se atribuye al jugador en la tabla Pichichi.
+          autogoles += 1;
+          return;
+        }
+
+        var scorerKey = goleadoresNorm(g.rawScorer);
+        var info = roster.get(scorerKey);
+
+        if(!info){
+          sinAsignar += 1;
+          return;
+        }
+
+        var pl = ensurePlayer(info.equipo, info.jugador);
+        pl.goles += 1;
+        if(g.penalti) pl.penaltis += 1;
+
+        if(!pl._partidosGol.has(matchKey)){
+          pl._partidosGol.add(matchKey);
+          pl.partidosConGol += 1;
+          pl.jornadasConGol.push(Number(j.jornada || 0));
+        }
+      });
+    });
+  });
+
+  var rows = Array.from(players.values())
+    .filter(function(p){ return p.goles > 0; })
+    .map(function(p){
+      return {
+        jugador:p.jugador,
+        equipo:p.equipo,
+        goles:p.goles,
+        penaltis:p.penaltis,
+        pj:p.pj,
+        partidosConGol:p.partidosConGol,
+        promedio:p.pj ? (p.goles / p.pj) : 0,
+        jornadasConGol:p.jornadasConGol.slice().sort(function(a,b){ return a-b; })
+      };
+    })
+    .sort(function(a,b){
+      // No inventamos un desempate de Pichichi: a igualdad de goles,
+      // solo ordenamos alfabéticamente para visualizar.
+      if(b.goles !== a.goles) return b.goles - a.goles;
+      return String(a.jugador).localeCompare(String(b.jugador), 'es', {sensitivity:'base'});
+    });
+
+  var lastGoals = null;
+  var lastRank = 0;
+  rows.forEach(function(r, idx){
+    if(r.goles !== lastGoals){
+      lastRank = idx + 1;
+      lastGoals = r.goles;
+    }
+    r.rank = lastRank;
+  });
+
+  return {
+    rows:rows,
+    actasProcesadas:actasProcesadas,
+    golesActa:golesActa,
+    golesAtribuidos:rows.reduce(function(acc, r){ return acc + r.goles; }, 0),
+    autogoles:autogoles,
+    sinAsignar:sinAsignar
+  };
+}
+
+function syncLigaGoleadoresLegacy(rows){
+  // Compatibilidad con cualquier parte antigua que todavía consulte db.ligaGoleadores.
+  if(!window.db) return;
+  db.ligaGoleadores = (rows || []).map(function(r){
+    return {
+      jugador:r.jugador,
+      equipo:r.equipo,
+      goles:r.goles,
+      penaltis:r.penaltis,
+      pj:r.pj,
+      promedio:r.promedio.toFixed(2),
+      partidosConGol:r.partidosConGol,
+      origen:'ACTAS_FUTGAL'
+    };
+  });
+}
+
+function renderLigaGoleadoresView(){
+  var calc = calcularLigaGoleadoresOficiales();
+  var scorers = calc.rows || [];
+  var selectE = document.getElementById('goleadoresLigaFiltroEquipo');
   var tbody = document.getElementById('ligaGoleadoresTbody');
   var banner = document.getElementById('ligaGoleadoresEmptyBanner');
+  var meta = document.getElementById('ligaGoleadoresMeta');
+
+  syncLigaGoleadoresLegacy(scorers);
+
+  if(meta){
+    var metaText = `${calc.actasProcesadas} actas procesadas · ${calc.golesAtribuidos} goles atribuidos a jugadores`;
+    if(calc.autogoles) metaText += ` · ${calc.autogoles} autogol${calc.autogoles === 1 ? '' : 'es'} no computado${calc.autogoles === 1 ? '' : 's'} al Pichichi`;
+    if(calc.sinAsignar) metaText += ` · ⚠ ${calc.sinAsignar} gol${calc.sinAsignar === 1 ? '' : 'es'} sin poder asignar`;
+    meta.textContent = metaText;
+  }
+
+  // Filtro construido con los equipos que ya aparecen en las actas.
+  if(selectE){
+    var current = currentLigaGoleadorEquipo || '';
+    var teams = [];
+    scorers.forEach(function(s){
+      if(!teams.some(function(t){ return goleadoresNorm(t) === goleadoresNorm(s.equipo); })){
+        teams.push(s.equipo);
+      }
+    });
+    teams.sort(function(a,b){ return String(a).localeCompare(String(b), 'es', {sensitivity:'base'}); });
+
+    selectE.innerHTML = '<option value="">-- Todos los Equipos --</option>' +
+      teams.map(function(t){
+        var star = /DORNEDA/i.test(t) ? '⭐ ' : '';
+        return `<option value="${String(t).replace(/"/g,'&quot;')}">${star}${t}</option>`;
+      }).join('');
+
+    var matching = teams.find(function(t){ return goleadoresNorm(t) === goleadoresNorm(current); });
+    selectE.value = matching || '';
+    if(current && !matching) currentLigaGoleadorEquipo = '';
+  }
 
   if(!scorers.length){
     if(tbody) tbody.innerHTML = '';
@@ -13499,33 +13825,41 @@ function renderLigaGoleadoresView(){
   var filtered = scorers;
   if(currentLigaGoleadorEquipo){
     filtered = scorers.filter(function(s){
-      return s.equipo && s.equipo.toLowerCase().indexOf(currentLigaGoleadorEquipo.toLowerCase()) !== -1;
+      return goleadoresNorm(s.equipo) === goleadoresNorm(currentLigaGoleadorEquipo);
     });
   }
 
   if(!filtered.length){
-    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:16px;color:var(--text-muted);">No hay goleadores registrados para este equipo.</td></tr>';
+    if(tbody) tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:16px;color:var(--text-muted);">No hay goleadores registrados para este equipo.</td></tr>';
     return;
   }
 
-  tbody.innerHTML = filtered.map(function(s, idx){
-    var isDorneda = s.equipo && s.equipo.indexOf('Dorneda') !== -1;
-    return `
-      <tr style="${isDorneda ? 'background:rgba(204,0,0,0.06);font-weight:800;' : ''}">
-        <td style="font-weight:800;text-align:center;">${idx + 1}</td>
-        <td style="font-weight:${isDorneda ? '900' : '700'};color:${isDorneda ? 'var(--red)' : 'var(--text)'};">
-          ${isDorneda ? "&#11088; " : ""}${s.jugador}
-        </td>
-        <td style="color:var(--text-muted);">${s.equipo}</td>
-        <td style="text-align:center;">${s.pj || 1}</td>
-        <td style="text-align:center;font-weight:900;color:var(--text);font-size:13px;">${s.goles}</td>
-        <td style="text-align:center;color:var(--text-dim);">${s.penaltis || 0}</td>
-        <td style="text-align:center;color:var(--text-dim);">${s.promedio || (s.goles / (s.pj || 1)).toFixed(2)}</td>
-      </tr>
-    `;
-  }).join('');
+  if(tbody){
+    tbody.innerHTML = filtered.map(function(s){
+      var isDorneda = /DORNEDA/i.test(s.equipo || '');
+      var jornadas = (s.jornadasConGol || []).map(function(j){ return 'J' + j; }).join(', ');
+
+      return `
+        <tr style="${isDorneda ? 'background:rgba(204,0,0,0.055);' : ''}">
+          <td style="text-align:center;">
+            <span class="gol-rank ${s.rank === 1 ? 'top1' : ''}">${s.rank}</span>
+          </td>
+          <td class="${isDorneda ? 'gol-player-dorneda' : ''}" style="font-weight:${isDorneda ? '900' : '750'};" title="${jornadas ? 'Marcó en: ' + jornadas : ''}">
+            ${isDorneda ? '⭐ ' : ''}${s.jugador}
+          </td>
+          <td class="gol-team">${s.equipo}</td>
+          <td class="gol-count" style="text-align:center;">${s.goles}</td>
+          <td style="text-align:center;font-weight:700;">${s.pj}</td>
+          <td style="text-align:center;">${s.partidosConGol}</td>
+          <td style="text-align:center;color:var(--text-dim);">${s.penaltis}</td>
+          <td style="text-align:center;color:var(--text-dim);">${s.promedio.toFixed(2)}</td>
+        </tr>
+      `;
+    }).join('');
+  }
 }
 window.renderLigaGoleadoresView = renderLigaGoleadoresView;
+window.calcularLigaGoleadoresOficiales = calcularLigaGoleadoresOficiales;
 
 function filterLigaGoleadores(team){
   currentLigaGoleadorEquipo = team || '';
@@ -13600,24 +13934,449 @@ function filterCopaGoleadores(team){
 }
 window.filterCopaGoleadores = filterCopaGoleadores;
 
+
+const CLASIF_AJUSTES_KEY = 'dorneda_clasificacion_ajustes_v1';
+
+function clasifNormName(v){
+  return String(v || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[.\-_/(),']/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function clasifGetScore(p){
+  if(!p) return null;
+
+  var gl = p.gl;
+  var gv = p.gv;
+
+  if((gl === null || gl === undefined || gl === '') && p.resultado && typeof p.resultado === 'object'){
+    gl = p.resultado.local;
+  }
+  if((gv === null || gv === undefined || gv === '') && p.resultado && typeof p.resultado === 'object'){
+    gv = p.resultado.visitante;
+  }
+
+  if(gl === null || gl === undefined || gl === '' || gv === null || gv === undefined || gv === ''){
+    return null;
+  }
+
+  gl = Number(gl);
+  gv = Number(gv);
+
+  if(!Number.isFinite(gl) || !Number.isFinite(gv)) return null;
+  return { gl: gl, gv: gv };
+}
+
+function clasifGetJornadas(){
+  return getLigaJornadasOficiales ? (getLigaJornadasOficiales() || []) : [];
+}
+
+function clasifFlattenMatches(){
+  var all = [];
+  clasifGetJornadas().forEach(function(j){
+    (j.partidos || []).forEach(function(p){
+      all.push({
+        jornada: Number(j.jornada || j.numero || p.jornada || 0),
+        local: p.local || '',
+        visitante: p.visitante || '',
+        fecha: p.fecha || j.fecha || '',
+        estado: p.estado || '',
+        score: clasifGetScore(p),
+        raw: p
+      });
+    });
+  });
+  return all;
+}
+
+function clasifLoadAjustes(){
+  try{
+    var raw = localStorage.getItem(CLASIF_AJUSTES_KEY);
+    var obj = raw ? JSON.parse(raw) : {};
+    return obj && typeof obj === 'object' ? obj : {};
+  }catch(e){
+    return {};
+  }
+}
+
+function clasifSaveAjustes(obj){
+  try{
+    localStorage.setItem(CLASIF_AJUSTES_KEY, JSON.stringify(obj || {}));
+  }catch(e){}
+}
+
+function clasifAdjustmentFor(team, ajustes){
+  var n = clasifNormName(team);
+  var hit = ajustes && ajustes[n] ? ajustes[n] : null;
+  return {
+    puntos: hit && Number.isFinite(Number(hit.puntos)) ? Number(hit.puntos) : 0,
+    motivo: hit && hit.motivo ? String(hit.motivo) : ''
+  };
+}
+
+function clasifBuildBase(){
+  var matches = clasifFlattenMatches();
+  var teamMap = new Map();
+
+  function ensure(name){
+    var key = clasifNormName(name);
+    if(!key) return null;
+
+    if(!teamMap.has(key)){
+      teamMap.set(key, {
+        key:key,
+        equipo:name,
+        pj:0, g:0, e:0, p:0,
+        gf:0, gc:0,
+        basePts:0,
+        ajuste:0,
+        ajusteMotivo:'',
+        pts:0,
+        tieMode:''
+      });
+    }
+    return teamMap.get(key);
+  }
+
+  // Todas las jornadas sirven para conocer los 16 equipos aunque todavía no hayan jugado.
+  matches.forEach(function(m){
+    ensure(m.local);
+    ensure(m.visitante);
+  });
+
+  // Respaldo por si el JSON todavía está entrando.
+  (LIGA_TEAMS_LIST || []).forEach(ensure);
+
+  var played = [];
+
+  matches.forEach(function(m){
+    if(!m.score) return;
+
+    var local = ensure(m.local);
+    var visit = ensure(m.visitante);
+    if(!local || !visit) return;
+
+    var gl = m.score.gl;
+    var gv = m.score.gv;
+
+    local.pj += 1;
+    visit.pj += 1;
+    local.gf += gl;
+    local.gc += gv;
+    visit.gf += gv;
+    visit.gc += gl;
+
+    if(gl > gv){
+      local.g += 1; visit.p += 1;
+      local.basePts += 3;
+    }else if(gv > gl){
+      visit.g += 1; local.p += 1;
+      visit.basePts += 3;
+    }else{
+      local.e += 1; visit.e += 1;
+      local.basePts += 1;
+      visit.basePts += 1;
+    }
+
+    played.push(m);
+  });
+
+  var ajustes = clasifLoadAjustes();
+  var teams = Array.from(teamMap.values());
+
+  teams.forEach(function(t){
+    var adj = clasifAdjustmentFor(t.equipo, ajustes);
+    t.ajuste = adj.puntos;
+    t.ajusteMotivo = adj.motivo;
+    t.pts = t.basePts + t.ajuste;
+    t.dg = t.gf - t.gc;
+  });
+
+  return {
+    teams:teams,
+    scheduled:matches,
+    played:played,
+    totalScheduled:matches.length,
+    totalPlayed:played.length
+  };
+}
+
+function clasifPairKey(a,b){
+  var x = clasifNormName(a), y = clasifNormName(b);
+  return x < y ? x + '||' + y : y + '||' + x;
+}
+
+function clasifDirectComplete(group, scheduled, played){
+  if(group.length < 2) return true;
+
+  for(var i=0;i<group.length;i++){
+    for(var j=i+1;j<group.length;j++){
+      var key = clasifPairKey(group[i].equipo, group[j].equipo);
+      var expected = scheduled.filter(function(m){
+        return clasifPairKey(m.local, m.visitante) === key;
+      }).length;
+
+      var done = played.filter(function(m){
+        return clasifPairKey(m.local, m.visitante) === key;
+      }).length;
+
+      // En la Liga a doble vuelta el calendario completo debe contener 2.
+      // Usamos el calendario real para no dejar la regla codificada a mano.
+      if(expected <= 0 || done < expected) return false;
+    }
+  }
+  return true;
+}
+
+function clasifMiniStats(group, played){
+  var keys = new Set(group.map(function(t){ return t.key; }));
+  var stats = {};
+
+  group.forEach(function(t){
+    stats[t.key] = { pts:0, gf:0, gc:0, dg:0 };
+  });
+
+  played.forEach(function(m){
+    var lk = clasifNormName(m.local);
+    var vk = clasifNormName(m.visitante);
+    if(!keys.has(lk) || !keys.has(vk) || !m.score) return;
+
+    var gl = m.score.gl, gv = m.score.gv;
+    stats[lk].gf += gl; stats[lk].gc += gv;
+    stats[vk].gf += gv; stats[vk].gc += gl;
+
+    if(gl > gv) stats[lk].pts += 3;
+    else if(gv > gl) stats[vk].pts += 3;
+    else { stats[lk].pts += 1; stats[vk].pts += 1; }
+  });
+
+  Object.keys(stats).forEach(function(k){
+    stats[k].dg = stats[k].gf - stats[k].gc;
+  });
+
+  return stats;
+}
+
+function clasifPartition(group, valueFn){
+  var buckets = new Map();
+
+  group.forEach(function(t){
+    var v = Number(valueFn(t));
+    if(!Number.isFinite(v)) v = 0;
+    if(!buckets.has(v)) buckets.set(v, []);
+    buckets.get(v).push(t);
+  });
+
+  return Array.from(buckets.keys())
+    .sort(function(a,b){ return b-a; })
+    .map(function(k){ return buckets.get(k); });
+}
+
+function clasifFallbackOrder(group){
+  return [...group].sort(function(a,b){
+    var dg = (b.dg || 0) - (a.dg || 0);
+    if(dg) return dg;
+
+    var gf = (b.gf || 0) - (a.gf || 0);
+    if(gf) return gf;
+
+    // Último recurso puramente visual. No se presenta como criterio federativo.
+    return String(a.equipo || '').localeCompare(String(b.equipo || ''), 'es', {sensitivity:'base'});
+  });
+}
+
+function clasifRankOfficial(group, ctx, mode, startCriterion){
+  if(group.length <= 1) return group.slice();
+
+  var mini = clasifMiniStats(group, ctx.played);
+  var criteria;
+
+  if(mode === 'two'){
+    // Art. 201.2: diferencia de goles en los DOS enfrentamientos,
+    // después DG general y después goles marcados.
+    criteria = [
+      function(t){ return mini[t.key] ? mini[t.key].dg : 0; },
+      function(t){ return t.dg || 0; },
+      function(t){ return t.gf || 0; }
+    ];
+  }else{
+    // Art. 201.3: puntos entre empatados, DG entre empatados,
+    // DG general, GF general; juego limpio queda pendiente si aún persistiera igualdad.
+    criteria = [
+      function(t){ return mini[t.key] ? mini[t.key].pts : 0; },
+      function(t){ return mini[t.key] ? mini[t.key].dg : 0; },
+      function(t){ return t.dg || 0; },
+      function(t){ return t.gf || 0; }
+    ];
+  }
+
+  var idx = startCriterion || 0;
+  if(idx >= criteria.length){
+    group.forEach(function(t){ t.tieMode = 'fairplay-pendiente'; });
+    return clasifFallbackOrder(group);
+  }
+
+  var parts = clasifPartition(group, criteria[idx]);
+
+  if(parts.length === 1){
+    return clasifRankOfficial(group, ctx, mode, idx + 1);
+  }
+
+  var result = [];
+
+  parts.forEach(function(sub){
+    if(sub.length === 1){
+      sub[0].tieMode = 'reglamentario';
+      result.push(sub[0]);
+      return;
+    }
+
+    // El art. 201 indica que, si un criterio separa a alguno, los restantes
+    // continúan aplicando las reglas que correspondan según sean 2 o más.
+    if(mode === 'multi' && sub.length === 2){
+      result.push.apply(result, clasifRankOfficial(sub, ctx, 'two', 0));
+    }else{
+      result.push.apply(result, clasifRankOfficial(sub, ctx, mode, idx + 1));
+    }
+  });
+
+  return result;
+}
+
+function clasifRankTieGroup(group, ctx){
+  if(group.length <= 1) return group.slice();
+
+  var complete = clasifDirectComplete(group, ctx.scheduled, ctx.played);
+
+  if(!complete){
+    group.forEach(function(t){ t.tieMode = 'provisional'; });
+    return clasifFallbackOrder(group);
+  }
+
+  return clasifRankOfficial(group, ctx, group.length === 2 ? 'two' : 'multi', 0);
+}
+
+function calcularClasificacionAutomatica(){
+  var ctx = clasifBuildBase();
+  var pointsGroups = new Map();
+
+  ctx.teams.forEach(function(t){
+    var p = Number(t.pts || 0);
+    if(!pointsGroups.has(p)) pointsGroups.set(p, []);
+    pointsGroups.get(p).push(t);
+  });
+
+  var ordered = [];
+  Array.from(pointsGroups.keys())
+    .sort(function(a,b){ return b-a; })
+    .forEach(function(pts){
+      var group = pointsGroups.get(pts);
+      ordered.push.apply(ordered, clasifRankTieGroup(group, ctx));
+    });
+
+  ordered.forEach(function(t, i){ t.pos = i + 1; });
+
+  return {
+    rows:ordered,
+    totalScheduled:ctx.totalScheduled,
+    totalPlayed:ctx.totalPlayed,
+    complete:ctx.totalScheduled > 0 && ctx.totalPlayed >= ctx.totalScheduled
+  };
+}
+
+function clasifSyncLegacyDb(rows){
+  // Mantiene compatibles Dashboard/Análisis sin convertirlos en fuente de verdad.
+  if(!window.db) return;
+
+  db.clasificacion = rows.map(function(t){
+    return {
+      equipo:t.equipo,
+      pj:t.pj,
+      g:t.g,
+      e:t.e,
+      p:t.p,
+      gf:t.gf,
+      gc:t.gc,
+      pts:t.pts,
+      ajuste:t.ajuste || 0,
+      ajusteMotivo:t.ajusteMotivo || '',
+      origen:'FUTGAL_AUTOMATICA'
+    };
+  });
+}
+
 function renderClasificacion(){
-  const s = [...(db.clasificacion || [])].sort((a,b) => b.pts - a.pts || (b.gf - b.gc) - (a.gf - a.gc));
-  
-  const rowsHtml = s.map((eq, i) => {
-    const isDorneda = (eq.equipo || '').indexOf('Dorneda') !== -1;
-    const rowCls = isDorneda ? 'dorneda-row' : '';
-    const dg = eq.gf - eq.gc;
-    const dgStr = dg > 0 ? '+' + dg : (dg < 0 ? dg : '0');
-    const dgColor = dg > 0 ? 'color:var(--success);font-weight:700;' : (dg < 0 ? 'color:var(--red-light);' : 'color:var(--text-muted);');
-    
-    let posHtml = `<span class="pos-pill normal">${i + 1}</span>`;
+  var calc = calcularClasificacionAutomatica();
+  var s = calc.rows || [];
+
+  var meta = document.getElementById('clasifAutoMeta');
+  var badge = document.getElementById('clasifAutoBadge');
+
+  if(!s.length || calc.totalScheduled === 0){
+    if(meta) meta.textContent = 'Cargando resultados oficiales FUTGAL…';
+    var tbEmpty = document.querySelector('#mainClasifTable tbody');
+    if(tbEmpty) tbEmpty.innerHTML = '<tr><td colspan="10" style="text-align:center;padding:18px;color:var(--text-muted)">Cargando clasificación…</td></tr>';
+    return;
+  }
+
+  clasifSyncLegacyDb(s);
+
+  var hayProvisionales = s.some(function(t){ return t.tieMode === 'provisional'; });
+  var hayFairPlayPendiente = s.some(function(t){ return t.tieMode === 'fairplay-pendiente'; });
+
+  if(meta){
+    var msg = `${calc.totalPlayed}/${calc.totalScheduled} partidos finalizados`;
+    if(calc.complete){
+      msg += ' · Clasificación final con desempates reglamentarios';
+    }else if(hayProvisionales){
+      msg += ' · Desempates provisionales cuando faltan enfrentamientos directos';
+    }else{
+      msg += ' · Calculada automáticamente desde FUTGAL';
+    }
+    if(hayFairPlayPendiente) msg += ' · Existe un empate que requeriría Juego Limpio';
+    meta.textContent = msg;
+  }
+
+  if(badge){
+    badge.textContent = calc.complete ? 'DEFINITIVA' : 'PROVISIONAL';
+    badge.style.background = calc.complete ? 'rgba(34,197,94,.10)' : 'rgba(59,130,246,.10)';
+    badge.style.color = calc.complete ? 'var(--success)' : 'var(--info)';
+  }
+
+  var rowsHtml = s.map(function(eq, i){
+    var isDorneda = /Dorneda/i.test(eq.equipo || '');
+    var rowCls = isDorneda ? 'dorneda-row' : '';
+    var dg = Number(eq.gf || 0) - Number(eq.gc || 0);
+    var dgStr = dg > 0 ? '+' + dg : String(dg);
+    var dgColor = dg > 0
+      ? 'color:var(--success);font-weight:700;'
+      : (dg < 0 ? 'color:var(--red-light);' : 'color:var(--text-muted);');
+
+    var posHtml = `<span class="pos-pill normal">${i + 1}</span>`;
     if(i === 0) posHtml = `<span class="pos-pill top-1" title="Líder">1</span>`;
     else if(i === 1) posHtml = `<span class="pos-pill top-2" title="2º Clasificado">2</span>`;
     else if(i === 2) posHtml = `<span class="pos-pill top-3" title="3º Clasificado">3</span>`;
 
+    var adjHtml = eq.ajuste
+      ? `<span class="clasif-adjust" title="${(eq.ajusteMotivo || 'Ajuste disciplinario').replace(/"/g,'&quot;')}">${eq.ajuste > 0 ? '+' : ''}${eq.ajuste}</span>`
+      : '';
+
+    var tieNote = '';
+    if(eq.tieMode === 'fairplay-pendiente'){
+      tieNote = '<span class="clasif-team-note">pendiente de criterio de Juego Limpio</span>';
+    }
+
     return `<tr class="${rowCls}">
       <td style="width:34px;padding:3px 2px;">${posHtml}</td>
-      <td>${highlightDorneda(eq.equipo)} ${isDorneda ? '⭐' : ''}</td>
+      <td style="font-weight:${isDorneda ? '900' : '700'};">
+        ${highlightDorneda(eq.equipo)} ${isDorneda ? '⭐' : ''}
+        ${tieNote}
+      </td>
+      <td style="font-size:12.5px;font-weight:900;color:var(--success);text-align:center;">${eq.pts}${adjHtml}</td>
       <td style="font-weight:700;">${eq.pj}</td>
       <td>${eq.g}</td>
       <td>${eq.e}</td>
@@ -13625,19 +14384,19 @@ function renderClasificacion(){
       <td class="td-muted">${eq.gf}</td>
       <td class="td-muted">${eq.gc}</td>
       <td style="${dgColor}">${dgStr}</td>
-      <td style="font-size:12.5px;font-weight:900;color:var(--success);">${eq.pts}</td>
     </tr>`;
   }).join('');
 
-  const tbMain = document.querySelector('#mainClasifTable tbody');
+  var tbMain = document.querySelector('#mainClasifTable tbody');
   if(tbMain) tbMain.innerHTML = rowsHtml;
 
-  const tbAnalisis = document.getElementById('tablaClasifBody');
+  var tbAnalisis = document.getElementById('tablaClasifBody');
   if(tbAnalisis) tbAnalisis.innerHTML = rowsHtml;
 
   if(clasifTabActive === 'copa') renderCopaView();
 }
 window.renderClasificacion = renderClasificacion;
+
 
 
 var analisisTabActive = 'equipo';
@@ -15628,70 +16387,104 @@ function renderCalendario(){
 }
 
 // CLASIFICACION MODAL EDITOR
+
 function openModalClasif(){
-  const content = document.getElementById('modalClasifContent');
+  var content = document.getElementById('modalClasifContent');
   if(!content) return;
-  const list = db.clasificacion || [];
+
+  var calc = calcularClasificacionAutomatica();
+  var ajustes = clasifLoadAjustes();
 
   content.innerHTML = `
-    <div style="font-size:12px;color:var(--text-muted);margin-bottom:12px">Edita directamente los puntos, partidos y goles de cada equipo:</div>
-    <div style="max-height:360px;overflow-y:auto">
-      <table style="width:100%;font-size:12px">
+    <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px;line-height:1.4">
+      La clasificación se calcula automáticamente desde FUTGAL. Aquí solo debes registrar
+      <strong>resoluciones disciplinarias</strong> que añadan o resten puntos sin modificar los resultados originales.
+    </div>
+    <div style="padding:8px 10px;border:1px solid var(--border);background:var(--surface2);border-radius:8px;margin-bottom:10px;font-size:10.5px;color:var(--text-muted)">
+      Ejemplo: una resolución de -3 puntos → escribe <strong>-3</strong> y anota el motivo.
+      Si no hay resolución, deja <strong>0</strong>.
+    </div>
+    <div style="max-height:420px;overflow:auto">
+      <table style="width:100%;font-size:11px;min-width:560px">
         <thead>
           <tr>
-            <th>Equipo</th>
-            <th style="width:50px">PJ</th>
-            <th style="width:50px">G</th>
-            <th style="width:50px">E</th>
-            <th style="width:50px">P</th>
-            <th style="width:50px">GF</th>
-            <th style="width:50px">GC</th>
-            <th style="width:50px">Pts</th>
+            <th style="text-align:left">Equipo</th>
+            <th style="width:80px">Ajuste</th>
+            <th style="text-align:left">Motivo / resolución</th>
           </tr>
         </thead>
         <tbody>
-          ${list.map((eq, i) => `
-            <tr>
-              <td><input class="form-control" style="padding:4px 8px;font-size:12px" id="eqName_${i}" value="${eq.equipo}"/></td>
-              <td><input type="number" class="form-control" style="padding:4px" id="eqPJ_${i}" value="${eq.pj}"/></td>
-              <td><input type="number" class="form-control" style="padding:4px" id="eqG_${i}" value="${eq.g}"/></td>
-              <td><input type="number" class="form-control" style="padding:4px" id="eqE_${i}" value="${eq.e}"/></td>
-              <td><input type="number" class="form-control" style="padding:4px" id="eqP_${i}" value="${eq.p}"/></td>
-              <td><input type="number" class="form-control" style="padding:4px" id="eqGF_${i}" value="${eq.gf}"/></td>
-              <td><input type="number" class="form-control" style="padding:4px" id="eqGC_${i}" value="${eq.gc}"/></td>
-              <td><input type="number" class="form-control" style="padding:4px;font-weight:700" id="eqPts_${i}" value="${eq.pts}"/></td>
-            </tr>
-          `).join('')}
+          ${(calc.rows || []).map(function(eq, i){
+            var a = ajustes[clasifNormName(eq.equipo)] || {};
+            var val = Number.isFinite(Number(a.puntos)) ? Number(a.puntos) : 0;
+            return `
+              <tr>
+                <td style="font-weight:${/Dorneda/i.test(eq.equipo) ? '900' : '700'}">${eq.equipo}</td>
+                <td>
+                  <input type="number" step="1" class="form-control"
+                         id="clasifAdjPts_${i}" value="${val}"
+                         style="padding:5px 6px;text-align:center;font-weight:800"/>
+                </td>
+                <td>
+                  <input class="form-control" id="clasifAdjMotivo_${i}"
+                         value="${String(a.motivo || '').replace(/"/g,'&quot;')}"
+                         placeholder="Opcional"
+                         style="padding:5px 7px"/>
+                  <input type="hidden" id="clasifAdjTeam_${i}" value="${String(eq.equipo).replace(/"/g,'&quot;')}"/>
+                </td>
+              </tr>
+            `;
+          }).join('')}
         </tbody>
       </table>
     </div>
-    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:16px">
-      <button class="btn btn-ghost" onclick="closeModal('modalClasif')">Cancelar</button>
-      <button class="btn btn-primary" onclick="saveModalClasif()">💾 Guardar Clasificación</button>
+    <div style="display:flex;gap:8px;justify-content:space-between;align-items:center;margin-top:14px;flex-wrap:wrap">
+      <button class="btn btn-ghost" onclick="resetClasifAjustes()">Borrar todos los ajustes</button>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-ghost" onclick="closeModal('modalClasif')">Cancelar</button>
+        <button class="btn btn-primary" onclick="saveModalClasif()">Guardar ajustes</button>
+      </div>
     </div>
   `;
+
   openModal('modalClasif');
 }
 
 function saveModalClasif(){
-  const list = db.clasificacion || [];
-  list.forEach((eq, i) => {
-    const nameEl = document.getElementById(`eqName_${i}`);
-    if(nameEl){
-      eq.equipo = nameEl.value.trim();
-      eq.pj = parseInt(document.getElementById(`eqPJ_${i}`).value) || 0;
-      eq.g = parseInt(document.getElementById(`eqG_${i}`).value) || 0;
-      eq.e = parseInt(document.getElementById(`eqE_${i}`).value) || 0;
-      eq.p = parseInt(document.getElementById(`eqP_${i}`).value) || 0;
-      eq.gf = parseInt(document.getElementById(`eqGF_${i}`).value) || 0;
-      eq.gc = parseInt(document.getElementById(`eqGC_${i}`).value) || 0;
-      eq.pts = parseInt(document.getElementById(`eqPts_${i}`).value) || 0;
+  var calc = calcularClasificacionAutomatica();
+  var obj = {};
+
+  (calc.rows || []).forEach(function(eq, i){
+    var ptsEl = document.getElementById(`clasifAdjPts_${i}`);
+    var motEl = document.getElementById(`clasifAdjMotivo_${i}`);
+    var teamEl = document.getElementById(`clasifAdjTeam_${i}`);
+    var team = teamEl ? teamEl.value : eq.equipo;
+    var pts = ptsEl ? Number(ptsEl.value || 0) : 0;
+    var motivo = motEl ? motEl.value.trim() : '';
+
+    if(!Number.isFinite(pts)) pts = 0;
+
+    if(pts !== 0 || motivo){
+      obj[clasifNormName(team)] = {
+        equipo:team,
+        puntos:Math.trunc(pts),
+        motivo:motivo
+      };
     }
   });
-  saveDB();
+
+  clasifSaveAjustes(obj);
   closeModal('modalClasif');
   renderClasificacion();
-  toast('Clasificación actualizada', 'success');
+  toast('Ajustes disciplinarios guardados', 'success');
+}
+
+function resetClasifAjustes(){
+  if(!confirm('¿Borrar todos los ajustes disciplinarios de la clasificación?')) return;
+  clasifSaveAjustes({});
+  closeModal('modalClasif');
+  renderClasificacion();
+  toast('Ajustes disciplinarios eliminados', 'success');
 }
 
 // FUTGAL IMPORTER
