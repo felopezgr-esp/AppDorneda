@@ -1,6 +1,6 @@
 {
   "versionFormato": 2,
-  "fechaExtraccion": "2026-09-27T14:15:27.864Z",
+  "fechaExtraccion": "2026-09-28T11:32:15.953Z",
   "fuente": "FUTGAL",
   "temporada": "2026-2027",
   "competicion": "Veteranos - Primera Galicia",
@@ -6241,18 +6241,6 @@
         },
         {
           "orden": 4,
-          "local": "SADA F.C. A NOSA VIÑA",
-          "visitante": "LICEO DE MONELOS S.D.",
-          "fecha": "03-10-2026",
-          "hora": null,
-          "campo": "Campo de Fútbol As Mariñas - Andrés Pena de Sada",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
-        },
-        {
-          "orden": 5,
           "local": "C.C.D. CURTIS",
           "visitante": "PORTAZGO S.D.",
           "fecha": "03-10-2026",
@@ -6264,7 +6252,7 @@
           "acta": null
         },
         {
-          "orden": 6,
+          "orden": 5,
           "local": "CLUB DEPORTIVO NARON SILVER CATERING",
           "visitante": "SPORTING CAMBRE AS TRAVESAS",
           "fecha": "03-10-2026",
@@ -6276,7 +6264,7 @@
           "acta": null
         },
         {
-          "orden": 7,
+          "orden": 6,
           "local": "U.D. PAIOSACO H.AÑON",
           "visitante": "CEDEIRA S.D.",
           "fecha": "03-10-2026",
@@ -6288,12 +6276,24 @@
           "acta": null
         },
         {
-          "orden": 8,
+          "orden": 7,
           "local": "CAMPANAL DE LOUREDA F. C.",
           "visitante": "SAN MARTIÑO S.D.",
           "fecha": "04-10-2026",
           "hora": "11:00",
           "campo": "Campo de Fútbol de Freán",
+          "estado": "PROGRAMADO",
+          "actaDisponible": false,
+          "resultado": null,
+          "acta": null
+        },
+        {
+          "orden": 8,
+          "local": "SADA F.C. A NOSA VIÑA",
+          "visitante": "LICEO DE MONELOS S.D.",
+          "fecha": "04-10-2026",
+          "hora": "12:00",
+          "campo": "O Loureiro (Oza De Los Ríos)",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,

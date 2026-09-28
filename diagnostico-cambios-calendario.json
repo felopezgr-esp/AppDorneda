@@ -1,1 +1,26 @@
-[]
+[
+  {
+    "jornada": 4,
+    "cambios": [
+      {
+        "tipo": "cambio_programacion",
+        "local": "SADA F.C. A NOSA VIÑA",
+        "visitante": "LICEO DE MONELOS S.D.",
+        "diferencias": {
+          "fecha": {
+            "antes": "03-10-2026",
+            "ahora": "04-10-2026"
+          },
+          "hora": {
+            "antes": null,
+            "ahora": "12:00"
+          },
+          "campo": {
+            "antes": "Campo de Fútbol As Mariñas - Andrés Pena de Sada",
+            "ahora": "O Loureiro (Oza De Los Ríos)"
+          }
+        }
+      }
+    ]
+  }
+]
