@@ -1,6 +1,6 @@
 {
   "versionFormato": 2,
-  "fechaExtraccion": "2026-09-28T11:32:15.953Z",
+  "fechaExtraccion": "2026-09-28T20:59:04.854Z",
   "fuente": "FUTGAL",
   "temporada": "2026-2027",
   "competicion": "Veteranos - Primera Galicia",
@@ -6229,18 +6229,6 @@
         },
         {
           "orden": 3,
-          "local": "OZA DE LOS RÍOS",
-          "visitante": "XUVENTUDE DORNEDA",
-          "fecha": "03-10-2026",
-          "hora": null,
-          "campo": "O Loureiro (Oza De Los Ríos)",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
-        },
-        {
-          "orden": 4,
           "local": "C.C.D. CURTIS",
           "visitante": "PORTAZGO S.D.",
           "fecha": "03-10-2026",
@@ -6252,7 +6240,7 @@
           "acta": null
         },
         {
-          "orden": 5,
+          "orden": 4,
           "local": "CLUB DEPORTIVO NARON SILVER CATERING",
           "visitante": "SPORTING CAMBRE AS TRAVESAS",
           "fecha": "03-10-2026",
@@ -6264,12 +6252,24 @@
           "acta": null
         },
         {
-          "orden": 6,
+          "orden": 5,
           "local": "U.D. PAIOSACO H.AÑON",
           "visitante": "CEDEIRA S.D.",
           "fecha": "03-10-2026",
           "hora": "18:00",
           "campo": "Porta Santa",
+          "estado": "PROGRAMADO",
+          "actaDisponible": false,
+          "resultado": null,
+          "acta": null
+        },
+        {
+          "orden": 6,
+          "local": "OZA DE LOS RÍOS",
+          "visitante": "XUVENTUDE DORNEDA",
+          "fecha": "04-10-2026",
+          "hora": "10:00",
+          "campo": "O Loureiro (Oza De Los Ríos)",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,
