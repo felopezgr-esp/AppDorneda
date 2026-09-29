@@ -3280,6 +3280,32 @@
 @media(max-width:900px){.scout-head-stats{grid-template-columns:repeat(3,1fr)}.scout-coach-layout,.scout-main-grid,.scout-chart-grid{grid-template-columns:1fr}}
 @media(max-width:600px){.scout-head-stats{grid-template-columns:repeat(2,1fr)}.scout-topbar{align-items:stretch}.scout-select{max-width:none;width:100%}.scout-history-row{grid-template-columns:70px 58px 1fr}}
 
+
+/* PASO 15C · RESULTADOS/BÚSQUEDA + ANÁLISIS INDIVIDUAL */
+.liga-search-filters{display:grid;grid-template-columns:minmax(0,2fr) minmax(210px,.62fr);gap:10px;align-items:end;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 9px;margin-bottom:9px}
+.liga-search-label{font-size:8.5px!important;font-weight:900!important;margin-bottom:3px!important;color:var(--text-muted)!important;text-transform:uppercase;letter-spacing:.3px}
+.liga-jornada-selector{display:flex;align-items:center;gap:3px;overflow-x:auto;padding:1px 0 3px;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+.liga-jornada-filter-btn{flex:0 0 auto;height:25px;min-width:29px;padding:0 5px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text-muted);font-size:9px;font-weight:800;cursor:pointer;transition:.12s ease}
+.liga-jornada-filter-btn:hover{border-color:var(--text-dim);color:var(--text);background:var(--surface3)}
+.liga-jornada-filter-btn.active{border-color:rgba(204,0,0,.38);background:rgba(204,0,0,.06);color:var(--red);box-shadow:inset 0 -2px 0 var(--red);font-weight:900}
+.liga-jornada-filter-btn.all{min-width:43px}
+.liga-team-select{height:29px!important;min-height:29px!important;padding:3px 8px!important;font-size:10.5px!important;font-weight:700!important}
+#analisisIndividual .analysis-individual-toolbar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:7px;padding:6px 8px;border:1px solid var(--border);border-radius:7px;background:var(--surface2)}
+.analysis-individual-scope{font-size:9px;color:var(--text-muted);font-weight:700}
+.analysis-comp-switch{display:flex;gap:3px;align-items:center;flex-wrap:wrap}
+.analysis-comp-btn{height:23px;min-height:23px;padding:0 7px;border:1px solid var(--border);border-radius:5px;background:var(--surface);color:var(--text-muted);font-size:8.5px;font-weight:800;cursor:pointer}
+.analysis-comp-btn.active{color:var(--red);border-color:rgba(204,0,0,.35);background:rgba(204,0,0,.06)}
+#analisisIndividual .card{padding:7px 9px!important;border-radius:7px!important}
+#analisisIndividual .card + .card{margin-top:8px!important}
+#analisisIndividual .card-title{font-size:10.5px!important;line-height:1!important}
+#analisisIndividual .individual-card-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:5px}
+#analisisIndividual .individual-card-note{font-size:8.5px;color:var(--text-dim)}
+#tablaGoleadores,#tablaParticipacion{font-size:9.5px!important}
+#tablaGoleadores thead th,#tablaParticipacion thead th{padding:3px 5px!important;height:20px!important;font-size:8px!important;white-space:nowrap}
+#tablaGoleadores tbody td,#tablaParticipacion tbody td{padding:3px 5px!important;height:24px!important;min-height:24px!important;line-height:1!important;white-space:nowrap}
+#tablaGoleadores .sort-icon,#tablaParticipacion .sort-icon{font-size:7px!important}
+@media(max-width:900px){.liga-search-filters{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -3417,7 +3443,7 @@
 <div class="modal-overlay" id="modalClasif">
   <div class="modal" style="max-width:700px">
     <div class="modal-header">
-      <div class="modal-title">Editar Clasificacion</div>
+      <div class="modal-title">Editar clasificación</div>
       <button class="modal-close" onclick="closeModal('modalClasif')">&#10005;</button>
     </div>
     <div id="modalClasifContent"></div>
@@ -3941,78 +3967,69 @@
     <!-- ANALISIS -->
     <section class="section" id="section-analisis">
       <div class="page-header">
-        <div><div class="page-title">Analisis</div><div class="page-subtitle">Estadísticas de equipo e individuales</div></div>
+        <div><div class="page-title">Análisis</div><div class="page-subtitle">Estadísticas de equipo e individuales</div></div>
       </div>
       <div class="tabs">
         <div class="tab active" onclick="showAnalisisTab('equipo',this)">&#127942; Equipo</div>
         <div class="tab" onclick="showAnalisisTab('individual',this)">&#128100; Individual</div>
-        <div class="tab" onclick="showAnalisisTab('clasificacion',this)">&#128203; Clasificacion</div>
         <div class="tab" onclick="showAnalisisTab('proximoRival',this)">&#127919; Pr&oacute;ximo Rival</div>
       </div>
       <div id="analisisEquipo">
         <div id="analisisMisterChip" class="mb-20"></div>
         <div class="stats-grid" id="analisisStatsGrid"></div>
         <div class="grid-2">
-          <div class="card"><div class="card-title">Rendimiento por Competicion</div><div id="rendimientoComp"></div></div>
+          <div class="card"><div class="card-title">Rendimiento por competición</div><div id="rendimientoComp"></div></div>
           <div class="card"><div class="card-title">Local vs Visitante</div><div id="localVsVisitante"></div></div>
         </div>
         <div class="card mt-20"><div class="card-title">Racha Actual</div><div id="rachaActual" class="flex gap-8 mt-12"></div></div>
       </div>
       <div id="analisisIndividual" style="display:none">
+        <div class="analysis-individual-toolbar">
+          <div class="analysis-individual-scope" id="analisisIndividualScope">Liga · 0 partidos jugados</div>
+          <div class="analysis-comp-switch">
+            <button type="button" class="analysis-comp-btn" data-stat-comp="Pretemporada" onclick="setAnalisisIndividualFilter('Pretemporada')">Pretemporada</button>
+            <button type="button" class="analysis-comp-btn" data-stat-comp="Liga" onclick="setAnalisisIndividualFilter('Liga')">Liga</button>
+            <button type="button" class="analysis-comp-btn" data-stat-comp="Copa" onclick="setAnalisisIndividualFilter('Copa')">Copa</button>
+            <button type="button" class="analysis-comp-btn" data-stat-comp="Total" onclick="setAnalisisIndividualFilter('Total')">General</button>
+          </div>
+        </div>
+
         <div class="card">
-          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:gap:8px;margin-bottom:8px">
-            <div class="card-title" style="margin-bottom:0">👟 Tabla de Goleadores</div>
-            <div style="font-size:11px;color:var(--text-muted)">Haz clic en cualquier columna para ordenar (Goles, Ratio/Promedio, Partidos...)</div>
+          <div class="individual-card-head">
+            <div class="card-title">Goleadores</div>
+            <div class="individual-card-note">Solo partidos disputados</div>
           </div>
           <div class="table-wrap">
             <table id="tablaGoleadores">
-              <thead>
-                <tr>
-                  <th onclick="sortGoleadores('pos')" class="sortable-th" id="th-gol-pos" title="Ordenar por ranking">Pos <span class="sort-icon" id="sort-gol-pos">&#8597;</span></th>
-                  <th onclick="sortGoleadores('dorsal')" class="sortable-th" id="th-gol-dorsal" title="Ordenar por dorsal"># <span class="sort-icon" id="sort-gol-dorsal">&#8597;</span></th>
-                  <th onclick="sortGoleadores('nombre')" class="sortable-th" id="th-gol-nombre" title="Ordenar por nombre de jugador">Jugador <span class="sort-icon" id="sort-gol-nombre">&#8597;</span></th>
-                  <th onclick="sortGoleadores('goles')" class="sortable-th active-sort" id="th-gol-goles" title="Ordenar por goles marcados">Goles ⚽ <span class="sort-icon" id="sort-gol-goles">&#8597;</span></th>
-                  <th onclick="sortGoleadores('partidos')" class="sortable-th" id="th-gol-partidos" title="Ordenar por partidos jugados">Partidos <span class="sort-icon" id="sort-gol-partidos">&#8597;</span></th>
-                  <th onclick="sortGoleadores('promedio')" class="sortable-th" id="th-gol-promedio" title="Ordenar por promedio / ratio de goles por partido">Promedio <span class="sort-icon" id="sort-gol-promedio">&#8597;</span></th>
-                  <th onclick="sortGoleadores('titular')" class="sortable-th" id="th-gol-titular" title="Ordenar por titularidades">Titular <span class="sort-icon" id="sort-gol-titular">&#8597;</span></th>
-                </tr>
-              </thead>
+              <thead><tr>
+                <th onclick="sortGoleadores('pos')" class="sortable-th" id="th-gol-pos">Pos <span class="sort-icon" id="sort-gol-pos">&#8597;</span></th>
+                <th onclick="sortGoleadores('dorsal')" class="sortable-th" id="th-gol-dorsal"># <span class="sort-icon" id="sort-gol-dorsal">&#8597;</span></th>
+                <th onclick="sortGoleadores('nombre')" class="sortable-th" id="th-gol-nombre">Jugador <span class="sort-icon" id="sort-gol-nombre">&#8597;</span></th>
+                <th onclick="sortGoleadores('goles')" class="sortable-th active-sort" id="th-gol-goles">Goles <span class="sort-icon" id="sort-gol-goles">&#8597;</span></th>
+                <th onclick="sortGoleadores('partidos')" class="sortable-th" id="th-gol-partidos">PJ <span class="sort-icon" id="sort-gol-partidos">&#8597;</span></th>
+                <th onclick="sortGoleadores('promedio')" class="sortable-th" id="th-gol-promedio">G/P <span class="sort-icon" id="sort-gol-promedio">&#8597;</span></th>
+                <th onclick="sortGoleadores('titular')" class="sortable-th" id="th-gol-titular">Tit. <span class="sort-icon" id="sort-gol-titular">&#8597;</span></th>
+              </tr></thead>
               <tbody></tbody>
             </table>
           </div>
         </div>
-        <div class="card mt-20">
-          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:8px">
-            <div class="card-title" style="margin-bottom:0">&#128101; Participación de Jugadores</div>
-            <div style="font-size:11px;color:var(--text-muted)">Haz clic en cualquier columna para ordenar</div>
+
+        <div class="card">
+          <div class="individual-card-head">
+            <div class="card-title">Participación de jugadores</div>
+            <div class="individual-card-note">Total de partidos jugados: <strong id="analisisTotalPartidosJugados">0</strong></div>
           </div>
           <div class="table-wrap">
             <table id="tablaParticipacion">
-              <thead>
-                <tr>
-                  <th onclick="sortParticipacion('dorsal')" class="sortable-th" id="th-part-dorsal" title="Ordenar por dorsal"># <span class="sort-icon" id="sort-part-dorsal">&#8597;</span></th>
-                  <th onclick="sortParticipacion('nombre')" class="sortable-th" id="th-part-nombre" title="Ordenar por nombre">Jugador <span class="sort-icon" id="sort-part-nombre">&#8597;</span></th>
-                  <th onclick="sortParticipacion('conv')" class="sortable-th" id="th-part-conv" title="Ordenar por convocatorias">Convocatorias <span class="sort-icon" id="sort-part-conv">&#8597;</span></th>
-                  <th onclick="sortParticipacion('tit')" class="sortable-th" id="th-part-tit" title="Ordenar por titularidades">Titularidades <span class="sort-icon" id="sort-part-tit">&#8597;</span></th>
-                  <th onclick="sortParticipacion('jug')" class="sortable-th active-sort" id="th-part-jug" title="Ordenar por partidos jugados">Partidos <span class="sort-icon" id="sort-part-jug">&#8597;</span></th>
-                  <th onclick="sortParticipacion('pct')" class="sortable-th" id="th-part-pct" title="Ordenar por porcentaje titular">% Titular <span class="sort-icon" id="sort-part-pct">&#8597;</span></th>
-                </tr>
-              </thead>
+              <thead><tr>
+                <th onclick="sortParticipacion('dorsal')" class="sortable-th" id="th-part-dorsal"># <span class="sort-icon" id="sort-part-dorsal">&#8597;</span></th>
+                <th onclick="sortParticipacion('nombre')" class="sortable-th" id="th-part-nombre">Jugador <span class="sort-icon" id="sort-part-nombre">&#8597;</span></th>
+                <th onclick="sortParticipacion('conv')" class="sortable-th" id="th-part-conv">Conv. <span class="sort-icon" id="sort-part-conv">&#8597;</span></th>
+                <th onclick="sortParticipacion('tit')" class="sortable-th active-sort" id="th-part-tit">Titular / total <span class="sort-icon" id="sort-part-tit">&#8597;</span></th>
+                <th onclick="sortParticipacion('pct')" class="sortable-th" id="th-part-pct">% Titular <span class="sort-icon" id="sort-part-pct">&#8597;</span></th>
+              </tr></thead>
               <tbody></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      <div id="analisisClasificacion" style="display:none">
-        <div class="page-header mb-0" style="margin-bottom:16px">
-          <div class="page-subtitle">Primera Futgal &middot; Grupo A Coruna-Ferrol</div>
-          <button class="btn btn-ghost" onclick="openModalClasif()">&#9999;&#65039; Editar</button>
-        </div>
-        <div class="card">
-          <div class="table-wrap">
-            <table id="tablaClasif">
-              <thead><tr><th class="clasif-pos">#</th><th>Equipo</th><th>Pts</th><th>PJ</th><th>G</th><th>E</th><th>P</th><th>GF</th><th>GC</th><th>DG</th></tr></thead>
-              <tbody id="tablaClasifBody"></tbody>
             </table>
           </div>
         </div>
@@ -4118,21 +4135,17 @@
         <!-- 2.2 LIGA RESULTADOS Y BÚSQUEDA -->
         <div id="ligaSubViewResultados" style="display:none">
           <div class="card mb-16">
-            <!-- Filtros simples: se aplican automáticamente -->
-            <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 10px;margin-bottom:9px;">
-              <div style="display:grid;grid-template-columns:minmax(180px,0.9fr) minmax(240px,1.1fr);gap:8px;align-items:end;">
-                <div>
-                  <label class="form-label" style="font-size:9.5px;font-weight:800;margin-bottom:3px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.25px;">Jornada</label>
-                  <select id="searchLigaJornada" class="form-control" onchange="executeLigaSearch()" style="font-size:12px;font-weight:700;padding:5px 9px;height:31px;">
-                    <option value="">Todas las jornadas</option>
-                  </select>
-                </div>
-                <div>
-                  <label class="form-label" style="font-size:9.5px;font-weight:800;margin-bottom:3px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.25px;">Equipo</label>
-                  <select id="searchLigaEquipo" class="form-control" onchange="executeLigaSearch()" style="font-size:12px;font-weight:700;padding:5px 9px;height:31px;">
-                    <option value="">Todos los equipos</option>
-                  </select>
-                </div>
+            <!-- Filtros rápidos -->
+            <div class="liga-search-filters">
+              <div>
+                <label class="form-label liga-search-label">Jornada</label>
+                <div id="searchLigaJornadasButtons" class="liga-jornada-selector"></div>
+              </div>
+              <div>
+                <label class="form-label liga-search-label">Equipo</label>
+                <select id="searchLigaEquipo" class="form-control liga-team-select" onchange="executeLigaSearch()">
+                  <option value="">Todos los equipos</option>
+                </select>
               </div>
             </div>
 
@@ -9234,7 +9247,7 @@ let currentCopaRondaNav = 1;
 let statFilterComp = 'Liga';
 let goleadoresSortField = 'goles';
 let goleadoresSortDir = 'desc';
-let participacionSortField = 'jug';
+let participacionSortField = 'tit';
 let participacionSortDir = 'desc';
 
 function initTheme(){
@@ -9688,148 +9701,353 @@ function setStatFilterComp(comp, el){
   if(window.renderAnalisisIndividual) renderAnalisisIndividual();
 }
 
-function calcGoleadores(filterComp){
-  if(!filterComp) filterComp = statFilterComp;
-  const m = {};
 
-  for(const p of db.partidos){
-    var comp = (p.competicion || '').toLowerCase();
-    var tipo = (p.tipo || '').toLowerCase();
-    
-    if(filterComp === 'Liga'){
-      if(comp.indexOf('futgal') === -1 && comp.indexOf('liga') === -1) continue;
-    } else if(filterComp === 'Copa'){
-      if(comp.indexOf('copa') === -1 && comp.indexOf('gallego') === -1) continue;
-    } else if(filterComp === 'Pretemporada'){
-      if(comp.indexOf('pretemporada') === -1 && tipo.indexOf('amistoso') === -1) continue;
-    } else if(filterComp === 'L+C'){
-      var isLiga = comp.indexOf('futgal') !== -1 || comp.indexOf('liga') !== -1;
-      var isCopa = comp.indexOf('copa') !== -1 || comp.indexOf('gallego') !== -1;
-      if(!isLiga && !isCopa) continue;
-    }
+function partidoPerteneceAStatFilter(p,filterComp){
+  if(!p) return false;
+  var comp=(p.competicion || '').toLowerCase();
+  var tipo=(p.tipo || '').toLowerCase();
 
-    const playerMatchGoals = {};
-    for(const c of (p.convocados || [])){
-      const canonName = getCanonicalPlayerName(c.nombre, c.dorsal);
-      if(!canonName) continue;
-      if(!m[canonName]) m[canonName] = {goles:0, partidos:0, titulares:0, asistencias:0};
-      
-      const convGoles = parseInt(c.goles) || 0;
-      m[canonName].goles += convGoles;
-      playerMatchGoals[normalizeName(canonName)] = (playerMatchGoals[normalizeName(canonName)] || 0) + convGoles;
-      m[canonName].asistencias += parseInt(c.asistencias) || 0;
-      m[canonName].partidos++;
-      if(c.titular) m[canonName].titulares++;
-    }
-
-    // Comprobar golesDetalle si algún gol de Dorneda no estaba sumado en convocados
-    if(p.golesDetalle && p.golesDetalle.length){
-      const detalleGoalsByPlayer = {};
-      p.golesDetalle.forEach(g => {
-        if(g.equipo === 'Xuventude Dorneda' || (g.equipo && g.equipo.indexOf('Dorneda') !== -1)){
-          const canonName = getCanonicalPlayerName(g.jugador, g.dorsal);
-          if(!canonName) return;
-          detalleGoalsByPlayer[canonName] = (detalleGoalsByPlayer[canonName] || 0) + 1;
-        }
-      });
-
-      Object.entries(detalleGoalsByPlayer).forEach(([canonName, detGoals]) => {
-        const normKey = normalizeName(canonName);
-        const convGoals = playerMatchGoals[normKey] || 0;
-        if(convGoals === 0 && detGoals > 0){
-          if(!m[canonName]){
-            m[canonName] = {goles: detGoals, partidos: 1, titulares: 0, asistencias: 0};
-          } else {
-            m[canonName].goles += detGoals;
-          }
-          playerMatchGoals[normKey] = detGoals;
-        }
-      });
-    }
+  if(filterComp === 'Liga') return comp.indexOf('futgal') !== -1 || comp.indexOf('liga') !== -1;
+  if(filterComp === 'Copa') return comp.indexOf('copa') !== -1 || comp.indexOf('gallego') !== -1;
+  if(filterComp === 'Pretemporada') return comp.indexOf('pretemporada') !== -1 || tipo.indexOf('amistoso') !== -1;
+  if(filterComp === 'L+C'){
+    return comp.indexOf('futgal') !== -1 || comp.indexOf('liga') !== -1 ||
+      comp.indexOf('copa') !== -1 || comp.indexOf('gallego') !== -1;
   }
-
-  return Object.entries(m)
-    .filter(([,v]) => v.goles > 0)
-    .sort((a,b) => (b[1].goles - a[1].goles) || (a[1].partidos - b[1].partidos));
+  return true;
 }
 
-function calcAsistidores(filterComp){
-  if(!filterComp) filterComp = statFilterComp;
-  const m = {};
+function getStatPartidosJugados(filterComp){
+  var f=filterComp || 'Total';
+  return (db.partidos || []).filter(function(p){
+    var played=(p.resultado === 'Victoria' || p.resultado === 'Empate' || p.resultado === 'Derrota') &&
+      p.gf !== null && p.gf !== undefined && p.gc !== null && p.gc !== undefined;
+    return played && partidoPerteneceAStatFilter(p,f);
+  });
+}
+window.getStatPartidosJugados=getStatPartidosJugados;
 
-  for(const p of db.partidos){
-    var comp = (p.competicion || '').toLowerCase();
-    var tipo = (p.tipo || '').toLowerCase();
-    
-    if(filterComp === 'Liga'){
-      if(comp.indexOf('futgal') === -1 && comp.indexOf('liga') === -1) continue;
-    } else if(filterComp === 'Copa'){
-      if(comp.indexOf('copa') === -1 && comp.indexOf('gallego') === -1) continue;
-    } else if(filterComp === 'Pretemporada'){
-      if(comp.indexOf('pretemporada') === -1 && tipo.indexOf('amistoso') === -1) continue;
-    } else if(filterComp === 'L+C'){
-      var isLiga = comp.indexOf('futgal') !== -1 || comp.indexOf('liga') !== -1;
-      var isCopa = comp.indexOf('copa') !== -1 || comp.indexOf('gallego') !== -1;
-      if(!isLiga && !isCopa) continue;
-    }
+function setAnalisisIndividualFilter(comp){
+  statFilterComp=comp || 'Liga';
+  renderAnalisisIndividual();
+}
+window.setAnalisisIndividualFilter=setAnalisisIndividualFilter;
 
-    for(const c of (p.convocados || [])){
-      const canonName = getCanonicalPlayerName(c.nombre, c.dorsal);
-      if(!canonName) continue;
-      if(!m[canonName]) m[canonName] = {asistencias:0, partidos:0};
-      const ast = parseInt(c.asistencias) || 0;
-      m[canonName].asistencias += ast;
-      m[canonName].partidos++;
-    }
-  }
 
-  return Object.entries(m)
-    .filter(([,v]) => v.asistencias > 0)
-    .sort((a,b) => (b[1].asistencias - a[1].asistencias) || (a[1].partidos - b[1].partidos));
+function isDornedaTeamName(name){
+  return /dorneda/i.test(String(name || ''));
 }
 
+function getLigaDornedaMatchesOficiales(){
+  var jornadas = (typeof getLigaJornadasOficiales === 'function')
+    ? (getLigaJornadasOficiales() || [])
+    : [];
 
-function calcParticipacion(){
-  const m = {};
-  (db.jugadores || []).forEach(j => {
-    if(j.estado === 'Con ficha' && !isStaff(j)){
-      m[j.nombre] = { dorsal: j.dorsal || 999, conv: 0, tit: 0, jug: 0 };
+  var out = [];
+  jornadas.forEach(function(j){
+    (j.partidos || []).forEach(function(p){
+      var isLocal = isDornedaTeamName(p.local);
+      var isVisit = isDornedaTeamName(p.visitante);
+      if(!isLocal && !isVisit) return;
+
+      var glOk = p.gl !== null && p.gl !== undefined && String(p.gl).trim() !== '' && Number.isFinite(Number(p.gl));
+      var gvOk = p.gv !== null && p.gv !== undefined && String(p.gv).trim() !== '' && Number.isFinite(Number(p.gv));
+      if(!glOk || !gvOk) return;
+
+      out.push({
+        jornada:Number(j.jornada) || 0,
+        partido:p,
+        isLocal:isLocal,
+        acta:p.actaData || null
+      });
+    });
+  });
+
+  out.sort(function(a,b){ return a.jornada-b.jornada; });
+  return out;
+}
+
+function ensureAnalisisPlayer(stats, name, dorsal, nombreCompleto){
+  var canon = getCanonicalPlayerName(name, dorsal) || String(name || '').trim();
+  if(!canon) return null;
+
+  var key = normalizeName(canon);
+  if(!key) return null;
+
+  if(!stats[key]){
+    var matched = matchPlayerInDB(name, dorsal);
+    stats[key] = {
+      nombre: matched && matched.nombre ? matched.nombre : canon,
+      nombreCompleto: matched && matched.nombreCompleto ? matched.nombreCompleto : (nombreCompleto || name || ''),
+      dorsal: dorsal ? parseInt(dorsal,10) : (matched && matched.dorsal ? parseInt(matched.dorsal,10) : 999),
+      partidos:0,
+      convocatorias:0,
+      titulares:0,
+      goles:0,
+      asistencias:0
+    };
+  }else if(dorsal && (!stats[key].dorsal || stats[key].dorsal === 999)){
+    stats[key].dorsal = parseInt(dorsal,10) || 999;
+  }
+  return stats[key];
+}
+
+function getLigaIndividualStatsOficiales(){
+  var stats = {};
+  var matches = getLigaDornedaMatchesOficiales();
+  var actasLeidas = 0;
+
+  matches.forEach(function(rec){
+    var p = rec.partido;
+    var a = rec.acta;
+    if(!a) return;
+
+    var titulares = rec.isLocal ? (a.localTitulares || []) : (a.visitTitulares || []);
+    var suplentes = rec.isLocal ? (a.localSuplentes || []) : (a.visitSuplentes || []);
+
+    // Si el acta no tiene alineaciones, no inventamos participación.
+    if(!titulares.length && !suplentes.length) return;
+    actasLeidas++;
+
+    var rosterByFedName = new Map();
+    var seen = new Set();
+
+    function addRoster(list, titular){
+      (list || []).forEach(function(pl){
+        if(!pl || !pl.nombre) return;
+        var row = ensureAnalisisPlayer(stats, pl.nombre, pl.dorsal, pl.nombre);
+        if(!row) return;
+
+        var key = normalizeName(row.nombre);
+        if(!seen.has(key)){
+          row.partidos++;
+          row.convocatorias++;
+          seen.add(key);
+        }
+        if(titular) row.titulares++;
+
+        rosterByFedName.set(goleadoresNorm(pl.nombre), row);
+        // Alias ya limpio/canónico por si el extractor entrega el goleador en otro formato.
+        rosterByFedName.set(goleadoresNorm(row.nombre), row);
+        if(row.nombreCompleto) rosterByFedName.set(goleadoresNorm(row.nombreCompleto), row);
+      });
+    }
+
+    addRoster(titulares, true);
+    addRoster(suplentes, false);
+
+    (a.allGoles || []).forEach(function(g){
+      var clean = cleanAndFormatGoal(g);
+      if(!clean || clean.propiaPuerta) return;
+
+      var scorerNorm = goleadoresNorm(clean.rawScorer || clean.scorerName || '');
+      var row = rosterByFedName.get(scorerNorm) || null;
+
+      if(!row){
+        var matched = matchPlayerInDB(clean.rawScorer || clean.scorerName || '', null);
+        if(matched && matched.nombre){
+          row = stats[normalizeName(matched.nombre)] || null;
+        }
+      }
+
+      // Solo atribuimos el gol si el goleador pertenece al roster Dorneda de ese acta.
+      if(row) row.goles++;
+    });
+  });
+
+  return {
+    stats:stats,
+    totalPartidos:matches.length,
+    actasLeidas:actasLeidas
+  };
+}
+
+function getManualIndividualStats(filterComp){
+  var stats = {};
+  var matches = getStatPartidosJugados(filterComp).filter(function(p){
+    // Liga se obtiene de FUTGAL para no usar fichas incompletas.
+    return !partidoPerteneceAStatFilter(p,'Liga');
+  });
+
+  matches.forEach(function(p){
+    var seen = new Set();
+
+    (p.convocados || []).forEach(function(c){
+      if(!c || !c.nombre) return;
+      var row = ensureAnalisisPlayer(stats, c.nombre, c.dorsal, c.nombreCompleto || c.nombre);
+      if(!row) return;
+
+      var key = normalizeName(row.nombre);
+      if(!seen.has(key)){
+        row.partidos++;
+        row.convocatorias++;
+        seen.add(key);
+      }
+      if(c.titular) row.titulares++;
+      row.goles += parseInt(c.goles,10) || 0;
+      row.asistencias += parseInt(c.asistencias,10) || 0;
+    });
+
+    // Fallback de goles de una ficha cuando el convocado no lleva goles informados.
+    (p.golesDetalle || []).forEach(function(g){
+      if(!g || !isDornedaTeamName(g.equipo)) return;
+      var row = ensureAnalisisPlayer(stats, g.jugador, g.dorsal, g.jugador);
+      if(!row) return;
+
+      var conv = (p.convocados || []).find(function(c){
+        return normalizeName(getCanonicalPlayerName(c.nombre,c.dorsal)) === normalizeName(row.nombre);
+      });
+      if(!conv || !(parseInt(conv.goles,10) > 0)){
+        row.goles++;
+      }
+    });
+  });
+
+  return {
+    stats:stats,
+    totalPartidos:matches.length,
+    actasLeidas:matches.length
+  };
+}
+
+function mergeAnalisisIndividualStats(target, source){
+  Object.keys(source || {}).forEach(function(k){
+    var s=source[k];
+    if(!target[k]){
+      target[k]={
+        nombre:s.nombre,
+        nombreCompleto:s.nombreCompleto || '',
+        dorsal:s.dorsal || 999,
+        partidos:0,
+        convocatorias:0,
+        titulares:0,
+        goles:0,
+        asistencias:0
+      };
+    }
+    var t=target[k];
+    if((!t.dorsal || t.dorsal===999) && s.dorsal && s.dorsal!==999) t.dorsal=s.dorsal;
+    t.partidos += s.partidos || 0;
+    t.convocatorias += s.convocatorias || 0;
+    t.titulares += s.titulares || 0;
+    t.goles += s.goles || 0;
+    t.asistencias += s.asistencias || 0;
+  });
+}
+
+function getAnalisisIndividualStats(filterComp){
+  var f = filterComp || 'Liga';
+  var finalStats = {};
+  var totalPartidos = 0;
+  var actasLeidas = 0;
+
+  if(f === 'Liga'){
+    var liga = getLigaIndividualStatsOficiales();
+    mergeAnalisisIndividualStats(finalStats, liga.stats);
+    totalPartidos = liga.totalPartidos;
+    actasLeidas = liga.actasLeidas;
+  }else if(f === 'Pretemporada' || f === 'Copa'){
+    var manual = getManualIndividualStats(f);
+    mergeAnalisisIndividualStats(finalStats, manual.stats);
+    totalPartidos = manual.totalPartidos;
+    actasLeidas = manual.actasLeidas;
+  }else{
+    // General: Liga oficial + Pretemporada + Copa.
+    var ligaAll = getLigaIndividualStatsOficiales();
+    var pre = getManualIndividualStats('Pretemporada');
+    var copa = getManualIndividualStats('Copa');
+
+    mergeAnalisisIndividualStats(finalStats, ligaAll.stats);
+    mergeAnalisisIndividualStats(finalStats, pre.stats);
+    mergeAnalisisIndividualStats(finalStats, copa.stats);
+
+    totalPartidos = ligaAll.totalPartidos + pre.totalPartidos + copa.totalPartidos;
+    actasLeidas = ligaAll.actasLeidas + pre.actasLeidas + copa.actasLeidas;
+  }
+
+  // La tabla de participación conserva la plantilla actual aunque alguien tenga 0.
+  (db.jugadores || []).forEach(function(j){
+    if(!j || isStaff(j) || j.estado !== 'Con ficha') return;
+    var key=normalizeName(j.nombre);
+    if(!finalStats[key]){
+      finalStats[key]={
+        nombre:j.nombre,
+        nombreCompleto:j.nombreCompleto || '',
+        dorsal:j.dorsal ? parseInt(j.dorsal,10) : 999,
+        partidos:0,
+        convocatorias:0,
+        titulares:0,
+        goles:0,
+        asistencias:0
+      };
     }
   });
 
-  for(const p of db.partidos){
-    for(const c of (p.convocados || [])){
-      const canonName = getCanonicalPlayerName(c.nombre, c.dorsal);
-      if(!canonName) continue;
-      
-      let targetName = null;
-      if(m[canonName]){
-        targetName = canonName;
-      } else {
-        const jFound = (db.jugadores || []).find(x => (x.nombre === canonName || normalizeName(x.nombre) === normalizeName(canonName)) && x.estado === 'Con ficha' && !isStaff(x));
-        if(jFound){
-          targetName = jFound.nombre;
-          if(!m[targetName]) m[targetName] = { dorsal: jFound.dorsal || 999, conv: 0, tit: 0, jug: 0 };
-        }
-      }
+  return {
+    stats:finalStats,
+    totalPartidos:totalPartidos,
+    actasLeidas:actasLeidas
+  };
+}
+window.getAnalisisIndividualStats=getAnalisisIndividualStats;
 
-      if(targetName && m[targetName]){
-        m[targetName].conv++;
-        if(c.titular) m[targetName].tit++;
-        m[targetName].jug++;
-      }
+function calcGoleadores(filterComp){
+  var data=getAnalisisIndividualStats(filterComp || statFilterComp);
+  return Object.keys(data.stats).map(function(k){
+    var r=data.stats[k];
+    return [r.nombre,{
+      goles:r.goles || 0,
+      partidos:r.partidos || 0,
+      titulares:r.titulares || 0,
+      asistencias:r.asistencias || 0,
+      dorsal:r.dorsal || 999
+    }];
+  }).filter(function(item){
+    return item[1].goles > 0;
+  }).sort(function(a,b){
+    return (b[1].goles-a[1].goles) ||
+      (a[1].partidos-b[1].partidos) ||
+      String(a[0]).localeCompare(String(b[0]),'es',{sensitivity:'base'});
+  });
+}
+
+function calcAsistidores(filterComp){
+  if(!filterComp) filterComp=statFilterComp;
+  const m={};
+
+  for(const p of getStatPartidosJugados(filterComp)){
+    for(const c of (p.convocados || [])){
+      const canonName=getCanonicalPlayerName(c.nombre,c.dorsal);
+      if(!canonName) continue;
+      if(!m[canonName]) m[canonName]={asistencias:0,partidos:0};
+      m[canonName].asistencias += parseInt(c.asistencias)||0;
+      m[canonName].partidos++;
     }
   }
 
   return Object.entries(m)
-    .sort((a,b) => {
-      const dA = a[1].dorsal || 999;
-      const dB = b[1].dorsal || 999;
-      if(dA !== 999 && dB !== 999) return dA - dB;
-      if(dA !== 999) return -1;
-      if(dB !== 999) return 1;
-      return a[0].localeCompare(b[0]);
-    });
+    .filter(function(item){return item[1].asistencias > 0;})
+    .sort(function(a,b){return (b[1].asistencias-a[1].asistencias) || (a[1].partidos-b[1].partidos);});
+}
+
+
+function calcParticipacion(filterComp){
+  var data=getAnalisisIndividualStats(filterComp || statFilterComp);
+  return Object.keys(data.stats).map(function(k){
+    var r=data.stats[k];
+    return [r.nombre,{
+      dorsal:r.dorsal || 999,
+      conv:r.convocatorias || r.partidos || 0,
+      tit:r.titulares || 0
+    }];
+  }).sort(function(a,b){
+    const dA=a[1].dorsal || 999;
+    const dB=b[1].dorsal || 999;
+    if(dA !== 999 && dB !== 999) return dA-dB;
+    if(dA !== 999) return -1;
+    if(dB !== 999) return 1;
+    return a[0].localeCompare(b[0],'es',{sensitivity:'base'});
+  });
 }
 function getNextMatch(){const t=new Date();return db.calendario.find(c=>{if(c.estado==='Jugado'||c.estado==='Libre')return false;const f=c.fecha.split('-')[0].split('/');if(f.length<3)return false;return new Date(`${f[2]}-${f[1].padStart(2,'0')}-${f[0].padStart(2,'0')}`)>=t;});}
 function getPlayerFullParticipation(playerOrName, dorsalHint) {
@@ -11054,6 +11272,7 @@ function renderAnalisis(){
   try {
     saved = localStorage.getItem('dorneda_active_analisis_tab') || analisisTabActive || 'equipo';
   } catch(e){}
+  if(saved === 'clasificacion') saved = 'equipo';
   showAnalisisTab(saved);
 }
 
@@ -12471,20 +12690,14 @@ function showClasifTab(tab, el){
 window.showClasifTab = showClasifTab;
 
 function changeJornadaNav(delta){
-  currentJornadaNav = Math.max(1, Math.min(30, currentJornadaNav + delta));
-  currentLigaSearchJornada = currentJornadaNav.toString();
-  var selectJ = document.getElementById('searchLigaJornada');
-  if(selectJ) selectJ.value = currentLigaSearchJornada;
+  currentJornadaNav=Math.max(1,Math.min(30,currentJornadaNav+delta));
+  currentLigaSearchJornada=currentJornadaNav.toString();
   renderLigaResultadosView();
 }
 window.changeJornadaNav = changeJornadaNav;
 
 function onSelectJornadaChange(val){
-  currentJornadaNav = parseInt(val, 10) || 1;
-  currentLigaSearchJornada = currentJornadaNav.toString();
-  var selectJ = document.getElementById('searchLigaJornada');
-  if(selectJ) selectJ.value = currentLigaSearchJornada;
-  renderLigaResultadosView();
+  selectLigaSearchJornada(parseInt(val,10) || 1);
 }
 window.onSelectJornadaChange = onSelectJornadaChange;
 
@@ -13348,124 +13561,116 @@ function equipoCoincideLiga(nombre, filtro){
   return !!a && !!b && (a.includes(b) || b.includes(a));
 }
 
+
+function renderLigaSearchJornadaButtons(jornadas){
+  var wrap=document.getElementById('searchLigaJornadasButtons');
+  if(!wrap) return;
+  var active=currentLigaSearchJornada ? parseInt(currentLigaSearchJornada,10) : null;
+
+  var html=`<button type="button" class="liga-jornada-filter-btn all ${active===null?'active':''}" onclick="selectLigaSearchJornada(null)">Todas</button>`;
+  html += jornadas.map(function(j){
+    return `<button type="button" class="liga-jornada-filter-btn ${Number(j.jornada)===active?'active':''}" onclick="selectLigaSearchJornada(${Number(j.jornada)})" title="Jornada ${j.jornada} · ${resumenFechasJornada(j,false)}">J${j.jornada}</button>`;
+  }).join('');
+
+  wrap.innerHTML=html;
+  var selected=wrap.querySelector('.liga-jornada-filter-btn.active');
+  if(selected && selected.scrollIntoView){
+    try{selected.scrollIntoView({block:'nearest',inline:'center'});}catch(e){}
+  }
+}
+
+function selectLigaSearchJornada(jNum){
+  if(jNum === null || jNum === undefined || jNum === ''){
+    currentLigaSearchJornada='';
+  }else{
+    currentJornadaNav=Number(jNum)||1;
+    currentLigaSearchJornada=String(currentJornadaNav);
+  }
+  renderLigaResultadosView();
+}
+window.selectLigaSearchJornada=selectLigaSearchJornada;
+
 function renderLigaResultadosView(){
-  var jornadas = getLigaJornadasOficiales();
+  var jornadas=getLigaJornadasOficiales();
   if(!jornadas.length){
-    var empty = document.getElementById('ligaMatchesResultContainer');
-    if(empty) empty.innerHTML = '<div style="padding:24px;text-align:center;color:var(--text-muted)">Cargando datos oficiales de FUTGAL…</div>';
+    var empty=document.getElementById('ligaMatchesResultContainer');
+    if(empty) empty.innerHTML='<div style="padding:24px;text-align:center;color:var(--text-muted)">Cargando datos oficiales de FUTGAL…</div>';
     return;
   }
 
-  // 1. Populate Dropdowns if not done
-  var selectJ = document.getElementById('searchLigaJornada');
-  var selectE = document.getElementById('searchLigaEquipo');
-
-  if(selectJ){
-    var jHtml = '<option value="">Todas las jornadas</option>';
-    jornadas.forEach(function(j){
-      jHtml += `<option value="${j.jornada}">Jornada ${j.jornada} (${resumenFechasJornada(j, false)})</option>`;
-    });
-    selectJ.innerHTML = jHtml;
-  }
-
+  var selectE=document.getElementById('searchLigaEquipo');
   if(selectE){
-    var eHtml = '<option value="">Todos los equipos</option>';
-    LIGA_TEAMS_LIST.forEach(function(t){
-      eHtml += `<option value="${t}">${t === "Xuventude Dorneda" ? "&#11088; " + t : t}</option>`;
+    var equiposOrdenados=LIGA_TEAMS_LIST.slice().sort(function(a,b){
+      return String(a).localeCompare(String(b),'es',{sensitivity:'base'});
     });
-    selectE.innerHTML = eHtml;
+    var eHtml='<option value="">Todos los equipos</option>';
+    equiposOrdenados.forEach(function(t){
+      eHtml += `<option value="${t}">${t==="Xuventude Dorneda" ? "⭐ "+t : t}</option>`;
+    });
+    selectE.innerHTML=eHtml;
+    selectE.value=currentLigaSearchEquipo || '';
   }
 
-  // Set current dropdown values
-  if(selectJ && selectJ.value !== currentLigaSearchJornada) selectJ.value = currentLigaSearchJornada;
-  if(selectE && selectE.value !== currentLigaSearchEquipo) selectE.value = currentLigaSearchEquipo;
+  var titleEl=document.getElementById('ligaSearchResultTitle');
+  var navQuickWrap=document.getElementById('ligaJornadaNavQuickWrap');
+  var container=document.getElementById('ligaMatchesResultContainer');
+  var eqFilter=currentLigaSearchEquipo ? currentLigaSearchEquipo.trim() : null;
 
-  var titleEl = document.getElementById('ligaSearchResultTitle');
-  var subtitleEl = null;
-  var pillsWrap = document.getElementById('jornadasPillsWrap');
-  var navQuickWrap = document.getElementById('ligaJornadaNavQuickWrap');
-  var container = document.getElementById('ligaMatchesResultContainer');
+  // Sin equipo elegido, la vista siempre está en una jornada concreta.
+  if(!currentLigaSearchJornada && !eqFilter){
+    var baseJ=jornadas.find(function(j){return Number(j.jornada)===Number(currentJornadaNav);}) || jornadas[0];
+    currentJornadaNav=Number(baseJ.jornada)||1;
+    currentLigaSearchJornada=String(currentJornadaNav);
+  }
 
-  var jFilter = currentLigaSearchJornada ? parseInt(currentLigaSearchJornada, 10) : null;
-  var eqFilter = currentLigaSearchEquipo ? currentLigaSearchEquipo.trim() : null;
+  renderLigaSearchJornadaButtons(jornadas);
 
-  // CASO A: Búsqueda Solo por Jornada
+  var jFilter=currentLigaSearchJornada ? parseInt(currentLigaSearchJornada,10) : null;
+
   if(jFilter !== null && !eqFilter){
-    currentJornadaNav = jFilter;
-    if(pillsWrap) pillsWrap.style.display = 'flex';
-    if(navQuickWrap) navQuickWrap.style.display = 'flex';
-
-    var currentJ = jornadas.find(function(j){ return j.jornada === jFilter; }) || jornadas[0];
-    if(titleEl) titleEl.innerHTML = `<strong>Jornada ${currentJ.jornada}</strong> · ${resumenFechasJornada(currentJ, false)}`;
-    
-
-    renderJornadasPills(jornadas, currentJ.jornada);
-    renderMatchesCards(currentJ.partidos || [], currentJ.jornada, currentJ.fecha, container);
+    currentJornadaNav=jFilter;
+    if(navQuickWrap) navQuickWrap.style.display='flex';
+    var currentJ=jornadas.find(function(j){return Number(j.jornada)===jFilter;}) || jornadas[0];
+    if(titleEl) titleEl.innerHTML=`<strong>Jornada ${currentJ.jornada}</strong> · ${resumenFechasJornada(currentJ,false)}`;
+    renderMatchesCards(currentJ.partidos || [],currentJ.jornada,currentJ.fecha,container);
     return;
   }
 
-  // CASO B: Búsqueda Solo por Equipo (muestra sus 30 partidos del año)
   if(jFilter === null && eqFilter){
-    if(pillsWrap) pillsWrap.style.display = 'none';
-    if(navQuickWrap) navQuickWrap.style.display = 'none';
+    if(navQuickWrap) navQuickWrap.style.display='none';
+    if(titleEl) titleEl.innerHTML=`Calendario completo · <strong>${eqFilter}</strong>`;
 
-    if(titleEl) titleEl.innerHTML = `Calendario completo · <strong>${eqFilter}</strong>`;
-    
-
-    var teamMatches = [];
+    var teamMatches=[];
     jornadas.forEach(function(j){
       (j.partidos || []).forEach(function(p){
-        var isLocal = equipoCoincideLiga(p.local, eqFilter);
-        var isVisitor = equipoCoincideLiga(p.visitante, eqFilter);
+        var isLocal=equipoCoincideLiga(p.local,eqFilter);
+        var isVisitor=equipoCoincideLiga(p.visitante,eqFilter);
         if(isLocal || isVisitor){
-          teamMatches.push({
-            partido: p,
-            jornada: j.jornada,
-            fecha: p.fecha || j.fecha,
-            isLocal: isLocal
-          });
+          teamMatches.push({partido:p,jornada:j.jornada,fecha:p.fecha || j.fecha,isLocal:isLocal});
         }
       });
     });
-
-    renderTeamFullCalendarCards(teamMatches, eqFilter, container);
+    renderTeamFullCalendarCards(teamMatches,eqFilter,container);
     return;
   }
 
-  // CASO C: Búsqueda Combinada Jornada + Equipo
   if(jFilter !== null && eqFilter){
-    if(pillsWrap) pillsWrap.style.display = 'none';
-    if(navQuickWrap) navQuickWrap.style.display = 'none';
-
-    var targetJ = jornadas.find(function(j){ return j.jornada === jFilter; });
-    var matchFound = null;
+    if(navQuickWrap) navQuickWrap.style.display='flex';
+    var targetJ=jornadas.find(function(j){return Number(j.jornada)===jFilter;});
+    var matchFound=null;
     if(targetJ && targetJ.partidos){
-      matchFound = targetJ.partidos.find(function(p){
-        return equipoCoincideLiga(p.local, eqFilter) || equipoCoincideLiga(p.visitante, eqFilter);
+      matchFound=targetJ.partidos.find(function(p){
+        return equipoCoincideLiga(p.local,eqFilter) || equipoCoincideLiga(p.visitante,eqFilter);
       });
     }
 
-    if(titleEl) titleEl.innerHTML = `<strong>Jornada ${jFilter}</strong> · ${eqFilter}`;
-    
-
+    if(titleEl) titleEl.innerHTML=`<strong>Jornada ${jFilter}</strong> · ${eqFilter}`;
     if(matchFound){
-      renderMatchesCards([matchFound], jFilter, targetJ.fecha, container);
-    } else {
-      container.innerHTML = `<div style="padding:20px;text-align:center;color:var(--text-muted);grid-column:1/-1;">No se encontró partido para ${eqFilter} en la Jornada ${jFilter}.</div>`;
+      renderMatchesCards([matchFound],jFilter,targetJ.fecha,container);
+    }else{
+      container.innerHTML=`<div style="padding:20px;text-align:center;color:var(--text-muted);grid-column:1/-1;">No se encontró partido para ${eqFilter} en la jornada ${jFilter}.</div>`;
     }
-    return;
   }
-
-  // CASO D: Ambos vacíos -> Mostrar Jornada actual por defecto (con pills y navegación)
-  if(pillsWrap) pillsWrap.style.display = 'flex';
-  if(navQuickWrap) navQuickWrap.style.display = 'flex';
-
-  var defJ = jornadas.find(function(j){ return j.jornada === currentJornadaNav; }) || jornadas[0];
-  if(titleEl) titleEl.innerHTML = `<strong>Jornada ${defJ.jornada}</strong> · ${resumenFechasJornada(defJ, false)}`;
-  
-
-  renderJornadasPills(jornadas, defJ.jornada);
-  renderMatchesCards(defJ.partidos || [], defJ.jornada, defJ.fecha, container);
 }
 window.renderLigaResultadosView = renderLigaResultadosView;
 
@@ -13492,33 +13697,22 @@ function renderJornadasPills(jornadas, activeJornada){
 }
 
 function onSelectJornadaNavQuick(jNum){
-  currentJornadaNav = jNum;
-  currentLigaSearchJornada = jNum.toString();
-  var selectJ = document.getElementById("searchLigaJornada");
-  if(selectJ) selectJ.value = currentLigaSearchJornada;
-  renderLigaResultadosView();
+  selectLigaSearchJornada(jNum);
 }
 window.onSelectJornadaNavQuick = onSelectJornadaNavQuick;
 
 function executeLigaSearch(){
-  var sJ = document.getElementById("searchLigaJornada");
-  var sE = document.getElementById("searchLigaEquipo");
-  currentLigaSearchJornada = sJ ? sJ.value : "";
-  currentLigaSearchEquipo = sE ? sE.value : "";
-  if(currentLigaSearchJornada){
-    currentJornadaNav = parseInt(currentLigaSearchJornada, 10) || 1;
-  }
+  var sE=document.getElementById("searchLigaEquipo");
+  currentLigaSearchEquipo=sE ? sE.value : "";
   renderLigaResultadosView();
 }
 window.executeLigaSearch = executeLigaSearch;
 
 function resetLigaSearch(){
-  currentLigaSearchJornada = '';
-  currentLigaSearchEquipo = '';
-  var sJ = document.getElementById('searchLigaJornada');
-  var sE = document.getElementById('searchLigaEquipo');
-  if(sJ) sJ.value = '';
-  if(sE) sE.value = '';
+  currentLigaSearchJornada=String(currentJornadaNav || 1);
+  currentLigaSearchEquipo='';
+  var sE=document.getElementById('searchLigaEquipo');
+  if(sE) sE.value='';
   renderLigaResultadosView();
 }
 window.resetLigaSearch = resetLigaSearch;
@@ -15014,17 +15208,15 @@ window.renderClasificacion = renderClasificacion;
 var analisisTabActive = 'equipo';
 
 function showAnalisisTab(tab, el){
+  if(tab === 'clasificacion') tab = 'equipo';
   analisisTabActive = tab || 'equipo';
   try {
     localStorage.setItem('dorneda_active_analisis_tab', analisisTabActive);
   } catch(e){}
 
-  // Actualizar clases de las pestaÃ±as
   var tabsContainer = document.querySelector('#section-analisis .tabs');
   if(tabsContainer){
-    tabsContainer.querySelectorAll('.tab').forEach(function(t){
-      t.classList.remove('active');
-    });
+    tabsContainer.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
     if(el && el.classList){
       el.classList.add('active');
     } else {
@@ -15035,17 +15227,14 @@ function showAnalisisTab(tab, el){
 
   var elE = document.getElementById('analisisEquipo');
   var elI = document.getElementById('analisisIndividual');
-  var elC = document.getElementById('analisisClasificacion');
   var elR = document.getElementById('analisisProximoRival');
 
   if(elE) elE.style.display = (tab === 'equipo') ? 'block' : 'none';
   if(elI) elI.style.display = (tab === 'individual') ? 'block' : 'none';
-  if(elC) elC.style.display = (tab === 'clasificacion') ? 'block' : 'none';
   if(elR) elR.style.display = (tab === 'proximoRival') ? 'block' : 'none';
 
   if(tab === 'equipo') renderAnalisisEquipo();
   else if(tab === 'individual') renderAnalisisIndividual();
-  else if(tab === 'clasificacion') renderClasificacion();
   else if(tab === 'proximoRival') renderAnalisisProximoRival();
 }
 window.showAnalisisTab = showAnalisisTab;
@@ -15122,7 +15311,13 @@ function renderAnalisisProximoRival(selectedTeam){
     equiposDef.forEach(function(eq){
       if(eq && eq.nombre && !allTeams.includes(eq.nombre)) allTeams.push(eq.nombre);
     });
-    var clasif = toArr((db && db.clasificacion && db.clasificacion.length) ? db.clasificacion : (DEFAULT_DATA.clasificacion || []));
+    var clasifAutoCalc = (typeof calcularClasificacionAutomatica === 'function')
+      ? calcularClasificacionAutomatica()
+      : null;
+    var clasifAutoRows = toArr(clasifAutoCalc && clasifAutoCalc.rows);
+    var clasifLegacy = toArr((db && db.clasificacion && db.clasificacion.length) ? db.clasificacion : (DEFAULT_DATA.clasificacion || []));
+    var clasif = clasifAutoRows.length ? clasifAutoRows : clasifLegacy;
+
     clasif.forEach(function(row){
       if(row && row.equipo && !allTeams.includes(row.equipo)){
         allTeams.push(row.equipo);
@@ -15142,7 +15337,7 @@ function renderAnalisisProximoRival(selectedTeam){
     // 3. Posici\u00f3n en la tabla de clasificaci\u00f3n
     var rivalClasif = clasif.find(function(r){
       return norm(r.equipo) === normActive || norm(r.equipo).includes(normActive) || normActive.includes(norm(r.equipo));
-    }) || { pos: '-', pts: 0, pj: 0, pg: 0, pe: 0, pp: 0, gf: 0, gc: 0, dg: 0 };
+    }) || { pos: null, pts: null, pj: null, g: null, e: null, p: null, gf: null, gc: null, dg: null };
 
     // 4. Recopilar todos los partidos de este rival en todasJornadas
     var officialJ = (typeof getLigaJornadasOficiales === 'function') ? toArr(getLigaJornadasOficiales()) : [];
@@ -15237,11 +15432,15 @@ function renderAnalisisProximoRival(selectedTeam){
           });
         }
 
-        var gl = (match.gl !== null && match.gl !== undefined) ? match.gl : (defM ? defM.gl : null);
-        var gv = (match.gv !== null && match.gv !== undefined) ? match.gv : (defM ? defM.gv : null);
-        var hasScore = (gl !== null && gv !== null);
-        var gf = isLocal ? gl : gv;
-        var gc = isLocal ? gv : gl;
+        var glRaw = (match.gl !== null && match.gl !== undefined) ? match.gl : (defM ? defM.gl : null);
+        var gvRaw = (match.gv !== null && match.gv !== undefined) ? match.gv : (defM ? defM.gv : null);
+        var hasScore = (glRaw !== null && glRaw !== undefined && gvRaw !== null && gvRaw !== undefined &&
+          String(glRaw).trim() !== '' && String(gvRaw).trim() !== '' &&
+          Number.isFinite(Number(glRaw)) && Number.isFinite(Number(gvRaw)));
+        var gl = hasScore ? Number(glRaw) : null;
+        var gv = hasScore ? Number(gvRaw) : null;
+        var gf = hasScore ? (isLocal ? gl : gv) : null;
+        var gc = hasScore ? (isLocal ? gv : gl) : null;
         var matchRival = isLocal ? match.visitante : match.local;
         var res = 'Pendiente';
         if(hasScore){
@@ -15404,7 +15603,26 @@ function renderAnalisisProximoRival(selectedTeam){
         });
       }
 
-      if(pDorneda.rivalAlineacion){
+      var pJornadaMatch = String(pDorneda.codigo || '').match(/^J(\d+)$/i);
+      var pJornadaNum = pJornadaMatch ? parseInt(pJornadaMatch[1], 10) : null;
+      var officialDirect = rivalMatches.find(function(rec){
+        if(!rec || !rec.matchObj) return false;
+        var isDorneda = norm(rec.rival).indexOf('dorneda') !== -1;
+        if(!isDorneda) return false;
+        if(pJornadaNum && Number(rec.jornada) === pJornadaNum) return true;
+        if(pDorneda.fecha && rec.fecha && String(pDorneda.fecha) === String(rec.fecha)) return true;
+        return false;
+      });
+      var officialDirectActa = officialDirect && officialDirect.matchObj && officialDirect.matchObj.actaData
+        ? officialDirect.matchObj.actaData
+        : null;
+      var officialDirectHasDetail = !!(officialDirectActa && (
+        toArr(officialDirectActa.allGoles || officialDirectActa.goles).length ||
+        toArr(officialDirectActa.localTitulares).length ||
+        toArr(officialDirectActa.visitTitulares).length
+      ));
+
+      if(pDorneda.rivalAlineacion && !officialDirectHasDetail){
         toArr(pDorneda.rivalAlineacion.titulares).forEach(function(t){
           if(!t || !t.nombre) return;
           registerPlayer(t.nombre, t.dorsal, true);
@@ -15435,7 +15653,7 @@ function renderAnalisisProximoRival(selectedTeam){
         });
       }
 
-      toArr(pDorneda.golesDetalle).forEach(function(g){
+      if(!officialDirectHasDetail) toArr(pDorneda.golesDetalle).forEach(function(g){
         if(!g) return;
         var isRivalGoal = g.equipo && norm(g.equipo).indexOf('dorneda') === -1;
         if(isRivalGoal){
@@ -15459,19 +15677,19 @@ function renderAnalisisProximoRival(selectedTeam){
       });
     });
 
-    // Totales
+    // Totales oficiales de Liga: exclusivamente desde marcadores.
     var totalPJ = (statsLocal.pj + statsVis.pj);
     var totalGF = (statsLocal.gf + statsVis.gf);
-    var totalGC = (statsLocal.gc + statsVis.gc);
-    var gfSlotsSum = Object.keys(gfSlots).reduce(function(s, k){ return s + (gfSlots[k] || 0); }, 0);
-    var gcSlotsSum = Object.keys(gcSlots).reduce(function(s, k){ return s + (gcSlots[k] || 0); }, 0);
-    if(gfSlotsSum > totalGF) totalGF = gfSlotsSum;
-    if(gcSlotsSum > totalGC) totalGC = gcSlotsSum;
     var totalGC = (statsLocal.gc + statsVis.gc);
     var totalV = (statsLocal.v + statsVis.v);
     var totalE = (statsLocal.e + statsVis.e);
     var totalD = (statsLocal.d + statsVis.d);
-    var totalPts = (statsLocal.pts + statsVis.pts);
+    var totalPtsResultados = (statsLocal.pts + statsVis.pts);
+
+    // Puntos/posición desde la clasificación automática, por si hay ajustes disciplinarios.
+    var hasAutoPts = rivalClasif && rivalClasif.pts !== null && rivalClasif.pts !== undefined &&
+      Number.isFinite(Number(rivalClasif.pts));
+    var totalPts = hasAutoPts ? Number(rivalClasif.pts) : totalPtsResultados;
 
     // Top 4 Goleadores
     var top4Goleadores = Object.values(goleadoresMap).sort(function(a, b){ return b.goles - a.goles; }).slice(0, 4);
@@ -15493,7 +15711,13 @@ function renderAnalisisProximoRival(selectedTeam){
     var maxGcSlot = Object.keys(gcSlots).reduce(function(a, b){ return gcSlots[a] >= gcSlots[b] ? a : b; }, '0-15');
 
 
-    var totalTeams = clasif.length || allTeams.length || 16;
+    var totalTeams = (clasifAutoRows && clasifAutoRows.length) ? clasifAutoRows.length : (clasif.length || allTeams.length || 16);
+    var headerPos = (rivalClasif && rivalClasif.pos !== null && rivalClasif.pos !== undefined)
+      ? Number(rivalClasif.pos)
+      : null;
+    var headerPts = totalPts;
+    var headerGF = totalGF;
+    var headerGC = totalGC;
     var top5Goleadores = Object.values(goleadoresMap).sort(function(a,b){
       if(b.goles !== a.goles) return b.goles - a.goles;
       return String(a.nombre).localeCompare(String(b.nombre),'es',{sensitivity:'base'});
@@ -15568,6 +15792,8 @@ function renderAnalisisProximoRival(selectedTeam){
 
     var maxGfCount=gfSlots[maxGfSlot]||0;
     var maxGcCount=gcSlots[maxGcSlot]||0;
+    var gfMinutesKnown = Object.keys(gfSlots).reduce(function(sum,k){ return sum + (gfSlots[k]||0); },0);
+    var gcMinutesKnown = Object.keys(gcSlots).reduce(function(sum,k){ return sum + (gcSlots[k]||0); },0);
     var maxTopGoals=top5Goleadores.length ? Math.max.apply(null,top5Goleadores.map(function(x){return x.goles;})) : 1;
 
     function barRows(slots,total,against){
@@ -15597,11 +15823,11 @@ function renderAnalisisProximoRival(selectedTeam){
         </div>
 
         <div class="scout-head-stats">
-          <div class="scout-stat"><div class="scout-stat-label">Posición</div><div class="scout-stat-value">${rivalClasif.pos || '—'}º / ${totalTeams}</div></div>
-          <div class="scout-stat"><div class="scout-stat-label">Puntos</div><div class="scout-stat-value">${rivalClasif.pts ?? totalPts}</div></div>
+          <div class="scout-stat"><div class="scout-stat-label">Posición</div><div class="scout-stat-value">${headerPos ? headerPos+'º / '+totalTeams : '— / '+totalTeams}</div></div>
+          <div class="scout-stat"><div class="scout-stat-label">Puntos</div><div class="scout-stat-value">${headerPts}</div></div>
           <div class="scout-stat"><div class="scout-stat-label">Racha · Liga</div><div class="scout-stat-value small" style="display:flex;gap:3px">${rachaHtml}</div></div>
-          <div class="scout-stat"><div class="scout-stat-label">Goles a favor</div><div class="scout-stat-value">${rivalClasif.gf ?? totalGF}</div></div>
-          <div class="scout-stat"><div class="scout-stat-label">Goles en contra</div><div class="scout-stat-value">${rivalClasif.gc ?? totalGC}</div></div>
+          <div class="scout-stat"><div class="scout-stat-label">Goles a favor</div><div class="scout-stat-value">${headerGF}</div></div>
+          <div class="scout-stat"><div class="scout-stat-label">Goles en contra</div><div class="scout-stat-value">${headerGC}</div></div>
         </div>
 
         <div class="scout-card">
@@ -15648,8 +15874,8 @@ function renderAnalisisProximoRival(selectedTeam){
         </div>
 
         <div class="scout-chart-grid">
-          <div class="scout-card"><div class="scout-card-head"><div class="scout-title">Goles a favor · por minutos</div><div class="scout-muted">${totalGF} GF</div></div>${barRows(gfSlots,totalGF,false)}</div>
-          <div class="scout-card"><div class="scout-card-head"><div class="scout-title">Goles en contra · por minutos</div><div class="scout-muted">${totalGC} GC</div></div>${barRows(gcSlots,totalGC,true)}</div>
+          <div class="scout-card"><div class="scout-card-head"><div class="scout-title">Goles a favor · por minutos</div><div class="scout-muted">${gfMinutesKnown}/${totalGF} con minuto disponible</div></div>${barRows(gfSlots,Math.max(gfMinutesKnown,1),false)}</div>
+          <div class="scout-card"><div class="scout-card-head"><div class="scout-title">Goles en contra · por minutos</div><div class="scout-muted">${gcMinutesKnown}/${totalGC} con minuto disponible</div></div>${barRows(gcSlots,Math.max(gcMinutesKnown,1),true)}</div>
         </div>
 
         <div class="scout-card">
@@ -15763,155 +15989,129 @@ function sortParticipacion(field){
 window.sortParticipacion = sortParticipacion;
 
 function renderAnalisisIndividual(){
-  let g = calcGoleadores(statFilterComp);
-  if(!g.length && statFilterComp !== 'Total'){
-    g = calcGoleadores('Total');
+  const dataset=getAnalisisIndividualStats(statFilterComp);
+  const totalPartidosEquipo=dataset.totalPartidos;
+  const scopeLabel=statFilterComp === 'Total' ? 'General' : statFilterComp;
+
+  const scopeEl=document.getElementById('analisisIndividualScope');
+  if(scopeEl){
+    const cobertura = statFilterComp === 'Liga'
+      ? ` · actas ${dataset.actasLeidas}/${totalPartidosEquipo}`
+      : '';
+    scopeEl.textContent=`${scopeLabel} · ${totalPartidosEquipo} partidos jugados${cobertura}`;
   }
 
-  // Enrich data for sorting
-  const enrichedG = g.map(([n, v], i) => {
-    const jFound = (db.jugadores || []).find(x => x.nombre === n || normalizeName(x.nombre) === normalizeName(n));
-    const dorsal = jFound && jFound.dorsal ? parseInt(jFound.dorsal) : 999;
-    const dTag = jFound && jFound.dorsal ? '#' + jFound.dorsal : '--';
-    const pj = v.partidos || 0;
-    const goles = v.goles || 0;
-    const promedio = pj > 0 ? (goles / pj) : 0;
-    const titulares = v.titulares || 0;
+  const totalEl=document.getElementById('analisisTotalPartidosJugados');
+  if(totalEl) totalEl.textContent=totalPartidosEquipo;
+
+  document.querySelectorAll('#analisisIndividual .analysis-comp-btn').forEach(function(btn){
+    btn.classList.toggle('active',btn.getAttribute('data-stat-comp')===statFilterComp);
+  });
+
+  const g=calcGoleadores(statFilterComp);
+  const enrichedG=g.map(function(item,i){
+    const n=item[0],v=item[1];
+    const jFound=(db.jugadores || []).find(function(x){
+      return x.nombre === n || normalizeName(x.nombre) === normalizeName(n);
+    });
+
+    // Preferimos el dorsal oficial leído del acta. Si no existe, usamos Plantilla.
+    const officialDorsal=v.dorsal && v.dorsal !== 999 ? parseInt(v.dorsal,10) : 999;
+    const rosterDorsal=jFound && jFound.dorsal ? parseInt(jFound.dorsal,10) : 999;
+    const dorsal=officialDorsal !== 999 ? officialDorsal : rosterDorsal;
+    const dTag=dorsal !== 999 ? '#'+dorsal : '—';
+
+    const pj=v.partidos || 0;
+    const goles=v.goles || 0;
     return {
-      posOriginal: i + 1,
-      nombre: n,
-      dorsal: dorsal,
-      dTag: dTag,
-      goles: goles,
-      partidos: pj,
-      promedio: promedio,
-      titulares: titulares
+      posOriginal:i+1,nombre:n,dorsal:dorsal,dTag:dTag,goles:goles,
+      partidos:pj,promedio:pj>0 ? goles/pj : 0,titulares:v.titulares || 0
     };
   });
 
-  // Sort based on goleadoresSortField and goleadoresSortDir
-  enrichedG.sort((a, b) => {
-    let diff = 0;
-    if(goleadoresSortField === 'pos'){
-      diff = a.posOriginal - b.posOriginal;
-    } else if(goleadoresSortField === 'dorsal'){
-      diff = a.dorsal - b.dorsal;
-    } else if(goleadoresSortField === 'nombre'){
-      diff = a.nombre.localeCompare(b.nombre);
-    } else if(goleadoresSortField === 'goles'){
-      diff = (b.goles - a.goles) || (a.partidos - b.partidos) || (b.promedio - a.promedio);
-      if(goleadoresSortDir === 'asc') diff = -diff;
+  enrichedG.sort(function(a,b){
+    let diff=0;
+    if(goleadoresSortField === 'pos') diff=a.posOriginal-b.posOriginal;
+    else if(goleadoresSortField === 'dorsal') diff=a.dorsal-b.dorsal;
+    else if(goleadoresSortField === 'nombre') diff=a.nombre.localeCompare(b.nombre,'es',{sensitivity:'base'});
+    else if(goleadoresSortField === 'goles'){
+      diff=(b.goles-a.goles)||(a.partidos-b.partidos)||(b.promedio-a.promedio);
+      if(goleadoresSortDir === 'asc') diff=-diff;
       return diff;
-    } else if(goleadoresSortField === 'partidos'){
-      diff = (b.partidos - a.partidos) || (b.goles - a.goles);
-    } else if(goleadoresSortField === 'promedio'){
-      diff = (b.promedio - a.promedio) || (b.goles - a.goles);
-    } else if(goleadoresSortField === 'titular'){
-      diff = (b.titulares - a.titulares) || (b.goles - a.goles);
-    }
-
+    }else if(goleadoresSortField === 'partidos') diff=(b.partidos-a.partidos)||(b.goles-a.goles);
+    else if(goleadoresSortField === 'promedio') diff=(b.promedio-a.promedio)||(b.goles-a.goles);
+    else if(goleadoresSortField === 'titular') diff=(b.titulares-a.titulares)||(b.goles-a.goles);
     return goleadoresSortDir === 'asc' ? diff : -diff;
   });
 
-  // Update header indicators for Goleadores
-  const gFields = ['pos', 'dorsal', 'nombre', 'goles', 'partidos', 'promedio', 'titular'];
-  gFields.forEach(f => {
-    const iconEl = document.getElementById('sort-gol-' + f);
-    const thEl = document.getElementById('th-gol-' + f);
-    if(thEl){
-      if(f === goleadoresSortField) thEl.classList.add('active-sort');
-      else thEl.classList.remove('active-sort');
-    }
+  ['pos','dorsal','nombre','goles','partidos','promedio','titular'].forEach(function(f){
+    const iconEl=document.getElementById('sort-gol-'+f);
+    const thEl=document.getElementById('th-gol-'+f);
+    if(thEl) thEl.classList.toggle('active-sort',f===goleadoresSortField);
     if(iconEl){
-      if(f === goleadoresSortField){
-        iconEl.textContent = goleadoresSortDir === 'asc' ? '▲' : '▼';
-        iconEl.style.opacity = '1';
-      } else {
-        iconEl.textContent = '⇅';
-        iconEl.style.opacity = '0.35';
-      }
+      iconEl.textContent=f===goleadoresSortField ? (goleadoresSortDir === 'asc' ? '▲' : '▼') : '⇅';
+      iconEl.style.opacity=f===goleadoresSortField ? '1' : '.35';
     }
   });
 
-  const elG = document.querySelector('#tablaGoleadores tbody');
+  const elG=document.querySelector('#tablaGoleadores tbody');
   if(elG){
-    elG.innerHTML = enrichedG.length ? enrichedG.map((row) => {
-      let medal = row.posOriginal;
-      if(row.posOriginal === 1) medal = '🥇';
-      else if(row.posOriginal === 2) medal = '🥈';
-      else if(row.posOriginal === 3) medal = '🥉';
-
+    elG.innerHTML=enrichedG.length ? enrichedG.map(function(row){
       return `<tr>
-        <td class="td-bold" style="text-align:center">${medal}</td>
-        <td style="font-weight:800;color:var(--red-light);min-width:40px;text-align:center">${row.dTag}</td>
+        <td style="text-align:center;font-weight:800">${row.posOriginal}</td>
+        <td style="font-weight:800;color:var(--red-light);text-align:center">${row.dTag}</td>
         <td class="td-bold">${row.nombre}</td>
-        <td><span class="text-success font-bold" style="font-size:14px">${row.goles} ⚽</span></td>
-        <td class="td-muted">${row.partidos} PJ</td>
-        <td style="font-weight:700;color:${row.promedio >= 1 ? '#16a34a' : (row.promedio >= 0.5 ? '#2563eb' : 'var(--text-muted)')}">${row.promedio.toFixed(2)}</td>
-        <td class="td-muted">${row.titulares}</td>
+        <td style="font-weight:900;color:var(--success);text-align:center">${row.goles}</td>
+        <td style="text-align:center">${row.partidos}</td>
+        <td style="font-weight:700;text-align:center">${row.promedio.toFixed(2)}</td>
+        <td style="text-align:center">${row.titulares}</td>
       </tr>`;
-    }).join('') : '<tr><td colspan="7" class="td-muted text-center" style="padding:16px">Sin goles registrados.</td></tr>';
+    }).join('') : '<tr><td colspan="7" class="td-muted text-center" style="padding:10px">Sin goles registrados en este ámbito.</td></tr>';
   }
 
-  // Participación
-  const p = calcParticipacion();
-  const enrichedP = p.map(([n, v]) => {
-    const dorsalNum = v.dorsal && v.dorsal !== 999 ? parseInt(v.dorsal) : 999;
-    const dTag = v.dorsal && v.dorsal !== 999 ? '#' + v.dorsal : '--';
-    const pct = v.conv > 0 ? Math.round((v.tit / v.conv) * 100) : 0;
+  const p=calcParticipacion(statFilterComp);
+  const enrichedP=p.map(function(item){
+    const n=item[0],v=item[1];
+    const dorsalNum=v.dorsal && v.dorsal !== 999 ? parseInt(v.dorsal,10) : 999;
+    const dTag=dorsalNum !== 999 ? '#'+dorsalNum : '—';
+
+    // El porcentaje responde exactamente a "titular en X de Y partidos del equipo".
+    const pct=totalPartidosEquipo>0 ? Math.round((Number(v.tit||0)/totalPartidosEquipo)*100) : 0;
     return {
-      nombre: n,
-      dorsal: dorsalNum,
-      dTag: dTag,
-      conv: v.conv || 0,
-      tit: v.tit || 0,
-      jug: v.jug || 0,
-      pct: pct
+      nombre:n,dorsal:dorsalNum,dTag:dTag,
+      conv:v.conv || 0,tit:v.tit || 0,pct:pct
     };
   });
 
-  enrichedP.sort((a, b) => {
-    let diff = 0;
-    if(participacionSortField === 'dorsal') diff = a.dorsal - b.dorsal;
-    else if(participacionSortField === 'nombre') diff = a.nombre.localeCompare(b.nombre);
-    else if(participacionSortField === 'conv') diff = b.conv - a.conv;
-    else if(participacionSortField === 'tit') diff = b.tit - a.tit;
-    else if(participacionSortField === 'jug') diff = b.jug - a.jug;
-    else if(participacionSortField === 'pct') diff = b.pct - a.pct;
-
+  enrichedP.sort(function(a,b){
+    let diff=0;
+    if(participacionSortField === 'dorsal') diff=a.dorsal-b.dorsal;
+    else if(participacionSortField === 'nombre') diff=a.nombre.localeCompare(b.nombre,'es',{sensitivity:'base'});
+    else if(participacionSortField === 'conv') diff=b.conv-a.conv;
+    else if(participacionSortField === 'tit') diff=b.tit-a.tit;
+    else if(participacionSortField === 'pct') diff=b.pct-a.pct;
     return participacionSortDir === 'asc' ? diff : -diff;
   });
 
-  // Update header indicators for Participación
-  const pFields = ['dorsal', 'nombre', 'conv', 'tit', 'jug', 'pct'];
-  pFields.forEach(f => {
-    const iconEl = document.getElementById('sort-part-' + f);
-    const thEl = document.getElementById('th-part-' + f);
-    if(thEl){
-      if(f === participacionSortField) thEl.classList.add('active-sort');
-      else thEl.classList.remove('active-sort');
-    }
+  ['dorsal','nombre','conv','tit','pct'].forEach(function(f){
+    const iconEl=document.getElementById('sort-part-'+f);
+    const thEl=document.getElementById('th-part-'+f);
+    if(thEl) thEl.classList.toggle('active-sort',f===participacionSortField);
     if(iconEl){
-      if(f === participacionSortField){
-        iconEl.textContent = participacionSortDir === 'asc' ? '▲' : '▼';
-        iconEl.style.opacity = '1';
-      } else {
-        iconEl.textContent = '⇅';
-        iconEl.style.opacity = '0.35';
-      }
+      iconEl.textContent=f===participacionSortField ? (participacionSortDir === 'asc' ? '▲' : '▼') : '⇅';
+      iconEl.style.opacity=f===participacionSortField ? '1' : '.35';
     }
   });
 
-  const elP = document.querySelector('#tablaParticipacion tbody');
+  const elP=document.querySelector('#tablaParticipacion tbody');
   if(elP){
-    elP.innerHTML = enrichedP.map((row) => {
+    elP.innerHTML=enrichedP.map(function(row){
       return `<tr>
-        <td style="font-weight:800;color:var(--red-light);min-width:40px;text-align:center">${row.dTag}</td>
+        <td style="font-weight:800;color:var(--red-light);text-align:center">${row.dTag}</td>
         <td class="td-bold">${row.nombre}</td>
-        <td>${row.conv}</td>
-        <td>${row.tit}</td>
-        <td><strong>${row.jug}</strong></td>
-        <td><span class="badge" style="background:var(--surface3);font-size:10px">${row.pct}%</span></td>
+        <td style="text-align:center">${row.conv}</td>
+        <td style="text-align:center;font-weight:800">${row.tit} / ${totalPartidosEquipo}</td>
+        <td style="text-align:center"><span class="badge" style="background:var(--surface3);font-size:8.5px">${row.pct}%</span></td>
       </tr>`;
     }).join('');
   }
