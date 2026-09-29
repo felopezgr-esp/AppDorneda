@@ -9290,22 +9290,45 @@ function initFirebaseSync(){
             var needsCloudUpdate = false;
             try {
               var incomingDb = cData.db;
+              var incomingCloned = false;
+
+              function ensureIncomingClone(){
+                if(!incomingCloned){
+                  incomingDb = JSON.parse(JSON.stringify(incomingDb));
+                  incomingCloned = true;
+                }
+              }
+
+              // ECONOMÍA: una copia de nube antigua no pisa una edición local más reciente.
               var localEconomia = db && db.economia ? db.economia : null;
               var incomingEconomia = incomingDb && incomingDb.economia ? incomingDb.economia : null;
               var localEditAt = Number(localEconomia && localEconomia._lastEditAt) || 0;
               var cloudEditAt = Number(incomingEconomia && incomingEconomia._lastEditAt) || 0;
-
-              // Si Economía fue editada localmente después de la copia de nube,
-              // preservamos ese subárbol. Esto evita que un onSnapshot antiguo
-              // deshaga una edición al refrescar.
               if(localEconomia && localEditAt > cloudEditAt){
-                incomingDb = JSON.parse(JSON.stringify(incomingDb));
+                ensureIncomingClone();
                 incomingDb.economia = JSON.parse(JSON.stringify(localEconomia));
+              }
+
+              // PLANTILLA: es la fuente de verdad de los jugadores.
+              // Si añadimos/editar un jugador localmente y Firebase todavía tiene
+              // una versión anterior, conservamos la plantilla local en vez de
+              // hacer desaparecer el alta al refrescar.
+              var localMeta = db && db._syncMeta ? db._syncMeta : {};
+              var cloudMeta = incomingDb && incomingDb._syncMeta ? incomingDb._syncMeta : {};
+              var localPlantillaAt = Number(localMeta.plantillaLastEditAt) || 0;
+              var cloudPlantillaAt = Number(cloudMeta.plantillaLastEditAt) || 0;
+
+              if(db && Array.isArray(db.jugadores) && localPlantillaAt > cloudPlantillaAt){
+                ensureIncomingClone();
+                incomingDb.jugadores = JSON.parse(JSON.stringify(db.jugadores));
+                incomingDb._syncMeta = Object.assign({}, incomingDb._syncMeta || {}, {
+                  plantillaLastEditAt: localPlantillaAt
+                });
               }
 
               var res = validateAndMigrateDB(incomingDb);
               db = res.dbObj;
-              needsCloudUpdate = res.modified;
+              needsCloudUpdate = res.modified || (localPlantillaAt > cloudPlantillaAt && isAdminMode);
               localStorage.setItem(DB_KEY, JSON.stringify(db));
               if(typeof currentSection !== 'undefined'){
                 renderSection(currentSection);
@@ -9371,6 +9394,13 @@ function saveDBToCloud(){
 window.saveDBToCloud = saveDBToCloud;
 
 
+
+function markPlantillaEdited(){
+  if(!db._syncMeta) db._syncMeta = {};
+  db._syncMeta.plantillaLastEditAt = Date.now();
+}
+window.markPlantillaEdited = markPlantillaEdited;
+
 function markEconomiaEdited(){
   if(!db.economia) db.economia = {};
   db.economia._lastEditAt = Date.now();
@@ -9384,6 +9414,16 @@ function saveDB(){
   saveDBToCloud();
 }
 window.saveDB = saveDB;
+
+function getPlantillaSyncStatus(){
+  return {
+    jugadores: Array.isArray(db && db.jugadores) ? db.jugadores.length : 0,
+    plantillaLastEditAt: Number(db && db._syncMeta && db._syncMeta.plantillaLastEditAt) || 0,
+    adminMode: !!isAdminMode
+  };
+}
+window.getPlantillaSyncStatus = getPlantillaSyncStatus;
+
 
 // ==========================================
 // ADMIN MODE WITH GOOGLE AUTHENTICATION
@@ -9449,6 +9489,13 @@ function verifyAdminPIN(){
     isAdminMode = true;
     updateAdminModeUI();
     closeAdminPINModal();
+
+    // Si había una edición local de Plantilla pendiente de nube, ahora que
+    // estamos autorizados la subimos.
+    if(db && db._syncMeta && Number(db._syncMeta.plantillaLastEditAt) > 0){
+      saveDBToCloud();
+    }
+
     toast('Modo Editor autorizado con Google 🔓', 'success');
   }).catch(function(error){
     if(error && error.code === 'auth/popup-closed-by-user') return;
@@ -10388,7 +10435,7 @@ function handleModalFotoUpload(ev, id){
   reader.onload = function(e){
     if(id){
       const j = db.jugadores.find(x => x.id === id);
-      if(j){ j.foto = e.target.result; saveDB(); renderPlantilla(); openJugadorModal(id); toast('Foto actualizada', 'success'); }
+      if(j){ j.foto = e.target.result; markPlantillaEdited(); saveDB(); renderPlantilla(); openJugadorModal(id); toast('Foto actualizada', 'success'); }
     } else {
       window._tempPlayerFoto = e.target.result;
       toast('Foto lista para guardar', 'info');
@@ -10399,10 +10446,10 @@ function handleModalFotoUpload(ev, id){
 
 function removePlayerPhoto(id){
   const j = db.jugadores.find(x => x.id === id);
-  if(j){ j.foto = null; saveDB(); renderPlantilla(); openJugadorModal(id); toast('Foto eliminada', 'info'); }
+  if(j){ j.foto = null; markPlantillaEdited(); saveDB(); renderPlantilla(); openJugadorModal(id); toast('Foto eliminada', 'info'); }
 }
 
-function handleFotoUpload(ev,id){const f=ev.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(e){const j=db.jugadores.find(x=>x.id===id);if(j){j.foto=e.target.result;saveDB();renderPlantilla();toast('Foto actualizada','success');}};r.readAsDataURL(f);}
+function handleFotoUpload(ev,id){const f=ev.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(e){const j=db.jugadores.find(x=>x.id===id);if(j){j.foto=e.target.result;markPlantillaEdited();saveDB();renderPlantilla();toast('Foto actualizada','success');}};r.readAsDataURL(f);}
 
 let currentModalPlayerId = null;
 let currentModalTab = 'datos';
@@ -10736,6 +10783,17 @@ function saveJugador(id){
     const newId = (db.jugadores || []).reduce((max, j) => Math.max(max, j.id || 0), 100) + 1;
     db.jugadores.push({id: newId, dorsal, nombre, nombreCompleto, rol, estado, foto: foto, notas});
   }
+
+  // Plantilla es la fuente de verdad. Marcamos la edición antes de guardar
+  // para que una copia antigua de Firebase no la borre al refrescar.
+  markPlantillaEdited();
+
+  // Si existe Economía, sincronizamos inmediatamente el seguimiento:
+  // Con ficha => cuota automática; A prueba => sin deuda automática.
+  if(db.economia && typeof syncCuotasDesdeMovimientos === 'function'){
+    syncCuotasDesdeMovimientos();
+  }
+
   saveDB();
   closeModal('modalJugador');
   renderPlantilla();
@@ -10746,6 +10804,7 @@ window.saveJugador = saveJugador;
 function deleteJugador(id){
   if(!confirm('¿Eliminar este miembro?')) return;
   db.jugadores = db.jugadores.filter(x => x.id !== id);
+  markPlantillaEdited();
   saveDB();
   closeModal('modalJugador');
   renderPlantilla();
@@ -17157,7 +17216,7 @@ function updateEconLockUI(){
 
 
 // ==========================================
-// PASO 14A/14B/14E/14F/14G/14H · ECONOMÍA V2
+// PASO 14A/14B/14E/14F/14G/14H/14I · ECONOMÍA V2
 // ==========================================
 const ECON_INGRESO_TIPOS = ['Ficha', 'Patrocinador', 'Otro'];
 const ECON_GASTO_TIPOS = ['Fichas', 'Cuota Club', 'Árbitros', 'Otro'];
