@@ -2923,6 +2923,117 @@
   }
 }
 
+
+/* ==========================================================
+   PASO 14B · ECONOMÍA · MOVIMIENTOS ULTRACOMPACTOS
+   ========================================================== */
+#econMovimientosMainCard{
+  padding:7px 9px !important;
+  margin-bottom:8px !important;
+  border-radius:8px !important;
+}
+.econ-mov-main-head{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  margin:0 0 5px 0;padding:0 0 5px 0;border-bottom:1px solid var(--border);
+}
+.econ-mov-main-title{display:flex;align-items:center;gap:6px;min-width:0}
+.econ-mov-main-title .card-title{margin:0 !important;font-size:11px !important;line-height:1 !important}
+.econ-mov-main-sub{font-size:9px;color:var(--text-dim);white-space:nowrap}
+.econ-mov-add-btn{
+  min-height:24px !important;height:24px !important;padding:2px 8px !important;
+  font-size:10px !important;font-weight:900 !important;border-radius:5px !important;
+}
+.econ-mov-filters{display:flex;align-items:center;gap:4px;margin:0 0 5px 0;padding:0;flex-wrap:nowrap}
+.econ-mov-filters .form-control{
+  height:25px !important;min-height:25px !important;padding:2px 6px !important;
+  font-size:9.5px !important;border-radius:5px !important;line-height:1 !important;
+}
+#econMovSearch{width:210px;flex:0 1 210px}
+#econMovFilterJugador{width:150px;flex:0 1 150px}
+#econMovFilterTipo{width:92px;flex:0 0 92px}
+#econMovFilterSituacion{width:105px;flex:0 0 105px}
+.econ-mov-filter-actions{display:flex;align-items:center;gap:3px;margin-left:auto}
+.econ-mov-filter-actions .btn{
+  min-height:25px !important;height:25px !important;padding:2px 7px !important;
+  font-size:9.5px !important;border-radius:5px !important;
+}
+.econ-mov-scroll{overflow-x:auto;border:1px solid var(--border);border-radius:5px;-webkit-overflow-scrolling:touch}
+#tablaMovimientosPrincipal{
+  width:100%;border-collapse:collapse;table-layout:fixed;font-size:9.5px !important;min-width:850px;
+}
+#tablaMovimientosPrincipal thead th{
+  padding:2px 5px !important;height:20px !important;font-size:8px !important;line-height:1 !important;
+  letter-spacing:.25px !important;color:var(--text-dim);background:var(--surface2);
+  white-space:nowrap;border-bottom:1px solid var(--border);
+}
+#tablaMovimientosPrincipal tbody tr{height:25px !important}
+#tablaMovimientosPrincipal tbody td{
+  padding:1px 5px !important;height:25px !important;min-height:25px !important;line-height:1.05 !important;
+  font-size:9.5px !important;border-bottom:1px solid var(--border);vertical-align:middle !important;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+#tablaMovimientosPrincipal tbody tr:last-child td{border-bottom:none}
+#tablaMovimientosPrincipal tbody tr:hover td{background:var(--surface2)}
+#tablaMovimientosPrincipal th:nth-child(1),#tablaMovimientosPrincipal td:nth-child(1){width:72px}
+#tablaMovimientosPrincipal th:nth-child(2),#tablaMovimientosPrincipal td:nth-child(2){width:58px;text-align:center}
+#tablaMovimientosPrincipal th:nth-child(3),#tablaMovimientosPrincipal td:nth-child(3){width:58px;text-align:center}
+#tablaMovimientosPrincipal th:nth-child(4),#tablaMovimientosPrincipal td:nth-child(4){width:82px}
+#tablaMovimientosPrincipal th:nth-child(5),#tablaMovimientosPrincipal td:nth-child(5){width:180px}
+#tablaMovimientosPrincipal th:nth-child(6),#tablaMovimientosPrincipal td:nth-child(6){width:145px}
+#tablaMovimientosPrincipal th:nth-child(7),#tablaMovimientosPrincipal td:nth-child(7){width:140px}
+#tablaMovimientosPrincipal th:nth-child(8),#tablaMovimientosPrincipal td:nth-child(8){width:88px;text-align:right}
+#tablaMovimientosPrincipal th:nth-child(9),#tablaMovimientosPrincipal td:nth-child(9){width:34px;text-align:center}
+.econ-mov-mini{
+  display:inline-flex;align-items:center;justify-content:center;height:16px;min-height:16px;padding:0 4px;
+  border-radius:3px;font-size:7.5px;line-height:1;font-weight:900;letter-spacing:.15px;
+  border:1px solid transparent;white-space:nowrap;
+}
+.econ-mov-mini.ingreso{color:#15803d;background:rgba(22,163,74,.08);border-color:rgba(22,163,74,.20)}
+.econ-mov-mini.gasto{color:#b91c1c;background:rgba(220,38,38,.07);border-color:rgba(220,38,38,.18)}
+.econ-mov-mini.actual{color:#334155;background:var(--surface2);border-color:var(--border)}
+.econ-mov-mini.previsto{color:#b45309;background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.20)}
+[data-theme="dark"] .econ-mov-mini.ingreso{color:#4ade80}
+[data-theme="dark"] .econ-mov-mini.gasto{color:#f87171}
+[data-theme="dark"] .econ-mov-mini.actual{color:#cbd5e1}
+[data-theme="dark"] .econ-mov-mini.previsto{color:#fbbf24}
+.econ-mov-detail{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700}
+.econ-mov-method,.econ-mov-rec{
+  display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text-muted);font-size:9px;
+}
+.econ-mov-amount{font-size:10px;font-weight:900;font-variant-numeric:tabular-nums}
+.econ-mov-edit{
+  width:20px !important;min-width:20px !important;height:20px !important;min-height:20px !important;padding:0 !important;
+  display:inline-flex !important;align-items:center;justify-content:center;border-radius:4px !important;font-size:9px !important;
+}
+.econ-mov-pagination{
+  display:flex;justify-content:flex-end;align-items:center;gap:5px;margin:4px 0 0 0;padding:0;min-height:22px;
+}
+#econMovPageInfo{margin-right:auto;font-size:8.5px !important;color:var(--text-dim) !important}
+.econ-mov-page-btn{
+  width:24px !important;min-width:24px !important;height:22px !important;min-height:22px !important;padding:0 !important;
+  display:inline-flex !important;align-items:center;justify-content:center;border-radius:4px !important;
+  font-size:13px !important;font-weight:900 !important;
+}
+.player-econ-summary{
+  border:1px solid var(--border);background:var(--surface2);border-radius:7px;padding:6px 8px;margin-bottom:9px;
+}
+.player-econ-summary-row{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+
+@media(max-width:760px){
+  #econMovimientosMainCard{padding:6px !important}
+  .econ-mov-main-sub{display:none}
+  .econ-mov-filters{overflow-x:auto;padding-bottom:2px}
+  #econMovSearch{min-width:155px;width:155px}
+  #econMovFilterJugador{min-width:125px;width:125px}
+  #econMovFilterTipo{min-width:82px;width:82px}
+  #econMovFilterSituacion{min-width:92px;width:92px}
+  .econ-mov-filter-actions{margin-left:0;flex:0 0 auto}
+  #tablaMovimientosPrincipal{min-width:800px}
+  #tablaMovimientosPrincipal tbody tr,#tablaMovimientosPrincipal tbody td{
+    height:24px !important;min-height:24px !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -3164,62 +3275,92 @@
 
 <!-- MODAL MOVIMIENTO ECONOMIA (INGRESO / GASTO) -->
 <div class="modal-overlay" id="modalMovimiento">
-  <div class="modal" style="max-width:550px">
+  <div class="modal" style="max-width:700px">
     <div class="modal-header">
-      <div class="modal-title" id="modalMovimientoTitle">💰 Registrar Movimiento</div>
+      <div class="modal-title" id="modalMovimientoTitle">💶 Añadir Movimiento</div>
       <button class="modal-close" onclick="closeModal('modalMovimiento')">&#10005;</button>
     </div>
     <form id="formMovimiento" onsubmit="event.preventDefault();saveMovimientoSubmit();">
       <input type="hidden" id="movId" value="" />
+
       <div class="form-row mb-12">
         <div class="form-group">
-          <label class="form-label">Tipo de Movimiento *</label>
+          <label class="form-label">1. Ingreso o gasto *</label>
           <select class="form-control" id="movTipo" onchange="updateMovCategorias()">
             <option value="Ingreso">🟢 Ingreso</option>
-            <option value="Gasto" selected>🔴 Gasto</option>
+            <option value="Gasto">🔴 Gasto</option>
           </select>
         </div>
         <div class="form-group">
-          <label class="form-label">Categoría *</label>
-          <select class="form-control" id="movCategoria"></select>
+          <label class="form-label">2. Actual o previsto *</label>
+          <select class="form-control" id="movSituacion">
+            <option value="Actual">Actual</option>
+            <option value="Previsto">Previsto</option>
+          </select>
         </div>
       </div>
-      <div class="form-group mb-12">
-        <label class="form-label">Concepto / Descripción *</label>
-        <input class="form-control" id="movConcepto" required placeholder="Ej. Arbitraje partido J3, Balones Nike..." />
-      </div>
+
       <div class="form-row mb-12">
         <div class="form-group">
-          <label class="form-label">Importe (€) *</label>
-          <input type="number" step="0.01" min="0" class="form-control" id="movImporte" required placeholder="0.00" />
+          <label class="form-label">3. Tipo *</label>
+          <select class="form-control" id="movCategoria" onchange="updateMovFormVisibility()"></select>
+        </div>
+        <div class="form-group" id="movCategoriaDetalleWrap" style="display:none">
+          <label class="form-label">Especificar "Otro" *</label>
+          <input class="form-control" id="movCategoriaDetalle" placeholder="Indica qué es" />
+        </div>
+      </div>
+
+      <div class="form-group mb-12" id="movJugadorWrap" style="display:none">
+        <label class="form-label">4. Jugador de la plantilla *</label>
+        <select class="form-control" id="movJugadorId"></select>
+      </div>
+
+      <div class="form-row mb-12">
+        <div class="form-group">
+          <label class="form-label">5. Método de pago</label>
+          <select class="form-control" id="movMetodoPago" onchange="updateMovFormVisibility()">
+            <option value="">-- Seleccionar --</option>
+            <option value="Bizum">Bizum</option>
+            <option value="Efectivo">Efectivo</option>
+            <option value="Transferencia a cuenta del club">Transferencia a cuenta del club</option>
+            <option value="Otro">Otro</option>
+          </select>
+        </div>
+        <div class="form-group" id="movMetodoDetalleWrap" style="display:none">
+          <label class="form-label">Especificar método</label>
+          <input class="form-control" id="movMetodoPagoDetalle" placeholder="Otro método" />
+        </div>
+      </div>
+
+      <div class="form-row mb-12">
+        <div class="form-group">
+          <label class="form-label">6. Receptor del dinero</label>
+          <input class="form-control" id="movReceptor" placeholder="Persona, club o entidad" />
         </div>
         <div class="form-group">
-          <label class="form-label">Fecha *</label>
+          <label class="form-label">7. Importe (€) *</label>
+          <input type="number" step="0.01" min="0.01" class="form-control" id="movImporte" required placeholder="0,00" />
+        </div>
+      </div>
+
+      <div class="form-row mb-12">
+        <div class="form-group">
+          <label class="form-label">8. Fecha *</label>
           <input class="form-control" id="movFecha" required placeholder="DD/MM/AAAA" />
         </div>
       </div>
-      <div class="form-row mb-12">
-        <div class="form-group">
-          <label class="form-label">Pagador / Beneficiario</label>
-          <input class="form-control" id="movTercero" placeholder="Persona, empresa o entidad" />
-        </div>
-        <div class="form-group">
-          <label class="form-label">Estado</label>
-          <select class="form-control" id="movEstado">
-            <option value="Pagado">Pagado / Cobrado</option>
-            <option value="Pendiente">Pendiente</option>
-          </select>
-        </div>
-      </div>
+
       <div class="form-group mb-16">
-        <label class="form-label">Notas / Observaciones</label>
-        <input class="form-control" id="movNotas" placeholder="Nº Factura, método de pago, etc." />
+        <label class="form-label">9. Otra información</label>
+        <textarea class="form-control" id="movNotas" rows="3" placeholder="Observaciones, justificante, patrocinador, detalle del gasto..."></textarea>
       </div>
-      <div style="display:flex;justify-content:space-between;gap:8px">
+
+      <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap">
         <button type="button" class="btn btn-danger btn-sm" id="btnDeleteMov" style="display:none" onclick="deleteCurrentMovimiento()">🗑️ Eliminar</button>
         <div style="display:flex;gap:8px;margin-left:auto">
           <button type="button" class="btn btn-ghost btn-sm" onclick="closeModal('modalMovimiento')">Cancelar</button>
-          <button type="submit" class="btn btn-primary btn-sm">💾 Guardar Movimiento</button>
+          <button type="submit" class="btn btn-primary btn-sm">💾 Guardar</button>
         </div>
       </div>
     </form>
@@ -3241,18 +3382,18 @@
       </div>
       <div class="form-row mb-12">
         <div class="form-group">
-          <label class="form-label">Cuota Fijada (€) *</label>
-          <input type="number" min="0" step="1" class="form-control" id="cuotaImporteFijado" required onchange="autoCalcEstadoCuota()" />
+          <label class="form-label">Cuota / ficha fijada (€) *</label>
+          <input type="number" min="0" step="1" class="form-control" id="cuotaImporteFijado" required />
         </div>
         <div class="form-group">
-          <label class="form-label">Importe Pagado (€) *</label>
-          <input type="number" min="0" step="1" class="form-control" id="cuotaImportePagado" required onchange="autoCalcEstadoCuota()" />
+          <label class="form-label">Importe abonado</label>
+          <input type="number" class="form-control" id="cuotaImportePagado" disabled />
         </div>
       </div>
       <div class="form-row mb-12">
         <div class="form-group">
-          <label class="form-label">Estado de Pago</label>
-          <select class="form-control" id="cuotaEstado">
+          <label class="form-label">Estado calculado</label>
+          <select class="form-control" id="cuotaEstado" disabled>
             <option value="Pagado">🟢 Pagado Completo</option>
             <option value="Parcial">🟡 Pago Parcial</option>
             <option value="Pendiente">🔴 Pendiente</option>
@@ -3260,20 +3401,18 @@
           </select>
         </div>
         <div class="form-group">
-          <label class="form-label">Método de Pago</label>
-          <select class="form-control" id="cuotaMetodo">
-            <option value="Bizum">Bizum</option>
-            <option value="Transferencia">Transferencia</option>
-            <option value="Efectivo">Efectivo</option>
-            <option value="Otro">Otro</option>
-          </select>
+          <label class="form-label">Último método</label>
+          <input class="form-control" id="cuotaMetodo" disabled />
         </div>
       </div>
       <div class="form-row mb-12">
         <div class="form-group">
-          <label class="form-label">Fecha del Último Pago</label>
-          <input class="form-control" id="cuotaFechaPago" placeholder="DD/MM/AAAA" />
+          <label class="form-label">Fecha del último pago</label>
+          <input class="form-control" id="cuotaFechaPago" disabled />
         </div>
+      </div>
+      <div style="font-size:10.5px;color:var(--text-muted);margin:-4px 0 12px;line-height:1.4">
+        El importe abonado y el estado se calculan desde <strong>Movimientos → Ingreso → Ficha</strong>.
       </div>
       <div class="form-group mb-16">
         <label class="form-label">Notas / Observaciones</label>
@@ -4042,7 +4181,7 @@
           <form id="formEconLogin" onsubmit="event.preventDefault();loginEconomia();">
             <div class="form-group text-left mb-12">
               <label class="form-label">Usuario</label>
-              <input class="form-control" id="econUserLogin" value="economia" placeholder="Usuario" required autocomplete="username" />
+              <input class="form-control" id="econUserLogin" value="Administrador" placeholder="Usuario" required autocomplete="username" />
             </div>
             <div class="form-group text-left mb-16">
               <label class="form-label">Contraseña</label>
@@ -4064,7 +4203,6 @@
             <div class="page-subtitle">Xuventude Dorneda &middot; Temporada 2026/27</div>
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
-            <button class="btn btn-primary btn-sm" onclick="openModalMovimiento(null)">+ Añadir Movimiento</button>
             <button class="btn btn-ghost btn-sm" onclick="openModalCambiarPassword()">🔑 Cambiar Contraseña</button>
             <button class="btn btn-danger btn-sm" onclick="logoutEconomia()">🔒 Salir</button>
           </div>
@@ -4081,13 +4219,70 @@
           <div class="tab" data-tab="hoja" onclick="showEconTab('hoja', this)">📄 Hoja Oficial (Excel)</div>
         </div>
 
-        <!-- TAB 1: CUOTAS PLANTILLA -->
+        <!-- TAB 1: MOVIMIENTOS + SEGUIMIENTO PLANTILLA -->
         <div id="econTabCuotas">
+
+          <!-- PASO 14B · MOVIMIENTOS ULTRACOMPACTOS -->
+          <div class="card mb-16" id="econMovimientosMainCard">
+            <div class="econ-mov-main-head">
+              <div class="econ-mov-main-title">
+                <div class="card-title">💶 Movimientos</div>
+                <span class="econ-mov-main-sub">10 por página · pulsa ✎ para editar</span>
+              </div>
+              <button type="button" class="btn btn-primary econ-mov-add-btn" onclick="openModalMovimiento(null)">+ AÑADIR</button>
+            </div>
+
+            <div class="econ-mov-filters">
+              <input id="econMovSearch" class="form-control" placeholder="🔎 Buscar..." title="Jugador, receptor, tipo, notas..." onkeydown="if(event.key==='Enter'){event.preventDefault();applyEconMovFilters();}" />
+              <select id="econMovFilterJugador" class="form-control" title="Filtrar por jugador" onchange="applyEconMovFilters()"></select>
+              <select id="econMovFilterTipo" class="form-control" title="Ingreso / Gasto" onchange="applyEconMovFilters()">
+                <option value="">Todos</option>
+                <option value="Ingreso">Ingreso</option>
+                <option value="Gasto">Gasto</option>
+              </select>
+              <select id="econMovFilterSituacion" class="form-control" title="Actual / Previsto" onchange="applyEconMovFilters()">
+                <option value="">Actual+Prev.</option>
+                <option value="Actual">Actual</option>
+                <option value="Previsto">Previsto</option>
+              </select>
+              <div class="econ-mov-filter-actions">
+                <button type="button" class="btn btn-ghost" onclick="applyEconMovFilters()" title="Buscar">🔎</button>
+                <button type="button" class="btn btn-ghost" onclick="clearEconMovFilters()" title="Limpiar filtros">×</button>
+              </div>
+            </div>
+
+            <div class="econ-mov-scroll">
+              <table id="tablaMovimientosPrincipal">
+                <thead>
+                  <tr>
+                    <th>Fecha</th>
+                    <th>Mov.</th>
+                    <th>Estado</th>
+                    <th>Tipo</th>
+                    <th>Jugador / Detalle</th>
+                    <th>Método</th>
+                    <th>Receptor</th>
+                    <th>Importe</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="econMovMainBody"></tbody>
+              </table>
+            </div>
+
+            <div class="econ-mov-pagination">
+              <div id="econMovPageInfo"></div>
+              <button type="button" id="econMovPrevBtn" class="btn btn-ghost econ-mov-page-btn" onclick="changeEconMovPage(-1)" title="Página anterior">‹</button>
+              <button type="button" id="econMovNextBtn" class="btn btn-ghost econ-mov-page-btn" onclick="changeEconMovPage(1)" title="Página siguiente">›</button>
+            </div>
+          </div>
+
+          <!-- SEGUIMIENTO DE JUGADORES -->
           <div class="card mb-16">
             <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:12px">
               <div>
-                <div class="card-title" style="margin-bottom:2px">💳 Seguimiento de Cuotas de Jugadores</div>
-                <div style="font-size:11px;color:var(--text-muted)">Cuota de temporada: 120 € / jugador con ficha</div>
+                <div class="card-title" style="margin-bottom:2px">👥 Seguimiento de jugadores</div>
+                <div style="font-size:11px;color:var(--text-muted)">Estado de la ficha calculado automáticamente desde los movimientos registrados</div>
               </div>
               <div class="tabs" style="margin-bottom:0;gap:4px">
                 <div class="tab active" onclick="filterCuotas('todos', this)">Todos (<span id="cntCuotasTodos">0</span>)</div>
@@ -7484,7 +7679,7 @@ const DEFAULT_DATA={
 ],
   ligaGoleadores: [],
   economia: {
-    auth: { usuario: 'economia', password: '1234' },
+    auth: { usuario: 'Administrador', password: '1234' },
     presupuestoEstimado: 3500,
     cuotaDefecto: 120,
     saldoAnterior: 430.40,
@@ -8758,6 +8953,9 @@ let currentEconTab = 'cuotas';
 let cuotasFilter = 'todos';
 let diarioFilterTipo = 'todos';
 let diarioFilterCat = 'todas';
+let econMovPage = 1;
+const ECON_MOV_PAGE_SIZE = 10;
+let econMovFilters = { texto:'', jugadorId:'', tipo:'', situacion:'' };
 let clasifTabActive = 'liga';
 let currentJornadaNav = 1;
 let currentCopaRondaNav = 1;
@@ -10223,6 +10421,7 @@ function openJugadorModal(id, initialTab = 'datos', initialFilter = 'todos'){
     
     <!-- PESTAÑA 1: DATOS Y FORMULARIO -->
     <div id="playerTabDatos" style="display:${currentModalTab==='datos'?'block':'none'}">
+      ${j && !isSt ? renderPlayerEconomiaResumen(j) : ''}
       <form id="formJugador">
         <!-- FOTO -->
         <div class="form-group mb-16">
@@ -16714,6 +16913,256 @@ function updateEconLockUI(){
   if(dashView) dashView.style.display = isEconAuth ? 'block' : 'none';
 }
 
+
+// ==========================================
+// PASO 14A/14B · ECONOMÍA V2
+// ==========================================
+const ECON_INGRESO_TIPOS = ['Ficha', 'Patrocinador', 'Otro'];
+const ECON_GASTO_TIPOS = ['Fichas', 'Cuota Club', 'Árbitros', 'Otro'];
+
+function econNorm(v){
+  return String(v || '').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+}
+
+function econMovSituacion(m){
+  if(m && (m.situacion === 'Actual' || m.situacion === 'Previsto')) return m.situacion;
+  return m && m.estado === 'Pendiente' ? 'Previsto' : 'Actual';
+}
+
+function econIsFichaMovement(m){
+  if(!m || m.tipo !== 'Ingreso') return false;
+  const c = econNorm(m.categoria);
+  return c === 'ficha' || c.indexOf('cuotas jugador') !== -1;
+}
+
+function econToday(){
+  const d = new Date();
+  return String(d.getDate()).padStart(2,'0') + '/' + String(d.getMonth()+1).padStart(2,'0') + '/' + d.getFullYear();
+}
+
+function econDateValue(v){
+  const s = String(v || '').trim();
+  let m = s.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+  if(m) return Date.UTC(+m[3], +m[2]-1, +m[1]);
+  m = s.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if(m) return Date.UTC(+m[1], +m[2]-1, +m[3]);
+  const t = Date.parse(s);
+  return Number.isFinite(t) ? t : 0;
+}
+
+function econMapMetodo(v){
+  const n = econNorm(v);
+  if(!n) return '';
+  if(n.indexOf('bizum') !== -1) return 'Bizum';
+  if(n.indexOf('efect') !== -1 || n.indexOf('en mano') !== -1) return 'Efectivo';
+  if(n.indexOf('transfer') !== -1) return 'Transferencia a cuenta del club';
+  return 'Otro';
+}
+
+function econMapLegacyCategory(m){
+  const old = String(m.categoria || '').trim();
+  const n = econNorm(old);
+  if(m.tipo === 'Ingreso'){
+    if(n === 'ficha' || n.indexOf('cuotas jugador') !== -1) return {categoria:'Ficha', detalle:''};
+    if(n.indexOf('patrocin') !== -1) return {categoria:'Patrocinador', detalle:''};
+    if(n === 'otro') return {categoria:'Otro', detalle:m.categoriaDetalle || ''};
+    return {categoria:'Otro', detalle:m.categoriaDetalle || old};
+  }
+  if(n === 'fichas' || n.indexOf('fichas y mutualidad') !== -1 || n.indexOf('mutualidad') !== -1) return {categoria:'Fichas', detalle:''};
+  if(n.indexOf('cuota club') !== -1 || n.indexOf('inscripcion') !== -1) return {categoria:'Cuota Club', detalle:''};
+  if(n.indexOf('arbitra') !== -1 || n.indexOf('arbitr') !== -1) return {categoria:'Árbitros', detalle:''};
+  if(n === 'otro') return {categoria:'Otro', detalle:m.categoriaDetalle || ''};
+  return {categoria:'Otro', detalle:m.categoriaDetalle || old};
+}
+
+function ensureEconomiaV2(){
+  if(!db.economia) db.economia = {};
+  if(!db.economia.auth) db.economia.auth = {};
+  db.economia.auth.usuario = 'Administrador';
+  if(!db.economia.auth.password) db.economia.auth.password = '1234';
+  if(!Array.isArray(db.economia.movimientos)) db.economia.movimientos = [];
+  if(!Array.isArray(db.economia.cuotas)) db.economia.cuotas = [];
+
+  let modified = false;
+
+  // Normaliza movimientos antiguos sin perder la descripción histórica.
+  db.economia.movimientos.forEach(function(m){
+    if(!m) return;
+    if(!m.situacion){
+      m.situacion = m.estado === 'Pendiente' ? 'Previsto' : 'Actual';
+      modified = true;
+    }
+    if(!m._economiaV2){
+      const mapped = econMapLegacyCategory(m);
+      if(mapped.categoria !== m.categoria){
+        if(!m.categoriaOriginal) m.categoriaOriginal = m.categoria || '';
+        m.categoria = mapped.categoria;
+      }
+      if(!m.categoriaDetalle && mapped.detalle) m.categoriaDetalle = mapped.detalle;
+      m.receptor = m.receptor || m.pagadorBeneficiario || '';
+      m.metodoPago = m.metodoPago || '';
+      m.metodoPagoDetalle = m.metodoPagoDetalle || '';
+      m.jugadorId = m.jugadorId || null;
+      m.jugadorNombre = m.jugadorNombre || '';
+      m._economiaV2 = true;
+      modified = true;
+    }
+    m.estado = m.situacion === 'Previsto' ? 'Pendiente' : 'Pagado';
+    m.pagadorBeneficiario = m.receptor || m.pagadorBeneficiario || '';
+  });
+
+  // Migración única: los pagos históricos del seguimiento de cuotas pasan a ser
+  // movimientos reales de tipo Ficha. Así Movimientos se convierte en la fuente
+  // de verdad de lo abonado sin perder lo que ya estaba registrado.
+  if(!db.economia.movimientosV2Migrados){
+    let nextId = db.economia.movimientos.reduce(function(mx,m){ return Math.max(mx, Number(m && m.id) || 0); }, 0) + 1;
+
+    db.economia.cuotas.forEach(function(c){
+      const paid = parseFloat(c && c.pagado) || 0;
+      if(!c || paid <= 0) return;
+
+      const exists = db.economia.movimientos.some(function(m){
+        return econIsFichaMovement(m) &&
+          Number(m.jugadorId) === Number(c.jugadorId) &&
+          econMovSituacion(m) === 'Actual';
+      });
+      if(exists) return;
+
+      const metodo = econMapMetodo(c.metodo || '');
+      db.economia.movimientos.push({
+        id: nextId++,
+        tipo: 'Ingreso',
+        situacion: 'Actual',
+        categoria: 'Ficha',
+        categoriaDetalle: '',
+        jugadorId: c.jugadorId,
+        jugadorNombre: c.nombre || '',
+        metodoPago: metodo,
+        metodoPagoDetalle: metodo === 'Otro' ? (c.metodo || '') : '',
+        receptor: '',
+        importe: paid,
+        fecha: c.fechaPago || '',
+        notas: c.notas || '',
+        concepto: 'Ficha ' + (c.nombre || ''),
+        pagadorBeneficiario: '',
+        estado: 'Pagado',
+        origen: 'cuota-migrada-v2',
+        _economiaV2: true
+      });
+      modified = true;
+    });
+
+    db.economia.movimientosV2Migrados = true;
+    modified = true;
+  }
+
+  syncCuotasDesdeMovimientos(false);
+  return modified;
+}
+
+function syncCuotasDesdeMovimientos(createMissing){
+  if(!db.economia) return;
+  if(!Array.isArray(db.economia.cuotas)) db.economia.cuotas = [];
+  const cuotas = db.economia.cuotas;
+  const jugadores = (db.jugadores || []).filter(function(j){ return j && !isStaff(j) && j.estado !== 'Vacante'; });
+
+  if(createMissing !== false){
+    jugadores.forEach(function(j){
+      let c = cuotas.find(function(x){ return Number(x.jugadorId) === Number(j.id); });
+      if(!c){
+        c = {
+          jugadorId:j.id, nombre:j.nombre, dorsal:j.dorsal || null,
+          nombreCompleto:j.nombreCompleto || '', estadoFicha:j.estado || '',
+          cuota:(db.economia.cuotaDefecto || 120), pagado:0,
+          estado:'Pendiente', metodo:'', fechaPago:'', notas:''
+        };
+        cuotas.push(c);
+      }
+    });
+  }
+
+  cuotas.forEach(function(c){
+    const j = jugadores.find(function(x){ return Number(x.id) === Number(c.jugadorId); });
+    if(j){
+      c.nombre = j.nombre;
+      c.dorsal = j.dorsal || null;
+      c.nombreCompleto = j.nombreCompleto || '';
+      c.estadoFicha = j.estado || c.estadoFicha || '';
+    }
+
+    const actuals = (db.economia.movimientos || []).filter(function(m){
+      return econIsFichaMovement(m) &&
+        econMovSituacion(m) === 'Actual' &&
+        Number(m.jugadorId) === Number(c.jugadorId);
+    }).sort(function(a,b){
+      return (econDateValue(b.fecha) - econDateValue(a.fecha)) || ((Number(b.id)||0)-(Number(a.id)||0));
+    });
+
+    const paid = actuals.reduce(function(sum,m){ return sum + (parseFloat(m.importe)||0); }, 0);
+    const fixed = parseFloat(c.cuota) || 0;
+    c.pagado = Math.round(paid * 100) / 100;
+
+    if(fixed <= 0){
+      c.estado = 'Exento';
+    }else if(paid >= fixed){
+      c.estado = 'Pagado';
+    }else if(paid > 0){
+      c.estado = 'Parcial';
+    }else{
+      c.estado = 'Pendiente';
+    }
+
+    const last = actuals[0];
+    c.metodo = last ? ((last.metodoPago === 'Otro' ? last.metodoPagoDetalle : last.metodoPago) || '') : '';
+    c.fechaPago = last ? (last.fecha || '') : '';
+  });
+}
+
+function getJugadorCuotaResumen(jugadorId){
+  if(!db.economia) return null;
+  syncCuotasDesdeMovimientos(false);
+  const c = (db.economia.cuotas || []).find(function(x){ return Number(x.jugadorId) === Number(jugadorId); });
+  if(!c) return null;
+  const fixed = parseFloat(c.cuota) || 0;
+  const paid = parseFloat(c.pagado) || 0;
+  return {
+    cuota: fixed,
+    pagado: paid,
+    pendiente: Math.max(0, fixed - paid),
+    estado: c.estado || (paid > 0 ? 'Parcial' : 'Pendiente'),
+    fecha: c.fechaPago || '',
+    metodo: c.metodo || ''
+  };
+}
+window.getJugadorCuotaResumen = getJugadorCuotaResumen;
+
+function renderPlayerEconomiaResumen(j){
+  if(!isEconAuth || !j || isStaff(j)) return '';
+  const r = getJugadorCuotaResumen(j.id);
+  if(!r) return '';
+  let cls = 'pendiente-pago';
+  let label = 'Pendiente';
+  if(r.estado === 'Pagado'){ cls = 'pagado'; label = 'Pagado completo'; }
+  else if(r.estado === 'Parcial'){ cls = 'parcial'; label = 'Pago parcial'; }
+  else if(r.estado === 'Exento'){ cls = 'exento'; label = 'Exento'; }
+
+  return `
+    <div class="player-econ-summary">
+      <div class="player-econ-summary-row">
+        <div>
+          <div style="font-size:10px;font-weight:800;text-transform:uppercase;color:var(--text-muted);margin-bottom:3px">💶 Estado económico de la ficha</div>
+          <span class="badge ${cls}">${label}</span>
+        </div>
+        <div style="text-align:right;font-size:11px;color:var(--text-muted)">
+          <div><strong style="color:var(--text)">${formatMoney(r.pagado)}</strong> de ${formatMoney(r.cuota)}</div>
+          <div>Pendiente: <strong style="color:${r.pendiente>0?'#dc2626':'#16a34a'}">${formatMoney(r.pendiente)}</strong></div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+window.renderPlayerEconomiaResumen = renderPlayerEconomiaResumen;
+
 function loginEconomia(){
   const uInput = document.getElementById('econUserLogin');
   const pInput = document.getElementById('econPassLogin');
@@ -16721,7 +17170,7 @@ function loginEconomia(){
   const user = (uInput ? uInput.value : '').trim().toLowerCase();
   const pass = (pInput ? pInput.value : '').trim();
 
-  const expectedUser = ((db.economia && db.economia.auth && db.economia.auth.usuario) || 'economia').toLowerCase();
+  const expectedUser = 'administrador';
   const expectedPass = (db.economia && db.economia.auth && db.economia.auth.password) || '1234';
 
   if(user === expectedUser && pass === expectedPass){
@@ -16729,6 +17178,10 @@ function loginEconomia(){
     sessionStorage.setItem('dorneda_econ_auth', 'true');
     if(errEl) errEl.style.display = 'none';
     if(pInput) pInput.value = '';
+
+    const modified = ensureEconomiaV2();
+    if(modified) saveDB();
+
     updateEconLockUI();
     renderEconomia();
     toast('Acceso autorizado a Economía', 'success');
@@ -16785,7 +17238,8 @@ function saveCambiarPassword(){
   }
 
   if(!db.economia) db.economia = {};
-  if(!db.economia.auth) db.economia.auth = { usuario: 'economia' };
+  if(!db.economia.auth) db.economia.auth = {};
+  db.economia.auth.usuario = 'Administrador';
   db.economia.auth.password = nueVal;
   saveDB();
   closeModal('modalCambiarPassword');
@@ -16838,23 +17292,24 @@ function formatMoneyInt(val){
 }
 
 function calcEconStats(){
+  syncCuotasDesdeMovimientos(false);
   const cuotas = (db.economia && db.economia.cuotas) || [];
   const movs = (db.economia && db.economia.movimientos) || [];
 
   let cuotasRecaudadas = 0;
   let cuotasEsperadas = 0;
 
-  cuotas.forEach(c => {
+  cuotas.forEach(function(c){
     const fixed = parseFloat(c.cuota) || 0;
     const paid = parseFloat(c.pagado) || 0;
     cuotasRecaudadas += paid;
+
     const isKata = normalizeName(c.nombre) === 'kata' || c.jugadorId === 108;
-    if(c.estado !== 'Exento' && fixed > 0 && !isKata && (c.notas && c.notas.indexOf('FICHA') !== -1 || c.estadoFicha === 'Con ficha' || (c.nombre !== 'Ángel' && c.nombre !== 'Antony' && c.nombre !== 'Michi' && c.nombre !== 'Bolich'))){
+    const conFicha = c.estadoFicha === 'Con ficha' || (c.notas && c.notas.indexOf('FICHA') !== -1);
+    if(c.estado !== 'Exento' && fixed > 0 && !isKata && conFicha){
       cuotasEsperadas += fixed;
     }
   });
-
-  if(cuotasEsperadas === 0) cuotasEsperadas = 3240;
 
   const cuotasPendientes = Math.max(0, cuotasEsperadas - cuotasRecaudadas);
 
@@ -16864,25 +17319,32 @@ function calcEconStats(){
   let gastosRealizados = 0;
   let gastosPendientes = 0;
 
-  movs.forEach(m => {
+  movs.forEach(function(m){
     const imp = parseFloat(m.importe) || 0;
-    const isPagado = (m.estado || 'Pagado') === 'Pagado';
+    const situacion = econMovSituacion(m);
+
     if(m.tipo === 'Ingreso'){
-      const cat = (m.categoria || '').toLowerCase();
-      const conc = (m.concepto || '').toLowerCase();
-      if(cat.indexOf('cierre') !== -1 || cat.indexOf('remanente') !== -1 || conc.indexOf('cierre') !== -1 || conc.indexOf('remanente') !== -1){
-        remanenteAnterior += imp;
-      } else if(isPagado){
+      const cat = econNorm(m.categoria);
+      const det = econNorm(m.categoriaDetalle);
+      const conc = econNorm(m.concepto);
+      const isCierre = cat.indexOf('cierre') !== -1 || det.indexOf('cierre') !== -1 ||
+        cat.indexOf('remanente') !== -1 || det.indexOf('remanente') !== -1 ||
+        conc.indexOf('cierre') !== -1 || conc.indexOf('remanente') !== -1;
+
+      if(isCierre){
+        if(situacion === 'Actual') remanenteAnterior += imp;
+      }else if(econIsFichaMovement(m)){
+        // Las fichas ya están incluidas mediante cuotasRecaudadas / cuotasPendientes.
+        // Un movimiento previsto de ficha no se suma otra vez: la cuota objetivo ya
+        // representa el ingreso esperado del jugador.
+      }else if(situacion === 'Actual'){
         otrosIngresosRealizados += imp;
-      } else {
+      }else{
         otrosIngresosPendientes += imp;
       }
-    } else if(m.tipo === 'Gasto'){
-      if(isPagado){
-        gastosRealizados += imp;
-      } else {
-        gastosPendientes += imp;
-      }
+    }else if(m.tipo === 'Gasto'){
+      if(situacion === 'Actual') gastosRealizados += imp;
+      else gastosPendientes += imp;
     }
   });
 
@@ -16893,10 +17355,8 @@ function calcEconStats(){
 
   const balanceActual = ingresosRealizados - gastosRealizados;
   const saldoActual = remanenteAnterior + balanceActual;
-
   const balancePrevisto = ingresosTotalesPrevistos - gastosTotalesPrevistos;
   const saldoFinalPrevisto = remanenteAnterior + balancePrevisto;
-
   const pctCuotas = cuotasEsperadas > 0 ? Math.round((cuotasRecaudadas / cuotasEsperadas) * 100) : 0;
 
   return {
@@ -16912,6 +17372,8 @@ function calcEconStats(){
     gastosRealizados,
     gastosPendientes,
     gastosTotalesPrevistos,
+    totalIngresos: ingresosRealizados,
+    totalGastos: gastosRealizados,
     balanceActual,
     balancePrevisto,
     saldoActual,
@@ -16929,17 +17391,17 @@ function switchEconTab(tabName){
   }
 }
 
-function openModalNuevoMovimiento(tipo, estado = 'Pagado'){
+function openModalNuevoMovimiento(tipo, estado = 'Actual'){
   openModalMovimiento(null);
   const tipoEl = document.getElementById('movTipo');
-  const estEl = document.getElementById('movEstado');
-  if(tipo && tipoEl){
-    tipoEl.value = tipo;
-    updateMovCategorias();
+  const sitEl = document.getElementById('movSituacion');
+  if(tipo && tipoEl) tipoEl.value = tipo;
+  if(sitEl){
+    if(estado === 'Pagado') sitEl.value = 'Actual';
+    else if(estado === 'Pendiente') sitEl.value = 'Previsto';
+    else sitEl.value = estado === 'Previsto' ? 'Previsto' : 'Actual';
   }
-  if(estado && estEl){
-    estEl.value = estado;
-  }
+  updateMovCategorias();
 }
 
 function openModalRemanente(){
@@ -16991,7 +17453,7 @@ function renderEconStats(){
   const balPrevSign = st.balancePrevisto >= 0 ? '+' : '';
 
   // 1. GASTOS REALIZADOS (PAGADOS)
-  const gastosPagados = movs.filter(m => m.tipo === 'Gasto' && (m.estado || 'Pagado') === 'Pagado');
+  const gastosPagados = movs.filter(m => m.tipo === 'Gasto' && econMovSituacion(m) === 'Actual');
   let gastosPagadosHtml = '';
   if(gastosPagados.length === 0){
     gastosPagadosHtml = `
@@ -17039,7 +17501,7 @@ function renderEconStats(){
   }
 
   // 2. GASTOS PENDIENTES (PREVISIÓN EXCEL)
-  const gastosPendientes = movs.filter(m => m.tipo === 'Gasto' && m.estado === 'Pendiente');
+  const gastosPendientes = movs.filter(m => m.tipo === 'Gasto' && econMovSituacion(m) === 'Previsto');
   let gastosPendientesHtml = '';
   if(gastosPendientes.length === 0){
     gastosPendientesHtml = `
@@ -17080,7 +17542,7 @@ function renderEconStats(){
   }
 
   // 3. OTROS INGRESOS COBRADOS
-  const otrosIngresosPagados = movs.filter(m => m.tipo === 'Ingreso' && (m.estado || 'Pagado') === 'Pagado' && (m.categoria !== 'Cierre Temporada Anterior' && (m.concepto || '').toLowerCase().indexOf('cierre') === -1));
+  const otrosIngresosPagados = movs.filter(m => m.tipo === 'Ingreso' && econMovSituacion(m) === 'Actual' && !econIsFichaMovement(m) && econNorm(m.categoriaDetalle).indexOf('cierre') === -1 && econNorm(m.concepto).indexOf('cierre') === -1);
   let otrosIngresosHtml = '';
   otrosIngresosPagados.forEach(m => {
     const subParts = [];
@@ -17151,7 +17613,7 @@ function renderEconStats(){
   }
 
   // Otros ingresos pendientes (si hay movimientos de tipo Ingreso en estado Pendiente)
-  const otrosIngresosPendMovs = movs.filter(m => m.tipo === 'Ingreso' && m.estado === 'Pendiente');
+  const otrosIngresosPendMovs = movs.filter(m => m.tipo === 'Ingreso' && econMovSituacion(m) === 'Previsto' && !econIsFichaMovement(m));
   otrosIngresosPendMovs.forEach(m => {
     ingresosPendientesHtml += `
       <div class="econ-ledger-row" style="background:rgba(245,158,11,0.03)">
@@ -17366,7 +17828,145 @@ function filterCuotas(estado, el){
   renderEconCuotas();
 }
 
+
+function populateEconMovementPlayerFilter(){
+  const sel = document.getElementById('econMovFilterJugador');
+  if(!sel) return;
+  const current = econMovFilters.jugadorId || '';
+  const players = (db.jugadores || [])
+    .filter(function(j){ return j && !isStaff(j) && j.estado !== 'Vacante'; })
+    .sort(function(a,b){
+      if(a.dorsal && b.dorsal) return Number(a.dorsal)-Number(b.dorsal);
+      if(a.dorsal) return -1;
+      if(b.dorsal) return 1;
+      return String(a.nombre).localeCompare(String(b.nombre),'es',{sensitivity:'base'});
+    });
+  sel.innerHTML = '<option value="">Todos los jugadores</option>' +
+    players.map(function(j){
+      return `<option value="${j.id}">${j.dorsal ? '#'+j.dorsal+' · ' : ''}${j.nombre}</option>`;
+    }).join('');
+  sel.value = current;
+}
+
+function applyEconMovFilters(){
+  econMovFilters = {
+    texto: (document.getElementById('econMovSearch')?.value || '').trim(),
+    jugadorId: document.getElementById('econMovFilterJugador')?.value || '',
+    tipo: document.getElementById('econMovFilterTipo')?.value || '',
+    situacion: document.getElementById('econMovFilterSituacion')?.value || ''
+  };
+  econMovPage = 1;
+  renderEconMovimientosMain();
+}
+window.applyEconMovFilters = applyEconMovFilters;
+
+function clearEconMovFilters(){
+  econMovFilters = {texto:'',jugadorId:'',tipo:'',situacion:''};
+  econMovPage = 1;
+  const ids = ['econMovSearch','econMovFilterJugador','econMovFilterTipo','econMovFilterSituacion'];
+  ids.forEach(function(id){ const el=document.getElementById(id); if(el) el.value=''; });
+  renderEconMovimientosMain();
+}
+window.clearEconMovFilters = clearEconMovFilters;
+
+function changeEconMovPage(delta){
+  econMovPage = Math.max(1, econMovPage + Number(delta || 0));
+  renderEconMovimientosMain();
+}
+window.changeEconMovPage = changeEconMovPage;
+
+function econMovementLabel(m){
+  if(econIsFichaMovement(m)){
+    return m.jugadorNombre || ((db.jugadores || []).find(function(j){ return Number(j.id)===Number(m.jugadorId); }) || {}).nombre || 'Ficha';
+  }
+  if(m.categoria === 'Otro') return m.categoriaDetalle || m.concepto || 'Otro';
+  return m.categoria || m.concepto || '';
+}
+
+function renderEconMovimientosMain(){
+  const tbody = document.getElementById('econMovMainBody');
+  if(!tbody) return;
+
+  populateEconMovementPlayerFilter();
+
+  const search = econNorm(econMovFilters.texto);
+  let rows = ((db.economia && db.economia.movimientos) || []).filter(function(m){
+    if(!m) return false;
+    if(econMovFilters.tipo && m.tipo !== econMovFilters.tipo) return false;
+    if(econMovFilters.situacion && econMovSituacion(m) !== econMovFilters.situacion) return false;
+    if(econMovFilters.jugadorId && Number(m.jugadorId) !== Number(econMovFilters.jugadorId)) return false;
+
+    if(search){
+      const haystack = [
+        m.tipo, econMovSituacion(m), m.categoria, m.categoriaDetalle, m.concepto,
+        m.jugadorNombre, m.metodoPago, m.metodoPagoDetalle, m.receptor,
+        m.pagadorBeneficiario, m.fecha, m.notas
+      ].map(econNorm).join(' ');
+      if(haystack.indexOf(search) === -1) return false;
+    }
+    return true;
+  });
+
+  rows.sort(function(a,b){
+    return (econDateValue(b.fecha)-econDateValue(a.fecha)) || ((Number(b.id)||0)-(Number(a.id)||0));
+  });
+
+  const total = rows.length;
+  const pages = Math.max(1, Math.ceil(total / ECON_MOV_PAGE_SIZE));
+  if(econMovPage > pages) econMovPage = pages;
+  const start = (econMovPage - 1) * ECON_MOV_PAGE_SIZE;
+  const pageRows = rows.slice(start, start + ECON_MOV_PAGE_SIZE);
+
+  if(!pageRows.length){
+    tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;height:28px !important;padding:2px 6px !important;color:var(--text-muted);font-size:9px">Sin movimientos.</td></tr>';
+  }else{
+    tbody.innerHTML = pageRows.map(function(m){
+      const ingreso = m.tipo === 'Ingreso';
+      const sit = econMovSituacion(m);
+      const method = m.metodoPago === 'Otro' ? (m.metodoPagoDetalle || 'Otro') : (m.metodoPago || '—');
+      const detalle = econMovementLabel(m) || '—';
+      const receptor = m.receptor || m.pagadorBeneficiario || '—';
+      const sign = ingreso ? '+' : '−';
+      const color = ingreso ? '#16a34a' : '#dc2626';
+      const fullTitle = [
+        m.concepto || '',
+        m.notas || '',
+        receptor !== '—' ? 'Receptor: ' + receptor : '',
+        method !== '—' ? 'Método: ' + method : ''
+      ].filter(Boolean).join(' · ').replace(/"/g,'&quot;');
+
+      return `
+        <tr title="${fullTitle}">
+          <td>${m.fecha || '—'}</td>
+          <td><span class="econ-mov-mini ${ingreso?'ingreso':'gasto'}">${ingreso?'+ ING':'− GAS'}</span></td>
+          <td><span class="econ-mov-mini ${sit==='Actual'?'actual':'previsto'}">${sit==='Actual'?'REAL':'PREV'}</span></td>
+          <td style="font-weight:700" title="${String(m.categoria || '').replace(/"/g,'&quot;')}">${m.categoria || '—'}</td>
+          <td><span class="econ-mov-detail" title="${String(detalle).replace(/"/g,'&quot;')}">${detalle}</span></td>
+          <td><span class="econ-mov-method" title="${String(method).replace(/"/g,'&quot;')}">${method}</span></td>
+          <td><span class="econ-mov-rec" title="${String(receptor).replace(/"/g,'&quot;')}">${receptor}</span></td>
+          <td><span class="econ-mov-amount" style="color:${color}">${sign}${formatMoney(m.importe)}</span></td>
+          <td><button type="button" class="btn btn-ghost econ-mov-edit" onclick="openModalMovimiento(${m.id})" title="Editar movimiento">✎</button></td>
+        </tr>
+      `;
+    }).join('');
+  }
+
+  const info = document.getElementById('econMovPageInfo');
+  if(info){
+    const from = total ? start + 1 : 0;
+    const to = Math.min(start + ECON_MOV_PAGE_SIZE, total);
+    info.textContent = total ? `${from}–${to} / ${total} · ${econMovPage}/${pages}` : '0 movimientos';
+  }
+
+  const prev = document.getElementById('econMovPrevBtn');
+  const next = document.getElementById('econMovNextBtn');
+  if(prev) prev.disabled = econMovPage <= 1;
+  if(next) next.disabled = econMovPage >= pages;
+}
+window.renderEconMovimientosMain = renderEconMovimientosMain;
+
 function renderEconCuotas(){
+  syncCuotasDesdeMovimientos();
   const tbody = document.getElementById('tablaCuotasBody');
   if(!tbody) return;
   const cuotas = (db.economia && db.economia.cuotas) || [];
@@ -17385,26 +17985,27 @@ function renderEconCuotas(){
   if(elPar) elPar.textContent = cntParcial;
   if(elPen) elPen.textContent = cntPendiente;
 
-  const filtered = cuotas.filter(c => {
+  const filtered = cuotas.filter(function(c){
     if(cuotasFilter === 'todos') return true;
     return c.estado === cuotasFilter;
   });
 
   if(filtered.length === 0){
-    tbody.innerHTML = `<tr><td colspan="10" style="text-align:center;padding:24px;color:var(--text-muted)">No hay registros de cuotas en esta categoría.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="10" style="text-align:center;padding:24px;color:var(--text-muted)">No hay jugadores en esta categoría.</td></tr>`;
     return;
   }
 
-  tbody.innerHTML = filtered.map(c => {
+  tbody.innerHTML = filtered.map(function(c){
     const fixed = parseFloat(c.cuota) || 0;
     const paid = parseFloat(c.pagado) || 0;
     const pend = Math.max(0, fixed - paid);
     const dTag = c.dorsal && c.dorsal !== 999 ? '#' + c.dorsal : '--';
 
     let bClass = 'pendiente-pago';
-    if(c.estado === 'Pagado') bClass = 'pagado';
-    else if(c.estado === 'Parcial') bClass = 'parcial';
-    else if(c.estado === 'Exento') bClass = 'exento';
+    let estadoLabel = 'Pendiente';
+    if(c.estado === 'Pagado'){ bClass = 'pagado'; estadoLabel = 'Pagado completo'; }
+    else if(c.estado === 'Parcial'){ bClass = 'parcial'; estadoLabel = 'Parcial'; }
+    else if(c.estado === 'Exento'){ bClass = 'exento'; estadoLabel = 'Exento'; }
 
     return `
       <tr>
@@ -17413,15 +18014,15 @@ function renderEconCuotas(){
           <div class="td-bold" style="font-size:13.5px">${c.nombre || ''}</div>
           ${c.nombreCompleto ? `<div style="font-size:11px;color:var(--text-muted);margin-top:2px">${c.nombreCompleto}</div>` : ''}
         </td>
-        <td style="text-align:center"><span class="badge" style="background:var(--surface3);font-size:11px;white-space:nowrap;display:inline-block">${c.estadoFicha || 'Con ficha'}</span></td>
+        <td style="text-align:center"><span class="badge" style="background:var(--surface3);font-size:11px;white-space:nowrap;display:inline-block">${c.estadoFicha || '--'}</span></td>
         <td style="font-weight:700;text-align:right;white-space:nowrap">${formatMoney(fixed)}</td>
         <td style="color:#16a34a;font-weight:700;text-align:right;white-space:nowrap">${formatMoney(paid)}</td>
         <td style="color:${pend > 0 ? '#dc2626' : 'var(--text-muted)'};font-weight:700;text-align:right;white-space:nowrap">${formatMoney(pend)}</td>
-        <td style="text-align:center"><span class="badge ${bClass}" style="white-space:nowrap">${c.estado || 'Pendiente'}</span></td>
+        <td style="text-align:center"><span class="badge ${bClass}" style="white-space:nowrap">${estadoLabel}</span></td>
         <td style="font-size:11.5px;color:var(--text-muted);text-align:center;white-space:nowrap">${c.fechaPago || '--'}</td>
         <td style="font-size:11.5px;color:var(--text-muted)">${c.notas || '--'}</td>
         <td style="text-align:right;white-space:nowrap">
-          <button type="button" class="btn btn-ghost btn-xs" onclick="openModalCuotaJugador(${c.jugadorId})" title="Gestionar pago">
+          <button type="button" class="btn btn-ghost btn-xs" onclick="openModalCuotaJugador(${c.jugadorId})" title="Editar cuota objetivo">
             ✏️ Editar
           </button>
         </td>
@@ -17431,8 +18032,9 @@ function renderEconCuotas(){
 }
 
 function openModalCuotaJugador(jugadorId){
+  syncCuotasDesdeMovimientos();
   const cuotas = (db.economia && db.economia.cuotas) || [];
-  const item = cuotas.find(c => c.jugadorId === jugadorId);
+  const item = cuotas.find(function(c){ return Number(c.jugadorId) === Number(jugadorId); });
   if(!item) return;
 
   const idEl = document.getElementById('cuotaJugadorId');
@@ -17446,10 +18048,10 @@ function openModalCuotaJugador(jugadorId){
 
   if(idEl) idEl.value = item.jugadorId;
   if(nomEl) nomEl.value = (item.dorsal ? '#' + item.dorsal + ' ' : '') + item.nombre + (item.nombreCompleto ? ' (' + item.nombreCompleto + ')' : '');
-  if(fijEl) fijEl.value = item.cuota || 120;
+  if(fijEl) fijEl.value = item.cuota ?? 120;
   if(pagEl) pagEl.value = item.pagado || 0;
   if(estEl) estEl.value = item.estado || 'Pendiente';
-  if(metEl) metEl.value = item.metodo || 'Transferencia';
+  if(metEl) metEl.value = item.metodo || '';
   if(fecEl) fecEl.value = item.fechaPago || '';
   if(notEl) notEl.value = item.notas || '';
 
@@ -17481,27 +18083,19 @@ function saveCuotaJugadorSubmit(){
   const jId = parseInt(idEl.value);
 
   const cuotas = (db.economia && db.economia.cuotas) || [];
-  const item = cuotas.find(c => c.jugadorId === jId);
+  const item = cuotas.find(function(c){ return Number(c.jugadorId) === Number(jId); });
   if(!item) return;
 
   const fijEl = document.getElementById('cuotaImporteFijado');
-  const pagEl = document.getElementById('cuotaImportePagado');
-  const estEl = document.getElementById('cuotaEstado');
-  const metEl = document.getElementById('cuotaMetodo');
-  const fecEl = document.getElementById('cuotaFechaPago');
   const notEl = document.getElementById('cuotaNotas');
+  item.cuota = Math.max(0, parseFloat(fijEl ? fijEl.value : 120) || 0);
+  item.notas = notEl ? notEl.value.trim() : (item.notas || '');
 
-  item.cuota = parseFloat(fijEl ? fijEl.value : 120) || 0;
-  item.pagado = parseFloat(pagEl ? pagEl.value : 0) || 0;
-  item.estado = estEl ? estEl.value : (item.cuota === 0 ? 'Exento' : 'Pendiente');
-  item.metodo = metEl ? metEl.value : '';
-  item.fechaPago = fecEl ? fecEl.value.trim() : '';
-  item.notas = notEl ? notEl.value.trim() : '';
-
+  syncCuotasDesdeMovimientos(false);
   saveDB();
   closeModal('modalCuotaJugador');
   renderEconomia();
-  toast('Cuota de ' + item.nombre + ' actualizada', 'success');
+  toast('Cuota objetivo de ' + item.nombre + ' actualizada', 'success');
 }
 
 function updateMovCategorias(selectedCat){
@@ -17509,10 +18103,43 @@ function updateMovCategorias(selectedCat){
   const catEl = document.getElementById('movCategoria');
   if(!tipoEl || !catEl) return;
 
-  const tipo = tipoEl.value;
-  const cats = tipo === 'Ingreso' ? CATEGORIAS_INGRESOS : CATEGORIAS_GASTOS;
-  catEl.innerHTML = cats.map(c => `<option value="${c}" ${c === selectedCat ? 'selected' : ''}>${c}</option>`).join('');
+  const cats = tipoEl.value === 'Ingreso' ? ECON_INGRESO_TIPOS : ECON_GASTO_TIPOS;
+  const safeSelected = cats.indexOf(selectedCat) !== -1 ? selectedCat : (selectedCat ? 'Otro' : cats[0]);
+  catEl.innerHTML = cats.map(function(c){
+    return `<option value="${c}" ${c === safeSelected ? 'selected' : ''}>${c}</option>`;
+  }).join('');
+  catEl.value = safeSelected;
+  updateMovFormVisibility();
 }
+
+function updateMovFormVisibility(){
+  const tipo = document.getElementById('movTipo')?.value || 'Ingreso';
+  const cat = document.getElementById('movCategoria')?.value || '';
+  const met = document.getElementById('movMetodoPago')?.value || '';
+
+  const catWrap = document.getElementById('movCategoriaDetalleWrap');
+  const jugadorWrap = document.getElementById('movJugadorWrap');
+  const metWrap = document.getElementById('movMetodoDetalleWrap');
+
+  if(catWrap) catWrap.style.display = cat === 'Otro' ? 'block' : 'none';
+  if(jugadorWrap) jugadorWrap.style.display = (tipo === 'Ingreso' && cat === 'Ficha') ? 'block' : 'none';
+  if(metWrap) metWrap.style.display = met === 'Otro' ? 'block' : 'none';
+
+  const playerSel = document.getElementById('movJugadorId');
+  if(playerSel && !playerSel.options.length){
+    const players = (db.jugadores || []).filter(function(j){ return j && !isStaff(j) && j.estado !== 'Vacante'; })
+      .sort(function(a,b){
+        if(a.dorsal && b.dorsal) return Number(a.dorsal)-Number(b.dorsal);
+        if(a.dorsal) return -1;
+        if(b.dorsal) return 1;
+        return String(a.nombre).localeCompare(String(b.nombre),'es',{sensitivity:'base'});
+      });
+    playerSel.innerHTML = '<option value="">-- Seleccionar jugador --</option>' +
+      players.map(function(j){ return `<option value="${j.id}">${j.dorsal?'#'+j.dorsal+' · ':''}${j.nombre}</option>`; }).join('');
+  }
+}
+window.updateMovFormVisibility = updateMovFormVisibility;
+
 
 function filterDiario(tipo, el){
   diarioFilterTipo = tipo;
@@ -17534,10 +18161,12 @@ function renderEconDiario(){
   if(!tbody) return;
   const movs = (db.economia && db.economia.movimientos) || [];
 
-  const filtered = movs.filter(m => {
+  const filtered = movs.filter(function(m){
     if(diarioFilterTipo !== 'todos' && m.tipo !== diarioFilterTipo) return false;
-    if(diarioFilterCat !== 'todas' && m.categoria !== diarioFilterCat) return false;
+    if(diarioFilterCat !== 'todas' && m.categoria !== diarioFilterCat && m.categoriaOriginal !== diarioFilterCat) return false;
     return true;
+  }).sort(function(a,b){
+    return (econDateValue(b.fecha)-econDateValue(a.fecha)) || ((Number(b.id)||0)-(Number(a.id)||0));
   });
 
   if(filtered.length === 0){
@@ -17545,25 +18174,26 @@ function renderEconDiario(){
     return;
   }
 
-  tbody.innerHTML = filtered.map(m => {
+  tbody.innerHTML = filtered.map(function(m){
     const isIngreso = m.tipo === 'Ingreso';
     const badgeType = isIngreso ? '<span class="badge ingreso">🟢 Ingreso</span>' : '<span class="badge gasto">🔴 Gasto</span>';
     const sign = isIngreso ? '+' : '-';
-    const color = isIngreso ? '#4ade80' : '#f87171';
-    const importe = parseFloat(m.importe) || 0;
+    const color = isIngreso ? '#16a34a' : '#dc2626';
+    const sit = econMovSituacion(m);
+    const detail = econMovementLabel(m);
 
     return `
       <tr>
         <td style="font-size:11px;color:var(--text-muted);white-space:nowrap">${m.fecha || '--'}</td>
         <td>${badgeType}</td>
-        <td><span class="badge" style="background:var(--surface3);font-size:10px">${m.categoria || 'Varios'}</span></td>
-        <td class="td-bold">${m.concepto || ''}</td>
-        <td style="font-size:11px">${m.pagadorBeneficiario || '--'}</td>
-        <td style="text-align:right;font-weight:800;color:${color}">${sign}${formatMoney(importe)}</td>
-        <td><span class="badge ${m.estado==='Pagado'?'pagado':'pendiente-pago'}">${m.estado || 'Pagado'}</span></td>
+        <td><span class="badge" style="background:var(--surface3);font-size:10px">${m.categoria || 'Otro'}</span></td>
+        <td class="td-bold">${detail || m.concepto || ''}</td>
+        <td style="font-size:11px">${m.receptor || m.pagadorBeneficiario || '--'}</td>
+        <td style="text-align:right;font-weight:800;color:${color}">${sign}${formatMoney(m.importe)}</td>
+        <td><span class="econ-mov-badge ${sit==='Actual'?'actual':'previsto'}">${sit}</span></td>
         <td style="text-align:right;white-space:nowrap">
-          <button type="button" class="btn btn-ghost btn-xs" onclick="openModalMovimiento(${m.id})" title="Editar movimiento">✏️</button>
-          <button type="button" class="btn btn-ghost btn-xs" onclick="deleteMovimiento(${m.id})" title="Eliminar movimiento" style="color:#f87171">🗑️</button>
+          <button type="button" class="btn btn-ghost btn-xs" onclick="openModalMovimiento(${m.id})">✏️</button>
+          <button type="button" class="btn btn-ghost btn-xs" onclick="deleteMovimiento(${m.id})" style="color:#f87171">🗑️</button>
         </td>
       </tr>
     `;
@@ -17571,110 +18201,153 @@ function renderEconDiario(){
 }
 
 function openModalMovimiento(id){
+  ensureEconomiaV2();
   const movs = (db.economia && db.economia.movimientos) || [];
-  const idEl = document.getElementById('movId');
-  const tipoEl = document.getElementById('movTipo');
-  const concEl = document.getElementById('movConcepto');
-  const impEl = document.getElementById('movImporte');
-  const fecEl = document.getElementById('movFecha');
-  const tercEl = document.getElementById('movTercero');
-  const estEl = document.getElementById('movEstado');
-  const notEl = document.getElementById('movNotas');
   const titleEl = document.getElementById('modalMovimientoTitle');
   const btnDel = document.getElementById('btnDeleteMov');
+  const idEl = document.getElementById('movId');
+  const tipoEl = document.getElementById('movTipo');
+  const sitEl = document.getElementById('movSituacion');
+  const catDetEl = document.getElementById('movCategoriaDetalle');
+  const playerEl = document.getElementById('movJugadorId');
+  const metEl = document.getElementById('movMetodoPago');
+  const metDetEl = document.getElementById('movMetodoPagoDetalle');
+  const recEl = document.getElementById('movReceptor');
+  const impEl = document.getElementById('movImporte');
+  const fecEl = document.getElementById('movFecha');
+  const notEl = document.getElementById('movNotas');
 
-  if(id === null){
-    if(titleEl) titleEl.textContent = '💰 Registrar Movimiento';
+  // Fuerza la creación del desplegable de plantilla.
+  if(playerEl) playerEl.innerHTML = '';
+  updateMovFormVisibility();
+
+  if(id === null || id === undefined){
+    if(titleEl) titleEl.textContent = '💶 Añadir Movimiento';
     if(idEl) idEl.value = '';
-    if(tipoEl) tipoEl.value = 'Gasto';
-    updateMovCategorias();
-    if(concEl) concEl.value = '';
+    if(tipoEl) tipoEl.value = 'Ingreso';
+    if(sitEl) sitEl.value = 'Actual';
+    updateMovCategorias('Ficha');
+    if(catDetEl) catDetEl.value = '';
+    if(playerEl) playerEl.value = '';
+    if(metEl) metEl.value = '';
+    if(metDetEl) metDetEl.value = '';
+    if(recEl) recEl.value = '';
     if(impEl) impEl.value = '';
-    const now = new Date();
-    const d = String(now.getDate()).padStart(2, '0');
-    const m = String(now.getMonth()+1).padStart(2, '0');
-    const y = now.getFullYear();
-    if(fecEl) fecEl.value = `${d}/${m}/${y}`;
-    if(tercEl) tercEl.value = '';
-    if(estEl) estEl.value = 'Pagado';
+    if(fecEl) fecEl.value = econToday();
     if(notEl) notEl.value = '';
     if(btnDel) btnDel.style.display = 'none';
-  } else {
-    const item = movs.find(x => x.id === id);
+  }else{
+    const item = movs.find(function(x){ return Number(x.id) === Number(id); });
     if(!item) return;
+
     if(titleEl) titleEl.textContent = '✏️ Editar Movimiento';
     if(idEl) idEl.value = item.id;
-    if(tipoEl) tipoEl.value = item.tipo || 'Gasto';
-    updateMovCategorias(item.categoria);
-    if(concEl) concEl.value = item.concepto || '';
+    if(tipoEl) tipoEl.value = item.tipo || 'Ingreso';
+    if(sitEl) sitEl.value = econMovSituacion(item);
+
+    const mapped = econMapLegacyCategory(item);
+    updateMovCategorias(mapped.categoria);
+    if(catDetEl) catDetEl.value = item.categoriaDetalle || mapped.detalle || '';
+    updateMovFormVisibility();
+
+    if(playerEl) playerEl.value = item.jugadorId || '';
+    if(metEl) metEl.value = item.metodoPago || '';
+    if(metDetEl) metDetEl.value = item.metodoPagoDetalle || '';
+    if(recEl) recEl.value = item.receptor || item.pagadorBeneficiario || '';
     if(impEl) impEl.value = item.importe || '';
     if(fecEl) fecEl.value = item.fecha || '';
-    if(tercEl) tercEl.value = item.pagadorBeneficiario || '';
-    if(estEl) estEl.value = item.estado || 'Pagado';
     if(notEl) notEl.value = item.notas || '';
     if(btnDel) btnDel.style.display = 'inline-block';
   }
+  updateMovFormVisibility();
   openModal('modalMovimiento');
 }
 
 function saveMovimientoSubmit(){
-  const idEl = document.getElementById('movId');
-  const tipoEl = document.getElementById('movTipo');
-  const catEl = document.getElementById('movCategoria');
-  const concEl = document.getElementById('movConcepto');
-  const impEl = document.getElementById('movImporte');
-  const fecEl = document.getElementById('movFecha');
-  const tercEl = document.getElementById('movTercero');
-  const estEl = document.getElementById('movEstado');
-  const notEl = document.getElementById('movNotas');
-
   if(!db.economia) db.economia = {};
-  if(!db.economia.movimientos) db.economia.movimientos = [];
+  if(!Array.isArray(db.economia.movimientos)) db.economia.movimientos = [];
 
-  const idVal = idEl && idEl.value ? parseInt(idEl.value) : null;
-  const tipo = tipoEl ? tipoEl.value : 'Gasto';
-  const categoria = catEl ? catEl.value : 'Varios';
-  const concepto = concEl ? concEl.value.trim() : '';
-  const importe = parseFloat(impEl ? impEl.value : 0) || 0;
-  const fecha = fecEl ? fecEl.value.trim() : '';
-  const pagadorBeneficiario = tercEl ? tercEl.value.trim() : '';
-  const estado = estEl ? estEl.value : 'Pagado';
-  const notas = notEl ? notEl.value.trim() : '';
+  const idEl = document.getElementById('movId');
+  const tipo = document.getElementById('movTipo')?.value || 'Ingreso';
+  const situacion = document.getElementById('movSituacion')?.value || 'Actual';
+  const categoria = document.getElementById('movCategoria')?.value || 'Otro';
+  const categoriaDetalle = (document.getElementById('movCategoriaDetalle')?.value || '').trim();
+  const jugadorIdRaw = document.getElementById('movJugadorId')?.value || '';
+  const metodoPago = document.getElementById('movMetodoPago')?.value || '';
+  const metodoPagoDetalle = (document.getElementById('movMetodoPagoDetalle')?.value || '').trim();
+  const receptor = (document.getElementById('movReceptor')?.value || '').trim();
+  const importe = parseFloat(document.getElementById('movImporte')?.value || 0) || 0;
+  const fecha = (document.getElementById('movFecha')?.value || '').trim();
+  const notas = (document.getElementById('movNotas')?.value || '').trim();
 
-  if(!concepto || importe <= 0){
-    toast('Por favor completa el concepto e importe válido', 'error');
+  if(importe <= 0){
+    toast('Indica un importe válido.', 'error');
+    return;
+  }
+  if(!fecha){
+    toast('Indica la fecha del movimiento.', 'error');
+    return;
+  }
+  if(categoria === 'Otro' && !categoriaDetalle){
+    toast('Especifica qué tipo de movimiento es.', 'error');
+    return;
+  }
+  if(metodoPago === 'Otro' && !metodoPagoDetalle){
+    toast('Especifica el método de pago.', 'error');
     return;
   }
 
-  if(idVal !== null){
-    const item = db.economia.movimientos.find(x => x.id === idVal);
-    if(item){
-      item.tipo = tipo;
-      item.categoria = categoria;
-      item.concepto = concepto;
-      item.importe = importe;
-      item.fecha = fecha;
-      item.pagadorBeneficiario = pagadorBeneficiario;
-      item.estado = estado;
-      item.notas = notas;
+  let jugadorId = null;
+  let jugadorNombre = '';
+  if(tipo === 'Ingreso' && categoria === 'Ficha'){
+    jugadorId = jugadorIdRaw ? Number(jugadorIdRaw) : null;
+    const j = (db.jugadores || []).find(function(x){ return Number(x.id) === Number(jugadorId); });
+    if(!j){
+      toast('Selecciona el jugador que realiza el pago de la ficha.', 'error');
+      return;
     }
-  } else {
-    const nextId = db.economia.movimientos.reduce((max, x) => Math.max(max, x.id || 0), 0) + 1;
-    db.economia.movimientos.push({
-      id: nextId,
-      tipo,
-      categoria,
-      concepto,
-      importe,
-      fecha,
-      pagadorBeneficiario,
-      estado,
-      notas
-    });
+    jugadorNombre = j.nombre || '';
   }
 
+  let concepto = categoria;
+  if(tipo === 'Ingreso' && categoria === 'Ficha') concepto = 'Ficha ' + jugadorNombre;
+  else if(categoria === 'Otro') concepto = categoriaDetalle;
+
+  const payload = {
+    tipo,
+    situacion,
+    categoria,
+    categoriaDetalle: categoria === 'Otro' ? categoriaDetalle : '',
+    jugadorId,
+    jugadorNombre,
+    metodoPago,
+    metodoPagoDetalle: metodoPago === 'Otro' ? metodoPagoDetalle : '',
+    receptor,
+    importe: Math.round(importe * 100) / 100,
+    fecha,
+    notas,
+    concepto,
+    // Campos de compatibilidad con Libro Diario / Balance antiguo:
+    pagadorBeneficiario: receptor,
+    estado: situacion === 'Previsto' ? 'Pendiente' : 'Pagado',
+    _economiaV2: true,
+    updatedAt: new Date().toISOString()
+  };
+
+  const idVal = idEl && idEl.value ? Number(idEl.value) : null;
+  if(idVal !== null){
+    const item = db.economia.movimientos.find(function(x){ return Number(x.id) === idVal; });
+    if(!item) return;
+    Object.assign(item, payload);
+  }else{
+    const nextId = db.economia.movimientos.reduce(function(max,x){ return Math.max(max, Number(x && x.id) || 0); },0) + 1;
+    db.economia.movimientos.push(Object.assign({id:nextId, createdAt:new Date().toISOString()}, payload));
+  }
+
+  syncCuotasDesdeMovimientos();
   saveDB();
   closeModal('modalMovimiento');
+  econMovPage = 1;
   renderEconomia();
   toast('Movimiento guardado con éxito', 'success');
 }
@@ -17689,7 +18362,8 @@ function deleteCurrentMovimiento(){
 function deleteMovimiento(id){
   if(!confirm('¿Estás seguro de eliminar este movimiento financiero?')) return;
   if(!db.economia || !db.economia.movimientos) return;
-  db.economia.movimientos = db.economia.movimientos.filter(x => x.id !== id);
+  db.economia.movimientos = db.economia.movimientos.filter(function(x){ return Number(x.id) !== Number(id); });
+  syncCuotasDesdeMovimientos();
   saveDB();
   renderEconomia();
   toast('Movimiento eliminado', 'info');
@@ -17707,7 +18381,7 @@ function renderEconBalance(){
   // Gastos por partida
   const gastosCat = {};
   CATEGORIAS_GASTOS.forEach(c => { gastosCat[c] = 0; });
-  movs.filter(m => m.tipo === 'Gasto').forEach(m => {
+  movs.filter(m => m.tipo === 'Gasto' && econMovSituacion(m) === 'Actual').forEach(m => {
     const c = m.categoria || 'Otros Gastos';
     gastosCat[c] = (gastosCat[c] || 0) + (parseFloat(m.importe) || 0);
   });
@@ -17737,7 +18411,7 @@ function renderEconBalance(){
   // Ingresos por fuente
   const ingresosCat = {};
   ingresosCat['Cuotas Jugadores'] = st.cuotasRecaudadas;
-  movs.filter(m => m.tipo === 'Ingreso').forEach(m => {
+  movs.filter(m => m.tipo === 'Ingreso' && econMovSituacion(m) === 'Actual' && !econIsFichaMovement(m)).forEach(m => {
     const c = m.categoria || 'Otros Ingresos';
     ingresosCat[c] = (ingresosCat[c] || 0) + (parseFloat(m.importe) || 0);
   });
@@ -18071,11 +18745,22 @@ window.exportEconCSV = exportEconCSV;
 function renderEconomia(){
   updateEconLockUI();
   if(!isEconAuth) return;
+
+  const modified = ensureEconomiaV2();
+  if(modified) saveDB();
+  syncCuotasDesdeMovimientos();
+
   renderEconStats();
-  if(currentEconTab === 'cuotas') renderEconCuotas();
-  else if(currentEconTab === 'diario') renderEconDiario();
-  else if(currentEconTab === 'balance') renderEconBalance();
-  else if(currentEconTab === 'hoja') renderEconHoja();
+  if(currentEconTab === 'cuotas'){
+    renderEconMovimientosMain();
+    renderEconCuotas();
+  }else if(currentEconTab === 'diario'){
+    renderEconDiario();
+  }else if(currentEconTab === 'balance'){
+    renderEconBalance();
+  }else if(currentEconTab === 'hoja'){
+    renderEconHoja();
+  }
 }
 
 // INITIALIZATION

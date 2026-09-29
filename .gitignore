@@ -22,3 +22,6 @@ node_modules/
 
 # Scratch & temporary test profiles
 scratch/
+index.backup*
+index.paso*.html
+aplicar-paso*.js
