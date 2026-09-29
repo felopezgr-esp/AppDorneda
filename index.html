@@ -16929,7 +16929,7 @@ function updateEconLockUI(){
 
 
 // ==========================================
-// PASO 14A/14B/14E · ECONOMÍA V2
+// PASO 14A/14B/14E/14F · ECONOMÍA V2
 // ==========================================
 const ECON_INGRESO_TIPOS = ['Ficha', 'Patrocinador', 'Otro'];
 const ECON_GASTO_TIPOS = ['Fichas', 'Cuota Club', 'Árbitros', 'Otro'];
@@ -17009,7 +17009,7 @@ function reconcileEconomiaHoja20260929(){
       const b = normName(j && j.nombreCompleto);
       return arr.some(function(x){
         const n = normName(x);
-        return a === n || b === n || (n.length > 4 && (a.indexOf(n)!==-1 || b.indexOf(n)!==-1 || n.indexOf(a)!==-1));
+        return a === n || b === n || (n.length > 6 && (a.indexOf(n)!==-1 || b.indexOf(n)!==-1));
       });
     }) || null;
   }
@@ -17125,7 +17125,7 @@ function reconcileEconomiaHoja20260929(){
   const kata=findJugador(['Kata']);
   const ck=getCuotaFor(kata,'Kata');
   if(ck){
-    ck.cuota=0;ck.pagado=0;ck.estado='Exento';ck.cuotaObligatoria=false;ck.cuotaAutomatica=true;
+    ck.cuota=0;ck.pagado=0;ck.estado='Exento';ck.cuotaObligatoria=false;ck.cuotaAutomatica=false;
   }
 
   // Reescribe SOLO los movimientos de Ficha de los jugadores de esta hoja.
@@ -17284,6 +17284,164 @@ function reconcileEconomiaHoja20260929V2(){
   return true;
 }
 
+
+function reconcileEconomiaHoja20260929V3(){
+  if(!db.economia) db.economia = {};
+  if(db.economia.hoja20260929V3) return false;
+  if(!Array.isArray(db.jugadores)) db.jugadores = [];
+  if(!Array.isArray(db.economia.cuotas)) db.economia.cuotas = [];
+  if(!Array.isArray(db.economia.movimientos)) db.economia.movimientos = [];
+
+  const nn = function(v){ return econNorm(v).replace(/\s+/g,' '); };
+  let modified = false;
+
+  // 1) Luis Ángel es una persona distinta de Ángel Novo.
+  let luis = db.jugadores.find(function(j){
+    return Number(j && j.id) === 111 ||
+      nn(j && j.nombre) === 'luis angel' ||
+      nn(j && j.nombreCompleto).indexOf('fernandez vijande') !== -1;
+  });
+  if(!luis){
+    luis = {
+      id:111,dorsal:null,nombre:'Luis Ángel',
+      nombreCompleto:'Luis A. Fernández Vijande',
+      estado:'Con ficha',foto:null,notas:'',rol:'Jugador'
+    };
+    db.jugadores.push(luis);
+    modified = true;
+  }else{
+    luis.id = luis.id || 111;
+    luis.nombre = 'Luis Ángel';
+    luis.nombreCompleto = luis.nombreCompleto || 'Luis A. Fernández Vijande';
+    luis.estado = 'Con ficha';
+  }
+
+  // 2) El pago de 100 € del 26/09 pertenece a Luis Ángel, no a Ángel Novo.
+  const badLuisPayment = db.economia.movimientos.find(function(m){
+    if(!m || !econIsFichaMovement(m) || econMovSituacion(m) !== 'Actual') return false;
+    const generated = String(m.origen || '').indexOf('hoja-20260929') === 0;
+    const looksLikeWrongAngel =
+      (Number(m.jugadorId) === 6 || nn(m.jugadorNombre) === 'angel' || nn(m.concepto) === 'ficha angel') &&
+      Math.abs((parseFloat(m.importe)||0) - 100) < 0.001 &&
+      String(m.fecha || '') === '26/09/2026';
+    return generated && looksLikeWrongAngel;
+  });
+  if(badLuisPayment){
+    badLuisPayment.jugadorId = luis.id;
+    badLuisPayment.jugadorNombre = 'Luis Ángel';
+    badLuisPayment.concepto = 'Ficha Luis Ángel';
+    badLuisPayment.metodoPago = 'Efectivo';
+    badLuisPayment.notas = 'En mano · hoja económica 29/09/2026';
+    modified = true;
+  }
+
+  // Si por cualquier motivo faltase ese pago, lo creamos una única vez.
+  const hasLuis100 = db.economia.movimientos.some(function(m){
+    return m && econIsFichaMovement(m) && econMovSituacion(m)==='Actual' &&
+      Number(m.jugadorId)===Number(luis.id) &&
+      Math.abs((parseFloat(m.importe)||0)-100)<0.001 &&
+      String(m.fecha||'')==='26/09/2026';
+  });
+  if(!hasLuis100){
+    const nextId=db.economia.movimientos.reduce(function(mx,m){return Math.max(mx,Number(m&&m.id)||0);},0)+1;
+    db.economia.movimientos.push({
+      id:nextId,tipo:'Ingreso',situacion:'Actual',categoria:'Ficha',categoriaDetalle:'',
+      jugadorId:luis.id,jugadorNombre:'Luis Ángel',metodoPago:'Efectivo',metodoPagoDetalle:'',
+      receptor:'',importe:100,fecha:'26/09/2026',
+      notas:'En mano · hoja económica 29/09/2026',
+      concepto:'Ficha Luis Ángel',pagadorBeneficiario:'',estado:'Pagado',
+      origen:'hoja-20260929-v3',_economiaV2:true
+    });
+    modified = true;
+  }
+
+  // 3) Cuota individual correcta de Luis Ángel: 120 / 100 / 20.
+  let luisCuota = db.economia.cuotas.find(function(c){
+    return Number(c && c.jugadorId)===Number(luis.id) ||
+      nn(c && c.nombre)==='luis angel' ||
+      nn(c && c.nombreCompleto).indexOf('fernandez vijande')!==-1;
+  });
+  if(!luisCuota){
+    luisCuota={
+      jugadorId:luis.id,nombre:'Luis Ángel',dorsal:luis.dorsal||null,
+      nombreCompleto:luis.nombreCompleto,estadoFicha:'Con ficha',
+      cuota:120,pagado:0,estado:'Pendiente',metodo:'',fechaPago:'',
+      notas:'',cuotaObligatoria:true,cuotaAutomatica:true
+    };
+    db.economia.cuotas.push(luisCuota);
+    modified=true;
+  }
+  luisCuota.jugadorId=luis.id;
+  luisCuota.nombre='Luis Ángel';
+  luisCuota.nombreCompleto=luis.nombreCompleto;
+  luisCuota.estadoFicha='Con ficha';
+  luisCuota.cuota=120;
+  luisCuota.cuotaObligatoria=true;
+  luisCuota.cuotaAutomatica=true;
+
+  // 4) Ángel Novo, Antony y Michi: a prueba, sin deuda.
+  [
+    [6,'Ángel'],[8,'Antony'],[9,'Michi']
+  ].forEach(function(row){
+    const c=db.economia.cuotas.find(function(x){
+      return Number(x && x.jugadorId)===row[0] || nn(x && x.nombre)===nn(row[1]);
+    });
+    if(c){
+      c.cuota=0;
+      c.cuotaObligatoria=false;
+      c.cuotaAutomatica=true;
+      c.estado='Exento';
+      // No borramos pagos manuales ajenos; el generado erróneo de Ángel ya se migró arriba.
+      modified=true;
+    }
+  });
+
+  // 5) Kata es entrenador y queda siempre exento en seguimiento.
+  let kata=db.economia.cuotas.find(function(c){
+    return Number(c && c.jugadorId)===108 || nn(c && c.nombre)==='kata';
+  });
+  if(kata){
+    kata.cuota=0;
+    kata.pagado=0;
+    kata.estado='Exento';
+    kata.cuotaObligatoria=false;
+    kata.cuotaAutomatica=false;
+    kata.notas='Entrenador (Exento - Ficha pagada por el club)';
+    modified=true;
+  }
+
+  // 6) Pago 7 de Luis Ángel: debe existir UNA sola vez por 83 €.
+  const p7s=db.economia.movimientos.filter(function(m){
+    return m && m.tipo==='Gasto' && nn(m.concepto)==='pago 7 ficha luis angel';
+  });
+  let p7=p7s[0] || null;
+  if(!p7){
+    const nextId=db.economia.movimientos.reduce(function(mx,m){return Math.max(mx,Number(m&&m.id)||0);},0)+1;
+    p7={id:nextId};
+    db.economia.movimientos.push(p7);
+  }
+  Object.assign(p7,{
+    tipo:'Gasto',categoria:'Fichas',concepto:'Pago 7. Ficha Luis Angel',
+    importe:83.00,fecha:'29/09/2026',receptor:'Kata',pagadorBeneficiario:'Kata',
+    notas:'Pago a Kata',situacion:'Actual',estado:'Pagado',
+    _economiaV2:true,origen:'hoja-20260929-v3'
+  });
+  if(p7s.length>1){
+    const keepId=Number(p7.id);
+    let kept=false;
+    db.economia.movimientos=db.economia.movimientos.filter(function(m){
+      if(!(m && m.tipo==='Gasto' && nn(m.concepto)==='pago 7 ficha luis angel')) return true;
+      if(!kept && Number(m.id)===keepId){ kept=true; return true; }
+      return false;
+    });
+    modified=true;
+  }
+
+  db.economia.saldoAnterior=430.40;
+  db.economia.hoja20260929V3=true;
+  return true;
+}
+
 function ensureEconomiaV2(){
   if(!db.economia) db.economia = {};
   if(!db.economia.auth) db.economia.auth = {};
@@ -17367,6 +17525,7 @@ function ensureEconomiaV2(){
 
   if(reconcileEconomiaHoja20260929()) modified = true;
   if(reconcileEconomiaHoja20260929V2()) modified = true;
+  if(reconcileEconomiaHoja20260929V3()) modified = true;
   syncCuotasDesdeMovimientos(false);
   return modified;
 }
@@ -17398,6 +17557,19 @@ function syncCuotasDesdeMovimientos(createMissing){
   }
 
   cuotas.forEach(function(c){
+    const isKataCuota = Number(c && c.jugadorId) === 108 || econNorm(c && c.nombre) === 'kata';
+    if(isKataCuota){
+      c.cuota = 0;
+      c.pagado = 0;
+      c.estado = 'Exento';
+      c.cuotaObligatoria = false;
+      c.cuotaAutomatica = false;
+      c.metodo = '';
+      c.fechaPago = '';
+      c.notas = 'Entrenador (Exento - Ficha pagada por el club)';
+      return;
+    }
+
     const j = jugadores.find(function(x){
       return Number(x.id) === Number(c.jugadorId) || econNorm(x.nombre) === econNorm(c.nombre);
     });
@@ -17632,18 +17804,25 @@ function calcEconStats(){
 
   let cuotasRecaudadas = 0;
   let cuotasEsperadas = 0;
+  let cuotasPendientes = 0;
+  let cuotasAplicadas = 0;
 
   cuotas.forEach(function(c){
     const fixed = parseFloat(c.cuota) || 0;
     const paid = parseFloat(c.pagado) || 0;
+    const isKata = econNorm(c.nombre) === 'kata' || Number(c.jugadorId) === 108;
+    const obligatoria = !isKata && c.cuotaObligatoria !== false && fixed > 0;
+
+    // Todo cobro real cuenta como ingreso real.
     cuotasRecaudadas += paid;
-    const isKata = econNorm(c.nombre) === 'kata' || c.jugadorId === 108;
-    if(!isKata && c.cuotaObligatoria !== false && fixed > 0){
+
+    // La previsión pendiente se calcula jugador por jugador.
+    if(obligatoria){
       cuotasEsperadas += fixed;
+      cuotasAplicadas += Math.min(paid, fixed);
+      cuotasPendientes += Math.max(0, fixed - paid);
     }
   });
-
-  const cuotasPendientes = Math.max(0, cuotasEsperadas - cuotasRecaudadas);
 
   let remanenteAnterior = 0;
   let otrosIngresosRealizados = 0;
@@ -17666,7 +17845,7 @@ function calcEconStats(){
       if(isCierre){
         if(situacion === 'Actual') remanenteAnterior += imp;
       }else if(econIsFichaMovement(m)){
-        // Fichas se suman una sola vez desde cuotasRecaudadas.
+        // Ya está incluido una sola vez mediante cuotasRecaudadas.
       }else if(situacion === 'Actual'){
         otrosIngresosRealizados += imp;
       }else{
@@ -17691,13 +17870,14 @@ function calcEconStats(){
   const saldoActual = remanenteAnterior + balanceActual;
   const balancePrevisto = ingresosTotalesPrevistos - gastosTotalesPrevistos;
   const saldoFinalPrevisto = remanenteAnterior + balancePrevisto;
-  const pctCuotas = cuotasEsperadas > 0 ? Math.round((cuotasRecaudadas / cuotasEsperadas) * 100) : 0;
+  const pctCuotas = cuotasEsperadas > 0 ? Math.round((cuotasAplicadas / cuotasEsperadas) * 100) : 0;
   const ingresosConRemanente = remanenteAnterior + ingresosRealizados;
 
   return {
     cuotasRecaudadas,
     cuotasEsperadas,
     cuotasPendientes,
+    cuotasAplicadas,
     remanenteAnterior,
     otrosIngresosRealizados,
     otrosIngresosPendientes,
