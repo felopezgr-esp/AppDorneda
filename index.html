@@ -3310,42 +3310,6 @@
 /* ==========================================================
    PASO 16A · LECTOR / EDITOR + DASHBOARD COMPACTO
    ========================================================== */
-.access-mode-box{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:8px;
-  padding:7px 8px;
-  border:1px solid var(--border);
-  border-radius:7px;
-  background:var(--surface2);
-}
-.access-mode-state{
-  display:flex;
-  align-items:center;
-  gap:6px;
-  font-size:10.5px;
-  font-weight:800;
-  color:var(--text-muted);
-}
-.access-dot{
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:#9ca3af;
-  flex:0 0 auto;
-}
-.access-mode-btn{
-  height:23px;
-  padding:0 8px;
-  border:1px solid var(--border);
-  border-radius:5px;
-  background:var(--surface);
-  color:var(--text);
-  font-size:8.5px;
-  font-weight:900;
-  letter-spacing:.3px;
-}
 body.editor-mode .access-dot{background:var(--success)}
 body.editor-mode .access-mode-state{color:var(--success)}
 body.editor-mode .access-mode-btn{color:var(--text-muted)}
@@ -3582,9 +3546,223 @@ body.reader-mode #modalFotoUploadInput{display:none!important}
 .access-mode-btn{position:relative;z-index:131;pointer-events:auto!important}
 #modalAdminPIN{pointer-events:auto}
 
+
+/* PASO 16F · CUADERNO DEL ENTRENADOR */
+.coach-notebook{
+  margin-top:14px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  overflow:hidden;
+  background:var(--surface);
+}
+.coach-notebook-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  min-height:32px;
+  padding:6px 10px;
+  background:var(--surface2);
+  border-bottom:1px solid var(--border);
+}
+.coach-notebook-title{
+  font-size:10px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.35px;
+  color:var(--text);
+}
+.coach-notebook-note{
+  font-size:8.5px;
+  color:var(--text-dim);
+}
+.coach-notebook-body{
+  display:grid;
+  grid-template-columns:minmax(0,1.1fr) minmax(260px,.9fr);
+  gap:10px;
+  padding:9px;
+}
+.coach-notebook-block{
+  border:1px solid var(--border);
+  border-radius:6px;
+  overflow:hidden;
+}
+.coach-notebook-block-title{
+  height:26px;
+  display:flex;
+  align-items:center;
+  padding:0 8px;
+  background:var(--surface2);
+  border-bottom:1px solid var(--border);
+  font-size:9px;
+  font-weight:900;
+  color:var(--text);
+}
+.coach-assist-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:9px;
+}
+.coach-assist-table th{
+  height:20px;
+  padding:2px 6px;
+  font-size:7.5px;
+  text-transform:uppercase;
+  color:var(--text-dim);
+  background:var(--surface);
+  border-bottom:1px solid var(--border);
+  text-align:left;
+}
+.coach-assist-table td{
+  height:28px;
+  padding:3px 6px;
+  border-bottom:1px solid var(--border);
+  vertical-align:middle;
+}
+.coach-assist-table tr:last-child td{border-bottom:0}
+.coach-assist-select{
+  width:100%;
+  height:24px;
+  min-height:24px;
+  padding:2px 6px;
+  border:1px solid var(--border);
+  border-radius:4px;
+  background:var(--surface);
+  color:var(--text);
+  font-size:9px;
+}
+.coach-observations{
+  width:100%;
+  min-height:112px;
+  resize:vertical;
+  border:0;
+  outline:0;
+  padding:8px;
+  background:var(--surface);
+  color:var(--text);
+  font-size:10px;
+  line-height:1.4;
+}
+.coach-notebook-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:6px;
+  padding:0 9px 9px;
+}
+.coach-notebook-save{
+  min-height:25px!important;
+  padding:3px 9px!important;
+  font-size:8.5px!important;
+}
+.coach-notebook-empty{
+  padding:12px;
+  text-align:center;
+  color:var(--text-dim);
+  font-size:9px;
+}
+@media(max-width:800px){
+  .coach-notebook-body{grid-template-columns:1fr}
+}
+
+
+/* PASO 16H · EDICIÓN DE FICHA DESDE LA FICHA OFICIAL */
+#btnEditMatchSheet{
+  background:var(--surface2);
+  color:var(--text);
+}
+#btnEditMatchSheet:hover{
+  background:var(--surface3);
+  border-color:var(--text-dim)!important;
+}
+#coachNotebookEditor{
+  scroll-margin-top:12px;
+}
+
+
+/* PASO 16J · CUADERNO VISIBLE EN LA FICHA */
+.coach-notebook-view{
+  margin-top:10px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  overflow:hidden;
+  background:var(--surface);
+}
+.coach-notebook-view-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  min-height:28px;
+  padding:5px 8px;
+  background:var(--surface2);
+  border-bottom:1px solid var(--border);
+}
+.coach-notebook-view-title{
+  font-size:9px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.3px;
+  color:var(--text);
+}
+.coach-notebook-view-grid{
+  display:grid;
+  grid-template-columns:minmax(220px,.9fr) minmax(0,1.1fr);
+}
+.coach-notebook-view-col{
+  padding:7px 8px;
+  min-width:0;
+}
+.coach-notebook-view-col + .coach-notebook-view-col{
+  border-left:1px solid var(--border);
+}
+.coach-notebook-view-label{
+  margin-bottom:5px;
+  font-size:7.5px;
+  font-weight:900;
+  text-transform:uppercase;
+  color:var(--text-dim);
+}
+.coach-notebook-assist-row{
+  display:grid;
+  grid-template-columns:42px minmax(0,1fr);
+  gap:5px;
+  align-items:center;
+  min-height:21px;
+  border-bottom:1px solid var(--border);
+  font-size:8.5px;
+}
+.coach-notebook-assist-row:last-child{border-bottom:0}
+.coach-notebook-assist-minute{
+  text-align:center;
+  font-weight:900;
+  color:var(--text-muted);
+}
+.coach-notebook-assist-text{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.coach-notebook-observation-text{
+  font-size:9px;
+  line-height:1.45;
+  color:var(--text);
+  white-space:pre-wrap;
+}
+.coach-notebook-view-empty{
+  font-size:8.5px;
+  color:var(--text-dim);
+  font-style:italic;
+}
+@media(max-width:760px){
+  .coach-notebook-view-grid{grid-template-columns:1fr}
+  .coach-notebook-view-col + .coach-notebook-view-col{
+    border-left:0;
+    border-top:1px solid var(--border);
+  }
+}
+
 </style>
 </head>
-<body class="reader-mode">
+<body class="editor-mode">
 <div class="toast-container" id="toastContainer"></div>
 
 <!-- PASO 11C · ACTUALIZACIÓN FUTGAL EN LA NUBE -->
@@ -4041,14 +4219,7 @@ body.reader-mode #modalFotoUploadInput{display:none!important}
         </button>
       </div>
 
-      <!-- ACCESO LECTOR / EDITOR -->
-      <div class="access-mode-box">
-        <div class="access-mode-state">
-          <span class="access-dot" id="accessModeDot"></span>
-          <span id="adminModeLabel">Lector</span>
-        </div>
-        <button type="button" id="adminModeBtn" class="access-mode-btn" onclick="toggleAdminPINModal()" title="Acceso de administrador">EDITOR</button>
-      </div>
+
 
       <input type="file" id="importFile" accept=".json" style="display:none" onchange="importJSON(event)" />
     </div>
@@ -4094,10 +4265,7 @@ body.reader-mode #modalFotoUploadInput{display:none!important}
             <div class="dash-v2-title">Xuventude Dorneda · 2026/27</div>
             <div class="dash-v2-sub">Resumen deportivo · Liga</div>
           </div>
-          <div class="dash-v2-mode">
-            <span>Acceso:</span>
-            <span class="dash-v2-mode-pill" id="dashAccessMode">LECTOR</span>
-          </div>
+
         </div>
 
         <div class="dash-section">
@@ -4218,7 +4386,7 @@ body.reader-mode #modalFotoUploadInput{display:none!important}
           </div>
         </div>
 
-        <div class="dash-section editor-only" id="dashEditorTools">
+        <div class="dash-section" id="dashEditorTools">
           <div class="dash-section-head">
             <div class="dash-section-title">Herramientas de edición</div>
             <div class="dash-section-note">Solo Editor</div>
@@ -4238,7 +4406,7 @@ body.reader-mode #modalFotoUploadInput{display:none!important}
 <section class="section" id="section-plantilla">
       <div class="page-header">
         <div><div class="page-title">Plantilla</div><div class="page-subtitle">Temporada 2026/27 &middot; Jugadores y Cuerpo Técnico</div></div>
-        <button class="btn btn-primary editor-only" onclick="openNuevoJugador()">+ Añadir Miembro</button>
+        <button class="btn btn-primary" onclick="openNuevoJugador()">+ Añadir Miembro</button>
       </div>
       <div class="tabs">
         <div class="tab active" id="tabPlantillaFicha" onclick="filtrarPlantilla('Con ficha',this)">⚽ Con ficha (<span id="cntFicha">0</span>)</div>
@@ -4274,7 +4442,7 @@ body.reader-mode #modalFotoUploadInput{display:none!important}
         <div><div class="page-title">Partidos</div><div class="page-subtitle">Historial de enfrentamientos y calendario de la temporada</div></div>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button type="button" class="btn btn-primary editor-only" onclick="syncFromFutgal()" title="Actualizar resultados desde FUTGAL">🔄 Actualizar desde FUTGAL</button>
-          <button type="button" class="btn btn-ghost editor-only" onclick="openNuevoPartido()">+ Nuevo Partido</button>
+          <button type="button" class="btn btn-ghost" onclick="openNuevoPartido()">+ Nuevo Partido</button>
         </div>
       </div>
       <div class="tabs mb-16">
@@ -5008,43 +5176,7 @@ body.reader-mode #modalFotoUploadInput{display:none!important}
 </div>
 
 
-<!-- MODAL DE ACCESO SEGURO / MODO EDICIÓN -->
-    <div class="modal-backdrop" id="modalAdminPIN" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);z-index:9999;align-items:center;justify-content:center;" onclick="if(event.target===this)closeAdminPINModal()">
-      <div class="modal card" style="max-width:360px;width:90%;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
-          <div style="font-weight:800;font-size:16px;color:var(--text);display:flex;align-items:center;gap:6px;" id="modalAdminPINTitle">Acceso de Editor</div>
-          <button type="button" class="btn-xs ghost" onclick="closeAdminPINModal()" style="font-size:14px;padding:4px 8px;">✕</button>
-        </div>
-        <div style="font-size:12px;color:var(--text-muted);margin-bottom:14px;line-height:1.4;" id="modalAdminPINDesc">
-          Introduce las credenciales de administrador para habilitar el perfil Editor.
-        </div>
 
-        <div style="display:grid;gap:9px;margin-bottom:12px;">
-          <div>
-            <label class="form-label" for="editorUsername" style="font-size:9px;">Usuario</label>
-            <input id="editorUsername" class="form-control" type="text" autocomplete="username"
-              placeholder="Administrador"
-              onkeydown="if(event.key==='Enter')document.getElementById('editorPassword').focus()">
-          </div>
-          <div>
-            <label class="form-label" for="editorPassword" style="font-size:9px;">Contraseña</label>
-            <input id="editorPassword" class="form-control" type="password" autocomplete="current-password"
-              placeholder="Contraseña"
-              onkeydown="if(event.key==='Enter')verifyAdminPIN()">
-          </div>
-        </div>
-
-        <div id="adminPINError" style="color:#ef4444;font-size:11px;margin-bottom:12px;display:none;font-weight:700;text-align:center;">
-          Usuario o contraseña incorrectos.
-        </div>
-
-        <div style="display:flex;gap:8px;">
-          <button type="button" class="btn btn-primary" id="adminCredentialsLoginBtn"
-            style="flex:1;justify-content:center;padding:10px;" onclick="verifyAdminPIN()">Entrar como Editor</button>
-          <button type="button" class="btn btn-ghost" onclick="closeAdminPINModal()" style="padding:10px;">Cancelar</button>
-        </div>
-      </div>
-    </div>
 
 <script>
 const DB_KEY='dorneda_2627_v19';
@@ -5125,7 +5257,7 @@ let isCloudSyncing = false;
 let isRemoteUpdate = false;
 let cloudSyncTimeout = null;
 let firestoreUnsubscribe = null;
-let isAdminMode = false;
+let isAdminMode = true;
 const EDITOR_USER = 'Administrador';
 const EDITOR_PASSWORD = '1234';
 const EDITOR_SESSION_KEY = 'dorneda_editor_session';
@@ -9808,11 +9940,6 @@ window.initFirebaseSync = initFirebaseSync;
 function saveDBToCloud(){
   if(!firestoreDocRef || isRemoteUpdate) return;
 
-  if(!isAdminMode){
-    updateCloudStatusUI('online','Guardado local');
-    return;
-  }
-
   if(cloudSyncTimeout) clearTimeout(cloudSyncTimeout);
   updateCloudStatusUI('syncing','Guardando...');
 
@@ -9908,114 +10035,59 @@ window.getPlantillaSyncStatus = getPlantillaSyncStatus;
 
 
 function applyAccessModeUI(){
+  isAdminMode=true;
   var body=document.body;
-  if(!body) return;
-
-  body.classList.toggle('editor-mode',!!isAdminMode);
-  body.classList.toggle('reader-mode',!isAdminMode);
+  if(body){
+    body.classList.remove('reader-mode');
+    body.classList.add('editor-mode');
+  }
 
   var econ=document.getElementById('nav-economia');
   var mecon=document.getElementById('mnav-economia');
-  if(econ) econ.style.display=isAdminMode ? '' : 'none';
-  if(mecon) mecon.style.display=isAdminMode ? '' : 'none';
+  if(econ) econ.style.display='';
+  if(mecon) mecon.style.display='';
 
-  var dashMode=document.getElementById('dashAccessMode');
-  if(dashMode) dashMode.textContent=isAdminMode ? 'EDITOR' : 'LECTOR';
-
-  // En Lector, formularios de ficha de jugador quedan visibles solo como consulta.
   var form=document.getElementById('formJugador');
   if(form){
     form.querySelectorAll('input,textarea,select').forEach(function(el){
-      el.disabled=!isAdminMode;
+      el.disabled=false;
     });
   }
 }
 window.applyAccessModeUI=applyAccessModeUI;
+window.applyAccessModeUI=applyAccessModeUI;
 
 function requireEditor(action){
-  if(isAdminMode) return true;
-  toast((action ? action+': ' : '')+'requiere acceso Editor.','info');
-  openAdminPINModal();
-  return false;
+  return true;
 }
+window.requireEditor=requireEditor;
 window.requireEditor=requireEditor;
 
 // ==========================================
 // LECTOR / EDITOR ACCESS
 // ==========================================
 function updateAdminModeUI(){
-  var btnLabel=document.getElementById('adminModeLabel');
-  var btn=document.getElementById('adminModeBtn');
-  var dot=document.getElementById('accessModeDot');
-  var mobBtn=document.getElementById('mobileAdminBtn');
-
-  if(btnLabel) btnLabel.textContent=isAdminMode ? 'Editor' : 'Lector';
-  if(btn) btn.textContent=isAdminMode ? 'SALIR' : 'EDITOR';
-  if(dot) dot.style.background=isAdminMode ? 'var(--success)' : '#9ca3af';
-
-  if(mobBtn){
-    mobBtn.innerHTML=isAdminMode ? '✓' : '✎';
-    mobBtn.title=isAdminMode ? 'Editor activo · pulsar para salir' : 'Entrar como Editor';
-  }
-
+  isAdminMode=true;
   applyAccessModeUI();
 
-  // Nunca permitimos que un error de renderizado del Dashboard bloquee
-  // el sistema de autenticación o el botón EDITOR.
-  try{
-    if(currentSection === 'economia' && !isAdminMode){
-      showSection('dashboard');
-    }else if(currentSection === 'dashboard'){
-      renderDashboard();
-    }
-  }catch(e){
-    console.warn('Aviso al actualizar interfaz de acceso:',e);
+  var mode=document.getElementById('dashAccessMode');
+  if(mode) mode.textContent='EDICIÓN';
+
+  if(currentSection === 'dashboard'){
+    try{ renderDashboard(); }catch(e){ console.warn('Dashboard:',e); }
   }
 }
 window.updateAdminModeUI = updateAdminModeUI;
 
 function toggleAdminPINModal(){
-  if(isAdminMode){
-    if(!confirm('¿Cerrar el perfil Editor y volver a Lector?')) return;
-
-    isAdminMode=false;
-    try{ sessionStorage.removeItem(EDITOR_SESSION_KEY); }catch(e){}
-    updateAdminModeUI();
-    toast('Modo Lector activado','info');
-    return;
-  }
-
-  openAdminPINModal();
+  isAdminMode=true;
+  applyAccessModeUI();
 }
 window.toggleAdminPINModal = toggleAdminPINModal;
 
 function openAdminPINModal(){
-  var m=document.getElementById('modalAdminPIN');
-  var err=document.getElementById('adminPINError');
-  var user=document.getElementById('editorUsername');
-  var pass=document.getElementById('editorPassword');
-
-  if(err){
-    err.style.display='none';
-    err.textContent='';
-  }
-  if(pass) pass.value='';
-
-  if(!m){
-    console.error('No se encontró modalAdminPIN');
-    return;
-  }
-
-  m.style.display='flex';
-  m.style.opacity='1';
-  m.style.pointerEvents='auto';
-
-  setTimeout(function(){
-    if(user){
-      user.focus();
-      user.select();
-    }
-  },30);
+  isAdminMode=true;
+  applyAccessModeUI();
 }
 window.openAdminPINModal = openAdminPINModal;
 
@@ -10026,34 +10098,8 @@ function closeAdminPINModal(){
 window.closeAdminPINModal = closeAdminPINModal;
 
 function verifyAdminPIN(){
-  var userEl=document.getElementById('editorUsername');
-  var passEl=document.getElementById('editorPassword');
-  var err=document.getElementById('adminPINError');
-
-  var user=String(userEl ? userEl.value : '').trim();
-  var pass=String(passEl ? passEl.value : '');
-
-  var validUser=user.toLowerCase() === EDITOR_USER.toLowerCase();
-  var validPass=pass === EDITOR_PASSWORD;
-
-  if(!validUser || !validPass){
-    if(err){
-      err.textContent='Usuario o contraseña incorrectos.';
-      err.style.display='block';
-    }
-    if(passEl){
-      passEl.value='';
-      passEl.focus();
-    }
-    return;
-  }
-
   isAdminMode=true;
-  try{ sessionStorage.setItem(EDITOR_SESSION_KEY,'1'); }catch(e){}
-
-  updateAdminModeUI();
-  closeAdminPINModal();
-  toast('Perfil Editor activado','success');
+  applyAccessModeUI();
 }
 window.verifyAdminPIN = verifyAdminPIN;
 
@@ -10075,11 +10121,6 @@ function closeMobileSidebar(){
 }
 
 function showSection(name, skipHashUpdate, skipScroll){
-  if(name === 'economia' && !isAdminMode){
-    toast('Economía está disponible solo para Editor.','info');
-    openAdminPINModal();
-    name = 'dashboard';
-  }
   currentSection = name;
   try {
     localStorage.setItem('dorneda_active_section', name);
@@ -10449,6 +10490,28 @@ function calcAsistidores(filterComp){
   const m={};
 
   for(const p of getStatPartidosJugados(filterComp)){
+    const detalles=toArr(p.asistenciasDetalle);
+
+    if(detalles.length){
+      const seenPlayers=new Set();
+
+      detalles.forEach(function(a){
+        if(!a || !a.asistente) return;
+        const canonName=getCanonicalPlayerName(a.asistente,a.dorsal) || a.asistente;
+        if(!m[canonName]) m[canonName]={asistencias:0,partidos:0};
+
+        m[canonName].asistencias++;
+
+        const k=normalizeName(canonName);
+        if(!seenPlayers.has(k)){
+          seenPlayers.add(k);
+          m[canonName].partidos++;
+        }
+      });
+      continue;
+    }
+
+    // Compatibilidad con fichas antiguas.
     for(const c of (p.convocados || [])){
       const canonName=getCanonicalPlayerName(c.nombre,c.dorsal);
       if(!canonName) continue;
@@ -10460,7 +10523,10 @@ function calcAsistidores(filterComp){
 
   return Object.entries(m)
     .filter(function(item){return item[1].asistencias > 0;})
-    .sort(function(a,b){return (b[1].asistencias-a[1].asistencias) || (a[1].partidos-b[1].partidos);});
+    .sort(function(a,b){
+      return (b[1].asistencias-a[1].asistencias) ||
+        String(a[0]).localeCompare(String(b[0]),'es',{sensitivity:'base'});
+    });
 }
 
 
@@ -11840,6 +11906,62 @@ function filtrarPartidos(filter, el){
 }
 window.filtrarPartidos = filtrarPartidos;
 
+
+function openUnifiedMatchFichaById(id){
+  var p=(db.partidos || []).find(function(x){ return Number(x.id)===Number(id); });
+  if(!p) return;
+
+  var comp=String(p.competicion || '').toLowerCase();
+  var isLiga=comp.indexOf('futgal') !== -1 || comp.indexOf('liga') !== -1;
+  var isCopa=comp.indexOf('copa') !== -1 || comp.indexOf('gallego') !== -1;
+
+  if(isLiga || isCopa){
+    var jornada=Number(p.jornada) || 0;
+    if(!jornada && p.codigo){
+      var jm=String(p.codigo).match(/^J(\d+)$/i);
+      if(jm) jornada=parseInt(jm[1],10) || 0;
+    }
+
+    var isHome=p.condicion === 'Local';
+    var local=isHome ? 'Xuventude Dorneda' : (p.rival || 'Rival');
+    var visitante=isHome ? (p.rival || 'Rival') : 'Xuventude Dorneda';
+
+    // Para Liga, completar siempre desde la fuente oficial si existe.
+    if(isLiga && typeof getLigaJornadasOficiales === 'function'){
+      var jornadas=getLigaJornadasOficiales() || [];
+      var jObj=jornadas.find(function(j){ return Number(j.jornada)===Number(jornada); });
+      if(jObj && jObj.partidos){
+        var official=jObj.partidos.find(function(m){
+          if(p.codActa && m.codActa && String(p.codActa)===String(m.codActa)) return true;
+          var n=function(s){ return normalizeName(String(s || '')); };
+          return (n(m.local)===n(local) && n(m.visitante)===n(visitante)) ||
+                 (n(m.local).indexOf('dorneda')!==-1 && n(local).indexOf('dorneda')!==-1) ||
+                 (n(m.visitante).indexOf('dorneda')!==-1 && n(visitante).indexOf('dorneda')!==-1);
+        });
+        if(official){
+          local=official.local || local;
+          visitante=official.visitante || visitante;
+          p.codActa=p.codActa || official.codActa || '';
+          p.enlaceActa=p.enlaceActa || official.enlaceActa || '';
+        }
+      }
+    }
+
+    openFichaActaOficial(
+      jornada || 1,
+      local,
+      visitante,
+      p.enlaceActa || '',
+      p.codActa || ''
+    );
+    return;
+  }
+
+  // Pretemporada u otros partidos sin acta oficial: mantenemos la ficha propia antigua.
+  showDetallePartido(id);
+}
+window.openUnifiedMatchFichaById=openUnifiedMatchFichaById;
+
 function renderPartidos(){
   let p = [...db.partidos];
   
@@ -11901,7 +12023,7 @@ function renderPartidos(){
     var actaBtn = x.enlaceActa ? `<a href="${x.enlaceActa}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" style="background:#285b4f;color:#ffffff;padding:2px 6px;border-radius:3px;font-size:9px;font-weight:700;display:inline-flex;align-items:center;gap:3px;text-decoration:none;border:1px solid #1e453c;white-space:nowrap;line-height:1;" title="Ver Acta Oficial en FUTGAL">📄 Acta ↗</a>` : '';
 
     return `
-      <div class="copa-match-row ${statusClass} ${resClass}" onclick="showDetallePartido(${x.id})" style="cursor:pointer;padding:6px 10px !important;min-height:34px !important;">
+      <div class="copa-match-row ${statusClass} ${resClass}" onclick="openUnifiedMatchFichaById(${x.id})" style="cursor:pointer;padding:6px 10px !important;min-height:34px !important;">
         <!-- Col 1: Competición / Fecha / Horario / Campo -->
         <div style="width:200px;flex-shrink:0;font-size:10.5px;color:var(--text-dim);display:flex;align-items:center;gap:6px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
           <span class="badge ${badgeCompClass}" style="font-size:9px;font-weight:900;padding:1px 6px;flex-shrink:0;">${compIcon} ${codeTag}</span>
@@ -11940,7 +12062,7 @@ function renderPartidos(){
 
         <!-- Col 6: Botones Acción -->
         <div style="width:120px;flex-shrink:0;display:flex;align-items:center;justify-content:flex-end;gap:4px;" onclick="event.stopPropagation()">
-          <button type="button" class="btn btn-primary btn-xs" style="font-size:9.5px;font-weight:800;padding:2px 7px;display:inline-flex;align-items:center;gap:3px;white-space:nowrap;border-radius:3px;" onclick="showDetallePartido(${x.id})" title="Ver Ficha y Estadísticas del Partido">
+          <button type="button" class="btn btn-primary btn-xs" style="font-size:9.5px;font-weight:800;padding:2px 7px;display:inline-flex;align-items:center;gap:3px;white-space:nowrap;border-radius:3px;" onclick="openUnifiedMatchFichaById(${x.id})" title="Abrir la misma Ficha de Competiciones">
             📋 Ficha
           </button>
           ${actaBtn}
@@ -14653,6 +14775,386 @@ function renderMatchesCards(matches, jornadaNum, jornadaFecha, container){
   }).join('');
 }
 
+
+let currentCoachNotebookContext = null;
+
+function coachNotebookIsDorneda(name){
+  return /dorneda/i.test(String(name || ''));
+}
+
+function coachNotebookFindManualMatch(ctx){
+  if(!ctx) return null;
+  return (db.partidos || []).find(function(p){
+    if(!p) return false;
+    if(ctx.codActa && p.codActa && String(p.codActa) === String(ctx.codActa)) return true;
+    if(ctx.jornada && (p.codigo === 'J'+ctx.jornada || Number(p.jornada) === Number(ctx.jornada))) return true;
+    return false;
+  }) || null;
+}
+
+function coachNotebookBuildRoster(match, acta){
+  var dornedaLocal=coachNotebookIsDorneda(match.local);
+  var list=dornedaLocal
+    ? toArr(acta.localTitulares).concat(toArr(acta.localSuplentes))
+    : toArr(acta.visitTitulares).concat(toArr(acta.visitSuplentes));
+
+  var seen=new Set();
+  return list.map(function(pl){
+    if(!pl || !pl.nombre) return null;
+    var canonical=getCanonicalPlayerName(pl.nombre,pl.dorsal) || formatOfficialPersonName(pl.nombre);
+    var key=normalizeName(canonical);
+    if(!key || seen.has(key)) return null;
+    seen.add(key);
+    return {
+      nombre:canonical,
+      dorsal:pl.dorsal || ''
+    };
+  }).filter(Boolean).sort(function(a,b){
+    var da=parseInt(a.dorsal,10), dbb=parseInt(b.dorsal,10);
+    if(Number.isFinite(da) && Number.isFinite(dbb)) return da-dbb;
+    if(Number.isFinite(da)) return -1;
+    if(Number.isFinite(dbb)) return 1;
+    return a.nombre.localeCompare(b.nombre,'es',{sensitivity:'base'});
+  });
+}
+
+function coachNotebookDornedaGoals(match, acta){
+  var raw=toArr(acta.allGoles || acta.goles);
+  if(!raw.length) return [];
+
+  var roster=goleadoresRosterMap(acta,match);
+  var dornedaLocal=coachNotebookIsDorneda(match.local);
+  var curL=0,curV=0;
+  var rows=[];
+
+  raw.forEach(function(g,index){
+    var clean=cleanAndFormatGoal(g);
+    if(!clean) return;
+
+    var side='';
+    var prog=clean.scoreProgression || '';
+    var pm=prog.match(/(\d+)\s*-\s*(\d+)/);
+    if(pm){
+      var nextL=parseInt(pm[1],10);
+      var nextV=parseInt(pm[2],10);
+      if(nextL>curL) side='local';
+      else if(nextV>curV) side='visitante';
+      curL=nextL;
+      curV=nextV;
+    }
+
+    var rosterInfo=roster.get(goleadoresNorm(g.rawScorer || clean.rawScorer || clean.scorerName));
+    if(!side && rosterInfo){
+      side=coachNotebookIsDorneda(rosterInfo.equipo)
+        ? (dornedaLocal ? 'local' : 'visitante')
+        : (dornedaLocal ? 'visitante' : 'local');
+    }
+
+    var dornedaScored=(dornedaLocal && side==='local') || (!dornedaLocal && side==='visitante');
+    if(!dornedaScored) return;
+
+    var ownGoal=!!clean.propiaPuerta;
+    var scorer=clean.scorerName || clean.rawScorer || 'Gol';
+    var scorerBelongsDorneda=!!(rosterInfo && coachNotebookIsDorneda(rosterInfo.equipo));
+
+    // Un gol en propia puerta a favor del Dorneda no admite asistencia.
+    var assistable=!ownGoal && scorerBelongsDorneda;
+
+    var minute=clean.minuto || '';
+    var key=[
+      String(minute || ''),
+      String(clean.scoreProgression || ''),
+      goleadoresNorm(scorer),
+      String(index)
+    ].join('|');
+
+    rows.push({
+      key:key,
+      minuto:minute,
+      parcial:clean.scoreProgression || '',
+      goleador:scorer,
+      assistable:assistable,
+      ownGoal:ownGoal
+    });
+  });
+
+  return rows;
+}
+
+function coachNotebookEscapeAttr(v){
+  return String(v === null || v === undefined ? '' : v)
+    .replace(/&/g,'&amp;')
+    .replace(/"/g,'&quot;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;');
+}
+
+
+function toggleCoachNotebookEditor(forceOpen){
+  var editor=document.getElementById('coachNotebookEditor');
+  var btn=document.getElementById('btnEditMatchSheet');
+  if(!editor) return;
+
+  var shouldOpen=(typeof forceOpen === 'boolean')
+    ? forceOpen
+    : (editor.style.display === 'none' || !editor.style.display);
+
+  editor.style.display=shouldOpen ? 'block' : 'none';
+
+  if(btn){
+    btn.innerHTML=shouldOpen
+      ? '<span>\u2715 Cerrar edición</span>'
+      : '<span>\u270e Editar Ficha de Partido</span>';
+  }
+
+  if(shouldOpen){
+    setTimeout(function(){
+      try{ editor.scrollIntoView({behavior:'smooth',block:'nearest'}); }catch(e){}
+    },20);
+  }
+}
+window.toggleCoachNotebookEditor=toggleCoachNotebookEditor;
+
+
+function coachNotebookViewRender(pManual){
+  var assists=toArr(pManual && pManual.asistenciasDetalle);
+  var obs=(pManual && (pManual.analisisPartido || pManual.observacionesEntrenador || pManual.observacionesRival)) || '';
+
+  // Si la ficha todavía no tiene datos propios, no añadimos ruido visual.
+  if(!assists.length && !String(obs).trim()) return '';
+
+  var assistHtml=assists.length ? assists.map(function(a){
+    var min=a && a.minuto ? String(a.minuto)+"'" : '—';
+    var scorer=(a && a.goleador) ? a.goleador : 'Gol';
+    var assistant=(a && a.asistente) ? a.asistente : '—';
+    return `<div class="coach-notebook-assist-row">
+      <div class="coach-notebook-assist-minute">${min}</div>
+      <div class="coach-notebook-assist-text"><strong>${scorer}</strong> · Asistencia: <strong>${assistant}</strong></div>
+    </div>`;
+  }).join('') : '<div class="coach-notebook-view-empty">Sin asistencias registradas.</div>';
+
+  var obsSafe=String(obs || '')
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;');
+
+  return `
+    <div class="coach-notebook-view">
+      <div class="coach-notebook-view-head">
+        <div class="coach-notebook-view-title">Cuaderno del entrenador</div>
+      </div>
+      <div class="coach-notebook-view-grid">
+        <div class="coach-notebook-view-col">
+          <div class="coach-notebook-view-label">Asistencias</div>
+          ${assistHtml}
+        </div>
+        <div class="coach-notebook-view-col">
+          <div class="coach-notebook-view-label">Observaciones del entrenador</div>
+          ${obsSafe
+            ? `<div class="coach-notebook-observation-text">${obsSafe}</div>`
+            : '<div class="coach-notebook-view-empty">Sin observaciones registradas.</div>'}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function coachNotebookRender(match,acta,pManual,jornadaNum){
+  var roster=coachNotebookBuildRoster(match,acta);
+  var goals=coachNotebookDornedaGoals(match,acta);
+  var saved=toArr(pManual && pManual.asistenciasDetalle);
+  var obs=(pManual && (pManual.analisisPartido || pManual.observacionesEntrenador || pManual.observacionesRival)) || '';
+
+  var assistRows='';
+  if(goals.length){
+    assistRows=goals.map(function(g){
+      var previous=saved.find(function(a){
+        if(!a) return false;
+        if(a.goalKey && a.goalKey===g.key) return true;
+        return String(a.minuto || '')===String(g.minuto || '') &&
+          normalizeName(a.goleador || '')===normalizeName(g.goleador || '');
+      });
+      var selected=previous ? (previous.asistente || '') : '';
+
+      var options='<option value="">— Sin asistencia —</option>';
+      roster.forEach(function(pl){
+        var val=coachNotebookEscapeAttr(pl.nombre);
+        var label=(pl.dorsal ? '#'+pl.dorsal+' · ' : '')+pl.nombre;
+        options += '<option value="'+val+'" '+(normalizeName(selected)===normalizeName(pl.nombre)?'selected':'')+'>'+label+'</option>';
+      });
+
+      if(!g.assistable){
+        return `<tr>
+          <td style="width:52px;text-align:center;font-weight:800;">${g.minuto ? g.minuto+"'" : '—'}</td>
+          <td style="width:64px;text-align:center;font-weight:800;">${g.parcial || '—'}</td>
+          <td style="font-weight:700;">${g.goleador}${g.ownGoal ? ' · p.p.' : ''}</td>
+          <td style="color:var(--text-dim);font-style:italic;">No procede</td>
+        </tr>`;
+      }
+
+      return `<tr>
+        <td style="width:52px;text-align:center;font-weight:800;">${g.minuto ? g.minuto+"'" : '—'}</td>
+        <td style="width:64px;text-align:center;font-weight:800;">${g.parcial || '—'}</td>
+        <td style="font-weight:700;">${g.goleador}</td>
+        <td>
+          <select class="coach-assist-select"
+                  data-coach-goal-key="${coachNotebookEscapeAttr(g.key)}"
+                  data-coach-minute="${coachNotebookEscapeAttr(g.minuto)}"
+                  data-coach-scorer="${coachNotebookEscapeAttr(g.goleador)}">
+            ${options}
+          </select>
+        </td>
+      </tr>`;
+    }).join('');
+  }else{
+    assistRows='<tr><td colspan="4" class="coach-notebook-empty">No hay goles del Dorneda disponibles en el acta.</td></tr>';
+  }
+
+  currentCoachNotebookContext={
+    jornada:Number(jornadaNum || match.jornada || 0),
+    codActa:match.codActa || '',
+    local:match.local || '',
+    visitante:match.visitante || '',
+    fecha:match.fecha || '',
+    hora:match.hora || '',
+    campo:match.campo || '',
+    gl:match.gl,
+    gv:match.gv
+  };
+
+  return `
+    <div class="coach-notebook" id="coachNotebookEditor" style="display:none;">
+      <div class="coach-notebook-head">
+        <div class="coach-notebook-title">Cuaderno del entrenador</div>
+        <div class="coach-notebook-note">Datos propios de la Ficha · el Acta FUTGAL no se modifica</div>
+      </div>
+
+      <div class="coach-notebook-body">
+        <div class="coach-notebook-block">
+          <div class="coach-notebook-block-title">Asistencias</div>
+          <div style="overflow-x:auto;">
+            <table class="coach-assist-table">
+              <thead>
+                <tr>
+                  <th style="width:52px;">Min.</th>
+                  <th style="width:64px;">Marcador</th>
+                  <th>Goleador</th>
+                  <th>Asistente</th>
+                </tr>
+              </thead>
+              <tbody>${assistRows}</tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="coach-notebook-block">
+          <div class="coach-notebook-block-title">Observaciones del entrenador</div>
+          <textarea id="coachNotebookObservations"
+                    class="coach-observations"
+                    placeholder="Observaciones del entrenador: análisis del partido, rival, ajustes tácticos, aspectos a mejorar...">${String(obs).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</textarea>
+        </div>
+      </div>
+
+      <div class="coach-notebook-actions">
+        <button type="button" class="btn btn-ghost coach-notebook-save" onclick="saveCuadernoEntrenador()">Guardar Ficha de Partido</button>
+      </div>
+    </div>
+  `;
+}
+
+function coachNotebookCreateManualMatch(ctx){
+  var dornedaLocal=coachNotebookIsDorneda(ctx.local);
+  var rival=dornedaLocal ? ctx.visitante : ctx.local;
+  var gf=(ctx.gl !== null && ctx.gl !== undefined && ctx.gv !== null && ctx.gv !== undefined)
+    ? Number(dornedaLocal ? ctx.gl : ctx.gv)
+    : null;
+  var gc=(ctx.gl !== null && ctx.gl !== undefined && ctx.gv !== null && ctx.gv !== undefined)
+    ? Number(dornedaLocal ? ctx.gv : ctx.gl)
+    : null;
+
+  var resultado='';
+  if(gf !== null && gc !== null){
+    resultado=gf>gc ? 'Victoria' : (gf<gc ? 'Derrota' : 'Empate');
+  }
+
+  return {
+    id:Date.now(),
+    tipo:'Oficial',
+    competicion:'Primera Futgal',
+    codigo:ctx.jornada ? 'J'+ctx.jornada : '',
+    jornada:ctx.jornada || null,
+    fecha:ctx.fecha || '',
+    horaPartido:ctx.hora || '',
+    rival:rival || '',
+    condicion:dornedaLocal ? 'Local' : 'Visitante',
+    campo:ctx.campo || '',
+    gf:gf,
+    gc:gc,
+    resultado:resultado,
+    codActa:ctx.codActa || '',
+    enlaceActa:'',
+    convocados:[],
+    ausentes:[],
+    asistenciasDetalle:[],
+    analisisPartido:'',
+    observacionesEntrenador:'',
+    origenFicha:'ACTA_FUTGAL'
+  };
+}
+
+function saveCuadernoEntrenador(){
+  var ctx=currentCoachNotebookContext;
+  if(!ctx) return;
+
+  var p=coachNotebookFindManualMatch(ctx);
+  if(!p){
+    p=coachNotebookCreateManualMatch(ctx);
+    if(!db.partidos) db.partidos=[];
+    db.partidos.push(p);
+  }
+
+  var detail=[];
+  document.querySelectorAll('[data-coach-goal-key]').forEach(function(sel){
+    var asistente=String(sel.value || '').trim();
+    if(!asistente) return;
+
+    var player=(db.jugadores || []).find(function(j){
+      return normalizeName(j.nombre)===normalizeName(asistente);
+    });
+
+    detail.push({
+      goalKey:sel.getAttribute('data-coach-goal-key') || '',
+      minuto:sel.getAttribute('data-coach-minute') || '',
+      goleador:sel.getAttribute('data-coach-scorer') || '',
+      asistente:asistente,
+      dorsal:player && player.dorsal ? player.dorsal : ''
+    });
+  });
+
+  var obsEl=document.getElementById('coachNotebookObservations');
+  var observations=obsEl ? obsEl.value.trim() : '';
+
+  p.asistenciasDetalle=detail;
+  p.analisisPartido=observations;
+  p.observacionesEntrenador=observations;
+
+  // Mantener vínculo con el acta y datos básicos para compatibilidad.
+  p.codigo=p.codigo || (ctx.jornada ? 'J'+ctx.jornada : '');
+  p.jornada=p.jornada || ctx.jornada || null;
+  p.codActa=p.codActa || ctx.codActa || '';
+  p.fecha=p.fecha || ctx.fecha || '';
+  p.campo=p.campo || ctx.campo || '';
+
+  markPartidosEdited();
+  saveDB();
+  toast('Cuaderno del entrenador guardado','success');
+
+  // Refrescar la ficha y mantener visible el área de edición.
+  openFichaActaOficial(ctx.jornada,ctx.local,ctx.visitante,'',ctx.codActa);
+  setTimeout(function(){ toggleCoachNotebookEditor(true); },40);
+}
+window.saveCuadernoEntrenador=saveCuadernoEntrenador;
+
 function openFichaActaOficial(jornadaNum, localTeam, visitTeam, enlaceActa, codActa){
   var titleEl = document.getElementById('fichaActaTitle') || document.getElementById('fichaActaOficialTitle');
   var bodyEl = document.getElementById('fichaActaContent') || document.getElementById('fichaActaOficialBody');
@@ -14705,7 +15207,7 @@ function openFichaActaOficial(jornadaNum, localTeam, visitTeam, enlaceActa, codA
   // Paso 2D: acta oficial exclusivamente desde el partido importado en db.todasJornadas.
   acta = acta || {};
 
-  var isDornedaMatch = (match.local && match.local.indexOf('Dorneda') !== -1) || (match.visitante && match.visitante.indexOf('Dorneda') !== -1);
+  var isDornedaMatch = normT(match.local).includes('dorneda') || normT(match.visitante).includes('dorneda');
   var hasScore = (match.gl !== null && match.gl !== undefined) && (match.gv !== null && match.gv !== undefined);
   var actaUrl = match.enlaceActa || (match.codActa ? `https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=${match.codActa}&cod_acta=${match.codActa}` : (enlaceActa || ''));
 
@@ -14722,7 +15224,7 @@ function openFichaActaOficial(jornadaNum, localTeam, visitTeam, enlaceActa, codA
   if(isDornedaMatch){
     var pDorneda = (db.partidos || []).find(function(x){ return x.codigo === ('J' + jornadaNum) || x.jornada === jornadaNum || (x.codActa && x.codActa === (match.codActa || codActa)); });
     if(pDorneda){
-      var isHome = pDorneda.condicion === 'Local' || (match.local && match.local.indexOf('Dorneda') !== -1);
+      var isHome = pDorneda.condicion === 'Local' || normT(match.local).includes('dorneda');
       if((!acta.localTitulares || !acta.localTitulares.length) && pDorneda.convocados && pDorneda.convocados.length){
         var dTit = pDorneda.convocados.filter(function(c){ return c.titular; }).map(function(c, i){ return { dorsal: c.dorsal || (i+1), nombre: c.nombreCompleto || c.nombre }; });
         var dSup = pDorneda.convocados.filter(function(c){ return !c.titular; }).map(function(c, i){ return { dorsal: c.dorsal || (12+i), nombre: c.nombreCompleto || c.nombre }; });
@@ -14749,10 +15251,10 @@ function openFichaActaOficial(jornadaNum, localTeam, visitTeam, enlaceActa, codA
         if(!isHome && (!acta.visitStaff || !acta.visitStaff.length)) acta.visitStaff = [staffItem];
       }
       if(pDorneda.tarjetasDetalle && pDorneda.tarjetasDetalle.length){
-        var dornedaTarjetas = pDorneda.tarjetasDetalle.filter(function(t){ return !t.equipo || t.equipo.indexOf('Dorneda') !== -1; }).map(function(t){
+        var dornedaTarjetas = pDorneda.tarjetasDetalle.filter(function(t){ return !t.equipo || normT(t.equipo).includes('dorneda'); }).map(function(t){
           return { minuto: t.minuto, tipo: t.tipo || 'Amarilla', nombre: (t.dorsal ? '#' + t.dorsal + ' ' : '') + t.jugador };
         });
-        var rivalTarjetas = pDorneda.tarjetasDetalle.filter(function(t){ return t.equipo && t.equipo.indexOf('Dorneda') === -1; }).map(function(t){
+        var rivalTarjetas = pDorneda.tarjetasDetalle.filter(function(t){ return t.equipo && !normT(t.equipo).includes('dorneda'); }).map(function(t){
           return { minuto: t.minuto, tipo: t.tipo || 'Amarilla', nombre: (t.dorsal ? '#' + t.dorsal + ' ' : '') + t.jugador };
         });
         if(isHome){
@@ -14802,7 +15304,7 @@ function openFichaActaOficial(jornadaNum, localTeam, visitTeam, enlaceActa, codA
     <!-- HEADER MARCADOR -->
     <div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;">
       <div style="flex:1;text-align:center;">
-        <div style="font-size:16px;font-weight:900;color:${cleanLocalName.indexOf('Dorneda') !== -1 ? 'var(--red-light)' : 'var(--text)'};">${cleanLocalName}</div>
+        <div style="font-size:16px;font-weight:900;color:${normT(cleanLocalName).includes('dorneda') ? 'var(--red-light)' : 'var(--text)'};">${cleanLocalName}</div>
         <div style="font-size:11px;color:var(--text-muted);margin-top:2px;">Equipo Local</div>
       </div>
       <div style="text-align:center;padding:0 16px;">
@@ -14814,7 +15316,7 @@ function openFichaActaOficial(jornadaNum, localTeam, visitTeam, enlaceActa, codA
         </div>
       </div>
       <div style="flex:1;text-align:center;">
-        <div style="font-size:16px;font-weight:900;color:${cleanVisitName.indexOf('Dorneda') !== -1 ? 'var(--red-light)' : 'var(--text)'};">${cleanVisitName}</div>
+        <div style="font-size:16px;font-weight:900;color:${normT(cleanVisitName).includes('dorneda') ? 'var(--red-light)' : 'var(--text)'};">${cleanVisitName}</div>
         <div style="font-size:11px;color:var(--text-muted);margin-top:2px;">Equipo Visitante</div>
       </div>
     </div>
@@ -14937,6 +15439,16 @@ function openFichaActaOficial(jornadaNum, localTeam, visitTeam, enlaceActa, codA
             <span>\u2197</span>
           </a>
         ` : ''}
+
+        ${isDornedaMatch ? `
+          <button type="button"
+                  id="btnEditMatchSheet"
+                  class="btn btn-ghost btn-sm"
+                  onclick="toggleCoachNotebookEditor()"
+                  style="width:100%;justify-content:center;font-weight:800;font-size:11.5px;border:1px solid var(--border);border-radius:8px;padding:8px;gap:6px;">
+            <span>\u270e Editar Ficha de Partido</span>
+          </button>
+        ` : ''}
       </div>
 
       <!-- COLUMNA 3: EQUIPO VISITANTE -->
@@ -15008,6 +15520,11 @@ function openFichaActaOficial(jornadaNum, localTeam, visitTeam, enlaceActa, codA
 
     </div>
   `;
+
+  if(isDornedaMatch){
+    html += coachNotebookViewRender(pDorneda || null);
+    html += coachNotebookRender(match,acta,pDorneda || null,jornadaNum);
+  }
 
   bodyEl.innerHTML = html;
   openModal(modalId);
@@ -20419,12 +20936,7 @@ function initApp(){
   initTheme();
   updateEconLockUI();
 
-  try{
-    isAdminMode = sessionStorage.getItem(EDITOR_SESSION_KEY) === '1';
-  }catch(e){
-    isAdminMode = false;
-  }
-
+  isAdminMode = true;
   initFirebaseSync();
   updateAdminModeUI();
 
