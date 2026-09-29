@@ -3576,6 +3576,12 @@ body.reader-mode #modalFotoUploadInput{display:none!important}
   .dash-summary-table{min-width:560px}
 }
 
+
+/* PASO 16C · ACCESO EDITOR SIEMPRE CLICABLE */
+.access-mode-box{position:relative;z-index:130}
+.access-mode-btn{position:relative;z-index:131;pointer-events:auto!important}
+#modalAdminPIN{pointer-events:auto}
+
 </style>
 </head>
 <body class="reader-mode">
@@ -4998,7 +5004,11 @@ body.reader-mode #modalFotoUploadInput{display:none!important}
           </div>
         </div>
       </div>
-    <!-- MODAL DE ACCESO SEGURO / MODO EDICIÓN -->
+  </main>
+</div>
+
+
+<!-- MODAL DE ACCESO SEGURO / MODO EDICIÓN -->
     <div class="modal-backdrop" id="modalAdminPIN" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);z-index:9999;align-items:center;justify-content:center;" onclick="if(event.target===this)closeAdminPINModal()">
       <div class="modal card" style="max-width:360px;width:90%;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
@@ -5015,8 +5025,6 @@ body.reader-mode #modalFotoUploadInput{display:none!important}
         </div>
       </div>
     </div>
-  </main>
-</div>
 
 <script>
 const DB_KEY='dorneda_2627_v19';
