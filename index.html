@@ -3229,6 +3229,57 @@
   }
 }
 
+
+/* ==========================================================
+   PASO 15A · ANÁLISIS · PRÓXIMO RIVAL
+   ========================================================== */
+.scout-shell{display:flex;flex-direction:column;gap:10px}
+.scout-topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:8px 10px;background:var(--surface2);border:1px solid var(--border);border-radius:8px}
+.scout-name{font-size:15px;font-weight:900;color:var(--text);line-height:1.1}
+.scout-select{height:30px !important;min-height:30px !important;padding:3px 8px !important;font-size:10.5px !important;font-weight:800 !important;max-width:260px;border-radius:6px !important}
+.scout-head-stats{display:grid;grid-template-columns:repeat(5,minmax(95px,1fr));gap:5px}
+.scout-stat{padding:6px 8px;background:var(--surface);border:1px solid var(--border);border-radius:6px;min-height:47px;display:flex;flex-direction:column;justify-content:center}
+.scout-stat-label{font-size:7.5px;font-weight:900;color:var(--text-dim);text-transform:uppercase;letter-spacing:.35px;margin-bottom:2px}
+.scout-stat-value{font-size:15px;font-weight:900;color:var(--text);line-height:1}
+.scout-stat-value.small{font-size:11px;letter-spacing:.8px}
+.scout-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:9px 10px}
+.scout-card-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:7px;padding-bottom:5px;border-bottom:1px solid var(--border)}
+.scout-title{font-size:11px;font-weight:900;color:var(--text)}
+.scout-muted{font-size:9px;color:var(--text-dim)}
+.scout-coach-layout{display:grid;grid-template-columns:minmax(260px,1.1fr) minmax(300px,1.4fr);gap:8px}
+.scout-note-input{width:100%;min-height:76px;resize:vertical;padding:7px 8px !important;font-size:10.5px !important;line-height:1.35 !important}
+.scout-note-save{height:25px !important;min-height:25px !important;padding:2px 8px !important;font-size:9px !important;margin-top:5px}
+.scout-history{display:flex;flex-direction:column;gap:4px;max-height:145px;overflow:auto}
+.scout-history-row{display:grid;grid-template-columns:76px 70px 1fr;gap:6px;align-items:start;padding:5px 0;border-bottom:1px solid var(--border);font-size:9.5px;line-height:1.25}
+.scout-history-row:last-child{border-bottom:0}
+.scout-history-date{color:var(--text-dim);white-space:nowrap}
+.scout-history-code{font-weight:800;color:var(--text-muted);white-space:nowrap}
+.scout-history-text{color:var(--text)}
+.scout-main-grid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(250px,.8fr);gap:8px}
+.scout-table{width:100%;border-collapse:collapse;font-size:9.5px}
+.scout-table th{padding:4px 6px;background:var(--surface2);border-bottom:1px solid var(--border);font-size:7.5px;text-transform:uppercase;color:var(--text-dim);letter-spacing:.3px;text-align:left}
+.scout-table td{padding:4px 6px;border-bottom:1px solid var(--border);vertical-align:middle}
+.scout-table tr:last-child td{border-bottom:0}
+.scout-table .k{color:var(--text-muted);font-weight:700;width:31%}
+.scout-table .v{font-weight:900;color:var(--text);width:19%}
+.scout-goals-table th:nth-child(1),.scout-goals-table td:nth-child(1){width:48px;text-align:center}
+.scout-goals-table th:nth-child(3),.scout-goals-table td:nth-child(3){width:58px;text-align:center}
+.scout-goals-table td:nth-child(3){font-weight:900;color:var(--success)}
+.scout-chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.scout-bar-row{display:grid;grid-template-columns:55px 1fr 34px;gap:6px;align-items:center;margin:5px 0}
+.scout-bar-label{font-size:8.5px;font-weight:800;color:var(--text-muted)}
+.scout-bar-bg{height:7px;background:var(--surface3);border-radius:4px;overflow:hidden}
+.scout-bar-fill{height:100%;background:var(--red);border-radius:4px}
+.scout-bar-val{text-align:right;font-size:8.5px;font-weight:900;color:var(--text)}
+.scout-bar-fill.against{background:var(--text-dim)}
+.scout-top5-row{display:grid;grid-template-columns:34px minmax(100px,180px) 1fr 30px;gap:6px;align-items:center;margin:5px 0}
+.scout-top5-num{font-size:8px;font-weight:900;color:var(--text-dim);text-align:center}
+.scout-top5-name{font-size:9px;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.scout-top5-goles{text-align:right;font-size:9px;font-weight:900;color:var(--success)}
+.scout-sample{padding:5px 8px;background:var(--surface2);border-radius:5px;font-size:8.5px;color:var(--text-dim);text-align:right}
+@media(max-width:900px){.scout-head-stats{grid-template-columns:repeat(3,1fr)}.scout-coach-layout,.scout-main-grid,.scout-chart-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.scout-head-stats{grid-template-columns:repeat(2,1fr)}.scout-topbar{align-items:stretch}.scout-select{max-width:none;width:100%}.scout-history-row{grid-template-columns:70px 58px 1fr}}
+
 </style>
 </head>
 <body>
@@ -9326,9 +9377,32 @@ function initFirebaseSync(){
                 });
               }
 
+              var localScoutingAt = Number(localMeta.scoutingLastEditAt) || 0;
+              var cloudScoutingAt = Number(cloudMeta.scoutingLastEditAt) || 0;
+              if(db && db.scoutingNotas && localScoutingAt > cloudScoutingAt){
+                ensureIncomingClone();
+                incomingDb.scoutingNotas = JSON.parse(JSON.stringify(db.scoutingNotas));
+                incomingDb._syncMeta = Object.assign({}, incomingDb._syncMeta || {}, {
+                  scoutingLastEditAt: localScoutingAt
+                });
+              }
+
+              var localPartidosAt = Number(localMeta.partidosLastEditAt) || 0;
+              var cloudPartidosAt = Number(cloudMeta.partidosLastEditAt) || 0;
+              if(db && Array.isArray(db.partidos) && localPartidosAt > cloudPartidosAt){
+                ensureIncomingClone();
+                incomingDb.partidos = JSON.parse(JSON.stringify(db.partidos));
+                incomingDb._syncMeta = Object.assign({}, incomingDb._syncMeta || {}, {
+                  partidosLastEditAt: localPartidosAt
+                });
+              }
+
               var res = validateAndMigrateDB(incomingDb);
               db = res.dbObj;
-              needsCloudUpdate = res.modified || (localPlantillaAt > cloudPlantillaAt && isAdminMode);
+              needsCloudUpdate = res.modified ||
+                (localPlantillaAt > cloudPlantillaAt && isAdminMode) ||
+                (localScoutingAt > cloudScoutingAt && isAdminMode) ||
+                (localPartidosAt > cloudPartidosAt && isAdminMode);
               localStorage.setItem(DB_KEY, JSON.stringify(db));
               if(typeof currentSection !== 'undefined'){
                 renderSection(currentSection);
@@ -9400,6 +9474,41 @@ function markPlantillaEdited(){
   db._syncMeta.plantillaLastEditAt = Date.now();
 }
 window.markPlantillaEdited = markPlantillaEdited;
+
+
+function markScoutingEdited(){
+  if(!db._syncMeta) db._syncMeta = {};
+  db._syncMeta.scoutingLastEditAt = Date.now();
+}
+window.markScoutingEdited = markScoutingEdited;
+
+function markPartidosEdited(){
+  if(!db._syncMeta) db._syncMeta = {};
+  db._syncMeta.partidosLastEditAt = Date.now();
+}
+window.markPartidosEdited = markPartidosEdited;
+
+function scoutingNoteKey(team){
+  return String(team || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g,'')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g,'_')
+    .replace(/^_+|_+$/g,'');
+}
+
+function saveScoutingCoachNote(team){
+  const el=document.getElementById('scoutCoachNote');
+  if(!el) return;
+  if(!db.scoutingNotas) db.scoutingNotas={};
+  const key=scoutingNoteKey(team);
+  db.scoutingNotas[key]={equipo:team,texto:el.value.trim(),updatedAt:new Date().toISOString()};
+  markScoutingEdited();
+  saveDB();
+  toast('Anotación del entrenador guardada','success');
+  renderAnalisisProximoRival(team);
+}
+window.saveScoutingCoachNote=saveScoutingCoachNote;
 
 function markEconomiaEdited(){
   if(!db.economia) db.economia = {};
@@ -10805,6 +10914,9 @@ function deleteJugador(id){
   if(!confirm('¿Eliminar este miembro?')) return;
   db.jugadores = db.jugadores.filter(x => x.id !== id);
   markPlantillaEdited();
+  if(db.economia && typeof syncCuotasDesdeMovimientos === 'function'){
+    syncCuotasDesdeMovimientos(false);
+  }
   saveDB();
   closeModal('modalJugador');
   renderPlantilla();
@@ -15033,7 +15145,8 @@ function renderAnalisisProximoRival(selectedTeam){
     }) || { pos: '-', pts: 0, pj: 0, pg: 0, pe: 0, pp: 0, gf: 0, gc: 0, dg: 0 };
 
     // 4. Recopilar todos los partidos de este rival en todasJornadas
-    var todasJ = toArr((db && db.todasJornadas && db.todasJornadas.length) ? db.todasJornadas : (DEFAULT_DATA.todasJornadas || []));
+    var officialJ = (typeof getLigaJornadasOficiales === 'function') ? toArr(getLigaJornadasOficiales()) : [];
+    var todasJ = officialJ.length ? officialJ : toArr((db && db.todasJornadas && db.todasJornadas.length) ? db.todasJornadas : (DEFAULT_DATA.todasJornadas || []));
     var defTodasJ = toArr(DEFAULT_DATA.todasJornadas);
     var rivalMatches = [];
     var plantillaMap = {};
@@ -15379,437 +15492,182 @@ function renderAnalisisProximoRival(selectedTeam){
     var maxGfSlot = Object.keys(gfSlots).reduce(function(a, b){ return gfSlots[a] >= gfSlots[b] ? a : b; }, '0-15');
     var maxGcSlot = Object.keys(gcSlots).reduce(function(a, b){ return gcSlots[a] >= gcSlots[b] ? a : b; }, '0-15');
 
-    // Generar Conclusiones Tácticas en Modo Lista
-    var conclusiones = [];
-    
-    // 1. Peligro Ofensivo
-    if(top4Goleadores.length > 0){
-      var artillerosHtml = top4Goleadores.map(function(g){
-        var minsHtml = g.minutos.length ? '<span style="font-size:11px;color:var(--text-dim);font-weight:600;margin-left:4px;">(mins ' + g.minutos.join('\', ') + '\')</span>' : '';
-        return '<span style="display:inline-flex;align-items:center;background:var(--surface2);border:1px solid var(--border);padding:3px 8px;border-radius:6px;margin:2px 4px 2px 0;">' +
-                 '<span style="background:var(--primary);color:#fff;font-weight:900;font-size:10px;padding:1px 5px;border-radius:4px;margin-right:6px;">#' + g.dorsal + '</span>' +
-                 '<strong style="font-size:12.5px;color:var(--text);">' + g.nombre + '</strong>' +
-                 '<span class="badge badge-success" style="font-size:10px;font-weight:900;padding:1px 6px;margin-left:6px;">' + g.goles + ' ⚽</span>' +
-                 minsHtml +
-               '</span>';
-      }).join(' ');
-      conclusiones.push({
-        icon: '⚽',
-        tag: 'Peligro Ofensivo Principal',
-        tagBg: 'rgba(37,99,235,0.1)',
-        tagColor: 'var(--info)',
-        tagBorder: 'rgba(37,99,235,0.25)',
-        borderLeft: 'var(--info)',
-        html: '<div style="display:flex;align-items:center;flex-wrap:wrap;gap:6px;">' + artillerosHtml + '</div>'
+
+    var totalTeams = clasif.length || allTeams.length || 16;
+    var top5Goleadores = Object.values(goleadoresMap).sort(function(a,b){
+      if(b.goles !== a.goles) return b.goles - a.goles;
+      return String(a.nombre).localeCompare(String(b.nombre),'es',{sensitivity:'base'});
+    }).slice(0,5);
+    var top3Goleadores = top5Goleadores.slice(0,3);
+    var topTarjetas = jugadoresTarjetas.length ? jugadoresTarjetas[0] : null;
+    var avgGF = totalPJ ? (totalGF / totalPJ) : 0;
+    var avgGC = totalPJ ? (totalGC / totalPJ) : 0;
+
+    function pct(n,d){ return d ? ((n/d)*100).toFixed(1).replace('.0','') + '%' : '—'; }
+
+    var cleanSheets = playedMatches.filter(function(m){ return Number(m.gc) === 0; }).length;
+    var sinMarcar = playedMatches.filter(function(m){ return Number(m.gf) === 0; }).length;
+    var gfFirstHalf = (gfSlots['0-15']||0)+(gfSlots['16-30']||0)+(gfSlots['31-45']||0);
+    var gfSecondHalf = (gfSlots['46-60']||0)+(gfSlots['61-75']||0)+(gfSlots['76-90']||0);
+    var gcFirstHalf = (gcSlots['0-15']||0)+(gcSlots['16-30']||0)+(gcSlots['31-45']||0);
+    var gcSecondHalf = (gcSlots['46-60']||0)+(gcSlots['61-75']||0)+(gcSlots['76-90']||0);
+
+    var lastLeague = playedMatches.slice(-5);
+    var rachaHtml = lastLeague.length ? lastLeague.map(function(m){
+      var cls = m.resultado === 'Victoria' ? 'var(--success)' : (m.resultado === 'Empate' ? 'var(--warning)' : 'var(--red)');
+      var letter = m.resultado === 'Victoria' ? 'V' : (m.resultado === 'Empate' ? 'E' : 'D');
+      return '<span style="display:inline-flex;width:18px;height:18px;align-items:center;justify-content:center;border-radius:4px;background:'+cls+';color:#fff;font-size:8px;font-weight:900;">'+letter+'</span>';
+    }).join('') : '<span style="color:var(--text-dim);font-size:9px;">Sin partidos</span>';
+
+    var firstFor = 0, firstAgainst = 0, firstKnown = 0;
+    playedMatches.forEach(function(rec){
+      var acta = rec.matchObj && rec.matchObj.actaData ? rec.matchObj.actaData : null;
+      if(!acta) return;
+      var goals = toArr(acta.allGoles || acta.goles);
+      if(!goals.length) return;
+      var curL=0,curV=0,first=null;
+      goals.some(function(g){
+        var clean=cleanAndFormatGoal(g);
+        if(!clean) return false;
+        var mm=clean.scoreProgression ? clean.scoreProgression.match(/(\d+)\s*-\s*(\d+)/) : null;
+        if(mm){
+          var nl=parseInt(mm[1],10), nv=parseInt(mm[2],10);
+          var localScored=nl>curL, visitScored=nv>curV;
+          curL=nl;curV=nv;
+          if(localScored || visitScored){
+            first = (rec.isLocal ? localScored : visitScored) ? 'for' : 'against';
+            return true;
+          }
+        }
+        return false;
       });
-    } else {
-      conclusiones.push({
-        icon: '⚽',
-        tag: 'Peligro Ofensivo',
-        tagBg: 'rgba(37,99,235,0.1)',
-        tagColor: 'var(--info)',
-        tagBorder: 'rgba(37,99,235,0.25)',
-        borderLeft: 'var(--info)',
-        html: '<span style="color:var(--text-dim);">No constan goleadores individuales registrados en los partidos disputados.</span>'
-      });
+      if(first==='for'){firstFor++;firstKnown++;}
+      else if(first==='against'){firstAgainst++;firstKnown++;}
+    });
+
+    if(!db.scoutingNotas) db.scoutingNotas={};
+    var scoutKey=scoutingNoteKey(activeRival);
+    var generalNote=(db.scoutingNotas[scoutKey] && db.scoutingNotas[scoutKey].texto) || '';
+
+    function usefulCoachNote(v){
+      var t=String(v||'').trim();
+      if(!t) return false;
+      var low=norm(t);
+      if(low.indexOf('campo:')===0 || low.indexOf('campo rival:')===0) return false;
+      if(low.indexOf('municipal ')===0 || low.indexOf('campo de futbol ')===0) return false;
+      return true;
     }
 
-    // 2. Tramo más anotador
-    if(totalGF > 0 && gfSlots[maxGfSlot] > 0){
-      conclusiones.push({
-        icon: '⏱️',
-        tag: 'Tramo más Letal',
-        tagBg: 'rgba(22,163,74,0.12)',
-        tagColor: 'var(--success)',
-        tagBorder: 'rgba(22,163,74,0.3)',
-        borderLeft: 'var(--success)',
-        html: '<span>Mayor concentración anotadora en el tramo <span style="background:rgba(22,163,74,0.12);color:var(--success);border:1px solid rgba(22,163,74,0.3);font-weight:900;padding:2px 7px;border-radius:5px;font-size:12px;">' + maxGfSlot + '\'</span> (<strong>' + gfSlots[maxGfSlot] + '</strong> goles marcados). Requiere atención táctica máxima en esos minutos.</span>'
-      });
-    } else {
-      conclusiones.push({
-        icon: '⏱️',
-        tag: 'Ritmo de Partido',
-        tagBg: 'rgba(22,163,74,0.12)',
-        tagColor: 'var(--success)',
-        tagBorder: 'rgba(22,163,74,0.3)',
-        borderLeft: 'var(--success)',
-        html: '<span>Promedio anotador de <strong>' + (totalPJ > 0 ? (totalGF / totalPJ).toFixed(2) : '0') + '</strong> goles por encuentro.</span>'
-      });
+    var coachHistory=partidosDorneda.filter(function(p){
+      if(!p || !p.rival) return false;
+      var same=norm(p.rival)===normActive || norm(p.rival).includes(normActive) || normActive.includes(norm(p.rival));
+      return same && usefulCoachNote(p.analisisPartido || p.observacionesRival);
+    }).map(function(p){
+      return {fecha:p.fecha || '',codigo:p.codigo || p.competicion || '',texto:p.analisisPartido || p.observacionesRival || ''};
+    }).sort(function(a,b){ return econDateValue(a.fecha)-econDateValue(b.fecha); });
+
+    var maxGfCount=gfSlots[maxGfSlot]||0;
+    var maxGcCount=gcSlots[maxGcSlot]||0;
+    var maxTopGoals=top5Goleadores.length ? Math.max.apply(null,top5Goleadores.map(function(x){return x.goles;})) : 1;
+
+    function barRows(slots,total,against){
+      return Object.keys(slots).map(function(slot){
+        var count=slots[slot]||0;
+        var width=total ? Math.max(0,Math.round((count/total)*100)) : 0;
+        return '<div class="scout-bar-row">'+
+          '<div class="scout-bar-label">'+slot+"'</div>"+
+          '<div class="scout-bar-bg"><div class="scout-bar-fill '+(against?'against':'')+'" style="width:'+width+'%"></div></div>'+
+          '<div class="scout-bar-val">'+count+'</div>'+
+        '</div>';
+      }).join('');
     }
 
-    // 3. Debilidad y vulnerabilidad defensiva
-    if(totalGC > 0 && gcSlots[maxGcSlot] > 0){
-      conclusiones.push({
-        icon: '🛡️',
-        tag: 'Momento de Vulnerabilidad',
-        tagBg: 'rgba(220,38,38,0.12)',
-        tagColor: 'var(--red-light)',
-        tagBorder: 'rgba(220,38,38,0.3)',
-        borderLeft: 'var(--red-light)',
-        html: '<span>Es más propenso a conceder goles en el tramo <span style="background:rgba(220,38,38,0.12);color:var(--red-light);border:1px solid rgba(220,38,38,0.3);font-weight:900;padding:2px 7px;border-radius:5px;font-size:12px;">' + maxGcSlot + '\'</span> (<strong>' + gcSlots[maxGcSlot] + '</strong> goles recibidos). Oportunidad para presionar alto y buscar transiciones rápidas en ese lapso.</span>'
-      });
-    } else if(totalPJ > 0){
-      conclusiones.push({
-        icon: '🛡️',
-        tag: 'Solidez Defensiva',
-        tagBg: 'rgba(59,130,246,0.12)',
-        tagColor: 'var(--info)',
-        tagBorder: 'rgba(59,130,246,0.3)',
-        borderLeft: 'var(--info)',
-        html: '<span>Promedio de <strong>' + (totalGC / totalPJ).toFixed(2) + '</strong> goles encajados por partido.</span>'
-      });
-    } else {
-      conclusiones.push({
-        icon: '🛡️',
-        tag: 'Estructura Defensiva',
-        tagBg: 'rgba(59,130,246,0.12)',
-        tagColor: 'var(--info)',
-        tagBorder: 'rgba(59,130,246,0.3)',
-        borderLeft: 'var(--info)',
-        html: '<span>Estructura ordenada que requerirá paciencia en la circulación y basculación rápida de balón.</span>'
-      });
-    }
-
-    // 4. Factor Disciplinario
-    if(jugadoresTarjetas.length > 0){
-      var sancionadosHtml = jugadoresTarjetas.slice(0, 3).map(function(t){
-        return '<span style="display:inline-flex;align-items:center;gap:4px;background:var(--surface2);border:1px solid var(--border);padding:2px 7px;border-radius:6px;margin:2px 4px 2px 0;">' +
-                 '<span style="background:var(--surface3);color:var(--text);font-weight:900;font-size:10px;padding:1px 4px;border-radius:3px;">#' + t.dorsal + '</span>' +
-                 '<strong style="font-size:12px;color:var(--text);">' + t.nombre + '</strong>' +
-                 (t.amarillas > 0 ? '<span class="badge badge-warning" style="font-size:9.5px;font-weight:900;padding:1px 4px;margin-left:2px;background:rgba(217,119,6,0.15);color:var(--warning);border:1px solid rgba(217,119,6,0.3);">' + t.amarillas + ' 🟨</span>' : '') +
-                 (t.rojas > 0 ? '<span class="badge badge-error" style="font-size:9.5px;font-weight:900;padding:1px 4px;margin-left:2px;background:rgba(220,38,38,0.15);color:var(--red-light);border:1px solid rgba(220,38,38,0.3);">' + t.rojas + ' 🟥</span>' : '') +
-               '</span>';
-      }).join(' ');
-      conclusiones.push({
-        icon: '⚠️',
-        tag: 'Presión & Disciplina',
-        tagBg: 'rgba(217,119,6,0.12)',
-        tagColor: 'var(--warning)',
-        tagBorder: 'rgba(217,119,6,0.3)',
-        borderLeft: 'var(--warning)',
-        html: '<span>Acumulan un total de <strong>' + totalAmarillas + '</strong> amarillas' + (totalRojas > 0 ? ' y <strong>' + totalRojas + '</strong> rojas' : '') + '. Futbolistas con mayor número de sanciones:</span> <div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;margin-top:2px;">' + sancionadosHtml + '</div>'
-      });
-    } else {
-      conclusiones.push({
-        icon: '⚠️',
-        tag: 'Disciplina',
-        tagBg: 'rgba(217,119,6,0.12)',
-        tagColor: 'var(--warning)',
-        tagBorder: 'rgba(217,119,6,0.3)',
-        borderLeft: 'var(--warning)',
-        html: '<span style="color:var(--text-dim);">Sin tarjetas registradas en su historial reciente.</span>'
-      });
-    }
-
-    // 5. Factor Local / Visitante
-    var matchCond = nextMatchVsRival ? (nextMatchVsRival.condicion === 'Local' ? 'Visitante' : 'Local') : 'Visitante';
-    if(matchCond === 'Visitante'){
-      var winPctV = statsVis.pj > 0 ? Math.round((statsVis.v / statsVis.pj) * 100) : 0;
-      conclusiones.push({
-        icon: '🏟️',
-        tag: 'Desempeño a Domicilio',
-        tagBg: 'rgba(139,92,246,0.12)',
-        tagColor: '#8B5CF6',
-        tagBorder: 'rgba(139,92,246,0.3)',
-        borderLeft: '#8B5CF6',
-        html: '<span>En el próximo encuentro jugarán como <strong style="color:var(--text);">Visitantes</strong> en nuestro campo. Fuera de casa registran <span style="background:var(--surface2);border:1px solid var(--border);padding:2px 6px;border-radius:4px;font-weight:800;">' + statsVis.v + 'V - ' + statsVis.e + 'E - ' + statsVis.d + 'D (' + winPctV + '% victorias)</span> con <strong>' + statsVis.gf + ' GF</strong> y <strong>' + statsVis.gc + ' GC</strong>.</span>'
-      });
-    } else {
-      var winPctL = statsLocal.pj > 0 ? Math.round((statsLocal.v / statsLocal.pj) * 100) : 0;
-      conclusiones.push({
-        icon: '🏟️',
-        tag: 'Desempeño en su Estadio',
-        tagBg: 'rgba(139,92,246,0.12)',
-        tagColor: '#8B5CF6',
-        tagBorder: 'rgba(139,92,246,0.3)',
-        borderLeft: '#8B5CF6',
-        html: '<span>En el próximo encuentro jugarán como <strong style="color:var(--text);">Locales</strong> en su campo. En casa registran <span style="background:var(--surface2);border:1px solid var(--border);padding:2px 6px;border-radius:4px;font-weight:800;">' + statsLocal.v + 'V - ' + statsLocal.e + 'E - ' + statsLocal.d + 'D (' + winPctL + '% victorias)</span> con <strong>' + statsLocal.gf + ' GF</strong> y <strong>' + statsLocal.gc + ' GC</strong>.</span>'
-      });
-    }
-
-    // RENDERIZADO DEL HTML
     var html = `
-      <!-- BARRA SUPERIOR: SELECTOR DE RIVAL Y ACCESO RÁPIDO -->
-      <div class="card mb-16" style="background:var(--surface2);border:1px solid var(--border);padding:14px 18px;border-radius:12px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
-          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-            <span style="font-size:24px;">🎯</span>
-            <div>
-              <div style="font-size:15px;font-weight:900;color:var(--text);">Scouting & Radiografía del Próximo Rival</div>
-              <div style="font-size:11.5px;color:var(--text-muted);">Información táctica obtenida de las fichas y actas oficiales jornada tras jornada</div>
-            </div>
-          </div>
-          <div style="display:flex;align-items:center;gap:8px;">
-            <label style="font-size:12px;font-weight:800;color:var(--text);">Seleccionar Rival:</label>
-            <select id="selectRivalScouting" onchange="renderAnalisisProximoRival(this.value)" class="form-control" style="font-size:12.5px;font-weight:800;padding:6px 12px;border-radius:8px;border:1.5px solid var(--primary);background:var(--surface);color:var(--text);cursor:pointer;">
-              ${rivalOptions.map(function(t){
-                var isSel = norm(t) === normActive;
-                return `<option value="${t}" ${isSel ? 'selected' : ''}>${t} ${norm(t) === norm(nextOpp.nombre) ? ' (⭐ Próximo)' : ''}</option>`;
-              }).join('')}
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <!-- HERO HEADER DEL ENFRENTAMIENTO -->
-      <div class="card mb-16" style="background:linear-gradient(135deg, rgba(37,99,235,0.08), rgba(22,163,74,0.05));border:1.5px solid var(--border);border-radius:14px;padding:18px 20px;">
-        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:16px;align-items:center;">
+      <div class="scout-shell">
+        <div class="scout-topbar">
           <div>
-            <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
-              <span class="badge badge-accent" style="font-size:9.5px;font-weight:900;">PRÓXIMO ENCUENTRO</span>
-              <span class="badge badge-info" style="font-size:9.5px;font-weight:800;">${nextMatchVsRival ? (nextMatchVsRival.codigo || 'Jornada') : 'Liga'}</span>
-            </div>
-            <div style="font-size:22px;font-weight:900;color:var(--text);line-height:1.2;">
-              ${formatCleanTeamName(activeRival)}
-            </div>
-            <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">
-              ${nextMatchVsRival ? `📅 ${nextMatchVsRival.fecha || '--'} ${nextMatchVsRival.horaPartido || nextMatchVsRival.hora ? '· ⏰ ' + (nextMatchVsRival.horaPartido || nextMatchVsRival.hora) : ''} · 📍 ${nextMatchVsRival.campo || (nextMatchVsRival.condicion === 'Local' ? 'A Marola' : 'Campo Rival')} (${nextMatchVsRival.condicion === 'Local' ? 'Dorneda Local' : 'Dorneda Visitante'})` : '📅 Partido regular de temporada'}
-            </div>
+            <div class="scout-name">${formatCleanTeamName(activeRival)}</div>
+            <div class="scout-muted">Análisis automático de Liga + anotaciones manuales del entrenador</div>
           </div>
-
-          <div style="display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;">
-            <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:8px 14px;text-align:center;min-width:70px;">
-              <div style="font-size:10px;font-weight:800;color:var(--text-dim);text-transform:uppercase;">Posición</div>
-              <div style="font-size:20px;font-weight:900;color:var(--primary);">${rivalClasif.pos || "-"}º</div>
-            </div>
-            <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:8px 14px;text-align:center;min-width:70px;">
-              <div style="font-size:10px;font-weight:800;color:var(--text-dim);text-transform:uppercase;">Puntos</div>
-              <div style="font-size:20px;font-weight:900;color:var(--success);">${rivalClasif.pts || totalPts}</div>
-            </div>
-            <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:8px 14px;text-align:center;min-width:70px;">
-              <div style="font-size:10px;font-weight:800;color:var(--text-dim);text-transform:uppercase;">V - E - D</div>
-              <div style="font-size:16px;font-weight:900;color:var(--text);">${rivalClasif.pg || rivalClasif.g || totalV}-${rivalClasif.pe || rivalClasif.e || totalE}-${rivalClasif.pp || rivalClasif.p || totalD}</div>
-            </div>
-            <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:8px 14px;text-align:center;min-width:70px;">
-              <div style="font-size:10px;font-weight:800;color:var(--text-dim);text-transform:uppercase;">Goles F/C</div>
-              <div style="font-size:16px;font-weight:900;color:var(--text);">${rivalClasif.gf || totalGF}/${rivalClasif.gc || totalGC}</div>
-            </div>
-          </div>
+          <select id="selectRivalScouting" onchange="renderAnalisisProximoRival(this.value)" class="form-control scout-select">
+            ${rivalOptions.map(function(t){
+              return `<option value="${t}" ${norm(t)===normActive?'selected':''}>${formatCleanTeamName(t)}${norm(t)===norm(nextOpp.nombre)?' · Próximo':''}</option>`;
+            }).join('')}
+          </select>
         </div>
-      </div>
 
-      <!-- CONCLUSIONES TÁCTICAS (MODO LISTA MEJORADO) -->
-      <div class="card mb-16" style="border:1.5px solid var(--primary);border-radius:14px;background:var(--surface2);">
-        <div class="card-title" style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
-          <span style="font-size:20px;">📋</span>
-          <span>Conclusiones Tácticas & Claves de Scouting</span>
+        <div class="scout-head-stats">
+          <div class="scout-stat"><div class="scout-stat-label">Posición</div><div class="scout-stat-value">${rivalClasif.pos || '—'}º / ${totalTeams}</div></div>
+          <div class="scout-stat"><div class="scout-stat-label">Puntos</div><div class="scout-stat-value">${rivalClasif.pts ?? totalPts}</div></div>
+          <div class="scout-stat"><div class="scout-stat-label">Racha · Liga</div><div class="scout-stat-value small" style="display:flex;gap:3px">${rachaHtml}</div></div>
+          <div class="scout-stat"><div class="scout-stat-label">Goles a favor</div><div class="scout-stat-value">${rivalClasif.gf ?? totalGF}</div></div>
+          <div class="scout-stat"><div class="scout-stat-label">Goles en contra</div><div class="scout-stat-value">${rivalClasif.gc ?? totalGC}</div></div>
         </div>
-        <div style="display:flex;flex-direction:column;gap:10px;">
-          ${conclusiones.map(function(c){
-            return `
-              <div style="padding:10px 14px;background:var(--surface);border-radius:10px;border:1px solid var(--border);border-left:4px solid ${c.borderLeft || 'var(--primary)'};display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
-                <div style="min-width:200px;flex-shrink:0;">
-                  <span style="display:inline-flex;align-items:center;gap:6px;background:${c.tagBg};color:${c.tagColor};border:1px solid ${c.tagBorder};padding:4px 9px;border-radius:6px;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:0.4px;">
-                    <span style="font-size:13px;">${c.icon}</span>
-                    <span>${c.tag}</span>
-                  </span>
-                </div>
-                <div style="flex:1;min-width:240px;font-size:12.5px;color:var(--text);line-height:1.6;display:flex;align-items:center;flex-wrap:wrap;gap:6px;">
-                  ${c.html}
-                </div>
+
+        <div class="scout-card">
+          <div class="scout-card-head"><div class="scout-title">Anotaciones del entrenador</div><div class="scout-muted">Manual · se conserva por rival</div></div>
+          <div class="scout-coach-layout">
+            <div>
+              <textarea id="scoutCoachNote" class="form-control scout-note-input" placeholder="Observaciones generales del entrenador sobre ${formatCleanTeamName(activeRival)}...">${generalNote}</textarea>
+              <button class="btn btn-primary scout-note-save" onclick="saveScoutingCoachNote('${String(activeRival).replace(/'/g,"\\'")}')">Guardar anotación</button>
+            </div>
+            <div>
+              <div class="scout-muted" style="font-weight:800;margin-bottom:4px">Histórico desde fichas · “Análisis de partido”</div>
+              <div class="scout-history">
+                ${coachHistory.length ? coachHistory.map(function(n){
+                  return `<div class="scout-history-row"><div class="scout-history-date">${n.fecha || '—'}</div><div class="scout-history-code">${n.codigo || '—'}</div><div class="scout-history-text">${n.texto}</div></div>`;
+                }).join('') : '<div class="scout-muted" style="padding:7px 0">Todavía no hay análisis manuales de partidos contra este rival.</div>'}
               </div>
-            `;
-          }).join('')}
-        </div>
-      </div>
-
-      <!-- SECCI\u00d3N DE RENDIMIENTO OFENSIVO Y DEFENSIVO POR MINUTOS -->
-      <div class="grid-2 mb-16">
-        
-        <!-- GOLES A FAVOR Y TRAMOS -->
-        <div class="card">
-          <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-            <span>\u26bd Goles a Favor (${totalGF})</span>
-            <span class="badge badge-success" style="font-size:11px;font-weight:800;">${totalPJ > 0 ? (totalGF / totalPJ).toFixed(1) : 0} goles/p</span>
-          </div>
-          <div style="font-size:11.5px;color:var(--text-muted);margin-bottom:10px;">\u00bfEn qu\u00e9 minutos suelen marcar goles?</div>
-          <div style="display:flex;flex-direction:column;gap:8px;">
-            ${Object.keys(gfSlots).map(function(slot){
-              var count = gfSlots[slot];
-              var pct = totalGF > 0 ? Math.round((count / totalGF) * 100) : 0;
-              var isMax = slot === maxGfSlot && count > 0;
-              return `
-                <div>
-                  <div style="display:flex;justify-content:space-between;font-size:11px;font-weight:700;margin-bottom:3px;">
-                    <span>\u23f1\ufe0f ${slot}' ${isMax ? '\ud83d\udd25 <strong style="color:var(--success)">Tramo m\u00e1s letal</strong>' : ''}</span>
-                    <span><strong>${count}</strong> goles (${pct}%)</span>
-                  </div>
-                  <div style="height:7px;background:var(--surface3);border-radius:4px;overflow:hidden;">
-                    <div style="height:100%;width:${pct}%;background:${isMax ? "var(--success)" : (count > 0 ? "#22c55e" : "transparent")};border-radius:4px;"></div>
-                  </div>
-                </div>
-              `;
-            }).join('')}
-          </div>
-        </div>
-
-        <!-- GOLES EN CONTRA Y TRAMOS -->
-        <div class="card">
-          <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-            <span>\ud83d\udee1\ufe0f Goles en Contra (${totalGC})</span>
-            <span class="badge ${totalGC > totalGF ? 'badge-error' : 'badge-warning'}" style="font-size:11px;font-weight:800;">${totalPJ > 0 ? (totalGC / totalPJ).toFixed(1) : 0} goles/p</span>
-          </div>
-          <div style="font-size:11.5px;color:var(--text-muted);margin-bottom:10px;">\u00bfEn qu\u00e9 minutos suelen encajar goles?</div>
-          <div style="display:flex;flex-direction:column;gap:8px;">
-            ${Object.keys(gcSlots).map(function(slot){
-              var count = gcSlots[slot];
-              var pct = totalGC > 0 ? Math.round((count / totalGC) * 100) : 0;
-              var isMax = slot === maxGcSlot && count > 0;
-              return `
-                <div>
-                  <div style="display:flex;justify-content:space-between;font-size:11px;font-weight:700;margin-bottom:3px;">
-                    <span>\u23f1\ufe0f ${slot}' ${isMax ? '\u26a0\ufe0f <strong style="color:var(--red)">Tramo m\u00e1s vulnerable</strong>' : ''}</span>
-                    <span><strong>${count}</strong> goles (${pct}%)</span>
-                  </div>
-                  <div style="height:7px;background:var(--surface3);border-radius:4px;overflow:hidden;">
-                    <div style="height:100%;width:${pct}%;background:${isMax ? 'var(--red)' : 'var(--warning)'};border-radius:4px;"></div>
-                  </div>
-                </div>
-              `;
-            }).join('')}
-          </div>
-        </div>
-
-      </div>
-
-      <!-- TOP 4 GOLEADORES Y TARJETAS/DISCIPLINA -->
-      <div class="grid-2 mb-16">
-        
-        <!-- TOP 4 GOLEADORES (CON DORSALES SIEMPRE) -->
-        <div class="card">
-          <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-            <span>\ud83d\udc5f Top 4 Goleadores</span>
-            <span style="font-size:11px;color:var(--text-dim);">${top4Goleadores.length} futbolistas</span>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:8px;">
-            ${top4Goleadores.length ? top4Goleadores.map(function(g, idx){
-              return `
-                <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--surface2);border-radius:8px;border:1px solid var(--border);">
-                  <div style="display:flex;align-items:center;gap:8px;">
-                    <span class="badge" style="background:var(--surface3);font-size:10px;font-weight:900;min-width:28px;text-align:center;">${g.dorsal}</span>
-                    <div>
-                      <strong style="font-size:12.5px;color:var(--text);">${g.nombre}</strong>
-                      ${g.minutos.length ? `<div style="font-size:10px;color:var(--text-dim);">Minutos: ${g.minutos.join(', ')}</div>` : ''}
-                    </div>
-                  </div>
-                  <span class="badge badge-success" style="font-size:11px;font-weight:900;">${g.goles} \u26bd</span>
-                </div>
-              `;
-            }).join('') : '<div style="color:var(--text-dim);font-size:12px;text-align:center;padding:12px;">Sin goles individuales registrados en actas de liga.</div>'}
-          </div>
-        </div>
-
-        <!-- DISCIPLINA Y TARJETAS (CON DORSALES SIEMPRE) -->
-        <div class="card">
-          <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-            <span>\ud83d\udfe8 Disciplina y Amonestaciones</span>
-            <span style="font-size:11.5px;font-weight:800;">${totalAmarillas} \ud83d\udfe8 \u00b7 ${totalRojas} \ud83d\udfe5</span>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:8px;">
-            ${jugadoresTarjetas.length ? jugadoresTarjetas.map(function(t){
-              return `
-                <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--surface2);border-radius:8px;border:1px solid var(--border);">
-                  <div style="display:flex;align-items:center;gap:8px;">
-                    <span class="badge" style="background:var(--surface3);font-size:10px;font-weight:900;min-width:28px;text-align:center;">${t.dorsal}</span>
-                    <div>
-                      <strong style="font-size:12.5px;color:var(--text);">${t.nombre}</strong>
-                      ${t.minutos.length ? `<div style="font-size:10px;color:var(--text-dim);">${t.minutos.join(' \u00b7 ')}</div>` : ''}
-                    </div>
-                  </div>
-                  <div style="display:flex;gap:4px;">
-                    ${t.amarillas > 0 ? `<span class="badge badge-card-yellow" style="font-size:10px;font-weight:900;">${t.amarillas} \ud83d\udfe8</span>` : ''}
-                    ${t.rojas > 0 ? `<span class="badge badge-card-red" style="font-size:10px;font-weight:900;">${t.rojas} \ud83d\udfe5</span>` : ''}
-                  </div>
-                </div>
-              `;
-            }).join('') : '<div style="color:var(--text-dim);font-size:12px;text-align:center;padding:12px;">Sin tarjetas registradas en actas oficiales.</div>'}
-          </div>
-        </div>
-
-      </div>
-
-      <!-- LOCAL VS VISITANTE Y RACHA DE PARTIDOS -->
-      <div class="grid-2 mb-16">
-        
-        <!-- DESGLOSE LOCAL VS VISITANTE -->
-        <div class="card">
-          <div class="card-title" style="margin-bottom:12px;">\ud83c\udfdf\ufe0f Rendimiento Local vs Visitante</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:center;">
-            <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px;">
-              <div style="font-size:11px;font-weight:800;color:var(--text-muted);text-transform:uppercase;">En Casa (Local)</div>
-              <div style="font-size:22px;font-weight:900;color:var(--text);margin:4px 0;">${statsLocal.v}V <span style="font-size:15px;color:var(--text-dim);">${statsLocal.e}E ${statsLocal.d}D</span></div>
-              <div style="font-size:11px;color:var(--text-dim);">PJ: ${statsLocal.pj} \u00b7 Pts: ${statsLocal.pts}</div>
-              <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">GF: ${statsLocal.gf} - GC: ${statsLocal.gc}</div>
-            </div>
-            <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px;">
-              <div style="font-size:11px;font-weight:800;color:var(--text-muted);text-transform:uppercase;">Fuera (Visitante)</div>
-              <div style="font-size:22px;font-weight:900;color:var(--text);margin:4px 0;">${statsVis.v}V <span style="font-size:15px;color:var(--text-dim);">${statsVis.e}E ${statsVis.d}D</span></div>
-              <div style="font-size:11px;color:var(--text-dim);">PJ: ${statsVis.pj} \u00b7 Pts: ${statsVis.pts}</div>
-              <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">GF: ${statsVis.gf} - GC: ${statsVis.gc}</div>
             </div>
           </div>
         </div>
 
-        <!-- RACHA DE PARTIDOS RECIENTES -->
-        <div class="card">
-          <div class="card-title" style="margin-bottom:12px;">\u26a1 Racha y \u00daltimos Partidos</div>
-          <div style="display:flex;flex-direction:column;gap:6px;">
-            ${playedMatches.length ? playedMatches.slice(-5).map(function(m){
-              var isV = m.resultado === 'Victoria';
-              var isD = m.resultado === 'Derrota';
-              var badgeCls = isV ? 'badge-success' : (isD ? 'badge-error' : 'badge-warning');
-              var resLetter = isV ? 'V' : (isD ? 'D' : 'E');
+        <div class="scout-main-grid">
+          <div class="scout-card">
+            <div class="scout-card-head"><div class="scout-title">Conclusiones estadísticas</div><div class="scout-muted">Solo Liga</div></div>
+            <table class="scout-table"><tbody>
+              <tr><td class="k">Promedio gol a favor</td><td class="v">${avgGF.toFixed(2)}</td><td class="k">Promedio gol en contra</td><td class="v">${avgGC.toFixed(2)}</td></tr>
+              <tr><td class="k">Ratio Victorias Local</td><td class="v">${pct(statsLocal.v,statsLocal.pj)}</td><td class="k">Ratio Victoria Visitante</td><td class="v">${pct(statsVis.v,statsVis.pj)}</td></tr>
+              <tr><td class="k">Ratio Empate Local</td><td class="v">${pct(statsLocal.e,statsLocal.pj)}</td><td class="k">Ratio Empate Visitante</td><td class="v">${pct(statsVis.e,statsVis.pj)}</td></tr>
+              <tr><td class="k">Ratio Derrota Local</td><td class="v">${pct(statsLocal.d,statsLocal.pj)}</td><td class="k">Ratio Derrota Visitante</td><td class="v">${pct(statsVis.d,statsVis.pj)}</td></tr>
+              <tr><td class="k">Jugador con + tarjetas</td><td class="v">${topTarjetas ? ((topTarjetas.dorsal||'')+' '+topTarjetas.nombre+' · '+topTarjetas.amarillas+'A'+(topTarjetas.rojas?' / '+topTarjetas.rojas+'R':'')) : '—'}</td><td class="k">Porterías a cero</td><td class="v">${cleanSheets} / ${totalPJ}</td></tr>
+              <tr><td class="k">Minutos de más goles a favor</td><td class="v">${maxGfCount ? maxGfSlot+"′ · "+maxGfCount : '—'}</td><td class="k">Minutos de más goles en contra</td><td class="v">${maxGcCount ? maxGcSlot+"′ · "+maxGcCount : '—'}</td></tr>
+              <tr><td class="k">Partidos sin marcar</td><td class="v">${sinMarcar} / ${totalPJ}</td><td class="k">Marca primero</td><td class="v">${firstKnown ? pct(firstFor,firstKnown) : '—'}</td></tr>
+              <tr><td class="k">Encaja primero</td><td class="v">${firstKnown ? pct(firstAgainst,firstKnown) : '—'}</td><td class="k">GF 1ª / 2ª parte</td><td class="v">${gfFirstHalf} / ${gfSecondHalf}</td></tr>
+              <tr><td class="k">GC 1ª / 2ª parte</td><td class="v">${gcFirstHalf} / ${gcSecondHalf}</td><td class="k">Partidos analizados</td><td class="v">${totalPJ}</td></tr>
+            </tbody></table>
+          </div>
 
-              return `
-                <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 10px;background:var(--surface2);border-radius:6px;border:1px solid var(--border);font-size:11.5px;">
-                  <div style="display:flex;align-items:center;gap:6px;">
-                    <span class="badge ${badgeCls}" style="font-size:10px;font-weight:900;min-width:20px;text-align:center;">${resLetter}</span>
-                    <span style="font-weight:700;color:var(--text);">J${m.jornada}</span>
-                    <span style="color:var(--text-dim);">vs ${m.rival} (${m.isLocal ? 'C' : 'F'})</span>
-                  </div>
-                  <div style="display:flex;align-items:center;gap:8px;">
-                    <strong style="font-size:12px;color:var(--text);">${m.gf} - ${m.gc}</strong>
-                    ${m.matchObj && m.matchObj.codActa ? `<button class="btn btn-ghost btn-xs" onclick="openFichaActaOficial(${m.jornada}, '${(m.matchObj.local||'').replace(/'/g,"\\'")}', '${(m.matchObj.visitante||'').replace(/'/g,"\\'")}', '${m.matchObj.enlaceActa||''}', '${m.matchObj.codActa||''}')" style="font-size:9.5px;padding:2px 6px;">\ud83d\udcc4 Acta</button>` : ''}
-                  </div>
-                </div>
-              `;
-            }).join('') : '<div style="color:var(--text-dim);font-size:12px;text-align:center;padding:12px;">Sin partidos disputados en liga todav\u00eda.</div>'}
+          <div class="scout-card">
+            <div class="scout-card-head"><div class="scout-title">Top 3 goleadores</div><div class="scout-muted">Dorsal · jugador · goles</div></div>
+            <table class="scout-table scout-goals-table">
+              <thead><tr><th>Dorsal</th><th>Nombre</th><th>Goles</th></tr></thead>
+              <tbody>${top3Goleadores.length ? top3Goleadores.map(function(g){return `<tr><td>${g.dorsal || '#—'}</td><td>${g.nombre}</td><td>${g.goles}</td></tr>`;}).join('') : '<tr><td colspan="3" class="scout-muted">Sin goleadores registrados.</td></tr>'}</tbody>
+            </table>
           </div>
         </div>
 
-      </div>
+        <div class="scout-chart-grid">
+          <div class="scout-card"><div class="scout-card-head"><div class="scout-title">Goles a favor · por minutos</div><div class="scout-muted">${totalGF} GF</div></div>${barRows(gfSlots,totalGF,false)}</div>
+          <div class="scout-card"><div class="scout-card-head"><div class="scout-title">Goles en contra · por minutos</div><div class="scout-muted">${totalGC} GC</div></div>${barRows(gcSlots,totalGC,true)}</div>
+        </div>
 
-      <!-- TABLA DE PLANTILLA COMPLETA DETECTADA (CON DORSALES SIEMPRE) -->
-      <div class="card" style="padding:14px 18px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
-          <div style="font-weight:800;font-size:12.5px;color:var(--text);display:flex;align-items:center;gap:6px;">
-            <span>\ud83d\udc65 Plantilla en Actas (${plantillaList.length} futbolistas)</span>
-          </div>
-          <span style="font-size:11px;color:var(--text-muted);font-weight:600;">${formatCleanTeamName(activeRival)}</span>
+        <div class="scout-card">
+          <div class="scout-card-head"><div class="scout-title">Top 5 goleadores</div><div class="scout-muted">Liga · actas disponibles</div></div>
+          ${top5Goleadores.length ? top5Goleadores.map(function(g){
+            var w=maxTopGoals ? Math.round((g.goles/maxTopGoals)*100) : 0;
+            return `<div class="scout-top5-row"><div class="scout-top5-num">${g.dorsal || '#—'}</div><div class="scout-top5-name">${g.nombre}</div><div class="scout-bar-bg"><div class="scout-bar-fill" style="width:${w}%"></div></div><div class="scout-top5-goles">${g.goles}</div></div>`;
+          }).join('') : '<div class="scout-muted">Sin datos de goleadores.</div>'}
         </div>
-        <div style="display:flex;flex-wrap:wrap;gap:6px;">
-          ${plantillaList.length ? plantillaList.map(function(j){
-            var extra = [];
-            if(j.goles > 0) extra.push('<strong style="color:var(--success);">' + j.goles + ' \u26bd</strong>');
-            if(j.amarillas > 0) extra.push('<span style="color:var(--warning);">' + j.amarillas + ' \ud83d\udfe8</span>');
-            if(j.rojas > 0) extra.push('<span style="color:var(--red);">' + j.rojas + ' \ud83d\udfe5</span>');
-            var extraStr = extra.length ? ' &middot; ' + extra.join(' ') : '';
-            return `
-              <span style="display:inline-flex;align-items:center;gap:5px;padding:4px 9px;background:var(--surface2);border:1px solid var(--border);border-radius:7px;font-size:11.5px;color:var(--text);">
-                <span style="font-weight:900;color:var(--red);font-size:10.5px;">${j.dorsal}</span>
-                <span style="font-weight:700;">${j.nombre}</span>
-                <span style="font-size:10.5px;color:var(--text-dim);">(${j.pj} PJ${extraStr})</span>
-              </span>
-            `;
-          }).join('') : '<div style="font-size:11.5px;color:var(--text-dim);">Sin datos de plantilla registrados.</div>'}
-        </div>
+
+        <div class="scout-sample">Base: ${totalPJ} partidos de Liga con marcador · datos individuales condicionados a actas FUTGAL disponibles.</div>
       </div>
     `;
 
     container.innerHTML = html;
   } catch(err) {
     console.error("Error in renderAnalisisProximoRival:", err);
-    container.innerHTML = `<div class="card" style="padding:24px;text-align:center;"><div style="font-size:18px;font-weight:800;color:var(--red);margin-bottom:8px;">\u26a0\ufe0f No se pudo cargar el an\u00e1lisis del rival</div><div style="font-size:12px;color:var(--text-muted);">${err.message || err}</div></div>`;
+    container.innerHTML = `<div class="card" style="padding:20px;text-align:center"><strong>No se pudo cargar el análisis del rival.</strong><div class="scout-muted" style="margin-top:5px">${err.message || err}</div></div>`;
   }
 }
 window.renderAnalisisProximoRival = renderAnalisisProximoRival;
@@ -16417,10 +16275,10 @@ function showDetallePartido(id){
       </div>
     ` : ''}
 
-    ${p.observacionesRival ? `
+    ${(p.analisisPartido || p.observacionesRival) ? `
       <div class="card mb-16" style="background:var(--surface2)">
-        <div class="card-title">🔍 Observaciones del Rival (${p.rival})</div>
-        <div style="font-size:13px;line-height:1.6;color:var(--text)">${p.observacionesRival}</div>
+        <div class="card-title">🔍 Análisis de partido · ${p.rival}</div>
+        <div style="font-size:13px;line-height:1.6;color:var(--text)">${p.analisisPartido || p.observacionesRival}</div>
       </div>
     ` : ''}
 
@@ -16468,6 +16326,7 @@ function openNuevoPartido(){
     incidencias: '',
     resumen: '',
     observacionesRival: '',
+    analisisPartido: '',
     jugadorDestacado: '',
     convocados: [],
     ausentes: []
@@ -16628,8 +16487,8 @@ function renderMatchStepper(step){
       <div class="form-group"><label class="form-label">Crónica / Resumen del Partido</label>
         <textarea class="form-control" id="mResumen" rows="4" placeholder="Escribe el desarrollo y resumen del partido...">${newMatchState.resumen || ''}</textarea>
       </div>
-      <div class="form-group"><label class="form-label">Observaciones del Rival / Notas Tácticas</label>
-        <textarea class="form-control" id="mObsRival" rows="3" placeholder="Puntos fuertes/débiles del rival, dorsales destacados...">${newMatchState.observacionesRival || ''}</textarea>
+      <div class="form-group"><label class="form-label">Análisis de partido / Observaciones del rival</label>
+        <textarea class="form-control" id="mObsRival" rows="3" placeholder="Qué vimos del rival: fortalezas, debilidades, jugadores, comportamientos...">${newMatchState.analisisPartido || newMatchState.observacionesRival || ''}</textarea>
       </div>
       <div class="form-group"><label class="form-label">Incidencias / Lesiones</label>
         <textarea class="form-control" id="mInc" rows="2" placeholder="Lesiones, tarjetas, etc...">${newMatchState.incidencias || ''}</textarea>
@@ -16701,7 +16560,8 @@ function saveStep2AndNext(){
 
 function saveCompleteMatch(){
   newMatchState.resumen = document.getElementById('mResumen').value.trim();
-  newMatchState.observacionesRival = document.getElementById('mObsRival').value.trim();
+  newMatchState.analisisPartido = document.getElementById('mObsRival').value.trim();
+  newMatchState.observacionesRival = newMatchState.analisisPartido;
   newMatchState.incidencias = document.getElementById('mInc').value.trim();
 
   if(currentMatchEditId){
@@ -16713,6 +16573,7 @@ function saveCompleteMatch(){
     db.partidos.push(newMatchState);
   }
 
+  markPartidosEdited();
   saveDB();
   closeModal('modalNuevoPartido');
   renderSection(currentSection);
@@ -16722,6 +16583,7 @@ function saveCompleteMatch(){
 function deletePartido(id){
   if(!confirm('¿Estás seguro de eliminar este partido?')) return;
   db.partidos = db.partidos.filter(x => x.id !== id);
+  markPartidosEdited();
   saveDB();
   closeModal('modalDetallePartido');
   renderSection(currentSection);
@@ -17216,7 +17078,7 @@ function updateEconLockUI(){
 
 
 // ==========================================
-// PASO 14A/14B/14E/14F/14G/14H/14I · ECONOMÍA V2
+// PASO 14A/14B/14E/14F/14G/14H/14I/14J · ECONOMÍA V2
 // ==========================================
 const ECON_INGRESO_TIPOS = ['Ficha', 'Patrocinador', 'Otro'];
 const ECON_GASTO_TIPOS = ['Fichas', 'Cuota Club', 'Árbitros', 'Otro'];
@@ -17904,11 +17766,39 @@ function ensureEconomiaV2(){
   return modified;
 }
 
+
+function getCurrentPlantillaPlayers(){
+  return (db.jugadores || []).filter(function(j){
+    return j && !isStaff(j) && j.estado !== 'Vacante';
+  });
+}
+
+function isCuotaFromCurrentPlantilla(c){
+  if(!c) return false;
+  const players = getCurrentPlantillaPlayers();
+
+  return players.some(function(j){
+    if(Number(j.id) === Number(c.jugadorId)) return true;
+
+    // Compatibilidad con registros antiguos sin id fiable.
+    const cn = econNorm(c.nombre);
+    const jn = econNorm(j.nombre);
+    const cf = econNorm(c.nombreCompleto);
+    const jf = econNorm(j.nombreCompleto);
+
+    if(cn && jn && cn === jn) return true;
+    if(cf && jf && cf === jf) return true;
+    return false;
+  });
+}
+window.getCurrentPlantillaPlayers = getCurrentPlantillaPlayers;
+window.isCuotaFromCurrentPlantilla = isCuotaFromCurrentPlantilla;
+
 function syncCuotasDesdeMovimientos(createMissing){
   if(!db.economia) return;
   if(!Array.isArray(db.economia.cuotas)) db.economia.cuotas = [];
   const cuotas = db.economia.cuotas;
-  const jugadores = (db.jugadores || []).filter(function(j){ return j && !isStaff(j) && j.estado !== 'Vacante'; });
+  const jugadores = getCurrentPlantillaPlayers();
 
   if(createMissing !== false){
     jugadores.forEach(function(j){
@@ -17995,6 +17885,9 @@ function syncCuotasDesdeMovimientos(createMissing){
     const last = actuals[0];
     c.metodo = last ? ((last.metodoPago === 'Otro' ? last.metodoPagoDetalle : last.metodoPago) || '') : '';
     c.fechaPago = last ? (last.fecha || '') : '';
+
+    // Solo pertenece al seguimiento si el jugador existe ahora mismo en Plantilla.
+    c._enPlantillaActual = isCuotaFromCurrentPlantilla(c);
   });
 }
 
@@ -18174,10 +18067,20 @@ function formatMoneyInt(val){
 
 function calcEconStats(){
   syncCuotasDesdeMovimientos(false);
-  const cuotas = (db.economia && db.economia.cuotas) || [];
+
+  const cuotas = ((db.economia && db.economia.cuotas) || []).filter(function(c){
+    return isCuotaFromCurrentPlantilla(c);
+  });
   const movs = (db.economia && db.economia.movimientos) || [];
 
-  let cuotasRecaudadas = 0;
+  // Los cobros reales son historia contable y salen de Movimientos.
+  // Eliminar a alguien de Plantilla no borra dinero que ya entró.
+  const cuotasRecaudadas = movs.filter(function(m){
+    return econIsFichaMovement(m) && econMovSituacion(m) === 'Actual';
+  }).reduce(function(sum,m){
+    return sum + (parseFloat(m.importe) || 0);
+  },0);
+
   let cuotasEsperadas = 0;
   let cuotasPendientes = 0;
   let cuotasAplicadas = 0;
@@ -18185,13 +18088,8 @@ function calcEconStats(){
   cuotas.forEach(function(c){
     const fixed = parseFloat(c.cuota) || 0;
     const paid = parseFloat(c.pagado) || 0;
-    const isKata = econNorm(c.nombre) === 'kata' || Number(c.jugadorId) === 108;
-    const obligatoria = !isKata && c.cuotaObligatoria !== false && fixed > 0;
+    const obligatoria = c.cuotaObligatoria !== false && fixed > 0;
 
-    // Todo cobro real cuenta como ingreso real.
-    cuotasRecaudadas += paid;
-
-    // La previsión pendiente se calcula jugador por jugador.
     if(obligatoria){
       cuotasEsperadas += fixed;
       cuotasAplicadas += Math.min(paid, fixed);
@@ -18220,7 +18118,7 @@ function calcEconStats(){
       if(isCierre){
         if(situacion === 'Actual') remanenteAnterior += imp;
       }else if(econIsFichaMovement(m)){
-        // Ya está incluido una sola vez mediante cuotasRecaudadas.
+        // Ya incluido una sola vez en cuotasRecaudadas.
       }else if(situacion === 'Actual'){
         otrosIngresosRealizados += imp;
       }else{
@@ -18334,7 +18232,7 @@ function renderEconStats(){
   const grid = document.getElementById('econStatsGrid');
   if(!grid) return;
   const st = calcEconStats();
-  const cuotas = (db.economia && db.economia.cuotas) || [];
+  const cuotas = ((db.economia && db.economia.cuotas) || []).filter(function(c){ return isCuotaFromCurrentPlantilla(c); });
   const movs = (db.economia && db.economia.movimientos) || [];
 
   const cntPagado = cuotas.filter(c => c.estado === 'Pagado').length;
@@ -18862,7 +18760,9 @@ function renderEconCuotas(){
   syncCuotasDesdeMovimientos();
   const tbody = document.getElementById('tablaCuotasBody');
   if(!tbody) return;
-  const cuotas = (db.economia && db.economia.cuotas) || [];
+  const cuotas = ((db.economia && db.economia.cuotas) || []).filter(function(c){
+    return isCuotaFromCurrentPlantilla(c);
+  });
 
   const cntTodos = cuotas.length;
   const cntPagado = cuotas.filter(function(c){ return c.estado === 'Pagado'; }).length;
@@ -19422,7 +19322,9 @@ function renderEconHoja(){
 
   syncCuotasDesdeMovimientos(false);
   const st = calcEconStats();
-  const cuotas = ((db.economia && db.economia.cuotas) || []).slice();
+  const cuotas = ((db.economia && db.economia.cuotas) || []).filter(function(c){
+    return isCuotaFromCurrentPlantilla(c);
+  }).slice();
   const movs = (db.economia && db.economia.movimientos) || [];
 
   cuotas.sort(function(a,b){
