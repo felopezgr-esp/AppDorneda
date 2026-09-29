@@ -3306,9 +3306,279 @@
 #tablaGoleadores .sort-icon,#tablaParticipacion .sort-icon{font-size:7px!important}
 @media(max-width:900px){.liga-search-filters{grid-template-columns:1fr}}
 
+
+/* ==========================================================
+   PASO 16A · LECTOR / EDITOR + DASHBOARD COMPACTO
+   ========================================================== */
+.access-mode-box{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  padding:7px 8px;
+  border:1px solid var(--border);
+  border-radius:7px;
+  background:var(--surface2);
+}
+.access-mode-state{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:10.5px;
+  font-weight:800;
+  color:var(--text-muted);
+}
+.access-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#9ca3af;
+  flex:0 0 auto;
+}
+.access-mode-btn{
+  height:23px;
+  padding:0 8px;
+  border:1px solid var(--border);
+  border-radius:5px;
+  background:var(--surface);
+  color:var(--text);
+  font-size:8.5px;
+  font-weight:900;
+  letter-spacing:.3px;
+}
+body.editor-mode .access-dot{background:var(--success)}
+body.editor-mode .access-mode-state{color:var(--success)}
+body.editor-mode .access-mode-btn{color:var(--text-muted)}
+body.reader-mode #nav-economia,
+body.reader-mode #mnav-economia,
+body.reader-mode #btnSyncFutgalSidebar,
+body.reader-mode .editor-only,
+body.reader-mode button[onclick*="openNuevoJugador"],
+body.reader-mode button[onclick*="openNuevoPartido"],
+body.reader-mode button[onclick*="editPartido"],
+body.reader-mode button[onclick*="deletePartido"],
+body.reader-mode button[onclick*="deleteJugador"],
+body.reader-mode button[onclick*="openFutgalImporter"],
+body.reader-mode button[onclick*="syncFromFutgal"],
+body.reader-mode button[onclick*="removePlayerPhoto"],
+body.reader-mode .avatar-upload-btn,
+body.reader-mode #formJugador button[type="submit"],
+body.reader-mode #formJugador button.btn-danger,
+body.reader-mode button[onclick*="openClasifAjustes"]{
+  display:none !important;
+}
+body.reader-mode #formJugador input,
+body.reader-mode #formJugador textarea,
+body.reader-mode #formJugador select{
+  pointer-events:none;
+  opacity:.82;
+}
+body.reader-mode #modalFotoUploadInput{display:none!important}
+
+/* Dashboard: lectura primero, máxima densidad */
+.dashboard-v2{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+.dash-v2-header{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:1px;
+}
+.dash-v2-title{
+  font-size:20px;
+  font-weight:900;
+  color:var(--text);
+  line-height:1.05;
+}
+.dash-v2-sub{
+  font-size:10px;
+  color:var(--text-dim);
+  margin-top:3px;
+}
+.dash-v2-mode{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:9px;
+  color:var(--text-muted);
+}
+.dash-v2-mode-pill{
+  display:inline-flex;
+  align-items:center;
+  height:22px;
+  padding:0 7px;
+  border:1px solid var(--border);
+  border-radius:5px;
+  font-size:8.5px;
+  font-weight:900;
+  letter-spacing:.25px;
+  background:var(--surface2);
+}
+.dash-section{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:7px;
+  overflow:hidden;
+}
+.dash-section-head{
+  height:30px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  padding:0 9px;
+  border-bottom:1px solid var(--border);
+  background:var(--surface2);
+}
+.dash-section-title{
+  font-size:9.5px;
+  font-weight:900;
+  color:var(--text);
+  text-transform:uppercase;
+  letter-spacing:.35px;
+}
+.dash-section-note{
+  font-size:8.5px;
+  color:var(--text-dim);
+  white-space:nowrap;
+}
+.dash-table-wrap{overflow-x:auto}
+.dash-table{
+  width:100%;
+  border-collapse:collapse;
+  table-layout:fixed;
+  font-size:9.5px;
+}
+.dash-table th{
+  height:20px;
+  padding:2px 6px;
+  font-size:7.5px;
+  font-weight:900;
+  color:var(--text-dim);
+  text-transform:uppercase;
+  letter-spacing:.25px;
+  background:var(--surface);
+  border-bottom:1px solid var(--border);
+  text-align:left;
+  white-space:nowrap;
+}
+.dash-table td{
+  height:25px;
+  padding:3px 6px;
+  border-bottom:1px solid var(--border);
+  color:var(--text);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.dash-table tr:last-child td{border-bottom:0}
+.dash-table .num{text-align:center;font-weight:800}
+.dash-table .right{text-align:right;font-weight:800}
+.dash-table .muted{color:var(--text-muted)}
+.dash-table .team{font-weight:800}
+.dash-table .dorneda-row td{
+  background:rgba(204,0,0,.045);
+  font-weight:900;
+}
+.dash-summary-table th,
+.dash-summary-table td{text-align:center}
+.dash-summary-table td{
+  height:31px;
+  font-size:12px;
+  font-weight:900;
+}
+.dash-summary-table td.team-col{
+  text-align:left;
+  font-size:10px;
+  font-weight:800;
+}
+.dash-compact-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+}
+.dash-result{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:18px;
+  height:16px;
+  padding:0 4px;
+  border-radius:3px;
+  font-size:7.5px;
+  font-weight:900;
+  color:#fff;
+}
+.dash-result.v{background:#16a34a}
+.dash-result.e{background:#d97706}
+.dash-result.d{background:#b91c1c}
+.dash-homeaway{
+  font-size:7.5px;
+  font-weight:900;
+  color:var(--text-dim);
+}
+.dash-r-form{
+  display:flex;
+  justify-content:center;
+  gap:3px;
+}
+.dash-r-form span{
+  width:17px;
+  height:17px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:3px;
+  font-size:7px;
+  font-weight:900;
+  color:#fff;
+}
+.dash-top3-table td:first-child{width:40px;text-align:center;color:var(--red-light);font-weight:900}
+.dash-top3-table td:last-child{width:55px;text-align:center;font-weight:900}
+.dash-admin-tools{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  flex-wrap:wrap;
+  padding:7px 9px;
+}
+.dash-admin-tools .btn{
+  height:24px!important;
+  min-height:24px!important;
+  padding:2px 7px!important;
+  font-size:8.5px!important;
+  border-radius:5px!important;
+}
+.dash-empty{
+  padding:12px;
+  font-size:9.5px;
+  color:var(--text-dim);
+  text-align:center;
+}
+.dash-link{
+  cursor:pointer;
+  color:var(--text-muted);
+  font-size:8.5px;
+  font-weight:800;
+}
+.dash-link:hover{color:var(--text)}
+@media(max-width:900px){
+  .dash-compact-grid{grid-template-columns:1fr}
+  .dash-v2-header{align-items:flex-start;flex-direction:column}
+}
+@media(max-width:600px){
+  .dash-v2-title{font-size:17px}
+  .dash-table{min-width:520px}
+  .dash-summary-table{min-width:560px}
+}
+
 </style>
 </head>
-<body>
+<body class="reader-mode">
 <div class="toast-container" id="toastContainer"></div>
 
 <!-- PASO 11C · ACTUALIZACIÓN FUTGAL EN LA NUBE -->
@@ -3765,12 +4035,13 @@
         </button>
       </div>
 
-      <!-- ADMIN PIN MODE TOGGLE -->
-      <div id="adminModeBtn" style="font-size:11px;font-weight:700;padding:6px 10px;border-radius:6px;border:1px solid rgba(255,255,255,0.1);background:var(--surface2);margin-bottom:0;display:flex;align-items:center;justify-content:space-between;cursor:pointer" onclick="toggleAdminPINModal()" title="Modo Edición / Administrador">
-        <span id="adminModeLabel" style="display:flex;align-items:center;gap:4px">
-          <span>🔓</span> Modo Editor
-        </span>
-        <span style="font-size:10px;color:var(--text-muted)">PIN</span>
+      <!-- ACCESO LECTOR / EDITOR -->
+      <div class="access-mode-box">
+        <div class="access-mode-state">
+          <span class="access-dot" id="accessModeDot"></span>
+          <span id="adminModeLabel">Lector</span>
+        </div>
+        <button type="button" id="adminModeBtn" class="access-mode-btn" onclick="toggleAdminPINModal()" title="Acceso de administrador">EDITOR</button>
       </div>
 
       <input type="file" id="importFile" accept=".json" style="display:none" onchange="importJSON(event)" />
@@ -3811,89 +4082,149 @@
 
   <main class="main-content">
 <section class="section active" id="section-dashboard">
-      <div class="page-header" style="margin-bottom:12px">
-        <div><div class="page-title">Dashboard</div><div class="page-subtitle"><span class="dorneda-highlight">Xuventude Dorneda</span> &middot; Temporada 2026/27</div></div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <button type="button" class="btn btn-primary" id="dashSyncFutgalBtn" onclick="syncFromFutgal()" title="Actualizar resultados y fechas desde FUTGAL">🔄 Actualizar desde FUTGAL</button>
-          <button type="button" class="btn btn-ghost" onclick="openFutgalImporter()" title="Pegar texto de acta manualmente">🔗 Importador Manual</button>
-          <button type="button" class="btn btn-ghost" onclick="openNuevoPartido()">+ Añadir Partido</button>
+      <div class="dashboard-v2">
+        <div class="dash-v2-header">
+          <div>
+            <div class="dash-v2-title">Xuventude Dorneda · 2026/27</div>
+            <div class="dash-v2-sub">Resumen deportivo · Liga</div>
+          </div>
+          <div class="dash-v2-mode">
+            <span>Acceso:</span>
+            <span class="dash-v2-mode-pill" id="dashAccessMode">LECTOR</span>
+          </div>
         </div>
-      </div>
 
-      <!-- STATS COMPETITION FILTER TABS -->
-      <div class="tabs mb-12">
-        <div class="tab" id="tabStatPret" onclick="filterDashStats('Pretemporada',this)">⏱️ Pretemporada</div>
-        <div class="tab active" id="tabStatLiga" onclick="filterDashStats('Liga',this)">⚽ Liga</div>
-        <div class="tab" id="tabStatCopa" onclick="filterDashStats('Copa',this)">🏆 Copa</div>
-        <div class="tab" id="tabStatTodos" onclick="filterDashStats('Todos',this)">🌐 General</div>
-      </div>
-
-      <!-- STATS GRID (ULTRA-COMPACT RIBBON) -->
-      <div class="stats-ribbon" id="dashStats"></div>
-
-      <!-- JORNADAS WIDGET -->
-      <div class="card jornadas-widget-wrap mb-0" style="margin-bottom:20px;margin-top:16px">
-        <div class="jornadas-header" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-          <div class="card-title" style="margin-bottom:0">⚽ Liga &middot; Primera Futgal</div>
-          <span id="jornadasSubtitle" style="font-size:11px;font-weight:700;color:var(--text-muted)"></span>
+        <div class="dash-section">
+          <div class="dash-section-head">
+            <div class="dash-section-title">Situación en Liga</div>
+            <div class="dash-section-note">Clasificación y racha actual</div>
+          </div>
+          <div class="dash-table-wrap">
+            <table class="dash-table dash-summary-table">
+              <thead>
+                <tr>
+                  <th>Posición</th><th>PJ</th><th>PTS</th><th>GF</th><th>GC</th><th>DG</th><th>Racha</th>
+                </tr>
+              </thead>
+              <tbody id="dashLigaSummary"></tbody>
+            </table>
+          </div>
         </div>
-        <div id="jornadasGrid" class="jornadas-grid mb-8"></div>
-        <div class="copa-chips" style="display:flex;align-items:center;gap:8px;padding-top:10px;margin-top:10px;border-top:1px dashed var(--border)"><span class="copa-chip-label" style="font-size:10px;font-weight:800;text-transform:uppercase;color:var(--text-muted);">🏆 Copa:</span><div id="copaChips"></div></div>
-      </div>
 
-      <!-- BOTTOM DASHBOARD GRID: PROXIMO PARTIDO + ULTIMO PARTIDO + TOP GOLEADORES & TOP ASISTENCIAS -->
-      <div class="dash-main-grid mt-20">
-        <!-- LEFT COLUMN: PROXIMO PARTIDO + ULTIMO PARTIDO JUGADO -->
-        <div style="display:flex;flex-direction:column;gap:14px">
-          <!-- PROXIMO PARTIDO CARD -->
-          <div class="card" style="border:1px solid rgba(239,68,68,0.35);background:linear-gradient(135deg,rgba(239,68,68,0.04),transparent);margin-bottom:0">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-              <div class="card-title" style="margin-bottom:0">&#9200; Pr&oacute;ximo Partido</div>
-              <span class="badge" style="background:#dc2626;color:#fff;font-size:10px;font-weight:800">PRÓXIMO</span>
+        <div class="dash-section">
+          <div class="dash-section-head">
+            <div class="dash-section-title">Próximo partido</div>
+            <div class="dash-section-note" id="dashNextMatchNote"></div>
+          </div>
+          <div class="dash-table-wrap">
+            <table class="dash-table">
+              <thead>
+                <tr>
+                  <th style="width:62px">Jornada</th>
+                  <th>Rival</th>
+                  <th style="width:56px">L/V</th>
+                  <th style="width:88px">Fecha</th>
+                  <th style="width:62px">Hora</th>
+                  <th>Campo</th>
+                </tr>
+              </thead>
+              <tbody id="dashNextMatchTable"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="dash-compact-grid">
+          <div class="dash-section">
+            <div class="dash-section-head">
+              <div class="dash-section-title">Últimos resultados</div>
+              <div class="dash-section-note">Liga · últimos 5</div>
             </div>
-            <div id="dashNextMatch"></div>
+            <div class="dash-table-wrap">
+              <table class="dash-table">
+                <thead>
+                  <tr><th style="width:45px">J</th><th>Rival</th><th style="width:42px">L/V</th><th style="width:58px">Res.</th><th style="width:62px">Marcador</th></tr>
+                </thead>
+                <tbody id="dashRecentResults"></tbody>
+              </table>
+            </div>
           </div>
 
-          <!-- ULTIMO PARTIDO JUGADO CARD -->
-          <div class="card" style="border:1px solid rgba(22,163,74,0.35);background:linear-gradient(135deg,rgba(22,163,74,0.04),transparent);margin-bottom:0">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-              <div class="card-title" style="margin-bottom:0">&#9201; Último Partido Jugado</div>
-              <span class="badge" style="background:#16a34a;color:#fff;font-size:10px;font-weight:800">JUGADO</span>
+          <div class="dash-section">
+            <div class="dash-section-head">
+              <div class="dash-section-title">Próximas jornadas</div>
+              <div class="dash-section-note">Liga · próximas 5</div>
             </div>
-            <div id="dashLastMatch"></div>
+            <div class="dash-table-wrap">
+              <table class="dash-table">
+                <thead>
+                  <tr><th style="width:45px">J</th><th>Rival</th><th style="width:42px">L/V</th><th style="width:82px">Fecha</th></tr>
+                </thead>
+                <tbody id="dashUpcomingMatches"></tbody>
+              </table>
+            </div>
           </div>
         </div>
 
-        <!-- TOP GOLEADORES, ASISTENCIAS, TARJETAS & SANCIONADOS -->
-        <div>
-          <!-- SANCIONADOS LIGA ALERT -->
-          <div class="card mb-12" style="border:1px solid rgba(239,68,68,0.25);background:rgba(239,68,68,0.03)">
-            <div class="card-title" style="color:#ef4444">&#128680; Se Pierde el Siguiente Partido (Liga)</div>
-            <div id="dashSancionadosBox"></div>
+        <div class="dash-compact-grid">
+          <div class="dash-section">
+            <div class="dash-section-head">
+              <div class="dash-section-title">Clasificación cercana</div>
+              <div class="dash-section-note"><span class="dash-link" onclick="showSection('clasificacion')">Ver completa</span></div>
+            </div>
+            <div class="dash-table-wrap">
+              <table class="dash-table">
+                <thead>
+                  <tr><th style="width:40px">Pos.</th><th>Equipo</th><th style="width:42px">PJ</th><th style="width:45px">PTS</th><th style="width:45px">DG</th></tr>
+                </thead>
+                <tbody id="dashNearbyStandings"></tbody>
+              </table>
+            </div>
           </div>
 
-          <!-- STAT COMPETITION FILTER TABS (PRETEMPORADA -> LIGA -> COPA -> GENERAL) -->
-          <div class="tabs mb-8" style="gap:4px">
-            <div class="tab" onclick="setStatFilterComp('Pretemporada', this)">⏱️ Pretemporada</div>
-            <div class="tab active" onclick="setStatFilterComp('Liga', this)">⚽ Liga</div>
-            <div class="tab" onclick="setStatFilterComp('Copa', this)">🏆 Copa</div>
-            <div class="tab" onclick="setStatFilterComp('Total', this)">🌐 General</div>
+          <div class="dash-section">
+            <div class="dash-section-head">
+              <div class="dash-section-title">Top goleadores</div>
+              <div class="dash-section-note">Liga · Top 3</div>
+            </div>
+            <div class="dash-table-wrap">
+              <table class="dash-table dash-top3-table">
+                <thead>
+                  <tr><th>#</th><th>Jugador</th><th>Goles</th></tr>
+                </thead>
+                <tbody id="dashTopScorers"></tbody>
+              </table>
+            </div>
           </div>
+        </div>
 
-          <div class="dash-stat-grid mb-12">
-            <div class="card" style="margin-bottom:0"><div class="card-title">&#9917; Top Goleadores</div><div id="dashGoleadores"></div></div>
-            <div class="card" style="margin-bottom:0"><div class="card-title">&#127919; Top Asistencias</div><div id="dashAsistidores"></div></div>
+        <div class="dash-section">
+          <div class="dash-section-head">
+            <div class="dash-section-title">Plantilla</div>
+            <div class="dash-section-note"><span class="dash-link" onclick="showSection('plantilla')">Ver plantilla</span></div>
           </div>
+          <div class="dash-table-wrap">
+            <table class="dash-table">
+              <thead>
+                <tr><th>Con ficha</th><th>A prueba</th><th>Cuerpo técnico</th><th>Sancionados próxima jornada</th><th>Dorsales libres</th></tr>
+              </thead>
+              <tbody id="dashSquadSummary"></tbody>
+            </table>
+          </div>
+        </div>
 
-          <div class="card" style="margin-bottom:0">
-            <div class="card-title" style="display:flex;align-items:center;gap:6px;"><span class="soccer-card yellow" style="width:10px;height:14px;"></span> Tarjetas en Liga (5ª am. = Sanción)</div>
-            <div id="dashTarjetasBox"></div>
+        <div class="dash-section editor-only" id="dashEditorTools">
+          <div class="dash-section-head">
+            <div class="dash-section-title">Herramientas de edición</div>
+            <div class="dash-section-note">Solo Editor</div>
+          </div>
+          <div class="dash-admin-tools">
+            <button type="button" class="btn btn-ghost" onclick="syncFromFutgal()">Actualizar FUTGAL</button>
+            <button type="button" class="btn btn-ghost" onclick="openFutgalImporter()">Importar acta</button>
+            <button type="button" class="btn btn-ghost" onclick="openNuevoPartido()">Añadir partido</button>
+            <button type="button" class="btn btn-ghost" onclick="openNuevoJugador()">Añadir jugador</button>
           </div>
         </div>
       </div>
-
-      <!-- MISTERCHIP STATISTICAL ANALYSIS BLOCK (6 INSIGHTS) -->
-      <div id="dashMisterChipBlock" class="mt-20"></div>
     </section>
 
     <!-- PLANTILLA -->
@@ -3901,7 +4232,7 @@
 <section class="section" id="section-plantilla">
       <div class="page-header">
         <div><div class="page-title">Plantilla</div><div class="page-subtitle">Temporada 2026/27 &middot; Jugadores y Cuerpo Técnico</div></div>
-        <button class="btn btn-primary" onclick="openNuevoJugador()">+ Añadir Miembro</button>
+        <button class="btn btn-primary editor-only" onclick="openNuevoJugador()">+ Añadir Miembro</button>
       </div>
       <div class="tabs">
         <div class="tab active" id="tabPlantillaFicha" onclick="filtrarPlantilla('Con ficha',this)">⚽ Con ficha (<span id="cntFicha">0</span>)</div>
@@ -3936,8 +4267,8 @@
       <div class="page-header">
         <div><div class="page-title">Partidos</div><div class="page-subtitle">Historial de enfrentamientos y calendario de la temporada</div></div>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <button type="button" class="btn btn-primary" onclick="syncFromFutgal()" title="Actualizar resultados desde FUTGAL">🔄 Actualizar desde FUTGAL</button>
-          <button type="button" class="btn btn-ghost" onclick="openNuevoPartido()">+ Nuevo Partido</button>
+          <button type="button" class="btn btn-primary editor-only" onclick="syncFromFutgal()" title="Actualizar resultados desde FUTGAL">🔄 Actualizar desde FUTGAL</button>
+          <button type="button" class="btn btn-ghost editor-only" onclick="openNuevoPartido()">+ Nuevo Partido</button>
         </div>
       </div>
       <div class="tabs mb-16">
@@ -4671,15 +5002,15 @@
     <div class="modal-backdrop" id="modalAdminPIN" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);z-index:9999;align-items:center;justify-content:center;" onclick="if(event.target===this)closeAdminPINModal()">
       <div class="modal card" style="max-width:360px;width:90%;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
-          <div style="font-weight:800;font-size:16px;color:var(--text);display:flex;align-items:center;gap:6px;" id="modalAdminPINTitle">🔒 Acceso seguro</div>
+          <div style="font-weight:800;font-size:16px;color:var(--text);display:flex;align-items:center;gap:6px;" id="modalAdminPINTitle">Acceso de Editor</div>
           <button type="button" class="btn-xs ghost" onclick="closeAdminPINModal()" style="font-size:14px;padding:4px 8px;">✕</button>
         </div>
         <div style="font-size:12px;color:var(--text-muted);margin-bottom:16px;line-height:1.4;" id="modalAdminPINDesc">
-          Inicia sesión con la cuenta de Google autorizada para editar resultados, plantilla y datos de la nube.
+          El público entra como Lector. Para habilitar edición, gestión y Economía, inicia sesión con la cuenta de administrador autorizada.
         </div>
         <div id="adminPINError" style="color:#ef4444;font-size:12px;margin-bottom:14px;display:none;font-weight:600;text-align:center;">Esta cuenta no está autorizada.</div>
         <div style="display:flex;gap:8px;">
-          <button type="button" class="btn btn-primary" style="flex:1;justify-content:center;padding:10px;" onclick="verifyAdminPIN()">Continuar con Google</button>
+          <button type="button" class="btn btn-primary" style="flex:1;justify-content:center;padding:10px;" onclick="verifyAdminPIN()">Entrar como Administrador</button>
           <button type="button" class="btn btn-ghost" onclick="closeAdminPINModal()" style="padding:10px;">Cancelar</button>
         </div>
       </div>
@@ -9511,6 +9842,7 @@ function scoutingNoteKey(team){
 }
 
 function saveScoutingCoachNote(team){
+  if(!requireEditor('Guardar anotación')) return;
   const el=document.getElementById('scoutCoachNote');
   if(!el) return;
   if(!db.scoutingNotas) db.scoutingNotas={};
@@ -9547,33 +9879,83 @@ function getPlantillaSyncStatus(){
 window.getPlantillaSyncStatus = getPlantillaSyncStatus;
 
 
+
+function applyAccessModeUI(){
+  var body=document.body;
+  if(!body) return;
+
+  body.classList.toggle('editor-mode',!!isAdminMode);
+  body.classList.toggle('reader-mode',!isAdminMode);
+
+  var econ=document.getElementById('nav-economia');
+  var mecon=document.getElementById('mnav-economia');
+  if(econ) econ.style.display=isAdminMode ? '' : 'none';
+  if(mecon) mecon.style.display=isAdminMode ? '' : 'none';
+
+  var dashMode=document.getElementById('dashAccessMode');
+  if(dashMode) dashMode.textContent=isAdminMode ? 'EDITOR' : 'LECTOR';
+
+  // En Lector, formularios de ficha de jugador quedan visibles solo como consulta.
+  var form=document.getElementById('formJugador');
+  if(form){
+    form.querySelectorAll('input,textarea,select').forEach(function(el){
+      el.disabled=!isAdminMode;
+    });
+  }
+}
+window.applyAccessModeUI=applyAccessModeUI;
+
+function requireEditor(action){
+  if(isAdminMode) return true;
+  toast((action ? action+': ' : '')+'requiere acceso Editor.','info');
+  openAdminPINModal();
+  return false;
+}
+window.requireEditor=requireEditor;
+
 // ==========================================
 // ADMIN MODE WITH GOOGLE AUTHENTICATION
 // ==========================================
 function updateAdminModeUI(){
-  var btnLabel = document.getElementById('adminModeLabel');
-  var mobBtn = document.getElementById('mobileAdminBtn');
-  if(btnLabel){
-    btnLabel.innerHTML = isAdminMode ? '<span>🔓</span> Modo Editor' : '<span>🔒</span> Modo Lectura';
-    btnLabel.style.color = isAdminMode ? 'var(--success)' : 'var(--text-muted)';
-  }
+  var btnLabel=document.getElementById('adminModeLabel');
+  var btn=document.getElementById('adminModeBtn');
+  var dot=document.getElementById('accessModeDot');
+  var mobBtn=document.getElementById('mobileAdminBtn');
+
+  if(btnLabel) btnLabel.textContent=isAdminMode ? 'Editor' : 'Lector';
+  if(btn) btn.textContent=isAdminMode ? 'SALIR' : 'EDITOR';
+  if(dot) dot.style.background=isAdminMode ? 'var(--success)' : '#9ca3af';
+
   if(mobBtn){
-    mobBtn.innerHTML = isAdminMode ? '🔓' : '🔒';
-    mobBtn.title = isAdminMode ? 'Modo Editor Activo' : 'Modo Lectura (Pulsa para desbloquear)';
+    mobBtn.innerHTML=isAdminMode ? '✓' : '✎';
+    mobBtn.title=isAdminMode ? 'Editor activo · pulsar para salir' : 'Entrar como Editor';
+  }
+
+  applyAccessModeUI();
+
+  if(currentSection === 'economia' && !isAdminMode){
+    showSection('dashboard');
+  }else if(currentSection === 'dashboard'){
+    renderDashboard();
   }
 }
 window.updateAdminModeUI = updateAdminModeUI;
 
 function toggleAdminPINModal(){
   if(isAdminMode){
-    if(confirm('¿Deseas cerrar la sesión de edición y volver al Modo Lectura?')){
-      firebaseAuth.signOut().then(function(){
-        isAdminMode = false;
+    if(confirm('¿Cerrar el acceso Editor y volver a Lector?')){
+      if(firebaseAuth){
+        firebaseAuth.signOut().then(function(){
+          isAdminMode=false;
+          updateAdminModeUI();
+          toast('Modo Lector activado','info');
+        });
+      }else{
+        isAdminMode=false;
         updateAdminModeUI();
-        toast('Modo Lectura activado 🔒', 'info');
-      });
+      }
     }
-  } else {
+  }else{
     openAdminPINModal();
   }
 }
@@ -9618,7 +10000,7 @@ function verifyAdminPIN(){
       saveDBToCloud();
     }
 
-    toast('Modo Editor autorizado con Google 🔓', 'success');
+    toast('Acceso Editor autorizado', 'success');
   }).catch(function(error){
     if(error && error.code === 'auth/popup-closed-by-user') return;
     if(err){
@@ -9647,6 +10029,11 @@ function closeMobileSidebar(){
 }
 
 function showSection(name, skipHashUpdate, skipScroll){
+  if(name === 'economia' && !isAdminMode){
+    toast('Economía está disponible solo para Editor.','info');
+    openAdminPINModal();
+    name = 'dashboard';
+  }
   currentSection = name;
   try {
     localStorage.setItem('dorneda_active_section', name);
@@ -10618,15 +11005,266 @@ function renderTarjetasYSancionesDashboard(){
 
 
 
+
+function dashNormTeam(v){
+  return clasifNormName ? clasifNormName(v) : normalizeName(v);
+}
+
+function dashIsDorneda(v){
+  var n=dashNormTeam(v);
+  return n.indexOf('dorneda') !== -1;
+}
+
+function dashLigaMatches(){
+  var jornadas=(typeof getLigaJornadasOficiales === 'function') ? (getLigaJornadasOficiales() || []) : [];
+  var out=[];
+
+  jornadas.forEach(function(j){
+    (j.partidos || []).forEach(function(p){
+      var isLocal=dashIsDorneda(p.local);
+      var isVisit=dashIsDorneda(p.visitante);
+      if(!isLocal && !isVisit) return;
+
+      var glOk=p.gl !== null && p.gl !== undefined && String(p.gl).trim() !== '' && Number.isFinite(Number(p.gl));
+      var gvOk=p.gv !== null && p.gv !== undefined && String(p.gv).trim() !== '' && Number.isFinite(Number(p.gv));
+
+      out.push({
+        jornada:Number(j.jornada)||0,
+        fecha:p.fecha || j.fecha || '',
+        hora:p.hora || p.horaPartido || '',
+        campo:p.campo || '',
+        rival:isLocal ? p.visitante : p.local,
+        condicion:isLocal ? 'Local' : 'Visitante',
+        played:glOk && gvOk,
+        gf:glOk && gvOk ? Number(isLocal ? p.gl : p.gv) : null,
+        gc:glOk && gvOk ? Number(isLocal ? p.gv : p.gl) : null
+      });
+    });
+  });
+
+  return out.sort(function(a,b){ return a.jornada-b.jornada; });
+}
+
+function dashResultCode(m){
+  if(!m || !m.played) return '';
+  if(m.gf > m.gc) return 'V';
+  if(m.gf < m.gc) return 'D';
+  return 'E';
+}
+
+function dashResultClass(code){
+  return code === 'V' ? 'v' : (code === 'D' ? 'd' : 'e');
+}
+
+function dashShortDate(v){
+  var s=String(v || '').trim();
+  if(!s) return '—';
+  var m=s.match(/(\d{1,2})[\/-](\d{1,2})(?:[\/-](\d{2,4}))?/);
+  if(m) return String(m[1]).padStart(2,'0')+'/'+String(m[2]).padStart(2,'0');
+  return s.length > 10 ? s.slice(0,10) : s;
+}
+
+function dashSafe(v){
+  return String(v === null || v === undefined ? '' : v)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+function dashLeagueContext(){
+  var calc=(typeof calcularClasificacionAutomatica === 'function') ? calcularClasificacionAutomatica() : null;
+  var rows=(calc && calc.rows) ? calc.rows : [];
+  var idx=rows.findIndex(function(r){ return dashIsDorneda(r.equipo); });
+  var dorneda=idx >= 0 ? rows[idx] : null;
+  var matches=dashLigaMatches();
+  var played=matches.filter(function(m){ return m.played; });
+  var pending=matches.filter(function(m){ return !m.played; });
+
+  return {
+    rows:rows,
+    dorneda:dorneda,
+    dornedaIndex:idx,
+    matches:matches,
+    played:played,
+    pending:pending,
+    next:pending.length ? pending[0] : null
+  };
+}
+
+function renderDashboardLeagueSummary(ctx){
+  var el=document.getElementById('dashLigaSummary');
+  if(!el) return;
+  var r=ctx.dorneda;
+  if(!r){
+    el.innerHTML='<tr><td colspan="7" class="dash-empty">Clasificación no disponible.</td></tr>';
+    return;
+  }
+
+  var form=ctx.played.slice(-5).map(function(m){
+    var c=dashResultCode(m);
+    return '<span class="'+dashResultClass(c)+'">'+c+'</span>';
+  }).join('');
+
+  el.innerHTML=`<tr class="dorneda-row">
+    <td>${r.pos || '—'}º / ${ctx.rows.length || '—'}</td>
+    <td>${r.pj || 0}</td>
+    <td>${r.pts || 0}</td>
+    <td>${r.gf || 0}</td>
+    <td>${r.gc || 0}</td>
+    <td>${(r.dg||0) > 0 ? '+' : ''}${r.dg || 0}</td>
+    <td><div class="dash-r-form">${form || '<span style="background:var(--surface3);color:var(--text-dim)">—</span>'}</div></td>
+  </tr>`;
+}
+
+function renderDashboardNextCompact(ctx){
+  var el=document.getElementById('dashNextMatchTable');
+  var note=document.getElementById('dashNextMatchNote');
+  if(!el) return;
+  var m=ctx.next;
+  if(!m){
+    el.innerHTML='<tr><td colspan="6" class="dash-empty">No hay próximo partido de Liga disponible.</td></tr>';
+    if(note) note.textContent='';
+    return;
+  }
+
+  if(note) note.textContent=m.condicion === 'Local' ? 'En casa' : 'Fuera';
+  el.innerHTML=`<tr>
+    <td class="num">J${m.jornada}</td>
+    <td class="team">${dashSafe(formatCleanTeamName ? formatCleanTeamName(m.rival) : m.rival)}</td>
+    <td class="num"><span class="dash-homeaway">${m.condicion === 'Local' ? 'LOCAL' : 'VIS.'}</span></td>
+    <td class="num">${dashShortDate(m.fecha)}</td>
+    <td class="num">${dashSafe(m.hora || '—')}</td>
+    <td>${dashSafe(m.campo || '—')}</td>
+  </tr>`;
+}
+
+function renderDashboardRecent(ctx){
+  var el=document.getElementById('dashRecentResults');
+  if(!el) return;
+  var rows=ctx.played.slice(-5).reverse();
+  if(!rows.length){
+    el.innerHTML='<tr><td colspan="5" class="dash-empty">Sin resultados de Liga.</td></tr>';
+    return;
+  }
+
+  el.innerHTML=rows.map(function(m){
+    var code=dashResultCode(m);
+    return `<tr>
+      <td class="num">J${m.jornada}</td>
+      <td class="team">${dashSafe(formatCleanTeamName ? formatCleanTeamName(m.rival) : m.rival)}</td>
+      <td class="num"><span class="dash-homeaway">${m.condicion === 'Local' ? 'L' : 'V'}</span></td>
+      <td class="num"><span class="dash-result ${dashResultClass(code)}">${code}</span></td>
+      <td class="num">${m.gf}-${m.gc}</td>
+    </tr>`;
+  }).join('');
+}
+
+function renderDashboardUpcoming(ctx){
+  var el=document.getElementById('dashUpcomingMatches');
+  if(!el) return;
+  var rows=ctx.pending.slice(0,5);
+  if(!rows.length){
+    el.innerHTML='<tr><td colspan="4" class="dash-empty">Sin jornadas pendientes.</td></tr>';
+    return;
+  }
+
+  el.innerHTML=rows.map(function(m){
+    return `<tr>
+      <td class="num">J${m.jornada}</td>
+      <td class="team">${dashSafe(formatCleanTeamName ? formatCleanTeamName(m.rival) : m.rival)}</td>
+      <td class="num"><span class="dash-homeaway">${m.condicion === 'Local' ? 'L' : 'V'}</span></td>
+      <td class="num">${dashShortDate(m.fecha)}</td>
+    </tr>`;
+  }).join('');
+}
+
+function renderDashboardNearby(ctx){
+  var el=document.getElementById('dashNearbyStandings');
+  if(!el) return;
+  if(!ctx.rows.length || ctx.dornedaIndex < 0){
+    el.innerHTML='<tr><td colspan="5" class="dash-empty">Clasificación no disponible.</td></tr>';
+    return;
+  }
+
+  var start=Math.max(0,ctx.dornedaIndex-2);
+  var end=Math.min(ctx.rows.length,start+5);
+  if(end-start<5) start=Math.max(0,end-5);
+
+  el.innerHTML=ctx.rows.slice(start,end).map(function(r){
+    var isD=dashIsDorneda(r.equipo);
+    return `<tr class="${isD?'dorneda-row':''}">
+      <td class="num">${r.pos}</td>
+      <td class="team">${dashSafe(formatCleanTeamName ? formatCleanTeamName(r.equipo) : r.equipo)}</td>
+      <td class="num">${r.pj || 0}</td>
+      <td class="num">${r.pts || 0}</td>
+      <td class="num">${(r.dg||0)>0?'+':''}${r.dg || 0}</td>
+    </tr>`;
+  }).join('');
+}
+
+function renderDashboardTop3(){
+  var el=document.getElementById('dashTopScorers');
+  if(!el) return;
+
+  var data=(typeof getAnalisisIndividualStats === 'function') ? getAnalisisIndividualStats('Liga') : null;
+  var stats=data && data.stats ? Object.values(data.stats) : [];
+  var top=stats.filter(function(r){ return (r.goles || 0) > 0; })
+    .sort(function(a,b){
+      return (b.goles-a.goles) ||
+        ((a.partidos||0)-(b.partidos||0)) ||
+        String(a.nombre).localeCompare(String(b.nombre),'es',{sensitivity:'base'});
+    }).slice(0,3);
+
+  if(!top.length){
+    el.innerHTML='<tr><td colspan="3" class="dash-empty">Sin goleadores registrados.</td></tr>';
+    return;
+  }
+
+  el.innerHTML=top.map(function(r){
+    var d=(r.dorsal && r.dorsal !== 999) ? r.dorsal : '—';
+    return `<tr>
+      <td>#${d}</td>
+      <td class="team">${dashSafe(r.nombre)}</td>
+      <td>${r.goles || 0}</td>
+    </tr>`;
+  }).join('');
+}
+
+function renderDashboardSquad(){
+  var el=document.getElementById('dashSquadSummary');
+  if(!el) return;
+
+  var players=(db.jugadores || []).filter(function(j){ return j && !isStaff(j) && j.estado !== 'Vacante'; });
+  var staff=(db.jugadores || []).filter(function(j){ return j && isStaff(j); });
+  var conFicha=players.filter(function(j){ return j.estado === 'Con ficha'; }).length;
+  var prueba=players.filter(function(j){ return j.estado === 'A prueba'; }).length;
+  var sancionados=0;
+  try{
+    var t=calcTarjetasLiga();
+    sancionados=(t && t.suspendedList) ? t.suspendedList.length : 0;
+  }catch(e){}
+  var libres=(typeof getDorsalesLibres === 'function') ? getDorsalesLibres().length : 0;
+
+  el.innerHTML=`<tr>
+    <td class="num">${conFicha}</td>
+    <td class="num">${prueba}</td>
+    <td class="num">${staff.length}</td>
+    <td class="num">${sancionados}</td>
+    <td class="num">${libres}</td>
+  </tr>`;
+}
+
 function renderDashboard(){
-  renderDashboardStats();
-  renderTarjetasYSancionesDashboard();
-  renderJornadasWidget();
-  renderDashboardNextMatch();
-  renderDashboardLastMatch();
-  renderDashboardGoleadoresYAsistidores();
-  var dmc = document.getElementById('dashMisterChipBlock');
-  if(dmc) dmc.innerHTML = renderMisterChipBlock();
+  var ctx=dashLeagueContext();
+  renderDashboardLeagueSummary(ctx);
+  renderDashboardNextCompact(ctx);
+  renderDashboardRecent(ctx);
+  renderDashboardUpcoming(ctx);
+  renderDashboardNearby(ctx);
+  renderDashboardTop3();
+  renderDashboardSquad();
+
+  var mode=document.getElementById('dashAccessMode');
+  if(mode) mode.textContent=isAdminMode ? 'EDITOR' : 'LECTOR';
 }
 
 function getDorsalesLibres(){
@@ -11089,10 +11727,12 @@ function openJugadorModal(id, initialTab = 'datos', initialFilter = 'todos'){
   }
   openModal('modalJugador');
 }
-function openNuevoJugador(){openJugadorModal(null);}
+function openNuevoJugador(){
+  if(!requireEditor('Añadir jugador')) return;openJugadorModal(null);}
 window.openNuevoJugador = openNuevoJugador;
 
 function saveJugador(id){
+  if(!requireEditor('Guardar jugador')) return;
   const nombre = document.getElementById('jN').value.trim();
   const dorsal = parseInt(document.getElementById('jD').value) || null;
   const nombreCompleto = document.getElementById('jNC').value.trim();
@@ -11129,6 +11769,7 @@ function saveJugador(id){
 window.saveJugador = saveJugador;
 
 function deleteJugador(id){
+  if(!requireEditor('Eliminar jugador')) return;
   if(!confirm('¿Eliminar este miembro?')) return;
   db.jugadores = db.jugadores.filter(x => x.id !== id);
   markPlantillaEdited();
@@ -12414,6 +13055,7 @@ function setSyncButtonsText(html) {
  * actualizados de forma continua por el robot de GitHub Actions sin bloqueos CORS.
  */
 async function syncFromFutgal() {
+  if(!requireEditor('Actualizar FUTGAL')) return;
   if (isFutgalSyncing) {
     toast('SincronizaciÃ³n en curso, por favor espera...', 'warning');
     return;
@@ -16505,6 +17147,7 @@ let currentMatchEditId = null;
 let newMatchState = {};
 
 function openNuevoPartido(){
+  if(!requireEditor('Añadir partido')) return;
   currentMatchEditId = null;
   newMatchState = {
     tipo: 'Oficial',
@@ -16536,6 +17179,7 @@ function openNuevoPartido(){
 }
 
 function editPartido(id){
+  if(!requireEditor('Editar partido')) return;
   const p = db.partidos.find(x => x.id === id);
   if(!p) return;
   currentMatchEditId = id;
@@ -16759,6 +17403,7 @@ function saveStep2AndNext(){
 }
 
 function saveCompleteMatch(){
+  if(!requireEditor('Guardar partido')) return;
   newMatchState.resumen = document.getElementById('mResumen').value.trim();
   newMatchState.analisisPartido = document.getElementById('mObsRival').value.trim();
   newMatchState.observacionesRival = newMatchState.analisisPartido;
@@ -16781,6 +17426,7 @@ function saveCompleteMatch(){
 }
 
 function deletePartido(id){
+  if(!requireEditor('Eliminar partido')) return;
   if(!confirm('¿Estás seguro de eliminar este partido?')) return;
   db.partidos = db.partidos.filter(x => x.id !== id);
   markPartidosEdited();
@@ -17051,6 +17697,7 @@ function resetClasifAjustes(){
 
 // FUTGAL IMPORTER
 function openFutgalImporter(){
+  if(!requireEditor('Importar acta')) return;
   const ta = document.getElementById('futgalTextRaw');
   if(ta) ta.value = '';
   openModal('modalFutgal');
