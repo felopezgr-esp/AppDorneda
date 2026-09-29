@@ -3311,14 +3311,19 @@
         </div>
       </div>
 
+      <div class="form-group mb-12">
+        <label class="form-label">4. Concepto / título *</label>
+        <input class="form-control" id="movConcepto" required placeholder="Ej.: Cuota septiembre, Ficha Coté, Árbitro J4..." />
+      </div>
+
       <div class="form-group mb-12" id="movJugadorWrap" style="display:none">
-        <label class="form-label">4. Jugador de la plantilla *</label>
-        <select class="form-control" id="movJugadorId"></select>
+        <label class="form-label">5. Jugador de la plantilla *</label>
+        <select class="form-control" id="movJugadorId" onchange="suggestMovimientoConcepto()"></select>
       </div>
 
       <div class="form-row mb-12">
         <div class="form-group">
-          <label class="form-label">5. Método de pago</label>
+          <label class="form-label">6. Método de pago</label>
           <select class="form-control" id="movMetodoPago" onchange="updateMovFormVisibility()">
             <option value="">-- Seleccionar --</option>
             <option value="Bizum">Bizum</option>
@@ -3335,24 +3340,24 @@
 
       <div class="form-row mb-12">
         <div class="form-group">
-          <label class="form-label">6. Receptor del dinero</label>
+          <label class="form-label">7. Receptor del dinero</label>
           <input class="form-control" id="movReceptor" placeholder="Persona, club o entidad" />
         </div>
         <div class="form-group">
-          <label class="form-label">7. Importe (€) *</label>
+          <label class="form-label">8. Importe (€) *</label>
           <input type="number" step="0.01" min="0.01" class="form-control" id="movImporte" required placeholder="0,00" />
         </div>
       </div>
 
       <div class="form-row mb-12">
         <div class="form-group">
-          <label class="form-label">8. Fecha *</label>
+          <label class="form-label">9. Fecha *</label>
           <input class="form-control" id="movFecha" required placeholder="DD/MM/AAAA" />
         </div>
       </div>
 
       <div class="form-group mb-16">
-        <label class="form-label">9. Otra información</label>
+        <label class="form-label">10. Otra información</label>
         <textarea class="form-control" id="movNotas" rows="3" placeholder="Observaciones, justificante, patrocinador, detalle del gasto..."></textarea>
       </div>
 
@@ -4259,7 +4264,7 @@
                     <th>Mov.</th>
                     <th>Estado</th>
                     <th>Tipo</th>
-                    <th>Jugador / Detalle</th>
+                    <th>Concepto / Detalle</th>
                     <th>Método</th>
                     <th>Receptor</th>
                     <th>Importe</th>
@@ -4530,7 +4535,10 @@ const DEFAULT_DATA={
     {id:104,dorsal:null,nombre:'Borja',nombreCompleto:'Borja Pita Gonzalez',estado:'Con ficha',foto:null,notas:''},
     {id:105,dorsal:null,nombre:'Manu',nombreCompleto:'Manuel Blanco Canosa',estado:'Con ficha',foto:null,notas:''},
     {id:106,dorsal:null,nombre:'Mario',nombreCompleto:'Mario Rei Lacaci',estado:'Con ficha',foto:null,notas:''},
-    {id:107,dorsal:null,nombre:'Boliche',nombreCompleto:'Bolich',estado:'A prueba',foto:null,notas:''},
+    {id:107,dorsal:null,nombre:'Boliche',nombreCompleto:'Sergio Sánchez Vieiro',estado:'Con ficha',foto:null,notas:''},
+    {id:109,dorsal:null,nombre:'Nolas',nombreCompleto:'Jose Barrenechea Padín',estado:'Con ficha',foto:null,notas:''},
+    {id:110,dorsal:null,nombre:'Coté',nombreCompleto:'Jose L Aguado Pernas',estado:'Con ficha',foto:null,notas:''},
+    {id:111,dorsal:null,nombre:'Luis Ángel',nombreCompleto:'Luis A. Fernández Vijande',estado:'Con ficha',foto:null,notas:''},
     {id:108,dorsal:null,nombre:'Kata',nombreCompleto:'Fernando Antonio Gundin Eirin',estado:'Con ficha',foto:null,notas:'Entrenador'}
   ],
   partidos:[
@@ -7687,14 +7695,14 @@ const DEFAULT_DATA={
       { jugadorId: 1, nombre: 'David', dorsal: 1, nombreCompleto: 'David Casado Gonzalez', estadoFicha: 'Con ficha', cuota: 120, pagado: 120, estado: 'Pagado', metodo: 'Transferencia', fechaPago: '05/08/2026', notas: 'Pago 1 completo (FICHA)' },
       { jugadorId: 3, nombre: 'Cerni', dorsal: 3, nombreCompleto: 'Oscar Cernadas Souto', estadoFicha: 'Con ficha', cuota: 120, pagado: 120, estado: 'Pagado', metodo: 'Transferencia', fechaPago: '03/08/2026', notas: 'Pago 1 completo (FICHA)' },
       { jugadorId: 5, nombre: 'Willow', dorsal: 5, nombreCompleto: 'Diego Salpurido Garcia', estadoFicha: 'Con ficha', cuota: 120, pagado: 120, estado: 'Pagado', metodo: 'Transferencia', fechaPago: '04/08/2026', notas: 'Pago 1 completo (FICHA)' },
-      { jugadorId: 6, nombre: 'Ángel', dorsal: 6, nombreCompleto: 'Ángel Novo Sánchez', estadoFicha: 'Sin ficha', cuota: 120, pagado: 0, estado: 'Pendiente', metodo: '', fechaPago: '', notas: '' },
-      { jugadorId: 7, nombre: 'Joni', dorsal: 7, nombreCompleto: 'Jonathan Docampo del Rio', estadoFicha: 'Con ficha', cuota: 120, pagado: 0, estado: 'Pendiente', metodo: '', fechaPago: '', notas: 'Pendiente pago (FICHA)' },
-      { jugadorId: 8, nombre: 'Antony', dorsal: 8, nombreCompleto: 'José Antonio López López', estadoFicha: 'Sin ficha', cuota: 120, pagado: 0, estado: 'Pendiente', metodo: '', fechaPago: '', notas: '' },
-      { jugadorId: 9, nombre: 'Michi', dorsal: 9, nombreCompleto: 'Miguel A. Requejo Lamas', estadoFicha: 'Sin ficha', cuota: 120, pagado: 0, estado: 'Pendiente', metodo: '', fechaPago: '', notas: '' },
+      { jugadorId: 6, nombre: 'Ángel', dorsal: 6, nombreCompleto: 'Ángel Novo Sánchez', estadoFicha: 'Sin ficha', cuota: 0, pagado: 0, estado: 'Exento', metodo: '', fechaPago: '', notas: '' },
+      { jugadorId: 7, nombre: 'Joni', dorsal: 7, nombreCompleto: 'Jonathan Docampo del Rio', estadoFicha: 'Con ficha', cuota: 120, pagado: 120, estado: 'Pagado', metodo: '', fechaPago: '13/09/2026', notas: 'Pago completo (FICHA)', cuotaObligatoria:true, cuotaAutomatica:true },
+      { jugadorId: 8, nombre: 'Antony', dorsal: 8, nombreCompleto: 'José Antonio López López', estadoFicha: 'Sin ficha', cuota: 0, pagado: 0, estado: 'Exento', metodo: '', fechaPago: '', notas: '' },
+      { jugadorId: 9, nombre: 'Michi', dorsal: 9, nombreCompleto: 'Miguel A. Requejo Lamas', estadoFicha: 'Sin ficha', cuota: 0, pagado: 0, estado: 'Exento', metodo: '', fechaPago: '', notas: '' },
       { jugadorId: 10, nombre: 'Felix', dorsal: 10, nombreCompleto: 'Felix Lopez Grana', estadoFicha: 'Con ficha', cuota: 120, pagado: 120, estado: 'Pagado', metodo: 'Transferencia', fechaPago: '03/08/2026', notas: 'Pago 1 completo (FICHA)' },
       { jugadorId: 11, nombre: 'Manuly', dorsal: 11, nombreCompleto: 'Jose M. Bergondo Moreno', estadoFicha: 'Con ficha', cuota: 120, pagado: 120, estado: 'Pagado', metodo: 'Transferencia', fechaPago: '05/08/2026', notas: 'Pago 1 completo (FICHA)' },
       { jugadorId: 13, nombre: 'Fonato', dorsal: 13, nombreCompleto: 'Eduardo Ramos Barderas', estadoFicha: 'Con ficha', cuota: 120, pagado: 120, estado: 'Pagado', metodo: 'Transferencia', fechaPago: '30/07/2026', notas: 'Pago 1 completo (FICHA)' },
-      { jugadorId: 14, nombre: 'Rober', dorsal: 14, nombreCompleto: 'Roberto Jose Rumbo Suarez', estadoFicha: 'Con ficha', cuota: 120, pagado: 85, estado: 'Parcial', metodo: 'Transferencia', fechaPago: '', notas: 'Abonado 85€ (restan 35€ pendientes) (FICHA)' },
+      { jugadorId: 14, nombre: 'Rober', dorsal: 14, nombreCompleto: 'Roberto Jose Rumbo Suarez', estadoFicha: 'Con ficha', cuota: 120, pagado: 85, estado: 'Parcial', metodo: '', fechaPago: '06/09/2026', notas: 'Abonado 85€ (restan 35€ pendientes) (FICHA)', cuotaObligatoria:true, cuotaAutomatica:true },
       { jugadorId: 15, nombre: 'Fran', dorsal: 15, nombreCompleto: 'Francisco Tosar Asorey', estadoFicha: 'Con ficha', cuota: 120, pagado: 120, estado: 'Pagado', metodo: 'Transferencia', fechaPago: '30/07/2026', notas: 'Pago 1 completo (FICHA)' },
       { jugadorId: 17, nombre: 'Jesus', dorsal: 17, nombreCompleto: 'Rogelio Jesus Sanchez Fernandez', estadoFicha: 'Con ficha', cuota: 120, pagado: 120, estado: 'Pagado', metodo: 'Transferencia', fechaPago: '04/08/2026', notas: 'Pago 1 completo (FICHA)' },
       { jugadorId: 18, nombre: 'Marcos', dorsal: 18, nombreCompleto: 'Marcos Chico Lago', estadoFicha: 'Con ficha', cuota: 120, pagado: 120, estado: 'Pagado', metodo: 'Transferencia', fechaPago: '28/07/2026', notas: 'Pago 1 completo (FICHA)' },
@@ -7707,14 +7715,17 @@ const DEFAULT_DATA={
       { jugadorId: 28, nombre: 'Jorge', dorsal: 28, nombreCompleto: 'Jorge Puente Longueira', estadoFicha: 'Con ficha', cuota: 120, pagado: 120, estado: 'Pagado', metodo: 'Transferencia', fechaPago: '04/08/2026', notas: 'Pago 1 completo (FICHA)' },
       { jugadorId: 30, nombre: 'Mauro', dorsal: 30, nombreCompleto: 'Sergio Blanco Varela', estadoFicha: 'Con ficha', cuota: 120, pagado: 120, estado: 'Pagado', metodo: 'Transferencia', fechaPago: '28/07/2026', notas: 'Pago 1 completo (FICHA)' },
       { jugadorId: 32, nombre: 'Rivera', dorsal: 32, nombreCompleto: 'Jose Antonio Rivera', estadoFicha: 'Con ficha', cuota: 120, pagado: 120, estado: 'Pagado', metodo: 'Transferencia', fechaPago: '30/07/2026', notas: 'Pago 1 completo (FICHA)' },
-      { jugadorId: 101, nombre: 'Meilan', dorsal: null, nombreCompleto: 'Ivan Meilan Seoane', estadoFicha: 'Con ficha', cuota: 120, pagado: 0, estado: 'Pendiente', metodo: '', fechaPago: '', notas: 'Pendiente pago (FICHA)' },
+      { jugadorId: 101, nombre: 'Meilan', dorsal: null, nombreCompleto: 'Ivan Meilan Seoane', estadoFicha: 'Con ficha', cuota: 120, pagado: 120, estado: 'Pagado', metodo: '', fechaPago: '', notas: 'Pago completo (FICHA)', cuotaObligatoria:true, cuotaAutomatica:true },
       { jugadorId: 102, nombre: 'Cata', dorsal: null, nombreCompleto: 'Jose Ignacio Garcia Dapia', estadoFicha: 'Con ficha', cuota: 120, pagado: 120, estado: 'Pagado', metodo: 'Transferencia', fechaPago: '12/08/2026', notas: 'Pago 1 completo (FICHA)' },
       { jugadorId: 103, nombre: 'Roman', dorsal: null, nombreCompleto: 'Roman G. Torreiro Couso', estadoFicha: 'Con ficha', cuota: 120, pagado: 120, estado: 'Pagado', metodo: 'Transferencia', fechaPago: '13/08/2026', notas: 'Pago 1 completo (FICHA)' },
       { jugadorId: 104, nombre: 'Borja', dorsal: null, nombreCompleto: 'Borja Pita Gonzalez', estadoFicha: 'Con ficha', cuota: 120, pagado: 120, estado: 'Pagado', metodo: 'Transferencia', fechaPago: '13/08/2026', notas: 'Pago 1 completo (FICHA)' },
       { jugadorId: 105, nombre: 'Manu', dorsal: null, nombreCompleto: 'Manuel Blanco Canosa', estadoFicha: 'Con ficha', cuota: 120, pagado: 120, estado: 'Pagado', metodo: 'Transferencia', fechaPago: '', notas: 'Pago 1 completo (FICHA)' },
       { jugadorId: 106, nombre: 'Mario', dorsal: null, nombreCompleto: 'Mario Rei Lacaci', estadoFicha: 'Con ficha', cuota: 120, pagado: 0, estado: 'Pendiente', metodo: '', fechaPago: '', notas: 'Pendiente pago (FICHA)' },
-      { jugadorId: 107, nombre: 'Boliche', dorsal: null, nombreCompleto: 'Bolich', estadoFicha: 'Sin ficha', cuota: 120, pagado: 0, estado: 'Pendiente', metodo: '', fechaPago: '', notas: '' },
-      { jugadorId: 108, nombre: 'Kata', dorsal: null, nombreCompleto: 'Fernando Antonio Gundin Eirin', estadoFicha: 'Con ficha', cuota: 0, pagado: 0, estado: 'Exento', metodo: '', fechaPago: '', notas: 'Entrenador (Exento)' }
+      { jugadorId: 107, nombre: 'Boliche', dorsal: null, nombreCompleto: 'Sergio Sánchez Vieiro', estadoFicha: 'Con ficha', cuota: 120, pagado: 120, estado: 'Pagado', metodo: '', fechaPago: '02/09/2026', notas: 'Pago completo (FICHA)', cuotaObligatoria:true, cuotaAutomatica:true },
+      { jugadorId: 109, nombre: 'Nolas', dorsal: null, nombreCompleto: 'Jose Barrenechea Padín', estadoFicha: 'Con ficha', cuota: 120, pagado: 120, estado: 'Pagado', metodo: '', fechaPago: '26/09/2026', notas: '100€ + 20€ (FICHA)', cuotaObligatoria:true, cuotaAutomatica:true },
+      { jugadorId: 110, nombre: 'Coté', dorsal: null, nombreCompleto: 'Jose L Aguado Pernas', estadoFicha: 'Con ficha', cuota: 120, pagado: 120, estado: 'Pagado', metodo: '', fechaPago: '28/09/2026', notas: 'Pago completo (FICHA)', cuotaObligatoria:true, cuotaAutomatica:true },
+      { jugadorId: 111, nombre: 'Luis Ángel', dorsal: null, nombreCompleto: 'Luis A. Fernández Vijande', estadoFicha: 'Con ficha', cuota: 120, pagado: 100, estado: 'Parcial', metodo: 'En mano', fechaPago: '26/09/2026', notas: 'Abonado 100€; restan 20€ (FICHA)', cuotaObligatoria:true, cuotaAutomatica:true },
+      { jugadorId: 108, nombre: 'Kata', dorsal: null, nombreCompleto: 'Fernando Antonio Gundin Eirin', estadoFicha: 'Con ficha', cuota: 0, pagado: 0, estado: 'Exento', metodo: '', fechaPago: '', notas: 'Entrenador (Exento)', cuotaObligatoria:false, cuotaAutomatica:true }
     ],
     movimientos: [
       { id: 1, fecha: '01/07/2026', tipo: 'Ingreso', categoria: 'Cierre Temporada Anterior', concepto: 'Cierre Temporada Anterior (Saldo a favor en cuenta)', importe: 430.40, pagadorBeneficiario: 'Tesorería Club Dorneda', estado: 'Pagado', notas: 'Remanente inicial disponible en cuenta' },
@@ -7725,7 +7736,10 @@ const DEFAULT_DATA={
       { id: 6, fecha: '31/08/2026', tipo: 'Gasto', categoria: 'Fichas y Mutualidad RFGF', concepto: 'Pago 4. 2 Fichas (100%)', importe: 166.00, pagadorBeneficiario: 'Pago a Kata (Fichas federativas)', estado: 'Pagado', notas: 'Mario y Manuel (100%)' },
       { id: 7, fecha: '10/08/2026', tipo: 'Gasto', categoria: 'Fichas y Mutualidad RFGF', concepto: 'Pago 1 (40% pendiente RFGF) - 16 fichas + cuota equipo', importe: 528.40, pagadorBeneficiario: 'Federación Gallega (RFGF)', estado: 'Pendiente', notas: '1411€ x 40% = 528.40€ pendientes de pago' },
       { id: 8, fecha: '12/08/2026', tipo: 'Gasto', categoria: 'Fichas y Mutualidad RFGF', concepto: 'Pago 2 (40% pendiente RFGF) - 5 fichas (David, Rivera, Fede, Yess, Jorge)', importe: 166.00, pagadorBeneficiario: 'Federación Gallega (RFGF)', estado: 'Pendiente', notas: '415€ x 40% = 166.00€ pendientes de pago' },
-      { id: 9, fecha: '15/08/2026', tipo: 'Gasto', categoria: 'Fichas y Mutualidad RFGF', concepto: 'Pago 3 (40% pendiente RFGF) - 4 fichas (Román, Cata, Borja, Meilán)', importe: 132.80, pagadorBeneficiario: 'Federación Gallega (RFGF)', estado: 'Pendiente', notas: '332€ x 40% = 132.80€ pendientes de pago' }
+      { id: 9, fecha: '15/08/2026', tipo: 'Gasto', categoria: 'Fichas y Mutualidad RFGF', concepto: 'Pago 3 (40% pendiente RFGF) - 4 fichas (Román, Cata, Borja, Meilán)', importe: 132.80, pagadorBeneficiario: 'Federación Gallega (RFGF)', estado: 'Pendiente', notas: '332€ x 40% = 132.80€ pendientes de pago' },
+      { id: 10, fecha: '11/09/2026', tipo: 'Gasto', categoria: 'Fichas y Mutualidad RFGF', concepto: 'Pago 6. 2 Ficha (100%). Coté y Nolas', importe: 166.00, pagadorBeneficiario: 'Kata', estado: 'Pagado', notas: '' },
+      { id: 11, fecha: '11/09/2026', tipo: 'Gasto', categoria: 'Fichas y Mutualidad RFGF', concepto: 'Pago 5. 1 Ficha (100%). Bolich', importe: 83.00, pagadorBeneficiario: 'Kata', estado: 'Pagado', notas: '' },
+      { id: 12, fecha: '29/09/2026', tipo: 'Gasto', categoria: 'Fichas y Mutualidad RFGF', concepto: 'Pago 7. Ficha Luis Angel', importe: 83.00, pagadorBeneficiario: 'Kata', estado: 'Pagado', notas: 'Pago a Kata' }
     ]
   }
 };
@@ -16915,7 +16929,7 @@ function updateEconLockUI(){
 
 
 // ==========================================
-// PASO 14A/14B · ECONOMÍA V2
+// PASO 14A/14B/14E · ECONOMÍA V2
 // ==========================================
 const ECON_INGRESO_TIPOS = ['Ficha', 'Patrocinador', 'Otro'];
 const ECON_GASTO_TIPOS = ['Fichas', 'Cuota Club', 'Árbitros', 'Otro'];
@@ -16973,6 +16987,301 @@ function econMapLegacyCategory(m){
   if(n.indexOf('arbitra') !== -1 || n.indexOf('arbitr') !== -1) return {categoria:'Árbitros', detalle:''};
   if(n === 'otro') return {categoria:'Otro', detalle:m.categoriaDetalle || ''};
   return {categoria:'Otro', detalle:m.categoriaDetalle || old};
+}
+
+
+function reconcileEconomiaHoja20260929(){
+  if(!db.economia) db.economia = {};
+  if(db.economia.hoja20260929V1) return false;
+
+  if(!Array.isArray(db.jugadores)) db.jugadores = [];
+  if(!Array.isArray(db.economia.cuotas)) db.economia.cuotas = [];
+  if(!Array.isArray(db.economia.movimientos)) db.economia.movimientos = [];
+
+  let modified = false;
+
+  function normName(v){ return econNorm(v).replace(/\s+/g,' '); }
+
+  function findJugador(aliases){
+    const arr = Array.isArray(aliases) ? aliases : [aliases];
+    return db.jugadores.find(function(j){
+      const a = normName(j && j.nombre);
+      const b = normName(j && j.nombreCompleto);
+      return arr.some(function(x){
+        const n = normName(x);
+        return a === n || b === n || (n.length > 4 && (a.indexOf(n)!==-1 || b.indexOf(n)!==-1 || n.indexOf(a)!==-1));
+      });
+    }) || null;
+  }
+
+  function ensureJugador(id,nombre,nombreCompleto){
+    let j = findJugador([nombre,nombreCompleto]);
+    if(!j){
+      j = {id:id,dorsal:null,nombre:nombre,nombreCompleto:nombreCompleto,estado:'Con ficha',foto:null,notas:'',rol:'Jugador'};
+      db.jugadores.push(j);
+      modified = true;
+    }
+    return j;
+  }
+
+  const extraPlayers = [
+    [109,'Nolas','Jose Barrenechea Padín'],
+    [110,'Coté','Jose L Aguado Pernas'],
+    [111,'Luis Ángel','Luis A. Fernández Vijande']
+  ];
+  extraPlayers.forEach(function(x){ ensureJugador(x[0],x[1],x[2]); });
+
+  const canonical = [
+    ['David',120,'05/08/2026',''],
+    ['Cerni',120,'03/08/2026',''],
+    ['Willow',120,'04/08/2026',''],
+    ['Joni',120,'13/09/2026',''],
+    ['Felix',120,'03/08/2026',''],
+    ['Manuly',120,'05/08/2026',''],
+    ['Fonato',120,'30/07/2026',''],
+    ['Rober',85,'06/09/2026',''],
+    ['Fran',120,'30/07/2026',''],
+    ['Jesus',120,'04/08/2026',''],
+    ['Marcos',120,'28/07/2026',''],
+    ['Yess',120,'09/08/2026','Efectivo'],
+    ['Pablo',120,'30/07/2026',''],
+    ['Piwi',120,'04/08/2026',''],
+    ['Fede',120,'05/08/2026',''],
+    ['Santi',120,'05/08/2026',''],
+    ['Lesmes',120,'05/08/2026',''],
+    ['Jorge',120,'04/08/2026',''],
+    ['Mauro',120,'28/07/2026',''],
+    ['Rivera',120,'30/07/2026',''],
+    ['Cata',120,'12/08/2026',''],
+    ['Borja',120,'13/08/2026',''],
+    ['Meilan',120,'',''],
+    ['Roman',120,'13/08/2026',''],
+    ['Manu',120,'',''],
+    ['Mario',0,'',''],
+    ['Coté',120,'28/09/2026',''],
+    ['Boliche',120,'02/09/2026',''],
+    ['Nolas',120,'26/09/2026',''],
+    ['Luis Ángel',100,'26/09/2026','Efectivo']
+  ];
+
+  // Normaliza alias de nombres existentes.
+  const aliasMap = {
+    felix:['Felix','Félix'], jesus:['Jesus','Jesús'], meilan:['Meilan','Meilán'],
+    manu:['Manu','Manuel'], cote:['Coté','Cote'], boliche:['Boliche','Bolich'],
+    'luis angel':['Luis Ángel','Luis Angel','Luis A. Fernández Vijande']
+  };
+
+  function aliasesFor(name){
+    const k = normName(name);
+    return aliasMap[k] || [name];
+  }
+
+  function getCuotaFor(j,name){
+    return db.economia.cuotas.find(function(c){
+      if(j && c && Number(c.jugadorId)===Number(j.id)) return true;
+      return aliasesFor(name).some(function(a){ return normName(c && c.nombre)===normName(a); });
+    }) || null;
+  }
+
+  canonical.forEach(function(row){
+    const name=row[0], paid=row[1], fecha=row[2], metodo=row[3];
+    const j = findJugador(aliasesFor(name));
+    if(!j && name !== 'Mario') return;
+    let c = getCuotaFor(j,name);
+    if(!c){
+      c = {
+        jugadorId:j ? j.id : null,
+        nombre:j ? j.nombre : name,
+        dorsal:j ? (j.dorsal || null) : null,
+        nombreCompleto:j ? (j.nombreCompleto || '') : '',
+        estadoFicha:j ? (j.estado || 'Con ficha') : 'Con ficha',
+        cuota:120,pagado:0,estado:'Pendiente',metodo:'',fechaPago:'',notas:''
+      };
+      db.economia.cuotas.push(c);
+      modified=true;
+    }
+    c.jugadorId = j ? j.id : c.jugadorId;
+    c.nombre = j ? j.nombre : name;
+    c.nombreCompleto = j ? (j.nombreCompleto || c.nombreCompleto || '') : (c.nombreCompleto || '');
+    c.dorsal = j ? (j.dorsal || null) : (c.dorsal || null);
+    c.cuota = 120;
+    c.cuotaObligatoria = true;
+    c.cuotaAutomatica = true;
+    c.notas = paid >= 120 ? 'Pago completo (FICHA)' : (paid > 0 ? `Abonado ${paid}€ (FICHA)` : 'Pendiente pago (FICHA)');
+    if(fecha) c.fechaPago = fecha;
+    if(metodo) c.metodo = metodo;
+  });
+
+  // No ficha / prueba: no generan deuda automática.
+  ['Ángel','Antony','Michi'].forEach(function(name){
+    const j=findJugador([name]);
+    let c=getCuotaFor(j,name);
+    if(c){
+      c.cuota=0;c.pagado=0;c.estado='Exento';c.cuotaObligatoria=false;c.cuotaAutomatica=true;
+      modified=true;
+    }
+  });
+
+  const kata=findJugador(['Kata']);
+  const ck=getCuotaFor(kata,'Kata');
+  if(ck){
+    ck.cuota=0;ck.pagado=0;ck.estado='Exento';ck.cuotaObligatoria=false;ck.cuotaAutomatica=true;
+  }
+
+  // Reescribe SOLO los movimientos de Ficha de los jugadores de esta hoja.
+  // No toca patrocinadores ni otros movimientos que el usuario haya creado.
+  const canonicalIds = new Set();
+  canonical.forEach(function(row){
+    const j=findJugador(aliasesFor(row[0]));
+    if(j) canonicalIds.add(Number(j.id));
+  });
+  db.economia.movimientos = db.economia.movimientos.filter(function(m){
+    if(!econIsFichaMovement(m)) return true;
+    if(m.jugadorId && canonicalIds.has(Number(m.jugadorId))) return false;
+    const n=normName(m.jugadorNombre || m.concepto || '');
+    return !canonical.some(function(row){
+      return aliasesFor(row[0]).some(function(a){ return n.indexOf(normName(a))!==-1; });
+    });
+  });
+
+  let nextId=db.economia.movimientos.reduce(function(mx,m){return Math.max(mx,Number(m&&m.id)||0);},0)+1;
+  function addFicha(name,amount,date,method,note){
+    if(!amount) return;
+    const j=findJugador(aliasesFor(name));
+    if(!j) return;
+    db.economia.movimientos.push({
+      id:nextId++,tipo:'Ingreso',situacion:'Actual',categoria:'Ficha',categoriaDetalle:'',
+      jugadorId:j.id,jugadorNombre:j.nombre,metodoPago:method||'',metodoPagoDetalle:'',
+      receptor:'',importe:amount,fecha:date||'',notas:note||'',
+      concepto:'Ficha '+j.nombre,pagadorBeneficiario:'',estado:'Pagado',
+      origen:'hoja-20260929',_economiaV2:true
+    });
+  }
+
+  canonical.forEach(function(row){
+    const name=row[0], paid=row[1], date=row[2], method=row[3];
+    if(name==='Nolas' || name==='Luis Ángel' || name==='Mario') return;
+    addFicha(name,paid,date,method,'Importado de hoja económica 29/09/2026');
+  });
+  addFicha('Nolas',100,'13/09/2026','', 'Pago 1 · hoja económica 29/09/2026');
+  addFicha('Nolas',20,'26/09/2026','', 'Pago 2 · hoja económica 29/09/2026');
+  addFicha('Luis Ángel',100,'26/09/2026','Efectivo','En mano · hoja económica 29/09/2026');
+
+  // Elimina dos apuntes antiguos que contradicen la hoja actual.
+  db.economia.movimientos = db.economia.movimientos.filter(function(m){
+    const c=normName(m.concepto);
+    if(c.indexOf('ingreso ficha nolas')!==-1 && econMovSituacion(m)==='Previsto') return false;
+    if(c.indexOf('fin de temporada')!==-1 && m.tipo==='Gasto' && econMovSituacion(m)==='Previsto' && Number(m.importe)===100) return false;
+    return true;
+  });
+
+  function upsertGasto(concepto,importe,situacion,fecha,receptor,notas){
+    let m=db.economia.movimientos.find(function(x){
+      return x && x.tipo==='Gasto' && normName(x.concepto)===normName(concepto);
+    });
+    if(!m){
+      m={id:nextId++,tipo:'Gasto',categoria:'Fichas',concepto:concepto,importe:importe,
+         fecha:fecha||'',receptor:receptor||'',pagadorBeneficiario:receptor||'',notas:notas||'',
+         situacion:situacion,estado:situacion==='Actual'?'Pagado':'Pendiente',_economiaV2:true,
+         origen:'hoja-20260929'};
+      db.economia.movimientos.push(m);
+    }else{
+      m.importe=importe;m.situacion=situacion;m.estado=situacion==='Actual'?'Pagado':'Pendiente';
+      m.fecha=fecha||m.fecha||'';m.receptor=receptor||m.receptor||m.pagadorBeneficiario||'';
+      m.pagadorBeneficiario=m.receptor;m.notas=notas||m.notas||'';
+    }
+    modified=true;
+  }
+
+  upsertGasto('Pago 1. Cuota equipo + 16 fichas (60%)',882.60,'Actual','10/08/2026','Federación Gallega (RFGF)','');
+  upsertGasto('Pago 2. 5 fichas (60%)',249.00,'Actual','12/08/2026','Federación Gallega (RFGF)','');
+  upsertGasto('Pago 3. 4 fichas (60%)',199.20,'Actual','15/08/2026','Federación Gallega (RFGF)','');
+  upsertGasto('Árbitro Rossonero (Amistoso Pret_3)',45.00,'Actual','23/08/2026','Kata','Pago a Kata');
+  upsertGasto('Pago 4. 2 Fichas (100%)',166.00,'Actual','31/08/2026','Kata','Mario y Manuel');
+  upsertGasto('Pago 5. 1 Ficha (100%). Bolich',83.00,'Actual','11/09/2026','Kata','');
+  upsertGasto('Pago 6. 2 Ficha (100%). Coté y Nolas',166.00,'Actual','11/09/2026','Kata','');
+  upsertGasto('Pago 1 (40% pendiente RFGF) - 16 fichas + cuota equipo',528.40,'Previsto','10/08/2026','Federación Gallega (RFGF)','Pendiente de pago');
+  upsertGasto('Pago 2 (40% pendiente RFGF) - 5 fichas (David, Rivera, Fede, Yess, Jorge)',166.00,'Previsto','12/08/2026','Federación Gallega (RFGF)','Pendiente de pago');
+  upsertGasto('Pago 3 (40% pendiente RFGF) - 4 fichas (Román, Cata, Borja, Meilán)',132.80,'Previsto','15/08/2026','Federación Gallega (RFGF)','Pendiente de pago');
+
+  // Pago 7 confirmado: ficha de Luis Ángel, 83 €, pagado a Kata.
+  let p7=db.economia.movimientos.find(function(x){return normName(x&&x.concepto)==='pago 7 ficha luis angel';});
+  if(!p7){
+    p7={
+      id:nextId++,tipo:'Gasto',categoria:'Fichas',concepto:'Pago 7. Ficha Luis Angel',
+      importe:83.00,fecha:'29/09/2026',receptor:'Kata',pagadorBeneficiario:'Kata',
+      notas:'Pago a Kata',situacion:'Actual',estado:'Pagado',_economiaV2:true,origen:'hoja-20260929'
+    };
+    db.economia.movimientos.push(p7);
+  }else{
+    p7.tipo='Gasto';
+    p7.categoria='Fichas';
+    p7.importe=83.00;
+    if(!p7.fecha) p7.fecha='29/09/2026';
+    p7.receptor='Kata';
+    p7.pagadorBeneficiario='Kata';
+    p7.notas='Pago a Kata';
+    p7.situacion='Actual';
+    p7.estado='Pagado';
+    p7._economiaV2=true;
+  }
+
+  db.economia.saldoAnterior=430.40;
+  db.economia.hoja20260929V1=true;
+  modified=true;
+  return modified;
+}
+
+
+function reconcileEconomiaHoja20260929V2(){
+  if(!db.economia) db.economia = {};
+  if(db.economia.hoja20260929V2) return false;
+  if(!Array.isArray(db.economia.movimientos)) db.economia.movimientos = [];
+
+  const normalize = function(v){
+    return econNorm(v).replace(/\s+/g,' ');
+  };
+
+  let p7 = db.economia.movimientos.find(function(m){
+    return m && normalize(m.concepto) === 'pago 7 ficha luis angel';
+  });
+
+  if(!p7){
+    const nextId = db.economia.movimientos.reduce(function(mx,m){
+      return Math.max(mx, Number(m && m.id) || 0);
+    },0) + 1;
+    p7 = {
+      id:nextId,
+      tipo:'Gasto',
+      categoria:'Fichas',
+      concepto:'Pago 7. Ficha Luis Angel',
+      importe:83.00,
+      fecha:'29/09/2026',
+      receptor:'Kata',
+      pagadorBeneficiario:'Kata',
+      notas:'Pago a Kata',
+      situacion:'Actual',
+      estado:'Pagado',
+      _economiaV2:true,
+      origen:'hoja-20260929-v2'
+    };
+    db.economia.movimientos.push(p7);
+  }else{
+    p7.tipo='Gasto';
+    p7.categoria='Fichas';
+    p7.importe=83.00;
+    if(!p7.fecha) p7.fecha='29/09/2026';
+    p7.receptor='Kata';
+    p7.pagadorBeneficiario='Kata';
+    p7.notas='Pago a Kata';
+    p7.situacion='Actual';
+    p7.estado='Pagado';
+    p7._economiaV2=true;
+  }
+
+  db.economia.saldoAnterior = 430.40;
+  db.economia.hoja20260929V2 = true;
+  return true;
 }
 
 function ensureEconomiaV2(){
@@ -17056,6 +17365,8 @@ function ensureEconomiaV2(){
     modified = true;
   }
 
+  if(reconcileEconomiaHoja20260929()) modified = true;
+  if(reconcileEconomiaHoja20260929V2()) modified = true;
   syncCuotasDesdeMovimientos(false);
   return modified;
 }
@@ -17068,13 +17379,18 @@ function syncCuotasDesdeMovimientos(createMissing){
 
   if(createMissing !== false){
     jugadores.forEach(function(j){
-      let c = cuotas.find(function(x){ return Number(x.jugadorId) === Number(j.id); });
+      let c = cuotas.find(function(x){
+        return Number(x.jugadorId) === Number(j.id) || econNorm(x.nombre) === econNorm(j.nombre);
+      });
       if(!c){
+        const conFicha = j.estado === 'Con ficha';
         c = {
-          jugadorId:j.id, nombre:j.nombre, dorsal:j.dorsal || null,
-          nombreCompleto:j.nombreCompleto || '', estadoFicha:j.estado || '',
-          cuota:(db.economia.cuotaDefecto || 120), pagado:0,
-          estado:'Pendiente', metodo:'', fechaPago:'', notas:''
+          jugadorId:j.id,nombre:j.nombre,dorsal:j.dorsal || null,
+          nombreCompleto:j.nombreCompleto || '',estadoFicha:j.estado || '',
+          cuota:conFicha ? (db.economia.cuotaDefecto || 120) : 0,
+          pagado:0,estado:conFicha ? 'Pendiente' : 'Exento',
+          metodo:'',fechaPago:'',notas:'',
+          cuotaObligatoria:conFicha,cuotaAutomatica:true
         };
         cuotas.push(c);
       }
@@ -17082,8 +17398,11 @@ function syncCuotasDesdeMovimientos(createMissing){
   }
 
   cuotas.forEach(function(c){
-    const j = jugadores.find(function(x){ return Number(x.id) === Number(c.jugadorId); });
+    const j = jugadores.find(function(x){
+      return Number(x.id) === Number(c.jugadorId) || econNorm(x.nombre) === econNorm(c.nombre);
+    });
     if(j){
+      c.jugadorId = j.id;
       c.nombre = j.nombre;
       c.dorsal = j.dorsal || null;
       c.nombreCompleto = j.nombreCompleto || '';
@@ -17093,16 +17412,31 @@ function syncCuotasDesdeMovimientos(createMissing){
     const actuals = (db.economia.movimientos || []).filter(function(m){
       return econIsFichaMovement(m) &&
         econMovSituacion(m) === 'Actual' &&
-        Number(m.jugadorId) === Number(c.jugadorId);
+        (
+          (m.jugadorId && Number(m.jugadorId) === Number(c.jugadorId)) ||
+          (!m.jugadorId && econNorm(m.jugadorNombre) === econNorm(c.nombre))
+        );
     }).sort(function(a,b){
       return (econDateValue(b.fecha) - econDateValue(a.fecha)) || ((Number(b.id)||0)-(Number(a.id)||0));
     });
 
     const paid = actuals.reduce(function(sum,m){ return sum + (parseFloat(m.importe)||0); }, 0);
+
+    if(c.cuotaAutomatica !== false){
+      const conFicha = c.estadoFicha === 'Con ficha';
+      if(conFicha){
+        c.cuotaObligatoria = true;
+        if((parseFloat(c.cuota)||0) <= 0) c.cuota = db.economia.cuotaDefecto || 120;
+      }else if(paid <= 0){
+        c.cuotaObligatoria = false;
+        c.cuota = 0;
+      }
+    }
+
     const fixed = parseFloat(c.cuota) || 0;
     c.pagado = Math.round(paid * 100) / 100;
 
-    if(fixed <= 0){
+    if(c.cuotaObligatoria === false || fixed <= 0){
       c.estado = 'Exento';
     }else if(paid >= fixed){
       c.estado = 'Pagado';
@@ -17303,10 +17637,8 @@ function calcEconStats(){
     const fixed = parseFloat(c.cuota) || 0;
     const paid = parseFloat(c.pagado) || 0;
     cuotasRecaudadas += paid;
-
-    const isKata = normalizeName(c.nombre) === 'kata' || c.jugadorId === 108;
-    const conFicha = c.estadoFicha === 'Con ficha' || (c.notas && c.notas.indexOf('FICHA') !== -1);
-    if(c.estado !== 'Exento' && fixed > 0 && !isKata && conFicha){
+    const isKata = econNorm(c.nombre) === 'kata' || c.jugadorId === 108;
+    if(!isKata && c.cuotaObligatoria !== false && fixed > 0){
       cuotasEsperadas += fixed;
     }
   });
@@ -17334,9 +17666,7 @@ function calcEconStats(){
       if(isCierre){
         if(situacion === 'Actual') remanenteAnterior += imp;
       }else if(econIsFichaMovement(m)){
-        // Las fichas ya están incluidas mediante cuotasRecaudadas / cuotasPendientes.
-        // Un movimiento previsto de ficha no se suma otra vez: la cuota objetivo ya
-        // representa el ingreso esperado del jugador.
+        // Fichas se suman una sola vez desde cuotasRecaudadas.
       }else if(situacion === 'Actual'){
         otrosIngresosRealizados += imp;
       }else{
@@ -17348,6 +17678,10 @@ function calcEconStats(){
     }
   });
 
+  if(remanenteAnterior === 0 && db.economia && Number(db.economia.saldoAnterior)){
+    remanenteAnterior = Number(db.economia.saldoAnterior);
+  }
+
   const ingresosRealizados = cuotasRecaudadas + otrosIngresosRealizados;
   const ingresosPendientes = cuotasPendientes + otrosIngresosPendientes;
   const ingresosTotalesPrevistos = ingresosRealizados + ingresosPendientes;
@@ -17358,6 +17692,7 @@ function calcEconStats(){
   const balancePrevisto = ingresosTotalesPrevistos - gastosTotalesPrevistos;
   const saldoFinalPrevisto = remanenteAnterior + balancePrevisto;
   const pctCuotas = cuotasEsperadas > 0 ? Math.round((cuotasRecaudadas / cuotasEsperadas) * 100) : 0;
+  const ingresosConRemanente = remanenteAnterior + ingresosRealizados;
 
   return {
     cuotasRecaudadas,
@@ -17372,11 +17707,15 @@ function calcEconStats(){
     gastosRealizados,
     gastosPendientes,
     gastosTotalesPrevistos,
-    totalIngresos: ingresosRealizados,
+    totalIngresosTemporada: ingresosRealizados,
+    ingresosConRemanente,
+    totalIngresos: ingresosConRemanente,
     totalGastos: gastosRealizados,
     balanceActual,
+    balanceTemporada: balanceActual,
     balancePrevisto,
     saldoActual,
+    saldoNeto: saldoActual,
     saldoFinalPrevisto,
     pctCuotas
   };
@@ -17574,7 +17913,7 @@ function renderEconStats(){
     const pend = Math.max(0, fixed - paid);
     const isKata = normalizeName(c.nombre) === 'kata' || c.jugadorId === 108;
 
-    const isConFicha = !isKata && c.estado !== 'Exento' && (c.estadoFicha === 'Con ficha' || (c.notas && c.notas.indexOf('FICHA') !== -1) || (fixed > 0 && c.nombre !== 'Ángel' && c.nombre !== 'Antony' && c.nombre !== 'Michi' && c.nombre !== 'Bolich'));
+    const isConFicha = !isKata && c.estado !== 'Exento' && c.cuotaObligatoria !== false && fixed > 0;
 
     if(isConFicha && pend > 0){
       sumJugadoresPend += pend;
@@ -17594,23 +17933,6 @@ function renderEconStats(){
       `;
     }
   });
-
-  // Si hay diferencia hasta cuotasEsperadas (p.ej. slot de 27 jugadores)
-  if(st.cuotasPendientes > sumJugadoresPend){
-    const diffRestante = st.cuotasPendientes - sumJugadoresPend;
-    ingresosPendientesHtml += `
-      <div class="econ-ledger-row" style="background:rgba(245,158,11,0.03)">
-        <div class="econ-row-left">
-          <div class="econ-row-title">⏳ Ingreso ficha adicional prevista <span class="badge-pending-tag">Previsión</span></div>
-          <div class="econ-row-sub">Previsión cuota completa 120 € (Plantilla 27 fichas)</div>
-        </div>
-        <div class="econ-row-right-wrap">
-          <span class="val-pending-income">+${formatMoney(diffRestante)}</span>
-          <button type="button" class="econ-action-btn" onclick="switchEconTab('cuotas')" title="Ver plantilla de cuotas">✏️</button>
-        </div>
-      </div>
-    `;
-  }
 
   // Otros ingresos pendientes (si hay movimientos de tipo Ingreso en estado Pendiente)
   const otrosIngresosPendMovs = movs.filter(m => m.tipo === 'Ingreso' && econMovSituacion(m) === 'Previsto' && !econIsFichaMovement(m));
@@ -17876,11 +18198,18 @@ function changeEconMovPage(delta){
 window.changeEconMovPage = changeEconMovPage;
 
 function econMovementLabel(m){
+  if(m && String(m.concepto || '').trim()){
+    const title = String(m.concepto).trim();
+    if(econIsFichaMovement(m) && m.jugadorNombre && econNorm(title).indexOf(econNorm(m.jugadorNombre)) === -1){
+      return title + ' · ' + m.jugadorNombre;
+    }
+    return title;
+  }
   if(econIsFichaMovement(m)){
     return m.jugadorNombre || ((db.jugadores || []).find(function(j){ return Number(j.id)===Number(m.jugadorId); }) || {}).nombre || 'Ficha';
   }
-  if(m.categoria === 'Otro') return m.categoriaDetalle || m.concepto || 'Otro';
-  return m.categoria || m.concepto || '';
+  if(m.categoria === 'Otro') return m.categoriaDetalle || 'Otro';
+  return m.categoria || '';
 }
 
 function renderEconMovimientosMain(){
@@ -18089,6 +18418,8 @@ function saveCuotaJugadorSubmit(){
   const fijEl = document.getElementById('cuotaImporteFijado');
   const notEl = document.getElementById('cuotaNotas');
   item.cuota = Math.max(0, parseFloat(fijEl ? fijEl.value : 120) || 0);
+  item.cuotaObligatoria = item.cuota > 0;
+  item.cuotaAutomatica = false;
   item.notas = notEl ? notEl.value.trim() : (item.notas || '');
 
   syncCuotasDesdeMovimientos(false);
@@ -18200,6 +18531,20 @@ function renderEconDiario(){
   }).join('');
 }
 
+
+function suggestMovimientoConcepto(){
+  const conceptoEl = document.getElementById('movConcepto');
+  const tipo = document.getElementById('movTipo')?.value || '';
+  const categoria = document.getElementById('movCategoria')?.value || '';
+  const jugadorId = document.getElementById('movJugadorId')?.value || '';
+
+  if(!conceptoEl || conceptoEl.value.trim() || tipo !== 'Ingreso' || categoria !== 'Ficha' || !jugadorId) return;
+
+  const j = (db.jugadores || []).find(function(x){ return Number(x.id) === Number(jugadorId); });
+  if(j) conceptoEl.value = 'Ficha ' + (j.nombre || '');
+}
+window.suggestMovimientoConcepto = suggestMovimientoConcepto;
+
 function openModalMovimiento(id){
   ensureEconomiaV2();
   const movs = (db.economia && db.economia.movimientos) || [];
@@ -18209,6 +18554,7 @@ function openModalMovimiento(id){
   const tipoEl = document.getElementById('movTipo');
   const sitEl = document.getElementById('movSituacion');
   const catDetEl = document.getElementById('movCategoriaDetalle');
+  const conceptoEl = document.getElementById('movConcepto');
   const playerEl = document.getElementById('movJugadorId');
   const metEl = document.getElementById('movMetodoPago');
   const metDetEl = document.getElementById('movMetodoPagoDetalle');
@@ -18228,6 +18574,7 @@ function openModalMovimiento(id){
     if(sitEl) sitEl.value = 'Actual';
     updateMovCategorias('Ficha');
     if(catDetEl) catDetEl.value = '';
+    if(conceptoEl) conceptoEl.value = '';
     if(playerEl) playerEl.value = '';
     if(metEl) metEl.value = '';
     if(metDetEl) metDetEl.value = '';
@@ -18248,6 +18595,7 @@ function openModalMovimiento(id){
     const mapped = econMapLegacyCategory(item);
     updateMovCategorias(mapped.categoria);
     if(catDetEl) catDetEl.value = item.categoriaDetalle || mapped.detalle || '';
+    if(conceptoEl) conceptoEl.value = item.concepto || (item.categoria === 'Otro' ? (item.categoriaDetalle || '') : (item.categoria || ''));
     updateMovFormVisibility();
 
     if(playerEl) playerEl.value = item.jugadorId || '';
@@ -18272,6 +18620,7 @@ function saveMovimientoSubmit(){
   const situacion = document.getElementById('movSituacion')?.value || 'Actual';
   const categoria = document.getElementById('movCategoria')?.value || 'Otro';
   const categoriaDetalle = (document.getElementById('movCategoriaDetalle')?.value || '').trim();
+  const conceptoManual = (document.getElementById('movConcepto')?.value || '').trim();
   const jugadorIdRaw = document.getElementById('movJugadorId')?.value || '';
   const metodoPago = document.getElementById('movMetodoPago')?.value || '';
   const metodoPagoDetalle = (document.getElementById('movMetodoPagoDetalle')?.value || '').trim();
@@ -18280,6 +18629,10 @@ function saveMovimientoSubmit(){
   const fecha = (document.getElementById('movFecha')?.value || '').trim();
   const notas = (document.getElementById('movNotas')?.value || '').trim();
 
+  if(!conceptoManual){
+    toast('Indica un concepto o título para el movimiento.', 'error');
+    return;
+  }
   if(importe <= 0){
     toast('Indica un importe válido.', 'error');
     return;
@@ -18309,9 +18662,7 @@ function saveMovimientoSubmit(){
     jugadorNombre = j.nombre || '';
   }
 
-  let concepto = categoria;
-  if(tipo === 'Ingreso' && categoria === 'Ficha') concepto = 'Ficha ' + jugadorNombre;
-  else if(categoria === 'Otro') concepto = categoriaDetalle;
+  const concepto = conceptoManual;
 
   const payload = {
     tipo,
@@ -18475,236 +18826,150 @@ function renderEconBalance(){
 }
 
 function renderEconHoja(){
-  const box = document.getElementById('excelSheetContent');
+  const box = document.getElementById('printableExcelSheet');
   if(!box) return;
 
+  syncCuotasDesdeMovimientos(false);
   const st = calcEconStats();
-  const cuotas = (db.economia && db.economia.cuotas) || [];
+  const cuotas = ((db.economia && db.economia.cuotas) || []).slice();
   const movs = (db.economia && db.economia.movimientos) || [];
 
-  const rowsExcel = [
-    { dorsal: 1, apodo: 'David', nombre: 'David Casado Gonzalez', ficha: true },
-    { dorsal: 2, apodo: '', nombre: '', ficha: false },
-    { dorsal: 3, apodo: 'Cerni', nombre: 'Cerni - Oscar Cernadas Souto', ficha: true },
-    { dorsal: 4, apodo: '', nombre: '', ficha: false },
-    { dorsal: 5, apodo: 'Willow', nombre: 'Diego Salpurido Garcia', ficha: true },
-    { dorsal: 6, apodo: 'Ángel', nombre: 'Ángel Novo Sánchez', ficha: false },
-    { dorsal: 7, apodo: 'Joni', nombre: 'Jonathan Docampo del Río', ficha: true },
-    { dorsal: 8, apodo: 'Antony', nombre: 'José Antonio López López', ficha: false },
-    { dorsal: 9, apodo: 'Michi', nombre: 'Miguel A. Requejo Lamas', ficha: false },
-    { dorsal: 10, apodo: 'Félix', nombre: 'Félix López Graña', ficha: true },
-    { dorsal: 11, apodo: 'Manuly', nombre: 'Jose M. Bergondo Moreno', ficha: true },
-    { dorsal: 12, apodo: '', nombre: '', ficha: false },
-    { dorsal: 13, apodo: 'Fonato', nombre: 'Eduardo Ramos Barderas', ficha: true },
-    { dorsal: 14, apodo: 'Rober', nombre: 'Roberto Jose Rumbo Suarez', ficha: true },
-    { dorsal: 15, apodo: 'Fran', nombre: 'Francisco Tosar Asorey', ficha: true },
-    { dorsal: 16, apodo: '', nombre: '', ficha: false },
-    { dorsal: 17, apodo: 'Jesús', nombre: 'Rogelio Jesús Sánchez Fernández', ficha: true },
-    { dorsal: 18, apodo: 'Marcos', nombre: 'Marcos Chico Lago', ficha: true },
-    { dorsal: 19, apodo: '', nombre: '', ficha: false },
-    { dorsal: 20, apodo: 'Yess', nombre: 'Jose A. Carvalho Tavares', ficha: true },
-    { dorsal: 21, apodo: 'Pablo', nombre: 'Pablo Allegue López', ficha: true },
-    { dorsal: 22, apodo: 'Piwi', nombre: 'Sergio J Casal Varela', ficha: true },
-    { dorsal: 23, apodo: '', nombre: '', ficha: false },
-    { dorsal: 24, apodo: 'Fede', nombre: 'Federico Laport Rivas', ficha: true },
-    { dorsal: 25, apodo: '', nombre: '', ficha: false },
-    { dorsal: 26, apodo: 'Santi', nombre: 'Santiago Garabal Callón', ficha: true },
-    { dorsal: 27, apodo: 'Lesmes', nombre: 'Lesmes Sánchez López', ficha: true },
-    { dorsal: 28, apodo: 'Jorge', nombre: 'Jorge Puente Longueira', ficha: true },
-    { dorsal: 29, apodo: '', nombre: '', ficha: false },
-    { dorsal: 30, apodo: 'Mauro', nombre: 'Sergio Blanco Varela', ficha: true },
-    { dorsal: 31, apodo: '', nombre: '', ficha: false },
-    { dorsal: 32, apodo: 'Rivera', nombre: 'Jose Antonio Rivera', ficha: true },
-    { dorsal: 33, apodo: '', nombre: '', ficha: false },
-    { dorsal: '', apodo: 'Cata', nombre: 'Jose Ignacio García Dapia', ficha: true },
-    { dorsal: '', apodo: 'Borja', nombre: 'Borja Pita González', ficha: true },
-    { dorsal: '', apodo: 'Meilan', nombre: 'Iván Meilán Seoane', ficha: true },
-    { dorsal: '', apodo: 'Roman', nombre: 'Roman G. Torreiro Couso', ficha: true },
-    { dorsal: '', apodo: 'Manuel', nombre: 'Manuel Blanco Canosa', ficha: true },
-    { dorsal: '', apodo: 'Mario', nombre: 'Mario Rei Lacaci', ficha: true },
-    { dorsal: '', apodo: 'Bolich', nombre: '', ficha: false },
-    { dorsal: 'Delegado', apodo: '', nombre: '', ficha: false, isRole: true },
-    { dorsal: 'Entrenador', apodo: 'Kata', nombre: 'Fernando Antonio Gundin Eirin', ficha: true, isRole: true },
-    { dorsal: 'Patrocinio', apodo: '', nombre: 'Patrocinador Rialto', ficha: false, isRole: true }
-  ];
+  cuotas.sort(function(a,b){
+    const da = Number(a.dorsal) || 999;
+    const dbb = Number(b.dorsal) || 999;
+    if(da !== dbb) return da-dbb;
+    return String(a.nombre||'').localeCompare(String(b.nombre||''),'es',{sensitivity:'base'});
+  });
 
-  let tbodyHtml = '';
-  rowsExcel.forEach(r => {
-    let c = cuotas.find(x => {
-      if(r.dorsal && typeof r.dorsal === 'number' && x.dorsal === r.dorsal) return true;
-      if(r.apodo && normalizeName(x.nombre) === normalizeName(r.apodo)) return true;
-      return false;
+  function playerPayments(c){
+    return movs.filter(function(m){
+      return econIsFichaMovement(m) &&
+        econMovSituacion(m)==='Actual' &&
+        (
+          (m.jugadorId && Number(m.jugadorId)===Number(c.jugadorId)) ||
+          (!m.jugadorId && econNorm(m.jugadorNombre)===econNorm(c.nombre))
+        );
+    }).sort(function(a,b){
+      return (econDateValue(a.fecha)-econDateValue(b.fecha)) || ((Number(a.id)||0)-(Number(b.id)||0));
     });
+  }
 
-    let estadoActual = '-120,00 €';
-    let estadoClass = 'cell-pending-bg';
-    let totalPagado = '0,00 €';
-    let totalPagadoClass = 'cell-pending-bg';
-    let pago1 = '';
-    let fecha = '';
-    let modo = '';
-    let anotaciones = r.ficha ? 'FICHA' : '';
-
-    if(r.isRole){
-      estadoActual = '0,00 €';
-      estadoClass = '';
-      totalPagado = '0,00 €';
-      totalPagadoClass = '';
-    } else if(c){
-      const paid = parseFloat(c.pagado) || 0;
-      const fixed = parseFloat(c.cuota) || 120;
-      const diff = paid - fixed;
-      if(paid >= fixed && fixed > 0){
-        estadoActual = '0,00 €';
-        estadoClass = 'cell-paid-bg';
-        totalPagado = formatMoney(paid);
-        totalPagadoClass = 'cell-paid-bg';
-        pago1 = formatMoney(paid);
-        fecha = c.fechaPago || '';
-        modo = c.metodo || '';
-      } else if(paid > 0){
-        estadoActual = formatMoney(diff);
-        estadoClass = 'cell-partial-bg';
-        totalPagado = formatMoney(paid);
-        totalPagadoClass = 'cell-paid-bg';
-        pago1 = formatMoney(paid);
-        fecha = c.fechaPago || '';
-        modo = c.metodo || '';
-      } else {
-        estadoActual = '-120,00 €';
-        estadoClass = 'cell-pending-bg';
-        totalPagado = '0,00 €';
-        totalPagadoClass = 'cell-pending-bg';
-      }
-      if(c.notas && c.notas.indexOf('FICHA') !== -1) anotaciones = 'FICHA';
-      if(c.metodo === 'En mano') modo = 'En mano';
-    } else if(!r.apodo && !r.nombre){
-      estadoActual = '-120,00 €';
-      estadoClass = 'cell-pending-bg';
-      totalPagado = '0,00 €';
-      totalPagadoClass = 'cell-pending-bg';
+  let tbodyHtml='';
+  cuotas.forEach(function(c){
+    const fixed=parseFloat(c.cuota)||0;
+    const paid=parseFloat(c.pagado)||0;
+    const obligatorio=c.cuotaObligatoria!==false && fixed>0;
+    const estadoActual = obligatorio ? (paid-fixed) : 0;
+    const payments=playerPayments(c);
+    const cells=[];
+    for(let i=0;i<3;i++){
+      const p=payments[i];
+      cells.push(p ? `
+        <td style="text-align:right">${formatMoney(p.importe)}</td>
+        <td style="text-align:center">${p.fecha||''}</td>
+        <td style="text-align:center">${p.metodoPago==='Efectivo' && /en mano/i.test(p.notas||'') ? 'En mano' : (p.metodoPago||'')}</td>
+      ` : '<td></td><td></td><td></td>');
     }
+    const estadoClass=!obligatorio?'':(estadoActual===0?'cell-paid-bg':(paid>0?'cell-partial-bg':'cell-pending-bg'));
+    const paidClass=!obligatorio?'':(paid>0?'cell-paid-bg':'cell-pending-bg');
 
     tbodyHtml += `
       <tr>
-        <td style="font-weight:700;text-align:center">${r.dorsal !== '' ? r.dorsal : ''}</td>
-        <td style="font-weight:600">${r.apodo || ''}</td>
-        <td>${r.nombre || ''}</td>
-        <td class="${estadoClass}">${estadoActual}</td>
-        <td class="${totalPagadoClass}">${totalPagado}</td>
-        <td style="text-align:right">${pago1}</td>
-        <td style="text-align:center">${fecha}</td>
-        <td style="text-align:center">${modo}</td>
-        <td style="font-weight:700;color:var(--text-muted);text-align:center">${anotaciones}</td>
+        <td style="font-weight:700;text-align:center">${c.dorsal||''}</td>
+        <td style="font-weight:600">${c.nombre||''}</td>
+        <td>${c.nombreCompleto||''}</td>
+        <td class="${estadoClass}" style="text-align:right">${formatMoney(estadoActual)}</td>
+        <td class="${paidClass}" style="text-align:right">${formatMoney(paid)}</td>
+        ${cells.join('')}
+        <td style="font-weight:700;color:var(--text-muted)">${c.notas||''}</td>
       </tr>
     `;
   });
 
-  const gastosRows = [
-    { concepto: 'Cuota Club Dorneda', importe: '', notas: '' },
-    { concepto: 'Cuota Asociación Dorneda', importe: '', notas: '' },
-    { concepto: 'Pago 1. Cuota equipo + 16 fichas (60%). Mauro, Piwi, Lesmes, Cerni, Fona, Fran, Manuly, Joni, Willo, Rober, Santi, Pablo Allegue, Marcos, Félix, Jesús, Kata. 1411 x 60%=', importe: '882,60 €', notas: '' },
-    { concepto: 'Pago 1. Cuota equipo + 16 fichas (40%). Mauro, Piwi, Lesmes, Cerni, Fona, Fran, Manuly, Joni, Willo, Rober, Santi, Pablo Allegue, Marcos, Félix, Jesús, Kata. 1411 x 60%=', importe: '', notas: '528,40 € pendientes de pago' },
-    { concepto: 'Pago 2. 5 fichas (60%) David, Rive, Fede, Yes y Jorge', importe: '249,00 €', notas: '' },
-    { concepto: 'Pago 2. 5 fichas (40%) David, Rive, Fede, Yes y Jorge', importe: '', notas: '166,00 € pendientes de pago' },
-    { concepto: 'Pago 3. 4 fichas (60%) Román, Cata, Borja, Meilan 332,00 x 60%', importe: '199,20 €', notas: '' },
-    { concepto: 'Pago 3. 4 fichas (40%) Román, Cata, Borja, Meilan 332,00 x 40%', importe: '', notas: '' },
-    { concepto: 'Árbitro Rossonero', importe: '45,00 €', notas: 'Pago a Kata' },
-    { concepto: 'Pago 4. 2 Ficas (100%). Mario y Manuel', importe: '166,00 €', notas: 'Pago a Kata' }
-  ];
+  const gastos = movs.filter(function(m){return m.tipo==='Gasto';}).sort(function(a,b){
+    const sa=econMovSituacion(a), sb=econMovSituacion(b);
+    if(sa!==sb) return sa==='Actual'?-1:1;
+    return econDateValue(a.fecha)-econDateValue(b.fecha);
+  });
 
-  let gastosTbodyHtml = gastosRows.map(g => `
-    <tr>
-      <td style="font-size:11px">${g.concepto}</td>
-      <td style="font-weight:700;text-align:right">${g.importe}</td>
-      <td style="font-size:11px;color:#991b1b;font-weight:600">${g.notas}</td>
-    </tr>
-  `).join('');
+  const gastosTbodyHtml = gastos.map(function(g){
+    const actual=econMovSituacion(g)==='Actual';
+    return `
+      <tr>
+        <td style="font-size:11px">${g.concepto||g.categoria||''}</td>
+        <td style="font-weight:700;text-align:right">${actual && Number(g.importe)>0 ? formatMoney(g.importe) : ''}</td>
+        <td style="font-size:11px;color:${actual?'var(--text-muted)':'#991b1b'};font-weight:600">
+          ${actual ? (g.notas||g.receptor||'') : ((Number(g.importe)>0?formatMoney(g.importe)+' pendientes de pago · ':'')+(g.notas||''))}
+        </td>
+      </tr>
+    `;
+  }).join('');
 
   box.innerHTML = `
-    <!-- HEADER TITULO -->
     <div class="excel-title-header">
       <div class="excel-title-text">INGRESOS Y GASTOS DORNEDA 2026/2027</div>
     </div>
 
-    <!-- CIERRE TEMPORADA ANTERIOR -->
     <div class="excel-top-bar">
       <span>CIERRE TEMPORADA ANTERIOR</span>
-      <span>430,40 €</span>
+      <span>${formatMoney(st.remanenteAnterior)}</span>
     </div>
 
-    <!-- RESUMEN PRINCIPAL -->
     <div class="excel-kpi-row">
       <div class="excel-kpi-cell" style="border-left:4px solid #22c55e">
-        <span>INGRESOS TOTALES</span>
-        <span style="color:#15803d;font-size:15px">${formatMoney(st.totalIngresos)}</span>
+        <span>INGRESOS</span>
+        <span style="color:#15803d;font-size:15px">${formatMoney(st.ingresosConRemanente)}</span>
       </div>
       <div class="excel-kpi-cell" style="border-left:4px solid #ef4444">
-        <span>GASTOS TOTALES</span>
-        <span style="color:#b91c1c;font-size:15px">${formatMoney(st.totalGastos)}</span>
+        <span>GASTOS</span>
+        <span style="color:#b91c1c;font-size:15px">${formatMoney(st.gastosRealizados)}</span>
       </div>
       <div class="excel-kpi-cell" style="border-left:4px solid #3b82f6;background:#eff6ff">
-        <span>CUENTA DEL EQUIPO (SALDO)</span>
-        <span style="color:#1d4ed8;font-size:16px">${formatMoney(st.saldoNeto)}</span>
+        <span>BALANCE / CUENTA</span>
+        <span style="color:#1d4ed8;font-size:16px">${formatMoney(st.saldoActual)}</span>
       </div>
     </div>
 
-    <!-- TABLA INGRESOS -->
-    <table class="excel-table">
+    <table class="excel-table" style="min-width:1450px">
       <thead>
         <tr>
-          <th style="width:50px;text-align:center">Dorsal</th>
-          <th style="width:80px">Nombre</th>
-          <th>JUGADOR</th>
-          <th style="width:110px;text-align:right">ESTADO ACTUAL</th>
-          <th style="width:110px;text-align:right">TOTAL PAGADO</th>
-          <th style="width:70px;text-align:right">Pago 1</th>
-          <th style="width:85px;text-align:center">Fecha</th>
-          <th style="width:80px;text-align:center">Modo</th>
-          <th style="width:80px;text-align:center">ANOTACIONES</th>
+          <th style="width:55px">Dorsal</th>
+          <th style="width:90px">Nombre</th>
+          <th style="min-width:180px">Jugador</th>
+          <th style="width:105px">Estado actual</th>
+          <th style="width:105px">Total pagado</th>
+          <th>Pago 1</th><th>Fecha</th><th>Modo</th>
+          <th>Pago 2</th><th>Fecha</th><th>Modo</th>
+          <th>Pago 3</th><th>Fecha</th><th>Modo</th>
+          <th style="min-width:180px">Anotaciones</th>
         </tr>
       </thead>
-      <tbody>
-        ${tbodyHtml}
-      </tbody>
+      <tbody>${tbodyHtml}</tbody>
     </table>
 
-    <!-- TOTAL EQUIPO INGRESOS -->
     <div class="excel-green-bar">
-      <span>TOTAL EQUIPO INGRESOS (No se toca)</span>
+      <span>TOTAL EQUIPO INGRESOS</span>
       <span>${formatMoney(st.cuotasRecaudadas)}</span>
     </div>
 
-    <!-- TABLA GASTOS -->
-    <div style="font-size:14px;font-weight:800;margin:12px 0 6px;color:#b91c1c">GASTOS :(</div>
+    <div style="font-size:14px;font-weight:800;margin:12px 0 6px;color:#b91c1c">GASTOS</div>
     <table class="excel-table">
-      <thead>
-        <tr>
-          <th>CONCEPTO</th>
-          <th style="width:100px;text-align:right">€</th>
-          <th style="width:220px">Anotaciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${gastosTbodyHtml}
-      </tbody>
+      <thead><tr><th>CONCEPTO</th><th style="width:110px">€</th><th style="width:300px">Anotaciones</th></tr></thead>
+      <tbody>${gastosTbodyHtml}</tbody>
     </table>
 
-    <!-- TOTAL GASTOS -->
     <div class="excel-orange-bar">
-      <span>TOTAL GASTOS (No se toca)</span>
-      <span>${formatMoney(st.totalGastos)}</span>
+      <span>TOTAL GASTOS</span>
+      <span>${formatMoney(st.gastosRealizados)}</span>
     </div>
 
-    <!-- BALANCE TEMPORADA 26/27 -->
     <div class="excel-green-bar" style="background:#4ade80;font-size:15px">
-      <span>BALANCE TEMPORADA 26/27 (No se toca)</span>
+      <span>BALANCE TEMPORADA 26/27</span>
       <span>${formatMoney(st.balanceTemporada)}</span>
     </div>
 
-    <!-- CUENTA EQUIPO DISPONIBLE -->
     <div style="background:#dbeafe;color:#1e40af;font-weight:800;padding:12px 16px;border-radius:4px;display:flex;justify-content:space-between;font-size:16px;border:1px solid #93c5fd;margin-top:10px">
-      <span>CUENTA DEL EQUIPO (No se toca)</span>
+      <span>CUENTA DEL EQUIPO</span>
       <span>${formatMoney(st.saldoNeto)}</span>
     </div>
   `;
@@ -18726,7 +18991,7 @@ function exportEconCSV(){
   });
   csv += "\nGASTOS\nConcepto,Importe,Anotaciones\n";
   const movs = (db.economia && db.economia.movimientos) || [];
-  movs.filter(m => m.tipo === 'Gasto').forEach(m => {
+  movs.filter(m => m.tipo === 'Gasto' && econMovSituacion(m) === 'Actual').forEach(m => {
     csv += `"${m.concepto}","${m.importe} €","${m.notas||''}"\n`;
   });
   const blob = new Blob(["\uFEFF" + csv], { type: 'text/csv;charset=utf-8;' });
