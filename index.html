@@ -5015,12 +5015,32 @@ body.reader-mode #modalFotoUploadInput{display:none!important}
           <div style="font-weight:800;font-size:16px;color:var(--text);display:flex;align-items:center;gap:6px;" id="modalAdminPINTitle">Acceso de Editor</div>
           <button type="button" class="btn-xs ghost" onclick="closeAdminPINModal()" style="font-size:14px;padding:4px 8px;">✕</button>
         </div>
-        <div style="font-size:12px;color:var(--text-muted);margin-bottom:16px;line-height:1.4;" id="modalAdminPINDesc">
-          El público entra como Lector. Para habilitar edición, gestión y Economía, inicia sesión con la cuenta de administrador autorizada.
+        <div style="font-size:12px;color:var(--text-muted);margin-bottom:14px;line-height:1.4;" id="modalAdminPINDesc">
+          Introduce las credenciales de administrador para habilitar el perfil Editor.
         </div>
-        <div id="adminPINError" style="color:#ef4444;font-size:12px;margin-bottom:14px;display:none;font-weight:600;text-align:center;">Esta cuenta no está autorizada.</div>
+
+        <div style="display:grid;gap:9px;margin-bottom:12px;">
+          <div>
+            <label class="form-label" for="editorUsername" style="font-size:9px;">Usuario</label>
+            <input id="editorUsername" class="form-control" type="text" autocomplete="username"
+              placeholder="Administrador"
+              onkeydown="if(event.key==='Enter')document.getElementById('editorPassword').focus()">
+          </div>
+          <div>
+            <label class="form-label" for="editorPassword" style="font-size:9px;">Contraseña</label>
+            <input id="editorPassword" class="form-control" type="password" autocomplete="current-password"
+              placeholder="Contraseña"
+              onkeydown="if(event.key==='Enter')verifyAdminPIN()">
+          </div>
+        </div>
+
+        <div id="adminPINError" style="color:#ef4444;font-size:11px;margin-bottom:12px;display:none;font-weight:700;text-align:center;">
+          Usuario o contraseña incorrectos.
+        </div>
+
         <div style="display:flex;gap:8px;">
-          <button type="button" class="btn btn-primary" id="adminGoogleLoginBtn" style="flex:1;justify-content:center;padding:10px;" onclick="verifyAdminPIN()">Continuar con Google</button>
+          <button type="button" class="btn btn-primary" id="adminCredentialsLoginBtn"
+            style="flex:1;justify-content:center;padding:10px;" onclick="verifyAdminPIN()">Entrar como Editor</button>
           <button type="button" class="btn btn-ghost" onclick="closeAdminPINModal()" style="padding:10px;">Cancelar</button>
         </div>
       </div>
@@ -5106,7 +5126,9 @@ let isRemoteUpdate = false;
 let cloudSyncTimeout = null;
 let firestoreUnsubscribe = null;
 let isAdminMode = false;
-const ADMIN_EMAIL = 'felopezgr@gmail.com';
+const EDITOR_USER = 'Administrador';
+const EDITOR_PASSWORD = '1234';
+const EDITOR_SESSION_KEY = 'dorneda_editor_session';
 
 const DEFAULT_DATA={
   jugadores:[
@@ -9666,32 +9688,9 @@ function initFirebaseSync(){
     } else {
       firebaseApp = firebase.app();
     }
+    // Firebase sigue proporcionando la base de datos, pero el perfil
+    // Lector/Editor ya no depende de una cuenta de Google.
     firebaseAuth = firebase.auth();
-
-    // Recupera también el resultado si el navegador tuvo que usar redirect.
-    firebaseAuth.getRedirectResult().then(function(result){
-      if(result && result.user){
-        var redirectEmail=(result.user.email || '').toLowerCase();
-        if(redirectEmail !== ADMIN_EMAIL){
-          firebaseAuth.signOut();
-        }
-      }
-    }).catch(function(err){
-      if(err && err.code === 'auth/unauthorized-domain'){
-        console.error('Firebase Auth: dominio no autorizado.');
-      }else if(err){
-        console.warn('Firebase redirect auth:',err);
-      }
-    });
-
-    firebaseAuth.onAuthStateChanged(function(user){
-      isAdminMode = !!(user && user.email && user.email.toLowerCase() === ADMIN_EMAIL);
-      updateAdminModeUI();
-      if(user && !isAdminMode){
-        firebaseAuth.signOut();
-        toast('Esta cuenta no está autorizada para editar.', 'error');
-      }
-    });
 
     function connectCloud(){
       if(firestoreUnsubscribe) return;
@@ -9808,31 +9807,34 @@ window.initFirebaseSync = initFirebaseSync;
 
 function saveDBToCloud(){
   if(!firestoreDocRef || isRemoteUpdate) return;
-  if(!isAdminMode || !firebaseAuth || !firebaseAuth.currentUser){
-    updateCloudStatusUI('online', 'Guardado local');
+
+  if(!isAdminMode){
+    updateCloudStatusUI('online','Guardado local');
     return;
   }
-  if(cloudSyncTimeout) clearTimeout(cloudSyncTimeout);
-  
-  updateCloudStatusUI('syncing', 'Guardando...');
 
-  cloudSyncTimeout = setTimeout(function(){
-    isCloudSyncing = true;
+  if(cloudSyncTimeout) clearTimeout(cloudSyncTimeout);
+  updateCloudStatusUI('syncing','Guardando...');
+
+  cloudSyncTimeout=setTimeout(function(){
+    isCloudSyncing=true;
+
     firestoreDocRef.set({
-      db: JSON.parse(JSON.stringify(db)),
-      updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
-      version: 'v18'
-    }, { merge: true })
+      db:JSON.parse(JSON.stringify(db)),
+      updatedAt:firebase.firestore.FieldValue.serverTimestamp(),
+      version:'v18'
+    },{merge:true})
     .then(function(){
-      isCloudSyncing = false;
-      updateCloudStatusUI('online', 'Nube Sincronizada');
+      isCloudSyncing=false;
+      updateCloudStatusUI('online','Nube Sincronizada');
     })
     .catch(function(err){
-      isCloudSyncing = false;
-      console.error('Error saveDBToCloud:', err);
-      updateCloudStatusUI('error', 'Error al Guardar');
+      isCloudSyncing=false;
+      console.error('Error saveDBToCloud:',err);
+      updateCloudStatusUI('error','Error al Guardar');
+      toast('No se pudo guardar en la nube. Revisa las reglas de Firebase.','error');
     });
-  }, 350);
+  },350);
 }
 window.saveDBToCloud = saveDBToCloud;
 
@@ -9939,7 +9941,7 @@ function requireEditor(action){
 window.requireEditor=requireEditor;
 
 // ==========================================
-// ADMIN MODE WITH GOOGLE AUTHENTICATION
+// LECTOR / EDITOR ACCESS
 // ==========================================
 function updateAdminModeUI(){
   var btnLabel=document.getElementById('adminModeLabel');
@@ -9974,25 +9976,15 @@ window.updateAdminModeUI = updateAdminModeUI;
 
 function toggleAdminPINModal(){
   if(isAdminMode){
-    if(!confirm('¿Cerrar el acceso Editor y volver a Lector?')) return;
+    if(!confirm('¿Cerrar el perfil Editor y volver a Lector?')) return;
 
-    if(firebaseAuth && firebaseAuth.currentUser){
-      firebaseAuth.signOut().then(function(){
-        isAdminMode=false;
-        updateAdminModeUI();
-        toast('Modo Lector activado','info');
-      }).catch(function(){
-        isAdminMode=false;
-        updateAdminModeUI();
-      });
-    }else{
-      isAdminMode=false;
-      updateAdminModeUI();
-    }
+    isAdminMode=false;
+    try{ sessionStorage.removeItem(EDITOR_SESSION_KEY); }catch(e){}
+    updateAdminModeUI();
+    toast('Modo Lector activado','info');
     return;
   }
 
-  // Abrir SIEMPRE el cuadro de acceso al pulsar EDITOR.
   openAdminPINModal();
 }
 window.toggleAdminPINModal = toggleAdminPINModal;
@@ -10000,11 +9992,14 @@ window.toggleAdminPINModal = toggleAdminPINModal;
 function openAdminPINModal(){
   var m=document.getElementById('modalAdminPIN');
   var err=document.getElementById('adminPINError');
+  var user=document.getElementById('editorUsername');
+  var pass=document.getElementById('editorPassword');
 
   if(err){
     err.style.display='none';
     err.textContent='';
   }
+  if(pass) pass.value='';
 
   if(!m){
     console.error('No se encontró modalAdminPIN');
@@ -10015,10 +10010,12 @@ function openAdminPINModal(){
   m.style.opacity='1';
   m.style.pointerEvents='auto';
 
-  // Si Firebase todavía no ha arrancado, lo iniciamos aquí también.
-  if(!firebaseAuth){
-    try{ initFirebaseSync(); }catch(e){}
-  }
+  setTimeout(function(){
+    if(user){
+      user.focus();
+      user.select();
+    }
+  },30);
 }
 window.openAdminPINModal = openAdminPINModal;
 
@@ -10029,90 +10026,34 @@ function closeAdminPINModal(){
 window.closeAdminPINModal = closeAdminPINModal;
 
 function verifyAdminPIN(){
+  var userEl=document.getElementById('editorUsername');
+  var passEl=document.getElementById('editorPassword');
   var err=document.getElementById('adminPINError');
-  var loginBtn=document.getElementById('adminGoogleLoginBtn');
 
-  function showErr(msg){
+  var user=String(userEl ? userEl.value : '').trim();
+  var pass=String(passEl ? passEl.value : '');
+
+  var validUser=user.toLowerCase() === EDITOR_USER.toLowerCase();
+  var validPass=pass === EDITOR_PASSWORD;
+
+  if(!validUser || !validPass){
     if(err){
-      err.textContent=msg;
+      err.textContent='Usuario o contraseña incorrectos.';
       err.style.display='block';
     }
-  }
-
-  if(loginBtn){
-    loginBtn.disabled=true;
-    loginBtn.textContent='Conectando…';
-  }
-
-  if(!firebaseAuth){
-    try{ initFirebaseSync(); }catch(e){}
-  }
-
-  if(!firebaseAuth){
-    if(loginBtn){
-      loginBtn.disabled=false;
-      loginBtn.textContent='Continuar con Google';
+    if(passEl){
+      passEl.value='';
+      passEl.focus();
     }
-    showErr('No se pudo iniciar Firebase. Recarga la página e inténtalo de nuevo.');
     return;
   }
 
-  var provider=new firebase.auth.GoogleAuthProvider();
-  provider.setCustomParameters({prompt:'select_account'});
+  isAdminMode=true;
+  try{ sessionStorage.setItem(EDITOR_SESSION_KEY,'1'); }catch(e){}
 
-  firebaseAuth.signInWithPopup(provider).then(function(result){
-    var email=result.user && result.user.email ? result.user.email.toLowerCase() : '';
-
-    if(email !== ADMIN_EMAIL){
-      return firebaseAuth.signOut().then(function(){
-        throw new Error('unauthorized');
-      });
-    }
-
-    isAdminMode=true;
-    updateAdminModeUI();
-    closeAdminPINModal();
-
-    if(db && db._syncMeta && Number(db._syncMeta.plantillaLastEditAt) > 0){
-      saveDBToCloud();
-    }
-
-    toast('Acceso Editor autorizado','success');
-  }).catch(function(error){
-    if(loginBtn){
-      loginBtn.disabled=false;
-      loginBtn.textContent='Continuar con Google';
-    }
-
-    if(error && error.message === 'unauthorized'){
-      showErr('Esta cuenta de Google no está autorizada como Editor.');
-      return;
-    }
-
-    if(error && error.code === 'auth/popup-closed-by-user'){
-      return;
-    }
-
-    // Algunos navegadores bloquean popups. En ese caso usamos redirect.
-    if(error && (
-      error.code === 'auth/popup-blocked' ||
-      error.code === 'auth/cancelled-popup-request' ||
-      error.code === 'auth/operation-not-supported-in-this-environment'
-    )){
-      try{
-        firebaseAuth.signInWithRedirect(provider);
-        return;
-      }catch(e){}
-    }
-
-    if(error && error.code === 'auth/unauthorized-domain'){
-      showErr('Este dominio todavía no está autorizado en Firebase Authentication.');
-      return;
-    }
-
-    console.error('Error acceso Editor:',error);
-    showErr('No se pudo iniciar sesión con Google. Inténtalo de nuevo.');
-  });
+  updateAdminModeUI();
+  closeAdminPINModal();
+  toast('Perfil Editor activado','success');
 }
 window.verifyAdminPIN = verifyAdminPIN;
 
@@ -20478,8 +20419,12 @@ function initApp(){
   initTheme();
   updateEconLockUI();
 
-  // Inicializamos primero la autenticación. Así EDITOR funciona aunque
-  // algún componente deportivo tarde en cargar o tenga un error.
+  try{
+    isAdminMode = sessionStorage.getItem(EDITOR_SESSION_KEY) === '1';
+  }catch(e){
+    isAdminMode = false;
+  }
+
   initFirebaseSync();
   updateAdminModeUI();
 
