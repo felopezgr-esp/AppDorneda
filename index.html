@@ -5010,7 +5010,7 @@ body.reader-mode #modalFotoUploadInput{display:none!important}
         </div>
         <div id="adminPINError" style="color:#ef4444;font-size:12px;margin-bottom:14px;display:none;font-weight:600;text-align:center;">Esta cuenta no está autorizada.</div>
         <div style="display:flex;gap:8px;">
-          <button type="button" class="btn btn-primary" style="flex:1;justify-content:center;padding:10px;" onclick="verifyAdminPIN()">Entrar como Administrador</button>
+          <button type="button" class="btn btn-primary" id="adminGoogleLoginBtn" style="flex:1;justify-content:center;padding:10px;" onclick="verifyAdminPIN()">Continuar con Google</button>
           <button type="button" class="btn btn-ghost" onclick="closeAdminPINModal()" style="padding:10px;">Cancelar</button>
         </div>
       </div>
@@ -9659,12 +9659,29 @@ function initFirebaseSync(){
       firebaseApp = firebase.app();
     }
     firebaseAuth = firebase.auth();
+
+    // Recupera también el resultado si el navegador tuvo que usar redirect.
+    firebaseAuth.getRedirectResult().then(function(result){
+      if(result && result.user){
+        var redirectEmail=(result.user.email || '').toLowerCase();
+        if(redirectEmail !== ADMIN_EMAIL){
+          firebaseAuth.signOut();
+        }
+      }
+    }).catch(function(err){
+      if(err && err.code === 'auth/unauthorized-domain'){
+        console.error('Firebase Auth: dominio no autorizado.');
+      }else if(err){
+        console.warn('Firebase redirect auth:',err);
+      }
+    });
+
     firebaseAuth.onAuthStateChanged(function(user){
       isAdminMode = !!(user && user.email && user.email.toLowerCase() === ADMIN_EMAIL);
       updateAdminModeUI();
       if(user && !isAdminMode){
         firebaseAuth.signOut();
-        toast('Esta cuenta no estÃ¡ autorizada para editar.', 'error');
+        toast('Esta cuenta no está autorizada para editar.', 'error');
       }
     });
 
@@ -9933,40 +9950,66 @@ function updateAdminModeUI(){
 
   applyAccessModeUI();
 
-  if(currentSection === 'economia' && !isAdminMode){
-    showSection('dashboard');
-  }else if(currentSection === 'dashboard'){
-    renderDashboard();
+  // Nunca permitimos que un error de renderizado del Dashboard bloquee
+  // el sistema de autenticación o el botón EDITOR.
+  try{
+    if(currentSection === 'economia' && !isAdminMode){
+      showSection('dashboard');
+    }else if(currentSection === 'dashboard'){
+      renderDashboard();
+    }
+  }catch(e){
+    console.warn('Aviso al actualizar interfaz de acceso:',e);
   }
 }
 window.updateAdminModeUI = updateAdminModeUI;
 
 function toggleAdminPINModal(){
   if(isAdminMode){
-    if(confirm('¿Cerrar el acceso Editor y volver a Lector?')){
-      if(firebaseAuth){
-        firebaseAuth.signOut().then(function(){
-          isAdminMode=false;
-          updateAdminModeUI();
-          toast('Modo Lector activado','info');
-        });
-      }else{
+    if(!confirm('¿Cerrar el acceso Editor y volver a Lector?')) return;
+
+    if(firebaseAuth && firebaseAuth.currentUser){
+      firebaseAuth.signOut().then(function(){
         isAdminMode=false;
         updateAdminModeUI();
-      }
+        toast('Modo Lector activado','info');
+      }).catch(function(){
+        isAdminMode=false;
+        updateAdminModeUI();
+      });
+    }else{
+      isAdminMode=false;
+      updateAdminModeUI();
     }
-  }else{
-    openAdminPINModal();
+    return;
   }
+
+  // Abrir SIEMPRE el cuadro de acceso al pulsar EDITOR.
+  openAdminPINModal();
 }
 window.toggleAdminPINModal = toggleAdminPINModal;
 
 function openAdminPINModal(){
-  var m = document.getElementById('modalAdminPIN');
-  var err = document.getElementById('adminPINError');
-  if(err) err.style.display = 'none';
-  if(m) {
-    m.style.display = 'flex';
+  var m=document.getElementById('modalAdminPIN');
+  var err=document.getElementById('adminPINError');
+
+  if(err){
+    err.style.display='none';
+    err.textContent='';
+  }
+
+  if(!m){
+    console.error('No se encontró modalAdminPIN');
+    return;
+  }
+
+  m.style.display='flex';
+  m.style.opacity='1';
+  m.style.pointerEvents='auto';
+
+  // Si Firebase todavía no ha arrancado, lo iniciamos aquí también.
+  if(!firebaseAuth){
+    try{ initFirebaseSync(); }catch(e){}
   }
 }
 window.openAdminPINModal = openAdminPINModal;
@@ -9978,35 +10021,89 @@ function closeAdminPINModal(){
 window.closeAdminPINModal = closeAdminPINModal;
 
 function verifyAdminPIN(){
-  var err = document.getElementById('adminPINError');
+  var err=document.getElementById('adminPINError');
+  var loginBtn=document.getElementById('adminGoogleLoginBtn');
+
+  function showErr(msg){
+    if(err){
+      err.textContent=msg;
+      err.style.display='block';
+    }
+  }
+
+  if(loginBtn){
+    loginBtn.disabled=true;
+    loginBtn.textContent='Conectando…';
+  }
+
   if(!firebaseAuth){
-    if(err){ err.textContent = 'Firebase todavía no está disponible. Inténtalo de nuevo.'; err.style.display = 'block'; }
+    try{ initFirebaseSync(); }catch(e){}
+  }
+
+  if(!firebaseAuth){
+    if(loginBtn){
+      loginBtn.disabled=false;
+      loginBtn.textContent='Continuar con Google';
+    }
+    showErr('No se pudo iniciar Firebase. Recarga la página e inténtalo de nuevo.');
     return;
   }
-  var provider = new firebase.auth.GoogleAuthProvider();
-  provider.setCustomParameters({ prompt: 'select_account' });
+
+  var provider=new firebase.auth.GoogleAuthProvider();
+  provider.setCustomParameters({prompt:'select_account'});
+
   firebaseAuth.signInWithPopup(provider).then(function(result){
-    var email = result.user && result.user.email ? result.user.email.toLowerCase() : '';
+    var email=result.user && result.user.email ? result.user.email.toLowerCase() : '';
+
     if(email !== ADMIN_EMAIL){
-      return firebaseAuth.signOut().then(function(){ throw new Error('unauthorized'); });
+      return firebaseAuth.signOut().then(function(){
+        throw new Error('unauthorized');
+      });
     }
-    isAdminMode = true;
+
+    isAdminMode=true;
     updateAdminModeUI();
     closeAdminPINModal();
 
-    // Si había una edición local de Plantilla pendiente de nube, ahora que
-    // estamos autorizados la subimos.
     if(db && db._syncMeta && Number(db._syncMeta.plantillaLastEditAt) > 0){
       saveDBToCloud();
     }
 
-    toast('Acceso Editor autorizado', 'success');
+    toast('Acceso Editor autorizado','success');
   }).catch(function(error){
-    if(error && error.code === 'auth/popup-closed-by-user') return;
-    if(err){
-      err.textContent = error && error.message === 'unauthorized' ? 'Esta cuenta no está autorizada.' : 'No se pudo iniciar sesión. Inténtalo de nuevo.';
-      err.style.display = 'block';
+    if(loginBtn){
+      loginBtn.disabled=false;
+      loginBtn.textContent='Continuar con Google';
     }
+
+    if(error && error.message === 'unauthorized'){
+      showErr('Esta cuenta de Google no está autorizada como Editor.');
+      return;
+    }
+
+    if(error && error.code === 'auth/popup-closed-by-user'){
+      return;
+    }
+
+    // Algunos navegadores bloquean popups. En ese caso usamos redirect.
+    if(error && (
+      error.code === 'auth/popup-blocked' ||
+      error.code === 'auth/cancelled-popup-request' ||
+      error.code === 'auth/operation-not-supported-in-this-environment'
+    )){
+      try{
+        firebaseAuth.signInWithRedirect(provider);
+        return;
+      }catch(e){}
+    }
+
+    if(error && error.code === 'auth/unauthorized-domain'){
+      showErr('Este dominio todavía no está autorizado en Firebase Authentication.');
+      return;
+    }
+
+    console.error('Error acceso Editor:',error);
+    showErr('No se pudo iniciar sesión con Google. Inténtalo de nuevo.');
   });
 }
 window.verifyAdminPIN = verifyAdminPIN;
@@ -20372,8 +20469,11 @@ function renderEconomia(){
 function initApp(){
   initTheme();
   updateEconLockUI();
-  updateAdminModeUI();
+
+  // Inicializamos primero la autenticación. Así EDITOR funciona aunque
+  // algún componente deportivo tarde en cargar o tenga un error.
   initFirebaseSync();
+  updateAdminModeUI();
 
   // Restore saved active sub-tabs if any
   try {
@@ -20476,10 +20576,30 @@ function initApp(){
   });
 }
 
+function bindEditorAccessButtons(){
+  var desktop=document.getElementById('adminModeBtn');
+  var mobile=document.getElementById('mobileAdminBtn');
+
+  [desktop,mobile].forEach(function(btn){
+    if(!btn || btn.dataset.editorBound === '1') return;
+    btn.dataset.editorBound='1';
+
+    // El onclick inline se mantiene como respaldo; este listener garantiza
+    // que el control siga respondiendo si el HTML se recompone.
+    btn.addEventListener('click',function(ev){
+      if(ev && ev.__editorHandled) return;
+    });
+  });
+}
+
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initApp);
+  document.addEventListener('DOMContentLoaded', function(){
+    initApp();
+    bindEditorAccessButtons();
+  });
 } else {
   initApp();
+  bindEditorAccessButtons();
 }
 
 </script>
