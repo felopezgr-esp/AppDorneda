@@ -3640,8 +3640,8 @@ body.reader-mode #modalFotoUploadInput{display:none!important}
   padding:8px;
   background:var(--surface);
   color:var(--text);
-  font-size:10px;
-  line-height:1.4;
+  font-size:11.5px;
+  line-height:1.5;
 }
 .coach-notebook-actions{
   display:flex;
@@ -3742,8 +3742,8 @@ body.reader-mode #modalFotoUploadInput{display:none!important}
   white-space:nowrap;
 }
 .coach-notebook-observation-text{
-  font-size:9px;
-  line-height:1.45;
+  font-size:12px;
+  line-height:1.55;
   color:var(--text);
   white-space:pre-wrap;
 }
@@ -3758,6 +3758,21 @@ body.reader-mode #modalFotoUploadInput{display:none!important}
     border-left:0;
     border-top:1px solid var(--border);
   }
+}
+
+
+.dash-stats-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.25fr) minmax(210px,.7fr) minmax(210px,.7fr);
+  gap:9px;
+}
+@media(max-width:1050px){
+  .dash-stats-grid{grid-template-columns:1fr 1fr}
+  .dash-stats-grid .dash-section:first-child{grid-column:1/-1}
+}
+@media(max-width:700px){
+  .dash-stats-grid{grid-template-columns:1fr}
+  .dash-stats-grid .dash-section:first-child{grid-column:auto}
 }
 
 </style>
@@ -4339,7 +4354,7 @@ body.reader-mode #modalFotoUploadInput{display:none!important}
           </div>
         </div>
 
-        <div class="dash-compact-grid">
+        <div class="dash-stats-grid">
           <div class="dash-section">
             <div class="dash-section-head">
               <div class="dash-section-title">Clasificación cercana</div>
@@ -4366,6 +4381,21 @@ body.reader-mode #modalFotoUploadInput{display:none!important}
                   <tr><th>#</th><th>Jugador</th><th>Goles</th></tr>
                 </thead>
                 <tbody id="dashTopScorers"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="dash-section">
+            <div class="dash-section-head">
+              <div class="dash-section-title">Top asistencias</div>
+              <div class="dash-section-note">Liga · Top 3</div>
+            </div>
+            <div class="dash-table-wrap">
+              <table class="dash-table dash-top3-table">
+                <thead>
+                  <tr><th>#</th><th>Jugador</th><th>Asist.</th></tr>
+                </thead>
+                <tbody id="dashTopAssists"></tbody>
               </table>
             </div>
           </div>
@@ -11313,6 +11343,35 @@ function renderDashboardNearby(ctx){
   }).join('');
 }
 
+
+function renderDashboardTopAssists(){
+  var el=document.getElementById('dashTopAssists');
+  if(!el) return;
+
+  var rows=(typeof calcAsistidores === 'function') ? calcAsistidores('Liga') : [];
+  var top=rows.slice(0,3);
+
+  if(!top.length){
+    el.innerHTML='<tr><td colspan="3" class="dash-empty">Sin asistencias registradas.</td></tr>';
+    return;
+  }
+
+  el.innerHTML=top.map(function(item){
+    var nombre=item[0];
+    var data=item[1] || {};
+    var player=(db.jugadores || []).find(function(j){
+      return normalizeName(j.nombre)===normalizeName(nombre);
+    });
+    var dorsal=player && player.dorsal ? player.dorsal : '—';
+
+    return `<tr>
+      <td>#${dorsal}</td>
+      <td class="team">${dashSafe(nombre)}</td>
+      <td>${data.asistencias || 0}</td>
+    </tr>`;
+  }).join('');
+}
+
 function renderDashboardTop3(){
   var el=document.getElementById('dashTopScorers');
   if(!el) return;
@@ -11373,6 +11432,7 @@ function renderDashboard(){
   renderDashboardUpcoming(ctx);
   renderDashboardNearby(ctx);
   renderDashboardTop3();
+  renderDashboardTopAssists();
   renderDashboardSquad();
 
   var mode=document.getElementById('dashAccessMode');
@@ -11962,10 +12022,107 @@ function openUnifiedMatchFichaById(id){
 }
 window.openUnifiedMatchFichaById=openUnifiedMatchFichaById;
 
+
+function partidosOfficialNorm(v){
+  return String(v || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g,'')
+    .toLowerCase()
+    .replace(/\./g,'')
+    .replace(/\s+/g,' ')
+    .trim();
+}
+
+function partidosOfficialIsDorneda(v){
+  return partidosOfficialNorm(v).indexOf('dorneda') !== -1;
+}
+
+function getOfficialLigaMatchForPartido(p){
+  if(!p || typeof getLigaJornadasOficiales !== 'function') return null;
+
+  var jornada=Number(p.jornada) || 0;
+  if(!jornada && p.codigo){
+    var jm=String(p.codigo).match(/^J(\d+)$/i);
+    if(jm) jornada=parseInt(jm[1],10) || 0;
+  }
+  if(!jornada) return null;
+
+  var jornadas=getLigaJornadasOficiales() || [];
+  var j=jornadas.find(function(x){ return Number(x.jornada)===jornada; });
+  if(!j || !j.partidos) return null;
+
+  // 1. CodActa es la coincidencia más fiable.
+  if(p.codActa){
+    var byActa=j.partidos.find(function(m){
+      return m && m.codActa && String(m.codActa)===String(p.codActa);
+    });
+    if(byActa) return byActa;
+  }
+
+  // 2. En una jornada solo puede haber un partido del Dorneda.
+  var dornedaMatches=j.partidos.filter(function(m){
+    return m && (partidosOfficialIsDorneda(m.local) || partidosOfficialIsDorneda(m.visitante));
+  });
+  if(dornedaMatches.length===1) return dornedaMatches[0];
+
+  // 3. Último fallback: comparación con el rival guardado.
+  var rivalNorm=partidosOfficialNorm(p.rival);
+  return dornedaMatches.find(function(m){
+    var rival=partidosOfficialIsDorneda(m.local) ? m.visitante : m.local;
+    var off=partidosOfficialNorm(rival);
+    return off===rivalNorm || off.indexOf(rivalNorm)!==-1 || rivalNorm.indexOf(off)!==-1;
+  }) || null;
+}
+
+function getOfficialCopaMatchForPartido(p){
+  if(!p) return null;
+  var rondas=(db.copaJornadas || DEFAULT_DATA.copaJornadas || []);
+  var all=[];
+  rondas.forEach(function(r){
+    (r.partidos || []).forEach(function(m){
+      if(m) all.push(m);
+    });
+  });
+
+  if(p.codActa){
+    var byActa=all.find(function(m){
+      return m.codActa && String(m.codActa)===String(p.codActa);
+    });
+    if(byActa) return byActa;
+  }
+
+  var rivalNorm=partidosOfficialNorm(p.rival);
+  var candidates=all.filter(function(m){
+    return partidosOfficialIsDorneda(m.local) || partidosOfficialIsDorneda(m.visitante);
+  });
+
+  return candidates.find(function(m){
+    var rival=partidosOfficialIsDorneda(m.local) ? m.visitante : m.local;
+    var off=partidosOfficialNorm(rival);
+    return off===rivalNorm || off.indexOf(rivalNorm)!==-1 || rivalNorm.indexOf(off)!==-1;
+  }) || null;
+}
+
+function getOfficialDisplayMatchForPartido(p){
+  if(!p) return null;
+  var comp=String(p.competicion || '').toLowerCase();
+
+  if(comp.indexOf('futgal')!==-1 || comp.indexOf('liga')!==-1){
+    return getOfficialLigaMatchForPartido(p);
+  }
+
+  if(comp.indexOf('copa')!==-1 || comp.indexOf('gallego')!==-1){
+    return getOfficialCopaMatchForPartido(p);
+  }
+
+  return null;
+}
+window.getOfficialDisplayMatchForPartido=getOfficialDisplayMatchForPartido;
+
 function renderPartidos(){
   let p = [...db.partidos];
-  
-  // Orden cronológico natural de la temporada (Pretemporada 1, 2, 3, 4 -> Copa -> Liga...)
+
+  // Orden cronológico natural de la temporada.
   p.sort((a, b) => (a.id || 0) - (b.id || 0));
 
   if(partidosFilter !== 'todos'){
@@ -11987,29 +12144,65 @@ function renderPartidos(){
   }
 
   el.innerHTML = p.map(function(x){
-    var isHome = x.condicion === 'Local';
-    var isPlayed = (x.resultado === 'Victoria' || x.resultado === 'Empate' || x.resultado === 'Derrota') && x.gf !== null && x.gf !== undefined && x.resultado !== 'Pendiente';
-    var localName = isHome ? 'Xuventude Dorneda' : (x.rival || 'Rival');
-    var visitorName = !isHome ? 'Xuventude Dorneda' : (x.rival || 'Rival');
-    var localScore = isPlayed ? (isHome ? x.gf : x.gc) : null;
-    var visitorScore = isPlayed ? (isHome ? x.gc : x.gf) : null;
+    var official = getOfficialDisplayMatchForPartido(x);
+
+    // En Liga/Copa, los nombres visibles proceden de la misma fuente oficial
+    // que usamos en Competiciones. No cambiamos su capitalización ni grafía.
+    var officialLocal = official && official.local ? official.local : null;
+    var officialVisitor = official && official.visitante ? official.visitante : null;
+
+    var isHome = official
+      ? partidosOfficialIsDorneda(officialLocal)
+      : x.condicion === 'Local';
+
+    var isPlayed = (x.resultado === 'Victoria' || x.resultado === 'Empate' || x.resultado === 'Derrota') &&
+      x.gf !== null && x.gf !== undefined && x.resultado !== 'Pendiente';
+
+    var localName = officialLocal || (isHome ? 'XUVENTUDE DORNEDA' : (x.rival || 'Rival'));
+    var visitorName = officialVisitor || (!isHome ? 'XUVENTUDE DORNEDA' : (x.rival || 'Rival'));
+
+    // Si la fuente oficial ya tiene marcador, es la referencia visual.
+    var officialScore = official &&
+      official.gl !== null && official.gl !== undefined &&
+      official.gv !== null && official.gv !== undefined &&
+      Number.isFinite(Number(official.gl)) && Number.isFinite(Number(official.gv));
+
+    var localScore = officialScore
+      ? Number(official.gl)
+      : (isPlayed ? (isHome ? x.gf : x.gc) : null);
+
+    var visitorScore = officialScore
+      ? Number(official.gv)
+      : (isPlayed ? (isHome ? x.gc : x.gf) : null);
+
+    if(officialScore) isPlayed = true;
+
     var isLocalWinner = isPlayed && localScore > visitorScore;
     var isVisitorWinner = isPlayed && visitorScore > localScore;
-    var isTie = isPlayed && localScore === visitorScore;
 
     var compIcon = getCompIcon(x.competicion);
     var codeTag = x.codigo || (x.competicion && x.competicion.indexOf('Copa') !== -1 ? 'COPA' : (x.competicion && x.competicion.toLowerCase().includes('pret') ? 'PRET' : 'LIGA'));
     var badgeCompClass = compBadge(x.competicion);
-    var horaVal = x.horaPartido || x.hora || '';
+
+    // Horario/campo oficiales cuando están disponibles.
+    var horaVal = (official && official.hora) ? official.hora : (x.horaPartido || x.hora || '');
+    var campoVal = (official && official.campo) ? official.campo : (x.campo || (isHome ? 'A Marola' : 'Fuera'));
+    var fechaVal = (official && official.fecha) ? official.fecha : (x.fecha || '');
 
     var statusClass = isPlayed ? 'match-played' : 'match-pending';
     var resClass = '';
     var resBadgeHtml = '';
+
+    var resultForDorneda='';
     if(isPlayed){
-      if(x.resultado === 'Victoria'){
+      var dornedaGF = isHome ? localScore : visitorScore;
+      var dornedaGC = isHome ? visitorScore : localScore;
+      resultForDorneda = dornedaGF>dornedaGC ? 'Victoria' : (dornedaGF<dornedaGC ? 'Derrota' : 'Empate');
+
+      if(resultForDorneda === 'Victoria'){
         resClass = 'result-win';
         resBadgeHtml = '<span class="badge" style="background:#16a34a;color:#fff;font-size:9.5px;font-weight:800;padding:2px 7px;border-radius:3px;">✅ Victoria (V)</span>';
-      } else if(x.resultado === 'Derrota'){
+      } else if(resultForDorneda === 'Derrota'){
         resClass = 'result-loss';
         resBadgeHtml = '<span class="badge" style="background:#dc2626;color:#fff;font-size:9.5px;font-weight:800;padding:2px 7px;border-radius:3px;">❌ Derrota (D)</span>';
       } else {
@@ -12020,21 +12213,25 @@ function renderPartidos(){
       resBadgeHtml = '<span class="badge" style="background:var(--surface2);color:var(--text-dim);border:1px solid var(--border);font-size:9.5px;font-weight:600;padding:2px 6px;border-radius:3px;">⏳ Pendiente</span>';
     }
 
-    var actaBtn = x.enlaceActa ? `<a href="${x.enlaceActa}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" style="background:#285b4f;color:#ffffff;padding:2px 6px;border-radius:3px;font-size:9px;font-weight:700;display:inline-flex;align-items:center;gap:3px;text-decoration:none;border:1px solid #1e453c;white-space:nowrap;line-height:1;" title="Ver Acta Oficial en FUTGAL">📄 Acta ↗</a>` : '';
+    var actaUrl = (official && official.enlaceActa) || x.enlaceActa || '';
+    if(!actaUrl && official && official.codActa){
+      actaUrl = `https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=${official.codActa}&cod_acta=${official.codActa}`;
+    }
+    var actaBtn = actaUrl ? `<a href="${actaUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" style="background:#285b4f;color:#ffffff;padding:2px 6px;border-radius:3px;font-size:9px;font-weight:700;display:inline-flex;align-items:center;gap:3px;text-decoration:none;border:1px solid #1e453c;white-space:nowrap;line-height:1;" title="Ver Acta Oficial en FUTGAL">📄 Acta ↗</a>` : '';
 
     return `
       <div class="copa-match-row ${statusClass} ${resClass}" onclick="openUnifiedMatchFichaById(${x.id})" style="cursor:pointer;padding:6px 10px !important;min-height:34px !important;">
         <!-- Col 1: Competición / Fecha / Horario / Campo -->
         <div style="width:200px;flex-shrink:0;font-size:10.5px;color:var(--text-dim);display:flex;align-items:center;gap:6px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
           <span class="badge ${badgeCompClass}" style="font-size:9px;font-weight:900;padding:1px 6px;flex-shrink:0;">${compIcon} ${codeTag}</span>
-          <span style="font-weight:700;color:var(--text);flex-shrink:0;">${x.fecha || ''}</span>
+          <span style="font-weight:700;color:var(--text);flex-shrink:0;">${fechaVal}</span>
           ${horaVal ? `<span style="font-size:10px;color:var(--text-muted);flex-shrink:0;">⏰ ${horaVal}</span>` : ''}
-          <span style="color:var(--text-dim);font-size:10px;overflow:hidden;text-overflow:ellipsis;" title="${x.campo || (isHome ? 'A Marola' : 'Fuera')}">📍 ${x.campo || (isHome ? 'A Marola' : 'Fuera')}</span>
+          <span style="color:var(--text-dim);font-size:10px;overflow:hidden;text-overflow:ellipsis;" title="${campoVal}">📍 ${campoVal}</span>
         </div>
 
-        <!-- Col 2: Equipo Local -->
-        <div style="flex:1;text-align:right;font-size:12px;font-weight:${isHome ? '800' : (isPlayed && isLocalWinner ? '700' : '500')};color:${isPlayed ? (isLocalWinner ? 'var(--text)' : 'var(--text-dim)') : (isHome ? 'var(--text)' : 'var(--text-muted)')};overflow:hidden;white-space:nowrap;text-overflow:ellipsis;" title="${localName}">
-          ${isHome ? '<strong style="font-weight:800;color:var(--text);">Xuventude Dorneda</strong>' : localName} ${isLocalWinner ? '<span style="color:var(--success);font-size:10px;">✅</span>' : ''}
+        <!-- Col 2: Equipo Local · nombre oficial FUTGAL -->
+        <div style="flex:1;text-align:right;font-size:12px;font-weight:${partidosOfficialIsDorneda(localName) ? '900' : (isPlayed && isLocalWinner ? '700' : '500')};color:${isPlayed ? (isLocalWinner ? 'var(--text)' : 'var(--text-dim)') : (partidosOfficialIsDorneda(localName) ? 'var(--text)' : 'var(--text-muted)')};overflow:hidden;white-space:nowrap;text-overflow:ellipsis;" title="${localName}">
+          ${partidosOfficialIsDorneda(localName) ? `<strong style="font-weight:900;color:var(--text);">${localName}</strong>` : localName} ${isLocalWinner ? '<span style="color:var(--success);font-size:10px;">✅</span>' : ''}
         </div>
 
         <!-- Col 3: Marcador / VS -->
@@ -12050,9 +12247,9 @@ function renderPartidos(){
           `}
         </div>
 
-        <!-- Col 4: Equipo Visitante -->
-        <div style="flex:1;text-align:left;font-size:12px;font-weight:${!isHome ? '800' : (isPlayed && isVisitorWinner ? '700' : '500')};color:${isPlayed ? (isVisitorWinner ? 'var(--text)' : 'var(--text-dim)') : (!isHome ? 'var(--text)' : 'var(--text-muted)')};overflow:hidden;white-space:nowrap;text-overflow:ellipsis;" title="${visitorName}">
-          ${isVisitorWinner ? '<span style="color:var(--success);font-size:10px;">✅</span> ' : ''}${!isHome ? '<strong style="font-weight:800;color:var(--text);">Xuventude Dorneda</strong>' : visitorName}
+        <!-- Col 4: Equipo Visitante · nombre oficial FUTGAL -->
+        <div style="flex:1;text-align:left;font-size:12px;font-weight:${partidosOfficialIsDorneda(visitorName) ? '900' : (isPlayed && isVisitorWinner ? '700' : '500')};color:${isPlayed ? (isVisitorWinner ? 'var(--text)' : 'var(--text-dim)') : (partidosOfficialIsDorneda(visitorName) ? 'var(--text)' : 'var(--text-muted)')};overflow:hidden;white-space:nowrap;text-overflow:ellipsis;" title="${visitorName}">
+          ${isVisitorWinner ? '<span style="color:var(--success);font-size:10px;">✅</span> ' : ''}${partidosOfficialIsDorneda(visitorName) ? `<strong style="font-weight:900;color:var(--text);">${visitorName}</strong>` : visitorName}
         </div>
 
         <!-- Col 5: Estado / Resultado -->
@@ -14916,22 +15113,39 @@ function toggleCoachNotebookEditor(forceOpen){
 window.toggleCoachNotebookEditor=toggleCoachNotebookEditor;
 
 
-function coachNotebookViewRender(pManual){
+
+function coachNotebookAssistancesInline(pManual){
   var assists=toArr(pManual && pManual.asistenciasDetalle);
-  var obs=(pManual && (pManual.analisisPartido || pManual.observacionesEntrenador || pManual.observacionesRival)) || '';
+  if(!assists.length) return '';
 
-  // Si la ficha todavía no tiene datos propios, no añadimos ruido visual.
-  if(!assists.length && !String(obs).trim()) return '';
-
-  var assistHtml=assists.length ? assists.map(function(a){
+  var rows=assists.map(function(a){
     var min=a && a.minuto ? String(a.minuto)+"'" : '—';
     var scorer=(a && a.goleador) ? a.goleador : 'Gol';
     var assistant=(a && a.asistente) ? a.asistente : '—';
-    return `<div class="coach-notebook-assist-row">
-      <div class="coach-notebook-assist-minute">${min}</div>
-      <div class="coach-notebook-assist-text"><strong>${scorer}</strong> · Asistencia: <strong>${assistant}</strong></div>
+
+    return `<div style="display:grid;grid-template-columns:48px minmax(0,1fr);gap:6px;align-items:center;padding:5px 8px;border-bottom:1px solid var(--border);font-size:10.5px;">
+      <div style="text-align:center;font-weight:900;color:var(--text-muted);">${min}</div>
+      <div style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+        <strong>${scorer}</strong>
+        <span style="color:var(--text-dim);"> · asistencia de </span>
+        <strong>${assistant}</strong>
+      </div>
     </div>`;
-  }).join('') : '<div class="coach-notebook-view-empty">Sin asistencias registradas.</div>';
+  }).join('');
+
+  return `
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;">
+      <div style="font-size:10.5px;font-weight:800;color:var(--text);text-transform:uppercase;padding:8px 10px;background:var(--surface2);border-bottom:1px solid var(--border);">
+        🅰️ Asistencias (${assists.length})
+      </div>
+      <div>${rows}</div>
+    </div>
+  `;
+}
+
+function coachNotebookViewRender(pManual){
+  var obs=(pManual && (pManual.analisisPartido || pManual.observacionesEntrenador || pManual.observacionesRival)) || '';
+  if(!String(obs).trim()) return '';
 
   var obsSafe=String(obs || '')
     .replace(/&/g,'&amp;')
@@ -14941,19 +15155,10 @@ function coachNotebookViewRender(pManual){
   return `
     <div class="coach-notebook-view">
       <div class="coach-notebook-view-head">
-        <div class="coach-notebook-view-title">Cuaderno del entrenador</div>
+        <div class="coach-notebook-view-title">Observaciones del entrenador</div>
       </div>
-      <div class="coach-notebook-view-grid">
-        <div class="coach-notebook-view-col">
-          <div class="coach-notebook-view-label">Asistencias</div>
-          ${assistHtml}
-        </div>
-        <div class="coach-notebook-view-col">
-          <div class="coach-notebook-view-label">Observaciones del entrenador</div>
-          ${obsSafe
-            ? `<div class="coach-notebook-observation-text">${obsSafe}</div>`
-            : '<div class="coach-notebook-view-empty">Sin observaciones registradas.</div>'}
-        </div>
+      <div class="coach-notebook-view-col" style="border-left:0;">
+        <div class="coach-notebook-observation-text">${obsSafe}</div>
       </div>
     </div>
   `;
@@ -15424,6 +15629,8 @@ function openFichaActaOficial(jornadaNum, localTeam, visitTeam, enlaceActa, codA
             </div>
           `}
         </div>
+
+        ${isDornedaMatch ? coachNotebookAssistancesInline(pDorneda || null) : ''}
 
         <!-- Estadio y Ciudad -->
         <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;">
