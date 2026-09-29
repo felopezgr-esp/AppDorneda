@@ -3034,6 +3034,201 @@
   }
 }
 
+
+/* ==========================================================
+   PASO 14G · SEGUIMIENTO DE JUGADORES ULTRACOMPACTO
+   ========================================================== */
+#econCuotasCompactCard{
+  padding:7px 9px !important;
+  margin-bottom:8px !important;
+  border-radius:8px !important;
+}
+.econ-cuotas-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin:0 0 5px 0;
+  padding:0 0 5px 0;
+  border-bottom:1px solid var(--border);
+}
+.econ-cuotas-title{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  min-width:0;
+}
+.econ-cuotas-title .card-title{
+  margin:0 !important;
+  font-size:11px !important;
+  line-height:1 !important;
+}
+.econ-cuotas-sub{
+  font-size:9px;
+  color:var(--text-dim);
+  white-space:nowrap;
+}
+.econ-cuotas-tabs{
+  display:flex;
+  align-items:center;
+  gap:3px;
+  flex-wrap:nowrap;
+}
+.econ-cuota-tab{
+  height:22px;
+  min-height:22px;
+  padding:0 6px;
+  border:1px solid var(--border);
+  border-radius:4px;
+  background:var(--surface2);
+  color:var(--text-muted);
+  font-size:8.5px;
+  line-height:1;
+  font-weight:800;
+  cursor:pointer;
+  white-space:nowrap;
+}
+.econ-cuota-tab.active{
+  background:var(--red);
+  border-color:var(--red);
+  color:#fff;
+}
+.econ-cuotas-scroll{
+  overflow-x:auto;
+  border:1px solid var(--border);
+  border-radius:5px;
+  -webkit-overflow-scrolling:touch;
+}
+#tablaCuotasPlantilla{
+  width:100%;
+  min-width:760px;
+  border-collapse:collapse;
+  table-layout:fixed;
+  font-size:9.5px !important;
+}
+#tablaCuotasPlantilla thead th{
+  height:20px !important;
+  padding:2px 5px !important;
+  font-size:8px !important;
+  line-height:1 !important;
+  color:var(--text-dim);
+  background:var(--surface2);
+  border-bottom:1px solid var(--border);
+  white-space:nowrap;
+}
+#tablaCuotasPlantilla tbody tr{
+  height:25px !important;
+}
+#tablaCuotasPlantilla tbody td{
+  height:25px !important;
+  min-height:25px !important;
+  padding:1px 5px !important;
+  font-size:9.5px !important;
+  line-height:1.05 !important;
+  vertical-align:middle !important;
+  border-bottom:1px solid var(--border);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+#tablaCuotasPlantilla tbody tr:last-child td{border-bottom:none}
+#tablaCuotasPlantilla tbody tr:hover td{background:var(--surface2)}
+#tablaCuotasPlantilla th:nth-child(1),#tablaCuotasPlantilla td:nth-child(1){width:42px;text-align:center}
+#tablaCuotasPlantilla th:nth-child(2),#tablaCuotasPlantilla td:nth-child(2){width:175px}
+#tablaCuotasPlantilla th:nth-child(3),#tablaCuotasPlantilla td:nth-child(3){width:78px;text-align:center}
+#tablaCuotasPlantilla th:nth-child(4),#tablaCuotasPlantilla td:nth-child(4){width:75px;text-align:right}
+#tablaCuotasPlantilla th:nth-child(5),#tablaCuotasPlantilla td:nth-child(5){width:75px;text-align:right}
+#tablaCuotasPlantilla th:nth-child(6),#tablaCuotasPlantilla td:nth-child(6){width:75px;text-align:right}
+#tablaCuotasPlantilla th:nth-child(7),#tablaCuotasPlantilla td:nth-child(7){width:92px;text-align:center}
+#tablaCuotasPlantilla th:nth-child(8),#tablaCuotasPlantilla td:nth-child(8){width:82px;text-align:center}
+#tablaCuotasPlantilla th:nth-child(9),#tablaCuotasPlantilla td:nth-child(9){width:34px;text-align:center}
+.econ-cuota-player{
+  display:block;
+  font-size:9.5px;
+  font-weight:800;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.econ-cuota-mini{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height:16px;
+  min-height:16px;
+  padding:0 4px;
+  border-radius:3px;
+  font-size:7.5px;
+  line-height:1;
+  font-weight:900;
+  border:1px solid var(--border);
+  white-space:nowrap;
+}
+.econ-cuota-mini.ficha{background:var(--surface2);color:var(--text)}
+.econ-cuota-mini.prueba{background:rgba(100,116,139,.08);color:var(--text-muted)}
+.econ-cuota-mini.pagado{background:rgba(34,197,94,.09);border-color:rgba(34,197,94,.25);color:#15803d}
+.econ-cuota-mini.parcial{background:rgba(245,158,11,.09);border-color:rgba(245,158,11,.25);color:#b45309}
+.econ-cuota-mini.pendiente{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.22);color:#b91c1c}
+.econ-cuota-mini.exento{background:var(--surface2);color:var(--text-muted)}
+[data-theme="dark"] .econ-cuota-mini.pagado{color:#4ade80}
+[data-theme="dark"] .econ-cuota-mini.parcial{color:#fbbf24}
+[data-theme="dark"] .econ-cuota-mini.pendiente{color:#f87171}
+.econ-cuota-edit{
+  width:20px !important;
+  min-width:20px !important;
+  height:20px !important;
+  min-height:20px !important;
+  padding:0 !important;
+  display:inline-flex !important;
+  align-items:center;
+  justify-content:center;
+  border-radius:4px !important;
+  font-size:9px !important;
+}
+.econ-cuotas-pagination{
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  gap:5px;
+  min-height:22px;
+  margin:4px 0 0;
+  padding:0;
+}
+#econCuotasPageInfo{
+  margin-right:auto;
+  font-size:8.5px;
+  color:var(--text-dim);
+}
+.econ-cuotas-page-btn{
+  width:24px !important;
+  min-width:24px !important;
+  height:22px !important;
+  min-height:22px !important;
+  padding:0 !important;
+  display:inline-flex !important;
+  align-items:center;
+  justify-content:center;
+  border-radius:4px !important;
+  font-size:13px !important;
+  font-weight:900 !important;
+}
+@media(max-width:760px){
+  #econCuotasCompactCard{padding:6px !important}
+  .econ-cuotas-head{align-items:flex-start;flex-direction:column;gap:5px}
+  .econ-cuotas-sub{display:none}
+  .econ-cuotas-tabs{
+    width:100%;
+    overflow-x:auto;
+    padding-bottom:1px;
+  }
+  #tablaCuotasPlantilla{min-width:720px}
+  #tablaCuotasPlantilla tbody tr,
+  #tablaCuotasPlantilla tbody td{
+    height:24px !important;
+    min-height:24px !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -4282,38 +4477,44 @@
             </div>
           </div>
 
-          <!-- SEGUIMIENTO DE JUGADORES -->
-          <div class="card mb-16">
-            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:12px">
-              <div>
-                <div class="card-title" style="margin-bottom:2px">👥 Seguimiento de jugadores</div>
-                <div style="font-size:11px;color:var(--text-muted)">Estado de la ficha calculado automáticamente desde los movimientos registrados</div>
+          <!-- PASO 14G · SEGUIMIENTO DE JUGADORES ULTRACOMPACTO -->
+          <div class="card mb-16" id="econCuotasCompactCard">
+            <div class="econ-cuotas-head">
+              <div class="econ-cuotas-title">
+                <div class="card-title">👥 Seguimiento de jugadores</div>
+                <span class="econ-cuotas-sub">10 por página · detalle completo al editar</span>
               </div>
-              <div class="tabs" style="margin-bottom:0;gap:4px">
-                <div class="tab active" onclick="filterCuotas('todos', this)">Todos (<span id="cntCuotasTodos">0</span>)</div>
-                <div class="tab" onclick="filterCuotas('Pagado', this)">Pagado (<span id="cntCuotasPagado">0</span>)</div>
-                <div class="tab" onclick="filterCuotas('Parcial', this)">Parcial (<span id="cntCuotasParcial">0</span>)</div>
-                <div class="tab" onclick="filterCuotas('Pendiente', this)">Pendiente (<span id="cntCuotasPendiente">0</span>)</div>
+              <div class="econ-cuotas-tabs">
+                <button type="button" class="econ-cuota-tab active" onclick="filterCuotas('todos', this)">Todos <span id="cntCuotasTodos">0</span></button>
+                <button type="button" class="econ-cuota-tab" onclick="filterCuotas('Pagado', this)">Pagado <span id="cntCuotasPagado">0</span></button>
+                <button type="button" class="econ-cuota-tab" onclick="filterCuotas('Parcial', this)">Parcial <span id="cntCuotasParcial">0</span></button>
+                <button type="button" class="econ-cuota-tab" onclick="filterCuotas('Pendiente', this)">Pendiente <span id="cntCuotasPendiente">0</span></button>
               </div>
             </div>
-            <div class="table-wrap">
+
+            <div class="econ-cuotas-scroll">
               <table id="tablaCuotasPlantilla">
                 <thead>
                   <tr>
-                    <th style="width:44px;text-align:center">#</th>
-                    <th style="min-width:170px">Jugador</th>
-                    <th style="width:110px;text-align:center;white-space:nowrap">Ficha</th>
-                    <th style="width:95px;text-align:right;white-space:nowrap">Cuota</th>
-                    <th style="width:95px;text-align:right;white-space:nowrap">Abonado</th>
-                    <th style="width:95px;text-align:right;white-space:nowrap">Pendiente</th>
-                    <th style="width:110px;text-align:center;white-space:nowrap">Estado</th>
-                    <th style="width:100px;text-align:center;white-space:nowrap">Fecha</th>
-                    <th style="min-width:150px">Anotaciones</th>
-                    <th style="width:80px;text-align:right;white-space:nowrap">Acción</th>
+                    <th>#</th>
+                    <th>Jugador</th>
+                    <th>Ficha</th>
+                    <th>Cuota</th>
+                    <th>Abonado</th>
+                    <th>Pend.</th>
+                    <th>Estado</th>
+                    <th>Fecha</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody id="tablaCuotasBody"></tbody>
               </table>
+            </div>
+
+            <div class="econ-cuotas-pagination">
+              <div id="econCuotasPageInfo"></div>
+              <button type="button" id="econCuotasPrevBtn" class="btn btn-ghost econ-cuotas-page-btn" onclick="changeEconCuotasPage(-1)" title="Página anterior">‹</button>
+              <button type="button" id="econCuotasNextBtn" class="btn btn-ghost econ-cuotas-page-btn" onclick="changeEconCuotasPage(1)" title="Página siguiente">›</button>
             </div>
           </div>
         </div>
@@ -8856,18 +9057,22 @@ function validateAndMigrateDB(dbObj){
           return c && ((c.jugadorId && c.jugadorId === j.id) || normalizeName(c.nombre) === normalizeName(j.nombre)); 
         });
         if(!existing){
+          var esStaff = j.rol === 'Entrenador' || normalizeName(j.nombre) === 'kata' || j.id === 108;
+          var conFicha = !esStaff && (j.estado || 'Con ficha') === 'Con ficha';
           dbObj.economia.cuotas.push({
             jugadorId: j.id,
             nombre: j.nombre,
             nombreCompleto: j.nombreCompleto || '',
             dorsal: j.dorsal,
             estadoFicha: j.estado || 'Con ficha',
-            cuota: dbObj.economia.cuotaDefecto || 120,
+            cuota: conFicha ? (dbObj.economia.cuotaDefecto || 120) : 0,
             pagado: 0,
-            estado: 'Pendiente',
+            estado: conFicha ? 'Pendiente' : 'Exento',
             metodo: '',
             fechaPago: '',
-            notas: ''
+            notas: esStaff ? 'Entrenador (Exento - Ficha pagada por el club)' : '',
+            cuotaObligatoria: conFicha,
+            cuotaAutomatica: true
           });
           modified = true;
         } else {
@@ -8965,6 +9170,8 @@ let currentSection = 'dashboard', currentStep = 0, newMatchData = {}, plantillaF
 let isEconAuth = sessionStorage.getItem('dorneda_econ_auth') === 'true';
 let currentEconTab = 'cuotas';
 let cuotasFilter = 'todos';
+let econCuotasPage = 1;
+const ECON_CUOTAS_PAGE_SIZE = 10;
 let diarioFilterTipo = 'todos';
 let diarioFilterCat = 'todas';
 let econMovPage = 1;
@@ -9082,7 +9289,21 @@ function initFirebaseSync(){
             isRemoteUpdate = true;
             var needsCloudUpdate = false;
             try {
-              var res = validateAndMigrateDB(cData.db);
+              var incomingDb = cData.db;
+              var localEconomia = db && db.economia ? db.economia : null;
+              var incomingEconomia = incomingDb && incomingDb.economia ? incomingDb.economia : null;
+              var localEditAt = Number(localEconomia && localEconomia._lastEditAt) || 0;
+              var cloudEditAt = Number(incomingEconomia && incomingEconomia._lastEditAt) || 0;
+
+              // Si Economía fue editada localmente después de la copia de nube,
+              // preservamos ese subárbol. Esto evita que un onSnapshot antiguo
+              // deshaga una edición al refrescar.
+              if(localEconomia && localEditAt > cloudEditAt){
+                incomingDb = JSON.parse(JSON.stringify(incomingDb));
+                incomingDb.economia = JSON.parse(JSON.stringify(localEconomia));
+              }
+
+              var res = validateAndMigrateDB(incomingDb);
               db = res.dbObj;
               needsCloudUpdate = res.modified;
               localStorage.setItem(DB_KEY, JSON.stringify(db));
@@ -9148,6 +9369,13 @@ function saveDBToCloud(){
   }, 350);
 }
 window.saveDBToCloud = saveDBToCloud;
+
+
+function markEconomiaEdited(){
+  if(!db.economia) db.economia = {};
+  db.economia._lastEditAt = Date.now();
+}
+window.markEconomiaEdited = markEconomiaEdited;
 
 function saveDB(){
   try {
@@ -16929,7 +17157,7 @@ function updateEconLockUI(){
 
 
 // ==========================================
-// PASO 14A/14B/14E/14F · ECONOMÍA V2
+// PASO 14A/14B/14E/14F/14G/14H · ECONOMÍA V2
 // ==========================================
 const ECON_INGRESO_TIPOS = ['Ficha', 'Patrocinador', 'Otro'];
 const ECON_GASTO_TIPOS = ['Fichas', 'Cuota Club', 'Árbitros', 'Otro'];
@@ -17442,6 +17670,95 @@ function reconcileEconomiaHoja20260929V3(){
   return true;
 }
 
+
+function sanitizeEconomiaRuntime(){
+  if(!db.economia) db.economia = {};
+  if(!Array.isArray(db.economia.movimientos)) db.economia.movimientos = [];
+  if(!Array.isArray(db.economia.cuotas)) db.economia.cuotas = [];
+
+  const n = function(v){ return econNorm(v).replace(/\s+/g,' '); };
+  let modified = false;
+
+  // Limpieza del error histórico: Pago 7 de Luis Ángel llegó a duplicarse
+  // porque las migraciones antiguas lo recreaban al cambiar su título.
+  // Aquí SOLO eliminamos duplicados existentes. Nunca lo volvemos a crear.
+  const p7 = db.economia.movimientos.filter(function(m){
+    return m && m.tipo === 'Gasto' &&
+      (
+        n(m.concepto) === 'pago 7 ficha luis angel' ||
+        (String(m.origen || '').indexOf('hoja-20260929-v') === 0 &&
+         Math.abs((parseFloat(m.importe)||0)-83) < 0.001 &&
+         n(m.receptor || m.pagadorBeneficiario) === 'kata' &&
+         String(m.fecha || '') === '29/09/2026')
+      );
+  });
+
+  if(p7.length > 1){
+    // Conservamos el movimiento con la edición más reciente si existe.
+    p7.sort(function(a,b){
+      const ta = Date.parse(a.updatedAt || a.createdAt || '') || 0;
+      const tb = Date.parse(b.updatedAt || b.createdAt || '') || 0;
+      if(tb !== ta) return tb-ta;
+      return (Number(b.id)||0) - (Number(a.id)||0);
+    });
+    const keep = p7[0];
+    const removeIds = new Set(p7.slice(1).map(function(x){ return Number(x.id); }));
+    db.economia.movimientos = db.economia.movimientos.filter(function(m){
+      return !removeIds.has(Number(m && m.id));
+    });
+    modified = true;
+  }
+
+  // Corrige únicamente el error histórico exacto "Ficha Angel" generado por
+  // la importación. No fuerza datos si el usuario ya lo ha editado.
+  let luis = (db.jugadores || []).find(function(j){
+    return Number(j && j.id) === 111 ||
+      n(j && j.nombre) === 'luis angel' ||
+      n(j && j.nombreCompleto).indexOf('fernandez vijande') !== -1;
+  });
+  if(luis){
+    db.economia.movimientos.forEach(function(m){
+      const generated = String(m && m.origen || '').indexOf('hoja-20260929') === 0;
+      const wrongAngel =
+        m && generated && econIsFichaMovement(m) &&
+        Number(m.jugadorId) === 6 &&
+        Math.abs((parseFloat(m.importe)||0)-100) < 0.001 &&
+        String(m.fecha||'') === '26/09/2026' &&
+        n(m.concepto) === 'ficha angel';
+      if(wrongAngel){
+        m.jugadorId = luis.id;
+        m.jugadorNombre = 'Luis Ángel';
+        m.concepto = 'Ficha Luis Ángel';
+        m.metodoPago = 'Efectivo';
+        m.notas = 'En mano · hoja económica 29/09/2026';
+        modified = true;
+      }
+    });
+  }
+
+  // Reglas estructurales, no movimientos: staff y jugadores a prueba no
+  // generan una deuda automática de 120 €.
+  db.economia.cuotas.forEach(function(c){
+    const name = n(c && c.nombre);
+    const id = Number(c && c.jugadorId);
+    if(id === 108 || name === 'kata'){
+      if(c.cuota !== 0 || c.estado !== 'Exento' || c.cuotaObligatoria !== false){
+        c.cuota = 0;
+        c.pagado = 0;
+        c.estado = 'Exento';
+        c.cuotaObligatoria = false;
+        c.cuotaAutomatica = false;
+        c.metodo = '';
+        c.fechaPago = '';
+        c.notas = 'Entrenador (Exento - Ficha pagada por el club)';
+        modified = true;
+      }
+    }
+  });
+
+  return modified;
+}
+
 function ensureEconomiaV2(){
   if(!db.economia) db.economia = {};
   if(!db.economia.auth) db.economia.auth = {};
@@ -17523,9 +17840,7 @@ function ensureEconomiaV2(){
     modified = true;
   }
 
-  if(reconcileEconomiaHoja20260929()) modified = true;
-  if(reconcileEconomiaHoja20260929V2()) modified = true;
-  if(reconcileEconomiaHoja20260929V3()) modified = true;
+  if(sanitizeEconomiaRuntime()) modified = true;
   syncCuotasDesdeMovimientos(false);
   return modified;
 }
@@ -17747,6 +18062,7 @@ function saveCambiarPassword(){
   if(!db.economia.auth) db.economia.auth = {};
   db.economia.auth.usuario = 'Administrador';
   db.economia.auth.password = nueVal;
+  markEconomiaEdited();
   saveDB();
   closeModal('modalCambiarPassword');
   toast('Contraseña de Economía cambiada con éxito', 'success');
@@ -18322,13 +18638,22 @@ function renderEconStats(){
 
 function filterCuotas(estado, el){
   cuotasFilter = estado;
+  econCuotasPage = 1;
   if(el){
     const parent = el.parentElement;
-    if(parent) parent.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    if(parent){
+      parent.querySelectorAll('.econ-cuota-tab').forEach(function(t){ t.classList.remove('active'); });
+    }
     el.classList.add('active');
   }
   renderEconCuotas();
 }
+
+function changeEconCuotasPage(delta){
+  econCuotasPage = Math.max(1, econCuotasPage + Number(delta || 0));
+  renderEconCuotas();
+}
+window.changeEconCuotasPage = changeEconCuotasPage;
 
 
 function populateEconMovementPlayerFilter(){
@@ -18481,9 +18806,9 @@ function renderEconCuotas(){
   const cuotas = (db.economia && db.economia.cuotas) || [];
 
   const cntTodos = cuotas.length;
-  const cntPagado = cuotas.filter(c => c.estado === 'Pagado').length;
-  const cntParcial = cuotas.filter(c => c.estado === 'Parcial').length;
-  const cntPendiente = cuotas.filter(c => c.estado === 'Pendiente').length;
+  const cntPagado = cuotas.filter(function(c){ return c.estado === 'Pagado'; }).length;
+  const cntParcial = cuotas.filter(function(c){ return c.estado === 'Parcial'; }).length;
+  const cntPendiente = cuotas.filter(function(c){ return c.estado === 'Pendiente'; }).length;
 
   const elT = document.getElementById('cntCuotasTodos');
   const elPag = document.getElementById('cntCuotasPagado');
@@ -18494,52 +18819,76 @@ function renderEconCuotas(){
   if(elPar) elPar.textContent = cntParcial;
   if(elPen) elPen.textContent = cntPendiente;
 
-  const filtered = cuotas.filter(function(c){
+  let filtered = cuotas.filter(function(c){
     if(cuotasFilter === 'todos') return true;
     return c.estado === cuotasFilter;
   });
 
-  if(filtered.length === 0){
-    tbody.innerHTML = `<tr><td colspan="10" style="text-align:center;padding:24px;color:var(--text-muted)">No hay jugadores en esta categoría.</td></tr>`;
-    return;
+  filtered.sort(function(a,b){
+    const da = Number(a.dorsal) || 999;
+    const dbb = Number(b.dorsal) || 999;
+    if(da !== dbb) return da-dbb;
+    return String(a.nombre || '').localeCompare(String(b.nombre || ''),'es',{sensitivity:'base'});
+  });
+
+  const total = filtered.length;
+  const pages = Math.max(1, Math.ceil(total / ECON_CUOTAS_PAGE_SIZE));
+  if(econCuotasPage > pages) econCuotasPage = pages;
+  const start = (econCuotasPage - 1) * ECON_CUOTAS_PAGE_SIZE;
+  const pageRows = filtered.slice(start, start + ECON_CUOTAS_PAGE_SIZE);
+
+  if(pageRows.length === 0){
+    tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;height:28px !important;padding:2px 6px !important;color:var(--text-muted);font-size:9px">Sin jugadores en este filtro.</td></tr>';
+  }else{
+    tbody.innerHTML = pageRows.map(function(c){
+      const fixed = parseFloat(c.cuota) || 0;
+      const paid = parseFloat(c.pagado) || 0;
+      const pend = Math.max(0, fixed - paid);
+      const dTag = c.dorsal && c.dorsal !== 999 ? '#' + c.dorsal : '—';
+
+      let estadoLabel = 'PEND.';
+      let estadoClass = 'pendiente';
+      if(c.estado === 'Pagado'){ estadoLabel = 'PAGADO'; estadoClass = 'pagado'; }
+      else if(c.estado === 'Parcial'){ estadoLabel = 'PARCIAL'; estadoClass = 'parcial'; }
+      else if(c.estado === 'Exento'){ estadoLabel = 'EXENTO'; estadoClass = 'exento'; }
+
+      const fichaClass = c.estadoFicha === 'Con ficha' ? 'ficha' : 'prueba';
+      const fichaLabel = c.estadoFicha === 'Con ficha' ? 'FICHA' : (c.estadoFicha === 'A prueba' ? 'PRUEBA' : (c.estadoFicha || '—'));
+      const title = [
+        c.nombreCompleto || '',
+        c.notas || '',
+        c.metodo ? 'Método: ' + c.metodo : '',
+        c.fechaPago ? 'Último pago: ' + c.fechaPago : ''
+      ].filter(Boolean).join(' · ').replace(/"/g,'&quot;');
+
+      return `
+        <tr title="${title}">
+          <td style="font-weight:900;color:var(--red-light)">${dTag}</td>
+          <td><span class="econ-cuota-player" title="${String(c.nombreCompleto || c.nombre || '').replace(/"/g,'&quot;')}">${c.nombre || '—'}</span></td>
+          <td><span class="econ-cuota-mini ${fichaClass}">${fichaLabel}</span></td>
+          <td style="font-weight:700">${formatMoney(fixed)}</td>
+          <td style="font-weight:800;color:#16a34a">${formatMoney(paid)}</td>
+          <td style="font-weight:800;color:${pend > 0 ? '#dc2626' : 'var(--text-muted)'}">${formatMoney(pend)}</td>
+          <td><span class="econ-cuota-mini ${estadoClass}">${estadoLabel}</span></td>
+          <td style="color:var(--text-muted);font-size:9px">${c.fechaPago || '—'}</td>
+          <td><button type="button" class="btn btn-ghost econ-cuota-edit" onclick="openModalCuotaJugador(${c.jugadorId})" title="Editar cuota / ver detalle">✎</button></td>
+        </tr>
+      `;
+    }).join('');
   }
 
-  tbody.innerHTML = filtered.map(function(c){
-    const fixed = parseFloat(c.cuota) || 0;
-    const paid = parseFloat(c.pagado) || 0;
-    const pend = Math.max(0, fixed - paid);
-    const dTag = c.dorsal && c.dorsal !== 999 ? '#' + c.dorsal : '--';
+  const info = document.getElementById('econCuotasPageInfo');
+  if(info){
+    const from = total ? start + 1 : 0;
+    const to = Math.min(start + ECON_CUOTAS_PAGE_SIZE, total);
+    info.textContent = total ? `${from}–${to} / ${total} · ${econCuotasPage}/${pages}` : '0 jugadores';
+  }
 
-    let bClass = 'pendiente-pago';
-    let estadoLabel = 'Pendiente';
-    if(c.estado === 'Pagado'){ bClass = 'pagado'; estadoLabel = 'Pagado completo'; }
-    else if(c.estado === 'Parcial'){ bClass = 'parcial'; estadoLabel = 'Parcial'; }
-    else if(c.estado === 'Exento'){ bClass = 'exento'; estadoLabel = 'Exento'; }
-
-    return `
-      <tr>
-        <td style="font-weight:800;color:var(--red-light);width:44px;text-align:center">${dTag}</td>
-        <td>
-          <div class="td-bold" style="font-size:13.5px">${c.nombre || ''}</div>
-          ${c.nombreCompleto ? `<div style="font-size:11px;color:var(--text-muted);margin-top:2px">${c.nombreCompleto}</div>` : ''}
-        </td>
-        <td style="text-align:center"><span class="badge" style="background:var(--surface3);font-size:11px;white-space:nowrap;display:inline-block">${c.estadoFicha || '--'}</span></td>
-        <td style="font-weight:700;text-align:right;white-space:nowrap">${formatMoney(fixed)}</td>
-        <td style="color:#16a34a;font-weight:700;text-align:right;white-space:nowrap">${formatMoney(paid)}</td>
-        <td style="color:${pend > 0 ? '#dc2626' : 'var(--text-muted)'};font-weight:700;text-align:right;white-space:nowrap">${formatMoney(pend)}</td>
-        <td style="text-align:center"><span class="badge ${bClass}" style="white-space:nowrap">${estadoLabel}</span></td>
-        <td style="font-size:11.5px;color:var(--text-muted);text-align:center;white-space:nowrap">${c.fechaPago || '--'}</td>
-        <td style="font-size:11.5px;color:var(--text-muted)">${c.notas || '--'}</td>
-        <td style="text-align:right;white-space:nowrap">
-          <button type="button" class="btn btn-ghost btn-xs" onclick="openModalCuotaJugador(${c.jugadorId})" title="Editar cuota objetivo">
-            ✏️ Editar
-          </button>
-        </td>
-      </tr>
-    `;
-  }).join('');
+  const prev = document.getElementById('econCuotasPrevBtn');
+  const next = document.getElementById('econCuotasNextBtn');
+  if(prev) prev.disabled = econCuotasPage <= 1;
+  if(next) next.disabled = econCuotasPage >= pages;
 }
-
 function openModalCuotaJugador(jugadorId){
   syncCuotasDesdeMovimientos();
   const cuotas = (db.economia && db.economia.cuotas) || [];
@@ -18603,6 +18952,7 @@ function saveCuotaJugadorSubmit(){
   item.notas = notEl ? notEl.value.trim() : (item.notas || '');
 
   syncCuotasDesdeMovimientos(false);
+  markEconomiaEdited();
   saveDB();
   closeModal('modalCuotaJugador');
   renderEconomia();
@@ -18876,6 +19226,7 @@ function saveMovimientoSubmit(){
   }
 
   syncCuotasDesdeMovimientos();
+  markEconomiaEdited();
   saveDB();
   closeModal('modalMovimiento');
   econMovPage = 1;
@@ -18895,6 +19246,7 @@ function deleteMovimiento(id){
   if(!db.economia || !db.economia.movimientos) return;
   db.economia.movimientos = db.economia.movimientos.filter(function(x){ return Number(x.id) !== Number(id); });
   syncCuotasDesdeMovimientos();
+  markEconomiaEdited();
   saveDB();
   renderEconomia();
   toast('Movimiento eliminado', 'info');
