@@ -4557,6 +4557,164 @@ body.reader-mode #modalFotoUploadInput{display:none!important}
   }
 }
 
+
+/* ==========================================================
+   PASO 16N · CORRECCIONES MÓVIL TRAS PRUEBA REAL EN IPHONE
+   - Barra inferior: todas las secciones visibles
+   - Competiciones: todas las subpestañas visibles
+   - Sin elementos cortados en los laterales
+   ========================================================== */
+@media (max-width:760px){
+
+  /* ---- BARRA INFERIOR: 7 SECCIONES SIEMPRE VISIBLES ---- */
+  .mobile-bottom-nav{
+    width:100vw!important;
+    max-width:100vw!important;
+    overflow:hidden!important;
+    justify-content:stretch!important;
+    gap:0!important;
+    padding-left:2px!important;
+    padding-right:2px!important;
+  }
+  .mobile-nav-item{
+    flex:1 1 0!important;
+    min-width:0!important;
+    width:auto!important;
+    padding:4px 1px!important;
+    overflow:hidden!important;
+  }
+  .mobile-nav-icon{
+    font-size:15px!important;
+    line-height:1!important;
+  }
+  .mobile-nav-label{
+    width:100%!important;
+    max-width:100%!important;
+    padding:0 1px!important;
+    font-size:7.2px!important;
+    line-height:1.05!important;
+    overflow:hidden!important;
+    text-overflow:ellipsis!important;
+    white-space:nowrap!important;
+  }
+
+  /* En móvil no necesitamos recentrar con scroll porque ya caben todos. */
+  .mobile-nav-item.active{
+    scroll-snap-align:none!important;
+  }
+
+  /* ---- COMPETICIONES: NUNCA OCULTAR SUBPESTAÑAS ---- */
+  #section-clasificacion #ligaSubTabsWrap,
+  #section-clasificacion #copaSubTabsWrap{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:5px!important;
+    overflow:visible!important;
+    padding:0!important;
+    margin-bottom:8px!important;
+  }
+  #section-clasificacion #ligaSubTabsWrap > button,
+  #section-clasificacion #copaSubTabsWrap > button{
+    width:100%!important;
+    min-width:0!important;
+    max-width:100%!important;
+    min-height:34px!important;
+    padding:5px 6px!important;
+    font-size:9px!important;
+    line-height:1.1!important;
+    white-space:normal!important;
+    text-align:center!important;
+    justify-content:center!important;
+    overflow:hidden!important;
+  }
+
+  /* Pestañas principales Pretemporada / Liga / Copa: las 3 visibles. */
+  #section-clasificacion #compMainTabs{
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:5px!important;
+    overflow:visible!important;
+    padding:4px!important;
+  }
+  #section-clasificacion #compMainTabs > .tab{
+    width:100%!important;
+    min-width:0!important;
+    justify-content:center!important;
+    text-align:center!important;
+    padding:7px 4px!important;
+    white-space:nowrap!important;
+    font-size:10px!important;
+  }
+
+  /* ---- FILTROS DE RESULTADOS: evitar sensación de contenido cortado ---- */
+  #section-clasificacion .liga-search-filters{
+    width:100%!important;
+    max-width:100%!important;
+    box-sizing:border-box!important;
+  }
+  #section-clasificacion .liga-jornada-selector{
+    width:100%!important;
+    max-width:100%!important;
+    padding-bottom:5px!important;
+    overflow-x:auto!important;
+    overscroll-behavior-x:contain;
+    scroll-snap-type:x proximity;
+  }
+  #section-clasificacion .liga-jornada-filter-btn{
+    scroll-snap-align:start;
+  }
+
+  /* Indicamos visualmente que las jornadas siguen hacia la derecha. */
+  #section-clasificacion .liga-search-filters > div:first-child{
+    position:relative;
+    min-width:0;
+  }
+  #section-clasificacion .liga-search-filters > div:first-child::after{
+    content:'›';
+    position:absolute;
+    right:-1px;
+    bottom:6px;
+    width:18px;
+    height:28px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    pointer-events:none;
+    font-size:20px;
+    font-weight:900;
+    color:var(--text-muted);
+    background:linear-gradient(90deg,rgba(240,244,249,0),var(--surface2) 60%);
+  }
+
+  /* ---- RESULTADOS: ancho real de pantalla ---- */
+  #section-clasificacion .card,
+  #section-clasificacion #ligaSubViewResultados{
+    max-width:100%!important;
+    min-width:0!important;
+  }
+
+  /* ---- EVITAR DESBORDAMIENTO GLOBAL DE BOTONES / SELECT ---- */
+  #section-clasificacion select,
+  #section-clasificacion button{
+    max-width:100%;
+  }
+}
+
+@media (max-width:390px){
+  .mobile-nav-icon{
+    font-size:14px!important;
+  }
+  .mobile-nav-label{
+    font-size:6.8px!important;
+  }
+  #section-clasificacion #ligaSubTabsWrap > button,
+  #section-clasificacion #copaSubTabsWrap > button{
+    font-size:8.6px!important;
+    padding-left:4px!important;
+    padding-right:4px!important;
+  }
+}
+
 </style>
 </head>
 <body class="editor-mode">
@@ -10950,9 +11108,6 @@ function showSection(name, skipHashUpdate, skipScroll){
   var mNavEl = document.getElementById('mnav-'+name);
   if(mNavEl){
     mNavEl.classList.add('active');
-    if(window.innerWidth <= 768 && mNavEl.scrollIntoView){
-      try{ mNavEl.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'}); }catch(e){}
-    }
   }
   closeMobileSidebar();
   renderSection(name);
