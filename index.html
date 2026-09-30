@@ -2,7 +2,7 @@
 <html lang="es" data-theme="light">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Xuventude Dorneda &middot; Temporada 2026/27</title>
   <meta name="description" content="App de gestion, registro y analisis de la temporada 2026/27 del Xuventude Dorneda, equipo de futbol veterano de la Primeira Futgal A Coruna-Ferrol." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -3775,6 +3775,788 @@ body.reader-mode #modalFotoUploadInput{display:none!important}
   .dash-stats-grid .dash-section:first-child{grid-column:auto}
 }
 
+
+/* ==========================================================
+   PASO 16M · REVISIÓN MÓVIL GLOBAL
+   Dashboard · Plantilla · Partidos · Análisis · Competiciones
+   Calendario · Economía · Modales / Ficha
+   ========================================================== */
+@media (max-width:760px){
+
+  /* ---------- ESTRUCTURA GENERAL ---------- */
+  html,body{
+    max-width:100vw!important;
+    overflow-x:hidden!important;
+  }
+  .mobile-topbar{
+    height:calc(52px + env(safe-area-inset-top,0px))!important;
+    padding:env(safe-area-inset-top,0px) 9px 0 9px!important;
+    gap:6px!important;
+  }
+  .mobile-brand-name{
+    font-size:12.5px!important;
+    gap:5px!important;
+    white-space:nowrap;
+  }
+  #mobileCloudStatusBadge{
+    font-size:8.5px!important;
+    padding:3px 5px!important;
+    white-space:nowrap;
+  }
+  .mobile-icon-btn{
+    width:32px!important;
+    height:32px!important;
+    min-width:32px!important;
+    border-radius:7px!important;
+    font-size:14px!important;
+  }
+  .main-content{
+    padding:
+      calc(60px + env(safe-area-inset-top,0px))
+      8px
+      calc(76px + env(safe-area-inset-bottom,0px))
+      8px!important;
+  }
+  .mobile-bottom-nav{
+    height:calc(58px + env(safe-area-inset-bottom,0px))!important;
+    justify-content:flex-start!important;
+    padding:0 4px env(safe-area-inset-bottom,0px)!important;
+    scroll-snap-type:x proximity;
+  }
+  .mobile-nav-item{
+    flex:0 0 68px!important;
+    min-width:68px!important;
+    padding:4px 2px!important;
+    scroll-snap-align:center;
+  }
+  .mobile-nav-icon{
+    font-size:16px!important;
+  }
+  .mobile-nav-label{
+    width:64px;
+    max-width:64px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    font-size:8.5px!important;
+    line-height:1.1!important;
+    text-align:center;
+  }
+
+  .page-header{
+    gap:7px!important;
+    margin-bottom:9px!important;
+  }
+  .page-title{
+    font-size:18px!important;
+    line-height:1.1!important;
+  }
+  .page-subtitle{
+    font-size:9.5px!important;
+    line-height:1.3!important;
+    margin-top:2px!important;
+  }
+  .page-header > div:last-child{
+    gap:5px!important;
+  }
+  .page-header > div:last-child .btn,
+  .page-header > button.btn{
+    min-height:33px!important;
+    padding:5px 8px!important;
+    font-size:9.5px!important;
+    flex:1 1 auto;
+  }
+
+  .card{
+    padding:9px!important;
+    border-radius:9px!important;
+  }
+  .card-title{
+    font-size:11px!important;
+  }
+
+  /* Todas las barras de pestañas se desplazan horizontalmente;
+     nunca fuerzan la pantalla a ser más ancha. */
+  .tabs{
+    display:flex!important;
+    flex-wrap:nowrap!important;
+    gap:4px!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    width:100%!important;
+    max-width:100%!important;
+    padding:4px!important;
+    margin-bottom:8px!important;
+    -webkit-overflow-scrolling:touch;
+    scroll-snap-type:x proximity;
+    scrollbar-width:none;
+  }
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{
+    flex:0 0 auto!important;
+    min-height:31px!important;
+    padding:6px 9px!important;
+    border-radius:7px!important;
+    font-size:10px!important;
+    line-height:1!important;
+    scroll-snap-align:start;
+  }
+
+  /* ---------- DASHBOARD ---------- */
+  #section-dashboard .dashboard-v2{gap:7px}
+  #section-dashboard .dash-v2-header{margin-bottom:0!important}
+  #section-dashboard .dash-v2-title{font-size:16.5px!important}
+  #section-dashboard .dash-v2-sub{font-size:9px!important}
+  #section-dashboard .dash-section{border-radius:8px}
+  #section-dashboard .dash-section-head{
+    height:auto!important;
+    min-height:29px!important;
+    padding:5px 7px!important;
+  }
+  #section-dashboard .dash-section-title{font-size:8.7px!important}
+  #section-dashboard .dash-section-note{font-size:7.5px!important}
+  #section-dashboard .dash-table-wrap{
+    overflow-x:hidden!important;
+  }
+  #section-dashboard .dash-table{
+    width:100%!important;
+    min-width:0!important;
+    table-layout:fixed!important;
+    font-size:8.7px!important;
+  }
+  #section-dashboard .dash-table th{
+    height:19px!important;
+    padding:2px 3px!important;
+    font-size:6.6px!important;
+    white-space:normal!important;
+    line-height:1.05!important;
+  }
+  #section-dashboard .dash-table td{
+    height:25px!important;
+    padding:3px!important;
+    font-size:8.8px!important;
+  }
+  #section-dashboard .dash-summary-table{
+    min-width:0!important;
+  }
+  #section-dashboard .dash-summary-table td{
+    font-size:10px!important;
+  }
+  #dashNextTable th:nth-child(6),
+  #dashNextTable td:nth-child(6){
+    display:none!important;
+  }
+  #dashNextTable th:nth-child(1){width:46px!important}
+  #dashNextTable th:nth-child(3){width:38px!important}
+  #dashNextTable th:nth-child(4){width:56px!important}
+  #dashNextTable th:nth-child(5){width:48px!important}
+  #dashRecentTable th:nth-child(1){width:34px!important}
+  #dashRecentTable th:nth-child(3){width:32px!important}
+  #dashRecentTable th:nth-child(4){width:40px!important}
+  #dashRecentTable th:nth-child(5){width:52px!important}
+  #dashUpcomingTable th:nth-child(1){width:34px!important}
+  #dashUpcomingTable th:nth-child(3){width:32px!important}
+  #dashUpcomingTable th:nth-child(4){width:55px!important}
+  #dashNearbyTable th:nth-child(1){width:32px!important}
+  #dashNearbyTable th:nth-child(3),
+  #dashNearbyTable th:nth-child(4),
+  #dashNearbyTable th:nth-child(5){width:35px!important}
+  #dashSquadTable th{
+    font-size:6.2px!important;
+    white-space:normal!important;
+  }
+  #dashSquadTable td{
+    text-align:center!important;
+    font-size:10px!important;
+    font-weight:900!important;
+  }
+  #section-dashboard .dash-stats-grid,
+  #section-dashboard .dash-compact-grid{
+    grid-template-columns:1fr!important;
+    gap:7px!important;
+  }
+  /* En móvil el Dashboard es lectura: las herramientas ya están en sus pantallas. */
+  #dashEditorTools{display:none!important}
+
+  /* ---------- PLANTILLA ---------- */
+  #section-plantilla .page-header > button{
+    width:100%!important;
+  }
+  #section-plantilla #playersGrid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:7px!important;
+  }
+  #section-plantilla #staffGrid{
+    grid-template-columns:1fr!important;
+    gap:7px!important;
+  }
+  #section-plantilla .player-card{
+    min-width:0!important;
+    padding:8px 5px!important;
+    border-radius:8px!important;
+  }
+  #section-plantilla .player-avatar{
+    width:42px!important;
+    height:42px!important;
+  }
+  #section-plantilla .player-name{
+    font-size:11px!important;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  #section-plantilla .player-fullname{
+    font-size:8.5px!important;
+    line-height:1.2!important;
+  }
+  #section-plantilla .free-dorsal-pill{
+    padding:2px 6px!important;
+    font-size:9px!important;
+  }
+  #section-plantilla #staffSectionWrap,
+  #section-plantilla #playersSectionWrap{
+    margin-bottom:12px!important;
+  }
+
+  /* ---------- PARTIDOS ---------- */
+  #section-partidos .page-header > div:last-child{
+    display:grid!important;
+    grid-template-columns:1fr 1fr!important;
+    width:100%!important;
+  }
+  #section-partidos .card{
+    padding:6px!important;
+  }
+  #section-partidos .card > div[style*="overflow-x:auto"]{
+    overflow:visible!important;
+    padding:0!important;
+  }
+  #section-partidos .copa-list-header{
+    display:none!important;
+  }
+  #partidosList{
+    min-width:0!important;
+    width:100%!important;
+    gap:7px!important;
+  }
+  #partidosList .copa-match-row{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) 52px minmax(0,1fr)!important;
+    grid-template-areas:
+      "meta meta meta"
+      "local score visit"
+      "result result actions"!important;
+    gap:5px 6px!important;
+    align-items:center!important;
+    width:100%!important;
+    min-width:0!important;
+    min-height:0!important;
+    padding:8px!important;
+    border-radius:9px!important;
+  }
+  #partidosList .copa-match-row > div:nth-child(1){
+    grid-area:meta;
+    width:auto!important;
+    min-width:0!important;
+    white-space:normal!important;
+    flex-wrap:wrap!important;
+    gap:3px 5px!important;
+    font-size:8.5px!important;
+  }
+  #partidosList .copa-match-row > div:nth-child(2){
+    grid-area:local;
+    width:auto!important;
+    min-width:0!important;
+    text-align:right!important;
+    white-space:normal!important;
+    line-height:1.15!important;
+    font-size:10.5px!important;
+  }
+  #partidosList .copa-match-row > div:nth-child(3){
+    grid-area:score;
+    width:auto!important;
+  }
+  #partidosList .copa-match-row > div:nth-child(4){
+    grid-area:visit;
+    width:auto!important;
+    min-width:0!important;
+    text-align:left!important;
+    white-space:normal!important;
+    line-height:1.15!important;
+    font-size:10.5px!important;
+  }
+  #partidosList .copa-match-row > div:nth-child(5){
+    grid-area:result;
+    width:auto!important;
+    text-align:left!important;
+  }
+  #partidosList .copa-match-row > div:nth-child(6){
+    grid-area:actions;
+    width:auto!important;
+    justify-content:flex-end!important;
+    gap:3px!important;
+  }
+  #partidosList .copa-match-row > div:nth-child(6) .btn,
+  #partidosList .copa-match-row > div:nth-child(6) a{
+    min-height:25px!important;
+    padding:3px 5px!important;
+    font-size:8.5px!important;
+  }
+
+  /* ---------- ANÁLISIS ---------- */
+  #section-analisis .stats-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:6px!important;
+  }
+  #section-analisis .analysis-individual-toolbar{
+    align-items:flex-start!important;
+    padding:6px!important;
+    gap:6px!important;
+  }
+  #section-analisis .analysis-comp-switch{
+    width:100%!important;
+    flex-wrap:nowrap!important;
+    overflow-x:auto!important;
+    padding-bottom:2px!important;
+    scrollbar-width:none;
+  }
+  #section-analisis .analysis-comp-switch::-webkit-scrollbar{display:none}
+  #section-analisis .analysis-comp-btn{
+    flex:0 0 auto!important;
+    height:29px!important;
+    padding:0 9px!important;
+    font-size:9px!important;
+  }
+  #section-analisis .individual-card-head{
+    align-items:flex-start!important;
+    flex-direction:column!important;
+    gap:2px!important;
+  }
+  #section-analisis .table-wrap{
+    border-radius:6px;
+  }
+  #tablaGoleadores{min-width:500px!important}
+  #tablaParticipacion{min-width:450px!important}
+  #section-analisis .scout-shell{gap:7px!important}
+  #section-analisis .scout-topbar{padding:7px!important}
+  #section-analisis .scout-name{font-size:13px!important}
+  #section-analisis .scout-head-stats{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:5px!important;
+  }
+  #section-analisis .scout-stat{
+    min-height:43px!important;
+    padding:5px 7px!important;
+  }
+  #section-analisis .scout-stat-value{font-size:13px!important}
+  #section-analisis .scout-card{padding:7px!important}
+  #section-analisis .scout-table{font-size:8.8px!important}
+  #section-analisis .scout-table th,
+  #section-analisis .scout-table td{
+    padding:4px!important;
+  }
+
+  /* ---------- COMPETICIONES ---------- */
+  #section-clasificacion #compMainTabs{
+    margin-bottom:7px!important;
+  }
+  #section-clasificacion #ligaSubTabsWrap,
+  #section-clasificacion #copaSubTabsWrap{
+    width:100%!important;
+    max-width:100%!important;
+    overflow-x:auto!important;
+    gap:4px!important;
+    margin-bottom:8px!important;
+    padding-bottom:4px!important;
+    scrollbar-width:none;
+    scroll-snap-type:x proximity;
+  }
+  #section-clasificacion #ligaSubTabsWrap::-webkit-scrollbar,
+  #section-clasificacion #copaSubTabsWrap::-webkit-scrollbar{display:none}
+  #section-clasificacion #ligaSubTabsWrap > button,
+  #section-clasificacion #copaSubTabsWrap > button{
+    flex:0 0 auto!important;
+    min-height:31px!important;
+    padding:5px 8px!important;
+    font-size:9.5px!important;
+    border-radius:7px!important;
+    scroll-snap-align:start;
+  }
+  #section-clasificacion .liga-search-filters{
+    padding:6px!important;
+    gap:6px!important;
+  }
+  #section-clasificacion .liga-jornada-selector{
+    gap:3px!important;
+  }
+  #section-clasificacion .liga-jornada-filter-btn{
+    height:29px!important;
+    min-width:31px!important;
+    font-size:9px!important;
+  }
+  #section-clasificacion .liga-team-select{
+    height:34px!important;
+    font-size:10px!important;
+  }
+  #section-clasificacion #equiposGridWrap{
+    grid-template-columns:1fr!important;
+    gap:8px!important;
+  }
+  #section-clasificacion #ligaSubViewEquipos .card{
+    padding:8px!important;
+  }
+
+  /* Pretemporada y Copa: de tabla ancha a tarjetas legibles */
+  #compViewPretemporada .copa-list-header,
+  #copaSubViewEliminatorias .copa-list-header{
+    display:none!important;
+  }
+  #compViewPretemporada div[style*="overflow-x:auto"],
+  #copaSubViewEliminatorias div[style*="overflow-x:auto"]{
+    overflow:visible!important;
+  }
+  #pretemporadaMatchesList,
+  #copaMatchesGrid{
+    min-width:0!important;
+    width:100%!important;
+    gap:7px!important;
+  }
+  #pretemporadaMatchesList .copa-match-row,
+  #copaMatchesGrid .copa-match-row{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) 52px minmax(0,1fr)!important;
+    grid-template-areas:
+      "meta meta meta"
+      "local score visit"
+      "status status actions"!important;
+    gap:5px 6px!important;
+    width:100%!important;
+    min-width:0!important;
+    padding:8px!important;
+    border-radius:9px!important;
+  }
+  #pretemporadaMatchesList .copa-match-row > div:nth-child(1),
+  #copaMatchesGrid .copa-match-row > div:nth-child(1){
+    grid-area:meta;
+    width:auto!important;
+    min-width:0!important;
+    white-space:normal!important;
+    flex-wrap:wrap!important;
+    font-size:8.5px!important;
+  }
+  #pretemporadaMatchesList .copa-match-row > div:nth-child(2),
+  #copaMatchesGrid .copa-match-row > div:nth-child(2){
+    grid-area:local;
+    width:auto!important;
+    min-width:0!important;
+    white-space:normal!important;
+    text-align:right!important;
+    font-size:10.5px!important;
+    line-height:1.15!important;
+  }
+  #pretemporadaMatchesList .copa-match-row > div:nth-child(3),
+  #copaMatchesGrid .copa-match-row > div:nth-child(3){
+    grid-area:score;
+    width:auto!important;
+  }
+  #pretemporadaMatchesList .copa-match-row > div:nth-child(4),
+  #copaMatchesGrid .copa-match-row > div:nth-child(4){
+    grid-area:visit;
+    width:auto!important;
+    min-width:0!important;
+    white-space:normal!important;
+    text-align:left!important;
+    font-size:10.5px!important;
+    line-height:1.15!important;
+  }
+  #pretemporadaMatchesList .copa-match-row > div:nth-child(5),
+  #copaMatchesGrid .copa-match-row > div:nth-child(5){
+    grid-area:status;
+    width:auto!important;
+    text-align:left!important;
+  }
+  #pretemporadaMatchesList .copa-match-row > div:nth-child(6),
+  #copaMatchesGrid .copa-match-row > div:nth-child(6){
+    grid-area:actions;
+    width:auto!important;
+    justify-content:flex-end!important;
+  }
+  #copaSubViewCuadro .card{
+    padding:7px!important;
+  }
+  #copaBracketCanvasWrap{
+    max-width:100%!important;
+    overflow:auto!important;
+    -webkit-overflow-scrolling:touch;
+  }
+  #copaSubViewGoleadores .table-wrap{
+    overflow-x:auto!important;
+  }
+  #copaGoleadoresTable{min-width:650px!important}
+
+  /* ---------- CALENDARIO ---------- */
+  #section-calendario > div[style*="Fines de semana"]{
+    flex-wrap:wrap!important;
+  }
+  #section-calendario .cal-toggle{
+    display:grid!important;
+    grid-template-columns:1fr 1fr!important;
+    width:100%!important;
+    gap:4px!important;
+  }
+  #section-calendario .cal-toggle-btn{
+    width:100%!important;
+    padding:6px 5px!important;
+    font-size:9px!important;
+    white-space:normal!important;
+    line-height:1.2!important;
+  }
+  #section-calendario .timeline{
+    padding-left:13px!important;
+  }
+  #section-calendario .timeline::before{left:4px!important}
+  #section-calendario .timeline-dot{left:-12px!important}
+  #section-calendario .timeline-card{
+    align-items:flex-start!important;
+    gap:5px!important;
+    padding:6px!important;
+    font-size:10px!important;
+  }
+  #section-calendario .timeline-header{
+    flex-wrap:wrap!important;
+    gap:4px!important;
+  }
+  #section-calendario .timeline-date{
+    font-size:8.5px!important;
+  }
+  #section-calendario .timeline-rival{
+    flex:1 1 150px!important;
+    min-width:120px!important;
+    white-space:normal!important;
+    line-height:1.2!important;
+    font-size:10.5px!important;
+  }
+  #section-calendario .timeline-obs{
+    max-width:100%!important;
+    overflow:hidden!important;
+    text-overflow:ellipsis!important;
+    font-size:8px!important;
+  }
+  #section-calendario .cal-row{
+    gap:4px!important;
+    padding:5px!important;
+    font-size:9.5px!important;
+  }
+  #section-calendario .cal-j{min-width:28px!important;font-size:9px!important}
+  #section-calendario .cal-fecha{min-width:42px!important;font-size:8px!important}
+  #section-calendario .cal-rival{font-size:9.5px!important}
+
+  /* ---------- ECONOMÍA ---------- */
+  #section-economia .econ-login-card{
+    width:100%!important;
+    max-width:none!important;
+    margin:8px auto!important;
+    padding:18px 14px!important;
+    border-radius:10px!important;
+  }
+  #section-economia .econ-lock-avatar{
+    width:48px!important;
+    height:48px!important;
+    font-size:21px!important;
+    margin-bottom:10px!important;
+  }
+  #section-economia .econ-mov-main-head{
+    align-items:flex-start!important;
+  }
+  #section-economia .econ-mov-main-sub{display:none!important}
+  #section-economia .econ-mov-filters{
+    display:grid!important;
+    grid-template-columns:1fr 1fr!important;
+    gap:5px!important;
+    width:100%!important;
+  }
+  #section-economia #econMovSearch{
+    grid-column:1 / -1!important;
+  }
+  #section-economia .econ-mov-filter-actions{
+    grid-column:1 / -1!important;
+    justify-content:flex-end!important;
+  }
+  #section-economia .econ-mov-filters .form-control{
+    width:100%!important;
+    min-width:0!important;
+    height:31px!important;
+    font-size:9px!important;
+  }
+  #section-economia .econ-mov-filter-actions .btn{
+    min-height:29px!important;
+  }
+  #section-economia .econ-mov-scroll,
+  #section-economia .table-wrap{
+    overflow-x:auto!important;
+    -webkit-overflow-scrolling:touch;
+  }
+
+  /* ---------- MODALES ---------- */
+  .modal-overlay{
+    padding:5px!important;
+  }
+  .modal{
+    width:calc(100vw - 10px)!important;
+    max-width:calc(100vw - 10px)!important;
+    max-height:calc(100dvh - 10px)!important;
+    margin:0!important;
+    padding:10px!important;
+    border-radius:11px!important;
+  }
+  .modal-header{
+    gap:7px!important;
+    padding:8px 9px!important;
+  }
+  .modal-title{
+    min-width:0!important;
+    font-size:12px!important;
+    line-height:1.2!important;
+  }
+  .modal-close{
+    flex:0 0 32px!important;
+    width:32px!important;
+    height:32px!important;
+  }
+  #modalFichaActaOficial .modal{
+    width:calc(100vw - 8px)!important;
+    max-width:calc(100vw - 8px)!important;
+    max-height:calc(100dvh - 8px)!important;
+    padding:0!important;
+  }
+  #modalFichaActaOficial .modal-header{
+    padding:7px 8px!important;
+  }
+  #fichaActaTitle{
+    font-size:10.5px!important;
+    gap:5px!important;
+    flex-wrap:wrap!important;
+  }
+  #fichaActaTitle .badge{
+    font-size:8px!important;
+    padding:2px 5px!important;
+  }
+  #fichaActaContent{
+    padding:7px!important;
+  }
+  .ficha-score-header{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) 72px minmax(0,1fr)!important;
+    gap:5px!important;
+    padding:9px 7px!important;
+    margin-bottom:8px!important;
+    border-radius:9px!important;
+  }
+  .ficha-score-team > div:first-child{
+    font-size:11px!important;
+    line-height:1.15!important;
+    overflow-wrap:anywhere;
+  }
+  .ficha-score-team > div:last-child{
+    font-size:7.5px!important;
+  }
+  .ficha-score-center{
+    padding:0!important;
+  }
+  .ficha-score-center > div:first-child{
+    font-size:23px!important;
+    letter-spacing:0!important;
+  }
+  .ficha-score-center > div:last-child{
+    font-size:7.5px!important;
+    line-height:1.2!important;
+  }
+  .ficha-match-grid{
+    grid-template-columns:1fr!important;
+    gap:7px!important;
+  }
+  .ficha-center-col{order:1!important}
+  .ficha-team-local{order:2!important}
+  .ficha-team-visit{order:3!important}
+  .ficha-team-col{
+    padding:8px!important;
+    gap:8px!important;
+    border-radius:8px!important;
+  }
+  .ficha-center-col{
+    gap:7px!important;
+  }
+  .coach-notebook-view{
+    margin-top:7px!important;
+  }
+  .coach-notebook-view-head{
+    min-height:27px!important;
+    padding:4px 7px!important;
+  }
+  .coach-notebook-view-title{
+    font-size:8.5px!important;
+  }
+  .coach-notebook-observation-text{
+    font-size:11.5px!important;
+    line-height:1.5!important;
+  }
+  .coach-notebook-body{
+    grid-template-columns:1fr!important;
+    gap:7px!important;
+    padding:7px!important;
+  }
+  .coach-notebook-head{
+    align-items:flex-start!important;
+    flex-direction:column!important;
+    gap:1px!important;
+    padding:6px 8px!important;
+  }
+  .coach-notebook-note{
+    font-size:7.5px!important;
+  }
+  .coach-assist-table{
+    min-width:520px!important;
+  }
+  .coach-notebook-actions{
+    padding:0 7px 7px!important;
+  }
+  .coach-notebook-save{
+    width:100%!important;
+    min-height:32px!important;
+  }
+}
+
+@media (max-width:390px){
+  .main-content{
+    padding-left:6px!important;
+    padding-right:6px!important;
+  }
+  .mobile-nav-item{
+    flex-basis:64px!important;
+    min-width:64px!important;
+  }
+  .mobile-nav-label{
+    width:60px;
+    max-width:60px;
+    font-size:8px!important;
+  }
+  #section-plantilla #playersGrid{
+    gap:5px!important;
+  }
+  #partidosList .copa-match-row,
+  #pretemporadaMatchesList .copa-match-row,
+  #copaMatchesGrid .copa-match-row{
+    grid-template-columns:minmax(0,1fr) 48px minmax(0,1fr)!important;
+    padding:7px 6px!important;
+  }
+  .ficha-score-header{
+    grid-template-columns:minmax(0,1fr) 64px minmax(0,1fr)!important;
+  }
+  .ficha-score-center > div:first-child{
+    font-size:21px!important;
+  }
+}
+
 </style>
 </head>
 <body class="editor-mode">
@@ -4183,7 +4965,6 @@ body.reader-mode #modalFotoUploadInput{display:none!important}
       <div id="mobileCloudStatusBadge" style="font-size:10px;font-weight:700;padding:3px 7px;border-radius:4px;border:1px solid rgba(255,255,255,0.1);background:var(--surface2);display:flex;align-items:center;cursor:pointer" onclick="initFirebaseSync()" title="Pulsa para sincronizar">
         <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#f59e0b;margin-right:4px"></span>Nube
       </div>
-      <button type="button" class="mobile-icon-btn" id="mobileAdminBtn" onclick="toggleAdminPINModal()" title="Modo Editor">🔓</button>
       <button type="button" class="mobile-icon-btn" onclick="toggleTheme()" title="Cambiar Tema">🌙</button>
       <button type="button" class="mobile-icon-btn" onclick="toggleMobileSidebar()" title="Menú">☰</button>
     </div>
@@ -4306,7 +5087,7 @@ body.reader-mode #modalFotoUploadInput{display:none!important}
             <div class="dash-section-note" id="dashNextMatchNote"></div>
           </div>
           <div class="dash-table-wrap">
-            <table class="dash-table">
+            <table class="dash-table" id="dashNextTable">
               <thead>
                 <tr>
                   <th style="width:62px">Jornada</th>
@@ -4329,7 +5110,7 @@ body.reader-mode #modalFotoUploadInput{display:none!important}
               <div class="dash-section-note">Liga · últimos 5</div>
             </div>
             <div class="dash-table-wrap">
-              <table class="dash-table">
+              <table class="dash-table" id="dashRecentTable">
                 <thead>
                   <tr><th style="width:45px">J</th><th>Rival</th><th style="width:42px">L/V</th><th style="width:58px">Res.</th><th style="width:62px">Marcador</th></tr>
                 </thead>
@@ -4344,7 +5125,7 @@ body.reader-mode #modalFotoUploadInput{display:none!important}
               <div class="dash-section-note">Liga · próximas 5</div>
             </div>
             <div class="dash-table-wrap">
-              <table class="dash-table">
+              <table class="dash-table" id="dashUpcomingTable">
                 <thead>
                   <tr><th style="width:45px">J</th><th>Rival</th><th style="width:42px">L/V</th><th style="width:82px">Fecha</th></tr>
                 </thead>
@@ -4361,7 +5142,7 @@ body.reader-mode #modalFotoUploadInput{display:none!important}
               <div class="dash-section-note"><span class="dash-link" onclick="showSection('clasificacion')">Ver completa</span></div>
             </div>
             <div class="dash-table-wrap">
-              <table class="dash-table">
+              <table class="dash-table" id="dashNearbyTable">
                 <thead>
                   <tr><th style="width:40px">Pos.</th><th>Equipo</th><th style="width:42px">PJ</th><th style="width:45px">PTS</th><th style="width:45px">DG</th></tr>
                 </thead>
@@ -4407,7 +5188,7 @@ body.reader-mode #modalFotoUploadInput{display:none!important}
             <div class="dash-section-note"><span class="dash-link" onclick="showSection('plantilla')">Ver plantilla</span></div>
           </div>
           <div class="dash-table-wrap">
-            <table class="dash-table">
+            <table class="dash-table" id="dashSquadTable">
               <thead>
                 <tr><th>Con ficha</th><th>A prueba</th><th>Cuerpo técnico</th><th>Sancionados próxima jornada</th><th>Dorsales libres</th></tr>
               </thead>
@@ -10167,7 +10948,12 @@ function showSection(name, skipHashUpdate, skipScroll){
   var navEl = document.getElementById('nav-'+name);
   if(navEl) navEl.classList.add('active');
   var mNavEl = document.getElementById('mnav-'+name);
-  if(mNavEl) mNavEl.classList.add('active');
+  if(mNavEl){
+    mNavEl.classList.add('active');
+    if(window.innerWidth <= 768 && mNavEl.scrollIntoView){
+      try{ mNavEl.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'}); }catch(e){}
+    }
+  }
   closeMobileSidebar();
   renderSection(name);
   if(!skipScroll){
@@ -15507,12 +16293,12 @@ function openFichaActaOficial(jornadaNum, localTeam, visitTeam, enlaceActa, codA
   // Renderizar 3 Column Layout
   var html = `
     <!-- HEADER MARCADOR -->
-    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;">
-      <div style="flex:1;text-align:center;">
+    <div class="ficha-score-header" style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;">
+      <div class="ficha-score-team ficha-score-local" style="flex:1;text-align:center;">
         <div style="font-size:16px;font-weight:900;color:${normT(cleanLocalName).includes('dorneda') ? 'var(--red-light)' : 'var(--text)'};">${cleanLocalName}</div>
         <div style="font-size:11px;color:var(--text-muted);margin-top:2px;">Equipo Local</div>
       </div>
-      <div style="text-align:center;padding:0 16px;">
+      <div class="ficha-score-center" style="text-align:center;padding:0 16px;">
         <div style="font-size:34px;font-weight:900;letter-spacing:2px;color:var(--text);line-height:1;">
           ${hasScore ? `${match.gl} - ${match.gv}` : '<span style="font-size:20px;color:var(--text-dim);">VS</span>'}
         </div>
@@ -15520,17 +16306,17 @@ function openFichaActaOficial(jornadaNum, localTeam, visitTeam, enlaceActa, codA
           ${match.fecha || ''} ${match.hora ? `\u00b7 \u23f0 ${match.hora}` : ''}
         </div>
       </div>
-      <div style="flex:1;text-align:center;">
+      <div class="ficha-score-team ficha-score-visit" style="flex:1;text-align:center;">
         <div style="font-size:16px;font-weight:900;color:${normT(cleanVisitName).includes('dorneda') ? 'var(--red-light)' : 'var(--text)'};">${cleanVisitName}</div>
         <div style="font-size:11px;color:var(--text-muted);margin-top:2px;">Equipo Visitante</div>
       </div>
     </div>
 
     <!-- 3 COLUMNS MATCH SHEET LAYOUT -->
-    <div style="display:grid;grid-template-columns:1fr 1.1fr 1fr;gap:14px;align-items:start;">
+    <div class="ficha-match-grid" style="display:grid;grid-template-columns:1fr 1.1fr 1fr;gap:14px;align-items:start;">
       
       <!-- COLUMNA 1: EQUIPO LOCAL -->
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:12px;">
+      <div class="ficha-team-col ficha-team-local" style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:12px;">
         <div style="font-size:13px;font-weight:900;color:var(--text);border-bottom:2px solid var(--border);padding-bottom:6px;text-align:center;">
           ${cleanLocalName}
         </div>
@@ -15597,7 +16383,7 @@ function openFichaActaOficial(jornadaNum, localTeam, visitTeam, enlaceActa, codA
       </div>
 
       <!-- COLUMNA 2: \u00c1RBITRO, GOLES Y SEDE -->
-      <div style="display:flex;flex-direction:column;gap:12px;">
+      <div class="ficha-center-col" style="display:flex;flex-direction:column;gap:12px;">
         
         <!-- \u00c1rbitro -->
         <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;">
@@ -15659,7 +16445,7 @@ function openFichaActaOficial(jornadaNum, localTeam, visitTeam, enlaceActa, codA
       </div>
 
       <!-- COLUMNA 3: EQUIPO VISITANTE -->
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:12px;">
+      <div class="ficha-team-col ficha-team-visit" style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:12px;">
         <div style="font-size:13px;font-weight:900;color:var(--text);border-bottom:2px solid var(--border);padding-bottom:6px;text-align:center;">
           ${cleanVisitName}
         </div>
