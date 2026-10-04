@@ -1,6 +1,6 @@
 {
   "versionFormato": 2,
-  "fechaExtraccion": "2026-10-04T06:47:14.655Z",
+  "fechaExtraccion": "2026-10-04T12:37:15.461Z",
   "fuente": "FUTGAL",
   "temporada": "2026-2027",
   "competicion": "Veteranos - Primera Galicia",
@@ -26,8 +26,8 @@
   ],
   "totalJornadas": 30,
   "totalPartidos": 240,
-  "totalActasDetectadas": 28,
-  "totalActasIntegradas": 28,
+  "totalActasDetectadas": 32,
+  "totalActasIntegradas": 32,
   "jornadas": [
     {
       "numero": 1,
@@ -6199,8 +6199,8 @@
     {
       "numero": 4,
       "totalPartidos": 8,
-      "totalActasDetectadas": 4,
-      "totalActasIntegradas": 4,
+      "totalActasDetectadas": 8,
+      "totalActasIntegradas": 8,
       "actasPendientes": [],
       "partidos": [
         {
@@ -7258,10 +7258,247 @@
           "fecha": "04-10-2026",
           "hora": "10:00",
           "campo": "O Loureiro (Oza De Los Ríos)",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
+          "estado": "FINALIZADO",
+          "actaDisponible": true,
+          "resultado": {
+            "local": 1,
+            "visitante": 4,
+            "texto": "1-4",
+            "fuente": "secuencia_goles_validada"
+          },
+          "acta": {
+            "url": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478236&cod_acta=1478236",
+            "arbitro": "CODESAL TEIJIDO, BRAIS",
+            "estadio": "O Loureiro (Oza De Los Ríos)",
+            "ciudad": "Oza Dos Ríos",
+            "goles": [
+              {
+                "marcador_raw": {
+                  "local": 0,
+                  "visitante": 1
+                },
+                "marcador": {
+                  "local": 0,
+                  "visitante": 1
+                },
+                "minuto": "9'",
+                "jugador": "AGUADO PERNAS, JOSE L",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              },
+              {
+                "marcador_raw": {
+                  "local": 0,
+                  "visitante": 2
+                },
+                "marcador": {
+                  "local": 0,
+                  "visitante": 2
+                },
+                "minuto": "27'",
+                "jugador": "REI LACACI, MARIO",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              },
+              {
+                "marcador_raw": {
+                  "local": 0,
+                  "visitante": 2
+                },
+                "marcador": {
+                  "local": 1,
+                  "visitante": 2
+                },
+                "minuto": "78'",
+                "jugador": "CARRO VAZQUEZ, ALBERTO",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "jugador_prioritario"
+              },
+              {
+                "marcador_raw": {
+                  "local": 1,
+                  "visitante": 3
+                },
+                "marcador": {
+                  "local": 1,
+                  "visitante": 3
+                },
+                "minuto": "85'",
+                "jugador": "MEILAN SEOANE, IVAN",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              },
+              {
+                "marcador_raw": {
+                  "local": 1,
+                  "visitante": 4
+                },
+                "marcador": {
+                  "local": 1,
+                  "visitante": 4
+                },
+                "minuto": "90'",
+                "jugador": "AGUADO PERNAS, JOSE L",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              }
+            ],
+            "equipo_local": {
+              "nombre": "OZA DE LOS RÍOS",
+              "titulares": [
+                {
+                  "dorsal": "1",
+                  "jugador": "VEIGA GARCIA, DAVID M"
+                },
+                {
+                  "dorsal": "4",
+                  "jugador": "SANMARTIN OTERO, RUBEN"
+                },
+                {
+                  "dorsal": "5",
+                  "jugador": "LAGO MATO, JOSE MARIA"
+                },
+                {
+                  "dorsal": "6",
+                  "jugador": "RAMOS VARELA, SAMUEL"
+                },
+                {
+                  "dorsal": "7",
+                  "jugador": "CARRO VAZQUEZ, ALBERTO"
+                },
+                {
+                  "dorsal": "11",
+                  "jugador": "LENDOIRO AGILDA, EMILIO"
+                },
+                {
+                  "dorsal": "20",
+                  "jugador": "CARRO VAZQUEZ, ANTONIO"
+                },
+                {
+                  "dorsal": "21",
+                  "jugador": "LENDOIRO AGILDA, HECTOR"
+                },
+                {
+                  "dorsal": "24",
+                  "jugador": "GABIN BELLO, BRUNO"
+                },
+                {
+                  "dorsal": "27",
+                  "jugador": "BELLO GABIN, ADRIÁN J"
+                },
+                {
+                  "dorsal": "30",
+                  "jugador": "PEREZ MIñO, DAVID"
+                }
+              ],
+              "suplentes": [
+                {
+                  "dorsal": "8",
+                  "jugador": "LOPEZ BRA, FRANCISCO J"
+                },
+                {
+                  "dorsal": "9",
+                  "jugador": "PEREZ GARCIA, DIEGO"
+                },
+                {
+                  "dorsal": "10",
+                  "jugador": "LOPEZ TAIN, PABLO"
+                },
+                {
+                  "dorsal": "23",
+                  "jugador": "GARCIA RODRIGUEZ, DAVID"
+                },
+                {
+                  "dorsal": "26",
+                  "jugador": "IGLESIAS CASTRO, JORGE JOSE"
+                }
+              ],
+              "cuerpo_tecnico": {
+                "delegado": "PEREZ VEIGA, SERGIO",
+                "entrenador": "No presenta"
+              },
+              "tarjetas": []
+            },
+            "equipo_visitante": {
+              "nombre": "XUVENTUDE DORNEDA",
+              "titulares": [
+                {
+                  "dorsal": "1",
+                  "jugador": "VAZQUEZ RIVERA, JOSE A"
+                },
+                {
+                  "dorsal": "3",
+                  "jugador": "CERNADAS SOUTO, OSCAR"
+                },
+                {
+                  "dorsal": "4",
+                  "jugador": "MEILAN SEOANE, IVAN"
+                },
+                {
+                  "dorsal": "6",
+                  "jugador": "TORREIRO COUSO, ROMAN G"
+                },
+                {
+                  "dorsal": "7",
+                  "jugador": "DOCAMPO DEL RIO, JONATHAN"
+                },
+                {
+                  "dorsal": "8",
+                  "jugador": "AGUADO PERNAS, JOSE L"
+                },
+                {
+                  "dorsal": "9",
+                  "jugador": "GARCIA DAPIA, JOSE I"
+                },
+                {
+                  "dorsal": "10",
+                  "jugador": "LOPEZ GRAÑA, FELIX"
+                },
+                {
+                  "dorsal": "18",
+                  "jugador": "CHICO LAGO, MARCOS"
+                },
+                {
+                  "dorsal": "24",
+                  "jugador": "LAPORT RIVAS, FEDERICO"
+                },
+                {
+                  "dorsal": "30",
+                  "jugador": "BLANCO VARELA, SERGIO"
+                }
+              ],
+              "suplentes": [
+                {
+                  "dorsal": "5",
+                  "jugador": "REI LACACI, MARIO"
+                },
+                {
+                  "dorsal": "13",
+                  "jugador": "RAMOS BARDERAS, EDUARDO"
+                },
+                {
+                  "dorsal": "22",
+                  "jugador": "CASAL VARELA, SERGIO J"
+                },
+                {
+                  "dorsal": "26",
+                  "jugador": "CARVALHO TAVARES, JOSE A"
+                },
+                {
+                  "dorsal": "32",
+                  "jugador": "PITA GONZALEZ, BORJA"
+                },
+                {
+                  "dorsal": "33",
+                  "jugador": "SÁNCHEZ VIEIRO, SERGIO"
+                }
+              ],
+              "cuerpo_tecnico": {
+                "entrenador": "No presenta"
+              },
+              "tarjetas": []
+            }
+          }
         },
         {
           "orden": 6,
@@ -7270,10 +7507,221 @@
           "fecha": "04-10-2026",
           "hora": "11:00",
           "campo": "Campo de Fútbol de Freán",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
+          "estado": "FINALIZADO",
+          "actaDisponible": true,
+          "resultado": {
+            "local": 2,
+            "visitante": 0,
+            "texto": "2-0",
+            "fuente": "secuencia_goles_validada"
+          },
+          "acta": {
+            "url": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478232&cod_acta=1478232",
+            "arbitro": "CARRO AÑÓN, HUGO",
+            "estadio": "Campo de Fútbol de Freán",
+            "ciudad": "Arteixo",
+            "goles": [
+              {
+                "marcador_raw": {
+                  "local": 1,
+                  "visitante": 0
+                },
+                "marcador": {
+                  "local": 1,
+                  "visitante": 0
+                },
+                "minuto": "17'",
+                "jugador": "SOTO MIRANDA, OSCAR",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              },
+              {
+                "marcador_raw": {
+                  "local": 2,
+                  "visitante": 0
+                },
+                "marcador": {
+                  "local": 2,
+                  "visitante": 0
+                },
+                "minuto": "80'",
+                "jugador": "GOMEZ CASTRO, JOSE M",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              }
+            ],
+            "equipo_local": {
+              "nombre": "CAMPANAL DE LOUREDA F. C.",
+              "titulares": [
+                {
+                  "dorsal": "1",
+                  "jugador": "GONZALEZ ARCOS, ADRIAN"
+                },
+                {
+                  "dorsal": "4",
+                  "jugador": "MAGDALENA SOUTO, IVAN"
+                },
+                {
+                  "dorsal": "8",
+                  "jugador": "GOMEZ CASTRO, JOSE M"
+                },
+                {
+                  "dorsal": "10",
+                  "jugador": "TUSET ARIJON, RUBEN"
+                },
+                {
+                  "dorsal": "15",
+                  "jugador": "CAAMAÑO MORAS, ALEJANDRO"
+                },
+                {
+                  "dorsal": "16",
+                  "jugador": "FERNANDEZ HERMIDA, DANIEL"
+                },
+                {
+                  "dorsal": "18",
+                  "jugador": "NAYA SEÑARIS, JUAN CARLOS"
+                },
+                {
+                  "dorsal": "21",
+                  "jugador": "SANCHEZ BLANCO, IVAN"
+                },
+                {
+                  "dorsal": "22",
+                  "jugador": "SOTO MIRANDA, OSCAR"
+                },
+                {
+                  "dorsal": "23",
+                  "jugador": "PENA SEIJAS, SERGIO"
+                },
+                {
+                  "dorsal": "24",
+                  "jugador": "LOPEZ BAO, JUAN M"
+                }
+              ],
+              "suplentes": [
+                {
+                  "dorsal": "3",
+                  "jugador": "VILLAVERDE MARTINEZ, HUGO"
+                },
+                {
+                  "dorsal": "7",
+                  "jugador": "RIVEIRO NAYA, JOSÉ ÁNGEL"
+                },
+                {
+                  "dorsal": "9",
+                  "jugador": "MAROÑO BOEDO, IVAN"
+                },
+                {
+                  "dorsal": "11",
+                  "jugador": "REGUEIRA CALVETE, RUBEN"
+                },
+                {
+                  "dorsal": "20",
+                  "jugador": "RIVEIRO RIVEIRO, RUBEN"
+                },
+                {
+                  "dorsal": "25",
+                  "jugador": "LAMELA OTERO, DAVID"
+                },
+                {
+                  "dorsal": "26",
+                  "jugador": "VARELA GOMEZ, CARLOS R"
+                }
+              ],
+              "cuerpo_tecnico": {
+                "delegado": "MARTINEZ GARCIA, JOSE ANTONIO",
+                "entrenador": "No presenta"
+              },
+              "tarjetas": []
+            },
+            "equipo_visitante": {
+              "nombre": "SAN MARTIÑO S.D.",
+              "titulares": [
+                {
+                  "dorsal": "1",
+                  "jugador": "GONZALEZ LISTA, NICOLAS"
+                },
+                {
+                  "dorsal": "3",
+                  "jugador": "LOMBA MATA, FELIX"
+                },
+                {
+                  "dorsal": "4",
+                  "jugador": "GONZALEZ GENDE, ALVARO"
+                },
+                {
+                  "dorsal": "5",
+                  "jugador": "RUMBO BOEDO, CARLOS"
+                },
+                {
+                  "dorsal": "8",
+                  "jugador": "CANEDO NIEVES, JOSE"
+                },
+                {
+                  "dorsal": "9",
+                  "jugador": "LAMAS SEÑARIS, GABINO J"
+                },
+                {
+                  "dorsal": "10",
+                  "jugador": "LAMAS CASTRO, ANGEL"
+                },
+                {
+                  "dorsal": "17",
+                  "jugador": "QUEIJO ALVAREZ, DANIEL"
+                },
+                {
+                  "dorsal": "18",
+                  "jugador": "LAMAS DUBRA, MARCOS"
+                },
+                {
+                  "dorsal": "26",
+                  "jugador": "FARIÑA COSTA, JOSE A"
+                },
+                {
+                  "dorsal": "29",
+                  "jugador": "LISTE OTERO, RICARDO A"
+                }
+              ],
+              "suplentes": [
+                {
+                  "dorsal": "6",
+                  "jugador": "FARIÑA COSTA, ALFONSO"
+                },
+                {
+                  "dorsal": "12",
+                  "jugador": "CASAS VARELA, MARCOS M"
+                },
+                {
+                  "dorsal": "13",
+                  "jugador": "LOUREIRO CASTRO, FRANCISCO MANUEL"
+                },
+                {
+                  "dorsal": "15",
+                  "jugador": "GONZALEZ VARELA, JOSE J"
+                },
+                {
+                  "dorsal": "20",
+                  "jugador": "CASTRO REGUEIRO, MIGUEL"
+                },
+                {
+                  "dorsal": "22",
+                  "jugador": "RODRIGUEZ GONZALEZ, JESUS"
+                },
+                {
+                  "dorsal": "23",
+                  "jugador": "GUARDADO GESTO, JOSE MIGUEL"
+                },
+                {
+                  "dorsal": "28",
+                  "jugador": "MOSQUERA CANOSA, MANUEL A"
+                }
+              ],
+              "cuerpo_tecnico": {
+                "entrenador": "No presenta"
+              },
+              "tarjetas": []
+            }
+          }
         },
         {
           "orden": 7,
@@ -7282,10 +7730,240 @@
           "fecha": "04-10-2026",
           "hora": "11:00",
           "campo": "Da Piscina",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
+          "estado": "FINALIZADO",
+          "actaDisponible": true,
+          "resultado": {
+            "local": 3,
+            "visitante": 0,
+            "texto": "3-0",
+            "fuente": "secuencia_goles_validada"
+          },
+          "acta": {
+            "url": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478233&cod_acta=1478233",
+            "arbitro": "FERNANDEZ CARREIRA, ALEJANDRO",
+            "estadio": "Da Piscina",
+            "ciudad": "San Sadurniño",
+            "goles": [
+              {
+                "marcador_raw": {
+                  "local": 1,
+                  "visitante": 0
+                },
+                "marcador": {
+                  "local": 1,
+                  "visitante": 0
+                },
+                "minuto": "12'",
+                "jugador": "RUMBO MENDEZ, MARCOS",
+                "tipo_gol": "Gol en propia puerta",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              },
+              {
+                "marcador_raw": {
+                  "local": 2,
+                  "visitante": 0
+                },
+                "marcador": {
+                  "local": 2,
+                  "visitante": 0
+                },
+                "minuto": "68'",
+                "jugador": "SILVA CASAS, BORJA",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              },
+              {
+                "marcador_raw": {
+                  "local": 3,
+                  "visitante": 0
+                },
+                "marcador": {
+                  "local": 3,
+                  "visitante": 0
+                },
+                "minuto": "88'",
+                "jugador": "HERMIDA IGLESIAS, RAUL",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              }
+            ],
+            "equipo_local": {
+              "nombre": "U.D. NARAHIO",
+              "titulares": [
+                {
+                  "dorsal": "1",
+                  "jugador": "ALVARIñO GARROTE, JAVIER"
+                },
+                {
+                  "dorsal": "6",
+                  "jugador": "FREIJO SANTALLA, ESTEBAN"
+                },
+                {
+                  "dorsal": "8",
+                  "jugador": "PENA GOMEZ, JOSE"
+                },
+                {
+                  "dorsal": "9",
+                  "jugador": "HERMIDA IGLESIAS, RAUL"
+                },
+                {
+                  "dorsal": "11",
+                  "jugador": "SILVA CASAS, BORJA"
+                },
+                {
+                  "dorsal": "15",
+                  "jugador": "RAMOS RAMOS, JULIAN"
+                },
+                {
+                  "dorsal": "19",
+                  "jugador": "SANDE DOPAZO, YAGO"
+                },
+                {
+                  "dorsal": "22",
+                  "jugador": "REY ANTON, SERVANDO I"
+                },
+                {
+                  "dorsal": "26",
+                  "jugador": "GERVENO CASTRO, ALBERTO"
+                },
+                {
+                  "dorsal": "30",
+                  "jugador": "SABIN BOUZA, CARLOS"
+                },
+                {
+                  "dorsal": "34",
+                  "jugador": "LOPEZ PORTA, GONZALO"
+                }
+              ],
+              "suplentes": [
+                {
+                  "dorsal": "3",
+                  "jugador": "LOPEZ LODEIRO, ALBERTO"
+                },
+                {
+                  "dorsal": "5",
+                  "jugador": "RODRIGUEZ CASAL, IGNACIO"
+                },
+                {
+                  "dorsal": "10",
+                  "jugador": "CASTRO BOUZAMAYOR, ANGEL"
+                },
+                {
+                  "dorsal": "16",
+                  "jugador": "TRIÑANES CORRAL, JUAN J"
+                },
+                {
+                  "dorsal": "17",
+                  "jugador": "REGUEIRA MESIA, JOSE R"
+                },
+                {
+                  "dorsal": "18",
+                  "jugador": "MARTINEZ RAMIL, ANGEL"
+                },
+                {
+                  "dorsal": "23",
+                  "jugador": "CAMPOS MENDEZ, ALBERTO"
+                }
+              ],
+              "cuerpo_tecnico": {
+                "entrenador": "No presenta"
+              },
+              "tarjetas": [
+                {
+                  "tipo": "amarilla",
+                  "minuto": "34'",
+                  "jugador": "FREIJO SANTALLA, ESTEBAN"
+                },
+                {
+                  "tipo": "amarilla",
+                  "minuto": "76'",
+                  "jugador": "HERMIDA IGLESIAS, RAUL"
+                }
+              ]
+            },
+            "equipo_visitante": {
+              "nombre": "C.D. SIGRAS",
+              "titulares": [
+                {
+                  "dorsal": "13",
+                  "jugador": "PULLEIRO GARABATO, IVAN"
+                },
+                {
+                  "dorsal": "3",
+                  "jugador": "SANCHEZ GOMEZ, DANIEL"
+                },
+                {
+                  "dorsal": "7",
+                  "jugador": "ROMERO RODRIGUEZ, PABLO"
+                },
+                {
+                  "dorsal": "8",
+                  "jugador": "RODRIGUEZ GESTAL, ANTOLIN"
+                },
+                {
+                  "dorsal": "11",
+                  "jugador": "GESTAL MOAR, JOSE L"
+                },
+                {
+                  "dorsal": "12",
+                  "jugador": "CONCHEIRO MESIAS, ROBERTO"
+                },
+                {
+                  "dorsal": "20",
+                  "jugador": "ROJO ALONSO, DIEGO"
+                },
+                {
+                  "dorsal": "21",
+                  "jugador": "SAR VARELA, JORGE"
+                },
+                {
+                  "dorsal": "24",
+                  "jugador": "IGLESIAS LOVELLE, SANTIAGO"
+                },
+                {
+                  "dorsal": "26",
+                  "jugador": "SANCHEZ GOMEZ, DIEGO"
+                },
+                {
+                  "dorsal": "29",
+                  "jugador": "RUMBO MENDEZ, MARCOS"
+                }
+              ],
+              "suplentes": [
+                {
+                  "dorsal": "5",
+                  "jugador": "PEREZ COUTO, ADAN"
+                },
+                {
+                  "dorsal": "17",
+                  "jugador": "NAVARRETE PENA, PABLO J"
+                },
+                {
+                  "dorsal": "22",
+                  "jugador": "RIOS MIRANDA, NOEL"
+                },
+                {
+                  "dorsal": "23",
+                  "jugador": "REGUEIRO LOPEZ, BRAIS"
+                },
+                {
+                  "dorsal": "28",
+                  "jugador": "BOO IGLESIAS, BRUNO"
+                }
+              ],
+              "cuerpo_tecnico": {
+                "delegado": "BARREIRO GAREA, NATALIA",
+                "entrenador": "No presenta"
+              },
+              "tarjetas": [
+                {
+                  "tipo": "amarilla",
+                  "minuto": "78'",
+                  "jugador": "GESTAL MOAR, JOSE L"
+                }
+              ]
+            }
+          }
         },
         {
           "orden": 8,
@@ -7294,10 +7972,267 @@
           "fecha": "04-10-2026",
           "hora": "12:00",
           "campo": "O Loureiro (Oza De Los Ríos)",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
+          "estado": "FINALIZADO",
+          "actaDisponible": true,
+          "resultado": {
+            "local": 1,
+            "visitante": 2,
+            "texto": "1-2",
+            "fuente": "secuencia_goles_validada"
+          },
+          "acta": {
+            "url": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478237&cod_acta=1478237",
+            "arbitro": "FERREIRO VARELA, JOSE LUIS",
+            "estadio": "O Loureiro (Oza De Los Ríos)",
+            "ciudad": "Oza Dos Ríos",
+            "goles": [
+              {
+                "marcador_raw": {
+                  "local": 1,
+                  "visitante": 0
+                },
+                "marcador": {
+                  "local": 1,
+                  "visitante": 0
+                },
+                "minuto": "13'",
+                "jugador": "FERRO ROZAS, GONZALO",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              },
+              {
+                "marcador_raw": {
+                  "local": 1,
+                  "visitante": 1
+                },
+                "marcador": {
+                  "local": 1,
+                  "visitante": 1
+                },
+                "minuto": "29'",
+                "jugador": "PISOS SOMESO, BRUNO",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              },
+              {
+                "marcador_raw": {
+                  "local": 1,
+                  "visitante": 2
+                },
+                "marcador": {
+                  "local": 1,
+                  "visitante": 2
+                },
+                "minuto": "40'",
+                "jugador": "PISOS SOMESO, BRUNO",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              }
+            ],
+            "equipo_local": {
+              "nombre": "SADA F.C. A NOSA VIÑA",
+              "titulares": [
+                {
+                  "dorsal": "1",
+                  "jugador": "MOURELO MOUZO, DAVID"
+                },
+                {
+                  "dorsal": "4",
+                  "jugador": "MARTINEZ VAZQUEZ, ALFONSO"
+                },
+                {
+                  "dorsal": "7",
+                  "jugador": "AMOR HAZ, MIGUEL"
+                },
+                {
+                  "dorsal": "10",
+                  "jugador": "FERRO ROZAS, GONZALO"
+                },
+                {
+                  "dorsal": "11",
+                  "jugador": "BOO FERNANDEZ, MIGUEL A"
+                },
+                {
+                  "dorsal": "16",
+                  "jugador": "GOMEZ CAGIAO, ENRIQUE BERNARDO"
+                },
+                {
+                  "dorsal": "19",
+                  "jugador": "MALLO LOPEZ, JOSE LUIS"
+                },
+                {
+                  "dorsal": "21",
+                  "jugador": "SEOANE BARROS, ANTONIO M"
+                },
+                {
+                  "dorsal": "23",
+                  "jugador": "FREIRE LESTA, CESAR"
+                },
+                {
+                  "dorsal": "25",
+                  "jugador": "ROIBAS NAVEIRO, ALBERTO"
+                },
+                {
+                  "dorsal": "26",
+                  "jugador": "GRAÑA PITA, PABLO"
+                }
+              ],
+              "suplentes": [
+                {
+                  "dorsal": "5",
+                  "jugador": "ALVAREZ LABORA, CARLOS MANUEL"
+                },
+                {
+                  "dorsal": "14",
+                  "jugador": "SEIJO CANCELO, SANTIAGO"
+                },
+                {
+                  "dorsal": "15",
+                  "jugador": "SEIJO CANCELO, SERGIO"
+                },
+                {
+                  "dorsal": "18",
+                  "jugador": "MARTINEZ ABRUÑEDO, BORJA"
+                },
+                {
+                  "dorsal": "20",
+                  "jugador": "IGLESIAS CASTRO, MARCOS"
+                },
+                {
+                  "dorsal": "22",
+                  "jugador": "PARIS LABANDEIRA, DAMIAN"
+                },
+                {
+                  "dorsal": "24",
+                  "jugador": "DURAN ALFONSIN, ALBERTO"
+                },
+                {
+                  "dorsal": "27",
+                  "jugador": "VIZOSO GUERRA, JAVIER"
+                },
+                {
+                  "dorsal": "30",
+                  "jugador": "LATA CORTES, FRANCISCO"
+                }
+              ],
+              "cuerpo_tecnico": {
+                "delegado": "NAVEIRA GARCÍA, FRANCISCO",
+                "entrenador": "No presenta"
+              },
+              "tarjetas": [
+                {
+                  "tipo": "amarilla",
+                  "minuto": "76'",
+                  "jugador": "ROIBAS NAVEIRO, ALBERTO"
+                }
+              ]
+            },
+            "equipo_visitante": {
+              "nombre": "LICEO DE MONELOS S.D.",
+              "titulares": [
+                {
+                  "dorsal": "28",
+                  "jugador": "SANCHEZ SOTO, MANUEL"
+                },
+                {
+                  "dorsal": "6",
+                  "jugador": "LOPEZ TEIJO, ALEJANDRO"
+                },
+                {
+                  "dorsal": "8",
+                  "jugador": "PISOS SOMESO, DANIEL"
+                },
+                {
+                  "dorsal": "10",
+                  "jugador": "PISOS SOMESO, BRUNO"
+                },
+                {
+                  "dorsal": "11",
+                  "jugador": "COLLAZO PORTEIRO, OSCAR"
+                },
+                {
+                  "dorsal": "12",
+                  "jugador": "VIÑA CASTIÑEIRA, ALBERTO"
+                },
+                {
+                  "dorsal": "13",
+                  "jugador": "PEDROSA FIGUEROA, ARTURO"
+                },
+                {
+                  "dorsal": "14",
+                  "jugador": "MERA VAZQUEZ, JUAN C"
+                },
+                {
+                  "dorsal": "17",
+                  "jugador": "POUSADA NION, DIEGO"
+                },
+                {
+                  "dorsal": "18",
+                  "jugador": "SANCHEZ VIEIRO, RAUL"
+                },
+                {
+                  "dorsal": "22",
+                  "jugador": "GARCIA FERNANDEZ, ALBERTO"
+                }
+              ],
+              "suplentes": [
+                {
+                  "dorsal": "4",
+                  "jugador": "PENA AMADO, GUSTAVO"
+                },
+                {
+                  "dorsal": "16",
+                  "jugador": "FERNANDEZ SUERO, JOSE M"
+                },
+                {
+                  "dorsal": "23",
+                  "jugador": "CASAL GAREA, LIONEL"
+                },
+                {
+                  "dorsal": "24",
+                  "jugador": "RIO MARTINEZ, BORJA"
+                },
+                {
+                  "dorsal": "25",
+                  "jugador": "PASTORIN SALIS, IGNACIO"
+                },
+                {
+                  "dorsal": "26",
+                  "jugador": "SANDE CARNOTA, RAMON"
+                },
+                {
+                  "dorsal": "29",
+                  "jugador": "ROCHA GESTAL, GONZALO"
+                }
+              ],
+              "cuerpo_tecnico": {
+                "delegado": "GONZALEZ CORTES, CARLOS M",
+                "entrenador": "No presenta"
+              },
+              "tarjetas": [
+                {
+                  "tipo": "amarilla",
+                  "minuto": "55'",
+                  "jugador": "SANCHEZ VIEIRO, RAUL"
+                },
+                {
+                  "tipo": "amarilla",
+                  "minuto": "61'",
+                  "jugador": "RIO MARTINEZ, BORJA"
+                },
+                {
+                  "tipo": "amarilla",
+                  "minuto": "75'",
+                  "jugador": "PISOS SOMESO, DANIEL"
+                },
+                {
+                  "tipo": "amarilla",
+                  "minuto": "81'",
+                  "jugador": "ROCHA GESTAL, GONZALO"
+                }
+              ]
+            }
+          }
         }
       ]
     },

@@ -1,5 +1,5 @@
 {
-  "fecha": "2026-10-04T06:47:14.655Z",
+  "fecha": "2026-10-04T12:37:15.461Z",
   "arquitectura": "datos_frescos_dos_fases_checkpoint_solo_respaldo",
   "metodoArranque": "checkpoint_local_sin_arranque_futgal",
   "metodoRecorrido": "10E_fresco_url_directa_aislada_con_fallback_a_checkpoint",
@@ -7,11 +7,11 @@
   "jornadasIntegradas": 30,
   "partidosEsperados": 240,
   "partidosIntegrados": 240,
-  "actasDetectadas": 28,
-  "actasIntegradas": 28,
+  "actasDetectadas": 32,
+  "actasIntegradas": 32,
   "actasPendientes": [],
   "jornadasConFallback": [],
-  "cambiosCalendarioDetectados": 14,
+  "cambiosCalendarioDetectados": 0,
   "todasCorrectas": true,
   "erroresGlobales": [],
   "resumenJornadas": [
@@ -40,8 +40,8 @@
       "jornada": 4,
       "correcto": true,
       "errores": [],
-      "actasDetectadas": 4,
-      "actasIntegradas": 4
+      "actasDetectadas": 8,
+      "actasIntegradas": 8
     },
     {
       "jornada": 5,
