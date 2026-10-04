@@ -1,1 +1,315 @@
-[]
+[
+  {
+    "jornada": 4,
+    "cambios": [
+      {
+        "tipo": "cambio_programacion",
+        "local": "SPORTING BURGO",
+        "visitante": "BETANZOS NORTE",
+        "diferencias": {
+          "hora": {
+            "antes": null,
+            "ahora": "18:00"
+          }
+        }
+      },
+      {
+        "tipo": "cambio_programacion",
+        "local": "C.C.D. CURTIS",
+        "visitante": "PORTAZGO S.D.",
+        "diferencias": {
+          "hora": {
+            "antes": null,
+            "ahora": "18:00"
+          }
+        }
+      },
+      {
+        "tipo": "cambio_programacion",
+        "local": "CLUB DEPORTIVO NARON SILVER CATERING",
+        "visitante": "SPORTING CAMBRE AS TRAVESAS",
+        "diferencias": {
+          "hora": {
+            "antes": null,
+            "ahora": "19:30"
+          }
+        }
+      },
+      {
+        "tipo": "cambio_programacion",
+        "local": "U.D. NARAHIO",
+        "visitante": "C.D. SIGRAS",
+        "diferencias": {
+          "fecha": {
+            "antes": "03-10-2026",
+            "ahora": "04-10-2026"
+          },
+          "hora": {
+            "antes": null,
+            "ahora": "11:00"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "jornada": 6,
+    "cambios": [
+      {
+        "tipo": "cambio_programacion",
+        "local": "U.D. NARAHIO",
+        "visitante": "SAN MARTIÑO S.D.",
+        "diferencias": {
+          "fecha": {
+            "antes": "17-10-2026",
+            "ahora": "18-10-2026"
+          },
+          "hora": {
+            "antes": null,
+            "ahora": "11:00"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "jornada": 7,
+    "cambios": [
+      {
+        "tipo": "cambio_programacion",
+        "local": "U.D. NARAHIO",
+        "visitante": "SPORTING BURGO",
+        "diferencias": {
+          "fecha": {
+            "antes": "24-10-2026",
+            "ahora": "25-10-2026"
+          },
+          "hora": {
+            "antes": null,
+            "ahora": "11:00"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "jornada": 9,
+    "cambios": [
+      {
+        "tipo": "cambio_programacion",
+        "local": "U.D. NARAHIO",
+        "visitante": "OZA DE LOS RÍOS",
+        "diferencias": {
+          "fecha": {
+            "antes": "14-11-2026",
+            "ahora": "15-11-2026"
+          },
+          "hora": {
+            "antes": null,
+            "ahora": "11:00"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "jornada": 11,
+    "cambios": [
+      {
+        "tipo": "cambio_programacion",
+        "local": "U.D. NARAHIO",
+        "visitante": "C.C.D. CURTIS",
+        "diferencias": {
+          "fecha": {
+            "antes": "28-11-2026",
+            "ahora": "29-11-2026"
+          },
+          "hora": {
+            "antes": null,
+            "ahora": "11:00"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "jornada": 13,
+    "cambios": [
+      {
+        "tipo": "cambio_programacion",
+        "local": "U.D. NARAHIO",
+        "visitante": "SPORTING CAMBRE AS TRAVESAS",
+        "diferencias": {
+          "fecha": {
+            "antes": "12-12-2026",
+            "ahora": "13-12-2026"
+          },
+          "hora": {
+            "antes": null,
+            "ahora": "11:00"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "jornada": 15,
+    "cambios": [
+      {
+        "tipo": "cambio_programacion",
+        "local": "U.D. NARAHIO",
+        "visitante": "LICEO DE MONELOS S.D.",
+        "diferencias": {
+          "fecha": {
+            "antes": "09-01-2027",
+            "ahora": "10-01-2027"
+          },
+          "hora": {
+            "antes": null,
+            "ahora": "11:00"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "jornada": 16,
+    "cambios": [
+      {
+        "tipo": "cambio_programacion",
+        "local": "U.D. NARAHIO",
+        "visitante": "XUVENTUDE DORNEDA",
+        "diferencias": {
+          "fecha": {
+            "antes": "16-01-2027",
+            "ahora": "17-01-2027"
+          },
+          "hora": {
+            "antes": null,
+            "ahora": "11:00"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "jornada": 18,
+    "cambios": [
+      {
+        "tipo": "cambio_programacion",
+        "local": "U.D. NARAHIO",
+        "visitante": "BETANZOS NORTE",
+        "diferencias": {
+          "fecha": {
+            "antes": "30-01-2027",
+            "ahora": "31-01-2027"
+          },
+          "hora": {
+            "antes": null,
+            "ahora": "11:00"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "jornada": 20,
+    "cambios": [
+      {
+        "tipo": "cambio_programacion",
+        "local": "U.D. NARAHIO",
+        "visitante": "CAMPANAL DE LOUREDA F. C.",
+        "diferencias": {
+          "fecha": {
+            "antes": "20-02-2027",
+            "ahora": "21-02-2027"
+          },
+          "hora": {
+            "antes": null,
+            "ahora": "11:00"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "jornada": 23,
+    "cambios": [
+      {
+        "tipo": "cambio_programacion",
+        "local": "U.D. NARAHIO",
+        "visitante": "U.D. PAIOSACO H.AÑON",
+        "diferencias": {
+          "fecha": {
+            "antes": "13-03-2027",
+            "ahora": "14-03-2027"
+          },
+          "hora": {
+            "antes": null,
+            "ahora": "11:00"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "jornada": 25,
+    "cambios": [
+      {
+        "tipo": "cambio_programacion",
+        "local": "U.D. NARAHIO",
+        "visitante": "SADA F.C. A NOSA VIÑA",
+        "diferencias": {
+          "fecha": {
+            "antes": "03-04-2027",
+            "ahora": "04-04-2027"
+          },
+          "hora": {
+            "antes": null,
+            "ahora": "11:00"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "jornada": 27,
+    "cambios": [
+      {
+        "tipo": "cambio_programacion",
+        "local": "U.D. NARAHIO",
+        "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
+        "diferencias": {
+          "fecha": {
+            "antes": "17-04-2027",
+            "ahora": "18-04-2027"
+          },
+          "hora": {
+            "antes": null,
+            "ahora": "11:00"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "jornada": 29,
+    "cambios": [
+      {
+        "tipo": "cambio_programacion",
+        "local": "U.D. NARAHIO",
+        "visitante": "PORTAZGO S.D.",
+        "diferencias": {
+          "fecha": {
+            "antes": "01-05-2027",
+            "ahora": "02-05-2027"
+          },
+          "hora": {
+            "antes": null,
+            "ahora": "11:00"
+          }
+        }
+      }
+    ]
+  }
+]

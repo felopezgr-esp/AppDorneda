@@ -1,6 +1,6 @@
 {
   "versionFormato": 2,
-  "fechaExtraccion": "2026-09-29T14:27:10.124Z",
+  "fechaExtraccion": "2026-10-04T06:47:14.655Z",
   "fuente": "FUTGAL",
   "temporada": "2026-2027",
   "competicion": "Veteranos - Primera Galicia",
@@ -26,8 +26,8 @@
   ],
   "totalJornadas": 30,
   "totalPartidos": 240,
-  "totalActasDetectadas": 24,
-  "totalActasIntegradas": 24,
+  "totalActasDetectadas": 28,
+  "totalActasIntegradas": 28,
   "jornadas": [
     {
       "numero": 1,
@@ -6199,72 +6199,1060 @@
     {
       "numero": 4,
       "totalPartidos": 8,
-      "totalActasDetectadas": 0,
-      "totalActasIntegradas": 0,
+      "totalActasDetectadas": 4,
+      "totalActasIntegradas": 4,
       "actasPendientes": [],
       "partidos": [
         {
           "orden": 1,
-          "local": "U.D. NARAHIO",
-          "visitante": "C.D. SIGRAS",
-          "fecha": "03-10-2026",
-          "hora": null,
-          "campo": "Da Piscina",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
-        },
-        {
-          "orden": 2,
           "local": "SPORTING BURGO",
           "visitante": "BETANZOS NORTE",
           "fecha": "03-10-2026",
-          "hora": null,
+          "hora": "18:00",
           "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
+          "estado": "FINALIZADO",
+          "actaDisponible": true,
+          "resultado": {
+            "local": 1,
+            "visitante": 4,
+            "texto": "1-4",
+            "fuente": "secuencia_goles_validada"
+          },
+          "acta": {
+            "url": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478234&cod_acta=1478234",
+            "arbitro": "BELMONTE MARTELL, GONZALO",
+            "estadio": "Campo de Fútbol Municipal A Lavandeira en Culleredo",
+            "ciudad": "Culleredo",
+            "goles": [
+              {
+                "marcador_raw": {
+                  "local": 0,
+                  "visitante": 1
+                },
+                "marcador": {
+                  "local": 0,
+                  "visitante": 1
+                },
+                "minuto": "17'",
+                "jugador": "CASTRO MARTINEZ, OSCAR",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              },
+              {
+                "marcador_raw": {
+                  "local": 1,
+                  "visitante": 1
+                },
+                "marcador": {
+                  "local": 1,
+                  "visitante": 1
+                },
+                "minuto": "22'",
+                "jugador": "ABUIN RODRIGUEZ, GERMAN",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              },
+              {
+                "marcador_raw": {
+                  "local": 1,
+                  "visitante": 2
+                },
+                "marcador": {
+                  "local": 1,
+                  "visitante": 2
+                },
+                "minuto": "58'",
+                "jugador": "VALIÑO REMUIÑAN, MATEO",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              },
+              {
+                "marcador_raw": {
+                  "local": 1,
+                  "visitante": 3
+                },
+                "marcador": {
+                  "local": 1,
+                  "visitante": 3
+                },
+                "minuto": "61'",
+                "jugador": "DEIBE BRAÑAS, IVAN",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              },
+              {
+                "marcador_raw": {
+                  "local": 1,
+                  "visitante": 4
+                },
+                "marcador": {
+                  "local": 1,
+                  "visitante": 4
+                },
+                "minuto": "73'",
+                "jugador": "PAREDES CARRO, MARTIN",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              }
+            ],
+            "equipo_local": {
+              "nombre": "SPORTING BURGO",
+              "titulares": [
+                {
+                  "dorsal": "1",
+                  "jugador": "RODRIGUEZ PARADA, ALEJANDRO"
+                },
+                {
+                  "dorsal": "5",
+                  "jugador": "BARBEITO RODRIGUEZ, SERGIO"
+                },
+                {
+                  "dorsal": "6",
+                  "jugador": "FERNANDEZ GARCIA, SENAR A"
+                },
+                {
+                  "dorsal": "7",
+                  "jugador": "RODRIGUEZ GIAO, JAVIER"
+                },
+                {
+                  "dorsal": "11",
+                  "jugador": "LIñARES GESTAL, CARLOS E"
+                },
+                {
+                  "dorsal": "12",
+                  "jugador": "GARCIA MENDEZ, JOSE L"
+                },
+                {
+                  "dorsal": "13",
+                  "jugador": "GARCIA TORREIRO, OSCAR"
+                },
+                {
+                  "dorsal": "14",
+                  "jugador": "VEAS PEREZ DE TUDELA RODRIGUEZ, MIGUEL JOSE"
+                },
+                {
+                  "dorsal": "15",
+                  "jugador": "LOURO GOMEZ, JOSE ANTONIO"
+                },
+                {
+                  "dorsal": "17",
+                  "jugador": "GARCIA RAMOS, RAMIRO"
+                },
+                {
+                  "dorsal": "18",
+                  "jugador": "MAGAN LABORA, MIGUEL"
+                }
+              ],
+              "suplentes": [
+                {
+                  "dorsal": "19",
+                  "jugador": "PITA PATIÑO, DIEGO"
+                },
+                {
+                  "dorsal": "21",
+                  "jugador": "FARIñA CANITO, CARLOS"
+                },
+                {
+                  "dorsal": "22",
+                  "jugador": "GONZALEZ BAñA, PABLO"
+                },
+                {
+                  "dorsal": "23",
+                  "jugador": "LOPEZ SANDA, BRUNO"
+                },
+                {
+                  "dorsal": "24",
+                  "jugador": "ABUIN RODRIGUEZ, GERMAN"
+                }
+              ],
+              "cuerpo_tecnico": {
+                "delegado": "OTERO LOPEZ, ARTURO",
+                "entrenador": "No presenta"
+              },
+              "tarjetas": []
+            },
+            "equipo_visitante": {
+              "nombre": "BETANZOS NORTE",
+              "titulares": [
+                {
+                  "dorsal": "1",
+                  "jugador": "GONZALEZ PICADO, LUIS A"
+                },
+                {
+                  "dorsal": "6",
+                  "jugador": "VALIÑO REMUIÑAN, MATEO"
+                },
+                {
+                  "dorsal": "10",
+                  "jugador": "PAREDES CARRO, MARTIN"
+                },
+                {
+                  "dorsal": "12",
+                  "jugador": "CODESAL CRESPO, JOSE A"
+                },
+                {
+                  "dorsal": "15",
+                  "jugador": "BRAñAS FREIRE, RUBEN"
+                },
+                {
+                  "dorsal": "17",
+                  "jugador": "DEIBE BRAÑAS, IVAN"
+                },
+                {
+                  "dorsal": "18",
+                  "jugador": "RUZO RAMOS, ANTONIO"
+                },
+                {
+                  "dorsal": "20",
+                  "jugador": "CASTILLO AGUILAR, LUIS MIGUEL"
+                },
+                {
+                  "dorsal": "21",
+                  "jugador": "BARDELLINI MOSCOSO, JAVIER FRANCISCO"
+                },
+                {
+                  "dorsal": "22",
+                  "jugador": "CASTRO MARTINEZ, OSCAR"
+                },
+                {
+                  "dorsal": "27",
+                  "jugador": "SANCHEZ DIAZ, ROBERTO"
+                }
+              ],
+              "suplentes": [
+                {
+                  "dorsal": "8",
+                  "jugador": "LOPEZ FANDIñO, MANUEL A"
+                },
+                {
+                  "dorsal": "11",
+                  "jugador": "SANCHEZ CAMPOS, RUBEN"
+                },
+                {
+                  "dorsal": "16",
+                  "jugador": "VIA MARTINEZ, JOSE M"
+                },
+                {
+                  "dorsal": "19",
+                  "jugador": "CASTILLO AGUILAR, JOSÉ GUILLERMO"
+                },
+                {
+                  "dorsal": "23",
+                  "jugador": "SANCHEZ MOSQUERA, JUAN C"
+                },
+                {
+                  "dorsal": "24",
+                  "jugador": "MALCA FASAVI, REIDER HUMBERTO"
+                }
+              ],
+              "cuerpo_tecnico": {
+                "entrenador": "No presenta"
+              },
+              "tarjetas": [
+                {
+                  "tipo": "roja",
+                  "minuto": "45'",
+                  "jugador": "VIA MARTINEZ, JOSE M"
+                },
+                {
+                  "tipo": "amarilla",
+                  "minuto": "45'",
+                  "jugador": "RUZO RAMOS, ANTONIO"
+                },
+                {
+                  "tipo": "amarilla",
+                  "minuto": "45'",
+                  "jugador": "CASTRO MARTINEZ, OSCAR"
+                },
+                {
+                  "tipo": "amarilla",
+                  "minuto": "45'",
+                  "jugador": "VALIÑO REMUIÑAN, MATEO"
+                },
+                {
+                  "tipo": "amarilla",
+                  "minuto": "45'",
+                  "jugador": "PAREDES CARRO, MARTIN"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "orden": 2,
+          "local": "U.D. PAIOSACO H.AÑON",
+          "visitante": "CEDEIRA S.D.",
+          "fecha": "03-10-2026",
+          "hora": "18:00",
+          "campo": "Porta Santa",
+          "estado": "FINALIZADO",
+          "actaDisponible": true,
+          "resultado": {
+            "local": 5,
+            "visitante": 5,
+            "texto": "5-5",
+            "fuente": "secuencia_goles_validada"
+          },
+          "acta": {
+            "url": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478235&cod_acta=1478235",
+            "arbitro": "GIL SORIANO, ALVARO",
+            "estadio": "Porta Santa",
+            "ciudad": "Laracha (A)",
+            "goles": [
+              {
+                "marcador_raw": {
+                  "local": 0,
+                  "visitante": 0
+                },
+                "marcador": {
+                  "local": 0,
+                  "visitante": 1
+                },
+                "minuto": "26'",
+                "jugador": "RODRIGUEZ PERNAS, DANIEL",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "jugador_prioritario"
+              },
+              {
+                "marcador_raw": {
+                  "local": 0,
+                  "visitante": 2
+                },
+                "marcador": {
+                  "local": 0,
+                  "visitante": 2
+                },
+                "minuto": "44'",
+                "jugador": "IGLESIAS FREIRE, DIEGO",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              },
+              {
+                "marcador_raw": {
+                  "local": 0,
+                  "visitante": 3
+                },
+                "marcador": {
+                  "local": 0,
+                  "visitante": 3
+                },
+                "minuto": "45'+1",
+                "jugador": "ARCONADA CALVO, MARCO",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              },
+              {
+                "marcador_raw": {
+                  "local": 0,
+                  "visitante": 3
+                },
+                "marcador": {
+                  "local": 1,
+                  "visitante": 3
+                },
+                "minuto": "52'",
+                "jugador": "VARELA BERTOA, RUBEN",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "jugador_prioritario"
+              },
+              {
+                "marcador_raw": {
+                  "local": 2,
+                  "visitante": 3
+                },
+                "marcador": {
+                  "local": 2,
+                  "visitante": 3
+                },
+                "minuto": "58'",
+                "jugador": "RODO VERDIA, OSCAR",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              },
+              {
+                "marcador_raw": {
+                  "local": 3,
+                  "visitante": 3
+                },
+                "marcador": {
+                  "local": 3,
+                  "visitante": 3
+                },
+                "minuto": "61'",
+                "jugador": "CALVO LOPEZ, DANIEL",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              },
+              {
+                "marcador_raw": {
+                  "local": 3,
+                  "visitante": 4
+                },
+                "marcador": {
+                  "local": 3,
+                  "visitante": 4
+                },
+                "minuto": "65'",
+                "jugador": "DORADO MARIÑA, BORJA",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              },
+              {
+                "marcador_raw": {
+                  "local": 3,
+                  "visitante": 5
+                },
+                "marcador": {
+                  "local": 3,
+                  "visitante": 5
+                },
+                "minuto": "81'",
+                "jugador": "ARCONADA CALVO, MARCO",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              },
+              {
+                "marcador_raw": {
+                  "local": 4,
+                  "visitante": 5
+                },
+                "marcador": {
+                  "local": 4,
+                  "visitante": 5
+                },
+                "minuto": "82'",
+                "jugador": "CALVO LOPEZ, DANIEL",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              },
+              {
+                "marcador_raw": {
+                  "local": 5,
+                  "visitante": 5
+                },
+                "marcador": {
+                  "local": 5,
+                  "visitante": 5
+                },
+                "minuto": "89'",
+                "jugador": "ALONSO AÑON, JAVIER",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              }
+            ],
+            "equipo_local": {
+              "nombre": "U.D. PAIOSACO H.AÑON",
+              "titulares": [
+                {
+                  "dorsal": "25",
+                  "jugador": "BUSTO FRAGA, VICTOR M"
+                },
+                {
+                  "dorsal": "5",
+                  "jugador": "CANEDO REY, RUBEN"
+                },
+                {
+                  "dorsal": "10",
+                  "jugador": "ATRIO VIDAL, JOSE M"
+                },
+                {
+                  "dorsal": "12",
+                  "jugador": "FRAGA CARRACEDO, RAFAEL"
+                },
+                {
+                  "dorsal": "13",
+                  "jugador": "SANDE MOSQUERA, PABLO"
+                },
+                {
+                  "dorsal": "16",
+                  "jugador": "MAGARIñOS REY, MARCOS"
+                },
+                {
+                  "dorsal": "18",
+                  "jugador": "VARELA BERTOA, RUBEN"
+                },
+                {
+                  "dorsal": "19",
+                  "jugador": "CALVO LOPEZ, DANIEL"
+                },
+                {
+                  "dorsal": "21",
+                  "jugador": "MARTINEZ ESMORIS, ALBERTO"
+                },
+                {
+                  "dorsal": "24",
+                  "jugador": "ALONSO AÑON, JAVIER"
+                },
+                {
+                  "dorsal": "26",
+                  "jugador": "NAYA REGUEIRA, OMAR"
+                }
+              ],
+              "suplentes": [
+                {
+                  "dorsal": "2",
+                  "jugador": "SUAREZ LOPEZ, JOSE A"
+                },
+                {
+                  "dorsal": "4",
+                  "jugador": "SANCHEZ RAMOS, ROBERTO"
+                },
+                {
+                  "dorsal": "8",
+                  "jugador": "PARDO GUILLIN, JORGE"
+                },
+                {
+                  "dorsal": "11",
+                  "jugador": "VARELA VARELA, ESTEBAN"
+                },
+                {
+                  "dorsal": "15",
+                  "jugador": "TURNES FERNANDEZ, ANTONIO C"
+                },
+                {
+                  "dorsal": "22",
+                  "jugador": "RODO VERDIA, OSCAR"
+                }
+              ],
+              "cuerpo_tecnico": {
+                "delegado": "SÁNCHEZ GRELA, ANTONIO",
+                "entrenador": "No presenta"
+              },
+              "tarjetas": [
+                {
+                  "tipo": "amarilla",
+                  "minuto": "17'",
+                  "jugador": "MAGARIñOS REY, MARCOS"
+                },
+                {
+                  "tipo": "amarilla",
+                  "minuto": "54'",
+                  "jugador": "RODO VERDIA, OSCAR"
+                },
+                {
+                  "tipo": "amarilla",
+                  "minuto": "73'",
+                  "jugador": "ALONSO AÑON, JAVIER"
+                }
+              ]
+            },
+            "equipo_visitante": {
+              "nombre": "CEDEIRA S.D.",
+              "titulares": [
+                {
+                  "dorsal": "27",
+                  "jugador": "PITA LEONARDO, JESUS"
+                },
+                {
+                  "dorsal": "2",
+                  "jugador": "LOPEZ RODRIGUEZ, JUAN M"
+                },
+                {
+                  "dorsal": "3",
+                  "jugador": "REY VICARIO, IGNACIO"
+                },
+                {
+                  "dorsal": "7",
+                  "jugador": "ANEIROS RODRIGUEZ, ANTONIO"
+                },
+                {
+                  "dorsal": "12",
+                  "jugador": "MASEDA ALVAREZ, PABLO"
+                },
+                {
+                  "dorsal": "15",
+                  "jugador": "DORADO MARIÑA, OSCAR"
+                },
+                {
+                  "dorsal": "18",
+                  "jugador": "PERNAS GARCIA, ROBERTO"
+                },
+                {
+                  "dorsal": "22",
+                  "jugador": "MARTINEZ LOPEZ, ALEJANDRO"
+                },
+                {
+                  "dorsal": "23",
+                  "jugador": "PRIETO FERNANDEZ, BRUNO"
+                },
+                {
+                  "dorsal": "24",
+                  "jugador": "RODRIGUEZ PERNAS, DANIEL"
+                },
+                {
+                  "dorsal": "28",
+                  "jugador": "VILELA PEREZ, JUAN"
+                }
+              ],
+              "suplentes": [
+                {
+                  "dorsal": "30",
+                  "jugador": "NÚÑEZ LOUREIRO, ESTEBAN"
+                },
+                {
+                  "dorsal": "4",
+                  "jugador": "ARCONADA CALVO, MARCO"
+                },
+                {
+                  "dorsal": "9",
+                  "jugador": "ELESPE VAN DER PUTTEN, GONZALO GABRIEL"
+                },
+                {
+                  "dorsal": "11",
+                  "jugador": "DORADO MARIÑA, BORJA"
+                },
+                {
+                  "dorsal": "14",
+                  "jugador": "DEL RIO RODRIGUEZ, RAMON"
+                },
+                {
+                  "dorsal": "16",
+                  "jugador": "REY CRIBEIRO, MATEO"
+                },
+                {
+                  "dorsal": "20",
+                  "jugador": "IGLESIAS FREIRE, DIEGO"
+                }
+              ],
+              "cuerpo_tecnico": {
+                "delegado": "ABELLA BOUZA, DAVID",
+                "entrenador": "No presenta"
+              },
+              "tarjetas": []
+            }
+          }
         },
         {
           "orden": 3,
           "local": "C.C.D. CURTIS",
           "visitante": "PORTAZGO S.D.",
           "fecha": "03-10-2026",
-          "hora": null,
+          "hora": "18:00",
           "campo": "Novo ( Curtis )",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
+          "estado": "FINALIZADO",
+          "actaDisponible": true,
+          "resultado": {
+            "local": 1,
+            "visitante": 0,
+            "texto": "1-0",
+            "fuente": "secuencia_goles_validada"
+          },
+          "acta": {
+            "url": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478238&cod_acta=1478238",
+            "arbitro": "AMOR VAZQUEZ, JOSE LUIS",
+            "estadio": "Novo ( Curtis )",
+            "ciudad": "Curtis",
+            "goles": [
+              {
+                "marcador_raw": {
+                  "local": 1,
+                  "visitante": 0
+                },
+                "marcador": {
+                  "local": 1,
+                  "visitante": 0
+                },
+                "minuto": "55'",
+                "jugador": "RODRIGUEZ RICO, DAVID",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              }
+            ],
+            "equipo_local": {
+              "nombre": "C.C.D. CURTIS",
+              "titulares": [
+                {
+                  "dorsal": "1",
+                  "jugador": "BARRAL GARCIA, FRANCISCO J"
+                },
+                {
+                  "dorsal": "5",
+                  "jugador": "SANTOS PEREZ, CARLOS"
+                },
+                {
+                  "dorsal": "6",
+                  "jugador": "CORGO LIÑEIRA, DIEGO"
+                },
+                {
+                  "dorsal": "7",
+                  "jugador": "ALLER DE ALMEIDA, MICAEL"
+                },
+                {
+                  "dorsal": "8",
+                  "jugador": "FREIRE SOUTO, JOSE ALVARO"
+                },
+                {
+                  "dorsal": "9",
+                  "jugador": "GUERRA VIGO, ANGEL"
+                },
+                {
+                  "dorsal": "11",
+                  "jugador": "RODRIGUEZ RICO, DAVID"
+                },
+                {
+                  "dorsal": "14",
+                  "jugador": "CASTRO VEIGA, IVAN"
+                },
+                {
+                  "dorsal": "18",
+                  "jugador": "ESPIDO SANCHEZ, PEDRO JOSE"
+                },
+                {
+                  "dorsal": "24",
+                  "jugador": "SUAREZ SUAREZ, RUBEN"
+                },
+                {
+                  "dorsal": "30",
+                  "jugador": "VAZQUEZ LIÑEIRA, PABLO"
+                }
+              ],
+              "suplentes": [
+                {
+                  "dorsal": "2",
+                  "jugador": "CAMIÑOS PEREZ, DIEGO"
+                },
+                {
+                  "dorsal": "15",
+                  "jugador": "BOADO SUAREZ, JOSE A"
+                },
+                {
+                  "dorsal": "17",
+                  "jugador": "NEIRA CASTRO, JOSE MANUEL"
+                },
+                {
+                  "dorsal": "19",
+                  "jugador": "NEIRA BOTANA, NICOLAS"
+                },
+                {
+                  "dorsal": "21",
+                  "jugador": "DORS DE LOS RIOS, VIVIAN THERRY"
+                },
+                {
+                  "dorsal": "23",
+                  "jugador": "DEL AGUILA AMIGO, MIGUEL"
+                },
+                {
+                  "dorsal": "29",
+                  "jugador": "LOPEZ RIVERA, SERGIO"
+                }
+              ],
+              "cuerpo_tecnico": {
+                "delegado": "CASES VAZQUEZ, OSCAR LUIS",
+                "entrenador": "No presenta"
+              },
+              "tarjetas": []
+            },
+            "equipo_visitante": {
+              "nombre": "PORTAZGO S.D.",
+              "titulares": [
+                {
+                  "dorsal": "1",
+                  "jugador": "OLIVEIRA AMIGO, EDUARDO GERMÁN"
+                },
+                {
+                  "dorsal": "3",
+                  "jugador": "CANCELO MARTINEZ, MARCOS"
+                },
+                {
+                  "dorsal": "6",
+                  "jugador": "MELLA MAROÑO, MAURICIO M"
+                },
+                {
+                  "dorsal": "8",
+                  "jugador": "GONZALO CASTRO, MIGUEL A"
+                },
+                {
+                  "dorsal": "14",
+                  "jugador": "TOJO SANDÁ, UXÍO"
+                },
+                {
+                  "dorsal": "15",
+                  "jugador": "BOLON RIEIRO, JORGE"
+                },
+                {
+                  "dorsal": "18",
+                  "jugador": "SANTOS MOSQUERA, ALEJANDRO"
+                },
+                {
+                  "dorsal": "19",
+                  "jugador": "LOPEZ BAO, DAVID A"
+                },
+                {
+                  "dorsal": "22",
+                  "jugador": "DA SILVA ALVES, JONATHAN LOIS"
+                },
+                {
+                  "dorsal": "27",
+                  "jugador": "MELON FERNANDEZ, RAFAEL"
+                },
+                {
+                  "dorsal": "28",
+                  "jugador": "VALVERDE DA CAMARA, FABRICIO"
+                }
+              ],
+              "suplentes": [
+                {
+                  "dorsal": "10",
+                  "jugador": "LOPEZ NOVO, IVAN"
+                },
+                {
+                  "dorsal": "25",
+                  "jugador": "FERREIRA PAULINO, BRUNO"
+                }
+              ],
+              "cuerpo_tecnico": {
+                "delegado": "LOPEZ NOVO, IVAN",
+                "entrenador": "No presenta"
+              },
+              "tarjetas": []
+            }
+          }
         },
         {
           "orden": 4,
           "local": "CLUB DEPORTIVO NARON SILVER CATERING",
           "visitante": "SPORTING CAMBRE AS TRAVESAS",
           "fecha": "03-10-2026",
-          "hora": null,
+          "hora": "19:30",
           "campo": "O Cadaval",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
+          "estado": "FINALIZADO",
+          "actaDisponible": true,
+          "resultado": {
+            "local": 3,
+            "visitante": 0,
+            "texto": "3-0",
+            "fuente": "secuencia_goles_validada"
+          },
+          "acta": {
+            "url": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478239&cod_acta=1478239",
+            "arbitro": "FERNANDEZ CARREIRA, ALEJANDRO",
+            "estadio": "O Cadaval",
+            "ciudad": "Narón",
+            "goles": [
+              {
+                "marcador_raw": {
+                  "local": 1,
+                  "visitante": 0
+                },
+                "marcador": {
+                  "local": 1,
+                  "visitante": 0
+                },
+                "minuto": "12'",
+                "jugador": "MOURIZ DOPICO, BRUNO",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              },
+              {
+                "marcador_raw": {
+                  "local": 2,
+                  "visitante": 0
+                },
+                "marcador": {
+                  "local": 2,
+                  "visitante": 0
+                },
+                "minuto": "45'+2",
+                "jugador": "LOPEZ ROCHA, OSCAR",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              },
+              {
+                "marcador_raw": {
+                  "local": 3,
+                  "visitante": 0
+                },
+                "marcador": {
+                  "local": 3,
+                  "visitante": 0
+                },
+                "minuto": "78'",
+                "jugador": "SECO EDREIRA, JONATHAN",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              }
+            ],
+            "equipo_local": {
+              "nombre": "CLUB DEPORTIVO NARON SILVER CATERING",
+              "titulares": [
+                {
+                  "dorsal": "13",
+                  "jugador": "MUIÑO CALVO, DAVID"
+                },
+                {
+                  "dorsal": "4",
+                  "jugador": "FERNANDEZ CORRAL, JOSE MANUEL"
+                },
+                {
+                  "dorsal": "5",
+                  "jugador": "LOPEZ BALADO, FRANCISCO J"
+                },
+                {
+                  "dorsal": "6",
+                  "jugador": "SEDES LORENZO, CARLOS"
+                },
+                {
+                  "dorsal": "7",
+                  "jugador": "SECO EDREIRA, JONATHAN"
+                },
+                {
+                  "dorsal": "15",
+                  "jugador": "FERNANDEZ PEREZ, ADRIAN M"
+                },
+                {
+                  "dorsal": "19",
+                  "jugador": "MOURIZ DOPICO, BRUNO"
+                },
+                {
+                  "dorsal": "21",
+                  "jugador": "LANDROVE GOMEZ, PABLO"
+                },
+                {
+                  "dorsal": "24",
+                  "jugador": "CASTRO FLORIANI, IVAN"
+                },
+                {
+                  "dorsal": "25",
+                  "jugador": "PIÑEIRO PENA, ENRIQUE MIGUEL"
+                },
+                {
+                  "dorsal": "29",
+                  "jugador": "GOMEZ LOPEZ, FRANCISCO J"
+                }
+              ],
+              "suplentes": [
+                {
+                  "dorsal": "2",
+                  "jugador": "AGUIAR CARREIRA, JOSE F"
+                },
+                {
+                  "dorsal": "9",
+                  "jugador": "SEGADE FANDIÑO, IVAN"
+                },
+                {
+                  "dorsal": "11",
+                  "jugador": "LOPEZ ROCHA, OSCAR"
+                },
+                {
+                  "dorsal": "12",
+                  "jugador": "SANCHEZ SEOANE, MARCOS"
+                },
+                {
+                  "dorsal": "17",
+                  "jugador": "GONZALEZ COTO, MANUEL"
+                },
+                {
+                  "dorsal": "20",
+                  "jugador": "FERNANDEZ PEREZ, FRANCISCO J"
+                },
+                {
+                  "dorsal": "23",
+                  "jugador": "CAGIAO FEAL, BRUNO"
+                },
+                {
+                  "dorsal": "30",
+                  "jugador": "DIAZ R NIDAGUILA, RUBEN"
+                },
+                {
+                  "dorsal": "31",
+                  "jugador": "REGUEIRO FERNANDEZ, AITOR"
+                }
+              ],
+              "cuerpo_tecnico": {
+                "delegado": "BARCIA BARCIA, PABLO",
+                "entrenador": "No presenta"
+              },
+              "tarjetas": [
+                {
+                  "tipo": "amarilla",
+                  "minuto": "39'",
+                  "jugador": "GOMEZ LOPEZ, FRANCISCO J"
+                }
+              ]
+            },
+            "equipo_visitante": {
+              "nombre": "SPORTING CAMBRE AS TRAVESAS",
+              "titulares": [
+                {
+                  "dorsal": "13",
+                  "jugador": "LOPEZ FERNANDEZ, RAUL"
+                },
+                {
+                  "dorsal": "3",
+                  "jugador": "IGLESIAS RIOBOO, FRANCISCO J"
+                },
+                {
+                  "dorsal": "4",
+                  "jugador": "LOPEZ SANCHEZ, ISAAC"
+                },
+                {
+                  "dorsal": "6",
+                  "jugador": "ABRUÑEDO DEBER, JESUS"
+                },
+                {
+                  "dorsal": "10",
+                  "jugador": "SOUTO PERNAS, MIGUEL"
+                },
+                {
+                  "dorsal": "12",
+                  "jugador": "DIAZ CALVIÑO, RUBEN"
+                },
+                {
+                  "dorsal": "19",
+                  "jugador": "PEREZ SABIO, ADRIAN"
+                },
+                {
+                  "dorsal": "20",
+                  "jugador": "FONTAO SILVA, DAVID"
+                },
+                {
+                  "dorsal": "22",
+                  "jugador": "ALVAREZ GACIO, GABRIEL"
+                },
+                {
+                  "dorsal": "24",
+                  "jugador": "FERNANDEZ ROZADA, JUAN C"
+                },
+                {
+                  "dorsal": "30",
+                  "jugador": "GONZALEZ ESTEVEZ, OSCAR"
+                }
+              ],
+              "suplentes": [
+                {
+                  "dorsal": "7",
+                  "jugador": "NAVARRETE PENA, DIEGO H"
+                },
+                {
+                  "dorsal": "17",
+                  "jugador": "GÓMEZ BLANCO, ROBERTO CARLOS"
+                },
+                {
+                  "dorsal": "23",
+                  "jugador": "CASTRO PARDO, PABLO"
+                }
+              ],
+              "cuerpo_tecnico": {
+                "delegado": "GARCIA FERREIRO, GONZALO",
+                "entrenador": "No presenta"
+              },
+              "tarjetas": [
+                {
+                  "tipo": "amarilla",
+                  "minuto": "5'",
+                  "jugador": "IGLESIAS RIOBOO, FRANCISCO J"
+                },
+                {
+                  "tipo": "roja",
+                  "minuto": "89'",
+                  "jugador": "CASTRO PARDO, PABLO"
+                }
+              ]
+            }
+          }
         },
         {
           "orden": 5,
-          "local": "U.D. PAIOSACO H.AÑON",
-          "visitante": "CEDEIRA S.D.",
-          "fecha": "03-10-2026",
-          "hora": "18:00",
-          "campo": "Porta Santa",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
-        },
-        {
-          "orden": 6,
           "local": "OZA DE LOS RÍOS",
           "visitante": "XUVENTUDE DORNEDA",
           "fecha": "04-10-2026",
@@ -6276,12 +7264,24 @@
           "acta": null
         },
         {
-          "orden": 7,
+          "orden": 6,
           "local": "CAMPANAL DE LOUREDA F. C.",
           "visitante": "SAN MARTIÑO S.D.",
           "fecha": "04-10-2026",
           "hora": "11:00",
           "campo": "Campo de Fútbol de Freán",
+          "estado": "PROGRAMADO",
+          "actaDisponible": false,
+          "resultado": null,
+          "acta": null
+        },
+        {
+          "orden": 7,
+          "local": "U.D. NARAHIO",
+          "visitante": "C.D. SIGRAS",
+          "fecha": "04-10-2026",
+          "hora": "11:00",
+          "campo": "Da Piscina",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,
@@ -6415,18 +7415,6 @@
       "partidos": [
         {
           "orden": 1,
-          "local": "U.D. NARAHIO",
-          "visitante": "SAN MARTIÑO S.D.",
-          "fecha": "17-10-2026",
-          "hora": null,
-          "campo": "Da Piscina",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
-        },
-        {
-          "orden": 2,
           "local": "SPORTING BURGO",
           "visitante": "CAMPANAL DE LOUREDA F. C.",
           "fecha": "17-10-2026",
@@ -6438,7 +7426,7 @@
           "acta": null
         },
         {
-          "orden": 3,
+          "orden": 2,
           "local": "U.D. PAIOSACO H.AÑON",
           "visitante": "C.D. SIGRAS",
           "fecha": "17-10-2026",
@@ -6450,7 +7438,7 @@
           "acta": null
         },
         {
-          "orden": 4,
+          "orden": 3,
           "local": "OZA DE LOS RÍOS",
           "visitante": "BETANZOS NORTE",
           "fecha": "17-10-2026",
@@ -6462,7 +7450,7 @@
           "acta": null
         },
         {
-          "orden": 5,
+          "orden": 4,
           "local": "SADA F.C. A NOSA VIÑA",
           "visitante": "CEDEIRA S.D.",
           "fecha": "17-10-2026",
@@ -6474,7 +7462,7 @@
           "acta": null
         },
         {
-          "orden": 6,
+          "orden": 5,
           "local": "C.C.D. CURTIS",
           "visitante": "XUVENTUDE DORNEDA",
           "fecha": "17-10-2026",
@@ -6486,7 +7474,7 @@
           "acta": null
         },
         {
-          "orden": 7,
+          "orden": 6,
           "local": "CLUB DEPORTIVO NARON SILVER CATERING",
           "visitante": "LICEO DE MONELOS S.D.",
           "fecha": "17-10-2026",
@@ -6498,12 +7486,24 @@
           "acta": null
         },
         {
-          "orden": 8,
+          "orden": 7,
           "local": "SPORTING CAMBRE AS TRAVESAS",
           "visitante": "PORTAZGO S.D.",
           "fecha": "17-10-2026",
           "hora": null,
           "campo": "Dani Mallo (Cambre)",
+          "estado": "PROGRAMADO",
+          "actaDisponible": false,
+          "resultado": null,
+          "acta": null
+        },
+        {
+          "orden": 8,
+          "local": "U.D. NARAHIO",
+          "visitante": "SAN MARTIÑO S.D.",
+          "fecha": "18-10-2026",
+          "hora": "11:00",
+          "campo": "Da Piscina",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,
@@ -6520,18 +7520,6 @@
       "partidos": [
         {
           "orden": 1,
-          "local": "U.D. NARAHIO",
-          "visitante": "SPORTING BURGO",
-          "fecha": "24-10-2026",
-          "hora": null,
-          "campo": "Da Piscina",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
-        },
-        {
-          "orden": 2,
           "local": "BETANZOS NORTE",
           "visitante": "SADA F.C. A NOSA VIÑA",
           "fecha": "24-10-2026",
@@ -6543,7 +7531,7 @@
           "acta": null
         },
         {
-          "orden": 3,
+          "orden": 2,
           "local": "CEDEIRA S.D.",
           "visitante": "C.C.D. CURTIS",
           "fecha": "24-10-2026",
@@ -6555,7 +7543,7 @@
           "acta": null
         },
         {
-          "orden": 4,
+          "orden": 3,
           "local": "XUVENTUDE DORNEDA",
           "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
           "fecha": "24-10-2026",
@@ -6567,7 +7555,7 @@
           "acta": null
         },
         {
-          "orden": 5,
+          "orden": 4,
           "local": "LICEO DE MONELOS S.D.",
           "visitante": "SPORTING CAMBRE AS TRAVESAS",
           "fecha": "24-10-2026",
@@ -6579,7 +7567,7 @@
           "acta": null
         },
         {
-          "orden": 6,
+          "orden": 5,
           "local": "SAN MARTIÑO S.D.",
           "visitante": "PORTAZGO S.D.",
           "fecha": "24-10-2026",
@@ -6591,12 +7579,24 @@
           "acta": null
         },
         {
-          "orden": 7,
+          "orden": 6,
           "local": "C.D. SIGRAS",
           "visitante": "OZA DE LOS RÍOS",
           "fecha": "24-10-2026",
           "hora": "18:00",
           "campo": "Os Pinares, (Brexo Lema)",
+          "estado": "PROGRAMADO",
+          "actaDisponible": false,
+          "resultado": null,
+          "acta": null
+        },
+        {
+          "orden": 7,
+          "local": "U.D. NARAHIO",
+          "visitante": "SPORTING BURGO",
+          "fecha": "25-10-2026",
+          "hora": "11:00",
+          "campo": "Da Piscina",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,
@@ -6742,18 +7742,6 @@
         },
         {
           "orden": 2,
-          "local": "U.D. NARAHIO",
-          "visitante": "OZA DE LOS RÍOS",
-          "fecha": "14-11-2026",
-          "hora": null,
-          "campo": "Da Piscina",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
-        },
-        {
-          "orden": 3,
           "local": "BETANZOS NORTE",
           "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
           "fecha": "14-11-2026",
@@ -6765,7 +7753,7 @@
           "acta": null
         },
         {
-          "orden": 4,
+          "orden": 3,
           "local": "CEDEIRA S.D.",
           "visitante": "SPORTING CAMBRE AS TRAVESAS",
           "fecha": "14-11-2026",
@@ -6777,7 +7765,7 @@
           "acta": null
         },
         {
-          "orden": 5,
+          "orden": 4,
           "local": "XUVENTUDE DORNEDA",
           "visitante": "PORTAZGO S.D.",
           "fecha": "14-11-2026",
@@ -6789,7 +7777,7 @@
           "acta": null
         },
         {
-          "orden": 6,
+          "orden": 5,
           "local": "SAN MARTIÑO S.D.",
           "visitante": "LICEO DE MONELOS S.D.",
           "fecha": "14-11-2026",
@@ -6801,12 +7789,24 @@
           "acta": null
         },
         {
-          "orden": 7,
+          "orden": 6,
           "local": "C.D. SIGRAS",
           "visitante": "C.C.D. CURTIS",
           "fecha": "14-11-2026",
           "hora": "18:00",
           "campo": "Os Pinares, (Brexo Lema)",
+          "estado": "PROGRAMADO",
+          "actaDisponible": false,
+          "resultado": null,
+          "acta": null
+        },
+        {
+          "orden": 7,
+          "local": "U.D. NARAHIO",
+          "visitante": "OZA DE LOS RÍOS",
+          "fecha": "15-11-2026",
+          "hora": "11:00",
+          "campo": "Da Piscina",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,
@@ -6964,18 +7964,6 @@
         },
         {
           "orden": 3,
-          "local": "U.D. NARAHIO",
-          "visitante": "C.C.D. CURTIS",
-          "fecha": "28-11-2026",
-          "hora": null,
-          "campo": "Da Piscina",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
-        },
-        {
-          "orden": 4,
           "local": "BETANZOS NORTE",
           "visitante": "PORTAZGO S.D.",
           "fecha": "28-11-2026",
@@ -6987,7 +7975,7 @@
           "acta": null
         },
         {
-          "orden": 5,
+          "orden": 4,
           "local": "CEDEIRA S.D.",
           "visitante": "LICEO DE MONELOS S.D.",
           "fecha": "28-11-2026",
@@ -6999,7 +7987,7 @@
           "acta": null
         },
         {
-          "orden": 6,
+          "orden": 5,
           "local": "SAN MARTIÑO S.D.",
           "visitante": "XUVENTUDE DORNEDA",
           "fecha": "28-11-2026",
@@ -7011,12 +7999,24 @@
           "acta": null
         },
         {
-          "orden": 7,
+          "orden": 6,
           "local": "C.D. SIGRAS",
           "visitante": "SPORTING CAMBRE AS TRAVESAS",
           "fecha": "28-11-2026",
           "hora": "18:00",
           "campo": "Os Pinares, (Brexo Lema)",
+          "estado": "PROGRAMADO",
+          "actaDisponible": false,
+          "resultado": null,
+          "acta": null
+        },
+        {
+          "orden": 7,
+          "local": "U.D. NARAHIO",
+          "visitante": "C.C.D. CURTIS",
+          "fecha": "29-11-2026",
+          "hora": "11:00",
+          "campo": "Da Piscina",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,
@@ -7186,18 +8186,6 @@
         },
         {
           "orden": 4,
-          "local": "U.D. NARAHIO",
-          "visitante": "SPORTING CAMBRE AS TRAVESAS",
-          "fecha": "12-12-2026",
-          "hora": null,
-          "campo": "Da Piscina",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
-        },
-        {
-          "orden": 5,
           "local": "BETANZOS NORTE",
           "visitante": "XUVENTUDE DORNEDA",
           "fecha": "12-12-2026",
@@ -7209,7 +8197,7 @@
           "acta": null
         },
         {
-          "orden": 6,
+          "orden": 5,
           "local": "SAN MARTIÑO S.D.",
           "visitante": "CEDEIRA S.D.",
           "fecha": "12-12-2026",
@@ -7221,12 +8209,24 @@
           "acta": null
         },
         {
-          "orden": 7,
+          "orden": 6,
           "local": "C.D. SIGRAS",
           "visitante": "LICEO DE MONELOS S.D.",
           "fecha": "12-12-2026",
           "hora": "18:00",
           "campo": "Os Pinares, (Brexo Lema)",
+          "estado": "PROGRAMADO",
+          "actaDisponible": false,
+          "resultado": null,
+          "acta": null
+        },
+        {
+          "orden": 7,
+          "local": "U.D. NARAHIO",
+          "visitante": "SPORTING CAMBRE AS TRAVESAS",
+          "fecha": "13-12-2026",
+          "hora": "11:00",
+          "campo": "Da Piscina",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,
@@ -7408,18 +8408,6 @@
         },
         {
           "orden": 5,
-          "local": "U.D. NARAHIO",
-          "visitante": "LICEO DE MONELOS S.D.",
-          "fecha": "09-01-2027",
-          "hora": null,
-          "campo": "Da Piscina",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
-        },
-        {
-          "orden": 6,
           "local": "BETANZOS NORTE",
           "visitante": "SAN MARTIÑO S.D.",
           "fecha": "09-01-2027",
@@ -7431,12 +8419,24 @@
           "acta": null
         },
         {
-          "orden": 7,
+          "orden": 6,
           "local": "C.D. SIGRAS",
           "visitante": "CEDEIRA S.D.",
           "fecha": "09-01-2027",
           "hora": "18:00",
           "campo": "Os Pinares, (Brexo Lema)",
+          "estado": "PROGRAMADO",
+          "actaDisponible": false,
+          "resultado": null,
+          "acta": null
+        },
+        {
+          "orden": 7,
+          "local": "U.D. NARAHIO",
+          "visitante": "LICEO DE MONELOS S.D.",
+          "fecha": "10-01-2027",
+          "hora": "11:00",
+          "campo": "Da Piscina",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,
@@ -7477,18 +8477,6 @@
         },
         {
           "orden": 2,
-          "local": "U.D. NARAHIO",
-          "visitante": "XUVENTUDE DORNEDA",
-          "fecha": "16-01-2027",
-          "hora": null,
-          "campo": "Da Piscina",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
-        },
-        {
-          "orden": 3,
           "local": "SPORTING BURGO",
           "visitante": "LICEO DE MONELOS S.D.",
           "fecha": "16-01-2027",
@@ -7500,7 +8488,7 @@
           "acta": null
         },
         {
-          "orden": 4,
+          "orden": 3,
           "local": "U.D. PAIOSACO H.AÑON",
           "visitante": "PORTAZGO S.D.",
           "fecha": "16-01-2027",
@@ -7512,7 +8500,7 @@
           "acta": null
         },
         {
-          "orden": 5,
+          "orden": 4,
           "local": "OZA DE LOS RÍOS",
           "visitante": "SPORTING CAMBRE AS TRAVESAS",
           "fecha": "16-01-2027",
@@ -7524,7 +8512,7 @@
           "acta": null
         },
         {
-          "orden": 6,
+          "orden": 5,
           "local": "SADA F.C. A NOSA VIÑA",
           "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
           "fecha": "16-01-2027",
@@ -7536,7 +8524,7 @@
           "acta": null
         },
         {
-          "orden": 7,
+          "orden": 6,
           "local": "C.C.D. CURTIS",
           "visitante": "SAN MARTIÑO S.D.",
           "fecha": "16-01-2027",
@@ -7548,12 +8536,24 @@
           "acta": null
         },
         {
-          "orden": 8,
+          "orden": 7,
           "local": "C.D. SIGRAS",
           "visitante": "BETANZOS NORTE",
           "fecha": "16-01-2027",
           "hora": "18:00",
           "campo": "Os Pinares, (Brexo Lema)",
+          "estado": "PROGRAMADO",
+          "actaDisponible": false,
+          "resultado": null,
+          "acta": null
+        },
+        {
+          "orden": 8,
+          "local": "U.D. NARAHIO",
+          "visitante": "XUVENTUDE DORNEDA",
+          "fecha": "17-01-2027",
+          "hora": "11:00",
+          "campo": "Da Piscina",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,
@@ -7675,18 +8675,6 @@
       "partidos": [
         {
           "orden": 1,
-          "local": "U.D. NARAHIO",
-          "visitante": "BETANZOS NORTE",
-          "fecha": "30-01-2027",
-          "hora": null,
-          "campo": "Da Piscina",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
-        },
-        {
-          "orden": 2,
           "local": "SPORTING BURGO",
           "visitante": "CEDEIRA S.D.",
           "fecha": "30-01-2027",
@@ -7698,7 +8686,7 @@
           "acta": null
         },
         {
-          "orden": 3,
+          "orden": 2,
           "local": "U.D. PAIOSACO H.AÑON",
           "visitante": "XUVENTUDE DORNEDA",
           "fecha": "30-01-2027",
@@ -7710,7 +8698,7 @@
           "acta": null
         },
         {
-          "orden": 4,
+          "orden": 3,
           "local": "OZA DE LOS RÍOS",
           "visitante": "LICEO DE MONELOS S.D.",
           "fecha": "30-01-2027",
@@ -7722,7 +8710,7 @@
           "acta": null
         },
         {
-          "orden": 5,
+          "orden": 4,
           "local": "SADA F.C. A NOSA VIÑA",
           "visitante": "PORTAZGO S.D.",
           "fecha": "30-01-2027",
@@ -7734,7 +8722,7 @@
           "acta": null
         },
         {
-          "orden": 6,
+          "orden": 5,
           "local": "C.C.D. CURTIS",
           "visitante": "SPORTING CAMBRE AS TRAVESAS",
           "fecha": "30-01-2027",
@@ -7746,7 +8734,7 @@
           "acta": null
         },
         {
-          "orden": 7,
+          "orden": 6,
           "local": "CLUB DEPORTIVO NARON SILVER CATERING",
           "visitante": "SAN MARTIÑO S.D.",
           "fecha": "30-01-2027",
@@ -7758,12 +8746,24 @@
           "acta": null
         },
         {
-          "orden": 8,
+          "orden": 7,
           "local": "CAMPANAL DE LOUREDA F. C.",
           "visitante": "C.D. SIGRAS",
           "fecha": "31-01-2027",
           "hora": "11:00",
           "campo": "Campo de Fútbol de Freán",
+          "estado": "PROGRAMADO",
+          "actaDisponible": false,
+          "resultado": null,
+          "acta": null
+        },
+        {
+          "orden": 8,
+          "local": "U.D. NARAHIO",
+          "visitante": "BETANZOS NORTE",
+          "fecha": "31-01-2027",
+          "hora": "11:00",
+          "campo": "Da Piscina",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,
@@ -7885,18 +8885,6 @@
       "partidos": [
         {
           "orden": 1,
-          "local": "U.D. NARAHIO",
-          "visitante": "CAMPANAL DE LOUREDA F. C.",
-          "fecha": "20-02-2027",
-          "hora": null,
-          "campo": "Da Piscina",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
-        },
-        {
-          "orden": 2,
           "local": "SPORTING BURGO",
           "visitante": "C.D. SIGRAS",
           "fecha": "20-02-2027",
@@ -7908,7 +8896,7 @@
           "acta": null
         },
         {
-          "orden": 3,
+          "orden": 2,
           "local": "U.D. PAIOSACO H.AÑON",
           "visitante": "BETANZOS NORTE",
           "fecha": "20-02-2027",
@@ -7920,7 +8908,7 @@
           "acta": null
         },
         {
-          "orden": 4,
+          "orden": 3,
           "local": "OZA DE LOS RÍOS",
           "visitante": "CEDEIRA S.D.",
           "fecha": "20-02-2027",
@@ -7932,7 +8920,7 @@
           "acta": null
         },
         {
-          "orden": 5,
+          "orden": 4,
           "local": "SADA F.C. A NOSA VIÑA",
           "visitante": "XUVENTUDE DORNEDA",
           "fecha": "20-02-2027",
@@ -7944,7 +8932,7 @@
           "acta": null
         },
         {
-          "orden": 6,
+          "orden": 5,
           "local": "C.C.D. CURTIS",
           "visitante": "LICEO DE MONELOS S.D.",
           "fecha": "20-02-2027",
@@ -7956,7 +8944,7 @@
           "acta": null
         },
         {
-          "orden": 7,
+          "orden": 6,
           "local": "CLUB DEPORTIVO NARON SILVER CATERING",
           "visitante": "PORTAZGO S.D.",
           "fecha": "20-02-2027",
@@ -7968,12 +8956,24 @@
           "acta": null
         },
         {
-          "orden": 8,
+          "orden": 7,
           "local": "SPORTING CAMBRE AS TRAVESAS",
           "visitante": "SAN MARTIÑO S.D.",
           "fecha": "20-02-2027",
           "hora": null,
           "campo": "Dani Mallo (Cambre)",
+          "estado": "PROGRAMADO",
+          "actaDisponible": false,
+          "resultado": null,
+          "acta": null
+        },
+        {
+          "orden": 8,
+          "local": "U.D. NARAHIO",
+          "visitante": "CAMPANAL DE LOUREDA F. C.",
+          "fecha": "21-02-2027",
+          "hora": "11:00",
+          "campo": "Da Piscina",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,
@@ -8212,18 +9212,6 @@
         },
         {
           "orden": 2,
-          "local": "U.D. NARAHIO",
-          "visitante": "U.D. PAIOSACO H.AÑON",
-          "fecha": "13-03-2027",
-          "hora": null,
-          "campo": "Da Piscina",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
-        },
-        {
-          "orden": 3,
           "local": "BETANZOS NORTE",
           "visitante": "C.C.D. CURTIS",
           "fecha": "13-03-2027",
@@ -8235,7 +9223,7 @@
           "acta": null
         },
         {
-          "orden": 4,
+          "orden": 3,
           "local": "CEDEIRA S.D.",
           "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
           "fecha": "13-03-2027",
@@ -8247,7 +9235,7 @@
           "acta": null
         },
         {
-          "orden": 5,
+          "orden": 4,
           "local": "XUVENTUDE DORNEDA",
           "visitante": "SPORTING CAMBRE AS TRAVESAS",
           "fecha": "13-03-2027",
@@ -8259,7 +9247,7 @@
           "acta": null
         },
         {
-          "orden": 6,
+          "orden": 5,
           "local": "LICEO DE MONELOS S.D.",
           "visitante": "PORTAZGO S.D.",
           "fecha": "13-03-2027",
@@ -8271,12 +9259,24 @@
           "acta": null
         },
         {
-          "orden": 7,
+          "orden": 6,
           "local": "C.D. SIGRAS",
           "visitante": "SADA F.C. A NOSA VIÑA",
           "fecha": "13-03-2027",
           "hora": "18:00",
           "campo": "Os Pinares, (Brexo Lema)",
+          "estado": "PROGRAMADO",
+          "actaDisponible": false,
+          "resultado": null,
+          "acta": null
+        },
+        {
+          "orden": 7,
+          "local": "U.D. NARAHIO",
+          "visitante": "U.D. PAIOSACO H.AÑON",
+          "fecha": "14-03-2027",
+          "hora": "11:00",
+          "campo": "Da Piscina",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,
@@ -8434,18 +9434,6 @@
         },
         {
           "orden": 3,
-          "local": "U.D. NARAHIO",
-          "visitante": "SADA F.C. A NOSA VIÑA",
-          "fecha": "03-04-2027",
-          "hora": null,
-          "campo": "Da Piscina",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
-        },
-        {
-          "orden": 4,
           "local": "BETANZOS NORTE",
           "visitante": "SPORTING CAMBRE AS TRAVESAS",
           "fecha": "03-04-2027",
@@ -8457,7 +9445,7 @@
           "acta": null
         },
         {
-          "orden": 5,
+          "orden": 4,
           "local": "CEDEIRA S.D.",
           "visitante": "PORTAZGO S.D.",
           "fecha": "03-04-2027",
@@ -8469,7 +9457,7 @@
           "acta": null
         },
         {
-          "orden": 6,
+          "orden": 5,
           "local": "XUVENTUDE DORNEDA",
           "visitante": "LICEO DE MONELOS S.D.",
           "fecha": "03-04-2027",
@@ -8481,12 +9469,24 @@
           "acta": null
         },
         {
-          "orden": 7,
+          "orden": 6,
           "local": "C.D. SIGRAS",
           "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
           "fecha": "03-04-2027",
           "hora": "18:00",
           "campo": "Os Pinares, (Brexo Lema)",
+          "estado": "PROGRAMADO",
+          "actaDisponible": false,
+          "resultado": null,
+          "acta": null
+        },
+        {
+          "orden": 7,
+          "local": "U.D. NARAHIO",
+          "visitante": "SADA F.C. A NOSA VIÑA",
+          "fecha": "04-04-2027",
+          "hora": "11:00",
+          "campo": "Da Piscina",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,
@@ -8656,18 +9656,6 @@
         },
         {
           "orden": 4,
-          "local": "U.D. NARAHIO",
-          "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
-          "fecha": "17-04-2027",
-          "hora": null,
-          "campo": "Da Piscina",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
-        },
-        {
-          "orden": 5,
           "local": "BETANZOS NORTE",
           "visitante": "LICEO DE MONELOS S.D.",
           "fecha": "17-04-2027",
@@ -8679,7 +9667,7 @@
           "acta": null
         },
         {
-          "orden": 6,
+          "orden": 5,
           "local": "CEDEIRA S.D.",
           "visitante": "XUVENTUDE DORNEDA",
           "fecha": "17-04-2027",
@@ -8691,12 +9679,24 @@
           "acta": null
         },
         {
-          "orden": 7,
+          "orden": 6,
           "local": "C.D. SIGRAS",
           "visitante": "PORTAZGO S.D.",
           "fecha": "17-04-2027",
           "hora": "18:00",
           "campo": "Os Pinares, (Brexo Lema)",
+          "estado": "PROGRAMADO",
+          "actaDisponible": false,
+          "resultado": null,
+          "acta": null
+        },
+        {
+          "orden": 7,
+          "local": "U.D. NARAHIO",
+          "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "fecha": "18-04-2027",
+          "hora": "11:00",
+          "campo": "Da Piscina",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,
@@ -8878,18 +9878,6 @@
         },
         {
           "orden": 5,
-          "local": "U.D. NARAHIO",
-          "visitante": "PORTAZGO S.D.",
-          "fecha": "01-05-2027",
-          "hora": null,
-          "campo": "Da Piscina",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
-        },
-        {
-          "orden": 6,
           "local": "BETANZOS NORTE",
           "visitante": "CEDEIRA S.D.",
           "fecha": "01-05-2027",
@@ -8901,12 +9889,24 @@
           "acta": null
         },
         {
-          "orden": 7,
+          "orden": 6,
           "local": "C.D. SIGRAS",
           "visitante": "XUVENTUDE DORNEDA",
           "fecha": "01-05-2027",
           "hora": "18:00",
           "campo": "Os Pinares, (Brexo Lema)",
+          "estado": "PROGRAMADO",
+          "actaDisponible": false,
+          "resultado": null,
+          "acta": null
+        },
+        {
+          "orden": 7,
+          "local": "U.D. NARAHIO",
+          "visitante": "PORTAZGO S.D.",
+          "fecha": "02-05-2027",
+          "hora": "11:00",
+          "campo": "Da Piscina",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,

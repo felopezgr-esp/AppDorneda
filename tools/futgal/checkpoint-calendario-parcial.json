@@ -1,5 +1,5 @@
 {
-  "fecha": "2026-09-29T14:27:07.909Z",
+  "fecha": "2026-10-04T06:46:53.252Z",
   "modo": "10E_fresco_con_respaldo",
   "totalEquipos": 16,
   "jornadasEsperadas": 30,
@@ -80,7 +80,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478211&cod_acta=1478211"
       ],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-09-29T14:23:21.114Z"
+      "fechaLecturaFresca": "2026-10-04T06:42:38.603Z"
     },
     {
       "numero": 2,
@@ -158,7 +158,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478217&cod_acta=1478217"
       ],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-09-29T14:23:27.090Z"
+      "fechaLecturaFresca": "2026-10-04T06:42:45.215Z"
     },
     {
       "numero": 3,
@@ -236,7 +236,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478229&cod_acta=1478229"
       ],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-09-29T14:23:32.698Z"
+      "fechaLecturaFresca": "2026-10-04T06:42:52.669Z"
     },
     {
       "numero": 4,
@@ -247,32 +247,11 @@
       },
       "partidos": [
         {
-          "local": "U.D. NARAHIO",
-          "visitante": "C.D. SIGRAS",
-          "fecha": "03-10-2026",
-          "hora": null,
-          "campo": "Da Piscina"
-        },
-        {
           "local": "SPORTING BURGO",
           "visitante": "BETANZOS NORTE",
           "fecha": "03-10-2026",
-          "hora": null,
+          "hora": "18:00",
           "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
-        },
-        {
-          "local": "C.C.D. CURTIS",
-          "visitante": "PORTAZGO S.D.",
-          "fecha": "03-10-2026",
-          "hora": null,
-          "campo": "Novo ( Curtis )"
-        },
-        {
-          "local": "CLUB DEPORTIVO NARON SILVER CATERING",
-          "visitante": "SPORTING CAMBRE AS TRAVESAS",
-          "fecha": "03-10-2026",
-          "hora": null,
-          "campo": "O Cadaval"
         },
         {
           "local": "U.D. PAIOSACO H.AÑON",
@@ -280,6 +259,20 @@
           "fecha": "03-10-2026",
           "hora": "18:00",
           "campo": "Porta Santa"
+        },
+        {
+          "local": "C.C.D. CURTIS",
+          "visitante": "PORTAZGO S.D.",
+          "fecha": "03-10-2026",
+          "hora": "18:00",
+          "campo": "Novo ( Curtis )"
+        },
+        {
+          "local": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "visitante": "SPORTING CAMBRE AS TRAVESAS",
+          "fecha": "03-10-2026",
+          "hora": "19:30",
+          "campo": "O Cadaval"
         },
         {
           "local": "OZA DE LOS RÍOS",
@@ -296,6 +289,13 @@
           "campo": "Campo de Fútbol de Freán"
         },
         {
+          "local": "U.D. NARAHIO",
+          "visitante": "C.D. SIGRAS",
+          "fecha": "04-10-2026",
+          "hora": "11:00",
+          "campo": "Da Piscina"
+        },
+        {
           "local": "SADA F.C. A NOSA VIÑA",
           "visitante": "LICEO DE MONELOS S.D.",
           "fecha": "04-10-2026",
@@ -303,9 +303,14 @@
           "campo": "O Loureiro (Oza De Los Ríos)"
         }
       ],
-      "actaUrls": [],
+      "actaUrls": [
+        "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478234&cod_acta=1478234",
+        "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478235&cod_acta=1478235",
+        "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478238&cod_acta=1478238",
+        "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478239&cod_acta=1478239"
+      ],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-09-29T14:23:38.613Z"
+      "fechaLecturaFresca": "2026-10-04T06:42:59.322Z"
     },
     {
       "numero": 5,
@@ -374,7 +379,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-09-29T14:23:52.263Z"
+      "fechaLecturaFresca": "2026-10-04T06:43:14.482Z"
     },
     {
       "numero": 6,
@@ -384,13 +389,6 @@
         "errores": []
       },
       "partidos": [
-        {
-          "local": "U.D. NARAHIO",
-          "visitante": "SAN MARTIÑO S.D.",
-          "fecha": "17-10-2026",
-          "hora": null,
-          "campo": "Da Piscina"
-        },
         {
           "local": "SPORTING BURGO",
           "visitante": "CAMPANAL DE LOUREDA F. C.",
@@ -439,11 +437,18 @@
           "fecha": "17-10-2026",
           "hora": null,
           "campo": "Dani Mallo (Cambre)"
+        },
+        {
+          "local": "U.D. NARAHIO",
+          "visitante": "SAN MARTIÑO S.D.",
+          "fecha": "18-10-2026",
+          "hora": "11:00",
+          "campo": "Da Piscina"
         }
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-09-29T14:23:57.869Z"
+      "fechaLecturaFresca": "2026-10-04T06:43:21.144Z"
     },
     {
       "numero": 7,
@@ -453,13 +458,6 @@
         "errores": []
       },
       "partidos": [
-        {
-          "local": "U.D. NARAHIO",
-          "visitante": "SPORTING BURGO",
-          "fecha": "24-10-2026",
-          "hora": null,
-          "campo": "Da Piscina"
-        },
         {
           "local": "BETANZOS NORTE",
           "visitante": "SADA F.C. A NOSA VIÑA",
@@ -503,6 +501,13 @@
           "campo": "Os Pinares, (Brexo Lema)"
         },
         {
+          "local": "U.D. NARAHIO",
+          "visitante": "SPORTING BURGO",
+          "fecha": "25-10-2026",
+          "hora": "11:00",
+          "campo": "Da Piscina"
+        },
+        {
           "local": "CAMPANAL DE LOUREDA F. C.",
           "visitante": "U.D. PAIOSACO H.AÑON",
           "fecha": "25-10-2026",
@@ -512,7 +517,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-09-29T14:24:04.084Z"
+      "fechaLecturaFresca": "2026-10-04T06:43:27.984Z"
     },
     {
       "numero": 8,
@@ -581,7 +586,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-09-29T14:24:09.698Z"
+      "fechaLecturaFresca": "2026-10-04T06:43:34.757Z"
     },
     {
       "numero": 9,
@@ -597,13 +602,6 @@
           "fecha": "14-11-2026",
           "hora": null,
           "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
-        },
-        {
-          "local": "U.D. NARAHIO",
-          "visitante": "OZA DE LOS RÍOS",
-          "fecha": "14-11-2026",
-          "hora": null,
-          "campo": "Da Piscina"
         },
         {
           "local": "BETANZOS NORTE",
@@ -641,6 +639,13 @@
           "campo": "Os Pinares, (Brexo Lema)"
         },
         {
+          "local": "U.D. NARAHIO",
+          "visitante": "OZA DE LOS RÍOS",
+          "fecha": "15-11-2026",
+          "hora": "11:00",
+          "campo": "Da Piscina"
+        },
+        {
           "local": "CAMPANAL DE LOUREDA F. C.",
           "visitante": "SADA F.C. A NOSA VIÑA",
           "fecha": "15-11-2026",
@@ -650,7 +655,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-09-29T14:24:23.718Z"
+      "fechaLecturaFresca": "2026-10-04T06:43:49.375Z"
     },
     {
       "numero": 10,
@@ -719,7 +724,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-09-29T14:24:29.640Z"
+      "fechaLecturaFresca": "2026-10-04T06:43:56.690Z"
     },
     {
       "numero": 11,
@@ -742,13 +747,6 @@
           "fecha": "28-11-2026",
           "hora": null,
           "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
-        },
-        {
-          "local": "U.D. NARAHIO",
-          "visitante": "C.C.D. CURTIS",
-          "fecha": "28-11-2026",
-          "hora": null,
-          "campo": "Da Piscina"
         },
         {
           "local": "BETANZOS NORTE",
@@ -779,6 +777,13 @@
           "campo": "Os Pinares, (Brexo Lema)"
         },
         {
+          "local": "U.D. NARAHIO",
+          "visitante": "C.C.D. CURTIS",
+          "fecha": "29-11-2026",
+          "hora": "11:00",
+          "campo": "Da Piscina"
+        },
+        {
           "local": "CAMPANAL DE LOUREDA F. C.",
           "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
           "fecha": "29-11-2026",
@@ -788,7 +793,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-09-29T14:24:35.293Z"
+      "fechaLecturaFresca": "2026-10-04T06:44:03.188Z"
     },
     {
       "numero": 12,
@@ -857,7 +862,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-09-29T14:24:41.212Z"
+      "fechaLecturaFresca": "2026-10-04T06:44:10.216Z"
     },
     {
       "numero": 13,
@@ -889,13 +894,6 @@
           "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
         },
         {
-          "local": "U.D. NARAHIO",
-          "visitante": "SPORTING CAMBRE AS TRAVESAS",
-          "fecha": "12-12-2026",
-          "hora": null,
-          "campo": "Da Piscina"
-        },
-        {
           "local": "BETANZOS NORTE",
           "visitante": "XUVENTUDE DORNEDA",
           "fecha": "12-12-2026",
@@ -917,6 +915,13 @@
           "campo": "Os Pinares, (Brexo Lema)"
         },
         {
+          "local": "U.D. NARAHIO",
+          "visitante": "SPORTING CAMBRE AS TRAVESAS",
+          "fecha": "13-12-2026",
+          "hora": "11:00",
+          "campo": "Da Piscina"
+        },
+        {
           "local": "CAMPANAL DE LOUREDA F. C.",
           "visitante": "PORTAZGO S.D.",
           "fecha": "13-12-2026",
@@ -926,7 +931,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-09-29T14:24:55.273Z"
+      "fechaLecturaFresca": "2026-10-04T06:44:25.461Z"
     },
     {
       "numero": 14,
@@ -995,7 +1000,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-09-29T14:25:01.441Z"
+      "fechaLecturaFresca": "2026-10-04T06:44:32.845Z"
     },
     {
       "numero": 15,
@@ -1034,13 +1039,6 @@
           "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
         },
         {
-          "local": "U.D. NARAHIO",
-          "visitante": "LICEO DE MONELOS S.D.",
-          "fecha": "09-01-2027",
-          "hora": null,
-          "campo": "Da Piscina"
-        },
-        {
           "local": "BETANZOS NORTE",
           "visitante": "SAN MARTIÑO S.D.",
           "fecha": "09-01-2027",
@@ -1055,6 +1053,13 @@
           "campo": "Os Pinares, (Brexo Lema)"
         },
         {
+          "local": "U.D. NARAHIO",
+          "visitante": "LICEO DE MONELOS S.D.",
+          "fecha": "10-01-2027",
+          "hora": "11:00",
+          "campo": "Da Piscina"
+        },
+        {
           "local": "CAMPANAL DE LOUREDA F. C.",
           "visitante": "XUVENTUDE DORNEDA",
           "fecha": "10-01-2027",
@@ -1064,7 +1069,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-09-29T14:25:07.276Z"
+      "fechaLecturaFresca": "2026-10-04T06:44:40.238Z"
     },
     {
       "numero": 16,
@@ -1080,13 +1085,6 @@
           "fecha": "16-01-2027",
           "hora": null,
           "campo": "Municipal Carmen Maseda (O Beco)"
-        },
-        {
-          "local": "U.D. NARAHIO",
-          "visitante": "XUVENTUDE DORNEDA",
-          "fecha": "16-01-2027",
-          "hora": null,
-          "campo": "Da Piscina"
         },
         {
           "local": "SPORTING BURGO",
@@ -1129,11 +1127,18 @@
           "fecha": "16-01-2027",
           "hora": "18:00",
           "campo": "Os Pinares, (Brexo Lema)"
+        },
+        {
+          "local": "U.D. NARAHIO",
+          "visitante": "XUVENTUDE DORNEDA",
+          "fecha": "17-01-2027",
+          "hora": "11:00",
+          "campo": "Da Piscina"
         }
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-09-29T14:25:13.042Z"
+      "fechaLecturaFresca": "2026-10-04T06:44:46.860Z"
     },
     {
       "numero": 17,
@@ -1202,7 +1207,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-09-29T14:25:27.785Z"
+      "fechaLecturaFresca": "2026-10-04T06:45:01.476Z"
     },
     {
       "numero": 18,
@@ -1212,13 +1217,6 @@
         "errores": []
       },
       "partidos": [
-        {
-          "local": "U.D. NARAHIO",
-          "visitante": "BETANZOS NORTE",
-          "fecha": "30-01-2027",
-          "hora": null,
-          "campo": "Da Piscina"
-        },
         {
           "local": "SPORTING BURGO",
           "visitante": "CEDEIRA S.D.",
@@ -1267,11 +1265,18 @@
           "fecha": "31-01-2027",
           "hora": "11:00",
           "campo": "Campo de Fútbol de Freán"
+        },
+        {
+          "local": "U.D. NARAHIO",
+          "visitante": "BETANZOS NORTE",
+          "fecha": "31-01-2027",
+          "hora": "11:00",
+          "campo": "Da Piscina"
         }
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-09-29T14:25:33.844Z"
+      "fechaLecturaFresca": "2026-10-04T06:45:08.088Z"
     },
     {
       "numero": 19,
@@ -1340,7 +1345,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-09-29T14:25:39.897Z"
+      "fechaLecturaFresca": "2026-10-04T06:45:14.814Z"
     },
     {
       "numero": 20,
@@ -1350,13 +1355,6 @@
         "errores": []
       },
       "partidos": [
-        {
-          "local": "U.D. NARAHIO",
-          "visitante": "CAMPANAL DE LOUREDA F. C.",
-          "fecha": "20-02-2027",
-          "hora": null,
-          "campo": "Da Piscina"
-        },
         {
           "local": "SPORTING BURGO",
           "visitante": "C.D. SIGRAS",
@@ -1405,11 +1403,18 @@
           "fecha": "20-02-2027",
           "hora": null,
           "campo": "Dani Mallo (Cambre)"
+        },
+        {
+          "local": "U.D. NARAHIO",
+          "visitante": "CAMPANAL DE LOUREDA F. C.",
+          "fecha": "21-02-2027",
+          "hora": "11:00",
+          "campo": "Da Piscina"
         }
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-09-29T14:25:45.495Z"
+      "fechaLecturaFresca": "2026-10-04T06:45:21.897Z"
     },
     {
       "numero": 21,
@@ -1478,7 +1483,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-09-29T14:25:59.163Z"
+      "fechaLecturaFresca": "2026-10-04T06:45:36.543Z"
     },
     {
       "numero": 22,
@@ -1547,7 +1552,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-09-29T14:26:04.833Z"
+      "fechaLecturaFresca": "2026-10-04T06:45:43.139Z"
     },
     {
       "numero": 23,
@@ -1563,13 +1568,6 @@
           "fecha": "13-03-2027",
           "hora": null,
           "campo": "A Revolta (Queixas)"
-        },
-        {
-          "local": "U.D. NARAHIO",
-          "visitante": "U.D. PAIOSACO H.AÑON",
-          "fecha": "13-03-2027",
-          "hora": null,
-          "campo": "Da Piscina"
         },
         {
           "local": "BETANZOS NORTE",
@@ -1607,6 +1605,13 @@
           "campo": "Os Pinares, (Brexo Lema)"
         },
         {
+          "local": "U.D. NARAHIO",
+          "visitante": "U.D. PAIOSACO H.AÑON",
+          "fecha": "14-03-2027",
+          "hora": "11:00",
+          "campo": "Da Piscina"
+        },
+        {
           "local": "CAMPANAL DE LOUREDA F. C.",
           "visitante": "OZA DE LOS RÍOS",
           "fecha": "14-03-2027",
@@ -1616,7 +1621,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-09-29T14:26:10.717Z"
+      "fechaLecturaFresca": "2026-10-04T06:45:49.862Z"
     },
     {
       "numero": 24,
@@ -1685,7 +1690,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-09-29T14:26:16.751Z"
+      "fechaLecturaFresca": "2026-10-04T06:45:56.503Z"
     },
     {
       "numero": 25,
@@ -1708,13 +1713,6 @@
           "fecha": "03-04-2027",
           "hora": null,
           "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
-        },
-        {
-          "local": "U.D. NARAHIO",
-          "visitante": "SADA F.C. A NOSA VIÑA",
-          "fecha": "03-04-2027",
-          "hora": null,
-          "campo": "Da Piscina"
         },
         {
           "local": "BETANZOS NORTE",
@@ -1745,6 +1743,13 @@
           "campo": "Os Pinares, (Brexo Lema)"
         },
         {
+          "local": "U.D. NARAHIO",
+          "visitante": "SADA F.C. A NOSA VIÑA",
+          "fecha": "04-04-2027",
+          "hora": "11:00",
+          "campo": "Da Piscina"
+        },
+        {
           "local": "CAMPANAL DE LOUREDA F. C.",
           "visitante": "C.C.D. CURTIS",
           "fecha": "04-04-2027",
@@ -1754,7 +1759,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-09-29T14:26:30.766Z"
+      "fechaLecturaFresca": "2026-10-04T06:46:11.212Z"
     },
     {
       "numero": 26,
@@ -1823,7 +1828,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-09-29T14:26:36.400Z"
+      "fechaLecturaFresca": "2026-10-04T06:46:17.842Z"
     },
     {
       "numero": 27,
@@ -1855,13 +1860,6 @@
           "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
         },
         {
-          "local": "U.D. NARAHIO",
-          "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
-          "fecha": "17-04-2027",
-          "hora": null,
-          "campo": "Da Piscina"
-        },
-        {
           "local": "BETANZOS NORTE",
           "visitante": "LICEO DE MONELOS S.D.",
           "fecha": "17-04-2027",
@@ -1883,6 +1881,13 @@
           "campo": "Os Pinares, (Brexo Lema)"
         },
         {
+          "local": "U.D. NARAHIO",
+          "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "fecha": "18-04-2027",
+          "hora": "11:00",
+          "campo": "Da Piscina"
+        },
+        {
           "local": "CAMPANAL DE LOUREDA F. C.",
           "visitante": "SPORTING CAMBRE AS TRAVESAS",
           "fecha": "18-04-2027",
@@ -1892,7 +1897,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-09-29T14:26:42.211Z"
+      "fechaLecturaFresca": "2026-10-04T06:46:24.568Z"
     },
     {
       "numero": 28,
@@ -1961,7 +1966,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-09-29T14:26:47.898Z"
+      "fechaLecturaFresca": "2026-10-04T06:46:31.260Z"
     },
     {
       "numero": 29,
@@ -2000,13 +2005,6 @@
           "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
         },
         {
-          "local": "U.D. NARAHIO",
-          "visitante": "PORTAZGO S.D.",
-          "fecha": "01-05-2027",
-          "hora": null,
-          "campo": "Da Piscina"
-        },
-        {
           "local": "BETANZOS NORTE",
           "visitante": "CEDEIRA S.D.",
           "fecha": "01-05-2027",
@@ -2021,6 +2019,13 @@
           "campo": "Os Pinares, (Brexo Lema)"
         },
         {
+          "local": "U.D. NARAHIO",
+          "visitante": "PORTAZGO S.D.",
+          "fecha": "02-05-2027",
+          "hora": "11:00",
+          "campo": "Da Piscina"
+        },
+        {
           "local": "CAMPANAL DE LOUREDA F. C.",
           "visitante": "LICEO DE MONELOS S.D.",
           "fecha": "02-05-2027",
@@ -2030,7 +2035,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-09-29T14:27:02.273Z"
+      "fechaLecturaFresca": "2026-10-04T06:46:46.568Z"
     },
     {
       "numero": 30,
@@ -2099,7 +2104,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-09-29T14:27:07.909Z"
+      "fechaLecturaFresca": "2026-10-04T06:46:53.252Z"
     }
   ]
 }
