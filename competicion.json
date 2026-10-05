@@ -1,6 +1,6 @@
 {
   "versionFormato": 2,
-  "fechaExtraccion": "2026-10-05T11:01:09.661Z",
+  "fechaExtraccion": "2026-10-05T15:39:46.387Z",
   "fuente": "FUTGAL",
   "temporada": "2026-2027",
   "competicion": "Veteranos - Primera Galicia",
@@ -8257,18 +8257,6 @@
         },
         {
           "orden": 2,
-          "local": "XUVENTUDE DORNEDA",
-          "visitante": "SADA F.C. A NOSA VIÑA",
-          "fecha": "10-10-2026",
-          "hora": null,
-          "campo": "Campo de Fútbol A Marola",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
-        },
-        {
-          "orden": 3,
           "local": "LICEO DE MONELOS S.D.",
           "visitante": "C.C.D. CURTIS",
           "fecha": "10-10-2026",
@@ -8280,7 +8268,7 @@
           "acta": null
         },
         {
-          "orden": 4,
+          "orden": 3,
           "local": "PORTAZGO S.D.",
           "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
           "fecha": "10-10-2026",
@@ -8292,7 +8280,7 @@
           "acta": null
         },
         {
-          "orden": 5,
+          "orden": 4,
           "local": "SAN MARTIÑO S.D.",
           "visitante": "SPORTING CAMBRE AS TRAVESAS",
           "fecha": "10-10-2026",
@@ -8304,7 +8292,7 @@
           "acta": null
         },
         {
-          "orden": 6,
+          "orden": 5,
           "local": "C.D. SIGRAS",
           "visitante": "SPORTING BURGO",
           "fecha": "10-10-2026",
@@ -8316,7 +8304,7 @@
           "acta": null
         },
         {
-          "orden": 7,
+          "orden": 6,
           "local": "CEDEIRA S.D.",
           "visitante": "OZA DE LOS RÍOS",
           "fecha": "11-10-2026",
@@ -8328,12 +8316,24 @@
           "acta": null
         },
         {
-          "orden": 8,
+          "orden": 7,
           "local": "CAMPANAL DE LOUREDA F. C.",
           "visitante": "U.D. NARAHIO",
           "fecha": "11-10-2026",
           "hora": "11:00",
           "campo": "Campo de Fútbol de Freán",
+          "estado": "PROGRAMADO",
+          "actaDisponible": false,
+          "resultado": null,
+          "acta": null
+        },
+        {
+          "orden": 8,
+          "local": "XUVENTUDE DORNEDA",
+          "visitante": "SADA F.C. A NOSA VIÑA",
+          "fecha": "11-10-2026",
+          "hora": "12:15",
+          "campo": "Campo de Fútbol A Marola",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,
