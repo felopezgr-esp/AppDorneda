@@ -4715,45 +4715,23 @@ body.reader-mode #modalFotoUploadInput{display:none!important}
   }
 }
 
+
+/* PASO 16O · ACTUALIZACIÓN FUTGAL DIRECTA */
+button[aria-busy="true"]{
+  cursor:not-allowed!important;
+  opacity:.72!important;
+}
+#btnSyncFutgalSidebar[aria-busy="true"]{
+  background:var(--surface3)!important;
+  color:var(--text-muted)!important;
+  border-color:var(--border)!important;
+}
+
 </style>
 </head>
 <body class="editor-mode">
 <div class="toast-container" id="toastContainer"></div>
 
-<!-- PASO 11C · ACTUALIZACIÓN FUTGAL EN LA NUBE -->
-<div class="modal-overlay" id="modalFutgalCloud">
-  <div class="modal" style="max-width:620px">
-    <div class="modal-header">
-      <div class="modal-title">☁ Actualizar FUTGAL · GitHub Actions</div>
-      <button class="modal-close" onclick="closeModal('modalFutgalCloud')">&#10005;</button>
-    </div>
-    <div style="padding:11px 13px;border-radius:9px;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.22);font-size:11.5px;line-height:1.45;margin-bottom:12px">
-      Ejecuta en GitHub el extractor FUTGAL validado. Al terminar,
-      <strong>Resultados y Búsqueda se actualiza automáticamente</strong>.
-      No modifica clasificación, Copa, plantilla ni tus datos manuales.
-    </div>
-
-    <div style="margin-bottom:10px">
-      <label class="form-label" style="font-size:10.5px">PIN de actualización</label>
-      <input id="futgalCloudPin" class="form-control" type="password" autocomplete="current-password" placeholder="PIN">
-    </div>
-
-    <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px">
-      <button type="button" class="btn btn-ghost" onclick="probarConexionFutgalCloud()">Comprobar conexión</button>
-      <button type="button" class="btn btn-primary" id="btnFutgalCloudStart" onclick="lanzarActualizacionFutgalCloud()">☁ Actualizar ahora</button>
-      <button type="button" class="btn btn-ghost" onclick="cancelarSeguimientoFutgalCloud()">Detener seguimiento</button>
-    </div>
-
-    <div id="futgalCloudStatus" style="padding:12px 13px;border:1px solid var(--border);border-radius:9px;font-size:11.5px;line-height:1.5">
-      Listo para conectar con GitHub Actions.
-    </div>
-
-    <div style="margin-top:10px;font-size:10px;color:var(--text-muted);line-height:1.4">
-      El PIN solo se conserva durante esta sesión. El token de GitHub permanece protegido en Cloudflare y nunca se envía a esta web.
-    </div>
-  </div>
-</div>
-<input type="file" id="futgalOfficialFileInput" accept=".json,application/json" style="display:none" onchange="cargarFutgalJsonManual(event)">
 
 
 <!-- MODAL NUEVO PARTIDO -->
@@ -5168,7 +5146,7 @@ body.reader-mode #modalFotoUploadInput{display:none!important}
         <div id="futgalLastSyncSidebar" style="font-size:9.5px;color:var(--text-muted);margin-bottom:6px;line-height:1.2">
           Actualizado: <span id="futgalLastSyncTime">cargando…</span>
         </div>
-        <button type="button" class="btn btn-primary btn-xs" id="btnSyncFutgalSidebar" onclick="abrirActualizacionFutgalCloud()" style="width:100%;justify-content:center;font-weight:700;padding:5px 8px;font-size:10.5px" title="Ejecutar el extractor FUTGAL en GitHub Actions">
+        <button type="button" class="btn btn-primary btn-xs" id="btnSyncFutgalSidebar" onclick="actualizarFutgalDirecto()" style="width:100%;justify-content:center;font-weight:700;padding:5px 8px;font-size:10.5px" title="Actualizar datos oficiales de FUTGAL">
           ☁ Actualizar
         </button>
       </div>
@@ -5361,7 +5339,7 @@ body.reader-mode #modalFotoUploadInput{display:none!important}
             <div class="dash-section-note">Solo Editor</div>
           </div>
           <div class="dash-admin-tools">
-            <button type="button" class="btn btn-ghost" onclick="syncFromFutgal()">Actualizar FUTGAL</button>
+            <button type="button" class="btn btn-ghost" onclick="actualizarFutgalDirecto()">Actualizar FUTGAL</button>
             <button type="button" class="btn btn-ghost" onclick="openFutgalImporter()">Importar acta</button>
             <button type="button" class="btn btn-ghost" onclick="openNuevoPartido()">Añadir partido</button>
             <button type="button" class="btn btn-ghost" onclick="openNuevoJugador()">Añadir jugador</button>
@@ -5410,7 +5388,7 @@ body.reader-mode #modalFotoUploadInput{display:none!important}
       <div class="page-header">
         <div><div class="page-title">Partidos</div><div class="page-subtitle">Historial de enfrentamientos y calendario de la temporada</div></div>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <button type="button" class="btn btn-primary editor-only" onclick="syncFromFutgal()" title="Actualizar resultados desde FUTGAL">🔄 Actualizar desde FUTGAL</button>
+          <button type="button" class="btn btn-primary editor-only" onclick="actualizarFutgalDirecto()" title="Actualizar datos oficiales de FUTGAL">🔄 Actualizar desde FUTGAL</button>
           <button type="button" class="btn btn-ghost" onclick="openNuevoPartido()">+ Nuevo Partido</button>
         </div>
       </div>
@@ -22217,7 +22195,247 @@ if (document.readyState === 'loading') {
 
 </script>
 <script src="scripts/futgal-official.js"></script>
-<script src="scripts/futgal-cloud.js"></script>
+
+
+<script>
+(function(){
+  'use strict';
+
+  const FUTGAL_WORKER_URL = 'https://appdorneda-futgal.felopezgr.workers.dev';
+  const FUTGAL_REQUEST_KEY = 'dorneda_futgal_request_direct_v1';
+
+  let futgalDirectRunning = false;
+  let futgalDirectTimer = null;
+  let futgalDirectRequestId = null;
+
+  function futgalButtons(){
+    const all = [
+      document.getElementById('btnSyncFutgalSidebar'),
+      document.getElementById('dashSyncFutgalBtn')
+    ];
+
+    document.querySelectorAll(
+      'button[onclick="actualizarFutgalDirecto()"]'
+    ).forEach(function(btn){ all.push(btn); });
+
+    return Array.from(new Set(all.filter(Boolean)));
+  }
+
+  function setFutgalDirectUI(running){
+    futgalDirectRunning = !!running;
+
+    futgalButtons().forEach(function(btn){
+      if(!btn.dataset.futgalOriginalHtml){
+        btn.dataset.futgalOriginalHtml = btn.innerHTML;
+      }
+      btn.disabled = !!running;
+      btn.setAttribute('aria-busy', running ? 'true' : 'false');
+      btn.innerHTML = running
+        ? '⏳ Actualización en curso'
+        : btn.dataset.futgalOriginalHtml;
+    });
+
+    const badge = document.getElementById('futgalSidebarBadge');
+    if(badge){
+      if(running){
+        badge.textContent = 'En curso';
+        badge.style.background = 'rgba(234,179,8,.12)';
+        badge.style.color = '#a16207';
+        badge.style.borderColor = 'rgba(234,179,8,.3)';
+      }else{
+        badge.textContent = 'Actualizado';
+        badge.style.background = 'rgba(22,163,74,.10)';
+        badge.style.color = '#15803d';
+        badge.style.borderColor = 'rgba(22,163,74,.25)';
+      }
+    }
+  }
+
+  async function futgalApi(path, options){
+    const res = await fetch(FUTGAL_WORKER_URL + path, {
+      ...(options || {}),
+      cache:'no-store',
+      headers:{
+        'Content-Type':'application/json',
+        ...((options && options.headers) || {})
+      }
+    });
+
+    const raw = await res.text();
+    let body = {};
+    try{
+      body = raw ? JSON.parse(raw) : {};
+    }catch(e){
+      body = {error:raw || ('HTTP '+res.status)};
+    }
+
+    if(!res.ok){
+      throw new Error(body.error || body.message || ('HTTP '+res.status));
+    }
+    return body;
+  }
+
+  function stopFutgalDirectPolling(){
+    if(futgalDirectTimer){
+      clearTimeout(futgalDirectTimer);
+      futgalDirectTimer = null;
+    }
+  }
+
+  function finishFutgalDirect(message, type){
+    stopFutgalDirectPolling();
+    localStorage.removeItem(FUTGAL_REQUEST_KEY);
+    futgalDirectRequestId = null;
+    setFutgalDirectUI(false);
+
+    if(typeof window.updateFutgalSyncUI === 'function'){
+      try{ window.updateFutgalSyncUI(); }catch(e){}
+    }
+
+    if(typeof window.toast === 'function' && message){
+      window.toast(message, type || 'success');
+    }
+  }
+
+  async function applyFutgalDirectData(requestId){
+    const result = await futgalApi('/data?request_id='+encodeURIComponent(requestId));
+
+    if(!result || !result.competicion){
+      throw new Error('El servicio no devolvió competicion.json.');
+    }
+    if(!window.FutgalOfficial || typeof window.FutgalOfficial.apply !== 'function'){
+      throw new Error('El módulo de datos oficiales no está disponible.');
+    }
+
+    window.FutgalOfficial.apply(result.competicion, {
+      source:'GitHub Actions #'+(result.run_number || '')
+    });
+
+    try{
+      if(typeof window.renderSection === 'function' && typeof window.currentSection !== 'undefined'){
+        window.renderSection(window.currentSection);
+      }
+    }catch(e){}
+
+    finishFutgalDirect('✓ Actualización FUTGAL completada', 'success');
+  }
+
+  async function pollFutgalDirect(requestId){
+    if(!requestId) return;
+
+    try{
+      const st = await futgalApi('/status?request_id='+encodeURIComponent(requestId));
+
+      if(st.status === 'completed' && st.conclusion === 'success'){
+        await applyFutgalDirectData(requestId);
+        return;
+      }
+
+      if(st.status === 'completed'){
+        finishFutgalDirect(
+          'La actualización FUTGAL terminó con error.',
+          'error'
+        );
+        return;
+      }
+
+      setFutgalDirectUI(true);
+      futgalDirectTimer = setTimeout(function(){
+        pollFutgalDirect(requestId);
+      }, 5000);
+
+    }catch(err){
+      // Si el seguimiento falla puntualmente, seguimos intentándolo.
+      setFutgalDirectUI(true);
+      futgalDirectTimer = setTimeout(function(){
+        pollFutgalDirect(requestId);
+      }, 10000);
+    }
+  }
+
+  async function actualizarFutgalDirecto(){
+    if(futgalDirectRunning){
+      if(typeof window.toast === 'function'){
+        window.toast('Actualización en curso.', 'info');
+      }
+      return;
+    }
+
+    setFutgalDirectUI(true);
+
+    if(typeof window.toast === 'function'){
+      window.toast('Actualización en curso.', 'info');
+    }
+
+    try{
+      // Primero comprobamos el servidor. Así evitamos duplicados incluso
+      // si la actualización se lanzó desde otro móvil, PC o pestaña.
+      const active = await futgalApi('/active');
+
+      if(active && active.active && active.request_id){
+        futgalDirectRequestId = active.request_id;
+        localStorage.setItem(FUTGAL_REQUEST_KEY, futgalDirectRequestId);
+        await pollFutgalDirect(futgalDirectRequestId);
+        return;
+      }
+
+      const started = await futgalApi('/start', {
+        method:'POST',
+        body:JSON.stringify({})
+      });
+
+      if(!started || !started.request_id){
+        throw new Error('No se recibió el identificador de la actualización.');
+      }
+
+      futgalDirectRequestId = started.request_id;
+      localStorage.setItem(FUTGAL_REQUEST_KEY, futgalDirectRequestId);
+
+      // Si entre la comprobación y el inicio apareció otra ejecución,
+      // el Worker devuelve esa ejecución en vez de crear una duplicada.
+      await pollFutgalDirect(futgalDirectRequestId);
+
+    }catch(err){
+      console.error('Actualizar FUTGAL:', err);
+      finishFutgalDirect(
+        'No se pudo iniciar la actualización FUTGAL.',
+        'error'
+      );
+    }
+  }
+
+  async function recoverFutgalDirectState(){
+    try{
+      const active = await futgalApi('/active');
+
+      if(active && active.active && active.request_id){
+        futgalDirectRequestId = active.request_id;
+        localStorage.setItem(FUTGAL_REQUEST_KEY, futgalDirectRequestId);
+        setFutgalDirectUI(true);
+        pollFutgalDirect(futgalDirectRequestId);
+        return;
+      }
+
+      localStorage.removeItem(FUTGAL_REQUEST_KEY);
+      setFutgalDirectUI(false);
+
+    }catch(e){
+      // Un fallo de estado no bloquea el resto de la app.
+    }
+  }
+
+  window.actualizarFutgalDirecto = actualizarFutgalDirecto;
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', function(){
+      setTimeout(recoverFutgalDirectState, 700);
+    });
+  }else{
+    setTimeout(recoverFutgalDirectState, 700);
+  }
+})();
+</script>
+
 </body>
 </html>
 
