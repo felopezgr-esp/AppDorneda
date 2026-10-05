@@ -5328,6 +5328,251 @@ button[aria-busy="true"]{
   .liga-mobile-actions a{padding:2px 7px!important;font-size:9px!important}
 }
 
+
+/* ==========================================================
+   PASO 16R · COMPETICIONES MÓVIL ULTRACOMPACTO
+   Objetivo: 6-8 partidos visibles en una pantalla de iPhone.
+   ========================================================== */
+@media (max-width:760px){
+
+  /* Actualizar siempre accesible en topbar */
+  #btnSyncFutgalTopbar{
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    width:34px!important;
+    height:34px!important;
+    min-width:34px!important;
+    padding:0!important;
+    font-size:21px!important;
+    font-weight:900!important;
+    line-height:1!important;
+    background:var(--surface2)!important;
+    border:1px solid var(--border2)!important;
+    color:var(--text)!important;
+  }
+  #btnSyncFutgalTopbar[aria-busy="true"],
+  #btnSyncFutgalTopbar:disabled{
+    background:var(--surface3)!important;
+    color:var(--text-dim)!important;
+    border-color:var(--border)!important;
+    opacity:.6!important;
+    cursor:not-allowed!important;
+  }
+
+  /* Cabecera de Competiciones */
+  #section-clasificacion .page-header{
+    margin:0 0 5px!important;
+    gap:0!important;
+  }
+  #section-clasificacion .page-title{
+    font-size:18px!important;
+    line-height:1.05!important;
+  }
+  #section-clasificacion .page-subtitle{
+    display:none!important;
+  }
+
+  /* Pretemporada / Liga / Copa: una sola línea compacta */
+  #section-clasificacion #compMainTabs{
+    min-height:0!important;
+    margin:0 0 5px!important;
+    padding:3px!important;
+    gap:4px!important;
+    border-radius:9px!important;
+  }
+  #section-clasificacion #compMainTabs > .tab{
+    min-height:34px!important;
+    height:34px!important;
+    padding:4px 2px!important;
+    font-size:10px!important;
+    border-radius:7px!important;
+  }
+
+  /* 4 subpestañas de Liga en UNA fila */
+  #section-clasificacion #ligaSubTabsWrap{
+    display:grid!important;
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    gap:3px!important;
+    overflow:visible!important;
+    margin:0 0 5px!important;
+    padding:0 0 5px!important;
+  }
+  #section-clasificacion #ligaSubTabsWrap > button{
+    width:100%!important;
+    min-width:0!important;
+    min-height:36px!important;
+    height:36px!important;
+    padding:3px 2px!important;
+    font-size:8.5px!important;
+    line-height:1.05!important;
+    white-space:normal!important;
+    overflow:hidden!important;
+    border-radius:7px!important;
+  }
+
+  #ligaSubViewResultados > .card{
+    padding:6px!important;
+    margin:0!important;
+    border-radius:10px!important;
+  }
+
+  /* Filtros comprimidos */
+  #section-clasificacion .liga-search-filters{
+    padding:5px!important;
+    margin:0 0 5px!important;
+    gap:4px!important;
+    border-radius:8px!important;
+  }
+  #section-clasificacion .liga-search-label{
+    display:none!important;
+  }
+  #section-clasificacion .liga-jornada-selector{
+    gap:3px!important;
+    padding:0 18px 3px 0!important;
+  }
+  #section-clasificacion .liga-jornada-filter-btn{
+    min-width:33px!important;
+    height:30px!important;
+    padding:0 5px!important;
+    font-size:9.5px!important;
+    border-radius:6px!important;
+  }
+  #section-clasificacion .liga-jornada-filter-btn.all{
+    min-width:44px!important;
+  }
+  #section-clasificacion .liga-team-select{
+    height:34px!important;
+    min-height:34px!important;
+    padding-top:4px!important;
+    padding-bottom:4px!important;
+    font-size:14px!important;
+    border-radius:7px!important;
+  }
+
+  /* Título de la jornada y navegación */
+  #ligaSubViewResultados > .card > div[style*="justify-content:space-between"][style*="border-bottom"]{
+    min-height:31px!important;
+    margin:0 0 5px!important;
+    padding:0 1px 4px!important;
+  }
+  #ligaSearchResultTitle{
+    font-size:11.5px!important;
+    line-height:1.1!important;
+  }
+  #ligaJornadaNavQuickWrap{
+    gap:2px!important;
+  }
+  #ligaJornadaNavQuickWrap .btn{
+    min-width:28px!important;
+    width:28px!important;
+    height:28px!important;
+    min-height:28px!important;
+    padding:0!important;
+    font-size:18px!important;
+    border-radius:7px!important;
+  }
+
+  /* Lista */
+  #ligaMatchesResultContainer{
+    gap:4px!important;
+  }
+
+  /* Partido: solo 2 filas de equipos + fecha/hora */
+  .liga-mobile-card-ultra{
+    min-height:0!important;
+    border-radius:8px!important;
+    box-shadow:none!important;
+    overflow:hidden!important;
+  }
+  .liga-mobile-card-ultra.dorneda-mobile-card{
+    border-left:3px solid var(--red)!important;
+    background:rgba(204,0,0,.035)!important;
+  }
+  .liga-mobile-card-ultra .liga-mobile-main{
+    display:grid!important;
+    grid-template-columns:22px 21px minmax(0,1fr) 46px!important;
+    grid-template-rows:22px 22px!important;
+    column-gap:4px!important;
+    row-gap:0!important;
+    padding:4px 6px!important;
+    align-items:center!important;
+  }
+  .liga-mobile-card-ultra .liga-mobile-score{
+    font-size:14px!important;
+    line-height:1!important;
+    text-align:center!important;
+  }
+  .liga-mobile-card-ultra .liga-mobile-score.pending{
+    font-size:13px!important;
+  }
+  .liga-mobile-card-ultra .liga-mobile-badge{
+    width:20px!important;
+    height:20px!important;
+    flex:0 0 20px!important;
+    font-size:6.8px!important;
+    border-width:1px!important;
+  }
+  .liga-mobile-card-ultra .liga-mobile-team{
+    min-width:0!important;
+    gap:3px!important;
+    font-size:10.6px!important;
+    line-height:1!important;
+    font-weight:720!important;
+  }
+  .liga-mobile-card-ultra .liga-mobile-team-name{
+    display:block!important;
+    min-width:0!important;
+    white-space:nowrap!important;
+    overflow:hidden!important;
+    text-overflow:ellipsis!important;
+  }
+  .liga-mobile-card-ultra .liga-mobile-win{
+    flex:0 0 auto!important;
+    color:var(--success)!important;
+    font-size:9px!important;
+  }
+  .liga-mobile-card-ultra .liga-mobile-date{
+    grid-column:4!important;
+    grid-row:1 / span 2!important;
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:flex-end!important;
+    justify-content:center!important;
+    text-align:right!important;
+    font-size:8.4px!important;
+    line-height:1.05!important;
+    color:var(--text-muted)!important;
+  }
+  .liga-mobile-card-ultra .liga-mobile-date strong{
+    font-size:8.8px!important;
+    line-height:1!important;
+  }
+  .liga-mobile-card-ultra .liga-mobile-date span{
+    margin-top:2px!important;
+  }
+
+  /* La fila completa abre la Ficha. El campo y los botones sobran aquí. */
+  .liga-mobile-card-ultra .liga-mobile-footer{
+    display:none!important;
+  }
+}
+
+/* iPhone estrecho */
+@media (max-width:390px){
+  #section-clasificacion #ligaSubTabsWrap > button{
+    font-size:7.9px!important;
+  }
+  .liga-mobile-card-ultra .liga-mobile-main{
+    grid-template-columns:20px 19px minmax(0,1fr) 43px!important;
+    padding-left:5px!important;
+    padding-right:5px!important;
+  }
+  .liga-mobile-card-ultra .liga-mobile-team{
+    font-size:10px!important;
+  }
+}
+
 </style>
 </head>
 <body class="editor-mode">
@@ -15242,41 +15487,79 @@ function getSemanaActualBounds(){
 }
 
 function getLigaJornadaSemanaActual(){
-  var jornadas = (typeof getLigaJornadasOficiales === 'function') ? (getLigaJornadasOficiales() || []) : [];
-  if(!jornadas.length) return 1;
+  function parseAnyDate(v){
+    var s=String(v || '').trim();
+    var m=s.match(/^(\d{2})[\/-](\d{2})[\/-](\d{4})$/);
+    if(!m) return null;
+    var d=new Date(Number(m[3]),Number(m[2])-1,Number(m[1]));
+    d.setHours(12,0,0,0);
+    return isNaN(d.getTime()) ? null : d;
+  }
 
-  var bounds = getSemanaActualBounds();
-  var nowTs = bounds.monday.getTime();
-  var weekStart = bounds.monday.getTime();
-  var weekEnd = bounds.sunday.getTime();
+  var now=new Date();
+  now.setHours(12,0,0,0);
 
-  var current = jornadas.find(function(j){
-    return fechasUnicasJornada(j).some(function(f){
-      var d = parseFechaLigaDMY(f);
-      if(!d) return false;
-      var t = d.getTime();
-      return t >= weekStart && t <= weekEnd;
+  var monday=new Date(now);
+  monday.setDate(now.getDate()-((now.getDay()+6)%7));
+  monday.setHours(0,0,0,0);
+
+  var sunday=new Date(monday);
+  sunday.setDate(monday.getDate()+6);
+  sunday.setHours(23,59,59,999);
+
+  var rows=[];
+
+  // 1. Fuente oficial si ya está cargada.
+  var jornadas=(typeof getLigaJornadasOficiales==='function')
+    ? (getLigaJornadasOficiales() || [])
+    : [];
+
+  jornadas.forEach(function(j){
+    var fechas=fechasUnicasJornada(j);
+    fechas.forEach(function(f){
+      var d=parseAnyDate(f);
+      if(d) rows.push({jornada:Number(j.jornada)||0,date:d});
     });
   });
-  if(current) return Number(current.jornada) || 1;
 
-  var next = null;
-  jornadas.forEach(function(j){
-    var fechas = fechasUnicasJornada(j).map(parseFechaLigaDMY).filter(Boolean).sort(function(a,b){ return a-b; });
-    if(!fechas.length) return;
-    var t = fechas[0].getTime();
-    if(t >= nowTs && (!next || t < next.t)) next = { t:t, j:j };
-  });
-  if(next) return Number(next.j.jornada) || 1;
+  // 2. Fallback inmediato: nuestros partidos de Liga ya conocen las fechas J1-J30.
+  if(!rows.length){
+    var source=(db && Array.isArray(db.partidos) && db.partidos.length)
+      ? db.partidos
+      : ((typeof DEFAULT_DATA!=='undefined' && Array.isArray(DEFAULT_DATA.partidos)) ? DEFAULT_DATA.partidos : []);
 
-  var prev = null;
-  jornadas.forEach(function(j){
-    var fechas = fechasUnicasJornada(j).map(parseFechaLigaDMY).filter(Boolean).sort(function(a,b){ return b-a; });
-    if(!fechas.length) return;
-    var t = fechas[0].getTime();
-    if(t <= weekEnd && (!prev || t > prev.t)) prev = { t:t, j:j };
+    source.forEach(function(p){
+      var comp=String(p.competicion || '').toLowerCase();
+      if(comp.indexOf('futgal')===-1 && comp.indexOf('liga')===-1) return;
+
+      var jornada=Number(p.jornada)||0;
+      if(!jornada && p.codigo){
+        var jm=String(p.codigo).match(/^J(\d+)$/i);
+        if(jm) jornada=Number(jm[1])||0;
+      }
+      var d=parseAnyDate(p.fecha);
+      if(jornada && d) rows.push({jornada:jornada,date:d});
+    });
+  }
+
+  if(!rows.length) return 1;
+
+  // Jornada que tenga al menos un partido entre lunes y domingo.
+  var current=rows.find(function(r){
+    var t=r.date.getTime();
+    return t>=monday.getTime() && t<=sunday.getTime();
   });
-  return prev ? (Number(prev.j.jornada) || 1) : 1;
+  if(current) return current.jornada;
+
+  // Si no hay partido esa semana, mostrar la próxima jornada.
+  var future=rows
+    .filter(function(r){ return r.date.getTime()>sunday.getTime(); })
+    .sort(function(a,b){ return a.date-b.date; });
+  if(future.length) return future[0].jornada;
+
+  // Fin de temporada: mantener la última.
+  rows.sort(function(a,b){ return b.date-a.date; });
+  return rows[0].jornada || 1;
 }
 
 function syncCurrentLigaWeekJornada(){
@@ -16332,71 +16615,56 @@ function renderLigaMobileMatchCards(matches, jornadaNum, container){
   if(!container) return;
 
   if(!matches || !matches.length){
-    container.innerHTML = '<div style="padding:18px;text-align:center;color:var(--text-muted);">No hay partidos programados.</div>';
+    container.innerHTML='<div style="padding:14px;text-align:center;color:var(--text-muted);font-size:11px;">No hay partidos programados.</div>';
     return;
   }
 
-  var sorted = [...matches].sort(function(a, b){
-    var ad = /Dorneda/i.test(String(a.local || '')) || /Dorneda/i.test(String(a.visitante || '')) || a.dorneda;
-    var bd = /Dorneda/i.test(String(b.local || '')) || /Dorneda/i.test(String(b.visitante || '')) || b.dorneda;
-    return Number(bd) - Number(ad);
+  var sorted=[...matches].sort(function(a,b){
+    var ad=/Dorneda/i.test(String(a.local||'')) || /Dorneda/i.test(String(a.visitante||'')) || a.dorneda;
+    var bd=/Dorneda/i.test(String(b.local||'')) || /Dorneda/i.test(String(b.visitante||'')) || b.dorneda;
+    return Number(bd)-Number(ad);
   });
 
-  container.innerHTML = sorted.map(function(p){
-    var isDornedaMatch = /Dorneda/i.test(String(p.local || '')) || /Dorneda/i.test(String(p.visitante || '')) || p.dorneda;
-    var isDornedaLocal = /Dorneda/i.test(String(p.local || ''));
-    var isDornedaVisit = /Dorneda/i.test(String(p.visitante || ''));
+  container.innerHTML=sorted.map(function(p){
+    var isDornedaMatch=/Dorneda/i.test(String(p.local||'')) || /Dorneda/i.test(String(p.visitante||'')) || p.dorneda;
+    var isDornedaLocal=/Dorneda/i.test(String(p.local||''));
+    var isDornedaVisit=/Dorneda/i.test(String(p.visitante||''));
 
-    var hasScore = p.gl !== null && p.gl !== undefined && p.gv !== null && p.gv !== undefined;
-    var localWinner = hasScore && Number(p.gl) > Number(p.gv);
-    var visitWinner = hasScore && Number(p.gv) > Number(p.gl);
+    var hasScore=p.gl!==null && p.gl!==undefined && p.gv!==null && p.gv!==undefined;
+    var localWinner=hasScore && Number(p.gl)>Number(p.gv);
+    var visitWinner=hasScore && Number(p.gv)>Number(p.gl);
 
-    var fecha = p.fecha ? String(p.fecha).slice(0,5) : '—';
-    var hora = p.hora || 'SF';
-    var campo = p.campo || 'Campo por determinar';
+    var fecha=p.fecha ? String(p.fecha).slice(0,5) : '—';
+    var hora=p.hora || 'Por fijar';
+    var campo=p.campo || 'Campo por determinar';
 
-    var actaUrl = p.enlaceActa || (
-      p.codActa
-        ? `https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=${p.codActa}&cod_acta=${p.codActa}`
-        : ''
-    );
-
-    var localEsc = (p.local || '').replace(/'/g, "\'");
-    var visitEsc = (p.visitante || '').replace(/'/g, "\'");
-
-    var localScore = hasScore ? p.gl : '–';
-    var visitScore = hasScore ? p.gv : '–';
+    var localEsc=(p.local||'').replace(/'/g,"\\'");
+    var visitEsc=(p.visitante||'').replace(/'/g,"\\'");
 
     return `
-      <div class="liga-mobile-card ${isDornedaMatch ? 'dorneda-mobile-card' : ''}"
-           title="${campo.replace(/"/g, '&quot;')}"
-           onclick="openFichaActaOficial(${jornadaNum}, '${localEsc}', '${visitEsc}', '${p.enlaceActa || ''}', '${p.codActa || ''}')">
+      <div class="liga-mobile-card liga-mobile-card-ultra ${isDornedaMatch?'dorneda-mobile-card':''}"
+           role="button"
+           tabindex="0"
+           title="${campo.replace(/"/g,'&quot;')} · Toca para abrir la ficha"
+           onclick="openFichaActaOficial(${jornadaNum}, '${localEsc}', '${visitEsc}', '${p.enlaceActa||''}', '${p.codActa||''}')">
         <div class="liga-mobile-main">
-          <div class="liga-mobile-score ${hasScore ? '' : 'pending'}">${localScore}</div>
-          <span class="liga-mobile-badge ${isDornedaLocal ? 'dorneda' : ''}">${ligaInicialesEquipo(p.local)}</span>
-          <div class="liga-mobile-team ${localWinner ? 'winner' : ''} ${isDornedaLocal ? 'dorneda' : ''}">
+          <div class="liga-mobile-score ${hasScore?'':'pending'}">${hasScore?p.gl:'–'}</div>
+          <span class="liga-mobile-badge ${isDornedaLocal?'dorneda':''}">${ligaInicialesEquipo(p.local)}</span>
+          <div class="liga-mobile-team ${localWinner?'winner':''} ${isDornedaLocal?'dorneda':''}">
             <span class="liga-mobile-team-name">${ligaNombreMovil(p.local)}</span>
-            ${localWinner ? '<span style="color:var(--success);font-size:11px;">✓</span>' : ''}
+            ${localWinner?'<span class="liga-mobile-win">✓</span>':''}
           </div>
-          <div class="liga-mobile-date"><strong>${fecha}</strong><br>${hora}</div>
 
-          <div class="liga-mobile-score ${hasScore ? '' : 'pending'}">${visitScore}</div>
-          <span class="liga-mobile-badge ${isDornedaVisit ? 'dorneda' : ''}">${ligaInicialesEquipo(p.visitante)}</span>
-          <div class="liga-mobile-team ${visitWinner ? 'winner' : ''} ${isDornedaVisit ? 'dorneda' : ''}">
+          <div class="liga-mobile-date">
+            <strong>${fecha}</strong>
+            <span>${hora}</span>
+          </div>
+
+          <div class="liga-mobile-score ${hasScore?'':'pending'}">${hasScore?p.gv:'–'}</div>
+          <span class="liga-mobile-badge ${isDornedaVisit?'dorneda':''}">${ligaInicialesEquipo(p.visitante)}</span>
+          <div class="liga-mobile-team ${visitWinner?'winner':''} ${isDornedaVisit?'dorneda':''}">
             <span class="liga-mobile-team-name">${ligaNombreMovil(p.visitante)}</span>
-            ${visitWinner ? '<span style="color:var(--success);font-size:11px;">✓</span>' : ''}
-          </div>
-        </div>
-
-        <div class="liga-mobile-footer" onclick="event.stopPropagation()">
-          <div class="liga-mobile-field" title="${campo.replace(/"/g, '&quot;')}">📍 ${campo}</div>
-          <div class="liga-mobile-actions">
-            <button type="button"
-                    class="btn ${isDornedaMatch ? 'btn-primary' : 'btn-ghost'} btn-xs"
-                    onclick="openFichaActaOficial(${jornadaNum}, '${localEsc}', '${visitEsc}', '${p.enlaceActa || ''}', '${p.codActa || ''}')">
-              Ficha
-            </button>
-            ${actaUrl ? `<a href="${actaUrl}" target="_blank" rel="noopener noreferrer" style="background:#285b4f;color:#fff;text-decoration:none;border:1px solid #1e453c;">Acta</a>` : ''}
+            ${visitWinner?'<span class="liga-mobile-win">✓</span>':''}
           </div>
         </div>
       </div>
@@ -22719,6 +22987,9 @@ function initApp(){
   isAdminMode = true;
   initFirebaseSync();
   updateAdminModeUI();
+
+  // En cada carga completa: lunes-domingo = jornada correspondiente.
+  // No depende de que FutgalOfficial haya terminado de cargar.
   syncCurrentLigaWeekJornada();
 
   // Restore saved active sub-tabs if any
