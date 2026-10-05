@@ -1,5 +1,5 @@
 {
-  "fecha": "2026-10-04T12:45:41.237Z",
+  "fecha": "2026-10-05T10:54:02.603Z",
   "arquitectura": "datos_frescos_dos_fases_checkpoint_solo_respaldo",
   "metodoArranque": "checkpoint_local_sin_arranque_futgal",
   "metodoRecorrido": "10E_fresco_url_directa_aislada_con_fallback_a_checkpoint",
@@ -11,7 +11,7 @@
   "actasIntegradas": 32,
   "actasPendientes": [],
   "jornadasConFallback": [],
-  "cambiosCalendarioDetectados": 0,
+  "cambiosCalendarioDetectados": 1,
   "todasCorrectas": true,
   "erroresGlobales": [],
   "resumenJornadas": [

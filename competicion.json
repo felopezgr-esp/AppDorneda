@@ -1,6 +1,6 @@
 {
   "versionFormato": 2,
-  "fechaExtraccion": "2026-10-04T12:45:41.237Z",
+  "fechaExtraccion": "2026-10-05T10:54:02.603Z",
   "fuente": "FUTGAL",
   "temporada": "2026-2027",
   "competicion": "Veteranos - Primera Galicia",
@@ -8257,18 +8257,6 @@
         },
         {
           "orden": 2,
-          "local": "CEDEIRA S.D.",
-          "visitante": "OZA DE LOS RÍOS",
-          "fecha": "10-10-2026",
-          "hora": null,
-          "campo": "Municipal Carmen Maseda (O Beco)",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
-        },
-        {
-          "orden": 3,
           "local": "XUVENTUDE DORNEDA",
           "visitante": "SADA F.C. A NOSA VIÑA",
           "fecha": "10-10-2026",
@@ -8280,7 +8268,7 @@
           "acta": null
         },
         {
-          "orden": 4,
+          "orden": 3,
           "local": "LICEO DE MONELOS S.D.",
           "visitante": "C.C.D. CURTIS",
           "fecha": "10-10-2026",
@@ -8292,7 +8280,7 @@
           "acta": null
         },
         {
-          "orden": 5,
+          "orden": 4,
           "local": "PORTAZGO S.D.",
           "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
           "fecha": "10-10-2026",
@@ -8304,7 +8292,7 @@
           "acta": null
         },
         {
-          "orden": 6,
+          "orden": 5,
           "local": "SAN MARTIÑO S.D.",
           "visitante": "SPORTING CAMBRE AS TRAVESAS",
           "fecha": "10-10-2026",
@@ -8316,12 +8304,24 @@
           "acta": null
         },
         {
-          "orden": 7,
+          "orden": 6,
           "local": "C.D. SIGRAS",
           "visitante": "SPORTING BURGO",
           "fecha": "10-10-2026",
           "hora": "18:00",
           "campo": "Os Pinares, (Brexo Lema)",
+          "estado": "PROGRAMADO",
+          "actaDisponible": false,
+          "resultado": null,
+          "acta": null
+        },
+        {
+          "orden": 7,
+          "local": "CEDEIRA S.D.",
+          "visitante": "OZA DE LOS RÍOS",
+          "fecha": "11-10-2026",
+          "hora": "10:00",
+          "campo": "Municipal Carmen Maseda (O Beco)",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,
