@@ -5573,6 +5573,14 @@ button[aria-busy="true"]{
   }
 }
 
+
+/* PASO 16S · Guardado robusto Ficha/Cuaderno */
+#coachNotebookSaveBtn[aria-busy="true"],
+#coachNotebookSaveBtn:disabled{
+  opacity:.65!important;
+  cursor:not-allowed!important;
+}
+
 </style>
 </head>
 <body class="editor-mode">
@@ -11758,6 +11766,58 @@ function saveDBToCloud(){
 }
 window.saveDBToCloud = saveDBToCloud;
 
+function saveDBToCloudImmediate(){
+  // Para ediciones importantes (Ficha/Cuaderno): no esperamos al debounce de 350 ms.
+  // La promesa solo termina correctamente cuando Firebase confirma la escritura.
+  if(cloudSyncTimeout){
+    clearTimeout(cloudSyncTimeout);
+    cloudSyncTimeout=null;
+  }
+
+  if(!firestoreDocRef || isRemoteUpdate){
+    return Promise.reject(new Error('La conexión con Firebase todavía no está disponible.'));
+  }
+
+  var snapshot=JSON.parse(JSON.stringify(db));
+  isCloudSyncing=true;
+  updateCloudStatusUI('syncing','Guardando...');
+
+  return firestoreDocRef.set({
+    db:snapshot,
+    updatedAt:firebase.firestore.FieldValue.serverTimestamp(),
+    version:'v19'
+  },{merge:true})
+  .then(function(){
+    return firestoreDocRef.get();
+  })
+  .then(function(docSnap){
+    isCloudSyncing=false;
+    if(!docSnap || !docSnap.exists){
+      throw new Error('Firebase no devolvió confirmación de la ficha.');
+    }
+
+    var remote=docSnap.data();
+    var remoteDb=remote && remote.db ? remote.db : null;
+    var localAt=Number(db && db._syncMeta && db._syncMeta.partidosLastEditAt) || 0;
+    var remoteAt=Number(remoteDb && remoteDb._syncMeta && remoteDb._syncMeta.partidosLastEditAt) || 0;
+
+    if(localAt && remoteAt < localAt){
+      throw new Error('La nube no confirmó todavía la última edición del partido.');
+    }
+
+    updateCloudStatusUI('online','Nube Sincronizada');
+    return true;
+  })
+  .catch(function(err){
+    isCloudSyncing=false;
+    console.error('Error saveDBToCloudImmediate:',err);
+    updateCloudStatusUI('error','Guardado local');
+    throw err;
+  });
+}
+window.saveDBToCloudImmediate=saveDBToCloudImmediate;
+
+
 
 
 function markPlantillaEdited(){
@@ -15136,26 +15196,82 @@ window.parseFirestoreRestDoc = parseFirestoreRestDoc;
 
 function fetchCloudDBViaRest(){
   const restUrl = `https://firestore.googleapis.com/v1/projects/${FIREBASE_CONFIG.projectId}/databases/(default)/documents/dorneda_app_data/temporada_2026_2027?key=${FIREBASE_CONFIG.apiKey}`;
-  return fetch(restUrl, { cache: 'no-store' })
+
+  return fetch(restUrl,{cache:'no-store'})
     .then(r => r.ok ? r.json() : null)
     .then(data => {
       if(data && data.fields){
-        const parsed = parseFirestoreRestDoc(data);
+        const parsed=parseFirestoreRestDoc(data);
+
         if(parsed && parsed.db){
-          const res = validateAndMigrateDB(parsed.db);
-          db = res.dbObj;
-          localStorage.setItem(DB_KEY, JSON.stringify(db));
-          if(typeof currentSection !== 'undefined') renderSection(currentSection);
+          var incomingDb=parsed.db;
+          var localMeta=(db && db._syncMeta) ? db._syncMeta : {};
+          var cloudMeta=(incomingDb && incomingDb._syncMeta) ? incomingDb._syncMeta : {};
+
+          var localPartidosAt=Number(localMeta.partidosLastEditAt)||0;
+          var cloudPartidosAt=Number(cloudMeta.partidosLastEditAt)||0;
+
+          // CRÍTICO: si la ficha del móvil es más reciente que la nube,
+          // conservamos nuestros partidos en lugar de reemplazarlos.
+          if(db && Array.isArray(db.partidos) && localPartidosAt>cloudPartidosAt){
+            incomingDb=JSON.parse(JSON.stringify(incomingDb));
+            incomingDb.partidos=JSON.parse(JSON.stringify(db.partidos));
+            incomingDb._syncMeta=Object.assign({},incomingDb._syncMeta||{},{
+              partidosLastEditAt:localPartidosAt
+            });
+          }
+
+          // Mantener también las protecciones de Plantilla y Scouting.
+          var localPlantillaAt=Number(localMeta.plantillaLastEditAt)||0;
+          var cloudPlantillaAt=Number(cloudMeta.plantillaLastEditAt)||0;
+          if(db && Array.isArray(db.jugadores) && localPlantillaAt>cloudPlantillaAt){
+            if(incomingDb===parsed.db) incomingDb=JSON.parse(JSON.stringify(incomingDb));
+            incomingDb.jugadores=JSON.parse(JSON.stringify(db.jugadores));
+            incomingDb._syncMeta=Object.assign({},incomingDb._syncMeta||{},{
+              plantillaLastEditAt:localPlantillaAt
+            });
+          }
+
+          var localScoutingAt=Number(localMeta.scoutingLastEditAt)||0;
+          var cloudScoutingAt=Number(cloudMeta.scoutingLastEditAt)||0;
+          if(db && db.scoutingNotas && localScoutingAt>cloudScoutingAt){
+            if(incomingDb===parsed.db) incomingDb=JSON.parse(JSON.stringify(incomingDb));
+            incomingDb.scoutingNotas=JSON.parse(JSON.stringify(db.scoutingNotas));
+            incomingDb._syncMeta=Object.assign({},incomingDb._syncMeta||{},{
+              scoutingLastEditAt:localScoutingAt
+            });
+          }
+
+          var localEconomia=db && db.economia ? db.economia : null;
+          var incomingEconomia=incomingDb && incomingDb.economia ? incomingDb.economia : null;
+          var localEconomiaAt=Number(localEconomia && localEconomia._lastEditAt)||0;
+          var cloudEconomiaAt=Number(incomingEconomia && incomingEconomia._lastEditAt)||0;
+          if(localEconomia && localEconomiaAt>cloudEconomiaAt){
+            if(incomingDb===parsed.db) incomingDb=JSON.parse(JSON.stringify(incomingDb));
+            incomingDb.economia=JSON.parse(JSON.stringify(localEconomia));
+          }
+
+          const res=validateAndMigrateDB(incomingDb);
+          db=res.dbObj;
+          localStorage.setItem(DB_KEY,JSON.stringify(db));
+
+          if(typeof currentSection!=='undefined') renderSection(currentSection);
           updateFutgalSyncUI();
-          updateCloudStatusUI('online', 'Nube Sincronizada');
+          updateCloudStatusUI('online','Nube Sincronizada');
+
+          // Si protegimos datos locales más recientes, intentamos subirlos.
+          if(localPartidosAt>cloudPartidosAt && isAdminMode && firestoreDocRef){
+            saveDBToCloudImmediate().catch(function(){});
+          }
+
           return db;
         }
       }
       return null;
     })
     .catch(e => {
-      console.warn('fetchCloudDBViaRest error:', e);
-      updateCloudStatusUI('offline', 'Modo Local');
+      console.warn('fetchCloudDBViaRest error:',e);
+      updateCloudStatusUI('offline','Modo Local');
       return null;
     });
 }
@@ -17102,7 +17218,7 @@ function coachNotebookRender(match,acta,pManual,jornadaNum){
       </div>
 
       <div class="coach-notebook-actions">
-        <button type="button" class="btn btn-ghost coach-notebook-save" onclick="saveCuadernoEntrenador()">Guardar Ficha de Partido</button>
+        <button type="button" id="coachNotebookSaveBtn" class="btn btn-ghost coach-notebook-save" onclick="saveCuadernoEntrenador()">Guardar Ficha de Partido</button>
       </div>
     </div>
   `;
@@ -17148,56 +17264,92 @@ function coachNotebookCreateManualMatch(ctx){
   };
 }
 
-function saveCuadernoEntrenador(){
+async function saveCuadernoEntrenador(){
   var ctx=currentCoachNotebookContext;
   if(!ctx) return;
 
-  var p=coachNotebookFindManualMatch(ctx);
-  if(!p){
-    p=coachNotebookCreateManualMatch(ctx);
-    if(!db.partidos) db.partidos=[];
-    db.partidos.push(p);
+  var saveBtn=document.getElementById('coachNotebookSaveBtn');
+  var originalBtnText=saveBtn ? saveBtn.innerHTML : 'Guardar Ficha de Partido';
+
+  if(saveBtn){
+    saveBtn.disabled=true;
+    saveBtn.innerHTML='⏳ Guardando...';
+    saveBtn.setAttribute('aria-busy','true');
   }
 
-  var detail=[];
-  document.querySelectorAll('[data-coach-goal-key]').forEach(function(sel){
-    var asistente=String(sel.value || '').trim();
-    if(!asistente) return;
+  try{
+    var p=coachNotebookFindManualMatch(ctx);
+    if(!p){
+      p=coachNotebookCreateManualMatch(ctx);
+      if(!db.partidos) db.partidos=[];
+      db.partidos.push(p);
+    }
 
-    var player=(db.jugadores || []).find(function(j){
-      return normalizeName(j.nombre)===normalizeName(asistente);
+    var detail=[];
+    document.querySelectorAll('[data-coach-goal-key]').forEach(function(sel){
+      var asistente=String(sel.value || '').trim();
+      if(!asistente) return;
+
+      var player=(db.jugadores || []).find(function(j){
+        return normalizeName(j.nombre)===normalizeName(asistente);
+      });
+
+      detail.push({
+        goalKey:sel.getAttribute('data-coach-goal-key') || '',
+        minuto:sel.getAttribute('data-coach-minute') || '',
+        goleador:sel.getAttribute('data-coach-scorer') || '',
+        asistente:asistente,
+        dorsal:player && player.dorsal ? player.dorsal : ''
+      });
     });
 
-    detail.push({
-      goalKey:sel.getAttribute('data-coach-goal-key') || '',
-      minuto:sel.getAttribute('data-coach-minute') || '',
-      goleador:sel.getAttribute('data-coach-scorer') || '',
-      asistente:asistente,
-      dorsal:player && player.dorsal ? player.dorsal : ''
-    });
-  });
+    var obsEl=document.getElementById('coachNotebookObservations');
+    var observations=obsEl ? obsEl.value.trim() : '';
 
-  var obsEl=document.getElementById('coachNotebookObservations');
-  var observations=obsEl ? obsEl.value.trim() : '';
+    p.asistenciasDetalle=detail;
+    p.analisisPartido=observations;
+    p.observacionesEntrenador=observations;
 
-  p.asistenciasDetalle=detail;
-  p.analisisPartido=observations;
-  p.observacionesEntrenador=observations;
+    p.codigo=p.codigo || (ctx.jornada ? 'J'+ctx.jornada : '');
+    p.jornada=p.jornada || ctx.jornada || null;
+    p.codActa=p.codActa || ctx.codActa || '';
+    p.fecha=p.fecha || ctx.fecha || '';
+    p.campo=p.campo || ctx.campo || '';
 
-  // Mantener vínculo con el acta y datos básicos para compatibilidad.
-  p.codigo=p.codigo || (ctx.jornada ? 'J'+ctx.jornada : '');
-  p.jornada=p.jornada || ctx.jornada || null;
-  p.codActa=p.codActa || ctx.codActa || '';
-  p.fecha=p.fecha || ctx.fecha || '';
-  p.campo=p.campo || ctx.campo || '';
+    markPartidosEdited();
 
-  markPartidosEdited();
-  saveDB();
-  toast('Cuaderno del entrenador guardado','success');
+    // PRIMERO: persistencia local síncrona. Aunque falle Internet,
+    // el texto no desaparece de este dispositivo.
+    localStorage.setItem(DB_KEY,JSON.stringify(db));
 
-  // Refrescar la ficha y mantener visible el área de edición.
-  openFichaActaOficial(ctx.jornada,ctx.local,ctx.visitante,'',ctx.codActa);
-  setTimeout(function(){ toggleCoachNotebookEditor(true); },40);
+    // SEGUNDO: escritura inmediata y confirmación real de Firebase.
+    await saveDBToCloudImmediate();
+
+    toast('✓ Ficha guardada en dispositivo y nube','success');
+
+    openFichaActaOficial(ctx.jornada,ctx.local,ctx.visitante,'',ctx.codActa);
+    setTimeout(function(){ toggleCoachNotebookEditor(true); },40);
+
+  }catch(err){
+    console.error('Guardar Cuaderno del entrenador:',err);
+
+    // La copia local ya está protegida. No fingimos que la nube se guardó.
+    toast('Ficha guardada en este móvil, pero la nube no confirmó el guardado. No cierres la app y vuelve a pulsar Guardar cuando tengas conexión.','warning');
+
+    if(saveBtn){
+      saveBtn.disabled=false;
+      saveBtn.innerHTML='⚠ Reintentar guardado en nube';
+      saveBtn.removeAttribute('aria-busy');
+    }
+    return;
+  }
+
+  var currentBtn=document.getElementById('coachNotebookSaveBtn');
+  if(currentBtn){
+    currentBtn.disabled=false;
+    currentBtn.innerHTML=originalBtnText;
+    currentBtn.removeAttribute('aria-busy');
+  }
 }
 window.saveCuadernoEntrenador=saveCuadernoEntrenador;
 
