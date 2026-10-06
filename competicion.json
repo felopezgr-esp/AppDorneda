@@ -1,6 +1,6 @@
 {
   "versionFormato": 2,
-  "fechaExtraccion": "2026-10-05T15:39:46.387Z",
+  "fechaExtraccion": "2026-10-06T10:54:21.820Z",
   "fuente": "FUTGAL",
   "temporada": "2026-2027",
   "competicion": "Veteranos - Primera Galicia",
@@ -8245,18 +8245,6 @@
       "partidos": [
         {
           "orden": 1,
-          "local": "BETANZOS NORTE",
-          "visitante": "U.D. PAIOSACO H.AÑON",
-          "fecha": "10-10-2026",
-          "hora": null,
-          "campo": "O Carregal (Betanzos)",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
-        },
-        {
-          "orden": 2,
           "local": "LICEO DE MONELOS S.D.",
           "visitante": "C.C.D. CURTIS",
           "fecha": "10-10-2026",
@@ -8268,7 +8256,7 @@
           "acta": null
         },
         {
-          "orden": 3,
+          "orden": 2,
           "local": "PORTAZGO S.D.",
           "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
           "fecha": "10-10-2026",
@@ -8280,7 +8268,7 @@
           "acta": null
         },
         {
-          "orden": 4,
+          "orden": 3,
           "local": "SAN MARTIÑO S.D.",
           "visitante": "SPORTING CAMBRE AS TRAVESAS",
           "fecha": "10-10-2026",
@@ -8292,12 +8280,24 @@
           "acta": null
         },
         {
-          "orden": 5,
+          "orden": 4,
           "local": "C.D. SIGRAS",
           "visitante": "SPORTING BURGO",
           "fecha": "10-10-2026",
           "hora": "18:00",
           "campo": "Os Pinares, (Brexo Lema)",
+          "estado": "PROGRAMADO",
+          "actaDisponible": false,
+          "resultado": null,
+          "acta": null
+        },
+        {
+          "orden": 5,
+          "local": "BETANZOS NORTE",
+          "visitante": "U.D. PAIOSACO H.AÑON",
+          "fecha": "10-10-2026",
+          "hora": "20:00",
+          "campo": "O Carregal (Betanzos)",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,

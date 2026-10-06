@@ -4,16 +4,12 @@
     "cambios": [
       {
         "tipo": "cambio_programacion",
-        "local": "XUVENTUDE DORNEDA",
-        "visitante": "SADA F.C. A NOSA VIÑA",
+        "local": "BETANZOS NORTE",
+        "visitante": "U.D. PAIOSACO H.AÑON",
         "diferencias": {
-          "fecha": {
-            "antes": "10-10-2026",
-            "ahora": "11-10-2026"
-          },
           "hora": {
             "antes": null,
-            "ahora": "12:15"
+            "ahora": "20:00"
           }
         }
       }
