@@ -1,18 +1,1 @@
-[
-  {
-    "jornada": 5,
-    "cambios": [
-      {
-        "tipo": "cambio_programacion",
-        "local": "BETANZOS NORTE",
-        "visitante": "U.D. PAIOSACO H.AÑON",
-        "diferencias": {
-          "hora": {
-            "antes": null,
-            "ahora": "20:00"
-          }
-        }
-      }
-    ]
-  }
-]
+[]
