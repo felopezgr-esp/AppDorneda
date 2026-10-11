@@ -1,1 +1,63 @@
-[]
+[
+  {
+    "jornada": 5,
+    "cambios": [
+      {
+        "tipo": "cambio_programacion",
+        "local": "PORTAZGO S.D.",
+        "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
+        "diferencias": {
+          "fecha": {
+            "antes": "10-10-2026",
+            "ahora": "11-10-2026"
+          },
+          "hora": {
+            "antes": null,
+            "ahora": "10:00"
+          }
+        }
+      },
+      {
+        "tipo": "cambio_programacion",
+        "local": "SAN MARTIÑO S.D.",
+        "visitante": "SPORTING CAMBRE AS TRAVESAS",
+        "diferencias": {
+          "fecha": {
+            "antes": "10-10-2026",
+            "ahora": "11-10-2026"
+          },
+          "hora": {
+            "antes": null,
+            "ahora": "11:00"
+          }
+        }
+      },
+      {
+        "tipo": "partido_nuevo_o_pareja_distinta",
+        "local": "Suspendido",
+        "visitante": "C.C.D. CURTIS",
+        "nuevo": {
+          "fecha": "11-10-2026",
+          "hora": "12:10",
+          "campo": "Campo de Fútbol Universidad Laboral"
+        }
+      }
+    ]
+  },
+  {
+    "jornada": 6,
+    "cambios": [
+      {
+        "tipo": "cambio_programacion",
+        "local": "U.D. PAIOSACO H.AÑON",
+        "visitante": "C.D. SIGRAS",
+        "diferencias": {
+          "hora": {
+            "antes": null,
+            "ahora": "19:40"
+          }
+        }
+      }
+    ]
+  }
+]
