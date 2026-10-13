@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Xuventude Dorneda &middot; Temporada 2026/27</title>
+  <!-- REVISION 2026-10-13: análisis oficial FUTGAL + próximo rival + editor móvil -->
   <meta name="description" content="App de gestion, registro y analisis de la temporada 2026/27 del Xuventude Dorneda, equipo de futbol veterano de la Primeira Futgal A Coruna-Ferrol." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -3677,6 +3678,23 @@ body.reader-mode #modalFotoUploadInput{display:none!important}
 #coachNotebookEditor{
   scroll-margin-top:12px;
 }
+.coach-mobile-edit-bar{display:none;}
+@media(max-width:760px){
+  .coach-mobile-edit-bar{
+    display:block!important;
+    margin:8px 0!important;
+  }
+  .coach-mobile-edit-bar .btn-edit-match-sheet{
+    width:100%!important;
+    min-height:44px!important;
+    justify-content:center!important;
+    font-size:12px!important;
+    font-weight:900!important;
+    border:1px solid var(--border2)!important;
+    background:var(--surface2)!important;
+    color:var(--text)!important;
+  }
+}
 
 
 /* PASO 16J · CUADERNO VISIBLE EN LA FICHA */
@@ -6276,7 +6294,7 @@ button[aria-busy="true"]{
         <div><div class="page-title">Análisis</div><div class="page-subtitle">Estadísticas de equipo e individuales</div></div>
       </div>
       <div class="tabs">
-        <div class="tab active" onclick="showAnalisisTab('equipo',this)">&#127942; Equipo</div>
+        <div class="tab active" onclick="showAnalisisTab('equipo',this)">&#127942; DORNEDA</div>
         <div class="tab" onclick="showAnalisisTab('individual',this)">&#128100; Individual</div>
         <div class="tab" onclick="showAnalisisTab('proximoRival',this)">&#127919; Pr&oacute;ximo Rival</div>
       </div>
@@ -11725,6 +11743,12 @@ function initFirebaseSync(){
         }
       }, function(err){
         console.warn('Firestore onSnapshot aviso:', err);
+        var denied=err && (err.code === 'permission-denied' || String(err.message || '').toLowerCase().indexOf('permission') !== -1);
+        if(denied){
+          updateCloudStatusUI('error', 'Reglas Firebase');
+          toast('Firebase ha bloqueado la nube porque las reglas de Firestore han caducado. Los datos locales de este dispositivo se conservan; actualiza las reglas en Firebase para recuperar la sincronización.','error');
+          return;
+        }
         fetchCloudDBViaRest();
       });
     }
@@ -11760,7 +11784,7 @@ function saveDBToCloud(){
       isCloudSyncing=false;
       console.error('Error saveDBToCloud:',err);
       updateCloudStatusUI('error','Error al Guardar');
-      toast('No se pudo guardar en la nube. Revisa las reglas de Firebase.','error');
+      toast('No se pudo guardar en la nube. Si Firestore indica reglas caducadas, actualízalas en Firebase. La copia local de este dispositivo no se borra.','error');
     });
   },350);
 }
@@ -12017,7 +12041,17 @@ function badgeClass(r){if(!r)return 'pendiente';const s=r.toLowerCase();if(s.inc
 function compBadge(c){if(!c)return 'pendiente';const s=c.toLowerCase();if(s.includes('pretemporada'))return 'pretemporada';if(s.includes('futgal'))return 'liga';if(s.includes('copa')||s.includes('gallego'))return 'copa';return 'pendiente';}
 function getCompIcon(c){if(!c)return '🌐';const s=c.toLowerCase();if(s.includes('pretemporada')||s.startsWith('pret'))return '⏱️';if(s.includes('copa')||s.includes('gallego')||s.startsWith('c_')||s.startsWith('cg_'))return '🏆';if(s.includes('futgal')||s.includes('liga')||s.startsWith('j'))return '⚽';return '🌐';}
 window.getCompIcon = getCompIcon;
-function calcStats(){const p=(db.partidos||[]).filter(x=>(x.resultado==='Victoria'||x.resultado==='Empate'||x.resultado==='Derrota')&&x.gf!==null&&x.gf!==undefined&&x.resultado!=='Pendiente'&&((x.competicion||'').toLowerCase().indexOf('futgal')!==-1||(x.competicion||'').toLowerCase().indexOf('liga')!==-1)),v=p.filter(x=>x.resultado==='Victoria').length,e=p.filter(x=>x.resultado==='Empate').length,d=p.filter(x=>x.resultado==='Derrota').length,gf=p.reduce((s,x)=>s+(parseInt(x.gf)||0),0),gc=p.reduce((s,x)=>s+(parseInt(x.gc)||0),0);return{total:p.length,v,e,d,gf,gc};}
+function calcStats(){
+  var p = (typeof getLigaDornedaAnalisisPartidosOficiales === 'function')
+    ? getLigaDornedaAnalisisPartidosOficiales()
+    : [];
+  var v=p.filter(function(x){return x.resultado==='Victoria';}).length;
+  var e=p.filter(function(x){return x.resultado==='Empate';}).length;
+  var d=p.filter(function(x){return x.resultado==='Derrota';}).length;
+  var gf=p.reduce(function(s,x){return s+(Number(x.gf)||0);},0);
+  var gc=p.reduce(function(s,x){return s+(Number(x.gc)||0);},0);
+  return {total:p.length,v:v,e:e,d:d,gf:gf,gc:gc};
+}
 
 function setStatFilterComp(comp, el){
   statFilterComp = comp;
@@ -12096,6 +12130,36 @@ function getLigaDornedaMatchesOficiales(){
   return out;
 }
 
+
+function getLigaDornedaAnalisisPartidosOficiales(){
+  return getLigaDornedaMatchesOficiales().map(function(rec){
+    var p=rec.partido || {};
+    var gf=Number(rec.isLocal ? p.gl : p.gv);
+    var gc=Number(rec.isLocal ? p.gv : p.gl);
+    var resultado=gf>gc ? 'Victoria' : (gf<gc ? 'Derrota' : 'Empate');
+    return {
+      jornada:rec.jornada || 0,
+      codigo:'J'+(rec.jornada || ''),
+      fecha:p.fecha || '',
+      hora:p.hora || '',
+      campo:p.campo || '',
+      codActa:p.codActa || '',
+      local:p.local || '',
+      visitante:p.visitante || '',
+      rival:rec.isLocal ? (p.visitante || '') : (p.local || ''),
+      condicion:rec.isLocal ? 'Local' : 'Visitante',
+      gf:gf,
+      gc:gc,
+      resultado:resultado,
+      partido:p,
+      acta:rec.acta || null
+    };
+  }).sort(function(a,b){
+    return (Number(a.jornada)||0)-(Number(b.jornada)||0);
+  });
+}
+window.getLigaDornedaAnalisisPartidosOficiales=getLigaDornedaAnalisisPartidosOficiales;
+
 function ensureAnalisisPlayer(stats, name, dorsal, nombreCompleto){
   var canon = getCanonicalPlayerName(name, dorsal) || String(name || '').trim();
   if(!canon) return null;
@@ -12125,20 +12189,19 @@ function getLigaIndividualStatsOficiales(){
   var stats = {};
   var matches = getLigaDornedaMatchesOficiales();
   var actasLeidas = 0;
+  var officialNameToStatKey = new Map();
 
   matches.forEach(function(rec){
-    var p = rec.partido;
     var a = rec.acta;
     if(!a) return;
 
     var titulares = rec.isLocal ? (a.localTitulares || []) : (a.visitTitulares || []);
     var suplentes = rec.isLocal ? (a.localSuplentes || []) : (a.visitSuplentes || []);
 
-    // Si el acta no tiene alineaciones, no inventamos participación.
+    // Participación: exclusivamente alineaciones oficiales del acta.
     if(!titulares.length && !suplentes.length) return;
     actasLeidas++;
 
-    var rosterByFedName = new Map();
     var seen = new Set();
 
     function addRoster(list, titular){
@@ -12155,34 +12218,31 @@ function getLigaIndividualStatsOficiales(){
         }
         if(titular) row.titulares++;
 
-        rosterByFedName.set(goleadoresNorm(pl.nombre), row);
-        // Alias ya limpio/canónico por si el extractor entrega el goleador en otro formato.
-        rosterByFedName.set(goleadoresNorm(row.nombre), row);
-        if(row.nombreCompleto) rosterByFedName.set(goleadoresNorm(row.nombreCompleto), row);
+        // Relación exacta entre el nombre de FUTGAL y nuestra fila canónica.
+        // No se usa búsqueda difusa para atribuir goles.
+        officialNameToStatKey.set(goleadoresNorm(pl.nombre), key);
+        if(row.nombreCompleto) officialNameToStatKey.set(goleadoresNorm(row.nombreCompleto), key);
+        officialNameToStatKey.set(goleadoresNorm(row.nombre), key);
       });
     }
 
     addRoster(titulares, true);
     addRoster(suplentes, false);
-
-    (a.allGoles || []).forEach(function(g){
-      var clean = cleanAndFormatGoal(g);
-      if(!clean || clean.propiaPuerta) return;
-
-      var scorerNorm = goleadoresNorm(clean.rawScorer || clean.scorerName || '');
-      var row = rosterByFedName.get(scorerNorm) || null;
-
-      if(!row){
-        var matched = matchPlayerInDB(clean.rawScorer || clean.scorerName || '', null);
-        if(matched && matched.nombre){
-          row = stats[normalizeName(matched.nombre)] || null;
-        }
-      }
-
-      // Solo atribuimos el gol si el goleador pertenece al roster Dorneda de ese acta.
-      if(row) row.goles++;
-    });
   });
+
+  // Fuente única de goles de Liga: el mismo cálculo que Competición > Goleadores.
+  // Así Análisis Individual nunca vuelve a reinterpretar los autores del acta.
+  Object.keys(stats).forEach(function(k){ stats[k].goles = 0; });
+  if(typeof calcularLigaGoleadoresOficiales === 'function'){
+    var pichichi = calcularLigaGoleadoresOficiales();
+    (pichichi.rows || []).forEach(function(g){
+      if(!isDornedaTeamName(g.equipo)) return;
+      var statKey = officialNameToStatKey.get(goleadoresNorm(g.jugador));
+      if(statKey && stats[statKey]){
+        stats[statKey].goles = Number(g.goles) || 0;
+      }
+    });
+  }
 
   return {
     stats:stats,
@@ -14108,26 +14168,25 @@ function renderAnalisis(){
 }
 
 function renderMisterChipBlock(){
-  const jugados = (db.partidos || []).filter(p => p.resultado && p.gf !== null && p.gf !== undefined);
+  const jugados = (typeof getLigaDornedaAnalisisPartidosOficiales === 'function') ? getLigaDornedaAnalisisPartidosOficiales() : [];
   const totalPJ = jugados.length;
   const v = jugados.filter(p => p.resultado === 'Victoria').length;
   const e = jugados.filter(p => p.resultado === 'Empate').length;
   const d = jugados.filter(p => p.resultado === 'Derrota').length;
-  const totalGF = jugados.reduce((s, p) => s + (parseInt(p.gf) || 0), 0);
-  const totalGC = jugados.reduce((s, p) => s + (parseInt(p.gc) || 0), 0);
+  const totalGF = jugados.reduce((s, p) => s + (Number(p.gf) || 0), 0);
+  const totalGC = jugados.reduce((s, p) => s + (Number(p.gc) || 0), 0);
   const promGF = totalPJ > 0 ? (totalGF / totalPJ).toFixed(1) : '0.0';
   const promGC = totalPJ > 0 ? (totalGC / totalPJ).toFixed(1) : '0.0';
   const pctVic = totalPJ > 0 ? Math.round((v / totalPJ) * 100) : 0;
 
-  // Pichichi
-  const goleadores = calcGoleadores('Total');
+  // Pichichi y participación: misma fuente oficial que Análisis Individual.
+  const goleadores = calcGoleadores('Liga');
   const topGol = goleadores.length ? goleadores[0] : null;
   const segundoGol = goleadores.length > 1 ? goleadores[1] : null;
 
-  // Participación
-  const participaciones = calcParticipacion();
-  const topPart = participaciones.length ? participaciones[0] : null;
-  const intocables = participaciones.filter(p => p[1].jug === totalPJ && totalPJ > 0).map(p => p[0]);
+  const participaciones = calcParticipacion('Liga');
+  const topPart = participaciones.slice().sort((a,b)=>(b[1].conv-a[1].conv)||(b[1].tit-a[1].tit))[0] || null;
+  const intocables = participaciones.filter(p => p[1].conv === totalPJ && totalPJ > 0).map(p => p[0]);
 
   // Factor Local vs Visitante
   const localPJ = jugados.filter(p => p.condicion === 'Local');
@@ -14198,7 +14257,7 @@ function renderMisterChipBlock(){
     insights.push({
       icon: '👕',
       title: 'Mayor Continuidad',
-      text: `<strong>${topPart[0]}</strong> lidera el ranking de presencia con <strong>${topPart[1].jug} partidos disputados</strong> y ${topPart[1].tit} titularidades.`
+      text: `<strong>${topPart[0]}</strong> lidera el ranking de presencia con <strong>${topPart[1].conv} partidos disputados</strong> y ${topPart[1].tit} titularidades.`
     });
   }
 
@@ -17046,7 +17105,7 @@ function coachNotebookEscapeAttr(v){
 
 function toggleCoachNotebookEditor(forceOpen){
   var editor=document.getElementById('coachNotebookEditor');
-  var btn=document.getElementById('btnEditMatchSheet');
+  var buttons=document.querySelectorAll('.btn-edit-match-sheet');
   if(!editor) return;
 
   var shouldOpen=(typeof forceOpen === 'boolean')
@@ -17055,11 +17114,11 @@ function toggleCoachNotebookEditor(forceOpen){
 
   editor.style.display=shouldOpen ? 'block' : 'none';
 
-  if(btn){
+  buttons.forEach(function(btn){
     btn.innerHTML=shouldOpen
       ? '<span>\u2715 Cerrar edición</span>'
       : '<span>\u270e Editar Ficha de Partido</span>';
-  }
+  });
 
   if(shouldOpen){
     setTimeout(function(){
@@ -17643,7 +17702,7 @@ function openFichaActaOficial(jornadaNum, localTeam, visitTeam, enlaceActa, codA
         ${isDornedaMatch ? `
           <button type="button"
                   id="btnEditMatchSheet"
-                  class="btn btn-ghost btn-sm"
+                  class="btn btn-ghost btn-sm btn-edit-match-sheet"
                   onclick="toggleCoachNotebookEditor()"
                   style="width:100%;justify-content:center;font-weight:800;font-size:11.5px;border:1px solid var(--border);border-radius:8px;padding:8px;gap:6px;">
             <span>\u270e Editar Ficha de Partido</span>
@@ -17722,6 +17781,11 @@ function openFichaActaOficial(jornadaNum, localTeam, visitTeam, enlaceActa, codA
   `;
 
   if(isDornedaMatch){
+    html += `<div class="coach-mobile-edit-bar">
+      <button type="button" id="btnEditMatchSheetMobile" class="btn btn-ghost btn-edit-match-sheet" onclick="toggleCoachNotebookEditor()">
+        <span>\u270e Editar Ficha de Partido</span>
+      </button>
+    </div>`;
     html += coachNotebookViewRender(pDorneda || null);
     html += coachNotebookRender(match,acta,pDorneda || null,jornadaNum);
   }
@@ -18663,31 +18727,53 @@ function toArr(x){
 }
 
 function getNextUpcomingOpponent(){
-  var partidos = toArr((db && db.partidos && db.partidos.length) ? db.partidos : DEFAULT_DATA.partidos);
-  var pendingMatch = partidos.find(function(p){
-    var isLiga = !p.competicion || p.competicion.toLowerCase().indexOf('futgal') !== -1 || p.competicion.toLowerCase().indexOf('primera') !== -1;
-    var isPending = (p.gf === null || p.gf === undefined || p.gf === '') && p.resultado !== 'Victoria' && p.resultado !== 'Derrota' && p.resultado !== 'Empate' && p.estado !== 'Jugado' && p.rival && p.rival !== 'Pendiente';
-    return isLiga && isPending;
+  var jornadas = (typeof getLigaJornadasOficiales === 'function')
+    ? toArr(getLigaJornadasOficiales())
+    : [];
+  var candidates=[];
+
+  jornadas.forEach(function(j){
+    toArr(j && j.partidos).forEach(function(p){
+      if(!p) return;
+      var isLocal=isDornedaTeamName(p.local);
+      var isVisit=isDornedaTeamName(p.visitante);
+      if(!isLocal && !isVisit) return;
+
+      var score=(typeof clasifGetScore === 'function') ? clasifGetScore(p) : null;
+      if(score) return; // ya jugado
+
+      var rival=isLocal ? p.visitante : p.local;
+      if(!rival) return;
+      candidates.push({
+        jornada:Number(j.jornada || j.numero || p.jornada || 0),
+        fecha:p.fecha || j.fecha || '',
+        rival:rival,
+        partido:p,
+        isLocal:isLocal
+      });
+    });
   });
-  if(pendingMatch && pendingMatch.rival){
-    return {
-      nombre: formatCleanTeamName(pendingMatch.rival),
-      rawNombre: pendingMatch.rival,
-      match: pendingMatch
-    };
-  }
-  var j2 = partidos.find(function(p){ return p.codigo === 'J2' || p.jornada === 2; });
-  if(j2 && j2.rival){
-    return {
-      nombre: formatCleanTeamName(j2.rival),
-      rawNombre: j2.rival,
-      match: j2
-    };
+
+  candidates.sort(function(a,b){
+    var ja=Number(a.jornada)||999;
+    var jb=Number(b.jornada)||999;
+    if(ja!==jb) return ja-jb;
+    var da=parseFechaLigaDMY(a.fecha);
+    var dbb=parseFechaLigaDMY(b.fecha);
+    return (da ? da.getTime() : 0) - (dbb ? dbb.getTime() : 0);
+  });
+
+  var next=candidates[0] || null;
+  if(!next){
+    return {nombre:'',rawNombre:'',match:null,jornada:null};
   }
   return {
-    nombre: 'Sporting Burgo',
-    rawNombre: 'Sporting Burgo',
-    match: null
+    nombre:formatCleanTeamName(next.rival),
+    rawNombre:next.rival,
+    match:next.partido,
+    jornada:next.jornada,
+    fecha:next.fecha,
+    condicion:next.isLocal ? 'Local' : 'Visitante'
   };
 }
 
@@ -18706,47 +18792,56 @@ function renderAnalisisProximoRival(selectedTeam){
 
   try {
     var nextOpp = getNextUpcomingOpponent();
-    var activeRival = selectedTeam || currentScoutingRival || nextOpp.nombre;
+    // Sin selección manual, SIEMPRE abrimos el próximo rival oficial actual.
+    var activeRival = selectedTeam || nextOpp.rawNombre || nextOpp.nombre || '';
+    if(!activeRival){
+      container.innerHTML = '<div class="card" style="padding:20px;text-align:center"><strong>No hay próximo rival pendiente en la Liga.</strong></div>';
+      return;
+    }
     currentScoutingRival = activeRival;
     var normActive = norm(activeRival);
 
-    // 1. Obtener lista completa de rivales de la liga (15 rivales + Dorneda)
+    // 1. Equipos SOLO desde la competición oficial / clasificación automática.
+    // Deduplicación normalizada para evitar dobles entradas en el desplegable.
+    var officialJ = (typeof getLigaJornadasOficiales === 'function') ? toArr(getLigaJornadasOficiales()) : [];
     var allTeams = [];
-    var equiposDef = toArr(DEFAULT_DATA && DEFAULT_DATA.equipos);
-    equiposDef.forEach(function(eq){
-      if(eq && eq.nombre && !allTeams.includes(eq.nombre)) allTeams.push(eq.nombre);
+    var teamKeys = new Set();
+    function addTeamOfficial(name){
+      if(!name || isDornedaTeamName(name)) return;
+      var key=(typeof clasifNormName === 'function') ? clasifNormName(name) : norm(name).replace(/[^a-z0-9]+/g,' ');
+      if(!key || teamKeys.has(key)) return;
+      teamKeys.add(key);
+      allTeams.push(name);
+    }
+    officialJ.forEach(function(j){
+      toArr(j && j.partidos).forEach(function(p){
+        if(!p) return;
+        addTeamOfficial(p.local);
+        addTeamOfficial(p.visitante);
+      });
     });
+
     var clasifAutoCalc = (typeof calcularClasificacionAutomatica === 'function')
       ? calcularClasificacionAutomatica()
       : null;
     var clasifAutoRows = toArr(clasifAutoCalc && clasifAutoCalc.rows);
-    var clasifLegacy = toArr((db && db.clasificacion && db.clasificacion.length) ? db.clasificacion : (DEFAULT_DATA.clasificacion || []));
+    var clasifLegacy = toArr((db && db.clasificacion && db.clasificacion.length) ? db.clasificacion : []);
     var clasif = clasifAutoRows.length ? clasifAutoRows : clasifLegacy;
+    clasif.forEach(function(row){ if(row && row.equipo) addTeamOfficial(row.equipo); });
+    addTeamOfficial(activeRival);
+    allTeams.sort(function(a,b){ return String(formatCleanTeamName(a)).localeCompare(String(formatCleanTeamName(b)),'es',{sensitivity:'base'}); });
+    var rivalOptions = allTeams;
 
-    clasif.forEach(function(row){
-      if(row && row.equipo && !allTeams.includes(row.equipo)){
-        allTeams.push(row.equipo);
-      }
-    });
-    if(!allTeams.length){
-      allTeams = ['Sporting Burgo', 'U.D. Narahio', 'Betanzos Norte', 'C.D. Sigr\u00e1s', 'C.C.D. Curtis', 'Club Deportivo Nar\u00f3n Silver Catering', 'Campanal de Loureda F. C.', 'Sporting Cambre As Travesas', 'Portazgo S.D.', 'Liceo de Monelos S.D.', 'U.D. Paiosaco H.A\u00f1on', 'Oza de los R\u00edos', 'Cedeira S.D.', 'Sada F.C. A Nosa Vi\u00f1a', 'San Marti\u00f1o S.D.', 'Xuventude Dorneda'];
-    }
-    var rivalOptions = allTeams.filter(function(t){ return norm(t).indexOf('dorneda') === -1; });
+    // Las notas manuales siguen viviendo en db.partidos, pero resultados/estadísticas vienen de FUTGAL.
+    var partidosDorneda = toArr((db && db.partidos && db.partidos.length) ? db.partidos : []);
 
-    // 2. Extraer datos del pr\u00f3ximo partido de Dorneda contra este rival
-    var partidosDorneda = toArr((db && db.partidos && db.partidos.length) ? db.partidos : (DEFAULT_DATA.partidos || []));
-    var nextMatchVsRival = partidosDorneda.find(function(p){
-      return norm(p.rival) === normActive || norm(p.rival).includes(normActive) || normActive.includes(norm(p.rival));
-    });
-
-    // 3. Posici\u00f3n en la tabla de clasificaci\u00f3n
+    // 2. Posici\u00f3n en la tabla de clasificaci\u00f3n
     var rivalClasif = clasif.find(function(r){
       return norm(r.equipo) === normActive || norm(r.equipo).includes(normActive) || normActive.includes(norm(r.equipo));
     }) || { pos: null, pts: null, pj: null, g: null, e: null, p: null, gf: null, gc: null, dg: null };
 
     // 4. Recopilar todos los partidos de este rival en todasJornadas
-    var officialJ = (typeof getLigaJornadasOficiales === 'function') ? toArr(getLigaJornadasOficiales()) : [];
-    var todasJ = officialJ.length ? officialJ : toArr((db && db.todasJornadas && db.todasJornadas.length) ? db.todasJornadas : (DEFAULT_DATA.todasJornadas || []));
+    var todasJ = officialJ.length ? officialJ : toArr((db && db.todasJornadas && db.todasJornadas.length) ? db.todasJornadas : []);
     var defTodasJ = toArr(DEFAULT_DATA.todasJornadas);
     var rivalMatches = [];
     var plantillaMap = {};
@@ -19222,7 +19317,7 @@ function renderAnalisisProximoRival(selectedTeam){
           </div>
           <select id="selectRivalScouting" onchange="renderAnalisisProximoRival(this.value)" class="form-control scout-select">
             ${rivalOptions.map(function(t){
-              return `<option value="${t}" ${norm(t)===normActive?'selected':''}>${formatCleanTeamName(t)}${norm(t)===norm(nextOpp.nombre)?' · Próximo':''}</option>`;
+              return `<option value="${t}" ${norm(t)===normActive?'selected':''}>${formatCleanTeamName(t)}${norm(t)===norm(nextOpp.rawNombre || nextOpp.nombre)?' · Próximo':''}</option>`;
             }).join('')}
           </select>
         </div>
@@ -19307,65 +19402,48 @@ window.getNextUpcomingOpponent = getNextUpcomingOpponent;
 function renderAnalisisEquipo(){
   var mcEl = document.getElementById('analisisMisterChip');
   if(mcEl) mcEl.innerHTML = renderMisterChipBlock();
-  const s = calcStats();
-  document.getElementById('analisisStatsGrid').innerHTML = `<div class="stat-card red"><div class="stat-label">Partidos</div><div class="stat-value">${s.total}</div></div><div class="stat-card green"><div class="stat-label">Victorias</div><div class="stat-value">${s.v}</div><div class="stat-sub">${s.total?Math.round(s.v/s.total*100):0}%</div></div><div class="stat-card yellow"><div class="stat-label">Empates</div><div class="stat-value">${s.e}</div></div><div class="stat-card gray"><div class="stat-label">Derrotas</div><div class="stat-value">${s.d}</div></div><div class="stat-card blue"><div class="stat-label">Goles F</div><div class="stat-value">${s.gf}</div><div class="stat-sub">${s.total?(s.gf/s.total).toFixed(1):0}/p</div></div><div class="stat-card ${s.gc<=s.gf?'green':'red'}"><div class="stat-label">Goles C</div><div class="stat-value">${s.gc}</div><div class="stat-sub">${s.total?(s.gc/s.total).toFixed(1):0}/p</div></div>`;
-  
-  const played = (db.partidos || []).filter(p => (p.resultado === 'Victoria' || p.resultado === 'Empate' || p.resultado === 'Derrota') && p.gf !== null && p.gf !== undefined && p.resultado !== 'Pendiente' && ((p.competicion||'').toLowerCase().indexOf('futgal')!==-1||(p.competicion||'').toLowerCase().indexOf('liga')!==-1));
-  
-  const comps = {};
-  for(const p of played){
-    const c = p.competicion || 'Otro';
-    if(!comps[c]) comps[c] = {v:0, e:0, d:0, total:0, gf:0, gc:0};
-    comps[c].total++;
-    comps[c].gf += parseInt(p.gf) || 0;
-    comps[c].gc += parseInt(p.gc) || 0;
-    if(p.resultado === 'Victoria') comps[c].v++;
-    else if(p.resultado === 'Empate') comps[c].e++;
-    else if(p.resultado === 'Derrota') comps[c].d++;
+
+  var played = (typeof getLigaDornedaAnalisisPartidosOficiales === 'function')
+    ? getLigaDornedaAnalisisPartidosOficiales()
+    : [];
+  var s = calcStats();
+
+  var statsGrid=document.getElementById('analisisStatsGrid');
+  if(statsGrid){
+    statsGrid.innerHTML = `<div class="stat-card red"><div class="stat-label">Partidos</div><div class="stat-value">${s.total}</div><div class="stat-sub">Liga oficial</div></div><div class="stat-card green"><div class="stat-label">Victorias</div><div class="stat-value">${s.v}</div><div class="stat-sub">${s.total?Math.round(s.v/s.total*100):0}%</div></div><div class="stat-card yellow"><div class="stat-label">Empates</div><div class="stat-value">${s.e}</div></div><div class="stat-card gray"><div class="stat-label">Derrotas</div><div class="stat-value">${s.d}</div></div><div class="stat-card blue"><div class="stat-label">Goles F</div><div class="stat-value">${s.gf}</div><div class="stat-sub">${s.total?(s.gf/s.total).toFixed(1):0}/p</div></div><div class="stat-card ${s.gc<=s.gf?'green':'red'}"><div class="stat-label">Goles C</div><div class="stat-value">${s.gc}</div><div class="stat-sub">${s.total?(s.gc/s.total).toFixed(1):0}/p</div></div>`;
   }
-  const compOrderKey = (name) => {
-    const s = (name || '').toLowerCase();
-    if(s.indexOf('pret') !== -1) return 1;
-    if(s.indexOf('futgal') !== -1 || s.indexOf('liga') !== -1) return 2;
-    if(s.indexOf('copa') !== -1) return 3;
-    return 4;
-  };
-  const sortedComps = Object.entries(comps).sort((a, b) => compOrderKey(a[0]) - compOrderKey(b[0]));
-  document.getElementById('rendimientoComp').innerHTML = sortedComps.map(([c,v]) => `<div class="flex items-center justify-between mb-12"><div><div style="font-size:13px;font-weight:700">${getCompIcon(c)} ${c}</div><div style="font-size:11px;color:var(--text-muted)">${v.total}p GF:${v.gf} GC:${v.gc}</div></div><div class="flex gap-8" style="font-size:12px;font-weight:700"><span class="text-success">${v.v}V</span><span class="text-warning">${v.e}E</span><span class="text-red">${v.d}D</span></div></div>`).join('') || '<div style="color:var(--text-dim);font-size:13px">Sin datos.</div>';
-  
-  const L = played.filter(p => p.condicion === 'Local');
-  const V = played.filter(p => p.condicion === 'Visitante');
-  const lv = (a, r) => a.filter(p => p.resultado === r).length;
-  document.getElementById('localVsVisitante').innerHTML = `<div class="flex justify-between mb-16"><div class="text-center"><div style="font-size:24px;font-weight:900">${L.length}</div><div style="font-size:11px;color:var(--text-muted)">En casa</div><div style="font-size:12px;margin-top:6px"><span class="text-success">${lv(L,'Victoria')}V</span> <span class="text-warning">${lv(L,'Empate')}E</span> <span class="text-red">${lv(L,'Derrota')}D</span></div></div><div style="width:1px;background:var(--border)"></div><div class="text-center"><div style="font-size:24px;font-weight:900">${V.length}</div><div style="font-size:11px;color:var(--text-muted)">Fuera</div><div style="font-size:12px;margin-top:6px"><span class="text-success">${lv(V,'Victoria')}V</span> <span class="text-warning">${lv(V,'Empate')}E</span> <span class="text-red">${lv(V,'Derrota')}D</span></div></div></div><div class="detail-key">GF local: ${L.reduce((sum,p)=>sum+(parseInt(p.gf)||0),0)} - GC local: ${L.reduce((sum,p)=>sum+(parseInt(p.gc)||0),0)}</div><div class="detail-key mt-8">GF visitante: ${V.reduce((sum,p)=>sum+(parseInt(p.gf)||0),0)} - GC visitante: ${V.reduce((sum,p)=>sum+(parseInt(p.gc)||0),0)}</div>`;
-  
-  const parseMatchDate = (str) => {
-    if (!str) return 0;
-    const parts = str.split('/');
-    if (parts.length === 3) return new Date(`${parts[2]}-${parts[1]}-${parts[0]}`).getTime();
-    return 0;
-  };
-  const sortedPlayed = [...played].sort((a, b) => (parseMatchDate(a.fecha) || a.id || 0) - (parseMatchDate(b.fecha) || b.id || 0));
-  const ult = sortedPlayed.slice(-8);
-  const rachaEl = document.getElementById('rachaActual');
+
+  var rendimiento=document.getElementById('rendimientoComp');
+  if(rendimiento){
+    rendimiento.innerHTML = played.length ? `<div class="flex items-center justify-between mb-12"><div><div style="font-size:13px;font-weight:700">⚽ Primera Futgal</div><div style="font-size:11px;color:var(--text-muted)">${s.total}p · GF:${s.gf} · GC:${s.gc}</div></div><div class="flex gap-8" style="font-size:12px;font-weight:700"><span class="text-success">${s.v}V</span><span class="text-warning">${s.e}E</span><span class="text-red">${s.d}D</span></div></div>` : '<div style="color:var(--text-dim);font-size:13px">Sin partidos oficiales disputados.</div>';
+  }
+
+  var L = played.filter(function(p){ return p.condicion === 'Local'; });
+  var V = played.filter(function(p){ return p.condicion === 'Visitante'; });
+  var lv = function(a,r){ return a.filter(function(p){ return p.resultado === r; }).length; };
+  var localVisit=document.getElementById('localVsVisitante');
+  if(localVisit){
+    localVisit.innerHTML = `<div class="flex justify-between mb-16"><div class="text-center"><div style="font-size:24px;font-weight:900">${L.length}</div><div style="font-size:11px;color:var(--text-muted)">En casa</div><div style="font-size:12px;margin-top:6px"><span class="text-success">${lv(L,'Victoria')}V</span> <span class="text-warning">${lv(L,'Empate')}E</span> <span class="text-red">${lv(L,'Derrota')}D</span></div></div><div style="width:1px;background:var(--border)"></div><div class="text-center"><div style="font-size:24px;font-weight:900">${V.length}</div><div style="font-size:11px;color:var(--text-muted)">Fuera</div><div style="font-size:12px;margin-top:6px"><span class="text-success">${lv(V,'Victoria')}V</span> <span class="text-warning">${lv(V,'Empate')}E</span> <span class="text-red">${lv(V,'Derrota')}D</span></div></div></div><div class="detail-key">GF local: ${L.reduce(function(sum,p){return sum+(Number(p.gf)||0);},0)} - GC local: ${L.reduce(function(sum,p){return sum+(Number(p.gc)||0);},0)}</div><div class="detail-key mt-8">GF visitante: ${V.reduce(function(sum,p){return sum+(Number(p.gf)||0);},0)} - GC visitante: ${V.reduce(function(sum,p){return sum+(Number(p.gc)||0);},0)}</div>`;
+  }
+
+  var ult = played.slice().sort(function(a,b){ return (Number(a.jornada)||0)-(Number(b.jornada)||0); }).slice(-8);
+  var rachaEl = document.getElementById('rachaActual');
   if(rachaEl){
     if(!ult.length){
-      rachaEl.innerHTML = '<span style="color:var(--text-dim);font-size:13px">Sin partidos jugados todavía esta temporada.</span>';
+      rachaEl.innerHTML = '<span style="color:var(--text-dim);font-size:13px">Sin partidos oficiales jugados todavía.</span>';
     } else {
-      rachaEl.innerHTML = ult.map(p => {
-        const isV = p.resultado === 'Victoria';
-        const isD = p.resultado === 'Derrota';
-        const isE = p.resultado === 'Empate';
-        const l = isV ? 'V' : (isD ? 'D' : 'E');
-        const bg = isV ? 'rgba(34,197,94,0.18)' : (isD ? 'rgba(239,68,68,0.18)' : 'rgba(245,158,11,0.18)');
-        const border = isV ? 'rgba(34,197,94,0.45)' : (isD ? 'rgba(239,68,68,0.45)' : 'rgba(245,158,11,0.45)');
-        const color = isV ? '#16a34a' : (isD ? '#dc2626' : '#d97706');
-        const isHome = p.condicion === 'Local';
-        const score = isHome ? `${p.gf}-${p.gc}` : `${p.gc}-${p.gf}`;
-        const rival = p.rival || 'Rival';
-        const comp = p.codigo || p.competicion || 'Partido';
-        const tooltip = `${p.fecha || ''} · ${comp}: ${isHome ? 'Dorneda ' + score + ' ' + rival : rival + ' ' + score + ' Dorneda'} (${p.resultado})`;
-        
-        return `<div title="${tooltip}" onclick="showDetallePartido(${p.id})" style="width:38px;height:38px;border-radius:9px;background:${bg};border:1.5px solid ${border};color:${color};display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;cursor:pointer;transition:transform 0.15s, box-shadow 0.15s;box-shadow:0 1px 3px rgba(0,0,0,0.06);" onmouseenter="this.style.transform='scale(1.1)'" onmouseleave="this.style.transform='none'">${l}</div>`;
+      rachaEl.innerHTML = ult.map(function(p){
+        var isV=p.resultado==='Victoria', isD=p.resultado==='Derrota';
+        var l=isV?'V':(isD?'D':'E');
+        var bg=isV?'rgba(34,197,94,0.18)':(isD?'rgba(239,68,68,0.18)':'rgba(245,158,11,0.18)');
+        var border=isV?'rgba(34,197,94,0.45)':(isD?'rgba(239,68,68,0.45)':'rgba(245,158,11,0.45)');
+        var color=isV?'#16a34a':(isD?'#dc2626':'#d97706');
+        var score=p.condicion==='Local' ? `${p.gf}-${p.gc}` : `${p.gc}-${p.gf}`;
+        var tooltip=`${p.fecha || ''} · J${p.jornada}: ${p.condicion==='Local' ? 'Dorneda '+score+' '+p.rival : p.rival+' '+score+' Dorneda'} (${p.resultado})`;
+        var onclick = (typeof openFichaActaOficial === 'function')
+          ? `openFichaActaOficial(${Number(p.jornada)||0},${JSON.stringify(p.local)},${JSON.stringify(p.visitante)},'',${JSON.stringify(p.codActa || '')})`
+          : '';
+        return `<div title="${tooltip.replace(/"/g,'&quot;')}" ${onclick?`onclick='${onclick.replace(/'/g,"&#39;")}'`:''} style="width:38px;height:38px;border-radius:9px;background:${bg};border:1.5px solid ${border};color:${color};display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;cursor:${onclick?'pointer':'default'};transition:transform 0.15s, box-shadow 0.15s;box-shadow:0 1px 3px rgba(0,0,0,0.06);">${l}</div>`;
       }).join('');
     }
   }
