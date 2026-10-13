@@ -10515,22 +10515,54 @@ function normalizeName(n){
 }
 window.normalizeName = normalizeName;
 
+function playerLiteralNorm(v){
+  return String(v || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toUpperCase()
+    .replace(/[^A-Z0-9]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+window.playerLiteralNorm = playerLiteralNorm;
+
+function playerNameOrders(rawName){
+  var raw = String(rawName || '').replace(/[\r\n\t]+/g,' ').replace(/\s+/g,' ').trim();
+  if(!raw) return [];
+  var values = [playerLiteralNorm(raw)];
+  if(raw.indexOf(',') !== -1){
+    var parts = raw.split(',');
+    var surnames = (parts[0] || '').trim();
+    var first = parts.slice(1).join(' ').trim();
+    if(first && surnames) values.push(playerLiteralNorm(first + ' ' + surnames));
+  }
+  return Array.from(new Set(values.filter(Boolean)));
+}
+window.playerNameOrders = playerNameOrders;
+
 function isSamePlayer(p1Name, p1Dorsal, p2Name, p2Dorsal) {
-  if (p1Dorsal && p2Dorsal && parseInt(p1Dorsal, 10) > 0 && parseInt(p1Dorsal, 10) === parseInt(p2Dorsal, 10)) {
-    return true;
-  }
-  var n1 = normalizeName(p1Name);
-  var n2 = normalizeName(p2Name);
-  if (!n1 || !n2) return false;
-  if (n1 === n2 || n1.indexOf(n2) !== -1 || n2.indexOf(n1) !== -1) return true;
-  var parts1 = n1.split(/[\s,]+/).filter(function(w){ return w.length > 2; });
-  var parts2 = n2.split(/[\s,]+/).filter(function(w){ return w.length > 2; });
-  for (var i = 0; i < parts1.length; i++) {
-    for (var j = 0; j < parts2.length; j++) {
-      if (parts1[i] === parts2[j]) return true;
+  // Primero intentamos resolver ambos nombres contra la plantilla con el mapa
+  // literal de FUTGAL. Si ambos quedan vinculados, solo vale la misma persona.
+  try{
+    if(typeof matchPlayerInDB === 'function'){
+      var m1 = matchPlayerInDB(p1Name, p1Dorsal);
+      var m2 = matchPlayerInDB(p2Name, p2Dorsal);
+      if(m1 && m2 && m1.id !== null && m1.id !== undefined && m2.id !== null && m2.id !== undefined){
+        return String(m1.id) === String(m2.id);
+      }
+      if(m1 && m2 && m1.estado !== 'No vinculado' && m2.estado !== 'No vinculado'){
+        return playerLiteralNorm(m1.nombre) === playerLiteralNorm(m2.nombre);
+      }
     }
-  }
-  return false;
+  }catch(e){}
+
+  // Si alguno no está vinculado, solo aceptamos igualdad literal del nombre
+  // (incluido el orden alternativo "APELLIDOS, NOMBRE"). El dorsal nunca
+  // identifica por sí solo a un jugador.
+  var a = playerNameOrders(p1Name);
+  var b = playerNameOrders(p2Name);
+  if(!a.length || !b.length) return false;
+  return a.some(function(x){ return b.indexOf(x) !== -1; });
 }
 window.isSamePlayer = isSamePlayer;
 
@@ -10566,203 +10598,92 @@ function calcHoraQuedada(horaStr) {
 }
 window.calcHoraQuedada = calcHoraQuedada;
 
+// Correspondencias EXACTAS entre el nombre oficial de FUTGAL y el jugador interno.
+// No usar fragmentos (includes) para identificar personas: "REI" dentro de "TORREIRO"
+// fue suficiente para atribuir por error un gol de Mario a Román.
+const DORNEDA_FUTGAL_PLAYER_MAP = Object.freeze({
+  'CASADO GONZALEZ DAVID':'David',
+  'CERNADAS SOUTO OSCAR':'Cerni',
+  'SALPURIDO GARCIA DIEGO':'Willow',
+  'NOVO SANCHEZ ANGEL':'Ángel',
+  'DOCAMPO DEL RIO JONATHAN':'Joni',
+  'LOPEZ LOPEZ JOSE ANTONIO':'Antony',
+  'REQUEJO LAMAS MIGUEL A':'Michi',
+  'LOPEZ GRANA FELIX':'Felix',
+  'BERGONDO MORENO JOSE M':'Manuly',
+  'RAMOS BARDERAS EDUARDO':'Fonato',
+  'RUMBO SUAREZ ROBERTO':'Rober',
+  'RUMBO SUAREZ ROBERTO JOSE':'Rober',
+  'TOSAR ASOREY FRANCISCO':'Fran',
+  'SANCHEZ FERNANDEZ ROGELIO JESUS':'Jesus',
+  'CHICO LAGO MARCOS':'Marcos',
+  'CARVALHO TAVARES JOSE A':'Yess',
+  'ALLEGUE LOPEZ PABLO':'Pablo',
+  'CASAL VARELA SERGIO J':'Piwi',
+  'LAPORT RIVAS FEDERICO':'Fede',
+  'GARABAL CALLON SANTIAGO':'Santi',
+  'SANCHEZ LOPEZ LESMES':'Lesmes',
+  'PUENTE LONGUEIRA JORGE':'Jorge',
+  'BLANCO VARELA SERGIO':'Mauro',
+  'VAZQUEZ RIVERA JOSE A':'Rivera',
+  'RIVERA JOSE ANTONIO':'Rivera',
+  'MEILAN SEOANE IVAN':'Meilan',
+  'GARCIA DAPIA JOSE I':'Cata',
+  'TORREIRO COUSO ROMAN G':'Roman',
+  'PITA GONZALEZ BORJA':'Borja',
+  'BLANCO CANOSA MANUEL':'Manu',
+  'REI LACACI MARIO':'Mario',
+  'SANCHEZ VIEIRO SERGIO':'Boliche',
+  'BARRENECHEA PADIN JUAN':'Nolas',
+  'BARRENECHEA PADIN JOSE':'Nolas',
+  'AGUADO PERNAS JOSE L':'Coté',
+  'FERNANDEZ VIJANDE LUIS A':'Luis Ángel',
+  'GUNDIN EIRIN FERNANDO ANTONIO':'Kata'
+});
+window.DORNEDA_FUTGAL_PLAYER_MAP = DORNEDA_FUTGAL_PLAYER_MAP;
+
 function matchPlayerInDB(rawName, dorsalHint) {
   if (!rawName) return null;
-  const rawClean = rawName.replace(/[\r\n\t]+/g, ' ').replace(/\s+/g, ' ').trim();
-  
-  let surnames = '';
-  let firstName = '';
-  if (rawClean.includes(',')) {
-    const parts = rawClean.split(',');
-    surnames = parts[0].trim();
-    firstName = (parts[1] || '').trim();
-  } else {
-    const parts = rawClean.split(' ');
-    if (parts.length > 2) {
-      firstName = parts[0];
-      surnames = parts.slice(1).join(' ');
-    } else if (parts.length === 2) {
-      firstName = parts[0];
-      surnames = parts[1];
-    } else {
-      firstName = rawClean;
+
+  var rawClean = String(rawName).replace(/[\r\n\t]+/g, ' ').replace(/\s+/g, ' ').trim();
+  if(!rawClean) return null;
+
+  var jugadores = (typeof db !== 'undefined' && db.jugadores) ? db.jugadores : (DEFAULT_DATA.jugadores || []);
+  var orders = playerNameOrders(rawClean);
+
+  // 1) Alias oficial FUTGAL: solo coincidencia EXACTA del nombre normalizado.
+  var aliasName = '';
+  for(var i=0;i<orders.length;i++){
+    if(DORNEDA_FUTGAL_PLAYER_MAP[orders[i]]){
+      aliasName = DORNEDA_FUTGAL_PLAYER_MAP[orders[i]];
+      break;
     }
   }
-
-  const normFull1 = normalizeName(firstName + ' ' + surnames);
-  const normFull2 = normalizeName(surnames + ' ' + firstName);
-  const normSurnames = normalizeName(surnames);
-  const normFirst = normalizeName(firstName);
-
-  const jugadores = (typeof db !== 'undefined' && db.jugadores) ? db.jugadores : (DEFAULT_DATA.jugadores || []);
-
-  // 1. Alias y casos conocidos de la plantilla del Xuventude Dorneda
-  if (normFull1.includes('gundin') || normFull2.includes('gundin')) {
-    const j = jugadores.find(x => normalizeName(x.nombre) === 'kata' || normalizeName(x.nombreCompleto).includes('gundin'));
-    if (j) return j;
-  }
-  if (normFull1.includes('salpurido') || normFull2.includes('salpurido')) {
-    const j = jugadores.find(x => normalizeName(x.nombre) === 'willow' || normalizeName(x.nombreCompleto).includes('salpurido'));
-    if (j) return j;
-  }
-  if (normFull1.includes('dapia') || normFull2.includes('dapia') || normFull1.includes('garcia dapia')) {
-    const j = jugadores.find(x => normalizeName(x.nombre) === 'cata' || normalizeName(x.nombreCompleto).includes('dapia'));
-    if (j) return j;
-  }
-  if (normFull1.includes('casal varela') || (normFull1.includes('casal') && normFirst.includes('sergio')) || normFull1.includes('casal') || normFull2.includes('casal')) {
-    const j = jugadores.find(x => normalizeName(x.nombre) === 'piwi' || normalizeName(x.nombreCompleto).includes('casal'));
-    if (j) return j;
-  }
-  if (normFull1.includes('blanco varela') || (normFull1.includes('varela') && normFirst.includes('sergio'))) {
-    const j = jugadores.find(x => normalizeName(x.nombre) === 'mauro' || normalizeName(x.nombreCompleto).includes('blanco varela'));
-    if (j) return j;
-  }
-  if (normFull1.includes('blanco canosa') || (normFull1.includes('canosa') && normFirst.includes('manuel'))) {
-    const j = jugadores.find(x => normalizeName(x.nombre) === 'manu' || normalizeName(x.nombreCompleto).includes('blanco canosa'));
-    if (j) return j;
-  }
-  if (normFull1.includes('laport') || normFull2.includes('laport')) {
-    const j = jugadores.find(x => normalizeName(x.nombre) === 'fede' || normalizeName(x.nombreCompleto).includes('laport'));
-    if (j) return j;
-  }
-  if (normFull1.includes('ramos barderas') || normFull2.includes('barderas') || normFull1.includes('barderas')) {
-    const j = jugadores.find(x => normalizeName(x.nombre) === 'fonato' || normalizeName(x.nombreCompleto).includes('barderas'));
-    if (j) return j;
-  }
-  if (normFull1.includes('bergondo') || normFull2.includes('bergondo')) {
-    const j = jugadores.find(x => normalizeName(x.nombre) === 'manuly' || normalizeName(x.nombreCompleto).includes('bergondo'));
-    if (j) return j;
-  }
-  if (normFull1.includes('cernadas') || normFull2.includes('cernadas')) {
-    const j = jugadores.find(x => normalizeName(x.nombre) === 'cerni' || normalizeName(x.nombreCompleto).includes('cernadas'));
-    if (j) return j;
-  }
-  if (normFull1.includes('meilan') || normFull2.includes('meilan')) {
-    const j = jugadores.find(x => normalizeName(x.nombre) === 'meilan' || normalizeName(x.nombreCompleto).includes('meilan'));
-    if (j) return j;
-  }
-  if (normFull1.includes('rei lacaci') || normFull2.includes('lacaci') || normFull1.includes('lacaci') || (normFull1.includes('rei') && !normFull1.includes('requejo'))) {
-    const j = jugadores.find(x => normalizeName(x.nombre) === 'mario' || normalizeName(x.nombreCompleto).includes('rei'));
-    if (j) return j;
-  }
-  if (normFull1.includes('vazquez rivera') || normFull1.includes('rivera') || normFull2.includes('rivera')) {
-    const j = jugadores.find(x => normalizeName(x.nombre) === 'rivera' || normalizeName(x.nombreCompleto).includes('rivera'));
-    if (j) return j;
-  }
-  if (normFull1.includes('puente') || normFull2.includes('puente')) {
-    const j = jugadores.find(x => normalizeName(x.nombre) === 'jorge' || normalizeName(x.nombreCompleto).includes('puente'));
-    if (j) return j;
-  }
-  if (normFull1.includes('chico lago') || normFull2.includes('chico') || normFull1.includes('chico')) {
-    const j = jugadores.find(x => normalizeName(x.nombre) === 'marcos' || normalizeName(x.nombreCompleto).includes('chico'));
-    if (j) return j;
-  }
-  if (normFull1.includes('garabal') || normFull2.includes('garabal')) {
-    const j = jugadores.find(x => normalizeName(x.nombre) === 'santi' || normalizeName(x.nombreCompleto).includes('garabal'));
-    if (j) return j;
-  }
-  if (normFull1.includes('casado') || normFull2.includes('casado')) {
-    const j = jugadores.find(x => normalizeName(x.nombre) === 'david' || normalizeName(x.nombreCompleto).includes('casado'));
-    if (j) return j;
-  }
-  if (normFull1.includes('lopez grana') || (normFull1.includes('grana') && normFirst.includes('felix')) || (normFull1.includes('lopez') && normFirst.includes('felix')) || (normFull2.includes('grana') && normFull2.includes('felix'))) {
-    const j = jugadores.find(x => normalizeName(x.nombre) === 'felix' || normalizeName(x.nombreCompleto).includes('grana'));
-    if (j) return j;
-  }
-  if (normFull1.includes('torreiro') || normFull2.includes('torreiro')) {
-    const j = jugadores.find(x => normalizeName(x.nombre) === 'roman' || normalizeName(x.nombreCompleto).includes('torreiro'));
-    if (j) return j;
-  }
-  if (normFull1.includes('pita gonzalez') || normFull1.includes('pita') || normFull2.includes('pita')) {
-    const j = jugadores.find(x => normalizeName(x.nombre) === 'borja' || normalizeName(x.nombreCompleto).includes('pita'));
-    if (j) return j;
-  }
-  if (normFull1.includes('rumbo') || normFull2.includes('rumbo')) {
-    const j = jugadores.find(x => normalizeName(x.nombre) === 'rober' || normalizeName(x.nombreCompleto).includes('rumbo'));
-    if (j) return j;
-  }
-  if (normFull1.includes('tosar') || normFull2.includes('tosar')) {
-    const j = jugadores.find(x => normalizeName(x.nombre) === 'fran' || normalizeName(x.nombreCompleto).includes('tosar'));
-    if (j) return j;
-  }
-  if (normFull1.includes('sanchez fernandez') || (normFull1.includes('sanchez') && (normFirst.includes('rogelio') || normFirst.includes('jesus')))) {
-    const j = jugadores.find(x => normalizeName(x.nombre) === 'jesus' || normalizeName(x.nombreCompleto).includes('sanchez fernandez'));
-    if (j) return j;
-  }
-  if (normFull1.includes('carvalho') || normFull1.includes('tavares') || normFull2.includes('carvalho')) {
-    const j = jugadores.find(x => normalizeName(x.nombre) === 'yess' || normalizeName(x.nombreCompleto).includes('carvalho'));
-    if (j) return j;
-  }
-  if (normFull1.includes('allegue') || normFull2.includes('allegue')) {
-    const j = jugadores.find(x => normalizeName(x.nombre) === 'pablo' || normalizeName(x.nombreCompleto).includes('allegue'));
-    if (j) return j;
-  }
-  if (normFull1.includes('docampo') || normFull2.includes('docampo')) {
-    const j = jugadores.find(x => normalizeName(x.nombre) === 'joni' || normalizeName(x.nombreCompleto).includes('docampo'));
-    if (j) return j;
-  }
-  if (normFull1.includes('requejo') || normFull2.includes('requejo')) {
-    const j = jugadores.find(x => normalizeName(x.nombre) === 'michi' || normalizeName(x.nombreCompleto).includes('requejo'));
-    if (j) return j;
-  }
-  if (normFull1.includes('novo') || normFull2.includes('novo')) {
-    const j = jugadores.find(x => normalizeName(x.nombre) === 'ángel' || normalizeName(x.nombre) === 'angel' || normalizeName(x.nombreCompleto).includes('novo'));
-    if (j) return j;
-  }
-  if (normFull1.includes('sanchez lopez') || (normFull1.includes('sanchez') && normFirst.includes('lesmes'))) {
-    const j = jugadores.find(x => normalizeName(x.nombre) === 'lesmes' || normalizeName(x.nombreCompleto).includes('sanchez lopez'));
-    if (j) return j;
-  }
-  if (normFull1.includes('lopez lopez') || (normFull1.includes('lopez') && (normFirst.includes('antonio') || normFirst.includes('antony')))) {
-    const j = jugadores.find(x => normalizeName(x.nombre) === 'antony' || normalizeName(x.nombreCompleto).includes('lopez lopez'));
-    if (j) return j;
-  }
-  if (normFull1.includes('aguado') || normFull2.includes('aguado') || normFull1.includes('pernas')) {
-    const j = jugadores.find(x => normalizeName(x.nombre) === 'coté' || normalizeName(x.nombre) === 'cote' || normalizeName(x.nombreCompleto).includes('aguado'));
-    if (j) return j;
-  }
-  if (normFull1.includes('barrenechea') || normFull2.includes('barrenechea') || normFull1.includes('padin')) {
-    const j = jugadores.find(x => normalizeName(x.nombre) === 'nolas' || normalizeName(x.nombreCompleto).includes('barrenechea'));
-    if (j) return j;
-  }
-  if (normFull1.includes('vieiro') || normFull2.includes('vieiro') || (normFull1.includes('sanchez') && normFirst.includes('sergio'))) {
-    const j = jugadores.find(x => normalizeName(x.nombre) === 'boliche' || normalizeName(x.nombreCompleto).includes('vieiro'));
-    if (j) return j;
+  if(aliasName){
+    var byAlias = jugadores.find(function(j){
+      return playerLiteralNorm(j.nombre) === playerLiteralNorm(aliasName);
+    });
+    if(byAlias) return byAlias;
   }
 
-  // 2. Coincidencia directa por nombreCompleto
-  for (const j of jugadores) {
-    if (!j.nombreCompleto) continue;
-    const nc = normalizeName(j.nombreCompleto);
-    if (nc === normFull1 || nc === normFull2) return j;
-    if (normFull1.length > 5 && (nc.includes(normFull1) || normFull1.includes(nc))) return j;
-    if (normFull2.length > 5 && (nc.includes(normFull2) || normFull2.includes(nc))) return j;
-    if (normSurnames.length > 4 && nc.includes(normSurnames) && (nc.includes(normFirst) || !normFirst)) return j;
-  }
+  // 2) Coincidencia exacta con apodo o nombre completo guardado.
+  // Se aceptan ambos órdenes si FUTGAL usa "APELLIDOS, NOMBRE".
+  var exact = jugadores.find(function(j){
+    var nickname = playerLiteralNorm(j.nombre);
+    var full = playerLiteralNorm(j.nombreCompleto);
+    return orders.some(function(o){ return o === nickname || o === full; });
+  });
+  if(exact) return exact;
 
-  // 3. Coincidencia por nombre / apodo
-  for (const j of jugadores) {
-    if (!j.nombre) continue;
-    const n = normalizeName(j.nombre);
-    if (n === normFirst || n === normSurnames || n === normFull1 || normFull1.includes(n) || normFull2.includes(n)) {
-      return j;
-    }
-  }
-
-  // 4. Coincidencia por dorsal si está disponible
-  if (dorsalHint) {
-    const dNum = parseInt(dorsalHint);
-    const jByDorsal = jugadores.find(j => parseInt(j.dorsal) === dNum);
-    if (jByDorsal) return jByDorsal;
-  }
-
-  const displayName = firstName ? (firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase() + ' ' + (surnames ? surnames.charAt(0).toUpperCase() + surnames.slice(1).toLowerCase() : '')) : rawClean;
+  // 3) Sin coincidencia inequívoca: NO adjudicarlo a otro jugador por apellido,
+  // fragmento ni dorsal. Se conserva como persona independiente para que el dato
+  // pueda mostrarse sin contaminar estadísticas de la plantilla.
   return {
     id: null,
-    nombre: displayName.trim(),
+    nombre: formatOfficialPersonName ? formatOfficialPersonName(rawClean) : rawClean,
     nombreCompleto: rawClean,
-    dorsal: dorsalHint ? parseInt(dorsalHint) : null,
-    estado: 'Con ficha'
+    dorsal: dorsalHint ? parseInt(dorsalHint,10) || null : null,
+    estado: 'No vinculado'
   };
 }
 window.matchPlayerInDB = matchPlayerInDB;
