@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Xuventude Dorneda &middot; Temporada 2026/27</title>
-  <!-- REVISION 2026-10-13: análisis oficial FUTGAL + próximo rival + editor móvil -->
+  <!-- REVISION 2026-10-13b: análisis literal + goleadores/asistentes + próximo rival + editor móvil -->
   <meta name="description" content="App de gestion, registro y analisis de la temporada 2026/27 del Xuventude Dorneda, equipo de futbol veterano de la Primeira Futgal A Coruna-Ferrol." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -6305,6 +6305,28 @@ button[aria-busy="true"]{
           <div class="card"><div class="card-title">Rendimiento por competición</div><div id="rendimientoComp"></div></div>
           <div class="card"><div class="card-title">Local vs Visitante</div><div id="localVsVisitante"></div></div>
         </div>
+        <div class="grid-2 mt-20">
+          <div class="card">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px">
+              <div>
+                <div class="card-title" style="margin-bottom:3px">Listado goleadores</div>
+                <div style="font-size:10.5px;color:var(--text-muted)">Goles de Liga · Actas oficiales FUTGAL</div>
+              </div>
+              <span class="badge badge-primary" id="analisisEquipoGoleadoresTotal">0 goles</span>
+            </div>
+            <div id="analisisEquipoGoleadores"></div>
+          </div>
+          <div class="card">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px">
+              <div>
+                <div class="card-title" style="margin-bottom:3px">Listado asistentes</div>
+                <div style="font-size:10.5px;color:var(--text-muted)">Asistencias de Liga · Fichas de partido guardadas</div>
+              </div>
+              <span class="badge" id="analisisEquipoAsistentesTotal">0 asistencias</span>
+            </div>
+            <div id="analisisEquipoAsistentes"></div>
+          </div>
+        </div>
         <div class="card mt-20"><div class="card-title">Racha Actual</div><div id="rachaActual" class="flex gap-8 mt-12"></div></div>
       </div>
       <div id="analisisIndividual" style="display:none">
@@ -12321,39 +12343,103 @@ function calcGoleadores(filterComp){
   });
 }
 
+function getLigaPartidosConAsistenciasRegistradas(){
+  var byKey=new Map();
+
+  (db.partidos || []).forEach(function(p,index){
+    if(!p || !partidoPerteneceAStatFilter(p,'Liga')) return;
+
+    var jornada=Number(p.jornada) || 0;
+    if(!jornada && p.codigo){
+      var jm=String(p.codigo).match(/^J(\d+)$/i);
+      if(jm) jornada=parseInt(jm[1],10) || 0;
+    }
+
+    var key=p.codActa
+      ? 'ACTA:'+String(p.codActa)
+      : (jornada ? 'J:'+jornada : 'IDX:'+index);
+
+    var detalles=toArr(p.asistenciasDetalle);
+    var fallback=(p.convocados || []).reduce(function(acc,c){
+      return acc + (parseInt(c && c.asistencias,10) || 0);
+    },0);
+    var calidad=(detalles.length*1000)+fallback;
+
+    var prev=byKey.get(key);
+    if(!prev || calidad>prev.calidad){
+      byKey.set(key,{partido:p,calidad:calidad});
+    }
+  });
+
+  return Array.from(byKey.values()).map(function(x){ return x.partido; });
+}
+window.getLigaPartidosConAsistenciasRegistradas=getLigaPartidosConAsistenciasRegistradas;
+
+function calcAsistidoresLigaRegistrados(){
+  var m={};
+
+  getLigaPartidosConAsistenciasRegistradas().forEach(function(p){
+    var detalles=toArr(p.asistenciasDetalle);
+
+    if(detalles.length){
+      detalles.forEach(function(a){
+        if(!a || !a.asistente) return;
+        var canonName=getCanonicalPlayerName(a.asistente,a.dorsal) || String(a.asistente).trim();
+        if(!canonName) return;
+        if(!m[canonName]) m[canonName]={asistencias:0};
+        m[canonName].asistencias += 1;
+      });
+      return;
+    }
+
+    // Compatibilidad literal con fichas antiguas: solo suma el número guardado.
+    (p.convocados || []).forEach(function(c){
+      var value=parseInt(c && c.asistencias,10) || 0;
+      if(value<=0 || !c || !c.nombre) return;
+      var canonName=getCanonicalPlayerName(c.nombre,c.dorsal) || String(c.nombre).trim();
+      if(!canonName) return;
+      if(!m[canonName]) m[canonName]={asistencias:0};
+      m[canonName].asistencias += value;
+    });
+  });
+
+  return Object.entries(m)
+    .filter(function(item){ return item[1].asistencias>0; })
+    .sort(function(a,b){
+      return (b[1].asistencias-a[1].asistencias) ||
+        String(a[0]).localeCompare(String(b[0]),'es',{sensitivity:'base'});
+    });
+}
+window.calcAsistidoresLigaRegistrados=calcAsistidoresLigaRegistrados;
+
 function calcAsistidores(filterComp){
   if(!filterComp) filterComp=statFilterComp;
+
+  // Liga: FUTGAL no publica asistencias. Solo contamos las que se hayan
+  // guardado expresamente en la Ficha de Partido; no se deducen ni inventan.
+  if(filterComp === 'Liga') return calcAsistidoresLigaRegistrados();
+
   const m={};
 
   for(const p of getStatPartidosJugados(filterComp)){
     const detalles=toArr(p.asistenciasDetalle);
 
     if(detalles.length){
-      const seenPlayers=new Set();
-
       detalles.forEach(function(a){
         if(!a || !a.asistente) return;
         const canonName=getCanonicalPlayerName(a.asistente,a.dorsal) || a.asistente;
-        if(!m[canonName]) m[canonName]={asistencias:0,partidos:0};
-
+        if(!m[canonName]) m[canonName]={asistencias:0};
         m[canonName].asistencias++;
-
-        const k=normalizeName(canonName);
-        if(!seenPlayers.has(k)){
-          seenPlayers.add(k);
-          m[canonName].partidos++;
-        }
       });
       continue;
     }
 
-    // Compatibilidad con fichas antiguas.
     for(const c of (p.convocados || [])){
       const canonName=getCanonicalPlayerName(c.nombre,c.dorsal);
-      if(!canonName) continue;
-      if(!m[canonName]) m[canonName]={asistencias:0,partidos:0};
-      m[canonName].asistencias += parseInt(c.asistencias)||0;
-      m[canonName].partidos++;
+      const value=parseInt(c.asistencias,10) || 0;
+      if(!canonName || value<=0) continue;
+      if(!m[canonName]) m[canonName]={asistencias:0};
+      m[canonName].asistencias += value;
     }
   }
 
@@ -14123,8 +14209,8 @@ function renderMisterChipBlock(){
   if(totalPJ > 0){
     insights.push({
       icon: '📊',
-      title: 'Efectividad y Rendimiento Global',
-      text: `El Xuventude Dorneda registra un <strong>${pctVic}% de victorias</strong> (${v}V &middot; ${e}E &middot; ${d}D) en sus ${totalPJ} compromisos disputados, con un balance neto de <strong>${totalGF > totalGC ? '+' : ''}${totalGF - totalGC} goles</strong>.`
+      title: 'Balance de Liga',
+      text: `Tras ${totalPJ} jornadas disputadas, el Dorneda suma <strong>${v} victorias, ${e} empates y ${d} derrotas</strong>. Ha marcado <strong>${totalGF} goles</strong> y ha encajado <strong>${totalGC}</strong>.`,
     });
   } else {
     insights.push({
@@ -14137,11 +14223,10 @@ function renderMisterChipBlock(){
   // 2. Pichichi y pólvora
   if(topGol && topGol[1].goles > 0){
     const segText = segundoGol && segundoGol[1].goles > 0 ? `, seguido de <strong>${segundoGol[0]}</strong> con <strong>${segundoGol[1].goles}</strong>` : '';
-    const ratio = (topGol[1].goles / Math.max(1, topGol[1].partidos)).toFixed(2);
     insights.push({
       icon: '⚽',
-      title: 'Capacidad Goleadora y Pichichi',
-      text: `<strong>${topGol[0]}</strong> lidera la tabla de artilleros con <strong>${topGol[1].goles} goles</strong> en ${topGol[1].partidos} partidos (promedio de <strong>${ratio} goles/partido</strong>)${segText}.`
+      title: 'Máximo goleador',
+      text: `<strong>${topGol[0]}</strong> es el máximo goleador del Dorneda en Liga con <strong>${topGol[1].goles} goles</strong>${segText}.`,
     });
   } else {
     insights.push({
@@ -14155,8 +14240,8 @@ function renderMisterChipBlock(){
   if(goleadoresDistintos > 1){
     insights.push({
       icon: '🎯',
-      title: 'Variedad de Recursos Ofensivos',
-      text: `Un total de <strong>${goleadoresDistintos} jugadores diferentes</strong> han visto portería, con una media de <strong>${promGF} goles marcados por partido</strong>.`
+      title: 'Goleadores distintos',
+      text: `<strong>${goleadoresDistintos} jugadores diferentes</strong> han marcado en Liga. El equipo suma <strong>${totalGF} goles</strong> en ${totalPJ} partidos.`,
     });
   } else {
     insights.push({
@@ -14171,8 +14256,8 @@ function renderMisterChipBlock(){
     const nombresInt = intocables.slice(0, 3).join(', ') + (intocables.length > 3 ? ` y ${intocables.length - 3} más` : '');
     insights.push({
       icon: '👔',
-      title: 'Los Intocables del Míster',
-      text: `<strong>${nombresInt}</strong> han disputado el <strong>100% de los partidos (${totalPJ}/${totalPJ})</strong>, siendo los pilares de máxima confianza para el cuerpo técnico.`
+      title: 'Presencia en todas las actas',
+      text: `<strong>${nombresInt}</strong> figuran en las actas oficiales de las <strong>${totalPJ}/${totalPJ} jornadas</strong> disputadas.`,
     });
   } else if(topPart){
     insights.push({
@@ -14187,8 +14272,8 @@ function renderMisterChipBlock(){
     const pctLocal = Math.round((vicLocal / localPJ.length) * 100);
     insights.push({
       icon: '🏟️',
-      title: 'Fortaleza como Local',
-      text: `Jugando en casa, el Dorneda ha sumado <strong>${vicLocal} victorias en ${localPJ.length} partidos (${pctLocal}%)</strong> anotando <strong>${gfLocal} goles</strong> ante su afición.`
+      title: 'Balance como local',
+      text: `En casa, el Dorneda ha jugado <strong>${localPJ.length} partidos</strong> y ha conseguido <strong>${vicLocal} victorias</strong>. Ha marcado <strong>${gfLocal} goles</strong>.`,
     });
   } else {
     insights.push({
@@ -14202,8 +14287,8 @@ function renderMisterChipBlock(){
   if(totalPJ > 0){
     insights.push({
       icon: '🛡️',
-      title: 'Seguridad Defensiva y Control',
-      text: `El equipo concede un promedio de <strong>${promGC} tantos por choque</strong>, manteniendo un índice de competitividad muy alto en todos los tramos de partido.`
+      title: 'Goles encajados',
+      text: `El Dorneda ha encajado <strong>${totalGC} goles</strong> en ${totalPJ} partidos, una media de <strong>${promGC} por partido</strong>.`,
     });
   } else {
     insights.push({
@@ -19320,6 +19405,54 @@ function renderAnalisisProximoRival(selectedTeam){
 window.renderAnalisisProximoRival = renderAnalisisProximoRival;
 window.getNextUpcomingOpponent = getNextUpcomingOpponent;
 
+function renderAnalisisEquipoListados(){
+  var goalEl=document.getElementById('analisisEquipoGoleadores');
+  var assistEl=document.getElementById('analisisEquipoAsistentes');
+  var goalTotalEl=document.getElementById('analisisEquipoGoleadoresTotal');
+  var assistTotalEl=document.getElementById('analisisEquipoAsistentesTotal');
+
+  var goleadores=(typeof calcGoleadores==='function' ? calcGoleadores('Liga') : []).slice();
+  goleadores.sort(function(a,b){
+    return (Number(b[1] && b[1].goles)-Number(a[1] && a[1].goles)) ||
+      String(a[0]).localeCompare(String(b[0]),'es',{sensitivity:'base'});
+  });
+
+  var asistentes=(typeof calcAsistidoresLigaRegistrados==='function'
+    ? calcAsistidoresLigaRegistrados()
+    : (typeof calcAsistidores==='function' ? calcAsistidores('Liga') : [])).slice();
+
+  function rowsHtml(rows,field,singular,plural,accent){
+    if(!rows.length){
+      return `<div style="font-size:12px;color:var(--text-dim);padding:10px 0">Sin ${plural} registradas todavía.</div>`;
+    }
+
+    return rows.map(function(item,index){
+      var nombre=item[0];
+      var data=item[1] || {};
+      var value=Number(data[field]) || 0;
+      var label=value===1 ? singular : plural;
+      return `<div style="display:grid;grid-template-columns:26px minmax(0,1fr) auto;gap:9px;align-items:center;padding:8px 2px;border-bottom:1px solid var(--border)">
+        <div style="font-size:10.5px;font-weight:900;color:var(--text-dim);text-align:center">${index+1}</div>
+        <div style="font-size:12px;font-weight:800;color:var(--text);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${String(nombre).replace(/"/g,'&quot;')}">${nombre}</div>
+        <div style="font-size:12px;font-weight:900;color:${accent};white-space:nowrap">${value} ${label}</div>
+      </div>`;
+    }).join('');
+  }
+
+  var totalGoals=goleadores.reduce(function(sum,item){ return sum+(Number(item[1] && item[1].goles)||0); },0);
+  var totalAssists=asistentes.reduce(function(sum,item){ return sum+(Number(item[1] && item[1].asistencias)||0); },0);
+
+  if(goalTotalEl) goalTotalEl.textContent=totalGoals+' '+(totalGoals===1?'gol':'goles');
+  if(assistTotalEl) assistTotalEl.textContent=totalAssists+' '+(totalAssists===1?'asistencia':'asistencias');
+  if(goalEl) goalEl.innerHTML=rowsHtml(goleadores,'goles','gol','goles','var(--red)');
+  if(assistEl){
+    assistEl.innerHTML=asistentes.length
+      ? rowsHtml(asistentes,'asistencias','asistencia','asistencias','#2563eb')
+      : '<div style="font-size:12px;color:var(--text-dim);padding:10px 0;line-height:1.5">Sin asistencias registradas en las fichas de partido. FUTGAL no aporta este dato automáticamente.</div>';
+  }
+}
+window.renderAnalisisEquipoListados=renderAnalisisEquipoListados;
+
 function renderAnalisisEquipo(){
   var mcEl = document.getElementById('analisisMisterChip');
   if(mcEl) mcEl.innerHTML = renderMisterChipBlock();
@@ -19346,6 +19479,8 @@ function renderAnalisisEquipo(){
   if(localVisit){
     localVisit.innerHTML = `<div class="flex justify-between mb-16"><div class="text-center"><div style="font-size:24px;font-weight:900">${L.length}</div><div style="font-size:11px;color:var(--text-muted)">En casa</div><div style="font-size:12px;margin-top:6px"><span class="text-success">${lv(L,'Victoria')}V</span> <span class="text-warning">${lv(L,'Empate')}E</span> <span class="text-red">${lv(L,'Derrota')}D</span></div></div><div style="width:1px;background:var(--border)"></div><div class="text-center"><div style="font-size:24px;font-weight:900">${V.length}</div><div style="font-size:11px;color:var(--text-muted)">Fuera</div><div style="font-size:12px;margin-top:6px"><span class="text-success">${lv(V,'Victoria')}V</span> <span class="text-warning">${lv(V,'Empate')}E</span> <span class="text-red">${lv(V,'Derrota')}D</span></div></div></div><div class="detail-key">GF local: ${L.reduce(function(sum,p){return sum+(Number(p.gf)||0);},0)} - GC local: ${L.reduce(function(sum,p){return sum+(Number(p.gc)||0);},0)}</div><div class="detail-key mt-8">GF visitante: ${V.reduce(function(sum,p){return sum+(Number(p.gf)||0);},0)} - GC visitante: ${V.reduce(function(sum,p){return sum+(Number(p.gc)||0);},0)}</div>`;
   }
+
+  if(typeof renderAnalisisEquipoListados === 'function') renderAnalisisEquipoListados();
 
   var ult = played.slice().sort(function(a,b){ return (Number(a.jornada)||0)-(Number(b.jornada)||0); }).slice(-8);
   var rachaEl = document.getElementById('rachaActual');
