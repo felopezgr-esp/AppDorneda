@@ -5970,7 +5970,7 @@ button[aria-busy="true"]{
       <span class="mobile-brand-name">⚡ <span class="dorneda-highlight">Xuventude Dorneda</span></span>
     </div>
     <div style="display:flex;align-items:center;gap:6px">
-      <div id="mobileCloudStatusBadge" style="font-size:10px;font-weight:700;padding:3px 7px;border-radius:4px;border:1px solid rgba(255,255,255,0.1);background:var(--surface2);display:flex;align-items:center;cursor:pointer" onclick="initFirebaseSync()" title="Pulsa para sincronizar">
+      <div id="mobileCloudStatusBadge" style="font-size:10px;font-weight:700;padding:3px 7px;border-radius:4px;border:1px solid rgba(255,255,255,0.1);background:var(--surface2);display:flex;align-items:center;cursor:pointer" onclick="handleCloudBadgeClick()" title="Nube privada · iniciar sesión / estado">
         <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#f59e0b;margin-right:4px"></span>Nube
       </div>
       <button type="button" class="mobile-icon-btn mobile-refresh-btn" id="btnSyncFutgalTopbar" data-futgal-mini="1" onclick="actualizarFutgalDirecto()" title="Actualizar FUTGAL">↻</button>
@@ -6027,7 +6027,17 @@ button[aria-busy="true"]{
         </button>
       </div>
 
-
+      <div id="firebaseSidebarCard" style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 10px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+          <span style="font-size:10px;font-weight:800;color:var(--text);letter-spacing:0.35px">NUBE PRIVADA</span>
+        </div>
+        <button type="button" id="cloudStatusBadge" class="btn btn-ghost btn-xs"
+                onclick="handleCloudBadgeClick()"
+                style="width:100%;justify-content:space-between;font-weight:700;padding:5px 8px;font-size:10.5px;border:1px solid var(--border)"
+                title="Iniciar sesión o consultar el estado de Firebase">
+          <span style="display:flex;align-items:center;gap:6px"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#9ca3af"></span><span>Inicia sesión</span></span><span>☁️</span>
+        </button>
+      </div>
 
       <input type="file" id="importFile" accept=".json" style="display:none" onchange="importJSON(event)" />
     </div>
@@ -7029,6 +7039,9 @@ const FIREBASE_CONFIG = {
   messagingSenderId: "257683129412",
   appId: "1:257683129412:web:9d141f307bdf03d65da811"
 };
+const FIREBASE_ADMIN_UID = 'UBqbw00ir4bhLTzwpkYjtk8KVmn2';
+const FIREBASE_EMAIL_KEY = 'dorneda_firebase_login_email_v1';
+
 
 // ==========================================
 // CONFIGURACIÓN CENTRALIZADA FUTGAL (LIGA Y COPAS)
@@ -7098,6 +7111,8 @@ let isCloudSyncing = false;
 let isRemoteUpdate = false;
 let cloudSyncTimeout = null;
 let firestoreUnsubscribe = null;
+let firebaseAuthUnsubscribe = null;
+let firebaseAuthReady = false;
 let isAdminMode = true;
 const EDITOR_USER = 'Administrador';
 const EDITOR_PASSWORD = '1234';
@@ -11570,140 +11585,343 @@ function updateCloudStatusUI(status, label){
 }
 window.updateCloudStatusUI = updateCloudStatusUI;
 
-function initFirebaseSync(){
-  try {
-    if(typeof firebase === 'undefined') {
-      console.warn('Firebase SDK no disponible. Operando en modo local.');
-      updateCloudStatusUI('offline', 'Modo Local');
-      return;
-    }
-    if(!firebase.apps.length){
-      firebaseApp = firebase.initializeApp(FIREBASE_CONFIG);
-    } else {
-      firebaseApp = firebase.app();
-    }
-    // Firebase sigue proporcionando la base de datos, pero el perfil
-    // Lector/Editor ya no depende de una cuenta de Google.
-    firebaseAuth = firebase.auth();
+function closeFirebaseAuthDialog(){
+  var modal=document.getElementById('firebaseAuthOverlay');
+  if(modal) modal.remove();
+}
+window.closeFirebaseAuthDialog=closeFirebaseAuthDialog;
 
-    function connectCloud(){
-      if(firestoreUnsubscribe) return;
-      firestoreDb = firebase.firestore();
-      firestoreDocRef = firestoreDb.collection('dorneda_app_data').doc('temporada_2026_2027');
+function firebaseAuthErrorText(err){
+  var code=String(err && err.code || '');
+  if(code.indexOf('invalid-credential')!==-1 || code.indexOf('wrong-password')!==-1 || code.indexOf('user-not-found')!==-1){
+    return 'Correo o contraseña incorrectos.';
+  }
+  if(code.indexOf('too-many-requests')!==-1){
+    return 'Demasiados intentos. Espera unos minutos y vuelve a probar.';
+  }
+  if(code.indexOf('network-request-failed')!==-1){
+    return 'No se pudo conectar con Firebase. Revisa la conexión a Internet.';
+  }
+  return (err && err.message) ? String(err.message) : 'No se pudo iniciar sesión.';
+}
 
-      updateCloudStatusUI('syncing', 'Conectando...');
+function openFirebaseAuthDialog(){
+  try{ initFirebaseSync(); }catch(e){}
 
-      firestoreUnsubscribe = firestoreDocRef.onSnapshot(function(docSnap){
-        if(isCloudSyncing) return;
+  var existing=document.getElementById('firebaseAuthOverlay');
+  if(existing) existing.remove();
 
-        if(docSnap.exists){
-          var cData = docSnap.data();
-          if(cData && cData.db){
-            isRemoteUpdate = true;
-            var needsCloudUpdate = false;
-            try {
-              var incomingDb = cData.db;
-              var incomingCloned = false;
+  var current=firebaseAuth && firebaseAuth.currentUser ? firebaseAuth.currentUser : null;
+  var signedIn=!!(current && current.uid===FIREBASE_ADMIN_UID);
+  var remembered='';
+  try{ remembered=localStorage.getItem(FIREBASE_EMAIL_KEY) || ''; }catch(e){}
 
-              function ensureIncomingClone(){
-                if(!incomingCloned){
-                  incomingDb = JSON.parse(JSON.stringify(incomingDb));
-                  incomingCloned = true;
-                }
-              }
+  var overlay=document.createElement('div');
+  overlay.id='firebaseAuthOverlay';
+  overlay.style.cssText='position:fixed;inset:0;z-index:100000;background:rgba(15,23,42,.56);display:flex;align-items:center;justify-content:center;padding:18px;';
+  overlay.addEventListener('click',function(ev){ if(ev.target===overlay) closeFirebaseAuthDialog(); });
 
-              // ECONOMÍA: una copia de nube antigua no pisa una edición local más reciente.
-              var localEconomia = db && db.economia ? db.economia : null;
-              var incomingEconomia = incomingDb && incomingDb.economia ? incomingDb.economia : null;
-              var localEditAt = Number(localEconomia && localEconomia._lastEditAt) || 0;
-              var cloudEditAt = Number(incomingEconomia && incomingEconomia._lastEditAt) || 0;
-              if(localEconomia && localEditAt > cloudEditAt){
-                ensureIncomingClone();
-                incomingDb.economia = JSON.parse(JSON.stringify(localEconomia));
-              }
+  var card=document.createElement('div');
+  card.style.cssText='width:min(420px,100%);background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:14px;box-shadow:0 22px 70px rgba(0,0,0,.28);padding:18px;';
 
-              // PLANTILLA: es la fuente de verdad de los jugadores.
-              // Si añadimos/editar un jugador localmente y Firebase todavía tiene
-              // una versión anterior, conservamos la plantilla local en vez de
-              // hacer desaparecer el alta al refrescar.
-              var localMeta = db && db._syncMeta ? db._syncMeta : {};
-              var cloudMeta = incomingDb && incomingDb._syncMeta ? incomingDb._syncMeta : {};
-              var localPlantillaAt = Number(localMeta.plantillaLastEditAt) || 0;
-              var cloudPlantillaAt = Number(cloudMeta.plantillaLastEditAt) || 0;
+  if(signedIn){
+    var safeEmail=String(current.email || 'Administrador').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    card.innerHTML=
+      '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px">'+
+        '<div><div style="font-size:18px;font-weight:900">☁️ Nube privada conectada</div>'+
+        '<div style="font-size:12px;color:var(--text-muted);margin-top:4px">Sesión autorizada para sincronizar AppDorneda.</div></div>'+
+        '<button type="button" onclick="closeFirebaseAuthDialog()" style="border:0;background:transparent;color:var(--text);font-size:22px;cursor:pointer">×</button>'+
+      '</div>'+
+      '<div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:14px">'+
+        '<div style="font-size:11px;color:var(--text-muted);margin-bottom:3px">Usuario</div>'+
+        '<div style="font-size:13px;font-weight:800;word-break:break-all">'+safeEmail+'</div>'+
+      '</div>'+
+      '<div style="display:flex;justify-content:flex-end;gap:8px">'+
+        '<button type="button" class="btn btn-ghost btn-sm" onclick="closeFirebaseAuthDialog()">Cerrar</button>'+
+        '<button type="button" class="btn btn-primary btn-sm" onclick="firebaseLogout()">Cerrar sesión</button>'+
+      '</div>';
+  }else{
+    var safeRemembered=remembered.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    card.innerHTML=
+      '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px">'+
+        '<div><div style="font-size:18px;font-weight:900">🔐 Acceso a la nube</div>'+
+        '<div style="font-size:12px;color:var(--text-muted);margin-top:4px;line-height:1.4">Inicia sesión con el usuario que creaste en Firebase Authentication. La contraseña no se guarda en el HTML ni en el navegador.</div></div>'+
+        '<button type="button" onclick="closeFirebaseAuthDialog()" style="border:0;background:transparent;color:var(--text);font-size:22px;cursor:pointer">×</button>'+
+      '</div>'+
+      '<form id="firebaseAuthForm" onsubmit="firebaseLoginSubmit(event)">'+
+        '<label style="display:block;font-size:11px;font-weight:800;margin-bottom:5px">Correo electrónico</label>'+
+        '<input id="firebaseLoginEmail" type="email" autocomplete="username" required value="'+safeRemembered+'" class="form-control" style="width:100%;margin-bottom:12px" placeholder="tu@email.com">'+
+        '<label style="display:block;font-size:11px;font-weight:800;margin-bottom:5px">Contraseña</label>'+
+        '<input id="firebaseLoginPassword" type="password" autocomplete="current-password" required class="form-control" style="width:100%;margin-bottom:10px" placeholder="••••••••">'+
+        '<div id="firebaseLoginError" style="display:none;color:#dc2626;font-size:11.5px;font-weight:700;line-height:1.35;margin-bottom:10px"></div>'+
+        '<div style="font-size:10.5px;color:var(--text-muted);line-height:1.4;margin-bottom:14px">La sesión queda recordada en este dispositivo mediante Firebase. Puedes cerrarla pulsando el indicador de nube.</div>'+
+        '<div style="display:flex;justify-content:flex-end;gap:8px">'+
+          '<button type="button" class="btn btn-ghost btn-sm" onclick="closeFirebaseAuthDialog()">Cancelar</button>'+
+          '<button id="firebaseLoginBtn" type="submit" class="btn btn-primary btn-sm">Entrar y sincronizar</button>'+
+        '</div>'+
+      '</form>';
+  }
 
-              if(db && Array.isArray(db.jugadores) && localPlantillaAt > cloudPlantillaAt){
-                ensureIncomingClone();
-                incomingDb.jugadores = JSON.parse(JSON.stringify(db.jugadores));
-                incomingDb._syncMeta = Object.assign({}, incomingDb._syncMeta || {}, {
-                  plantillaLastEditAt: localPlantillaAt
-                });
-              }
+  overlay.appendChild(card);
+  document.body.appendChild(overlay);
+  setTimeout(function(){
+    var target=document.getElementById(remembered ? 'firebaseLoginPassword' : 'firebaseLoginEmail');
+    if(target) target.focus();
+  },30);
+}
+window.openFirebaseAuthDialog=openFirebaseAuthDialog;
 
-              var localScoutingAt = Number(localMeta.scoutingLastEditAt) || 0;
-              var cloudScoutingAt = Number(cloudMeta.scoutingLastEditAt) || 0;
-              if(db && db.scoutingNotas && localScoutingAt > cloudScoutingAt){
-                ensureIncomingClone();
-                incomingDb.scoutingNotas = JSON.parse(JSON.stringify(db.scoutingNotas));
-                incomingDb._syncMeta = Object.assign({}, incomingDb._syncMeta || {}, {
-                  scoutingLastEditAt: localScoutingAt
-                });
-              }
+function firebaseLoginSubmit(ev){
+  if(ev) ev.preventDefault();
+  var emailEl=document.getElementById('firebaseLoginEmail');
+  var passEl=document.getElementById('firebaseLoginPassword');
+  var errEl=document.getElementById('firebaseLoginError');
+  var btn=document.getElementById('firebaseLoginBtn');
+  var email=String(emailEl && emailEl.value || '').trim();
+  var password=String(passEl && passEl.value || '');
 
-              var localPartidosAt = Number(localMeta.partidosLastEditAt) || 0;
-              var cloudPartidosAt = Number(cloudMeta.partidosLastEditAt) || 0;
-              if(db && Array.isArray(db.partidos) && localPartidosAt > cloudPartidosAt){
-                ensureIncomingClone();
-                incomingDb.partidos = JSON.parse(JSON.stringify(db.partidos));
-                incomingDb._syncMeta = Object.assign({}, incomingDb._syncMeta || {}, {
-                  partidosLastEditAt: localPartidosAt
-                });
-              }
+  if(!email || !password) return false;
+  if(!firebaseAuth){
+    if(errEl){ errEl.style.display='block'; errEl.textContent='Firebase todavía no está disponible.'; }
+    return false;
+  }
 
-              var res = validateAndMigrateDB(incomingDb);
-              db = res.dbObj;
-              needsCloudUpdate = res.modified ||
-                (localPlantillaAt > cloudPlantillaAt && isAdminMode) ||
-                (localScoutingAt > cloudScoutingAt && isAdminMode) ||
-                (localPartidosAt > cloudPartidosAt && isAdminMode);
-              localStorage.setItem(DB_KEY, JSON.stringify(db));
-              if(typeof currentSection !== 'undefined'){
-                renderSection(currentSection);
-              }
-              updateFutgalSyncUI();
-              updateCloudStatusUI('online', 'Nube Sincronizada');
-              console.log('SincronizaciÃ³n en tiempo real recibida de Firebase.');
-            } finally {
-              isRemoteUpdate = false;
-            }
-            if(needsCloudUpdate && isAdminMode){
-              console.log('Actualizando datos validados en Firestore...');
-              saveDBToCloud();
+  if(btn){ btn.disabled=true; btn.textContent='Entrando…'; }
+  if(errEl){ errEl.style.display='none'; errEl.textContent=''; }
+
+  firebaseAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+    .then(function(){ return firebaseAuth.signInWithEmailAndPassword(email,password); })
+    .then(function(cred){
+      var user=cred && cred.user ? cred.user : null;
+      if(!user || user.uid!==FIREBASE_ADMIN_UID){
+        return firebaseAuth.signOut().then(function(){
+          throw new Error('Esta cuenta no está autorizada para la nube de AppDorneda.');
+        });
+      }
+      try{ localStorage.setItem(FIREBASE_EMAIL_KEY,email); }catch(e){}
+      closeFirebaseAuthDialog();
+      updateCloudStatusUI('syncing','Conectando…');
+      toast('Sesión de Firebase iniciada. Sincronizando la nube…','success');
+      return true;
+    })
+    .catch(function(err){
+      if(errEl){
+        errEl.style.display='block';
+        errEl.textContent=firebaseAuthErrorText(err);
+      }
+      if(btn){ btn.disabled=false; btn.textContent='Entrar y sincronizar'; }
+    });
+  return false;
+}
+window.firebaseLoginSubmit=firebaseLoginSubmit;
+
+function firebaseLogout(){
+  if(!firebaseAuth) return;
+  firebaseAuth.signOut().then(function(){
+    closeFirebaseAuthDialog();
+    updateCloudStatusUI('offline','Inicia sesión');
+    toast('Sesión de nube cerrada. La aplicación sigue funcionando con los datos locales.','info');
+  }).catch(function(err){
+    toast('No se pudo cerrar la sesión de Firebase.','error');
+  });
+}
+window.firebaseLogout=firebaseLogout;
+
+function handleCloudBadgeClick(){
+  openFirebaseAuthDialog();
+}
+window.handleCloudBadgeClick=handleCloudBadgeClick;
+
+function disconnectFirestoreListener(){
+  if(firestoreUnsubscribe){
+    try{ firestoreUnsubscribe(); }catch(e){}
+    firestoreUnsubscribe=null;
+  }
+  firestoreDocRef=null;
+}
+window.disconnectFirestoreListener=disconnectFirestoreListener;
+
+function connectAuthorizedFirestore(){
+  if(!firebaseAuth || !firebaseAuth.currentUser || firebaseAuth.currentUser.uid!==FIREBASE_ADMIN_UID){
+    disconnectFirestoreListener();
+    updateCloudStatusUI('offline','Inicia sesión');
+    return;
+  }
+  if(firestoreUnsubscribe) return;
+
+  firestoreDb=firebase.firestore();
+  firestoreDocRef=firestoreDb.collection('dorneda_app_data').doc('temporada_2026_2027');
+  updateCloudStatusUI('syncing','Conectando…');
+
+  firestoreUnsubscribe=firestoreDocRef.onSnapshot(function(docSnap){
+    if(isCloudSyncing) return;
+
+    if(docSnap.exists){
+      var cData=docSnap.data();
+      if(cData && cData.db){
+        isRemoteUpdate=true;
+        var needsCloudUpdate=false;
+        try{
+          var incomingDb=cData.db;
+          var incomingCloned=false;
+
+          function ensureIncomingClone(){
+            if(!incomingCloned){
+              incomingDb=JSON.parse(JSON.stringify(incomingDb));
+              incomingCloned=true;
             }
           }
-        } else if(isAdminMode) {
-          console.log('Creando registro de temporada 2026/27 en Firestore...');
+
+          var localEconomia=db && db.economia ? db.economia : null;
+          var incomingEconomia=incomingDb && incomingDb.economia ? incomingDb.economia : null;
+          var localEditAt=Number(localEconomia && localEconomia._lastEditAt)||0;
+          var cloudEditAt=Number(incomingEconomia && incomingEconomia._lastEditAt)||0;
+          if(localEconomia && localEditAt>cloudEditAt){
+            ensureIncomingClone();
+            incomingDb.economia=JSON.parse(JSON.stringify(localEconomia));
+          }
+
+          var localMeta=db && db._syncMeta ? db._syncMeta : {};
+          var cloudMeta=incomingDb && incomingDb._syncMeta ? incomingDb._syncMeta : {};
+          var localPlantillaAt=Number(localMeta.plantillaLastEditAt)||0;
+          var cloudPlantillaAt=Number(cloudMeta.plantillaLastEditAt)||0;
+          if(db && Array.isArray(db.jugadores) && localPlantillaAt>cloudPlantillaAt){
+            ensureIncomingClone();
+            incomingDb.jugadores=JSON.parse(JSON.stringify(db.jugadores));
+            incomingDb._syncMeta=Object.assign({},incomingDb._syncMeta||{},{
+              plantillaLastEditAt:localPlantillaAt
+            });
+          }
+
+          var localScoutingAt=Number(localMeta.scoutingLastEditAt)||0;
+          var cloudScoutingAt=Number(cloudMeta.scoutingLastEditAt)||0;
+          if(db && db.scoutingNotas && localScoutingAt>cloudScoutingAt){
+            ensureIncomingClone();
+            incomingDb.scoutingNotas=JSON.parse(JSON.stringify(db.scoutingNotas));
+            incomingDb._syncMeta=Object.assign({},incomingDb._syncMeta||{},{
+              scoutingLastEditAt:localScoutingAt
+            });
+          }
+
+          var localPartidosAt=Number(localMeta.partidosLastEditAt)||0;
+          var cloudPartidosAt=Number(cloudMeta.partidosLastEditAt)||0;
+          if(db && Array.isArray(db.partidos) && localPartidosAt>cloudPartidosAt){
+            ensureIncomingClone();
+            incomingDb.partidos=JSON.parse(JSON.stringify(db.partidos));
+            incomingDb._syncMeta=Object.assign({},incomingDb._syncMeta||{},{
+              partidosLastEditAt:localPartidosAt
+            });
+          }
+
+          var res=validateAndMigrateDB(incomingDb);
+          db=res.dbObj;
+          needsCloudUpdate=res.modified ||
+            (localPlantillaAt>cloudPlantillaAt && isAdminMode) ||
+            (localScoutingAt>cloudScoutingAt && isAdminMode) ||
+            (localPartidosAt>cloudPartidosAt && isAdminMode);
+
+          localStorage.setItem(DB_KEY,JSON.stringify(db));
+          if(typeof currentSection!=='undefined') renderSection(currentSection);
+          updateFutgalSyncUI();
+          updateCloudStatusUI('online','Nube sincronizada');
+          console.log('Sincronización en tiempo real recibida de Firebase.');
+        }finally{
+          isRemoteUpdate=false;
+        }
+
+        if(needsCloudUpdate && isAdminMode){
+          console.log('Subiendo a Firestore los datos locales más recientes.');
           saveDBToCloud();
         }
-      }, function(err){
-        console.warn('Firestore onSnapshot aviso:', err);
-        var denied=err && (err.code === 'permission-denied' || String(err.message || '').toLowerCase().indexOf('permission') !== -1);
-        if(denied){
-          updateCloudStatusUI('error', 'Reglas Firebase');
-          toast('Firebase ha bloqueado la nube porque las reglas de Firestore han caducado. Los datos locales de este dispositivo se conservan; actualiza las reglas en Firebase para recuperar la sincronización.','error');
-          return;
-        }
-        fetchCloudDBViaRest();
-      });
+      }
+    }else if(isAdminMode){
+      console.log('Creando registro de temporada 2026/27 en Firestore.');
+      saveDBToCloud();
+    }
+  },function(err){
+    console.warn('Firestore onSnapshot aviso:',err);
+    var denied=err && (err.code==='permission-denied' || String(err.message||'').toLowerCase().indexOf('permission')!==-1);
+    if(denied){
+      updateCloudStatusUI('error','Acceso no autorizado');
+      toast('Firebase rechazó el acceso a la nube. Comprueba que has iniciado sesión con la cuenta administradora autorizada.','error');
+      return;
+    }
+    updateCloudStatusUI('error','Error de nube');
+  });
+}
+window.connectAuthorizedFirestore=connectAuthorizedFirestore;
+
+function getFirebaseIdToken(){
+  var user=firebaseAuth && firebaseAuth.currentUser ? firebaseAuth.currentUser : null;
+  if(!user || user.uid!==FIREBASE_ADMIN_UID){
+    return Promise.reject(new Error('Debes iniciar sesión en la nube privada.'));
+  }
+  return user.getIdToken();
+}
+window.getFirebaseIdToken=getFirebaseIdToken;
+
+function firebaseRestFetch(url,options){
+  return getFirebaseIdToken().then(function(token){
+    var opts=Object.assign({},options||{});
+    opts.headers=Object.assign({},opts.headers||{},{
+      'Authorization':'Bearer '+token
+    });
+    return fetch(url,opts);
+  });
+}
+window.firebaseRestFetch=firebaseRestFetch;
+
+function initFirebaseSync(){
+  try{
+    if(typeof firebase==='undefined'){
+      console.warn('Firebase SDK no disponible. Operando en modo local.');
+      updateCloudStatusUI('offline','Modo local');
+      return;
     }
 
-    connectCloud();
+    if(!firebase.apps.length){
+      firebaseApp=firebase.initializeApp(FIREBASE_CONFIG);
+    }else{
+      firebaseApp=firebase.app();
+    }
 
-  } catch(e){
-    console.error('Error initFirebaseSync:', e);
-    updateCloudStatusUI('error', 'Error Nube');
+    firebaseAuth=firebase.auth();
+    firebaseAuthReady=true;
+
+    try{
+      firebaseAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(function(){});
+    }catch(e){}
+
+    if(firebaseAuthUnsubscribe) return;
+
+    firebaseAuthUnsubscribe=firebaseAuth.onAuthStateChanged(function(user){
+      if(user && user.uid===FIREBASE_ADMIN_UID){
+        updateCloudStatusUI('syncing','Conectando…');
+        connectAuthorizedFirestore();
+        return;
+      }
+
+      disconnectFirestoreListener();
+
+      if(user && user.uid!==FIREBASE_ADMIN_UID){
+        updateCloudStatusUI('error','Cuenta no autorizada');
+        firebaseAuth.signOut().catch(function(){});
+        toast('Esta cuenta de Firebase no está autorizada para AppDorneda.','error');
+        return;
+      }
+
+      updateCloudStatusUI('offline','Inicia sesión');
+    },function(err){
+      console.error('Firebase auth state error:',err);
+      updateCloudStatusUI('error','Error de sesión');
+    });
+
+  }catch(e){
+    console.error('Error initFirebaseSync:',e);
+    updateCloudStatusUI('error','Error nube');
   }
 }
-window.initFirebaseSync = initFirebaseSync;
+window.initFirebaseSync=initFirebaseSync;
 
 function saveDBToCloud(){
   if(!firestoreDocRef || isRemoteUpdate) return;
@@ -11727,7 +11945,7 @@ function saveDBToCloud(){
       isCloudSyncing=false;
       console.error('Error saveDBToCloud:',err);
       updateCloudStatusUI('error','Error al Guardar');
-      toast('No se pudo guardar en la nube. Si Firestore indica reglas caducadas, actualízalas en Firebase. La copia local de este dispositivo no se borra.','error');
+      toast('No se pudo guardar en la nube. Comprueba que has iniciado sesión con la cuenta administradora de Firebase. La copia local de este dispositivo no se borra.','error');
     });
   },350);
 }
@@ -15262,7 +15480,7 @@ window.parseFirestoreRestDoc = parseFirestoreRestDoc;
 function fetchCloudDBViaRest(){
   const restUrl = `https://firestore.googleapis.com/v1/projects/${FIREBASE_CONFIG.projectId}/databases/(default)/documents/dorneda_app_data/temporada_2026_2027?key=${FIREBASE_CONFIG.apiKey}`;
 
-  return fetch(restUrl,{cache:'no-store'})
+  return firebaseRestFetch(restUrl,{cache:'no-store'})
     .then(r => r.ok ? r.json() : null)
     .then(data => {
       if(data && data.fields){
@@ -15403,7 +15621,7 @@ async function syncFromFutgal() {
           }
         }
       } catch (sdkErr) {
-        console.warn('Firestore SDK get aviso, recurriendo a REST API oficial:', sdkErr);
+        console.warn('Firestore SDK get aviso, recurriendo a REST autenticado:', sdkErr);
       }
     }
 
@@ -15412,7 +15630,7 @@ async function syncFromFutgal() {
       setSyncButtonsText('<span>â˜ï¸ Descargando datos...</span>');
       try {
         const restUrl = `https://firestore.googleapis.com/v1/projects/${FIREBASE_CONFIG.projectId}/databases/(default)/documents/dorneda_app_data/temporada_2026_2027?key=${FIREBASE_CONFIG.apiKey}`;
-        const res = await fetch(restUrl, { cache: 'no-store' });
+        const res = await firebaseRestFetch(restUrl, { cache: 'no-store' });
         if (res.ok) {
           const restJson = await res.json();
           const parsed = parseFirestoreRestDoc(restJson);
