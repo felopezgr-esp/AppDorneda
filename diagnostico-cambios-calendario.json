@@ -1,17 +1,1 @@
-[
-  {
-    "jornada": 6,
-    "cambios": [
-      {
-        "tipo": "partido_nuevo_o_pareja_distinta",
-        "local": "SADA F.C. A NOSA VIÑA",
-        "visitante": "CEDEIRA S.D.",
-        "nuevo": {
-          "fecha": "17-10-2026",
-          "hora": "17:45",
-          "campo": "A Grela (Carnoedo)"
-        }
-      }
-    ]
-  }
-]
+[]
