@@ -21736,5 +21736,338 @@
       ]
     },
     "fuente": "extraido_10B"
+  },
+  "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478245&cod_acta=1478245": {
+    "ok": true,
+    "jornada": 5,
+    "url": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478245&cod_acta=1478245",
+    "acta": {
+      "temporada": "2026-2027",
+      "jornada": 5,
+      "fecha": "11-10-2026",
+      "hora": "12:10",
+      "local": "LICEO DE MONELOS S.D.",
+      "visitante": "C.C.D. CURTIS",
+      "resultado_principal_raw": {
+        "local": null,
+        "visitante": null
+      },
+      "resultado": {
+        "local": 1,
+        "visitante": 0,
+        "texto": "1-0",
+        "fuente": "secuencia_goles_validada"
+      },
+      "arbitro": "IGLESIAS BAZARRA, MANUEL",
+      "estadio": "Campo de Fútbol Universidad Laboral",
+      "ciudad": "Culleredo",
+      "goles": [
+        {
+          "marcador_raw": {
+            "local": 0,
+            "visitante": 0
+          },
+          "marcador": {
+            "local": 1,
+            "visitante": 0
+          },
+          "minuto": "6'",
+          "jugador": "PISOS SOMESO, DANIEL",
+          "tipo_gol": "Gol normal",
+          "marcador_fuente": "jugador_prioritario"
+        }
+      ],
+      "equipo_local": {
+        "nombre": "LICEO DE MONELOS S.D.",
+        "titulares": [
+          {
+            "dorsal": "1",
+            "jugador": "RAMOS CARBALLEDO, FRANCO"
+          },
+          {
+            "dorsal": "2",
+            "jugador": "LOUSADO NOGUEIRA, JUAN JOSE"
+          },
+          {
+            "dorsal": "4",
+            "jugador": "PENA AMADO, GUSTAVO"
+          },
+          {
+            "dorsal": "8",
+            "jugador": "PISOS SOMESO, DANIEL"
+          },
+          {
+            "dorsal": "10",
+            "jugador": "PISOS SOMESO, BRUNO"
+          },
+          {
+            "dorsal": "11",
+            "jugador": "COLLAZO PORTEIRO, OSCAR"
+          },
+          {
+            "dorsal": "17",
+            "jugador": "POUSADA NION, DIEGO"
+          },
+          {
+            "dorsal": "18",
+            "jugador": "SANCHEZ VIEIRO, RAUL"
+          },
+          {
+            "dorsal": "25",
+            "jugador": "PASTORIN SALIS, IGNACIO"
+          },
+          {
+            "dorsal": "26",
+            "jugador": "SANDE CARNOTA, RAMON"
+          },
+          {
+            "dorsal": "29",
+            "jugador": "ROCHA GESTAL, GONZALO"
+          }
+        ],
+        "suplentes": [
+          {
+            "dorsal": "16",
+            "jugador": "FERNANDEZ SUERO, JOSE M"
+          }
+        ],
+        "cuerpo_tecnico": {
+          "entrenador": "No presenta"
+        },
+        "tarjetas": [
+          {
+            "tipo": "amarilla",
+            "minuto": "27'",
+            "jugador": "SANCHEZ VIEIRO, RAUL"
+          },
+          {
+            "tipo": "amarilla",
+            "minuto": "27'",
+            "jugador": "SANCHEZ VIEIRO, RAUL"
+          }
+        ]
+      },
+      "equipo_visitante": {
+        "nombre": "C.C.D. CURTIS",
+        "titulares": [
+          {
+            "dorsal": "1",
+            "jugador": "BARRAL GARCIA, FRANCISCO J"
+          },
+          {
+            "dorsal": "3",
+            "jugador": "DORS DE LOS RIOS, VIVIAN THERRY"
+          },
+          {
+            "dorsal": "5",
+            "jugador": "SANTOS PEREZ, CARLOS"
+          },
+          {
+            "dorsal": "7",
+            "jugador": "ALLER DE ALMEIDA, MICAEL"
+          },
+          {
+            "dorsal": "8",
+            "jugador": "FREIRE SOUTO, JOSE ALVARO"
+          },
+          {
+            "dorsal": "10",
+            "jugador": "VAZQUEZ GIAO, JACOBO"
+          },
+          {
+            "dorsal": "11",
+            "jugador": "RODRIGUEZ RICO, DAVID"
+          },
+          {
+            "dorsal": "14",
+            "jugador": "CASTRO VEIGA, IVAN"
+          },
+          {
+            "dorsal": "18",
+            "jugador": "ESPIDO SANCHEZ, PEDRO JOSE"
+          },
+          {
+            "dorsal": "19",
+            "jugador": "NEIRA BOTANA, NICOLAS"
+          },
+          {
+            "dorsal": "20",
+            "jugador": "GUERRA VIGO, ANGEL"
+          }
+        ],
+        "suplentes": [
+          {
+            "dorsal": "2",
+            "jugador": "CAMIÑOS PEREZ, DIEGO"
+          },
+          {
+            "dorsal": "15",
+            "jugador": "BOADO SUAREZ, JOSE A"
+          },
+          {
+            "dorsal": "22",
+            "jugador": "LOPEZ RIVERA, SERGIO"
+          },
+          {
+            "dorsal": "24",
+            "jugador": "SUAREZ SUAREZ, RUBEN"
+          },
+          {
+            "dorsal": "26",
+            "jugador": "CORGO LIÑEIRA, DIEGO"
+          }
+        ],
+        "cuerpo_tecnico": {
+          "delegado": "CASES VAZQUEZ, OSCAR LUIS",
+          "entrenador": "No presenta"
+        },
+        "tarjetas": []
+      }
+    },
+    "validacion": {
+      "correcto": true,
+      "errores": [],
+      "pruebas": [
+        {
+          "prueba": "Temporada presente",
+          "ok": true,
+          "obtenido": "2026-2027"
+        },
+        {
+          "prueba": "Jornada presente",
+          "ok": true,
+          "obtenido": 5
+        },
+        {
+          "prueba": "Fecha presente",
+          "ok": true,
+          "obtenido": "11-10-2026"
+        },
+        {
+          "prueba": "Hora presente",
+          "ok": true,
+          "obtenido": "12:10"
+        },
+        {
+          "prueba": "Equipo local presente",
+          "ok": true,
+          "obtenido": "LICEO DE MONELOS S.D."
+        },
+        {
+          "prueba": "Equipo visitante presente",
+          "ok": true,
+          "obtenido": "C.C.D. CURTIS"
+        },
+        {
+          "prueba": "Resultado completo",
+          "ok": true,
+          "obtenido": "1-0"
+        },
+        {
+          "prueba": "Árbitro presente",
+          "ok": true,
+          "obtenido": "IGLESIAS BAZARRA, MANUEL"
+        },
+        {
+          "prueba": "Estadio presente",
+          "ok": true,
+          "obtenido": "Campo de Fútbol Universidad Laboral"
+        },
+        {
+          "prueba": "Titulares local razonables",
+          "ok": true,
+          "obtenido": 11
+        },
+        {
+          "prueba": "Titulares visitante razonables",
+          "ok": true,
+          "obtenido": 11
+        },
+        {
+          "prueba": "Secuencia de goles coherente",
+          "ok": true,
+          "obtenido": [
+            {
+              "gol": 1,
+              "minuto": "6'",
+              "jugador": "PISOS SOMESO, DANIEL",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 0,
+                "visitante": 0
+              },
+              "corregido": {
+                "local": 1,
+                "visitante": 0
+              },
+              "fuente": "jugador_prioritario",
+              "equipo_esperado": "local",
+              "equipo_marcador": "local",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            }
+          ]
+        },
+        {
+          "prueba": "Goleadores asignados al equipo correcto",
+          "ok": true,
+          "obtenido": [
+            {
+              "gol": 1,
+              "minuto": "6'",
+              "jugador": "PISOS SOMESO, DANIEL",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 0,
+                "visitante": 0
+              },
+              "corregido": {
+                "local": 1,
+                "visitante": 0
+              },
+              "fuente": "jugador_prioritario",
+              "equipo_esperado": "local",
+              "equipo_marcador": "local",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            }
+          ]
+        },
+        {
+          "prueba": "Último marcador coincide con resultado",
+          "ok": true,
+          "obtenido": {
+            "ultimoGol": {
+              "local": 1,
+              "visitante": 0
+            },
+            "resultado": "1-0"
+          }
+        },
+        {
+          "prueba": "Número de goles coincide con resultado",
+          "ok": true,
+          "obtenido": {
+            "filasGol": 1,
+            "totalMarcador": 1
+          }
+        },
+        {
+          "prueba": "Ningún marcador sin resolver",
+          "ok": true,
+          "obtenido": [
+            {
+              "minuto": "6'",
+              "marcador": {
+                "local": 1,
+                "visitante": 0
+              },
+              "fuente": "jugador_prioritario"
+            }
+          ]
+        }
+      ]
+    },
+    "fuente": "extraido_10B"
   }
 }

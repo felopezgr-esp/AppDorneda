@@ -1,6 +1,6 @@
 {
   "versionFormato": 2,
-  "fechaExtraccion": "2026-10-11T12:56:27.829Z",
+  "fechaExtraccion": "2026-10-17T16:08:18.094Z",
   "fuente": "FUTGAL",
   "temporada": "2026-2027",
   "competicion": "Veteranos - Primera Galicia",
@@ -22,12 +22,13 @@
     "CAMPANAL DE LOUREDA F. C.",
     "CEDEIRA S.D.",
     "LICEO DE MONELOS S.D.",
-    "SPORTING BURGO"
+    "SPORTING BURGO",
+    "Suspendido"
   ],
   "totalJornadas": 30,
   "totalPartidos": 240,
-  "totalActasDetectadas": 39,
-  "totalActasIntegradas": 39,
+  "totalActasDetectadas": 40,
+  "totalActasIntegradas": 40,
   "jornadas": [
     {
       "numero": 1,
@@ -8239,8 +8240,8 @@
     {
       "numero": 5,
       "totalPartidos": 8,
-      "totalActasDetectadas": 7,
-      "totalActasIntegradas": 7,
+      "totalActasDetectadas": 8,
+      "totalActasIntegradas": 8,
       "actasPendientes": [],
       "partidos": [
         {
@@ -9771,15 +9772,187 @@
         },
         {
           "orden": 7,
-          "local": "Suspendido",
+          "local": "LICEO DE MONELOS S.D.",
           "visitante": "C.C.D. CURTIS",
           "fecha": "11-10-2026",
           "hora": "12:10",
           "campo": "Campo de Fútbol Universidad Laboral",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
+          "estado": "FINALIZADO",
+          "actaDisponible": true,
+          "resultado": {
+            "local": 1,
+            "visitante": 0,
+            "texto": "1-0",
+            "fuente": "secuencia_goles_validada"
+          },
+          "acta": {
+            "url": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478245&cod_acta=1478245",
+            "arbitro": "IGLESIAS BAZARRA, MANUEL",
+            "estadio": "Campo de Fútbol Universidad Laboral",
+            "ciudad": "Culleredo",
+            "goles": [
+              {
+                "marcador_raw": {
+                  "local": 0,
+                  "visitante": 0
+                },
+                "marcador": {
+                  "local": 1,
+                  "visitante": 0
+                },
+                "minuto": "6'",
+                "jugador": "PISOS SOMESO, DANIEL",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "jugador_prioritario"
+              }
+            ],
+            "equipo_local": {
+              "nombre": "LICEO DE MONELOS S.D.",
+              "titulares": [
+                {
+                  "dorsal": "1",
+                  "jugador": "RAMOS CARBALLEDO, FRANCO"
+                },
+                {
+                  "dorsal": "2",
+                  "jugador": "LOUSADO NOGUEIRA, JUAN JOSE"
+                },
+                {
+                  "dorsal": "4",
+                  "jugador": "PENA AMADO, GUSTAVO"
+                },
+                {
+                  "dorsal": "8",
+                  "jugador": "PISOS SOMESO, DANIEL"
+                },
+                {
+                  "dorsal": "10",
+                  "jugador": "PISOS SOMESO, BRUNO"
+                },
+                {
+                  "dorsal": "11",
+                  "jugador": "COLLAZO PORTEIRO, OSCAR"
+                },
+                {
+                  "dorsal": "17",
+                  "jugador": "POUSADA NION, DIEGO"
+                },
+                {
+                  "dorsal": "18",
+                  "jugador": "SANCHEZ VIEIRO, RAUL"
+                },
+                {
+                  "dorsal": "25",
+                  "jugador": "PASTORIN SALIS, IGNACIO"
+                },
+                {
+                  "dorsal": "26",
+                  "jugador": "SANDE CARNOTA, RAMON"
+                },
+                {
+                  "dorsal": "29",
+                  "jugador": "ROCHA GESTAL, GONZALO"
+                }
+              ],
+              "suplentes": [
+                {
+                  "dorsal": "16",
+                  "jugador": "FERNANDEZ SUERO, JOSE M"
+                }
+              ],
+              "cuerpo_tecnico": {
+                "entrenador": "No presenta"
+              },
+              "tarjetas": [
+                {
+                  "tipo": "amarilla",
+                  "minuto": "27'",
+                  "jugador": "SANCHEZ VIEIRO, RAUL"
+                },
+                {
+                  "tipo": "amarilla",
+                  "minuto": "27'",
+                  "jugador": "SANCHEZ VIEIRO, RAUL"
+                }
+              ]
+            },
+            "equipo_visitante": {
+              "nombre": "C.C.D. CURTIS",
+              "titulares": [
+                {
+                  "dorsal": "1",
+                  "jugador": "BARRAL GARCIA, FRANCISCO J"
+                },
+                {
+                  "dorsal": "3",
+                  "jugador": "DORS DE LOS RIOS, VIVIAN THERRY"
+                },
+                {
+                  "dorsal": "5",
+                  "jugador": "SANTOS PEREZ, CARLOS"
+                },
+                {
+                  "dorsal": "7",
+                  "jugador": "ALLER DE ALMEIDA, MICAEL"
+                },
+                {
+                  "dorsal": "8",
+                  "jugador": "FREIRE SOUTO, JOSE ALVARO"
+                },
+                {
+                  "dorsal": "10",
+                  "jugador": "VAZQUEZ GIAO, JACOBO"
+                },
+                {
+                  "dorsal": "11",
+                  "jugador": "RODRIGUEZ RICO, DAVID"
+                },
+                {
+                  "dorsal": "14",
+                  "jugador": "CASTRO VEIGA, IVAN"
+                },
+                {
+                  "dorsal": "18",
+                  "jugador": "ESPIDO SANCHEZ, PEDRO JOSE"
+                },
+                {
+                  "dorsal": "19",
+                  "jugador": "NEIRA BOTANA, NICOLAS"
+                },
+                {
+                  "dorsal": "20",
+                  "jugador": "GUERRA VIGO, ANGEL"
+                }
+              ],
+              "suplentes": [
+                {
+                  "dorsal": "2",
+                  "jugador": "CAMIÑOS PEREZ, DIEGO"
+                },
+                {
+                  "dorsal": "15",
+                  "jugador": "BOADO SUAREZ, JOSE A"
+                },
+                {
+                  "dorsal": "22",
+                  "jugador": "LOPEZ RIVERA, SERGIO"
+                },
+                {
+                  "dorsal": "24",
+                  "jugador": "SUAREZ SUAREZ, RUBEN"
+                },
+                {
+                  "dorsal": "26",
+                  "jugador": "CORGO LIÑEIRA, DIEGO"
+                }
+              ],
+              "cuerpo_tecnico": {
+                "delegado": "CASES VAZQUEZ, OSCAR LUIS",
+                "entrenador": "No presenta"
+              },
+              "tarjetas": []
+            }
+          }
         },
         {
           "orden": 8,
@@ -10157,11 +10330,11 @@
       "partidos": [
         {
           "orden": 1,
-          "local": "SPORTING BURGO",
-          "visitante": "CAMPANAL DE LOUREDA F. C.",
+          "local": "SADA F.C. A NOSA VIÑA",
+          "visitante": "CEDEIRA S.D.",
           "fecha": "17-10-2026",
-          "hora": null,
-          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo",
+          "hora": "17:45",
+          "campo": "A Grela (Carnoedo)",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,
@@ -10169,11 +10342,11 @@
         },
         {
           "orden": 2,
-          "local": "OZA DE LOS RÍOS",
-          "visitante": "BETANZOS NORTE",
+          "local": "SPORTING BURGO",
+          "visitante": "CAMPANAL DE LOUREDA F. C.",
           "fecha": "17-10-2026",
-          "hora": null,
-          "campo": "O Loureiro (Oza De Los Ríos)",
+          "hora": "18:00",
+          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,
@@ -10181,11 +10354,11 @@
         },
         {
           "orden": 3,
-          "local": "SADA F.C. A NOSA VIÑA",
-          "visitante": "CEDEIRA S.D.",
+          "local": "OZA DE LOS RÍOS",
+          "visitante": "BETANZOS NORTE",
           "fecha": "17-10-2026",
-          "hora": null,
-          "campo": "Campo de Fútbol As Mariñas - Andrés Pena de Sada",
+          "hora": "18:00",
+          "campo": "O Loureiro (Oza De Los Ríos)",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,
@@ -10196,7 +10369,7 @@
           "local": "C.C.D. CURTIS",
           "visitante": "XUVENTUDE DORNEDA",
           "fecha": "17-10-2026",
-          "hora": null,
+          "hora": "19:15",
           "campo": "Novo ( Curtis )",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
@@ -10205,11 +10378,11 @@
         },
         {
           "orden": 5,
-          "local": "CLUB DEPORTIVO NARON SILVER CATERING",
-          "visitante": "LICEO DE MONELOS S.D.",
+          "local": "U.D. PAIOSACO H.AÑON",
+          "visitante": "C.D. SIGRAS",
           "fecha": "17-10-2026",
-          "hora": null,
-          "campo": "O Cadaval",
+          "hora": "19:40",
+          "campo": "Porta Santa",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,
@@ -10217,11 +10390,11 @@
         },
         {
           "orden": 6,
-          "local": "SPORTING CAMBRE AS TRAVESAS",
-          "visitante": "PORTAZGO S.D.",
-          "fecha": "17-10-2026",
-          "hora": null,
-          "campo": "Dani Mallo (Cambre)",
+          "local": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "visitante": "LICEO DE MONELOS S.D.",
+          "fecha": "18-10-2026",
+          "hora": "10:00",
+          "campo": "O Cadaval",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,
@@ -10229,11 +10402,11 @@
         },
         {
           "orden": 7,
-          "local": "U.D. PAIOSACO H.AÑON",
-          "visitante": "C.D. SIGRAS",
-          "fecha": "17-10-2026",
-          "hora": "19:40",
-          "campo": "Porta Santa",
+          "local": "SPORTING CAMBRE AS TRAVESAS",
+          "visitante": "PORTAZGO S.D.",
+          "fecha": "18-10-2026",
+          "hora": "10:00",
+          "campo": "Dani Mallo (Cambre)",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,
@@ -10286,18 +10459,6 @@
         },
         {
           "orden": 3,
-          "local": "XUVENTUDE DORNEDA",
-          "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
-          "fecha": "24-10-2026",
-          "hora": null,
-          "campo": "Campo de Fútbol A Marola",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
-        },
-        {
-          "orden": 4,
           "local": "LICEO DE MONELOS S.D.",
           "visitante": "SPORTING CAMBRE AS TRAVESAS",
           "fecha": "24-10-2026",
@@ -10309,7 +10470,7 @@
           "acta": null
         },
         {
-          "orden": 5,
+          "orden": 4,
           "local": "SAN MARTIÑO S.D.",
           "visitante": "PORTAZGO S.D.",
           "fecha": "24-10-2026",
@@ -10321,12 +10482,24 @@
           "acta": null
         },
         {
-          "orden": 6,
+          "orden": 5,
           "local": "C.D. SIGRAS",
           "visitante": "OZA DE LOS RÍOS",
           "fecha": "24-10-2026",
           "hora": "18:00",
           "campo": "Os Pinares, (Brexo Lema)",
+          "estado": "PROGRAMADO",
+          "actaDisponible": false,
+          "resultado": null,
+          "acta": null
+        },
+        {
+          "orden": 6,
+          "local": "XUVENTUDE DORNEDA",
+          "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "fecha": "25-10-2026",
+          "hora": "10:00",
+          "campo": "Campo de Fútbol A Marola",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,
