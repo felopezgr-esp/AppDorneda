@@ -1,118 +1,15 @@
 [
   {
-    "jornada": 5,
-    "cambios": [
-      {
-        "tipo": "partido_nuevo_o_pareja_distinta",
-        "local": "LICEO DE MONELOS S.D.",
-        "visitante": "C.C.D. CURTIS",
-        "nuevo": {
-          "fecha": "11-10-2026",
-          "hora": "12:10",
-          "campo": "Campo de Fútbol Universidad Laboral"
-        }
-      }
-    ]
-  },
-  {
     "jornada": 6,
     "cambios": [
       {
-        "tipo": "cambio_programacion",
-        "local": "SADA F.C. A NOSA VIÑA",
+        "tipo": "partido_nuevo_o_pareja_distinta",
+        "local": "Última actualización 18:36 h",
         "visitante": "CEDEIRA S.D.",
-        "diferencias": {
-          "hora": {
-            "antes": null,
-            "ahora": "17:45"
-          },
-          "campo": {
-            "antes": "Campo de Fútbol As Mariñas - Andrés Pena de Sada",
-            "ahora": "A Grela (Carnoedo)"
-          }
-        }
-      },
-      {
-        "tipo": "cambio_programacion",
-        "local": "SPORTING BURGO",
-        "visitante": "CAMPANAL DE LOUREDA F. C.",
-        "diferencias": {
-          "hora": {
-            "antes": null,
-            "ahora": "18:00"
-          }
-        }
-      },
-      {
-        "tipo": "cambio_programacion",
-        "local": "OZA DE LOS RÍOS",
-        "visitante": "BETANZOS NORTE",
-        "diferencias": {
-          "hora": {
-            "antes": null,
-            "ahora": "18:00"
-          }
-        }
-      },
-      {
-        "tipo": "cambio_programacion",
-        "local": "C.C.D. CURTIS",
-        "visitante": "XUVENTUDE DORNEDA",
-        "diferencias": {
-          "hora": {
-            "antes": null,
-            "ahora": "19:15"
-          }
-        }
-      },
-      {
-        "tipo": "cambio_programacion",
-        "local": "CLUB DEPORTIVO NARON SILVER CATERING",
-        "visitante": "LICEO DE MONELOS S.D.",
-        "diferencias": {
-          "fecha": {
-            "antes": "17-10-2026",
-            "ahora": "18-10-2026"
-          },
-          "hora": {
-            "antes": null,
-            "ahora": "10:00"
-          }
-        }
-      },
-      {
-        "tipo": "cambio_programacion",
-        "local": "SPORTING CAMBRE AS TRAVESAS",
-        "visitante": "PORTAZGO S.D.",
-        "diferencias": {
-          "fecha": {
-            "antes": "17-10-2026",
-            "ahora": "18-10-2026"
-          },
-          "hora": {
-            "antes": null,
-            "ahora": "10:00"
-          }
-        }
-      }
-    ]
-  },
-  {
-    "jornada": 7,
-    "cambios": [
-      {
-        "tipo": "cambio_programacion",
-        "local": "XUVENTUDE DORNEDA",
-        "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
-        "diferencias": {
-          "fecha": {
-            "antes": "24-10-2026",
-            "ahora": "25-10-2026"
-          },
-          "hora": {
-            "antes": null,
-            "ahora": "10:00"
-          }
+        "nuevo": {
+          "fecha": "17-10-2026",
+          "hora": "17:45",
+          "campo": "A Grela (Carnoedo)"
         }
       }
     ]

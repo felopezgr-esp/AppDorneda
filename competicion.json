@@ -1,6 +1,6 @@
 {
   "versionFormato": 2,
-  "fechaExtraccion": "2026-10-17T16:08:18.094Z",
+  "fechaExtraccion": "2026-10-17T16:41:40.520Z",
   "fuente": "FUTGAL",
   "temporada": "2026-2027",
   "competicion": "Veteranos - Primera Galicia",
@@ -22,8 +22,7 @@
     "CAMPANAL DE LOUREDA F. C.",
     "CEDEIRA S.D.",
     "LICEO DE MONELOS S.D.",
-    "SPORTING BURGO",
-    "Suspendido"
+    "SPORTING BURGO"
   ],
   "totalJornadas": 30,
   "totalPartidos": 240,
@@ -10330,7 +10329,7 @@
       "partidos": [
         {
           "orden": 1,
-          "local": "SADA F.C. A NOSA VIÑA",
+          "local": "Última actualización 18:36 h",
           "visitante": "CEDEIRA S.D.",
           "fecha": "17-10-2026",
           "hora": "17:45",
