@@ -5599,6 +5599,127 @@ button[aria-busy="true"]{
   cursor:not-allowed!important;
 }
 
+
+/* ECONOMÍA · interfaz 2 pestañas + resumen permanente */
+.econ-summary-strip{
+  display:grid;
+  grid-template-columns:repeat(7,minmax(118px,1fr));
+  gap:8px;
+  margin:0 0 12px;
+}
+.econ-summary-kpi{
+  min-width:0;
+  padding:10px 11px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:var(--surface);
+  box-shadow:0 1px 0 rgba(15,23,42,.03);
+}
+.econ-summary-label{
+  font-size:9px;
+  line-height:1.15;
+  font-weight:800;
+  letter-spacing:.03em;
+  text-transform:uppercase;
+  color:var(--text-muted);
+  min-height:21px;
+}
+.econ-summary-value{
+  margin-top:4px;
+  font-size:16px;
+  line-height:1.05;
+  font-weight:900;
+  white-space:nowrap;
+  color:var(--text);
+}
+.econ-summary-sub{
+  margin-top:4px;
+  font-size:8.5px;
+  color:var(--text-muted);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.econ-summary-kpi.carry .econ-summary-value{color:#2563eb;}
+.econ-summary-kpi.income-real .econ-summary-value{color:#16a34a;}
+.econ-summary-kpi.income-forecast{border-style:dashed;}
+.econ-summary-kpi.income-forecast .econ-summary-value{color:#d97706;}
+.econ-summary-kpi.expense-real .econ-summary-value{color:#dc2626;}
+.econ-summary-kpi.expense-forecast{border-style:dashed;}
+.econ-summary-kpi.expense-forecast .econ-summary-value{color:#ea580c;}
+.econ-summary-kpi.balance-real{
+  border-width:2px;
+  background:rgba(22,163,74,.06);
+}
+.econ-summary-kpi.balance-real .econ-summary-value{color:#16a34a;}
+.econ-summary-kpi.balance-forecast{
+  border-width:2px;
+  border-style:dashed;
+  background:rgba(37,99,235,.06);
+}
+.econ-summary-kpi.balance-forecast .econ-summary-value{color:#2563eb;}
+.econ-main-tabs{margin-top:2px;}
+.econ-main-tabs .tab{
+  min-width:138px;
+  justify-content:center;
+  text-align:center;
+  font-weight:800;
+}
+.econ-mov-add-actions,.econ-balance-actions{
+  display:flex;
+  gap:6px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+.econ-mov-add-expense{border-color:rgba(220,38,38,.35);}
+.econ-balance-toolbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  margin:0 0 12px;
+}
+.econ-print-source{
+  display:block;
+  position:absolute;
+  left:-100000px;
+  top:0;
+  width:1100px;
+  height:1px;
+  overflow:hidden;
+  pointer-events:none;
+  opacity:0;
+}
+@media (max-width:1180px){
+  .econ-summary-strip{grid-template-columns:repeat(4,minmax(130px,1fr));}
+}
+@media (max-width:700px){
+  .econ-summary-strip{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;}
+  .econ-summary-kpi{padding:9px 9px;}
+  .econ-summary-value{font-size:15px;}
+  .econ-summary-label{font-size:8.5px;min-height:19px;}
+  .econ-summary-sub{font-size:8px;}
+  .econ-summary-kpi.balance-forecast{grid-column:span 2;}
+  .econ-main-tabs{display:grid !important;grid-template-columns:1fr 1fr;width:100%;}
+  .econ-main-tabs .tab{min-width:0;width:100%;justify-content:center;}
+  .econ-mov-add-actions{width:100%;}
+  .econ-mov-add-actions .btn{flex:1;justify-content:center;}
+  .econ-balance-actions{width:100%;}
+  .econ-balance-actions .btn{flex:1;justify-content:center;}
+}
+@media print{
+  #econTabHoja.econ-print-source{
+    display:block !important;
+    position:static !important;
+    left:auto !important;
+    width:auto !important;
+    height:auto !important;
+    overflow:visible !important;
+    opacity:1 !important;
+  }
+}
+
 </style>
 </head>
 <body class="editor-mode">
@@ -6831,12 +6952,10 @@ button[aria-busy="true"]{
         <!-- HERO Y STATS FINANCIERO -->
         <div id="econStatsGrid"></div>
 
-        <!-- SUB-TABS ECONOMIA -->
-        <div class="tabs mb-12">
-          <div class="tab active" data-tab="cuotas" onclick="showEconTab('cuotas', this)">👥 Cuotas Plantilla</div>
-          <div class="tab" data-tab="diario" onclick="showEconTab('diario', this)">📋 Libro Diario (Ingresos y Gastos)</div>
-          <div class="tab" data-tab="balance" onclick="showEconTab('balance', this)">📊 Balance y Partidas</div>
-          <div class="tab" data-tab="hoja" onclick="showEconTab('hoja', this)">📄 Hoja Oficial (Excel)</div>
+        <!-- SUB-TABS ECONOMIA · interfaz simplificada -->
+        <div class="tabs mb-12 econ-main-tabs" id="econMainTabs">
+          <div class="tab active" data-tab="movimientos" onclick="showEconTab('movimientos', this)">💶 Movimientos</div>
+          <div class="tab" data-tab="balance" onclick="showEconTab('balance', this)">📊 Balance</div>
         </div>
 
         <!-- TAB 1: MOVIMIENTOS + SEGUIMIENTO PLANTILLA -->
@@ -6849,7 +6968,10 @@ button[aria-busy="true"]{
                 <div class="card-title">💶 Movimientos</div>
                 <span class="econ-mov-main-sub">10 por página · pulsa ✎ para editar</span>
               </div>
-              <button type="button" class="btn btn-primary econ-mov-add-btn" onclick="openModalMovimiento(null)">+ AÑADIR</button>
+              <div class="econ-mov-add-actions">
+                <button type="button" class="btn btn-primary econ-mov-add-btn" onclick="openModalNuevoMovimiento('Ingreso','Actual')">+ INGRESO</button>
+                <button type="button" class="btn btn-ghost econ-mov-add-btn econ-mov-add-expense" onclick="openModalNuevoMovimiento('Gasto','Actual')">+ GASTO</button>
+              </div>
             </div>
 
             <div class="econ-mov-filters">
@@ -6939,8 +7061,8 @@ button[aria-busy="true"]{
           </div>
         </div>
 
-        <!-- TAB 2: LIBRO DIARIO (MOVIMIENTOS) -->
-        <div id="econTabDiario" style="display:none">
+        <!-- LEGACY: Libro Diario conservado internamente para compatibilidad, ya no se muestra en navegación -->
+        <div id="econTabDiario" style="display:none !important" aria-hidden="true">
           <div class="card mb-16">
             <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:12px">
               <div>
@@ -6988,8 +7110,22 @@ button[aria-busy="true"]{
           </div>
         </div>
 
-        <!-- TAB 3: BALANCE Y DESGLOSE -->
+        <!-- TAB 2: BALANCE · Estado contable + desglose -->
         <div id="econTabBalance" style="display:none">
+          <div class="econ-balance-toolbar">
+            <div>
+              <div class="card-title" style="margin-bottom:2px">📊 Balance y Tesorería</div>
+              <div style="font-size:11px;color:var(--text-muted)">Estado contable real y proyección de la temporada</div>
+            </div>
+            <div class="econ-balance-actions">
+              <button type="button" class="btn btn-primary btn-sm" onclick="printEconSheet()">🖨️ Hoja oficial / PDF</button>
+              <button type="button" class="btn btn-ghost btn-sm" onclick="exportEconCSV()">📥 Exportar CSV</button>
+            </div>
+          </div>
+
+          <!-- Estado Contable de Tesorería integrado en Balance -->
+          <div id="econBalanceTreasury" class="mb-16"></div>
+
           <div class="grid-2 mb-16">
             <!-- DESGLOSE GASTOS -->
             <div class="card" style="margin-bottom:0">
@@ -7009,8 +7145,8 @@ button[aria-busy="true"]{
           </div>
         </div>
 
-        <!-- TAB 4: HOJA OFICIAL (EXCEL REPLICA) -->
-        <div id="econTabHoja" style="display:none">
+        <!-- HOJA OFICIAL: soporte de impresión/exportación, sin pestaña propia -->
+        <div id="econTabHoja" class="econ-print-source" aria-hidden="true">
           <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:14px">
             <div style="font-size:12px;color:var(--text-muted)">Vista fiel de la hoja de cálculo oficial de ingresos y gastos de la temporada 2026/2027.</div>
             <div style="display:flex;gap:8px">
@@ -11502,7 +11638,7 @@ function loadDB(){
 let db = loadDB();
 let currentSection = 'dashboard', currentStep = 0, newMatchData = {}, plantillaFilter = 'Con ficha', partidosFilter = 'Primera Futgal', nextJugadorId = 200;
 let isEconAuth = sessionStorage.getItem('dorneda_econ_auth') === 'true';
-let currentEconTab = 'cuotas';
+let currentEconTab = 'movimientos';
 let cuotasFilter = 'todos';
 let econCuotasPage = 1;
 const ECON_CUOTAS_PAGE_SIZE = 10;
@@ -21983,32 +22119,45 @@ function saveCambiarPassword(){
 }
 
 function showEconTab(tab, el){
+  // Compatibilidad con versiones anteriores guardadas en localStorage.
+  if(tab === 'cuotas' || tab === 'diario') tab = 'movimientos';
+  if(tab === 'hoja') tab = 'balance';
+  if(tab !== 'movimientos' && tab !== 'balance') tab = 'movimientos';
+
   currentEconTab = tab;
   try {
     localStorage.setItem('dorneda_active_econ_tab', tab);
   } catch(e){}
 
   if(!el){
-    el = document.querySelector('.tabs .tab[data-tab="' + tab + '"]') || document.querySelector('#section-economia .tabs .tab[onclick*="\'' + tab + '\'"]');
+    el = document.querySelector('#econMainTabs .tab[data-tab="' + tab + '"]');
   }
-  if(el){
-    const parent = el.parentElement;
-    if(parent) parent.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    el.classList.add('active');
-  }
-  const tabC = document.getElementById('econTabCuotas');
-  const tabD = document.getElementById('econTabDiario');
-  const tabB = document.getElementById('econTabBalance');
-  const tabH = document.getElementById('econTabHoja');
-  if(tabC) tabC.style.display = tab === 'cuotas' ? 'block' : 'none';
-  if(tabD) tabD.style.display = tab === 'diario' ? 'block' : 'none';
-  if(tabB) tabB.style.display = tab === 'balance' ? 'block' : 'none';
-  if(tabH) tabH.style.display = tab === 'hoja' ? 'block' : 'none';
 
-  if(tab === 'cuotas') renderEconCuotas();
-  if(tab === 'diario') renderEconDiario();
-  if(tab === 'balance') renderEconBalance();
-  if(tab === 'hoja') renderEconHoja();
+  const tabsWrap = document.getElementById('econMainTabs');
+  if(tabsWrap){
+    tabsWrap.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+  }
+  if(el) el.classList.add('active');
+
+  const tabMov = document.getElementById('econTabCuotas');
+  const tabBal = document.getElementById('econTabBalance');
+  const tabD = document.getElementById('econTabDiario');
+  const tabH = document.getElementById('econTabHoja');
+
+  if(tabMov) tabMov.style.display = tab === 'movimientos' ? 'block' : 'none';
+  if(tabBal) tabBal.style.display = tab === 'balance' ? 'block' : 'none';
+  if(tabD) tabD.style.setProperty('display','none','important');
+  if(tabH) tabH.classList.add('econ-print-source');
+
+  renderEconStats();
+  if(tab === 'movimientos'){
+    renderEconMovimientosMain();
+    renderEconCuotas();
+  }else if(tab === 'balance'){
+    renderEconTreasury();
+    renderEconBalance();
+    renderEconHoja();
+  }
 }
 
 function formatMoney(val, decimals = 2){
@@ -22137,9 +22286,12 @@ function calcEconStats(){
 }
 
 function switchEconTab(tabName){
-  const tabBtn = document.querySelector(`.tabs .tab[data-tab="${tabName}"]`);
+  if(tabName === 'cuotas' || tabName === 'diario') tabName = 'movimientos';
+  if(tabName === 'hoja') tabName = 'balance';
+  const tabBtn = document.querySelector(`#econMainTabs .tab[data-tab="${tabName}"]`);
   showEconTab(tabName, tabBtn);
-  const targetTab = document.getElementById('econTab' + tabName.charAt(0).toUpperCase() + tabName.slice(1));
+  const targetId = tabName === 'movimientos' ? 'econTabCuotas' : 'econTabBalance';
+  const targetTab = document.getElementById(targetId);
   if(targetTab){
     targetTab.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
@@ -22190,8 +22342,8 @@ function saveRemanenteSubmit(){
   toast('Remanente inicial actualizado a ' + formatMoney(imp), 'success');
 }
 
-function renderEconStats(){
-  const grid = document.getElementById('econStatsGrid');
+function renderEconTreasury(){
+  const grid = document.getElementById('econBalanceTreasury');
   if(!grid) return;
   const st = calcEconStats();
   const cuotas = ((db.economia && db.economia.cuotas) || []).filter(function(c){ return isCuotaFromCurrentPlantilla(c); });
@@ -22443,7 +22595,7 @@ function renderEconStats(){
               </div>
               <div class="econ-row-right-wrap">
                 <span class="val-income">+${formatMoney(st.cuotasRecaudadas)}</span>
-                <button type="button" class="econ-action-btn" onclick="switchEconTab('cuotas')" title="Ver y editar cuotas de jugadores">✏️ Cuotas</button>
+                <button type="button" class="econ-action-btn" onclick="switchEconTab('movimientos')" title="Ver y editar cuotas de jugadores">✏️ Cuotas</button>
               </div>
             </div>
 
@@ -22554,6 +22706,47 @@ function renderEconStats(){
     </div>
   `;
 }
+
+function renderEconStats(){
+  const grid = document.getElementById('econStatsGrid');
+  if(!grid) return;
+  const st = calcEconStats();
+
+  function signedMoney(value, forcePlus){
+    const n = Number(value) || 0;
+    if(forcePlus && n >= 0) return '+' + formatMoney(n);
+    return formatMoney(n);
+  }
+
+  const balanceReal = st.saldoActual;
+  const balancePrevisto = st.saldoFinalPrevisto;
+
+  const items = [
+    {cls:'carry', label:'Cierre temporada anterior', value:'+' + formatMoney(st.remanenteAnterior), sub:'Remanente inicial'},
+    {cls:'income-real', label:'Ingresos Reales', value:'+' + formatMoney(st.ingresosRealizados), sub:'Cobrado'},
+    {cls:'income-forecast', label:'Ingresos Previstos', value:'+' + formatMoney(st.ingresosPendientes), sub:'Pendiente de cobrar'},
+    {cls:'expense-real', label:'Gastos Reales', value:'−' + formatMoney(st.gastosRealizados), sub:'Pagado'},
+    {cls:'expense-forecast', label:'Gastos Previstos', value:'−' + formatMoney(st.gastosPendientes), sub:'Pendiente de pagar'},
+    {cls:'balance-real', label:'Balance Real', value:signedMoney(balanceReal, true), sub:'Cierre + cobros − pagos'},
+    {cls:'balance-forecast', label:'Balance Previsto', value:signedMoney(balancePrevisto, true), sub:'Real + previstos'}
+  ];
+
+  grid.innerHTML = `
+    <div class="econ-summary-strip" aria-label="Resumen económico">
+      ${items.map(function(item){
+        return `
+          <div class="econ-summary-kpi ${item.cls}">
+            <div class="econ-summary-label">${item.label}</div>
+            <div class="econ-summary-value">${item.value}</div>
+            <div class="econ-summary-sub">${item.sub}</div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `;
+}
+window.renderEconStats = renderEconStats;
+window.renderEconTreasury = renderEconTreasury;
 
 function filterCuotas(estado, el){
   cuotasFilter = estado;
@@ -23471,14 +23664,16 @@ function renderEconomia(){
   syncCuotasDesdeMovimientos();
 
   renderEconStats();
-  if(currentEconTab === 'cuotas'){
+
+  if(currentEconTab === 'cuotas' || currentEconTab === 'diario') currentEconTab = 'movimientos';
+  if(currentEconTab === 'hoja') currentEconTab = 'balance';
+
+  if(currentEconTab === 'movimientos'){
     renderEconMovimientosMain();
     renderEconCuotas();
-  }else if(currentEconTab === 'diario'){
-    renderEconDiario();
   }else if(currentEconTab === 'balance'){
+    renderEconTreasury();
     renderEconBalance();
-  }else if(currentEconTab === 'hoja'){
     renderEconHoja();
   }
 }
@@ -23499,7 +23694,9 @@ function initApp(){
   // Restore saved active sub-tabs if any
   try {
     const savedEconTab = localStorage.getItem('dorneda_active_econ_tab');
-    if(savedEconTab) currentEconTab = savedEconTab;
+    if(savedEconTab){
+      currentEconTab = (savedEconTab === 'balance' || savedEconTab === 'hoja') ? 'balance' : 'movimientos';
+    }
     const savedClasifTab = localStorage.getItem('dorneda_active_clasif_tab');
     if(savedClasifTab) clasifTabActive = savedClasifTab;
     const savedCompCat = localStorage.getItem('dorneda_active_comp_cat');
