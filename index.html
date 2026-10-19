@@ -5720,6 +5720,247 @@ button[aria-busy="true"]{
   }
 }
 
+
+
+/* ECONOMÍA · revisión neutra y compacta */
+#section-economia .card{
+  box-shadow:none;
+}
+#section-economia .econ-summary-strip.econ-summary-neutral{
+  grid-template-columns:repeat(7,minmax(105px,1fr));
+  gap:5px;
+  margin-bottom:9px;
+}
+#section-economia .econ-summary-neutral .econ-summary-kpi{
+  padding:6px 8px;
+  min-height:48px;
+  border:1px solid var(--border);
+  border-radius:6px;
+  background:var(--surface2);
+  box-shadow:none;
+}
+#section-economia .econ-summary-neutral .econ-summary-label{
+  min-height:0;
+  font-size:7.8px;
+  line-height:1.05;
+  letter-spacing:.025em;
+  color:var(--text-muted);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+#section-economia .econ-summary-neutral .econ-summary-value{
+  margin-top:4px;
+  font-size:12.5px;
+  line-height:1;
+  color:var(--text)!important;
+  font-weight:850;
+}
+#section-economia .econ-main-tabs .tab{
+  font-weight:750;
+}
+#section-economia .econ-mov-add-expense{
+  border-color:var(--border);
+}
+#section-economia .econ-mov-mini,
+#section-economia .econ-cuota-mini{
+  background:var(--surface2)!important;
+  border-color:var(--border)!important;
+  color:var(--text-muted)!important;
+}
+#section-economia .econ-mov-amount{
+  color:var(--text)!important;
+  font-weight:800;
+}
+#section-economia .econ-balance-toolbar{
+  margin-bottom:8px;
+}
+#section-economia .econ-neutral-balance{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:8px;
+}
+#section-economia .econ-neutral-col{
+  min-width:0;
+  border:1px solid var(--border);
+  border-radius:7px;
+  background:var(--surface);
+  overflow:hidden;
+}
+#section-economia .econ-neutral-col-head{
+  height:34px;
+  padding:0 9px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  border-bottom:1px solid var(--border);
+  background:var(--surface2);
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.05em;
+}
+#section-economia .econ-neutral-add{
+  border:1px solid var(--border);
+  background:var(--surface);
+  color:var(--text-muted);
+  border-radius:5px;
+  padding:3px 7px;
+  font-size:9px;
+  font-weight:700;
+  cursor:pointer;
+}
+#section-economia .econ-neutral-add:hover{
+  color:var(--text);
+  border-color:var(--text-muted);
+}
+#section-economia .econ-neutral-section + .econ-neutral-section{
+  border-top:1px solid var(--border);
+}
+#section-economia .econ-neutral-section-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  padding:6px 9px;
+  font-size:10px;
+  font-weight:800;
+  background:var(--surface);
+}
+#section-economia .econ-neutral-section-head strong{
+  font-size:10px;
+  color:var(--text);
+}
+#section-economia .econ-neutral-table-head,
+#section-economia .econ-neutral-row{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 72px 78px 23px;
+  align-items:center;
+  gap:5px;
+  padding:4px 7px 4px 9px;
+}
+#section-economia .econ-neutral-table-head{
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  background:var(--surface2);
+  color:var(--text-muted);
+  font-size:7.5px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.03em;
+}
+#section-economia .econ-neutral-table-head span:nth-child(3){text-align:right;}
+#section-economia .econ-neutral-row{
+  min-height:29px;
+  border-bottom:1px solid var(--border);
+  font-size:9px;
+}
+#section-economia .econ-neutral-row:last-child{border-bottom:0;}
+#section-economia .econ-neutral-concept{
+  min-width:0;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  font-weight:650;
+}
+#section-economia .econ-neutral-date{
+  color:var(--text-muted);
+  font-size:8.3px;
+  white-space:nowrap;
+}
+#section-economia .econ-neutral-amount{
+  text-align:right;
+  white-space:nowrap;
+  font-weight:800;
+  color:var(--text);
+}
+#section-economia .econ-neutral-edit{
+  width:21px;
+  height:21px;
+  border:0;
+  background:transparent;
+  color:var(--text-muted);
+  cursor:pointer;
+  border-radius:4px;
+  padding:0;
+}
+#section-economia .econ-neutral-edit:hover{
+  background:var(--surface2);
+  color:var(--text);
+}
+#section-economia .econ-neutral-empty{
+  padding:8px 9px;
+  color:var(--text-muted);
+  font-size:9px;
+  border-bottom:1px solid var(--border);
+}
+/* Mini-ventanas: hasta 6 movimientos visibles por bloque; el resto se desplaza */
+#section-economia .econ-neutral-scroll{
+  max-height:174px;
+  overflow-y:auto;
+  overflow-x:hidden;
+  scrollbar-gutter:stable;
+  overscroll-behavior:contain;
+}
+#section-economia .econ-neutral-scroll::-webkit-scrollbar{width:6px;}
+#section-economia .econ-neutral-scroll::-webkit-scrollbar-track{background:transparent;}
+#section-economia .econ-neutral-scroll::-webkit-scrollbar-thumb{
+  background:var(--border);
+  border-radius:999px;
+}
+/* Sangría mínima para que el concepto empiece un poco más a la derecha */
+#section-economia .econ-neutral-concept{padding-left:7px;}
+#section-economia .econ-neutral-table-head span:first-child{padding-left:7px;}
+/* Color muy suave únicamente en las etiquetas de tipo de Movimiento */
+#section-economia .econ-mov-mini.ingreso{
+  background:#f3fbf5!important;
+  border-color:#dcefe2!important;
+  color:#477a57!important;
+}
+#section-economia .econ-mov-mini.gasto{
+  background:#fff5f5!important;
+  border-color:#f1dddd!important;
+  color:#946060!important;
+}
+[data-theme="dark"] #section-economia .econ-mov-mini.ingreso{
+  background:rgba(34,197,94,.075)!important;
+  border-color:rgba(34,197,94,.15)!important;
+  color:#86b894!important;
+}
+[data-theme="dark"] #section-economia .econ-mov-mini.gasto{
+  background:rgba(239,68,68,.07)!important;
+  border-color:rgba(239,68,68,.14)!important;
+  color:#c99a9a!important;
+}
+@media (max-width:1180px){
+  #section-economia .econ-summary-strip.econ-summary-neutral{
+    grid-template-columns:repeat(4,minmax(105px,1fr));
+  }
+}
+@media (max-width:700px){
+  #section-economia .econ-summary-strip.econ-summary-neutral{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:4px;
+  }
+  #section-economia .econ-summary-neutral .econ-summary-kpi{
+    min-height:42px;
+    padding:5px 7px;
+  }
+  #section-economia .econ-summary-neutral .econ-summary-value{font-size:12px;}
+  #section-economia .econ-summary-neutral .econ-summary-label{font-size:7.4px;}
+  #section-economia .econ-neutral-balance{
+    grid-template-columns:1fr;
+  }
+  #section-economia .econ-neutral-table-head,
+  #section-economia .econ-neutral-row{
+    grid-template-columns:minmax(0,1fr) 66px 72px 22px;
+    gap:4px;
+    padding-left:7px;
+  }
+  #section-economia .econ-neutral-date{font-size:7.8px;}
+  #section-economia .econ-neutral-row{font-size:8.6px;}
+  #section-economia .econ-balance-actions .btn{font-size:9px;padding:5px 7px;}
+}
 </style>
 </head>
 <body class="editor-mode">
@@ -6954,8 +7195,8 @@ button[aria-busy="true"]{
 
         <!-- SUB-TABS ECONOMIA · interfaz simplificada -->
         <div class="tabs mb-12 econ-main-tabs" id="econMainTabs">
-          <div class="tab active" data-tab="movimientos" onclick="showEconTab('movimientos', this)">💶 Movimientos</div>
-          <div class="tab" data-tab="balance" onclick="showEconTab('balance', this)">📊 Balance</div>
+          <div class="tab active" data-tab="movimientos" onclick="showEconTab('movimientos', this)">Movimientos</div>
+          <div class="tab" data-tab="balance" onclick="showEconTab('balance', this)">Balance</div>
         </div>
 
         <!-- TAB 1: MOVIMIENTOS + SEGUIMIENTO PLANTILLA -->
@@ -6965,7 +7206,7 @@ button[aria-busy="true"]{
           <div class="card mb-16" id="econMovimientosMainCard">
             <div class="econ-mov-main-head">
               <div class="econ-mov-main-title">
-                <div class="card-title">💶 Movimientos</div>
+                <div class="card-title">Movimientos</div>
                 <span class="econ-mov-main-sub">10 por página · pulsa ✎ para editar</span>
               </div>
               <div class="econ-mov-add-actions">
@@ -7023,7 +7264,7 @@ button[aria-busy="true"]{
           <div class="card mb-16" id="econCuotasCompactCard">
             <div class="econ-cuotas-head">
               <div class="econ-cuotas-title">
-                <div class="card-title">👥 Seguimiento de jugadores</div>
+                <div class="card-title">Seguimiento de jugadores</div>
                 <span class="econ-cuotas-sub">10 por página · detalle completo al editar</span>
               </div>
               <div class="econ-cuotas-tabs">
@@ -7110,39 +7351,20 @@ button[aria-busy="true"]{
           </div>
         </div>
 
-        <!-- TAB 2: BALANCE · Estado contable + desglose -->
+        <!-- TAB 2: BALANCE · vista contable compacta -->
         <div id="econTabBalance" style="display:none">
           <div class="econ-balance-toolbar">
             <div>
-              <div class="card-title" style="margin-bottom:2px">📊 Balance y Tesorería</div>
-              <div style="font-size:11px;color:var(--text-muted)">Estado contable real y proyección de la temporada</div>
+              <div class="card-title" style="margin-bottom:2px">Balance</div>
+              <div style="font-size:10px;color:var(--text-muted)">Ingresos y gastos reales y pendientes</div>
             </div>
             <div class="econ-balance-actions">
-              <button type="button" class="btn btn-primary btn-sm" onclick="printEconSheet()">🖨️ Hoja oficial / PDF</button>
-              <button type="button" class="btn btn-ghost btn-sm" onclick="exportEconCSV()">📥 Exportar CSV</button>
+              <button type="button" class="btn btn-ghost btn-sm" onclick="printEconSheet()">Hoja oficial / PDF</button>
+              <button type="button" class="btn btn-ghost btn-sm" onclick="exportEconCSV()">Exportar CSV</button>
             </div>
           </div>
 
-          <!-- Estado Contable de Tesorería integrado en Balance -->
           <div id="econBalanceTreasury" class="mb-16"></div>
-
-          <div class="grid-2 mb-16">
-            <!-- DESGLOSE GASTOS -->
-            <div class="card" style="margin-bottom:0">
-              <div class="card-title" style="color:#f87171">🔴 Desglose de Gastos por Partida</div>
-              <div id="desgloseGastosBars"></div>
-            </div>
-            <!-- DESGLOSE INGRESOS -->
-            <div class="card" style="margin-bottom:0">
-              <div class="card-title" style="color:#4ade80">🟢 Fuentes de Ingresos</div>
-              <div id="desgloseIngresosBars"></div>
-            </div>
-          </div>
-          <!-- RESUMEN PRESUPUESTARIO -->
-          <div class="card">
-            <div class="card-title">📊 Resumen de Ejecución Presupuestaria 2026/27</div>
-            <div id="resumenPresupuestoBox"></div>
-          </div>
         </div>
 
         <!-- HOJA OFICIAL: soporte de impresión/exportación, sin pestaña propia -->
@@ -21866,8 +22088,11 @@ function ensureEconomiaV2(){
 
 
 function getCurrentPlantillaPlayers(){
+  // En Economía, "Plantilla" significa únicamente jugadores con ficha activa.
+  // Los jugadores "A prueba" (p. ej. Ángel, Antony o Michi) no forman parte
+  // del seguimiento de cuotas hasta que pasen a estado "Con ficha".
   return (db.jugadores || []).filter(function(j){
-    return j && !isStaff(j) && j.estado !== 'Vacante';
+    return j && !isStaff(j) && j.estado === 'Con ficha';
   });
 }
 
@@ -22345,364 +22570,146 @@ function saveRemanenteSubmit(){
 function renderEconTreasury(){
   const grid = document.getElementById('econBalanceTreasury');
   if(!grid) return;
+
   const st = calcEconStats();
-  const cuotas = ((db.economia && db.economia.cuotas) || []).filter(function(c){ return isCuotaFromCurrentPlantilla(c); });
   const movs = (db.economia && db.economia.movimientos) || [];
-
-  const cntPagado = cuotas.filter(c => c.estado === 'Pagado').length;
-  const cntParcial = cuotas.filter(c => c.estado === 'Parcial').length;
-  const cntPendiente = cuotas.filter(c => c.estado === 'Pendiente' && c.cuota > 0 && c.nombre !== 'Kata').length;
-
-  const saldoSign = st.saldoActual >= 0 ? '+' : '';
-  const balSign = st.balanceActual >= 0 ? '+' : '';
-  const prevSign = st.saldoFinalPrevisto >= 0 ? '+' : '';
-  const balPrevSign = st.balancePrevisto >= 0 ? '+' : '';
-
-  // 1. GASTOS REALIZADOS (PAGADOS)
-  const gastosPagados = movs.filter(m => m.tipo === 'Gasto' && econMovSituacion(m) === 'Actual');
-  let gastosPagadosHtml = '';
-  if(gastosPagados.length === 0){
-    gastosPagadosHtml = `
-      <div class="econ-ledger-row">
-        <div class="econ-row-left">
-          <div class="econ-row-title">Sin gastos pagados</div>
-          <div class="econ-row-sub">No se han ejecutado pagos todavía</div>
-        </div>
-        <div class="econ-row-right-wrap"><span style="color:var(--text-muted);font-size:12px">0,00 €</span></div>
-      </div>
-    `;
-  } else {
-    gastosPagadosHtml = gastosPagados.map(m => {
-      let icon = '📄';
-      const cLower = (m.concepto || '').toLowerCase();
-      const catLower = (m.categoria || '').toLowerCase();
-      if(catLower.indexOf('ficha') !== -1 || catLower.indexOf('mutualidad') !== -1 || cLower.indexOf('ficha') !== -1){
-        icon = '📑';
-      } else if(catLower.indexOf('arbitra') !== -1 || cLower.indexOf('árbitr') !== -1 || cLower.indexOf('arbitr') !== -1){
-        icon = '⚽';
-      } else if(catLower.indexOf('material') !== -1 || cLower.indexOf('material') !== -1 || cLower.indexOf('balón') !== -1 || cLower.indexOf('balon') !== -1){
-        icon = '🎒';
-      } else if(catLower.indexOf('campo') !== -1 || cLower.indexOf('campo') !== -1 || cLower.indexOf('alquiler') !== -1){
-        icon = '🏟️';
-      }
-
-      const subParts = [];
-      if(m.fecha) subParts.push(m.fecha);
-      if(m.pagadorBeneficiario) subParts.push(m.pagadorBeneficiario);
-      const subInfo = subParts.join(' &middot; ');
-
-      return `
-        <div class="econ-ledger-row">
-          <div class="econ-row-left">
-            <div class="econ-row-title">${icon} ${m.concepto}</div>
-            ${subInfo ? `<div class="econ-row-sub">${subInfo}</div>` : ''}
-          </div>
-          <div class="econ-row-right-wrap">
-            <span class="val-expense">-${formatMoney(m.importe)}</span>
-            <button type="button" class="econ-action-btn" onclick="openModalMovimiento(${m.id})" title="Editar gasto">✏️</button>
-          </div>
-        </div>
-      `;
-    }).join('');
-  }
-
-  // 2. GASTOS PENDIENTES (PREVISIÓN EXCEL)
-  const gastosPendientes = movs.filter(m => m.tipo === 'Gasto' && econMovSituacion(m) === 'Previsto');
-  let gastosPendientesHtml = '';
-  if(gastosPendientes.length === 0){
-    gastosPendientesHtml = `
-      <div class="econ-ledger-row">
-        <div class="econ-row-left">
-          <div class="econ-row-title">Sin gastos pendientes</div>
-          <div class="econ-row-sub">Todos los gastos previstos están al día</div>
-        </div>
-        <div class="econ-row-right-wrap"><span style="color:var(--text-muted);font-size:12px">0,00 €</span></div>
-      </div>
-    `;
-  } else {
-    gastosPendientesHtml = gastosPendientes.map(m => {
-      let icon = '⏳';
-      const cLower = (m.concepto || '').toLowerCase();
-      if(cLower.indexOf('ficha') !== -1 || (m.categoria && m.categoria.indexOf('Fichas') !== -1)){
-        icon = '📑';
-      }
-
-      const subParts = [];
-      if(m.notas) subParts.push(m.notas);
-      else if(m.pagadorBeneficiario) subParts.push(m.pagadorBeneficiario);
-      const subInfo = subParts.join(' &middot; ');
-
-      return `
-        <div class="econ-ledger-row" style="background:rgba(245,158,11,0.03)">
-          <div class="econ-row-left">
-            <div class="econ-row-title">⏳ ${m.concepto} <span class="badge-pending-tag">Previsión</span></div>
-            ${subInfo ? `<div class="econ-row-sub">${subInfo}</div>` : ''}
-          </div>
-          <div class="econ-row-right-wrap">
-            <span class="val-pending-expense">-${formatMoney(m.importe)}</span>
-            <button type="button" class="econ-action-btn" onclick="openModalMovimiento(${m.id})" title="Editar previsión de gasto / marcar pagado">✏️</button>
-          </div>
-        </div>
-      `;
-    }).join('');
-  }
-
-  // 3. OTROS INGRESOS COBRADOS
-  const otrosIngresosPagados = movs.filter(m => m.tipo === 'Ingreso' && econMovSituacion(m) === 'Actual' && !econIsFichaMovement(m) && econNorm(m.categoriaDetalle).indexOf('cierre') === -1 && econNorm(m.concepto).indexOf('cierre') === -1);
-  let otrosIngresosHtml = '';
-  otrosIngresosPagados.forEach(m => {
-    const subParts = [];
-    if(m.fecha) subParts.push(m.fecha);
-    if(m.categoria) subParts.push(m.categoria);
-    const subInfo = subParts.join(' &middot; ');
-
-    otrosIngresosHtml += `
-      <div class="econ-ledger-row">
-        <div class="econ-row-left">
-          <div class="econ-row-title">💰 ${m.concepto}</div>
-          ${subInfo ? `<div class="econ-row-sub">${subInfo}</div>` : ''}
-        </div>
-        <div class="econ-row-right-wrap">
-          <span class="val-income">+${formatMoney(m.importe)}</span>
-          <button type="button" class="econ-action-btn" onclick="openModalMovimiento(${m.id})" title="Editar ingreso">✏️</button>
-        </div>
-      </div>
-    `;
+  const cuotas = ((db.economia && db.economia.cuotas) || []).filter(function(c){
+    return isCuotaFromCurrentPlantilla(c);
   });
 
-  // 4. INGRESOS PENDIENTES (JUGADORES QUE NO HAN PAGADO)
-  let ingresosPendientesHtml = '';
-  let sumJugadoresPend = 0;
-  
-  cuotas.forEach(c => {
+  function isCierre(m){
+    const txt = [m && m.categoria, m && m.categoriaDetalle, m && m.concepto].map(econNorm).join(' ');
+    return txt.indexOf('cierre') !== -1 || txt.indexOf('remanente') !== -1;
+  }
+
+  function sortMovs(rows){
+    return rows.slice().sort(function(a,b){
+      return (econDateValue(b.fecha)-econDateValue(a.fecha)) || ((Number(b.id)||0)-(Number(a.id)||0));
+    });
+  }
+
+  function movementRow(m, kind){
+    const concepto = econMovementLabel(m) || m.concepto || m.categoria || 'Movimiento';
+    const fecha = m.fecha || '—';
+    const importe = parseFloat(m.importe) || 0;
+    const sign = kind === 'income' ? '+' : '−';
+    return `
+      <div class="econ-neutral-row">
+        <div class="econ-neutral-concept" title="${String(concepto).replace(/"/g,'&quot;')}">${concepto}</div>
+        <div class="econ-neutral-date">${fecha}</div>
+        <div class="econ-neutral-amount">${sign}${formatMoney(importe)}</div>
+        <button type="button" class="econ-neutral-edit" onclick="openModalMovimiento(${m.id})" title="Editar">✎</button>
+      </div>
+    `;
+  }
+
+  function pendingQuotaRow(c){
     const fixed = parseFloat(c.cuota) || 0;
     const paid = parseFloat(c.pagado) || 0;
     const pend = Math.max(0, fixed - paid);
-    const isKata = normalizeName(c.nombre) === 'kata' || c.jugadorId === 108;
-
-    const isConFicha = !isKata && c.estado !== 'Exento' && c.cuotaObligatoria !== false && fixed > 0;
-
-    if(isConFicha && pend > 0){
-      sumJugadoresPend += pend;
-      const subInfo = c.estado === 'Parcial' ? `Abonado ${formatMoney(paid)} de ${formatMoney(fixed)} (Resta ${formatMoney(pend)})` : (c.nombreCompleto ? `${c.nombreCompleto} · Cuota ${formatMoney(fixed)}` : `Cuota ${formatMoney(fixed)}`);
-
-      ingresosPendientesHtml += `
-        <div class="econ-ledger-row" style="background:rgba(245,158,11,0.03)">
-          <div class="econ-row-left">
-            <div class="econ-row-title">⏳ Ingreso ficha ${c.nombre} <span class="badge-pending-tag">${c.estado==='Parcial'?'Parcial':'Pendiente'}</span></div>
-            <div class="econ-row-sub">${subInfo}</div>
-          </div>
-          <div class="econ-row-right-wrap">
-            <span class="val-pending-income">+${formatMoney(pend)}</span>
-            <button type="button" class="econ-action-btn" onclick="openModalCuotaJugador(${c.jugadorId})" title="Editar cuota de ${c.nombre} (o cambiar a Exento)">✏️</button>
-          </div>
-        </div>
-      `;
-    }
-  });
-
-  // Otros ingresos pendientes (si hay movimientos de tipo Ingreso en estado Pendiente)
-  const otrosIngresosPendMovs = movs.filter(m => m.tipo === 'Ingreso' && econMovSituacion(m) === 'Previsto' && !econIsFichaMovement(m));
-  otrosIngresosPendMovs.forEach(m => {
-    ingresosPendientesHtml += `
-      <div class="econ-ledger-row" style="background:rgba(245,158,11,0.03)">
-        <div class="econ-row-left">
-          <div class="econ-row-title">⏳ ${m.concepto} <span class="badge-pending-tag">Previsión</span></div>
-          <div class="econ-row-sub">${m.categoria || 'Ingreso previsto'}</div>
-        </div>
-        <div class="econ-row-right-wrap">
-          <span class="val-pending-income">+${formatMoney(m.importe)}</span>
-          <button type="button" class="econ-action-btn" onclick="openModalMovimiento(${m.id})" title="Editar previsión de ingreso">✏️</button>
-        </div>
-      </div>
-    `;
-  });
-
-  if(!ingresosPendientesHtml){
-    ingresosPendientesHtml = `
-      <div class="econ-ledger-row">
-        <div class="econ-row-left">
-          <div class="econ-row-title">Sin cuotas pendientes</div>
-          <div class="econ-row-sub">Todas las cuotas de la plantilla han sido cobradas</div>
-        </div>
-        <div class="econ-row-right-wrap"><span style="color:var(--text-muted);font-size:12px">0,00 €</span></div>
+    return `
+      <div class="econ-neutral-row">
+        <div class="econ-neutral-concept" title="Ficha · ${String(c.nombre || '').replace(/"/g,'&quot;')}">Ficha · ${c.nombre || 'Jugador'}</div>
+        <div class="econ-neutral-date">—</div>
+        <div class="econ-neutral-amount">+${formatMoney(pend)}</div>
+        <button type="button" class="econ-neutral-edit" onclick="switchEconTab('movimientos')" title="Ver cuotas">✎</button>
       </div>
     `;
   }
 
+  function emptyRow(text){
+    return `<div class="econ-neutral-empty">${text}</div>`;
+  }
+
+  const ingresosCobrados = sortMovs(movs.filter(function(m){
+    return m && m.tipo === 'Ingreso' && econMovSituacion(m) === 'Actual' && !isCierre(m);
+  }));
+
+  const ingresosPrevistos = sortMovs(movs.filter(function(m){
+    return m && m.tipo === 'Ingreso' && econMovSituacion(m) === 'Previsto' && !econIsFichaMovement(m) && !isCierre(m);
+  }));
+
+  const cuotasPendientes = cuotas.filter(function(c){
+    const fixed = parseFloat(c.cuota) || 0;
+    const paid = parseFloat(c.pagado) || 0;
+    return c.cuotaObligatoria !== false && fixed > 0 && paid < fixed;
+  }).sort(function(a,b){
+    const da = Number(a.dorsal) || 999;
+    const dbb = Number(b.dorsal) || 999;
+    return da !== dbb ? da-dbb : String(a.nombre||'').localeCompare(String(b.nombre||''),'es',{sensitivity:'base'});
+  });
+
+  const gastosPagados = sortMovs(movs.filter(function(m){
+    return m && m.tipo === 'Gasto' && econMovSituacion(m) === 'Actual';
+  }));
+  const gastosPendientes = sortMovs(movs.filter(function(m){
+    return m && m.tipo === 'Gasto' && econMovSituacion(m) === 'Previsto';
+  }));
+
+  const ingresosPendHtml = [
+    ...cuotasPendientes.map(pendingQuotaRow),
+    ...ingresosPrevistos.map(function(m){ return movementRow(m,'income'); })
+  ].join('');
+
   grid.innerHTML = `
-    <div class="econ-ledger-card">
-      <!-- CABECERA SUPERIOR: TÍTULO Y SALDO TOTAL EN CUENTA -->
-      <div class="econ-ledger-header-bar">
-        <div>
-          <div class="econ-ledger-top-title">💳 Estado Contable de Tesorería</div>
-          <div class="econ-ledger-top-sub">Xuventude Dorneda &middot; Temporada 2026/27</div>
+    <div class="econ-neutral-balance">
+      <div class="econ-neutral-col">
+        <div class="econ-neutral-col-head">
+          <span>INGRESOS</span>
+          <button type="button" class="econ-neutral-add" onclick="openModalNuevoMovimiento('Ingreso','Actual')">+ Ingreso</button>
         </div>
-        <div class="econ-saldo-badge-box">
-          <div>
-            <div class="econ-saldo-badge-label">Saldo Actual en Cuenta (Hoy)</div>
-            <div class="econ-saldo-badge-val">${saldoSign}${formatMoney(st.saldoActual)}</div>
+
+        <div class="econ-neutral-section">
+          <div class="econ-neutral-section-head">
+            <span>Cobrados</span>
+            <strong>+${formatMoney(st.ingresosRealizados)}</strong>
           </div>
-        </div>
-      </div>
-
-      <!-- BANNER SUPERIOR: CIERRE TEMPORADA ANTERIOR -->
-      <div class="econ-remanente-bar">
-        <div class="econ-remanente-left">
-          <span class="econ-remanente-icon">🏛️</span>
-          <div>
-            <div class="econ-remanente-title">Cierre Temporada Anterior (Remanente Inicial): <span style="color:#2563eb">+${formatMoney(st.remanenteAnterior)}</span></div>
-            <div class="econ-remanente-sub">Saldo inicial con el que partió el club disponible en cuenta bancaria</div>
-          </div>
-        </div>
-        <div style="display:flex;align-items:center;gap:6px">
-          <div class="econ-remanente-amount" style="color:#2563eb">+${formatMoney(st.remanenteAnterior)}</div>
-          <button type="button" class="econ-action-btn" onclick="openModalRemanente()" title="Editar remanente inicial">✏️</button>
-        </div>
-      </div>
-
-      <!-- DOS COLUMNAS: INGRESOS TEMPORADA A LA IZQUIERDA, GASTOS A LA DERECHA -->
-      <div class="econ-2cols-grid">
-        
-        <!-- COLUMNA 1: INGRESOS -->
-        <div class="econ-col-panel">
-          <div class="econ-col-head income">
-            <div style="display:flex;align-items:center;gap:6px">
-              <span>📈 INGRESOS TEMPORADA</span>
-              <button type="button" class="econ-add-btn" onclick="openModalNuevoMovimiento('Ingreso')" title="Añadir nuevo ingreso">+ Ingreso</button>
-            </div>
-            <div class="econ-dual-totals">
-              <span class="dual-real" title="Ingresos reales cobrados hasta hoy">Real: <strong>+${formatMoney(st.ingresosRealizados)}</strong></span>
-              <span class="dual-previsto" title="Total ingresos previstos al completar todas las cuotas">Previsto: <strong>+${formatMoney(st.ingresosTotalesPrevistos)}</strong></span>
-            </div>
-          </div>
-
-          <div class="econ-ledger-rows">
-            <!-- 1.1 SUBSECCIÓN INGRESOS REALES COBRADOS -->
-            <div class="econ-sub-divider income-sub">
-              <span>🟢 1. Ingresos Reales Cobrados (En Cuenta)</span>
-              <div style="display:flex;align-items:center;gap:4px">
-                <span>+${formatMoney(st.ingresosRealizados)}</span>
-                <button type="button" class="econ-action-btn" onclick="openModalNuevoMovimiento('Ingreso', 'Pagado')" title="Añadir cobro real">+</button>
-              </div>
-            </div>
-
-            <!-- Fila: Cuotas cobradas -->
-            <div class="econ-ledger-row">
-              <div class="econ-row-left">
-                <div class="econ-row-title">👥 Cuotas abonadas por la plantilla</div>
-                <div class="econ-row-sub">${cntPagado} completas · ${cntParcial} parcial (${st.pctCuotas}% recaudado)</div>
-              </div>
-              <div class="econ-row-right-wrap">
-                <span class="val-income">+${formatMoney(st.cuotasRecaudadas)}</span>
-                <button type="button" class="econ-action-btn" onclick="switchEconTab('movimientos')" title="Ver y editar cuotas de jugadores">✏️ Cuotas</button>
-              </div>
-            </div>
-
-            ${otrosIngresosHtml}
-
-            <!-- 1.2 SUBSECCIÓN INGRESOS PENDIENTES (PREVISIÓN) -->
-            <div class="econ-sub-divider pending-sub">
-              <span>⏳ 2. Ingresos Pendientes (Previsión de Cobro)</span>
-              <div style="display:flex;align-items:center;gap:4px">
-                <span class="pending-color">+${formatMoney(st.ingresosPendientes)}</span>
-                <button type="button" class="econ-action-btn" onclick="openModalNuevoMovimiento('Ingreso', 'Pendiente')" title="Añadir previsión de ingreso">+</button>
-              </div>
-            </div>
-
-            ${ingresosPendientesHtml}
-          </div>
-
-          <div class="econ-col-foot">
-            <div>Real cobrado: <strong style="color:#16a34a">+${formatMoney(st.ingresosRealizados)}</strong></div>
-            <div>Pendiente: <strong style="color:#d97706">+${formatMoney(st.ingresosPendientes)}</strong></div>
-            <div>🎯 Total Previsto: <strong style="color:#16a34a;font-size:12px">+${formatMoney(st.ingresosTotalesPrevistos)}</strong></div>
+          <div class="econ-neutral-table-head"><span>Concepto</span><span>Fecha</span><span>€</span><span></span></div>
+          <div class="econ-neutral-scroll">
+            ${ingresosCobrados.length ? ingresosCobrados.map(function(m){ return movementRow(m,'income'); }).join('') : emptyRow('Sin ingresos cobrados')}
           </div>
         </div>
 
-        <!-- COLUMNA 2: GASTOS -->
-        <div class="econ-col-panel">
-          <div class="econ-col-head expense">
-            <div style="display:flex;align-items:center;gap:6px">
-              <span>📉 GASTOS TEMPORADA</span>
-              <button type="button" class="econ-add-btn" onclick="openModalNuevoMovimiento('Gasto')" title="Añadir nuevo gasto">+ Gasto</button>
-            </div>
-            <div class="econ-dual-totals">
-              <span class="dual-real" title="Gastos reales pagados hasta hoy">Real: <strong>-${formatMoney(st.gastosRealizados)}</strong></span>
-              <span class="dual-previsto" title="Total gastos previstos al completar todos los pagos">Previsto: <strong>-${formatMoney(st.gastosTotalesPrevistos)}</strong></span>
-            </div>
+        <div class="econ-neutral-section">
+          <div class="econ-neutral-section-head">
+            <span>Pendientes</span>
+            <strong>+${formatMoney(st.ingresosPendientes)}</strong>
           </div>
-
-          <div class="econ-ledger-rows">
-            <!-- 2.1 SUBSECCIÓN GASTOS REALES PAGADOS -->
-            <div class="econ-sub-divider expense-sub">
-              <span>🔴 1. Gastos Reales Pagados (Ejecutados)</span>
-              <div style="display:flex;align-items:center;gap:4px">
-                <span>-${formatMoney(st.gastosRealizados)}</span>
-                <button type="button" class="econ-action-btn" onclick="openModalNuevoMovimiento('Gasto', 'Pagado')" title="Añadir gasto pagado">+</button>
-              </div>
-            </div>
-
-            ${gastosPagadosHtml}
-
-            <!-- 2.2 SUBSECCIÓN GASTOS PENDIENTES (PREVISIÓN) -->
-            <div class="econ-sub-divider pending-sub">
-              <span>⏳ 2. Gastos Pendientes (Previsión Excel)</span>
-              <div style="display:flex;align-items:center;gap:4px">
-                <span class="pending-expense-color">-${formatMoney(st.gastosPendientes)}</span>
-                <button type="button" class="econ-action-btn" onclick="openModalNuevoMovimiento('Gasto', 'Pendiente')" title="Añadir gasto previsto pendiente">+</button>
-              </div>
-            </div>
-
-            ${gastosPendientesHtml}
-          </div>
-
-          <div class="econ-col-foot">
-            <div>Real pagado: <strong style="color:#dc2626">-${formatMoney(st.gastosRealizados)}</strong></div>
-            <div>Pendiente: <strong style="color:#ea580c">-${formatMoney(st.gastosPendientes)}</strong></div>
-            <div>🎯 Total Previsto: <strong style="color:#dc2626;font-size:12px">-${formatMoney(st.gastosTotalesPrevistos)}</strong></div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- CUADRÍCULA COMPARATIVA DE BALANCES (REAL vs PREVISTO) -->
-      <div class="econ-kpi-comparison-grid">
-        <!-- CAJA 1: ESTADO REAL (ACTUAL HOY) -->
-        <div class="econ-kpi-box real-box">
-          <div class="econ-kpi-header">
-            <span class="econ-kpi-badge real-badge">🟢 BALANCE REAL (ACTUAL HOY)</span>
-            <span class="econ-kpi-tag">En Banco</span>
-          </div>
-          <div class="econ-kpi-main-val" style="color:#16a34a">${saldoSign}${formatMoney(st.saldoActual)}</div>
-          <div class="econ-kpi-sub">
-            <span>Beneficio Real Temp: <strong style="color:${st.balanceActual>=0?'#16a34a':'#dc2626'}">${balSign}${formatMoney(st.balanceActual)}</strong></span>
-            <span style="opacity:0.5">&middot;</span>
-            <span>Remanente: <strong>+${formatMoney(st.remanenteAnterior)}</strong></span>
-          </div>
-          <div class="econ-kpi-formula">
-            Ingresos Reales (+${formatMoney(st.ingresosRealizados)}) − Gastos Reales (-${formatMoney(st.gastosRealizados)}) = ${balSign}${formatMoney(st.balanceActual)}
-          </div>
-        </div>
-
-        <!-- CAJA 2: ESTADO PREVISTO (PROYECCIÓN FINAL) -->
-        <div class="econ-kpi-box previsto-box">
-          <div class="econ-kpi-header">
-            <span class="econ-kpi-badge previsto-badge">🔮 BALANCE PREVISTO (FINAL TEMPORADA)</span>
-            <span class="econ-kpi-tag">Proyección</span>
-          </div>
-          <div class="econ-kpi-main-val" style="color:#2563eb">${prevSign}${formatMoney(st.saldoFinalPrevisto)}</div>
-          <div class="econ-kpi-sub">
-            <span>Beneficio Previsto Temp: <strong style="color:${st.balancePrevisto>=0?'#16a34a':'#dc2626'}">${balPrevSign}${formatMoney(st.balancePrevisto)}</strong></span>
-            <span style="opacity:0.5">&middot;</span>
-            <span>Remanente: <strong>+${formatMoney(st.remanenteAnterior)}</strong></span>
-          </div>
-          <div class="econ-kpi-formula">
-            Ingresos Previstos (+${formatMoney(st.ingresosTotalesPrevistos)}) − Gastos Previstos (-${formatMoney(st.gastosTotalesPrevistos)}) = ${balPrevSign}${formatMoney(st.balancePrevisto)}
+          <div class="econ-neutral-table-head"><span>Concepto</span><span>Fecha</span><span>€</span><span></span></div>
+          <div class="econ-neutral-scroll">
+            ${ingresosPendHtml || emptyRow('Sin ingresos pendientes')}
           </div>
         </div>
       </div>
 
+      <div class="econ-neutral-col">
+        <div class="econ-neutral-col-head">
+          <span>GASTOS</span>
+          <button type="button" class="econ-neutral-add" onclick="openModalNuevoMovimiento('Gasto','Actual')">+ Gasto</button>
+        </div>
+
+        <div class="econ-neutral-section">
+          <div class="econ-neutral-section-head">
+            <span>Pagados</span>
+            <strong>−${formatMoney(st.gastosRealizados)}</strong>
+          </div>
+          <div class="econ-neutral-table-head"><span>Concepto</span><span>Fecha</span><span>€</span><span></span></div>
+          <div class="econ-neutral-scroll">
+            ${gastosPagados.length ? gastosPagados.map(function(m){ return movementRow(m,'expense'); }).join('') : emptyRow('Sin gastos pagados')}
+          </div>
+        </div>
+
+        <div class="econ-neutral-section">
+          <div class="econ-neutral-section-head">
+            <span>Pendientes</span>
+            <strong>−${formatMoney(st.gastosPendientes)}</strong>
+          </div>
+          <div class="econ-neutral-table-head"><span>Concepto</span><span>Fecha</span><span>€</span><span></span></div>
+          <div class="econ-neutral-scroll">
+            ${gastosPendientes.length ? gastosPendientes.map(function(m){ return movementRow(m,'expense'); }).join('') : emptyRow('Sin gastos pendientes')}
+          </div>
+        </div>
+      </div>
     </div>
   `;
 }
@@ -22712,39 +22719,35 @@ function renderEconStats(){
   if(!grid) return;
   const st = calcEconStats();
 
-  function signedMoney(value, forcePlus){
+  function signed(value){
     const n = Number(value) || 0;
-    if(forcePlus && n >= 0) return '+' + formatMoney(n);
-    return formatMoney(n);
+    return (n >= 0 ? '+' : '') + formatMoney(n);
   }
 
-  const balanceReal = st.saldoActual;
-  const balancePrevisto = st.saldoFinalPrevisto;
-
   const items = [
-    {cls:'carry', label:'Cierre temporada anterior', value:'+' + formatMoney(st.remanenteAnterior), sub:'Remanente inicial'},
-    {cls:'income-real', label:'Ingresos Reales', value:'+' + formatMoney(st.ingresosRealizados), sub:'Cobrado'},
-    {cls:'income-forecast', label:'Ingresos Previstos', value:'+' + formatMoney(st.ingresosPendientes), sub:'Pendiente de cobrar'},
-    {cls:'expense-real', label:'Gastos Reales', value:'−' + formatMoney(st.gastosRealizados), sub:'Pagado'},
-    {cls:'expense-forecast', label:'Gastos Previstos', value:'−' + formatMoney(st.gastosPendientes), sub:'Pendiente de pagar'},
-    {cls:'balance-real', label:'Balance Real', value:signedMoney(balanceReal, true), sub:'Cierre + cobros − pagos'},
-    {cls:'balance-forecast', label:'Balance Previsto', value:signedMoney(balancePrevisto, true), sub:'Real + previstos'}
+    ['Cierre anterior', '+' + formatMoney(st.remanenteAnterior)],
+    ['Ingresos reales', '+' + formatMoney(st.ingresosRealizados)],
+    ['Ingresos previstos', '+' + formatMoney(st.ingresosPendientes)],
+    ['Gastos reales', '−' + formatMoney(st.gastosRealizados)],
+    ['Gastos previstos', '−' + formatMoney(st.gastosPendientes)],
+    ['Balance real', signed(st.saldoActual)],
+    ['Balance previsto', signed(st.saldoFinalPrevisto)]
   ];
 
   grid.innerHTML = `
-    <div class="econ-summary-strip" aria-label="Resumen económico">
+    <div class="econ-summary-strip econ-summary-neutral" aria-label="Resumen económico">
       ${items.map(function(item){
         return `
-          <div class="econ-summary-kpi ${item.cls}">
-            <div class="econ-summary-label">${item.label}</div>
-            <div class="econ-summary-value">${item.value}</div>
-            <div class="econ-summary-sub">${item.sub}</div>
+          <div class="econ-summary-kpi">
+            <div class="econ-summary-label">${item[0]}</div>
+            <div class="econ-summary-value">${item[1]}</div>
           </div>
         `;
       }).join('')}
     </div>
   `;
 }
+
 window.renderEconStats = renderEconStats;
 window.renderEconTreasury = renderEconTreasury;
 
@@ -22873,8 +22876,7 @@ function renderEconMovimientosMain(){
       const detalle = econMovementLabel(m) || '—';
       const receptor = m.receptor || m.pagadorBeneficiario || '—';
       const sign = ingreso ? '+' : '−';
-      const color = ingreso ? '#16a34a' : '#dc2626';
-      const fullTitle = [
+            const fullTitle = [
         m.concepto || '',
         m.notas || '',
         receptor !== '—' ? 'Receptor: ' + receptor : '',
@@ -22890,7 +22892,7 @@ function renderEconMovimientosMain(){
           <td><span class="econ-mov-detail" title="${String(detalle).replace(/"/g,'&quot;')}">${detalle}</span></td>
           <td><span class="econ-mov-method" title="${String(method).replace(/"/g,'&quot;')}">${method}</span></td>
           <td><span class="econ-mov-rec" title="${String(receptor).replace(/"/g,'&quot;')}">${receptor}</span></td>
-          <td><span class="econ-mov-amount" style="color:${color}">${sign}${formatMoney(m.importe)}</span></td>
+          <td><span class="econ-mov-amount">${sign}${formatMoney(m.importe)}</span></td>
           <td><button type="button" class="btn btn-ghost econ-mov-edit" onclick="openModalMovimiento(${m.id})" title="Editar movimiento">✎</button></td>
         </tr>
       `;
@@ -22977,12 +22979,12 @@ function renderEconCuotas(){
 
       return `
         <tr title="${title}">
-          <td style="font-weight:900;color:var(--red-light)">${dTag}</td>
+          <td style="font-weight:800">${dTag}</td>
           <td><span class="econ-cuota-player" title="${String(c.nombreCompleto || c.nombre || '').replace(/"/g,'&quot;')}">${c.nombre || '—'}</span></td>
           <td><span class="econ-cuota-mini ${fichaClass}">${fichaLabel}</span></td>
           <td style="font-weight:700">${formatMoney(fixed)}</td>
-          <td style="font-weight:800;color:#16a34a">${formatMoney(paid)}</td>
-          <td style="font-weight:800;color:${pend > 0 ? '#dc2626' : 'var(--text-muted)'}">${formatMoney(pend)}</td>
+          <td style="font-weight:800">${formatMoney(paid)}</td>
+          <td style="font-weight:800">${formatMoney(pend)}</td>
           <td><span class="econ-cuota-mini ${estadoClass}">${estadoLabel}</span></td>
           <td style="color:var(--text-muted);font-size:9px">${c.fechaPago || '—'}</td>
           <td><button type="button" class="btn btn-ghost econ-cuota-edit" onclick="openModalCuotaJugador(${c.jugadorId})" title="Editar cuota / ver detalle">✎</button></td>
