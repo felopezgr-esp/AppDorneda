@@ -6636,6 +6636,36 @@ button[aria-busy="true"]{
               </table>
             </div>
           </div>
+
+          <div class="dash-section">
+            <div class="dash-section-head">
+              <div class="dash-section-title">Tarjetas Amarillas</div>
+              <div class="dash-section-note">Dorneda · Liga</div>
+            </div>
+            <div class="dash-table-wrap">
+              <table class="dash-table dash-top3-table">
+                <thead>
+                  <tr><th>#</th><th>Jugador</th><th>TA</th></tr>
+                </thead>
+                <tbody id="dashTopYellowCards"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="dash-section">
+            <div class="dash-section-head">
+              <div class="dash-section-title">Tarjetas Rojas</div>
+              <div class="dash-section-note">Dorneda · Liga</div>
+            </div>
+            <div class="dash-table-wrap">
+              <table class="dash-table dash-top3-table">
+                <thead>
+                  <tr><th>#</th><th>Jugador</th><th>TR</th></tr>
+                </thead>
+                <tbody id="dashTopRedCards"></tbody>
+              </table>
+            </div>
+          </div>
         </div>
 
         <div class="dash-section">
@@ -6773,6 +6803,28 @@ button[aria-busy="true"]{
               <span class="badge" id="analisisEquipoAsistentesTotal">0 asistencias</span>
             </div>
             <div id="analisisEquipoAsistentes"></div>
+          </div>
+        </div>
+        <div class="grid-2 mt-20">
+          <div class="card">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px">
+              <div>
+                <div class="card-title" style="margin-bottom:3px">Tarjetas Amarillas</div>
+                <div style="font-size:10.5px;color:var(--text-muted)">Liga · Actas oficiales FUTGAL</div>
+              </div>
+              <span class="badge" id="analisisEquipoAmarillasTotal">0 amarillas</span>
+            </div>
+            <div id="analisisEquipoAmarillas"></div>
+          </div>
+          <div class="card">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px">
+              <div>
+                <div class="card-title" style="margin-bottom:3px">Tarjetas Rojas</div>
+                <div style="font-size:10.5px;color:var(--text-muted)">Liga · Actas oficiales FUTGAL</div>
+              </div>
+              <span class="badge" id="analisisEquipoRojasTotal">0 rojas</span>
+            </div>
+            <div id="analisisEquipoRojas"></div>
           </div>
         </div>
         <div class="card mt-20"><div class="card-title">Racha Actual</div><div id="rachaActual" class="flex gap-8 mt-12"></div></div>
@@ -13618,6 +13670,68 @@ function renderDashboardGoleadoresYAsistidores(){
 }
 
 
+function calcTarjetasDornedaLigaOficiales(){
+  var byPlayer = {};
+  var matches = (typeof getLigaDornedaMatchesOficiales === 'function') ? (getLigaDornedaMatchesOficiales() || []) : [];
+
+  function cardType(v){
+    return String(v || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();
+  }
+
+  matches.forEach(function(rec){
+    if(!rec) return;
+    var acta = rec.acta || (rec.partido && rec.partido.actaData) || null;
+    if(!acta) return;
+
+    var cards = toArr(rec.isLocal ? acta.localTarjetas : acta.visitTarjetas);
+    cards.forEach(function(t){
+      if(!t) return;
+      var rawName = t.nombre || t.jugador || '';
+      if(!rawName) return;
+
+      var matched = (typeof matchPlayerInDB === 'function') ? matchPlayerInDB(rawName, t.dorsal) : null;
+      if(matched && typeof isStaff === 'function' && isStaff(matched)) return;
+
+      var canon = (typeof getCanonicalPlayerName === 'function') ? getCanonicalPlayerName(rawName, t.dorsal) : '';
+      var display = (matched && matched.nombre) ? matched.nombre : (canon || (typeof formatOfficialPersonName === 'function' ? formatOfficialPersonName(rawName) : rawName));
+      var key = normalizeName(display);
+      if(!key) return;
+
+      if(!byPlayer[key]){
+        byPlayer[key] = {
+          nombre: display,
+          dorsal: (matched && matched.dorsal) ? Number(matched.dorsal) : (Number(t.dorsal) || 999),
+          amarillas: 0,
+          rojas: 0
+        };
+      }
+
+      var tipo = cardType(t.tipo);
+      if(tipo.indexOf('roja') !== -1 || tipo.indexOf('doble amarilla') !== -1){
+        byPlayer[key].rojas++;
+      }else if(tipo.indexOf('amarilla') !== -1){
+        byPlayer[key].amarillas++;
+      }
+    });
+  });
+
+  var rows = Object.values(byPlayer);
+  var amarillas = rows.filter(function(r){ return r.amarillas > 0; }).sort(function(a,b){
+    return (b.amarillas-a.amarillas) || ((a.dorsal||999)-(b.dorsal||999)) || String(a.nombre).localeCompare(String(b.nombre),'es',{sensitivity:'base'});
+  });
+  var rojas = rows.filter(function(r){ return r.rojas > 0; }).sort(function(a,b){
+    return (b.rojas-a.rojas) || ((a.dorsal||999)-(b.dorsal||999)) || String(a.nombre).localeCompare(String(b.nombre),'es',{sensitivity:'base'});
+  });
+
+  return {
+    amarillas: amarillas,
+    rojas: rojas,
+    totalAmarillas: amarillas.reduce(function(sum,r){ return sum+r.amarillas; },0),
+    totalRojas: rojas.reduce(function(sum,r){ return sum+r.rojas; },0)
+  };
+}
+window.calcTarjetasDornedaLigaOficiales = calcTarjetasDornedaLigaOficiales;
+
 function calcTarjetasLiga(){
   const playerStats = {};
 
@@ -13971,6 +14085,36 @@ function renderDashboardTop3(){
   }).join('');
 }
 
+function renderDashboardTarjetasDorneda(){
+  var yellowEl=document.getElementById('dashTopYellowCards');
+  var redEl=document.getElementById('dashTopRedCards');
+  if(!yellowEl && !redEl) return;
+
+  var data=(typeof calcTarjetasDornedaLigaOficiales === 'function')
+    ? calcTarjetasDornedaLigaOficiales()
+    : {amarillas:[],rojas:[]};
+
+  function fill(el,rows,field,emptyText){
+    if(!el) return;
+    var top=(rows || []).slice(0,3);
+    if(!top.length){
+      el.innerHTML='<tr><td colspan="3" class="dash-empty">'+emptyText+'</td></tr>';
+      return;
+    }
+    el.innerHTML=top.map(function(r){
+      var d=(r.dorsal && r.dorsal !== 999) ? r.dorsal : '—';
+      return `<tr>
+        <td>#${d}</td>
+        <td class="team">${dashSafe(r.nombre)}</td>
+        <td>${Number(r[field]) || 0}</td>
+      </tr>`;
+    }).join('');
+  }
+
+  fill(yellowEl,data.amarillas,'amarillas','Sin amarillas registradas.');
+  fill(redEl,data.rojas,'rojas','Sin rojas registradas.');
+}
+
 function renderDashboardSquad(){
   var el=document.getElementById('dashSquadSummary');
   if(!el) return;
@@ -14004,6 +14148,7 @@ function renderDashboard(){
   renderDashboardNearby(ctx);
   renderDashboardTop3();
   renderDashboardTopAssists();
+  renderDashboardTarjetasDorneda();
   renderDashboardSquad();
 
   var mode=document.getElementById('dashAccessMode');
@@ -19912,6 +20057,12 @@ function renderAnalisisProximoRival(selectedTeam){
     var jugadoresTarjetas = Object.values(tarjetasMap).sort(function(a, b){ return (b.rojas * 5 + b.amarillas) - (a.rojas * 5 + a.amarillas); });
     var totalAmarillas = jugadoresTarjetas.reduce(function(sum, x){ return sum + x.amarillas; }, 0);
     var totalRojas = jugadoresTarjetas.reduce(function(sum, x){ return sum + x.rojas; }, 0);
+    var rivalAmarillas = jugadoresTarjetas.filter(function(x){ return x.amarillas > 0; }).sort(function(a,b){
+      return (b.amarillas-a.amarillas) || String(a.nombre).localeCompare(String(b.nombre),'es',{sensitivity:'base'});
+    });
+    var rivalRojas = jugadoresTarjetas.filter(function(x){ return x.rojas > 0; }).sort(function(a,b){
+      return (b.rojas-a.rojas) || String(a.nombre).localeCompare(String(b.nombre),'es',{sensitivity:'base'});
+    });
 
     // Racha ordenada por jornada
     rivalMatches.sort(function(a, b){ return (a.jornada || 0) - (b.jornada || 0); });
@@ -20087,6 +20238,23 @@ function renderAnalisisProximoRival(selectedTeam){
           </div>
         </div>
 
+        <div class="scout-main-grid">
+          <div class="scout-card">
+            <div class="scout-card-head"><div class="scout-title">Tarjetas Amarillas</div><div class="scout-muted">${totalAmarillas} en Liga</div></div>
+            <table class="scout-table scout-goals-table">
+              <thead><tr><th>Dorsal</th><th>Jugador</th><th>TA</th></tr></thead>
+              <tbody>${rivalAmarillas.length ? rivalAmarillas.map(function(r){return `<tr><td>${r.dorsal || '#—'}</td><td>${r.nombre}</td><td>${r.amarillas}</td></tr>`;}).join('') : '<tr><td colspan="3" class="scout-muted">Sin tarjetas amarillas registradas.</td></tr>'}</tbody>
+            </table>
+          </div>
+          <div class="scout-card">
+            <div class="scout-card-head"><div class="scout-title">Tarjetas Rojas</div><div class="scout-muted">${totalRojas} en Liga</div></div>
+            <table class="scout-table scout-goals-table">
+              <thead><tr><th>Dorsal</th><th>Jugador</th><th>TR</th></tr></thead>
+              <tbody>${rivalRojas.length ? rivalRojas.map(function(r){return `<tr><td>${r.dorsal || '#—'}</td><td>${r.nombre}</td><td>${r.rojas}</td></tr>`;}).join('') : '<tr><td colspan="3" class="scout-muted">Sin tarjetas rojas registradas.</td></tr>'}</tbody>
+            </table>
+          </div>
+        </div>
+
         <div class="scout-chart-grid">
           <div class="scout-card"><div class="scout-card-head"><div class="scout-title">Goles a favor · por minutos</div><div class="scout-muted">${gfMinutesKnown}/${totalGF} con minuto disponible</div></div>${barRows(gfSlots,Math.max(gfMinutesKnown,1),false)}</div>
           <div class="scout-card"><div class="scout-card-head"><div class="scout-title">Goles en contra · por minutos</div><div class="scout-muted">${gcMinutesKnown}/${totalGC} con minuto disponible</div></div>${barRows(gcSlots,Math.max(gcMinutesKnown,1),true)}</div>
@@ -20116,8 +20284,12 @@ window.getNextUpcomingOpponent = getNextUpcomingOpponent;
 function renderAnalisisEquipoListados(){
   var goalEl=document.getElementById('analisisEquipoGoleadores');
   var assistEl=document.getElementById('analisisEquipoAsistentes');
+  var yellowEl=document.getElementById('analisisEquipoAmarillas');
+  var redEl=document.getElementById('analisisEquipoRojas');
   var goalTotalEl=document.getElementById('analisisEquipoGoleadoresTotal');
   var assistTotalEl=document.getElementById('analisisEquipoAsistentesTotal');
+  var yellowTotalEl=document.getElementById('analisisEquipoAmarillasTotal');
+  var redTotalEl=document.getElementById('analisisEquipoRojasTotal');
 
   var goleadores=(typeof calcGoleadores==='function' ? calcGoleadores('Liga') : []).slice();
   goleadores.sort(function(a,b){
@@ -20149,15 +20321,38 @@ function renderAnalisisEquipoListados(){
 
   var totalGoals=goleadores.reduce(function(sum,item){ return sum+(Number(item[1] && item[1].goles)||0); },0);
   var totalAssists=asistentes.reduce(function(sum,item){ return sum+(Number(item[1] && item[1].asistencias)||0); },0);
+  var cards=(typeof calcTarjetasDornedaLigaOficiales === 'function')
+    ? calcTarjetasDornedaLigaOficiales()
+    : {amarillas:[],rojas:[],totalAmarillas:0,totalRojas:0};
+
+  function cardRowsHtml(rows,field,singular,plural,accent){
+    if(!rows.length){
+      return `<div style="font-size:12px;color:var(--text-dim);padding:10px 0">Sin ${plural} registradas.</div>`;
+    }
+    return rows.map(function(r,index){
+      var value=Number(r[field]) || 0;
+      var label=value===1 ? singular : plural;
+      var dorsal=(r.dorsal && r.dorsal !== 999) ? '#'+r.dorsal : '#—';
+      return `<div style="display:grid;grid-template-columns:32px minmax(0,1fr) auto;gap:9px;align-items:center;padding:8px 2px;border-bottom:1px solid var(--border)">
+        <div style="font-size:10.5px;font-weight:900;color:var(--text-dim);text-align:center">${dorsal}</div>
+        <div style="font-size:12px;font-weight:800;color:var(--text);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${String(r.nombre).replace(/"/g,'&quot;')}">${r.nombre}</div>
+        <div style="font-size:12px;font-weight:900;color:${accent};white-space:nowrap">${value} ${label}</div>
+      </div>`;
+    }).join('');
+  }
 
   if(goalTotalEl) goalTotalEl.textContent=totalGoals+' '+(totalGoals===1?'gol':'goles');
   if(assistTotalEl) assistTotalEl.textContent=totalAssists+' '+(totalAssists===1?'asistencia':'asistencias');
+  if(yellowTotalEl) yellowTotalEl.textContent=cards.totalAmarillas+' '+(cards.totalAmarillas===1?'amarilla':'amarillas');
+  if(redTotalEl) redTotalEl.textContent=cards.totalRojas+' '+(cards.totalRojas===1?'roja':'rojas');
   if(goalEl) goalEl.innerHTML=rowsHtml(goleadores,'goles','gol','goles','var(--red)');
   if(assistEl){
     assistEl.innerHTML=asistentes.length
       ? rowsHtml(asistentes,'asistencias','asistencia','asistencias','#2563eb')
       : '<div style="font-size:12px;color:var(--text-dim);padding:10px 0;line-height:1.5">Sin asistencias registradas en las fichas de partido. FUTGAL no aporta este dato automáticamente.</div>';
   }
+  if(yellowEl) yellowEl.innerHTML=cardRowsHtml(cards.amarillas,'amarillas','amarilla','amarillas','#b7791f');
+  if(redEl) redEl.innerHTML=cardRowsHtml(cards.rojas,'rojas','roja','rojas','var(--red)');
 }
 window.renderAnalisisEquipoListados=renderAnalisisEquipoListados;
 
