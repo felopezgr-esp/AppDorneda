@@ -5962,6 +5962,82 @@ button[aria-busy="true"]{
   #section-economia .econ-balance-actions .btn{font-size:9px;padding:5px 7px;}
 }
 </style>
+
+<style id="mobile-clasificacion-prioritaria-v1">
+/* Clasificación móvil: Pos + Equipo + Pt + PJ siempre visibles; resto desplazable */
+.clasif-team-mobile{display:none;}
+.clasif-head-mobile{display:none;}
+
+@media (max-width:760px){
+  #ligaSubViewClasif .card{
+    padding:7px !important;
+  }
+  #ligaSubViewClasif .table-wrap{
+    overflow-x:auto !important;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:thin;
+  }
+  #mainClasifTable{
+    min-width:520px !important;
+    width:520px !important;
+    table-layout:fixed !important;
+    font-size:10px !important;
+  }
+  #mainClasifTable th,
+  #mainClasifTable td{
+    height:29px !important;
+    padding:3px 3px !important;
+    font-size:10px !important;
+    line-height:1.05 !important;
+    white-space:nowrap !important;
+    overflow:hidden !important;
+    text-overflow:ellipsis !important;
+  }
+
+  /* Anchos muy compactos de las cuatro columnas prioritarias */
+  #mainClasifTable th:nth-child(1), #mainClasifTable td:nth-child(1){width:30px !important;min-width:30px !important;max-width:30px !important;}
+  #mainClasifTable th:nth-child(2), #mainClasifTable td:nth-child(2){width:126px !important;min-width:126px !important;max-width:126px !important;padding-left:6px !important;}
+  #mainClasifTable th:nth-child(3), #mainClasifTable td:nth-child(3){width:36px !important;min-width:36px !important;max-width:36px !important;}
+  #mainClasifTable th:nth-child(4), #mainClasifTable td:nth-child(4){width:34px !important;min-width:34px !important;max-width:34px !important;}
+  #mainClasifTable th:nth-child(n+5), #mainClasifTable td:nth-child(n+5){width:42px !important;min-width:42px !important;max-width:42px !important;}
+
+  /* Las cuatro primeras columnas permanecen visibles al desplazar */
+  #mainClasifTable th:nth-child(1), #mainClasifTable td:nth-child(1){position:sticky !important;left:0 !important;z-index:7 !important;background:var(--surface) !important;}
+  #mainClasifTable th:nth-child(2), #mainClasifTable td:nth-child(2){position:sticky !important;left:30px !important;z-index:6 !important;background:var(--surface) !important;}
+  #mainClasifTable th:nth-child(3), #mainClasifTable td:nth-child(3){position:sticky !important;left:156px !important;z-index:6 !important;background:var(--surface) !important;}
+  #mainClasifTable th:nth-child(4), #mainClasifTable td:nth-child(4){position:sticky !important;left:192px !important;z-index:6 !important;background:var(--surface) !important;box-shadow:5px 0 7px -7px rgba(0,0,0,.55);}
+  #mainClasifTable thead th:nth-child(-n+4){z-index:10 !important;background:var(--surface2) !important;}
+
+  /* Mantener el resaltado del Dorneda también en las columnas fijas */
+  #mainClasifTable tr.dorneda-row td:nth-child(-n+4){
+    background:var(--danger-soft, rgba(220,38,38,.08)) !important;
+  }
+
+  /* Nombres específicos y cortos para móvil */
+  #mainClasifTable .clasif-team-full{display:none !important;}
+  #mainClasifTable .clasif-team-mobile{
+    display:inline !important;
+    max-width:108px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    vertical-align:middle;
+  }
+  #mainClasifTable .clasif-team-note{display:none !important;}
+  #mainClasifTable .clasif-head-desktop{display:none !important;}
+  #mainClasifTable .clasif-head-mobile{display:inline !important;}
+  #mainClasifTable .pos-pill{
+    width:18px !important;
+    height:18px !important;
+    font-size:9px !important;
+  }
+  #mainClasifTable .clasif-adjust{
+    margin-left:1px !important;
+    padding:0 2px !important;
+    font-size:7.5px !important;
+  }
+}
+</style>
+
 </head>
 <body class="editor-mode">
 <div class="toast-container" id="toastContainer"></div>
@@ -6834,7 +6910,7 @@ button[aria-busy="true"]{
                   <tr>
                     <th style="width:34px">Pos</th>
                     <th>Equipo</th>
-                    <th style="text-align:center">Pts</th>
+                    <th style="text-align:center"><span class="clasif-head-desktop">Pts</span><span class="clasif-head-mobile">Pt</span></th>
                     <th>PJ</th>
                     <th>PG</th>
                     <th>PE</th>
@@ -12174,6 +12250,7 @@ function connectAuthorizedFirestore(){
           var res=validateAndMigrateDB(incomingDb);
           db=res.dbObj;
           needsCloudUpdate=res.modified ||
+            (localEditAt>cloudEditAt && isAdminMode) ||
             (localPlantillaAt>cloudPlantillaAt && isAdminMode) ||
             (localScoutingAt>cloudScoutingAt && isAdminMode) ||
             (localPartidosAt>cloudPartidosAt && isAdminMode);
@@ -12343,9 +12420,14 @@ function saveDBToCloudImmediate(){
     var remoteDb=remote && remote.db ? remote.db : null;
     var localAt=Number(db && db._syncMeta && db._syncMeta.partidosLastEditAt) || 0;
     var remoteAt=Number(remoteDb && remoteDb._syncMeta && remoteDb._syncMeta.partidosLastEditAt) || 0;
+    var localEconAt=Number(db && db.economia && db.economia._lastEditAt) || 0;
+    var remoteEconAt=Number(remoteDb && remoteDb.economia && remoteDb.economia._lastEditAt) || 0;
 
     if(localAt && remoteAt < localAt){
       throw new Error('La nube no confirmó todavía la última edición del partido.');
+    }
+    if(localEconAt && remoteEconAt < localEconAt){
+      throw new Error('La nube no confirmó todavía la última edición económica.');
     }
 
     updateCloudStatusUI('online','Nube Sincronizada');
@@ -12418,6 +12500,27 @@ function saveDB(){
   saveDBToCloud();
 }
 window.saveDB = saveDB;
+
+
+function saveEconomiaPersistent(){
+  // La copia local se guarda de forma inmediata.
+  try{
+    localStorage.setItem(DB_KEY, JSON.stringify(db));
+  }catch(e){}
+
+  // Para Economía no dejamos la escritura únicamente al debounce: si la nube
+  // ya está conectada pedimos confirmación inmediata. Si aún no lo está, el
+  // comparador de _lastEditAt la subirá automáticamente al conectar.
+  if(firestoreDocRef && !isRemoteUpdate){
+    saveDBToCloudImmediate().catch(function(err){
+      console.warn('Economía guardada localmente; sincronización pendiente:',err);
+      saveDBToCloud();
+    });
+  }else{
+    saveDBToCloud();
+  }
+}
+window.saveEconomiaPersistent=saveEconomiaPersistent;
 
 function getPlantillaSyncStatus(){
   return {
@@ -19166,6 +19269,34 @@ function clasifSyncLegacyDb(rows){
   });
 }
 
+
+function clasifNombreMovil(nombre){
+  var raw = String(nombre || '').trim();
+  var key = raw.toUpperCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/\s+/g,' ');
+
+  if(key.includes('DORNEDA')) return 'DORNEDA';
+  if(key.includes('BETANZOS')) return 'BETANZOS';
+  if(key.includes('CURTIS')) return 'CURTIS';
+  if(key.includes('SIGRAS')) return 'SIGRÁS';
+  if(key.includes('NARON')) return 'CD NARÓN';
+  if(key.includes('CAMPANAL')) return 'CAMPANAL';
+  if(key.includes('SPORTING CAMBRE')) return 'SP. CAMBRE';
+  if(key.includes('NARAHIO')) return 'NARAHÍO';
+  if(key.includes('PORTAZGO')) return 'PORTAZGO';
+  if(key.includes('SPORTING BURGO')) return 'SP. BURGO';
+  if(key.includes('LICEO')) return 'LICEO';
+  if(key.includes('PAIOSACO')) return 'PAIOSACO';
+  if(key.includes('OZA')) return 'OZA';
+  if(key.includes('CEDEIRA')) return 'CEDEIRA';
+  if(key.includes('SADA')) return 'SADA';
+  if(key.includes('SAN MARTINO')) return 'SAN MARTIÑO';
+
+  return raw.length > 15 ? raw.slice(0,14).trim() + '…' : raw;
+}
+window.clasifNombreMovil = clasifNombreMovil;
+
 function renderClasificacion(){
   var calc = calcularClasificacionAutomatica();
   var s = calc.rows || [];
@@ -19229,8 +19360,9 @@ function renderClasificacion(){
 
     return `<tr class="${rowCls}">
       <td style="width:34px;padding:3px 2px;">${posHtml}</td>
-      <td style="font-weight:${isDorneda ? '900' : '700'};">
-        ${highlightDorneda(eq.equipo)} ${isDorneda ? '⭐' : ''}
+      <td style="font-weight:${isDorneda ? '900' : '700'};" title="${String(eq.equipo || '').replace(/"/g,'&quot;')}">
+        <span class="clasif-team-full">${highlightDorneda(eq.equipo)}</span>
+        <span class="clasif-team-mobile">${highlightDorneda(clasifNombreMovil(eq.equipo))}</span>${isDorneda ? ' ⭐' : ''}
         ${tieNote}
       </td>
       <td style="font-size:12.5px;font-weight:900;color:var(--success);text-align:center;">${eq.pts}${adjHtml}</td>
@@ -21418,6 +21550,152 @@ function econIsFichaMovement(m){
   return c === 'ficha' || c.indexOf('cuotas jugador') !== -1;
 }
 
+
+// Recuperación conservadora de la economía guardada en el backup del 16/10/2026.
+// Solo añade movimientos históricos que falten; nunca sustituye ni borra movimientos actuales.
+// Se ejecuta una sola vez por base de datos y queda sincronizada en Firebase.
+const ECON_RECOVERY_BACKUP_20261016 = [{"categoriaOriginal":"Cierre Temporada Anterior","importe":430.4,"receptor":"Tesorería Club Dorneda","_economiaV2":true,"jugadorNombre":"","metodoPagoDetalle":"","fecha":"01/07/2026","tipo":"Ingreso","estado":"Pagado","categoriaDetalle":"Cierre Temporada Anterior","pagadorBeneficiario":"Tesorería Club Dorneda","jugadorId":null,"situacion":"Actual","id":1,"metodoPago":"","notas":"Remanente inicial disponible en cuenta","concepto":"Cierre Temporada Anterior (Saldo a favor en cuenta)","categoria":"Otro"},{"categoria":"Fichas","metodoPago":"","pagadorBeneficiario":"Federación Gallega (RFGF)","estado":"Pagado","fecha":"10/08/2026","situacion":"Actual","importe":882.6,"jugadorId":null,"concepto":"Pago 1. Cuota equipo + 16 fichas (60%)","tipo":"Gasto","receptor":"Federación Gallega (RFGF)","notas":"Mauro, Piwi, Lesmes, Cerni, Fona, Fran, Manuly, Joni, Willo, Rober, Santi, Pablo Allegue, Marcos, Félix, Jesús, Kata. 1411€ x 60% = 882.60€. (Pendiente 40%: 528.40€)","id":2,"metodoPagoDetalle":"","jugadorNombre":"","_economiaV2":true,"categoriaOriginal":"Fichas y Mutualidad RFGF"},{"situacion":"Actual","receptor":"Federación Gallega (RFGF)","metodoPago":"","categoria":"Fichas","tipo":"Gasto","fecha":"12/08/2026","_economiaV2":true,"estado":"Pagado","jugadorId":null,"importe":249,"pagadorBeneficiario":"Federación Gallega (RFGF)","jugadorNombre":"","categoriaOriginal":"Fichas y Mutualidad RFGF","id":3,"notas":"David, Rivera, Fede, Yess y Jorge (60%). (Pendiente 40%: 166.00€)","metodoPagoDetalle":"","concepto":"Pago 2. 5 fichas (60%)"},{"metodoPagoDetalle":"","estado":"Pagado","receptor":"Federación Gallega (RFGF)","metodoPago":"","jugadorNombre":"","notas":"Román, Cata, Borja, Meilán (332€ x 60% = 199.20€)","id":4,"categoriaOriginal":"Fichas y Mutualidad RFGF","pagadorBeneficiario":"Federación Gallega (RFGF)","situacion":"Actual","categoria":"Fichas","concepto":"Pago 3. 4 fichas (60%)","importe":199.2,"fecha":"15/08/2026","jugadorId":null,"tipo":"Gasto","_economiaV2":true},{"categoria":"Árbitros","situacion":"Actual","receptor":"Pago a Kata (Reembolso árbitro)","pagadorBeneficiario":"Pago a Kata (Reembolso árbitro)","jugadorId":null,"metodoPago":"","fecha":"23/08/2026","id":5,"estado":"Pagado","jugadorNombre":"","tipo":"Gasto","metodoPagoDetalle":"","_economiaV2":true,"importe":45,"notas":"Arbitraje en campo Eirís","concepto":"Árbitro Rossonero (Amistoso Pret_3)","categoriaOriginal":"Arbitrajes"},{"estado":"Pagado","notas":"Mario y Manuel (100%)","jugadorId":null,"metodoPagoDetalle":"","jugadorNombre":"","situacion":"Actual","categoriaOriginal":"Fichas y Mutualidad RFGF","concepto":"Pago 4. 2 Fichas (100%)","categoria":"Fichas","fecha":"31/08/2026","receptor":"Pago a Kata (Fichas federativas)","_economiaV2":true,"pagadorBeneficiario":"Pago a Kata (Fichas federativas)","tipo":"Gasto","importe":166,"id":6,"metodoPago":""},{"receptor":"Federación Gallega (RFGF)","jugadorId":null,"importe":528.4,"jugadorNombre":"","notas":"1411€ x 40% = 528.40€ pendientes de pago","categoria":"Fichas","metodoPago":"","situacion":"Previsto","id":7,"categoriaOriginal":"Fichas y Mutualidad RFGF","fecha":"10/08/2026","tipo":"Gasto","estado":"Pendiente","pagadorBeneficiario":"Federación Gallega (RFGF)","_economiaV2":true,"metodoPagoDetalle":"","concepto":"Pago 1 (40% pendiente RFGF) - 16 fichas + cuota equipo"},{"notas":"415€ x 40% = 166.00€ pendientes de pago","jugadorId":null,"categoriaOriginal":"Fichas y Mutualidad RFGF","pagadorBeneficiario":"Federación Gallega (RFGF)","tipo":"Gasto","jugadorNombre":"","metodoPagoDetalle":"","importe":166,"categoria":"Fichas","situacion":"Previsto","receptor":"Federación Gallega (RFGF)","fecha":"12/08/2026","_economiaV2":true,"concepto":"Pago 2 (40% pendiente RFGF) - 5 fichas (David, Rivera, Fede, Yess, Jorge)","id":8,"metodoPago":"","estado":"Pendiente"},{"notas":"332€ x 40% = 132.80€ pendientes de pago","jugadorNombre":"","estado":"Pendiente","metodoPago":"","importe":132.8,"_economiaV2":true,"receptor":"Federación Gallega (RFGF)","tipo":"Gasto","jugadorId":null,"id":9,"categoriaOriginal":"Fichas y Mutualidad RFGF","concepto":"Pago 3 (40% pendiente RFGF) - 4 fichas (Román, Cata, Borja, Meilán)","pagadorBeneficiario":"Federación Gallega (RFGF)","fecha":"15/08/2026","metodoPagoDetalle":"","categoria":"Fichas","situacion":"Previsto"},{"categoriaOriginal":"Fichas y Mutualidad RFGF","importe":166,"pagadorBeneficiario":"Kata","jugadorId":null,"categoria":"Fichas","tipo":"Gasto","metodoPagoDetalle":"","_economiaV2":true,"metodoPago":"","situacion":"Actual","fecha":"11/09/2026","concepto":"Pago 6. 2 Ficha (100%). Coté y Nolas","receptor":"Kata","jugadorNombre":"","id":10,"notas":"","estado":"Pagado"},{"jugadorId":null,"estado":"Pagado","pagadorBeneficiario":"Kata","notas":"","metodoPago":"","categoria":"Fichas","situacion":"Actual","receptor":"Kata","_economiaV2":true,"concepto":"Pago 5. 1 Ficha (100%). Bolich","fecha":"11/09/2026","metodoPagoDetalle":"","tipo":"Gasto","id":11,"jugadorNombre":"","categoriaOriginal":"Fichas y Mutualidad RFGF","importe":83},{"estado":"Pendiente","fecha":"12/09/2026","metodoPagoDetalle":"","tipo":"Gasto","importe":100,"receptor":"","categoriaOriginal":"Otros Gastos","notas":"Fin de temporada","jugadorId":null,"categoriaDetalle":"Otros Gastos","concepto":"Fin de temporada.","id":13,"_economiaV2":true,"categoria":"Otro","jugadorNombre":"","pagadorBeneficiario":"","metodoPago":"","situacion":"Previsto"},{"fecha":"05/08/2026","receptor":"","metodoPago":"Transferencia a cuenta del club","jugadorNombre":"David","_economiaV2":true,"estado":"Pagado","id":14,"situacion":"Actual","pagadorBeneficiario":"","notas":"Pago 1 completo (FICHA)","importe":120,"origen":"cuota-migrada-v2","tipo":"Ingreso","categoria":"Ficha","categoriaDetalle":"","metodoPagoDetalle":"","jugadorId":1,"concepto":"Ficha David"},{"categoriaDetalle":"","notas":"Pago 1 completo (FICHA)","importe":120,"origen":"cuota-migrada-v2","receptor":"","jugadorNombre":"Cerni","pagadorBeneficiario":"","metodoPagoDetalle":"","tipo":"Ingreso","_economiaV2":true,"jugadorId":3,"id":15,"fecha":"03/08/2026","concepto":"Ficha Cerni","estado":"Pagado","categoria":"Ficha","metodoPago":"Transferencia a cuenta del club","situacion":"Actual"},{"origen":"cuota-migrada-v2","jugadorNombre":"Willow","metodoPago":"Transferencia a cuenta del club","categoriaDetalle":"","categoria":"Ficha","situacion":"Actual","tipo":"Ingreso","pagadorBeneficiario":"","importe":120,"fecha":"04/08/2026","jugadorId":5,"receptor":"","_economiaV2":true,"concepto":"Ficha Willow","id":16,"notas":"Pago 1 completo (FICHA)","estado":"Pagado","metodoPagoDetalle":""},{"origen":"cuota-migrada-v2","concepto":"Ficha Felix","tipo":"Ingreso","notas":"Pago 1 completo (FICHA)","importe":120,"jugadorNombre":"Felix","metodoPago":"Transferencia a cuenta del club","metodoPagoDetalle":"","_economiaV2":true,"categoria":"Ficha","categoriaDetalle":"","id":17,"situacion":"Actual","fecha":"03/08/2026","jugadorId":10,"estado":"Pagado","receptor":"","pagadorBeneficiario":""},{"origen":"cuota-migrada-v2","metodoPago":"Transferencia a cuenta del club","importe":120,"jugadorId":11,"id":18,"concepto":"Ficha Manuly","categoria":"Ficha","notas":"Pago 1 completo (FICHA)","situacion":"Actual","tipo":"Ingreso","pagadorBeneficiario":"","_economiaV2":true,"jugadorNombre":"Manuly","categoriaDetalle":"","metodoPagoDetalle":"","receptor":"","fecha":"05/08/2026","estado":"Pagado"},{"receptor":"","notas":"Pago 1 completo (FICHA)","_economiaV2":true,"categoriaDetalle":"","origen":"cuota-migrada-v2","estado":"Pagado","tipo":"Ingreso","jugadorId":13,"fecha":"30/07/2026","metodoPagoDetalle":"","importe":120,"categoria":"Ficha","pagadorBeneficiario":"","id":19,"jugadorNombre":"Fonato","concepto":"Ficha Fonato","metodoPago":"Transferencia a cuenta del club","situacion":"Actual"},{"jugadorId":14,"jugadorNombre":"Rober","_economiaV2":true,"metodoPago":"Transferencia a cuenta del club","origen":"cuota-migrada-v2","categoria":"Ficha","situacion":"Actual","receptor":"","notas":"Abonado 85€ (restan 35€ pendientes) (FICHA)","tipo":"Ingreso","categoriaDetalle":"","concepto":"Ficha Rober","metodoPagoDetalle":"","estado":"Pagado","id":20,"pagadorBeneficiario":"","fecha":"","importe":85},{"jugadorNombre":"Fran","pagadorBeneficiario":"","jugadorId":15,"concepto":"Ficha Fran","categoriaDetalle":"","categoria":"Ficha","situacion":"Actual","id":21,"fecha":"30/07/2026","estado":"Pagado","origen":"cuota-migrada-v2","_economiaV2":true,"metodoPagoDetalle":"","importe":120,"tipo":"Ingreso","metodoPago":"Transferencia a cuenta del club","receptor":"","notas":"Pago 1 completo (FICHA)"},{"categoria":"Ficha","metodoPago":"Transferencia a cuenta del club","id":22,"fecha":"04/08/2026","situacion":"Actual","jugadorId":17,"origen":"cuota-migrada-v2","concepto":"Ficha Jesus","tipo":"Ingreso","receptor":"","estado":"Pagado","notas":"Pago 1 completo (FICHA)","jugadorNombre":"Jesus","metodoPagoDetalle":"","importe":120,"categoriaDetalle":"","pagadorBeneficiario":"","_economiaV2":true},{"fecha":"28/07/2026","tipo":"Ingreso","concepto":"Ficha Marcos","metodoPagoDetalle":"","origen":"cuota-migrada-v2","jugadorNombre":"Marcos","pagadorBeneficiario":"","notas":"Pago 1 completo (FICHA)","estado":"Pagado","situacion":"Actual","categoriaDetalle":"","metodoPago":"Transferencia a cuenta del club","receptor":"","id":23,"categoria":"Ficha","jugadorId":18,"importe":120,"_economiaV2":true},{"receptor":"","id":24,"metodoPago":"Efectivo","_economiaV2":true,"importe":120,"fecha":"09/08/2026","categoriaDetalle":"","origen":"cuota-migrada-v2","metodoPagoDetalle":"","estado":"Pagado","notas":"Pago 1 en mano (FICHA)","jugadorId":20,"pagadorBeneficiario":"","tipo":"Ingreso","situacion":"Actual","concepto":"Ficha Yess","categoria":"Ficha","jugadorNombre":"Yess"},{"estado":"Pagado","fecha":"30/07/2026","_economiaV2":true,"tipo":"Ingreso","id":25,"metodoPagoDetalle":"","concepto":"Ficha Pablo","categoriaDetalle":"","notas":"Pago 1 completo (FICHA)","jugadorNombre":"Pablo","receptor":"","jugadorId":21,"metodoPago":"Transferencia a cuenta del club","importe":120,"situacion":"Actual","pagadorBeneficiario":"","origen":"cuota-migrada-v2","categoria":"Ficha"},{"jugadorId":22,"notas":"Pago 1 completo (FICHA)","receptor":"","estado":"Pagado","categoria":"Ficha","importe":120,"situacion":"Actual","_economiaV2":true,"metodoPagoDetalle":"","id":26,"categoriaDetalle":"","origen":"cuota-migrada-v2","fecha":"04/08/2026","tipo":"Ingreso","pagadorBeneficiario":"","concepto":"Ficha Piwi","jugadorNombre":"Piwi","metodoPago":"Transferencia a cuenta del club"},{"origen":"cuota-migrada-v2","categoriaDetalle":"","id":27,"notas":"Pago 1 completo (FICHA)","importe":120,"receptor":"","_economiaV2":true,"concepto":"Ficha Fede","categoria":"Ficha","situacion":"Actual","tipo":"Ingreso","metodoPagoDetalle":"","jugadorId":24,"metodoPago":"Transferencia a cuenta del club","fecha":"05/08/2026","pagadorBeneficiario":"","estado":"Pagado","jugadorNombre":"Fede"},{"jugadorNombre":"Santi","jugadorId":26,"concepto":"Ficha Santi","estado":"Pagado","categoriaDetalle":"","pagadorBeneficiario":"","categoria":"Ficha","metodoPago":"Transferencia a cuenta del club","notas":"Pago 1 completo (FICHA)","situacion":"Actual","metodoPagoDetalle":"","importe":120,"receptor":"","origen":"cuota-migrada-v2","_economiaV2":true,"fecha":"05/08/2026","id":28,"tipo":"Ingreso"},{"categoria":"Ficha","metodoPagoDetalle":"","tipo":"Ingreso","estado":"Pagado","importe":120,"situacion":"Actual","receptor":"","fecha":"05/08/2026","jugadorId":27,"categoriaDetalle":"","_economiaV2":true,"id":29,"concepto":"Ficha Lesmes","pagadorBeneficiario":"","notas":"Pago 1 completo (FICHA)","origen":"cuota-migrada-v2","metodoPago":"Transferencia a cuenta del club","jugadorNombre":"Lesmes"},{"notas":"Pago 1 completo (FICHA)","categoria":"Ficha","pagadorBeneficiario":"","_economiaV2":true,"tipo":"Ingreso","origen":"cuota-migrada-v2","id":30,"situacion":"Actual","metodoPagoDetalle":"","importe":120,"jugadorId":28,"receptor":"","fecha":"04/08/2026","concepto":"Ficha Jorge","metodoPago":"Transferencia a cuenta del club","estado":"Pagado","jugadorNombre":"Jorge","categoriaDetalle":""},{"categoria":"Ficha","metodoPagoDetalle":"","concepto":"Ficha Mauro","pagadorBeneficiario":"","situacion":"Actual","jugadorId":30,"origen":"cuota-migrada-v2","notas":"Pago 1 completo (FICHA)","id":31,"jugadorNombre":"Mauro","estado":"Pagado","metodoPago":"Transferencia a cuenta del club","receptor":"","fecha":"28/07/2026","_economiaV2":true,"importe":120,"categoriaDetalle":"","tipo":"Ingreso"},{"receptor":"","categoriaDetalle":"","id":32,"metodoPagoDetalle":"","importe":120,"fecha":"30/07/2026","tipo":"Ingreso","metodoPago":"Transferencia a cuenta del club","origen":"cuota-migrada-v2","jugadorNombre":"Rivera","jugadorId":32,"estado":"Pagado","notas":"Pago 1 completo (FICHA)","pagadorBeneficiario":"","_economiaV2":true,"categoria":"Ficha","concepto":"Ficha Rivera","situacion":"Actual"},{"notas":"Pendiente pago (FICHA)","metodoPago":"Bizum","situacion":"Actual","metodoPagoDetalle":"","tipo":"Ingreso","origen":"cuota-migrada-v2","categoria":"Ficha","receptor":"","jugadorNombre":"Meilan","categoriaDetalle":"","pagadorBeneficiario":"","jugadorId":101,"fecha":"09/09/2026","id":33,"estado":"Pagado","concepto":"Ficha Meilan","importe":120,"_economiaV2":true},{"categoria":"Ficha","_economiaV2":true,"id":34,"situacion":"Actual","importe":120,"fecha":"12/08/2026","tipo":"Ingreso","jugadorId":102,"metodoPagoDetalle":"","concepto":"Ficha Cata","origen":"cuota-migrada-v2","jugadorNombre":"Cata","metodoPago":"Transferencia a cuenta del club","receptor":"","estado":"Pagado","notas":"Pago 1 completo (FICHA)","categoriaDetalle":"","pagadorBeneficiario":""},{"tipo":"Ingreso","id":35,"jugadorNombre":"Roman","importe":120,"notas":"Pago 1 completo (FICHA)","estado":"Pagado","receptor":"","situacion":"Actual","origen":"cuota-migrada-v2","concepto":"Ficha Roman","metodoPago":"Transferencia a cuenta del club","metodoPagoDetalle":"","categoria":"Ficha","categoriaDetalle":"","pagadorBeneficiario":"","_economiaV2":true,"fecha":"13/08/2026","jugadorId":103},{"situacion":"Actual","receptor":"","_economiaV2":true,"categoria":"Ficha","origen":"cuota-migrada-v2","categoriaDetalle":"","jugadorId":104,"pagadorBeneficiario":"","notas":"Pago 1 completo (FICHA)","importe":120,"tipo":"Ingreso","metodoPagoDetalle":"","estado":"Pagado","concepto":"Ficha Borja","id":36,"fecha":"13/08/2026","jugadorNombre":"Borja","metodoPago":"Transferencia a cuenta del club"},{"pagadorBeneficiario":"","estado":"Pagado","situacion":"Actual","categoria":"Ficha","fecha":"","id":37,"importe":120,"categoriaDetalle":"","jugadorNombre":"Manu","concepto":"Ficha Manu","tipo":"Ingreso","jugadorId":105,"receptor":"","_economiaV2":true,"metodoPagoDetalle":"","notas":"Pago 1 completo (FICHA)","metodoPago":"Transferencia a cuenta del club","origen":"cuota-migrada-v2"},{"situacion":"Actual","receptor":"","categoria":"Ficha","jugadorNombre":"Boliche","importe":120,"_economiaV2":true,"jugadorId":107,"fecha":"08/09/2026","estado":"Pagado","origen":"cuota-migrada-v2","metodoPago":"Transferencia a cuenta del club","categoriaDetalle":"","tipo":"Ingreso","pagadorBeneficiario":"","concepto":"Ficha Boliche","metodoPagoDetalle":"","notas":"Pago completo (FICHA)","id":38},{"jugadorId":109,"importe":120,"concepto":"Ficha Nolas","categoria":"Ficha","tipo":"Ingreso","situacion":"Actual","notas":"","jugadorNombre":"Nolas","id":39,"pagadorBeneficiario":"","updatedAt":"2026-09-29T09:24:56.888Z","receptor":"","createdAt":"2026-09-29T09:24:56.888Z","metodoPagoDetalle":"Mixto","_economiaV2":true,"metodoPago":"Otro","categoriaDetalle":"","fecha":"29/09/2026","estado":"Pagado"},{"categoriaDetalle":"","tipo":"Ingreso","_economiaV2":true,"jugadorNombre":"Coté","receptor":"","notas":"","updatedAt":"2026-09-29T09:25:17.578Z","createdAt":"2026-09-29T09:25:17.578Z","situacion":"Actual","id":40,"categoria":"Ficha","importe":120,"fecha":"29/09/2026","pagadorBeneficiario":"","concepto":"Ficha Coté","estado":"Pagado","jugadorId":110,"metodoPagoDetalle":"","metodoPago":"Bizum"},{"importe":120,"fecha":"29/09/2026","tipo":"Ingreso","jugadorId":7,"metodoPago":"Bizum","_economiaV2":true,"categoriaDetalle":"","categoria":"Ficha","receptor":"","situacion":"Actual","jugadorNombre":"Joni","pagadorBeneficiario":"","notas":"","createdAt":"2026-09-29T09:25:39.067Z","concepto":"Ficha Joni","updatedAt":"2026-09-29T09:25:39.067Z","estado":"Pagado","metodoPagoDetalle":"","id":41},{"pagadorBeneficiario":"Kata","jugadorNombre":"","updatedAt":"2026-09-29T09:27:09.110Z","receptor":"Kata","_economiaV2":true,"fecha":"29/09/2026","createdAt":"2026-09-29T09:27:09.110Z","concepto":"Ficha Luis Ángel","metodoPagoDetalle":"","categoria":"Fichas","categoriaDetalle":"","situacion":"Actual","id":42,"estado":"Pagado","metodoPago":"Bizum","jugadorId":null,"notas":"","tipo":"Gasto","importe":83},{"jugadorNombre":"Luis Ángel","metodoPago":"Efectivo","id":43,"_economiaV2":true,"estado":"Pagado","tipo":"Ingreso","categoriaDetalle":"","updatedAt":"2026-09-29T09:41:18.145Z","receptor":"Félix","createdAt":"2026-09-29T09:27:59.471Z","fecha":"29/09/2026","concepto":"Ficha Luis Ángel","categoria":"Ficha","situacion":"Actual","pagadorBeneficiario":"Félix","jugadorId":111,"metodoPagoDetalle":"","importe":100,"notas":""},{"jugadorId":null,"situacion":"Actual","importe":50,"pagadorBeneficiario":"Asociación","concepto":"Cuota Asociación","notas":"","estado":"Pagado","categoria":"Cuota Club","metodoPagoDetalle":"","updatedAt":"2026-09-30T11:56:41.285Z","categoriaDetalle":"","createdAt":"2026-09-30T11:56:41.285Z","receptor":"Asociación","id":44,"jugadorNombre":"","tipo":"Gasto","metodoPago":"Bizum","_economiaV2":true,"fecha":"30/09/2026"},{"pagadorBeneficiario":"FUTGAL","categoria":"Árbitros","metodoPago":"Transferencia a cuenta del club","concepto":"Árbitros (40 partidos x 35 euros)","situacion":"Previsto","estado":"Pendiente","id":45,"tipo":"Gasto","jugadorId":null,"metodoPagoDetalle":"","jugadorNombre":"","_economiaV2":true,"notas":"","categoriaDetalle":"","receptor":"FUTGAL","createdAt":"2026-09-30T12:00:16.244Z","importe":1400,"updatedAt":"2026-09-30T12:00:16.244Z","fecha":"30/09/2026"}];
+
+function recoverEconomiaBackup20261016(){
+  if(!db.economia) db.economia={};
+  if(!Array.isArray(db.economia.movimientos)) db.economia.movimientos=[];
+  if(db.economia._recoveryBackup20261016V1) return false;
+
+  const current=db.economia.movimientos;
+  let nextId=current.reduce(function(mx,m){ return Math.max(mx,Number(m&&m.id)||0); },0)+1;
+  let modified=false;
+
+  function sameMovement(a,b){
+    if(!a || !b) return false;
+    if(String(a.tipo||'')!==String(b.tipo||'')) return false;
+    if(econMovSituacion(a)!==econMovSituacion(b)) return false;
+    const aa=Math.round((parseFloat(a.importe)||0)*100);
+    const bb=Math.round((parseFloat(b.importe)||0)*100);
+    if(aa!==bb) return false;
+
+    // En cobros de ficha, el jugador + importe identifican el pago aunque una
+    // versión antigua tuviese otra fecha o texto de concepto.
+    if(econIsFichaMovement(b) && econMovSituacion(b)==='Actual'){
+      const aid=Number(a.jugadorId)||0;
+      const bid=Number(b.jugadorId)||0;
+      if(aid && bid) return aid===bid;
+      const an=econNorm(a.jugadorNombre||a.concepto||'');
+      const bn=econNorm(b.jugadorNombre||b.concepto||'');
+      return !!an && !!bn && (an===bn || an.indexOf(bn)!==-1 || bn.indexOf(an)!==-1);
+    }
+
+    const ac=econNorm(a.concepto||'');
+    const bc=econNorm(b.concepto||'');
+    if(ac && bc && ac===bc) return true;
+    return econNorm(a.categoria||'')===econNorm(b.categoria||'') &&
+      String(a.fecha||'')===String(b.fecha||'') &&
+      econNorm(a.receptor||a.pagadorBeneficiario||'')===econNorm(b.receptor||b.pagadorBeneficiario||'');
+  }
+
+  const processedFichaPlayers=new Set();
+  function fichaPlayerKey(m){
+    const id=Number(m&&m.jugadorId)||0;
+    if(id) return 'id:'+id;
+    return 'name:'+econNorm(m&&m.jugadorNombre || m&&m.concepto || '');
+  }
+
+  ECON_RECOVERY_BACKUP_20261016.forEach(function(src){
+    // Para cobros históricos de ficha recuperamos el TOTAL que constaba en el
+    // backup, no duplicamos filas si en la base actual el pago está dividido.
+    if(econIsFichaMovement(src) && econMovSituacion(src)==='Actual'){
+      const key=fichaPlayerKey(src);
+      if(processedFichaPlayers.has(key)) return;
+      processedFichaPlayers.add(key);
+
+      const expected=ECON_RECOVERY_BACKUP_20261016.filter(function(x){
+        return econIsFichaMovement(x) && econMovSituacion(x)==='Actual' && fichaPlayerKey(x)===key;
+      }).reduce(function(sum,x){ return sum+(parseFloat(x.importe)||0); },0);
+
+      const already=current.filter(function(x){
+        return econIsFichaMovement(x) && econMovSituacion(x)==='Actual' && fichaPlayerKey(x)===key;
+      }).reduce(function(sum,x){ return sum+(parseFloat(x.importe)||0); },0);
+
+      if(already+0.001>=expected) return;
+      const clone=JSON.parse(JSON.stringify(src));
+      clone.importe=Math.round((expected-already)*100)/100;
+      if(already>0){
+        clone.concepto=(src.concepto||'Ficha')+' · recuperación diferencia';
+        clone.notas=((src.notas||'')+' · Recuperado desde backup 16/10/2026').replace(/^ · /,'');
+      }
+      clone.id=nextId++;
+      clone.origen='recovery-backup-20261016';
+      current.push(clone);
+      modified=true;
+      return;
+    }
+
+    if(current.some(function(m){ return sameMovement(m,src); })) return;
+    const clone=JSON.parse(JSON.stringify(src));
+    if(current.some(function(m){ return Number(m&&m.id)===Number(clone.id); })){
+      clone.id=nextId++;
+    }else{
+      nextId=Math.max(nextId,(Number(clone.id)||0)+1);
+    }
+    if(!clone.origen) clone.origen='recovery-backup-20261016';
+    current.push(clone);
+    modified=true;
+  });
+
+  // Mario también fue confirmado por el usuario como ficha completamente pagada.
+  // Si ese alta manual ya está en la base, no se toca; si se perdió, recuperamos
+  // únicamente el importe que falte hasta 120 € sin inventar fecha ni método.
+  const marioPaid=current.filter(function(m){
+    return econIsFichaMovement(m) && econMovSituacion(m)==='Actual' &&
+      (Number(m.jugadorId)===106 || econNorm(m.jugadorNombre)==='mario');
+  }).reduce(function(sum,m){ return sum+(parseFloat(m.importe)||0); },0);
+
+  if(marioPaid<119.999){
+    current.push({
+      id:nextId++,tipo:'Ingreso',situacion:'Actual',categoria:'Ficha',categoriaDetalle:'',
+      jugadorId:106,jugadorNombre:'Mario',metodoPago:'',metodoPagoDetalle:'',
+      receptor:'',importe:Math.round((120-marioPaid)*100)/100,fecha:'',
+      notas:'Pago de ficha confirmado. Fecha y método pendientes de completar.',
+      concepto:'Ficha Mario',pagadorBeneficiario:'',estado:'Pagado',
+      origen:'recovery-mario-20261019',_economiaV2:true,createdAt:new Date().toISOString(),updatedAt:new Date().toISOString()
+    });
+    modified=true;
+  }
+
+  // El usuario confirmó posteriormente un segundo pago de 20 € de Luis Ángel.
+  // Ese pago no llegó al backup ni a Firebase. Recuperamos únicamente el importe
+  // (sin inventar fecha ni método) si todavía constan exactamente 100 € abonados.
+  const luisPaid=current.filter(function(m){
+    return econIsFichaMovement(m) && econMovSituacion(m)==='Actual' &&
+      (Number(m.jugadorId)===111 || econNorm(m.jugadorNombre)==='luis angel');
+  }).reduce(function(sum,m){ return sum+(parseFloat(m.importe)||0); },0);
+
+  if(Math.abs(luisPaid-100)<0.001){
+    current.push({
+      id:nextId++,tipo:'Ingreso',situacion:'Actual',categoria:'Ficha',categoriaDetalle:'',
+      jugadorId:111,jugadorNombre:'Luis Ángel',metodoPago:'',metodoPagoDetalle:'',
+      receptor:'',importe:20,fecha:'',
+      notas:'Pago adicional de 20 € confirmado. Fecha y método pendientes de completar.',
+      concepto:'Ficha Luis Ángel - resto',pagadorBeneficiario:'',estado:'Pagado',
+      origen:'recovery-luis-20-20261019',_economiaV2:true,createdAt:new Date().toISOString(),updatedAt:new Date().toISOString()
+    });
+    modified=true;
+  }
+
+  if(db.economia.saldoAnterior===undefined || db.economia.saldoAnterior===null){
+    db.economia.saldoAnterior=430.40;
+    modified=true;
+  }
+  if(!db.economia.presupuestoEstimado){
+    db.economia.presupuestoEstimado=3500;
+    modified=true;
+  }
+
+  db.economia._recoveryBackup20261016V1=true;
+  db.economia._lastEditAt=Date.now();
+  return true;
+}
+window.recoverEconomiaBackup20261016=recoverEconomiaBackup20261016;
+
 function econToday(){
   const d = new Date();
   return String(d.getDate()).padStart(2,'0') + '/' + String(d.getMonth()+1).padStart(2,'0') + '/' + d.getFullYear();
@@ -22081,6 +22359,7 @@ function ensureEconomiaV2(){
     modified = true;
   }
 
+  if(recoverEconomiaBackup20261016()) modified = true;
   if(sanitizeEconomiaRuntime()) modified = true;
   syncCuotasDesdeMovimientos(false);
   return modified;
@@ -22276,7 +22555,10 @@ function loginEconomia(){
     if(pInput) pInput.value = '';
 
     const modified = ensureEconomiaV2();
-    if(modified) saveDB();
+    if(modified){
+      markEconomiaEdited();
+      saveEconomiaPersistent();
+    }
 
     updateEconLockUI();
     renderEconomia();
@@ -22338,7 +22620,7 @@ function saveCambiarPassword(){
   db.economia.auth.usuario = 'Administrador';
   db.economia.auth.password = nueVal;
   markEconomiaEdited();
-  saveDB();
+  saveEconomiaPersistent();
   closeModal('modalCambiarPassword');
   toast('Contraseña de Economía cambiada con éxito', 'success');
 }
@@ -22561,7 +22843,8 @@ function saveRemanenteSubmit(){
     }
   }
 
-  saveDB();
+  markEconomiaEdited();
+  saveEconomiaPersistent();
   closeModal('modalRemanente');
   renderEconomia();
   toast('Remanente inicial actualizado a ' + formatMoney(imp), 'success');
@@ -23069,7 +23352,7 @@ function saveCuotaJugadorSubmit(){
 
   syncCuotasDesdeMovimientos(false);
   markEconomiaEdited();
-  saveDB();
+  saveEconomiaPersistent();
   closeModal('modalCuotaJugador');
   renderEconomia();
   toast('Cuota objetivo de ' + item.nombre + ' actualizada', 'success');
@@ -23343,7 +23626,7 @@ function saveMovimientoSubmit(){
 
   syncCuotasDesdeMovimientos();
   markEconomiaEdited();
-  saveDB();
+  saveEconomiaPersistent();
   closeModal('modalMovimiento');
   econMovPage = 1;
   renderEconomia();
@@ -23363,7 +23646,7 @@ function deleteMovimiento(id){
   db.economia.movimientos = db.economia.movimientos.filter(function(x){ return Number(x.id) !== Number(id); });
   syncCuotasDesdeMovimientos();
   markEconomiaEdited();
-  saveDB();
+  saveEconomiaPersistent();
   renderEconomia();
   toast('Movimiento eliminado', 'info');
 }
@@ -23662,7 +23945,10 @@ function renderEconomia(){
   if(!isEconAuth) return;
 
   const modified = ensureEconomiaV2();
-  if(modified) saveDB();
+  if(modified){
+    markEconomiaEdited();
+    saveEconomiaPersistent();
+  }
   syncCuotasDesdeMovimientos();
 
   renderEconStats();
