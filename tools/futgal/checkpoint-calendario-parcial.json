@@ -1,5 +1,5 @@
 {
-  "fecha": "2026-10-20T12:46:52.365Z",
+  "fecha": "2026-10-20T12:49:08.270Z",
   "modo": "10E_fresco_con_respaldo",
   "totalEquipos": 16,
   "jornadasEsperadas": 30,
@@ -79,7 +79,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478329&cod_acta=1478329",
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478211&cod_acta=1478211"
       ],
-      "origenDatos": "FUTGAL_FRESCO",
+      "origenDatos": "CHECKPOINT_VALIDADO_NO_REVISADO_RAPIDO",
       "fechaLecturaFresca": "2026-10-20T12:42:51.425Z"
     },
     {
@@ -157,7 +157,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478222&cod_acta=1478222",
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478217&cod_acta=1478217"
       ],
-      "origenDatos": "FUTGAL_FRESCO",
+      "origenDatos": "CHECKPOINT_VALIDADO_NO_REVISADO_RAPIDO",
       "fechaLecturaFresca": "2026-10-20T12:42:57.851Z"
     },
     {
@@ -235,7 +235,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478228&cod_acta=1478228",
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478229&cod_acta=1478229"
       ],
-      "origenDatos": "FUTGAL_FRESCO",
+      "origenDatos": "CHECKPOINT_VALIDADO_NO_REVISADO_RAPIDO",
       "fechaLecturaFresca": "2026-10-20T12:43:03.963Z"
     },
     {
@@ -313,7 +313,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478233&cod_acta=1478233",
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478237&cod_acta=1478237"
       ],
-      "origenDatos": "FUTGAL_FRESCO",
+      "origenDatos": "CHECKPOINT_VALIDADO_NO_REVISADO_RAPIDO",
       "fechaLecturaFresca": "2026-10-20T12:43:10.254Z"
     },
     {
@@ -392,7 +392,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478244&cod_acta=1478244"
       ],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-10-20T12:43:24.461Z"
+      "fechaLecturaFresca": "2026-10-20T12:48:54.908Z"
     },
     {
       "numero": 6,
@@ -470,7 +470,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478248&cod_acta=1478248"
       ],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-10-20T12:43:30.704Z"
+      "fechaLecturaFresca": "2026-10-20T12:49:02.255Z"
     },
     {
       "numero": 7,
@@ -539,7 +539,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-10-20T12:43:37.667Z"
+      "fechaLecturaFresca": "2026-10-20T12:49:08.270Z"
     },
     {
       "numero": 8,

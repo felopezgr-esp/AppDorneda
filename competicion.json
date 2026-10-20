@@ -1,7 +1,13 @@
 {
   "versionFormato": 2,
-  "fechaExtraccion": "2026-10-20T12:46:54.575Z",
+  "fechaExtraccion": "2026-10-20T12:49:10.522Z",
   "fuente": "FUTGAL",
+  "modoActualizacion": "fast",
+  "jornadasObjetivoRapido": [
+    5,
+    6,
+    7
+  ],
   "temporada": "2026-2027",
   "competicion": "Veteranos - Primera Galicia",
   "grupo": "A Coruña | 1ª División Veteranos",
