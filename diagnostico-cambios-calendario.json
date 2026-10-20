@@ -1,1 +1,48 @@
-[]
+[
+  {
+    "jornada": 7,
+    "cambios": [
+      {
+        "tipo": "cambio_programacion",
+        "local": "CEDEIRA S.D.",
+        "visitante": "C.C.D. CURTIS",
+        "diferencias": {
+          "hora": {
+            "antes": null,
+            "ahora": "17:00"
+          }
+        }
+      },
+      {
+        "tipo": "cambio_programacion",
+        "local": "XUVENTUDE DORNEDA",
+        "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
+        "diferencias": {
+          "hora": {
+            "antes": "10:00",
+            "ahora": "11:00"
+          }
+        }
+      },
+      {
+        "tipo": "cambio_programacion",
+        "local": "SAN MARTIÑO S.D.",
+        "visitante": "PORTAZGO S.D.",
+        "diferencias": {
+          "fecha": {
+            "antes": "24-10-2026",
+            "ahora": "25-10-2026"
+          },
+          "hora": {
+            "antes": null,
+            "ahora": "12:00"
+          },
+          "campo": {
+            "antes": "A Revolta (Queixas)",
+            "ahora": "Anexo O Roxo (Cerceda)"
+          }
+        }
+      }
+    ]
+  }
+]
