@@ -6,6 +6,8 @@ on:
       - futgal-rapida-v1
     paths:
       - "tools/futgal/actualizar-futgal-rapido.js"
+      - ".github/workflows/actualizar-futgal-rapido.yml"
+      - ".github/workflows/actualizar-futgal.yml"
       - ".github/workflows/probar-futgal-rapido.yml"
   workflow_dispatch:
 

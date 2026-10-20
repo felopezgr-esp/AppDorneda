@@ -1,5 +1,5 @@
 name: Actualizar FUTGAL
-run-name: Actualizar FUTGAL · ${{ inputs.request_id || 'manual' }}
+run-name: ${{ github.event_name == 'workflow_run' && format('Auditoría FUTGAL · fast-run-{0}', github.event.workflow_run.id) || format('Actualizar FUTGAL · {0}', inputs.request_id || 'manual') }}
 
 on:
   workflow_dispatch:
@@ -8,16 +8,22 @@ on:
         description: "Identificador de la solicitud web"
         required: false
         type: string
+  workflow_run:
+    workflows:
+      - "Actualizar FUTGAL rápido"
+    types:
+      - completed
 
 permissions:
   contents: write
 
 concurrency:
-  group: actualizar-futgal
+  group: futgal-official-data
   cancel-in-progress: false
 
 jobs:
   actualizar:
+    if: ${{ github.event_name == 'workflow_dispatch' || (github.event.workflow_run.head_branch == 'main' && github.event.workflow_run.conclusion != 'cancelled') }}
     runs-on: ubuntu-latest
     timeout-minutes: 45
 
@@ -42,7 +48,7 @@ jobs:
         working-directory: tools/futgal
         run: npx playwright install --with-deps chromium
 
-      - name: Ejecutar Paso10E en la nube
+      - name: Ejecutar auditoría completa FUTGAL
         working-directory: tools/futgal
         run: node actualizar-futgal.js
 
@@ -89,6 +95,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No hay cambios que publicar."
           else
-            git commit -m "Actualizar datos FUTGAL"
+            git commit -m "Auditar datos FUTGAL"
             git push
           fi
