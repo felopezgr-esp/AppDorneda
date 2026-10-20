@@ -1,0 +1,201 @@
+name: Probar FUTGAL rapido vs auditoria completa
+
+on:
+  push:
+    branches:
+      - futgal-rapida-v1
+    paths:
+      - "tools/futgal/actualizar-futgal-rapido.js"
+      - ".github/workflows/actualizar-futgal-rapido.yml"
+      - ".github/workflows/actualizar-futgal.yml"
+      - ".github/workflows/probar-futgal-rapido.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: probar-futgal-rapido-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  comparar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    env:
+      CI: "true"
+      TZ: Europe/Madrid
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Instalar dependencias
+        working-directory: tools/futgal
+        run: npm install --no-audit --no-fund
+
+      - name: Instalar Chromium de Playwright
+        working-directory: tools/futgal
+        run: npx playwright install --with-deps chromium
+
+      - name: Ejecutar actualización RÁPIDA de prueba
+        working-directory: tools/futgal
+        shell: bash
+        run: |
+          START=$(date +%s)
+          node actualizar-futgal-rapido.js
+          END=$(date +%s)
+          echo $((END-START)) > /tmp/tiempo-fast.txt
+
+      - name: Validar salida rápida con los controles actuales
+        working-directory: tools/futgal
+        run: node verificar-salida-github.js
+
+      - name: Guardar resultado rápido
+        shell: bash
+        run: |
+          mkdir -p /tmp/futgal-comparacion
+          cp tools/futgal/competicion.json /tmp/futgal-comparacion/competicion-fast.json
+          cp tools/futgal/validacion-competicion.json /tmp/futgal-comparacion/validacion-fast.json
+          cp tools/futgal/salida-integracion.txt /tmp/futgal-comparacion/salida-fast.txt
+
+      - name: Ejecutar AUDITORÍA COMPLETA actual
+        working-directory: tools/futgal
+        shell: bash
+        run: |
+          START=$(date +%s)
+          node actualizar-futgal.js
+          END=$(date +%s)
+          echo $((END-START)) > /tmp/tiempo-full.txt
+
+      - name: Validar auditoría completa con los controles actuales
+        working-directory: tools/futgal
+        run: node verificar-salida-github.js
+
+      - name: Guardar resultado completo
+        shell: bash
+        run: |
+          cp tools/futgal/competicion.json /tmp/futgal-comparacion/competicion-full.json
+          cp tools/futgal/validacion-competicion.json /tmp/futgal-comparacion/validacion-full.json
+          cp tools/futgal/salida-integracion.txt /tmp/futgal-comparacion/salida-full.txt
+
+      - name: Comparar rápida vs completa jornada a jornada
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const crypto = require('crypto');
+
+          const fast = JSON.parse(
+            fs.readFileSync('/tmp/futgal-comparacion/competicion-fast.json', 'utf8')
+          );
+
+          const full = JSON.parse(
+            fs.readFileSync('/tmp/futgal-comparacion/competicion-full.json', 'utf8')
+          );
+
+          function canonJornada(j) {
+            if (!j) return null;
+            return {
+              numero: Number(j.numero),
+              totalPartidos: Number(j.totalPartidos),
+              totalActasDetectadas: Number(j.totalActasDetectadas),
+              totalActasIntegradas: Number(j.totalActasIntegradas),
+              actasPendientes: j.actasPendientes || [],
+              partidos: j.partidos || []
+            };
+          }
+
+          function hash(v) {
+            return crypto
+              .createHash('sha256')
+              .update(JSON.stringify(v))
+              .digest('hex');
+          }
+
+          const detalle = [];
+
+          for (let n = 1; n <= 30; n++) {
+            const jf = canonJornada(
+              fast.jornadas.find(j => Number(j.numero) === n)
+            );
+            const jc = canonJornada(
+              full.jornadas.find(j => Number(j.numero) === n)
+            );
+
+            const hf = hash(jf);
+            const hc = hash(jc);
+
+            detalle.push({
+              jornada: n,
+              igual: hf === hc,
+              hashRapida: hf,
+              hashCompleta: hc
+            });
+          }
+
+          const distintas = detalle
+            .filter(x => !x.igual)
+            .map(x => x.jornada);
+
+          const tiempoFast = Number(
+            fs.readFileSync('/tmp/tiempo-fast.txt', 'utf8').trim()
+          );
+          const tiempoFull = Number(
+            fs.readFileSync('/tmp/tiempo-full.txt', 'utf8').trim()
+          );
+
+          const informe = {
+            fecha: new Date().toISOString(),
+            jornadasIguales: 30 - distintas.length,
+            jornadasDistintas: distintas,
+            segundosRapida: tiempoFast,
+            segundosCompleta: tiempoFull,
+            mejoraPorcentual:
+              tiempoFull > 0
+                ? Number(((1 - tiempoFast / tiempoFull) * 100).toFixed(1))
+                : null,
+            detalle
+          };
+
+          fs.writeFileSync(
+            '/tmp/futgal-comparacion/comparacion-fast-vs-full.json',
+            JSON.stringify(informe, null, 2)
+          );
+
+          console.log('==========================================');
+          console.log(' COMPARACIÓN RÁPIDA VS COMPLETA');
+          console.log(' Jornadas iguales:', informe.jornadasIguales + '/30');
+          console.log(
+            ' Jornadas distintas:',
+            distintas.length ? distintas.join(', ') : 'ninguna'
+          );
+          console.log(' Tiempo rápida:', tiempoFast + ' s');
+          console.log(' Tiempo completa:', tiempoFull + ' s');
+          console.log(' Mejora:', informe.mejoraPorcentual + '%');
+          console.log('==========================================');
+
+          if (distintas.length) {
+            process.exit(1);
+          }
+          NODE
+
+      - name: Subir diagnóstico de la prueba
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: futgal-prueba-rapida-vs-completa-${{ github.run_number }}
+          retention-days: 14
+          if-no-files-found: warn
+          path: |
+            /tmp/futgal-comparacion/
+            tools/futgal/diagnostico-actas.json
+            tools/futgal/diagnostico-navegacion.json
+            tools/futgal/diagnostico-cambios-calendario.json
+            tools/futgal/errores/
