@@ -153,7 +153,7 @@ reemplazarUnaVez(
 reemplazarUnaVez(
   'marcar calendario rápido',
   /(const calendarioCompleto = \{\s*\n\s*fecha:\s*\n\s*new Date\(\)\.toISOString\(\),\s*\n\s*metodo:\s*\n\s*)'10E_futgal_fresco_con_checkpoint_solo_respaldo'/,
-  `$1'10E_RAPIDO_prioritario_con_checkpoint_validado',\n      modoActualizacion: 'fast',\n      jornadasObjetivoRapido: [...jornadasObjetivoRapido].sort((a, b) => a - b),\n      jornadasNoRevisadasRapido,`
+  `$1'10E_RAPIDO_prioritario_con_checkpoint_validado',\n      modoActualizacion: 'fast',\n      jornadasObjetivoRapido: [...jornadasObjetivoRapido].sort((a, b) => a - b),\n      jornadasNoRevisadasRapido`
 );
 
 reemplazarUnaVez(
@@ -167,6 +167,26 @@ if (cambios !== 6) {
 }
 
 fs.writeFileSync(tempPath, src, 'utf8');
+
+const syntax = spawnSync(
+  process.execPath,
+  ['--check', tempPath],
+  {
+    cwd: __dirname,
+    stdio: 'inherit'
+  }
+);
+
+if (syntax.error || syntax.status !== 0) {
+  try {
+    fs.unlinkSync(tempPath);
+  } catch {}
+
+  console.error(
+    'Modo rápido: el runtime generado no supera node --check.'
+  );
+  process.exit(1);
+}
 
 const run = spawnSync(
   process.execPath,
