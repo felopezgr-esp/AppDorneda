@@ -1,18 +1,1 @@
-[
-  {
-    "jornada": 7,
-    "cambios": [
-      {
-        "tipo": "cambio_programacion",
-        "local": "BETANZOS NORTE",
-        "visitante": "SADA F.C. A NOSA VIÑA",
-        "diferencias": {
-          "hora": {
-            "antes": null,
-            "ahora": "20:15"
-          }
-        }
-      }
-    ]
-  }
-]
+[]
