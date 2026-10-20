@@ -1,5 +1,5 @@
 {
-  "fecha": "2026-10-20T08:41:09.579Z",
+  "fecha": "2026-10-20T12:42:10.472Z",
   "modo": "10E_fresco_con_respaldo",
   "totalEquipos": 16,
   "jornadasEsperadas": 30,
@@ -79,7 +79,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478329&cod_acta=1478329",
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478211&cod_acta=1478211"
       ],
-      "origenDatos": "FUTGAL_FRESCO",
+      "origenDatos": "CHECKPOINT_VALIDADO_NO_REVISADO_RAPIDO",
       "fechaLecturaFresca": "2026-10-20T08:36:55.764Z"
     },
     {
@@ -157,7 +157,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478222&cod_acta=1478222",
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478217&cod_acta=1478217"
       ],
-      "origenDatos": "FUTGAL_FRESCO",
+      "origenDatos": "CHECKPOINT_VALIDADO_NO_REVISADO_RAPIDO",
       "fechaLecturaFresca": "2026-10-20T08:37:03.018Z"
     },
     {
@@ -235,7 +235,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478228&cod_acta=1478228",
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478229&cod_acta=1478229"
       ],
-      "origenDatos": "FUTGAL_FRESCO",
+      "origenDatos": "CHECKPOINT_VALIDADO_NO_REVISADO_RAPIDO",
       "fechaLecturaFresca": "2026-10-20T08:37:09.591Z"
     },
     {
@@ -313,7 +313,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478233&cod_acta=1478233",
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478237&cod_acta=1478237"
       ],
-      "origenDatos": "FUTGAL_FRESCO",
+      "origenDatos": "CHECKPOINT_VALIDADO_NO_REVISADO_RAPIDO",
       "fechaLecturaFresca": "2026-10-20T08:37:16.715Z"
     },
     {
@@ -392,7 +392,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478244&cod_acta=1478244"
       ],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-10-20T08:37:31.727Z"
+      "fechaLecturaFresca": "2026-10-20T12:41:58.339Z"
     },
     {
       "numero": 6,
@@ -470,7 +470,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478248&cod_acta=1478248"
       ],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-10-20T08:37:38.366Z"
+      "fechaLecturaFresca": "2026-10-20T12:42:04.190Z"
     },
     {
       "numero": 7,
@@ -480,13 +480,6 @@
         "errores": []
       },
       "partidos": [
-        {
-          "local": "BETANZOS NORTE",
-          "visitante": "SADA F.C. A NOSA VIÑA",
-          "fecha": "24-10-2026",
-          "hora": null,
-          "campo": "O Carregal (Betanzos)"
-        },
         {
           "local": "LICEO DE MONELOS S.D.",
           "visitante": "SPORTING CAMBRE AS TRAVESAS",
@@ -507,6 +500,13 @@
           "fecha": "24-10-2026",
           "hora": "18:00",
           "campo": "Os Pinares, (Brexo Lema)"
+        },
+        {
+          "local": "BETANZOS NORTE",
+          "visitante": "SADA F.C. A NOSA VIÑA",
+          "fecha": "24-10-2026",
+          "hora": "20:15",
+          "campo": "O Carregal (Betanzos)"
         },
         {
           "local": "U.D. NARAHIO",
@@ -539,7 +539,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-10-20T08:37:44.934Z"
+      "fechaLecturaFresca": "2026-10-20T12:42:10.472Z"
     },
     {
       "numero": 8,

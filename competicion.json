@@ -1,7 +1,13 @@
 {
   "versionFormato": 2,
-  "fechaExtraccion": "2026-10-20T08:41:11.796Z",
+  "fechaExtraccion": "2026-10-20T12:42:12.688Z",
   "fuente": "FUTGAL",
+  "modoActualizacion": "fast",
+  "jornadasObjetivoRapido": [
+    5,
+    6,
+    7
+  ],
   "temporada": "2026-2027",
   "competicion": "Veteranos - Primera Galicia",
   "grupo": "A Coruña | 1ª División Veteranos",
@@ -12350,18 +12356,6 @@
       "partidos": [
         {
           "orden": 1,
-          "local": "BETANZOS NORTE",
-          "visitante": "SADA F.C. A NOSA VIÑA",
-          "fecha": "24-10-2026",
-          "hora": null,
-          "campo": "O Carregal (Betanzos)",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
-        },
-        {
-          "orden": 2,
           "local": "LICEO DE MONELOS S.D.",
           "visitante": "SPORTING CAMBRE AS TRAVESAS",
           "fecha": "24-10-2026",
@@ -12373,7 +12367,7 @@
           "acta": null
         },
         {
-          "orden": 3,
+          "orden": 2,
           "local": "CEDEIRA S.D.",
           "visitante": "C.C.D. CURTIS",
           "fecha": "24-10-2026",
@@ -12385,12 +12379,24 @@
           "acta": null
         },
         {
-          "orden": 4,
+          "orden": 3,
           "local": "C.D. SIGRAS",
           "visitante": "OZA DE LOS RÍOS",
           "fecha": "24-10-2026",
           "hora": "18:00",
           "campo": "Os Pinares, (Brexo Lema)",
+          "estado": "PROGRAMADO",
+          "actaDisponible": false,
+          "resultado": null,
+          "acta": null
+        },
+        {
+          "orden": 4,
+          "local": "BETANZOS NORTE",
+          "visitante": "SADA F.C. A NOSA VIÑA",
+          "fecha": "24-10-2026",
+          "hora": "20:15",
+          "campo": "O Carregal (Betanzos)",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,
