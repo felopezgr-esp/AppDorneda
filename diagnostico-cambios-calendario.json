@@ -1,1 +1,42 @@
-[]
+[
+  {
+    "jornada": 7,
+    "cambios": [
+      {
+        "tipo": "cambio_programacion",
+        "local": "LICEO DE MONELOS S.D.",
+        "visitante": "SPORTING CAMBRE AS TRAVESAS",
+        "diferencias": {
+          "fecha": {
+            "antes": "24-10-2026",
+            "ahora": "25-10-2026"
+          },
+          "hora": {
+            "antes": null,
+            "ahora": "12:00"
+          },
+          "campo": {
+            "antes": "Víctor Fernández Alonso - Antigua Leyma",
+            "ahora": "Campo de Fútbol MUNICIPAL EIRIS - LAMADOSA"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "jornada": 8,
+    "cambios": [
+      {
+        "tipo": "cambio_programacion",
+        "local": "U.D. PAIOSACO H.AÑON",
+        "visitante": "U.D. NARAHIO",
+        "diferencias": {
+          "hora": {
+            "antes": null,
+            "ahora": "18:00"
+          }
+        }
+      }
+    ]
+  }
+]
