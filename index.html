@@ -3278,6 +3278,18 @@
 .scout-top5-name{font-size:9px;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .scout-top5-goles{text-align:right;font-size:9px;font-weight:900;color:var(--success)}
 .scout-sample{padding:5px 8px;background:var(--surface2);border-radius:5px;font-size:8.5px;color:var(--text-dim);text-align:right}
+.scout-last5-summary{font-size:9px;color:var(--text-muted);white-space:nowrap;text-align:right}
+.scout-last5-summary strong{color:var(--text);font-size:11px}
+.scout-last5-list{display:flex;flex-direction:column;gap:4px}
+.scout-last5-row{display:grid;grid-template-columns:28px minmax(0,1fr) 48px;gap:8px;align-items:center;padding:6px 7px;background:var(--surface2);border:1px solid var(--border);border-radius:6px}
+.scout-last5-result{width:24px;height:24px;display:flex;align-items:center;justify-content:center;border-radius:5px;color:#fff;font-size:10px;font-weight:900}
+.scout-last5-result.win{background:var(--success)}
+.scout-last5-result.draw{background:var(--warning)}
+.scout-last5-result.loss{background:var(--red)}
+.scout-last5-info{min-width:0}
+.scout-last5-rival{font-size:10px;font-weight:850;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.scout-last5-meta{margin-top:2px;font-size:8.5px;color:var(--text-dim)}
+.scout-last5-score{text-align:center;font-size:13px;font-weight:900;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:5px;padding:4px}
 @media(max-width:900px){.scout-head-stats{grid-template-columns:repeat(3,1fr)}.scout-coach-layout,.scout-main-grid,.scout-chart-grid{grid-template-columns:1fr}}
 @media(max-width:600px){.scout-head-stats{grid-template-columns:repeat(2,1fr)}.scout-topbar{align-items:stretch}.scout-select{max-width:none;width:100%}.scout-history-row{grid-template-columns:70px 58px 1fr}}
 
@@ -12311,6 +12323,10 @@ function connectAuthorizedFirestore(){
           if(typeof currentSection!=='undefined') renderSection(currentSection);
           updateFutgalSyncUI();
           updateCloudStatusUI('online','Nube sincronizada');
+          window.appDornedaPrivateCloudReady=true;
+          if(typeof window.publishPublicSportsData==='function'){
+            window.publishPublicSportsData();
+          }
           console.log('Sincronización en tiempo real recibida de Firebase.');
         }finally{
           isRemoteUpdate=false;
@@ -12550,6 +12566,9 @@ function saveDB(){
     localStorage.setItem(DB_KEY, JSON.stringify(db));
   } catch(e){}
   saveDBToCloud();
+  if(typeof window.publishPublicSportsData==='function'){
+    window.publishPublicSportsData();
+  }
 }
 window.saveDB = saveDB;
 
@@ -20102,6 +20121,32 @@ function renderAnalisisProximoRival(selectedTeam){
     var gcSecondHalf = (gcSlots['46-60']||0)+(gcSlots['61-75']||0)+(gcSlots['76-90']||0);
 
     var lastLeague = playedMatches.slice(-5);
+
+    // Últimos 5 partidos · resumen y detalle (más reciente primero)
+    var last5Pts = lastLeague.reduce(function(sum,m){
+      if(m.resultado === 'Victoria') return sum + 3;
+      if(m.resultado === 'Empate') return sum + 1;
+      return sum;
+    },0);
+    var last5GF = lastLeague.reduce(function(sum,m){ return sum + (Number(m.gf) || 0); },0);
+    var last5GC = lastLeague.reduce(function(sum,m){ return sum + (Number(m.gc) || 0); },0);
+    var last5MaxPts = lastLeague.length * 3;
+
+    var last5RowsHtml = lastLeague.length
+      ? lastLeague.slice().reverse().map(function(m){
+          var letra = m.resultado === 'Victoria' ? 'V' : (m.resultado === 'Empate' ? 'E' : 'D');
+          var clase = m.resultado === 'Victoria' ? 'win' : (m.resultado === 'Empate' ? 'draw' : 'loss');
+          return `
+            <div class="scout-last5-row">
+              <div class="scout-last5-result ${clase}">${letra}</div>
+              <div class="scout-last5-info">
+                <div class="scout-last5-rival">${m.rival}</div>
+                <div class="scout-last5-meta">J${m.jornada || '—'} · ${m.fecha || 'Sin fecha'} · ${m.isLocal ? 'Local' : 'Visitante'}</div>
+              </div>
+              <div class="scout-last5-score">${m.gf} - ${m.gc}</div>
+            </div>`;
+        }).join('')
+      : '<div class="scout-muted" style="padding:6px 0">Todavía no hay partidos disputados.</div>';
     var rachaHtml = lastLeague.length ? lastLeague.map(function(m){
       var cls = m.resultado === 'Victoria' ? 'var(--success)' : (m.resultado === 'Empate' ? 'var(--warning)' : 'var(--red)');
       var letter = m.resultado === 'Victoria' ? 'V' : (m.resultado === 'Empate' ? 'E' : 'D');
@@ -20193,6 +20238,19 @@ function renderAnalisisProximoRival(selectedTeam){
           <div class="scout-stat"><div class="scout-stat-label">Racha · Liga</div><div class="scout-stat-value small" style="display:flex;gap:3px">${rachaHtml}</div></div>
           <div class="scout-stat"><div class="scout-stat-label">Goles a favor</div><div class="scout-stat-value">${headerGF}</div></div>
           <div class="scout-stat"><div class="scout-stat-label">Goles en contra</div><div class="scout-stat-value">${headerGC}</div></div>
+        </div>
+
+        <div class="scout-card scout-last5-card">
+          <div class="scout-card-head">
+            <div>
+              <div class="scout-title">Últimos 5 partidos</div>
+              <div class="scout-muted">Forma reciente · más reciente primero</div>
+            </div>
+            <div class="scout-last5-summary">
+              ${lastLeague.length ? ('<strong>'+last5Pts+'/'+last5MaxPts+'</strong> pts · '+last5GF+' GF · '+last5GC+' GC') : 'Sin partidos'}
+            </div>
+          </div>
+          <div class="scout-last5-list">${last5RowsHtml}</div>
         </div>
 
         <div class="scout-card">
@@ -24306,6 +24364,7 @@ if (document.readyState === 'loading') {
 </script>
 <script src="scripts/futgal-official.js"></script>
 <script src="scripts/public-sports-sync.js"></script>
+
 
 <script>
 (function(){
