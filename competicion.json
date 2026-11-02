@@ -1,7 +1,13 @@
 {
   "versionFormato": 2,
-  "fechaExtraccion": "2026-10-27T16:54:04.969Z",
+  "fechaExtraccion": "2026-11-02T12:47:54.848Z",
   "fuente": "FUTGAL",
+  "modoActualizacion": "fast",
+  "jornadasObjetivoRapido": [
+    6,
+    7,
+    8
+  ],
   "temporada": "2026-2027",
   "competicion": "Veteranos - Primera Galicia",
   "grupo": "A Coruña | 1ª División Veteranos",
@@ -14693,18 +14699,6 @@
         },
         {
           "orden": 2,
-          "local": "OZA DE LOS RÍOS",
-          "visitante": "CAMPANAL DE LOUREDA F. C.",
-          "fecha": "07-11-2026",
-          "hora": null,
-          "campo": "O Loureiro (Oza De Los Ríos)",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
-        },
-        {
-          "orden": 3,
           "local": "SADA F.C. A NOSA VIÑA",
           "visitante": "C.D. SIGRAS",
           "fecha": "07-11-2026",
@@ -14716,7 +14710,7 @@
           "acta": null
         },
         {
-          "orden": 4,
+          "orden": 3,
           "local": "C.C.D. CURTIS",
           "visitante": "BETANZOS NORTE",
           "fecha": "07-11-2026",
@@ -14728,7 +14722,7 @@
           "acta": null
         },
         {
-          "orden": 5,
+          "orden": 4,
           "local": "CLUB DEPORTIVO NARON SILVER CATERING",
           "visitante": "CEDEIRA S.D.",
           "fecha": "07-11-2026",
@@ -14740,7 +14734,7 @@
           "acta": null
         },
         {
-          "orden": 6,
+          "orden": 5,
           "local": "SPORTING CAMBRE AS TRAVESAS",
           "visitante": "XUVENTUDE DORNEDA",
           "fecha": "07-11-2026",
@@ -14752,7 +14746,7 @@
           "acta": null
         },
         {
-          "orden": 7,
+          "orden": 6,
           "local": "PORTAZGO S.D.",
           "visitante": "LICEO DE MONELOS S.D.",
           "fecha": "07-11-2026",
@@ -14764,12 +14758,24 @@
           "acta": null
         },
         {
-          "orden": 8,
+          "orden": 7,
           "local": "U.D. PAIOSACO H.AÑON",
           "visitante": "U.D. NARAHIO",
           "fecha": "07-11-2026",
           "hora": "18:00",
           "campo": "Porta Santa",
+          "estado": "PROGRAMADO",
+          "actaDisponible": false,
+          "resultado": null,
+          "acta": null
+        },
+        {
+          "orden": 8,
+          "local": "OZA DE LOS RÍOS",
+          "visitante": "CAMPANAL DE LOUREDA F. C.",
+          "fecha": "08-11-2026",
+          "hora": "10:00",
+          "campo": "O Loureiro (Oza De Los Ríos)",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,
