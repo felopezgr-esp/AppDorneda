@@ -3278,6 +3278,47 @@
 .scout-top5-name{font-size:9px;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .scout-top5-goles{text-align:right;font-size:9px;font-weight:900;color:var(--success)}
 .scout-sample{padding:5px 8px;background:var(--surface2);border-radius:5px;font-size:8.5px;color:var(--text-dim);text-align:right}
+
+/* PASO 15D · PRONÓSTICO ESTADÍSTICO */
+.scout-pred-card{overflow:hidden}
+.scout-pred-head{align-items:flex-start}
+.scout-pred-confidence{display:inline-flex;align-items:center;height:22px;padding:0 7px;border-radius:999px;font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:.35px;border:1px solid var(--border);white-space:nowrap}
+.scout-pred-confidence.low{background:rgba(239,68,68,.07);color:var(--red);border-color:rgba(239,68,68,.2)}
+.scout-pred-confidence.medium{background:rgba(245,158,11,.09);color:#b45309;border-color:rgba(245,158,11,.24)}
+.scout-pred-confidence.high{background:rgba(34,197,94,.08);color:var(--success);border-color:rgba(34,197,94,.23)}
+[data-theme="dark"] .scout-pred-confidence.medium{color:#fbbf24}
+.scout-pred-fixture{display:flex;align-items:center;justify-content:center;gap:7px;flex-wrap:wrap;padding:7px 9px;margin-bottom:7px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;font-size:10px;color:var(--text-muted)}
+.scout-pred-fixture strong{font-size:11px;color:var(--text)}
+.scout-pred-fixture small{width:100%;text-align:center;font-size:8.5px;color:var(--text-dim)}
+.scout-pred-probs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.scout-pred-prob{padding:7px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;min-width:0}
+.scout-pred-label{font-size:8px;font-weight:900;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-transform:uppercase;letter-spacing:.25px}
+.scout-pred-value{font-size:18px;font-weight:950;color:var(--text);line-height:1.05;margin:3px 0 5px}
+.scout-pred-bar{height:4px;background:var(--surface3);border-radius:999px;overflow:hidden}
+.scout-pred-bar span{display:block;height:100%;border-radius:999px;background:var(--text-muted)}
+.scout-pred-prob.dorneda .scout-pred-bar span{background:var(--red)}
+.scout-pred-prob.draw .scout-pred-bar span{background:var(--warning)}
+.scout-pred-detail-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:6px;margin-top:7px}
+.scout-pred-metric{display:flex;flex-direction:column;gap:2px;padding:6px 7px;border:1px solid var(--border);border-radius:6px;background:var(--surface)}
+.scout-pred-metric span{font-size:7.5px;color:var(--text-dim);font-weight:850;text-transform:uppercase;letter-spacing:.25px}
+.scout-pred-metric strong{font-size:9.5px;color:var(--text)}
+.scout-pred-bottom{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(220px,.85fr);gap:8px;margin-top:8px}
+.scout-pred-scores{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+.scout-pred-score{display:grid;grid-template-columns:20px 1fr auto;align-items:center;gap:5px;padding:5px 6px;background:var(--surface2);border:1px solid var(--border);border-radius:6px}
+.scout-pred-rank{display:flex;width:18px;height:18px;align-items:center;justify-content:center;border-radius:50%;background:var(--surface3);font-size:7.5px;font-weight:900;color:var(--text-muted)}
+.scout-pred-scoreline{font-size:11px;font-weight:900;color:var(--text);white-space:nowrap}
+.scout-pred-scoreprob{font-size:8px;font-weight:900;color:var(--text-muted)}
+.scout-pred-method{display:flex;flex-direction:column;gap:2px;padding:6px 8px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;font-size:8px;color:var(--text-dim)}
+.scout-pred-method strong{font-size:8.5px;color:var(--text-muted);margin-bottom:1px}
+.scout-pred-note{margin-top:7px;padding-top:6px;border-top:1px solid var(--border);font-size:7.8px;line-height:1.35;color:var(--text-dim)}
+@media(max-width:700px){
+  .scout-pred-probs{grid-template-columns:1fr}
+  .scout-pred-prob{display:grid;grid-template-columns:minmax(80px,1fr) 64px;align-items:center;column-gap:8px}
+  .scout-pred-prob .scout-pred-label{grid-column:1}.scout-pred-prob .scout-pred-value{grid-column:2;grid-row:1;text-align:right;margin:0;font-size:16px}.scout-pred-prob .scout-pred-bar{grid-column:1 / -1;margin-top:4px}
+  .scout-pred-detail-grid{grid-template-columns:1fr}
+  .scout-pred-bottom{grid-template-columns:1fr}
+  .scout-pred-scores{grid-template-columns:1fr}
+}
 .scout-last5-summary{font-size:9px;color:var(--text-muted);white-space:nowrap;text-align:right}
 .scout-last5-summary strong{color:var(--text);font-size:11px}
 .scout-last5-list{display:flex;flex-direction:column;gap:4px}
@@ -20147,6 +20188,273 @@ function renderAnalisisProximoRival(selectedTeam){
             </div>`;
         }).join('')
       : '<div class="scout-muted" style="padding:6px 0">Todavía no hay partidos disputados.</div>';
+    // Pronóstico estadístico del próximo enfrentamiento contra el rival seleccionado.
+    // Modelo base: fuerzas ofensiva/defensiva local-visitante + forma reciente + Poisson.
+    function predTeamKey(name){
+      if(typeof clasifNormName === 'function') return clasifNormName(name || '');
+      return norm(name).replace(/[^a-z0-9]+/g,' ').trim();
+    }
+
+    function predSameTeam(a,b){
+      var ka=predTeamKey(a), kb=predTeamKey(b);
+      return !!ka && !!kb && ka===kb;
+    }
+
+    var predPlayed=[];
+    var predPendingDirect=[];
+
+    officialJ.forEach(function(j){
+      toArr(j && j.partidos).forEach(function(p){
+        if(!p) return;
+        var sc=(typeof clasifGetScore === 'function') ? clasifGetScore(p) : null;
+        var jornadaNum=Number(j.jornada || j.numero || p.jornada || 0);
+        if(sc){
+          predPlayed.push({
+            jornada:jornadaNum,
+            local:p.local || '',
+            visitante:p.visitante || '',
+            gl:Number(sc.gl),
+            gv:Number(sc.gv),
+            fecha:p.fecha || j.fecha || ''
+          });
+        }
+
+        var direct=(isDornedaTeamName(p.local) && predSameTeam(p.visitante,activeRival)) ||
+          (isDornedaTeamName(p.visitante) && predSameTeam(p.local,activeRival));
+        if(direct && !sc){
+          predPendingDirect.push({
+            jornada:jornadaNum,
+            local:p.local || '',
+            visitante:p.visitante || '',
+            fecha:p.fecha || j.fecha || '',
+            hora:p.hora || ''
+          });
+        }
+      });
+    });
+
+    predPendingDirect.sort(function(a,b){
+      return (a.jornada||999)-(b.jornada||999);
+    });
+
+    var predFixture=predPendingDirect[0] || null;
+    var predictionHtml='';
+
+    if(predFixture && predPlayed.length){
+      function predEmptyStats(){
+        return {pj:0,gf:0,gc:0,pts:0,matches:[]};
+      }
+
+      function predAddResult(st,gf,gc,rec){
+        st.pj++;
+        st.gf+=gf;
+        st.gc+=gc;
+        if(gf>gc) st.pts+=3;
+        else if(gf===gc) st.pts+=1;
+        st.matches.push(rec);
+      }
+
+      function predStatsFor(team){
+        var key=predTeamKey(team);
+        var out={overall:predEmptyStats(),home:predEmptyStats(),away:predEmptyStats()};
+        predPlayed.forEach(function(rec){
+          if(predTeamKey(rec.local)===key){
+            var row={jornada:rec.jornada,gf:rec.gl,gc:rec.gv,isLocal:true};
+            predAddResult(out.overall,rec.gl,rec.gv,row);
+            predAddResult(out.home,rec.gl,rec.gv,row);
+          }else if(predTeamKey(rec.visitante)===key){
+            var row2={jornada:rec.jornada,gf:rec.gv,gc:rec.gl,isLocal:false};
+            predAddResult(out.overall,rec.gv,rec.gl,row2);
+            predAddResult(out.away,rec.gv,rec.gl,row2);
+          }
+        });
+        out.overall.matches.sort(function(a,b){return (a.jornada||0)-(b.jornada||0);});
+        return out;
+      }
+
+      var leagueHomeGoals=predPlayed.reduce(function(sum,m){return sum+m.gl;},0);
+      var leagueAwayGoals=predPlayed.reduce(function(sum,m){return sum+m.gv;},0);
+      var leagueHomeAvg=predPlayed.length ? leagueHomeGoals/predPlayed.length : 1.35;
+      var leagueAwayAvg=predPlayed.length ? leagueAwayGoals/predPlayed.length : 1.05;
+      if(!(leagueHomeAvg>0)) leagueHomeAvg=1.35;
+      if(!(leagueAwayAvg>0)) leagueAwayAvg=1.05;
+      var leagueTeamAvg=(leagueHomeAvg+leagueAwayAvg)/2;
+
+      var homeTeam=predFixture.local;
+      var awayTeam=predFixture.visitante;
+      var homeStats=predStatsFor(homeTeam);
+      var awayStats=predStatsFor(awayTeam);
+
+      function predSmooth(goals,pj,base,pseudo){
+        return (Number(goals||0)+(pseudo*base))/(Number(pj||0)+pseudo);
+      }
+
+      // Tres partidos ficticios al promedio de Liga estabilizan muestras pequeñas.
+      var pseudoVenue=3;
+      var homeAttackRate=predSmooth(homeStats.home.gf,homeStats.home.pj,leagueHomeAvg,pseudoVenue);
+      var homeDefRate=predSmooth(homeStats.home.gc,homeStats.home.pj,leagueAwayAvg,pseudoVenue);
+      var awayAttackRate=predSmooth(awayStats.away.gf,awayStats.away.pj,leagueAwayAvg,pseudoVenue);
+      var awayDefRate=predSmooth(awayStats.away.gc,awayStats.away.pj,leagueHomeAvg,pseudoVenue);
+
+      var lambdaHome=leagueHomeAvg * (homeAttackRate/leagueHomeAvg) * (awayDefRate/leagueHomeAvg);
+      var lambdaAway=leagueAwayAvg * (awayAttackRate/leagueAwayAvg) * (homeDefRate/leagueAwayAvg);
+
+      // Forma reciente: 20% del pronóstico. El 80% conserva la base local/visitante.
+      function predRecentRates(st){
+        var recent=st.overall.matches.slice(-5);
+        var gf=recent.reduce(function(sum,m){return sum+m.gf;},0);
+        var gc=recent.reduce(function(sum,m){return sum+m.gc;},0);
+        return {
+          n:recent.length,
+          gf:predSmooth(gf,recent.length,leagueTeamAvg,2),
+          gc:predSmooth(gc,recent.length,leagueTeamAvg,2)
+        };
+      }
+
+      var homeRecent=predRecentRates(homeStats);
+      var awayRecent=predRecentRates(awayStats);
+      var recentLambdaHome=leagueTeamAvg * (homeRecent.gf/leagueTeamAvg) * (awayRecent.gc/leagueTeamAvg);
+      var recentLambdaAway=leagueTeamAvg * (awayRecent.gf/leagueTeamAvg) * (homeRecent.gc/leagueTeamAvg);
+
+      lambdaHome=(0.80*lambdaHome)+(0.20*recentLambdaHome);
+      lambdaAway=(0.80*lambdaAway)+(0.20*recentLambdaAway);
+
+      // Evitamos extremos poco plausibles con muestras todavía pequeñas.
+      lambdaHome=Math.max(0.25,Math.min(4.50,lambdaHome));
+      lambdaAway=Math.max(0.25,Math.min(4.50,lambdaAway));
+
+      function predPoisson(k,lambda){
+        var fact=1;
+        for(var i=2;i<=k;i++) fact*=i;
+        return Math.exp(-lambda)*Math.pow(lambda,k)/fact;
+      }
+
+      var matrix=[];
+      var mass=0;
+      var maxGoals=8;
+      for(var hg=0;hg<=maxGoals;hg++){
+        for(var ag=0;ag<=maxGoals;ag++){
+          var pr=predPoisson(hg,lambdaHome)*predPoisson(ag,lambdaAway);
+          matrix.push({h:hg,a:ag,p:pr});
+          mass+=pr;
+        }
+      }
+      if(mass<=0) mass=1;
+      matrix.forEach(function(x){x.p=x.p/mass;});
+
+      var pHome=0,pDraw=0,pAway=0,pOver25=0,pBTTS=0;
+      matrix.forEach(function(x){
+        if(x.h>x.a) pHome+=x.p;
+        else if(x.h===x.a) pDraw+=x.p;
+        else pAway+=x.p;
+        if((x.h+x.a)>=3) pOver25+=x.p;
+        if(x.h>0 && x.a>0) pBTTS+=x.p;
+      });
+
+      var dornedaIsHome=isDornedaTeamName(homeTeam);
+      var pDorneda=dornedaIsHome ? pHome : pAway;
+      var pRival=dornedaIsHome ? pAway : pHome;
+      var lambdaDorneda=dornedaIsHome ? lambdaHome : lambdaAway;
+      var lambdaRival=dornedaIsHome ? lambdaAway : lambdaHome;
+
+      var topScores=matrix.slice().sort(function(a,b){return b.p-a.p;}).slice(0,3);
+      var topScoresHtml=topScores.map(function(sc,idx){
+        return '<div class="scout-pred-score">'+
+          '<span class="scout-pred-rank">'+(idx+1)+'</span>'+
+          '<span class="scout-pred-scoreline">'+sc.h+' - '+sc.a+'</span>'+
+          '<span class="scout-pred-scoreprob">'+(sc.p*100).toFixed(1)+'%</span>'+
+        '</div>';
+      }).join('');
+
+      var venueSample=Math.min(homeStats.home.pj,awayStats.away.pj);
+      var confidence='Baja';
+      var confidenceClass='low';
+      if(predPlayed.length>=70 && venueSample>=7){
+        confidence='Alta';confidenceClass='high';
+      }else if(predPlayed.length>=30 && venueSample>=3){
+        confidence='Media';confidenceClass='medium';
+      }
+
+      var fixtureDate=[predFixture.fecha,predFixture.hora].filter(Boolean).join(' · ');
+      var rivalClean=formatCleanTeamName(activeRival);
+      var dornedaPct=(pDorneda*100).toFixed(1);
+      var drawPct=(pDraw*100).toFixed(1);
+      var rivalPct=(pRival*100).toFixed(1);
+
+      predictionHtml=`
+        <div class="scout-card scout-pred-card">
+          <div class="scout-card-head scout-pred-head">
+            <div>
+              <div class="scout-title">Pronóstico estadístico</div>
+              <div class="scout-muted">Modelo Poisson · ataque/defensa · local/visitante · forma reciente</div>
+            </div>
+            <span class="scout-pred-confidence ${confidenceClass}">Confianza ${confidence}</span>
+          </div>
+
+          <div class="scout-pred-fixture">
+            <strong>${formatCleanTeamName(homeTeam)}</strong>
+            <span>vs</span>
+            <strong>${formatCleanTeamName(awayTeam)}</strong>
+            <small>J${predFixture.jornada || '—'}${fixtureDate ? ' · '+fixtureDate : ''}</small>
+          </div>
+
+          <div class="scout-pred-probs">
+            <div class="scout-pred-prob dorneda">
+              <div class="scout-pred-label">Dorneda</div>
+              <div class="scout-pred-value">${dornedaPct}%</div>
+              <div class="scout-pred-bar"><span style="width:${dornedaPct}%"></span></div>
+            </div>
+            <div class="scout-pred-prob draw">
+              <div class="scout-pred-label">Empate</div>
+              <div class="scout-pred-value">${drawPct}%</div>
+              <div class="scout-pred-bar"><span style="width:${drawPct}%"></span></div>
+            </div>
+            <div class="scout-pred-prob rival">
+              <div class="scout-pred-label">${rivalClean}</div>
+              <div class="scout-pred-value">${rivalPct}%</div>
+              <div class="scout-pred-bar"><span style="width:${rivalPct}%"></span></div>
+            </div>
+          </div>
+
+          <div class="scout-pred-detail-grid">
+            <div class="scout-pred-metric">
+              <span>Goles esperados</span>
+              <strong>Dorneda ${lambdaDorneda.toFixed(2)} · ${rivalClean} ${lambdaRival.toFixed(2)}</strong>
+            </div>
+            <div class="scout-pred-metric">
+              <span>Ambos marcan</span>
+              <strong>${(pBTTS*100).toFixed(1)}%</strong>
+            </div>
+            <div class="scout-pred-metric">
+              <span>Más de 2,5 goles</span>
+              <strong>${(pOver25*100).toFixed(1)}%</strong>
+            </div>
+          </div>
+
+          <div class="scout-pred-bottom">
+            <div>
+              <div class="scout-muted" style="font-weight:900;margin-bottom:5px">Marcadores más probables · local - visitante</div>
+              <div class="scout-pred-scores">${topScoresHtml}</div>
+            </div>
+            <div class="scout-pred-method">
+              <strong>Base del cálculo</strong>
+              <span>${predPlayed.length} partidos de Liga finalizados</span>
+              <span>${formatCleanTeamName(homeTeam)}: ${homeStats.home.pj} como local</span>
+              <span>${formatCleanTeamName(awayTeam)}: ${awayStats.away.pj} como visitante</span>
+              <span>Forma: últimos ${Math.min(5,homeStats.overall.pj)} / ${Math.min(5,awayStats.overall.pj)} partidos</span>
+            </div>
+          </div>
+
+          <div class="scout-pred-note">Estimación orientativa basada en resultados oficiales disponibles. No incorpora bajas, lesiones, sanciones, alineaciones previstas ni otras variables no registradas en la app.</div>
+        </div>`;
+    }else{
+      predictionHtml=`
+        <div class="scout-card scout-pred-card">
+          <div class="scout-card-head"><div class="scout-title">Pronóstico estadístico</div><div class="scout-muted">Modelo Poisson</div></div>
+          <div class="scout-muted" style="padding:5px 0">No hay un enfrentamiento de Liga pendiente contra este rival con datos suficientes para generar el pronóstico.</div>
+        </div>`;
+    }
+
     var rachaHtml = lastLeague.length ? lastLeague.map(function(m){
       var cls = m.resultado === 'Victoria' ? 'var(--success)' : (m.resultado === 'Empate' ? 'var(--warning)' : 'var(--red)');
       var letter = m.resultado === 'Victoria' ? 'V' : (m.resultado === 'Empate' ? 'E' : 'D');
@@ -20252,6 +20560,8 @@ function renderAnalisisProximoRival(selectedTeam){
           </div>
           <div class="scout-last5-list">${last5RowsHtml}</div>
         </div>
+
+        ${predictionHtml}
 
         <div class="scout-card">
           <div class="scout-card-head"><div class="scout-title">Anotaciones del entrenador</div><div class="scout-muted">Manual · se conserva por rival</div></div>
