@@ -1,1 +1,81 @@
-[]
+[
+  {
+    "jornada": 8,
+    "cambios": [
+      {
+        "tipo": "cambio_programacion",
+        "local": "SPORTING BURGO",
+        "visitante": "SAN MARTIÑO S.D.",
+        "diferencias": {
+          "hora": {
+            "antes": null,
+            "ahora": "18:00"
+          }
+        }
+      },
+      {
+        "tipo": "cambio_programacion",
+        "local": "PORTAZGO S.D.",
+        "visitante": "LICEO DE MONELOS S.D.",
+        "diferencias": {
+          "hora": {
+            "antes": null,
+            "ahora": "18:00"
+          },
+          "campo": {
+            "antes": "Campo de Fútbol Municipal A Lavandeira en Culleredo",
+            "ahora": "Municip. De Tarrio, (Culleredo)"
+          }
+        }
+      },
+      {
+        "tipo": "cambio_programacion",
+        "local": "C.C.D. CURTIS",
+        "visitante": "BETANZOS NORTE",
+        "diferencias": {
+          "hora": {
+            "antes": null,
+            "ahora": "18:15"
+          }
+        }
+      },
+      {
+        "tipo": "cambio_programacion",
+        "local": "SADA F.C. A NOSA VIÑA",
+        "visitante": "C.D. SIGRAS",
+        "diferencias": {
+          "hora": {
+            "antes": null,
+            "ahora": "20:00"
+          }
+        }
+      },
+      {
+        "tipo": "cambio_programacion",
+        "local": "SPORTING CAMBRE AS TRAVESAS",
+        "visitante": "XUVENTUDE DORNEDA",
+        "diferencias": {
+          "hora": {
+            "antes": null,
+            "ahora": "20:00"
+          }
+        }
+      },
+      {
+        "tipo": "cambio_programacion",
+        "local": "CLUB DEPORTIVO NARON SILVER CATERING",
+        "visitante": "CEDEIRA S.D.",
+        "diferencias": {
+          "fecha": {
+            "antes": "07-11-2026",
+            "ahora": "08-11-2026"
+          },
+          "hora": {
+            "antes": null,
+            "ahora": "10:00"
+          }
+        }
+      }
+    ]
+  }
+]
