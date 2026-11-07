@@ -31777,5 +31777,3329 @@
       ]
     },
     "fuente": "extraido_10B"
+  },
+  "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478264&cod_acta=1478264": {
+    "ok": true,
+    "jornada": 8,
+    "url": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478264&cod_acta=1478264",
+    "acta": {
+      "temporada": "2026-2027",
+      "jornada": 8,
+      "fecha": "07-11-2026",
+      "hora": "18:00",
+      "local": "SPORTING BURGO",
+      "visitante": "SAN MARTIÑO S.D.",
+      "resultado_principal_raw": {
+        "local": null,
+        "visitante": null
+      },
+      "resultado": {
+        "local": 3,
+        "visitante": 1,
+        "texto": "3-1",
+        "fuente": "secuencia_goles_validada"
+      },
+      "arbitro": "DOPICO PEREZ, HIRAN HISMEL",
+      "estadio": "Campo de Fútbol Municipal A Lavandeira en Culleredo",
+      "ciudad": "Culleredo",
+      "goles": [
+        {
+          "marcador_raw": {
+            "local": 1,
+            "visitante": 0
+          },
+          "marcador": {
+            "local": 1,
+            "visitante": 0
+          },
+          "minuto": "12'",
+          "jugador": "FERNANDEZ GARCIA, SENAR A",
+          "tipo_gol": "Gol normal",
+          "marcador_fuente": "raw_y_jugador_coherentes"
+        },
+        {
+          "marcador_raw": {
+            "local": 2,
+            "visitante": 0
+          },
+          "marcador": {
+            "local": 2,
+            "visitante": 0
+          },
+          "minuto": "13'",
+          "jugador": "FERNANDEZ GARCIA, SENAR A",
+          "tipo_gol": "Gol normal",
+          "marcador_fuente": "raw_y_jugador_coherentes"
+        },
+        {
+          "marcador_raw": {
+            "local": 2,
+            "visitante": 1
+          },
+          "marcador": {
+            "local": 2,
+            "visitante": 1
+          },
+          "minuto": "64'",
+          "jugador": "LAMAS SEÑARIS, GABINO J",
+          "tipo_gol": "Gol normal",
+          "marcador_fuente": "raw_y_jugador_coherentes"
+        },
+        {
+          "marcador_raw": {
+            "local": 3,
+            "visitante": 1
+          },
+          "marcador": {
+            "local": 3,
+            "visitante": 1
+          },
+          "minuto": "89'",
+          "jugador": "BARRAL TABOAS, MARCOS",
+          "tipo_gol": "Gol normal",
+          "marcador_fuente": "raw_y_jugador_coherentes"
+        }
+      ],
+      "equipo_local": {
+        "nombre": "SPORTING BURGO",
+        "titulares": [
+          {
+            "dorsal": "1",
+            "jugador": "RODRIGUEZ PARADA, ALEJANDRO"
+          },
+          {
+            "dorsal": "3",
+            "jugador": "MONTANS FRESCO, FERNANDO"
+          },
+          {
+            "dorsal": "4",
+            "jugador": "NUÑEZ PRIETO, DAVID"
+          },
+          {
+            "dorsal": "5",
+            "jugador": "BARBEITO RODRIGUEZ, SERGIO"
+          },
+          {
+            "dorsal": "6",
+            "jugador": "FERNANDEZ GARCIA, SENAR A"
+          },
+          {
+            "dorsal": "7",
+            "jugador": "RODRIGUEZ GIAO, JAVIER"
+          },
+          {
+            "dorsal": "9",
+            "jugador": "BARRAL TABOAS, MARCOS"
+          },
+          {
+            "dorsal": "10",
+            "jugador": "SABIO SANCHEZ, RUBEN"
+          },
+          {
+            "dorsal": "12",
+            "jugador": "GARCIA MENDEZ, JOSE L"
+          },
+          {
+            "dorsal": "13",
+            "jugador": "GARCÍA TORREIRO, OSCAR"
+          },
+          {
+            "dorsal": "14",
+            "jugador": "VEAS PEREZ DE TUDELA RODRIGUEZ, MIGUEL JOSE"
+          }
+        ],
+        "suplentes": [
+          {
+            "dorsal": "17",
+            "jugador": "GARCIA RAMOS, RAMIRO"
+          },
+          {
+            "dorsal": "22",
+            "jugador": "GONZALEZ BAñA, PABLO"
+          },
+          {
+            "dorsal": "25",
+            "jugador": "LOPEZ SANDA, BRUNO"
+          },
+          {
+            "dorsal": "28",
+            "jugador": "PITA PATIÑO, DIEGO"
+          }
+        ],
+        "cuerpo_tecnico": {
+          "delegado": "OTERO LOPEZ, ARTURO",
+          "entrenador": "No presenta"
+        },
+        "tarjetas": [
+          {
+            "tipo": "amarilla",
+            "minuto": "70'",
+            "jugador": "NUÑEZ PRIETO, DAVID"
+          },
+          {
+            "tipo": "amarilla",
+            "minuto": "72'",
+            "jugador": "GARCIA RAMOS, RAMIRO"
+          }
+        ]
+      },
+      "equipo_visitante": {
+        "nombre": "SAN MARTIÑO S.D.",
+        "titulares": [
+          {
+            "dorsal": "1",
+            "jugador": "GONZALEZ LISTA, NICOLAS"
+          },
+          {
+            "dorsal": "3",
+            "jugador": "LOMBA MATA, FELIX"
+          },
+          {
+            "dorsal": "4",
+            "jugador": "GONZALEZ GENDE, ALVARO"
+          },
+          {
+            "dorsal": "5",
+            "jugador": "RUMBO BOEDO, CARLOS"
+          },
+          {
+            "dorsal": "8",
+            "jugador": "CANEDO NIEVES, JOSE"
+          },
+          {
+            "dorsal": "12",
+            "jugador": "CASAS VARELA, MARCOS M"
+          },
+          {
+            "dorsal": "17",
+            "jugador": "QUEIJO ALVAREZ, DANIEL"
+          },
+          {
+            "dorsal": "20",
+            "jugador": "CASTRO REGUEIRO, MIGUEL"
+          },
+          {
+            "dorsal": "21",
+            "jugador": "GESTO REGUEIRO, ALEJANDRO"
+          },
+          {
+            "dorsal": "26",
+            "jugador": "FARIÑA COSTA, JOSE A"
+          },
+          {
+            "dorsal": "28",
+            "jugador": "MOSQUERA CANOSA, MANUEL A"
+          }
+        ],
+        "suplentes": [
+          {
+            "dorsal": "6",
+            "jugador": "FARIÑA COSTA, ALFONSO"
+          },
+          {
+            "dorsal": "9",
+            "jugador": "LAMAS SEÑARIS, GABINO J"
+          },
+          {
+            "dorsal": "10",
+            "jugador": "LAMAS CASTRO, ANGEL"
+          },
+          {
+            "dorsal": "14",
+            "jugador": "ALONSO VAZQUEZ, ALEJANDRO"
+          },
+          {
+            "dorsal": "15",
+            "jugador": "GONZALEZ VARELA, JOSE J"
+          },
+          {
+            "dorsal": "18",
+            "jugador": "LAMAS DUBRA, MARCOS"
+          },
+          {
+            "dorsal": "22",
+            "jugador": "RODRIGUEZ GONZALEZ, JESUS"
+          },
+          {
+            "dorsal": "25",
+            "jugador": "LOURO PEREZ, CANDIDO"
+          },
+          {
+            "dorsal": "29",
+            "jugador": "LISTE OTERO, RICARDO A"
+          }
+        ],
+        "cuerpo_tecnico": {
+          "delegado": "QUEIJO GONZALEZ, ALEJANDRO",
+          "entrenador": "No presenta"
+        },
+        "tarjetas": [
+          {
+            "tipo": "amarilla",
+            "minuto": "80'",
+            "jugador": "QUEIJO ALVAREZ, DANIEL"
+          },
+          {
+            "tipo": "amarilla",
+            "minuto": "87'",
+            "jugador": "FARIÑA COSTA, JOSE A"
+          },
+          {
+            "tipo": "amarilla",
+            "minuto": "90'",
+            "jugador": "LOMBA MATA, FELIX"
+          }
+        ]
+      }
+    },
+    "validacion": {
+      "correcto": true,
+      "errores": [],
+      "pruebas": [
+        {
+          "prueba": "Temporada presente",
+          "ok": true,
+          "obtenido": "2026-2027"
+        },
+        {
+          "prueba": "Jornada presente",
+          "ok": true,
+          "obtenido": 8
+        },
+        {
+          "prueba": "Fecha presente",
+          "ok": true,
+          "obtenido": "07-11-2026"
+        },
+        {
+          "prueba": "Hora presente",
+          "ok": true,
+          "obtenido": "18:00"
+        },
+        {
+          "prueba": "Equipo local presente",
+          "ok": true,
+          "obtenido": "SPORTING BURGO"
+        },
+        {
+          "prueba": "Equipo visitante presente",
+          "ok": true,
+          "obtenido": "SAN MARTIÑO S.D."
+        },
+        {
+          "prueba": "Resultado completo",
+          "ok": true,
+          "obtenido": "3-1"
+        },
+        {
+          "prueba": "Árbitro presente",
+          "ok": true,
+          "obtenido": "DOPICO PEREZ, HIRAN HISMEL"
+        },
+        {
+          "prueba": "Estadio presente",
+          "ok": true,
+          "obtenido": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
+        },
+        {
+          "prueba": "Titulares local razonables",
+          "ok": true,
+          "obtenido": 11
+        },
+        {
+          "prueba": "Titulares visitante razonables",
+          "ok": true,
+          "obtenido": 11
+        },
+        {
+          "prueba": "Secuencia de goles coherente",
+          "ok": true,
+          "obtenido": [
+            {
+              "gol": 1,
+              "minuto": "12'",
+              "jugador": "FERNANDEZ GARCIA, SENAR A",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 1,
+                "visitante": 0
+              },
+              "corregido": {
+                "local": 1,
+                "visitante": 0
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "local",
+              "equipo_marcador": "local",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 2,
+              "minuto": "13'",
+              "jugador": "FERNANDEZ GARCIA, SENAR A",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 2,
+                "visitante": 0
+              },
+              "corregido": {
+                "local": 2,
+                "visitante": 0
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "local",
+              "equipo_marcador": "local",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 3,
+              "minuto": "64'",
+              "jugador": "LAMAS SEÑARIS, GABINO J",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 2,
+                "visitante": 1
+              },
+              "corregido": {
+                "local": 2,
+                "visitante": 1
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 4,
+              "minuto": "89'",
+              "jugador": "BARRAL TABOAS, MARCOS",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 3,
+                "visitante": 1
+              },
+              "corregido": {
+                "local": 3,
+                "visitante": 1
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "local",
+              "equipo_marcador": "local",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            }
+          ]
+        },
+        {
+          "prueba": "Goleadores asignados al equipo correcto",
+          "ok": true,
+          "obtenido": [
+            {
+              "gol": 1,
+              "minuto": "12'",
+              "jugador": "FERNANDEZ GARCIA, SENAR A",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 1,
+                "visitante": 0
+              },
+              "corregido": {
+                "local": 1,
+                "visitante": 0
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "local",
+              "equipo_marcador": "local",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 2,
+              "minuto": "13'",
+              "jugador": "FERNANDEZ GARCIA, SENAR A",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 2,
+                "visitante": 0
+              },
+              "corregido": {
+                "local": 2,
+                "visitante": 0
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "local",
+              "equipo_marcador": "local",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 3,
+              "minuto": "64'",
+              "jugador": "LAMAS SEÑARIS, GABINO J",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 2,
+                "visitante": 1
+              },
+              "corregido": {
+                "local": 2,
+                "visitante": 1
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 4,
+              "minuto": "89'",
+              "jugador": "BARRAL TABOAS, MARCOS",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 3,
+                "visitante": 1
+              },
+              "corregido": {
+                "local": 3,
+                "visitante": 1
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "local",
+              "equipo_marcador": "local",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            }
+          ]
+        },
+        {
+          "prueba": "Último marcador coincide con resultado",
+          "ok": true,
+          "obtenido": {
+            "ultimoGol": {
+              "local": 3,
+              "visitante": 1
+            },
+            "resultado": "3-1"
+          }
+        },
+        {
+          "prueba": "Número de goles coincide con resultado",
+          "ok": true,
+          "obtenido": {
+            "filasGol": 4,
+            "totalMarcador": 4
+          }
+        },
+        {
+          "prueba": "Ningún marcador sin resolver",
+          "ok": true,
+          "obtenido": [
+            {
+              "minuto": "12'",
+              "marcador": {
+                "local": 1,
+                "visitante": 0
+              },
+              "fuente": "raw_y_jugador_coherentes"
+            },
+            {
+              "minuto": "13'",
+              "marcador": {
+                "local": 2,
+                "visitante": 0
+              },
+              "fuente": "raw_y_jugador_coherentes"
+            },
+            {
+              "minuto": "64'",
+              "marcador": {
+                "local": 2,
+                "visitante": 1
+              },
+              "fuente": "raw_y_jugador_coherentes"
+            },
+            {
+              "minuto": "89'",
+              "marcador": {
+                "local": 3,
+                "visitante": 1
+              },
+              "fuente": "raw_y_jugador_coherentes"
+            }
+          ]
+        }
+      ]
+    },
+    "fuente": "extraido_10B"
+  },
+  "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478265&cod_acta=1478265": {
+    "ok": true,
+    "jornada": 8,
+    "url": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478265&cod_acta=1478265",
+    "acta": {
+      "temporada": "2026-2027",
+      "jornada": 8,
+      "fecha": "07-11-2026",
+      "hora": "18:00",
+      "local": "U.D. PAIOSACO H.AÑON",
+      "visitante": "U.D. NARAHIO",
+      "resultado_principal_raw": {
+        "local": null,
+        "visitante": null
+      },
+      "resultado": {
+        "local": 0,
+        "visitante": 0,
+        "texto": "0-0",
+        "fuente": "sin_goles"
+      },
+      "arbitro": "ECHEVARRIA FIAÑO, DIEGO",
+      "estadio": "Porta Santa",
+      "ciudad": "Laracha (A)",
+      "goles": [],
+      "equipo_local": {
+        "nombre": "U.D. PAIOSACO H.AÑON",
+        "titulares": [
+          {
+            "dorsal": "1",
+            "jugador": "VARELA VARELA, DIEGO"
+          },
+          {
+            "dorsal": "3",
+            "jugador": "AñON ROIBAL, JAIME"
+          },
+          {
+            "dorsal": "7",
+            "jugador": "MARTINEZ VARELA, ANGEL"
+          },
+          {
+            "dorsal": "10",
+            "jugador": "SANDE MOSQUERA, PABLO"
+          },
+          {
+            "dorsal": "11",
+            "jugador": "VARELA VARELA, ESTEBAN"
+          },
+          {
+            "dorsal": "12",
+            "jugador": "FRAGA CARRACEDO, RAFAEL"
+          },
+          {
+            "dorsal": "16",
+            "jugador": "MAGARIñOS REY, MARCOS"
+          },
+          {
+            "dorsal": "21",
+            "jugador": "MARTINEZ ESMORIS, ALBERTO"
+          },
+          {
+            "dorsal": "22",
+            "jugador": "RODO VERDIA, OSCAR"
+          },
+          {
+            "dorsal": "23",
+            "jugador": "REY AñON, SERGIO"
+          },
+          {
+            "dorsal": "24",
+            "jugador": "ALONSO AÑON, JAVIER"
+          }
+        ],
+        "suplentes": [
+          {
+            "dorsal": "25",
+            "jugador": "BUSTO FRAGA, VICTOR M"
+          },
+          {
+            "dorsal": "2",
+            "jugador": "SUAREZ LOPEZ, JOSE A"
+          },
+          {
+            "dorsal": "5",
+            "jugador": "CANEDO REY, RUBEN"
+          },
+          {
+            "dorsal": "13",
+            "jugador": "ATRIO VIDAL, JOSE M"
+          },
+          {
+            "dorsal": "14",
+            "jugador": "QUIROGA BARREIRO, JOSE M"
+          },
+          {
+            "dorsal": "18",
+            "jugador": "VARELA BERTOA, RUBEN"
+          },
+          {
+            "dorsal": "19",
+            "jugador": "CALVO LOPEZ, DANIEL"
+          },
+          {
+            "dorsal": "26",
+            "jugador": "NAYA REGUEIRA, OMAR"
+          },
+          {
+            "dorsal": "27",
+            "jugador": "RAMOS SANCHEZ, ADRIAN"
+          }
+        ],
+        "cuerpo_tecnico": {
+          "delegado": "SÁNCHEZ GRELA, ANTONIO",
+          "entrenador": "No presenta"
+        },
+        "tarjetas": [
+          {
+            "tipo": "amarilla",
+            "minuto": "87'",
+            "jugador": "ATRIO VIDAL, JOSE M"
+          },
+          {
+            "tipo": "amarilla",
+            "minuto": "90'",
+            "jugador": "ATRIO VIDAL, JOSE M"
+          }
+        ]
+      },
+      "equipo_visitante": {
+        "nombre": "U.D. NARAHIO",
+        "titulares": [
+          {
+            "dorsal": "1",
+            "jugador": "ALVARIñO GARROTE, JAVIER"
+          },
+          {
+            "dorsal": "2",
+            "jugador": "RIOS LAMAS, DANIEL"
+          },
+          {
+            "dorsal": "5",
+            "jugador": "RODRIGUEZ CASAL, IGNACIO"
+          },
+          {
+            "dorsal": "8",
+            "jugador": "PENA GOMEZ, JOSE"
+          },
+          {
+            "dorsal": "9",
+            "jugador": "HERMIDA IGLESIAS, RAUL"
+          },
+          {
+            "dorsal": "11",
+            "jugador": "SILVA CASAS, BORJA"
+          },
+          {
+            "dorsal": "14",
+            "jugador": "LOPEZ PORTA, GONZALO"
+          },
+          {
+            "dorsal": "15",
+            "jugador": "RAMOS RAMOS, JULIAN"
+          },
+          {
+            "dorsal": "18",
+            "jugador": "MARTINEZ RAMIL, ANGEL"
+          },
+          {
+            "dorsal": "19",
+            "jugador": "SANDE DOPAZO, YAGO"
+          },
+          {
+            "dorsal": "22",
+            "jugador": "REY ANTON, SERVANDO I"
+          }
+        ],
+        "suplentes": [
+          {
+            "dorsal": "10",
+            "jugador": "CASTRO BOUZAMAYOR, ANGEL"
+          },
+          {
+            "dorsal": "16",
+            "jugador": "TRIÑANES CORRAL, JUAN J"
+          },
+          {
+            "dorsal": "17",
+            "jugador": "REGUEIRA MESIA, JOSE R"
+          },
+          {
+            "dorsal": "30",
+            "jugador": "SABIN BOUZA, CARLOS"
+          }
+        ],
+        "cuerpo_tecnico": {
+          "entrenador": "No presenta"
+        },
+        "tarjetas": [
+          {
+            "tipo": "amarilla",
+            "minuto": "35'",
+            "jugador": "RODRIGUEZ CASAL, IGNACIO"
+          },
+          {
+            "tipo": "amarilla",
+            "minuto": "87'",
+            "jugador": "MARTINEZ RAMIL, ANGEL"
+          }
+        ]
+      }
+    },
+    "validacion": {
+      "correcto": true,
+      "errores": [],
+      "pruebas": [
+        {
+          "prueba": "Temporada presente",
+          "ok": true,
+          "obtenido": "2026-2027"
+        },
+        {
+          "prueba": "Jornada presente",
+          "ok": true,
+          "obtenido": 8
+        },
+        {
+          "prueba": "Fecha presente",
+          "ok": true,
+          "obtenido": "07-11-2026"
+        },
+        {
+          "prueba": "Hora presente",
+          "ok": true,
+          "obtenido": "18:00"
+        },
+        {
+          "prueba": "Equipo local presente",
+          "ok": true,
+          "obtenido": "U.D. PAIOSACO H.AÑON"
+        },
+        {
+          "prueba": "Equipo visitante presente",
+          "ok": true,
+          "obtenido": "U.D. NARAHIO"
+        },
+        {
+          "prueba": "Resultado completo",
+          "ok": true,
+          "obtenido": "0-0"
+        },
+        {
+          "prueba": "Árbitro presente",
+          "ok": true,
+          "obtenido": "ECHEVARRIA FIAÑO, DIEGO"
+        },
+        {
+          "prueba": "Estadio presente",
+          "ok": true,
+          "obtenido": "Porta Santa"
+        },
+        {
+          "prueba": "Titulares local razonables",
+          "ok": true,
+          "obtenido": 11
+        },
+        {
+          "prueba": "Titulares visitante razonables",
+          "ok": true,
+          "obtenido": 11
+        },
+        {
+          "prueba": "Secuencia de goles coherente",
+          "ok": true,
+          "obtenido": []
+        },
+        {
+          "prueba": "Goleadores asignados al equipo correcto",
+          "ok": true,
+          "obtenido": []
+        },
+        {
+          "prueba": "Sin goles equivale a 0-0",
+          "ok": true,
+          "obtenido": "0-0"
+        },
+        {
+          "prueba": "Número de goles coincide con resultado",
+          "ok": true,
+          "obtenido": {
+            "filasGol": 0,
+            "totalMarcador": 0
+          }
+        },
+        {
+          "prueba": "Ningún marcador sin resolver",
+          "ok": true,
+          "obtenido": []
+        }
+      ]
+    },
+    "fuente": "extraido_10B"
+  },
+  "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478271&cod_acta=1478271": {
+    "ok": true,
+    "jornada": 8,
+    "url": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478271&cod_acta=1478271",
+    "acta": {
+      "temporada": "2026-2027",
+      "jornada": 8,
+      "fecha": "07-11-2026",
+      "hora": "18:00",
+      "local": "PORTAZGO S.D.",
+      "visitante": "LICEO DE MONELOS S.D.",
+      "resultado_principal_raw": {
+        "local": null,
+        "visitante": null
+      },
+      "resultado": {
+        "local": 1,
+        "visitante": 7,
+        "texto": "1-7",
+        "fuente": "secuencia_goles_validada"
+      },
+      "arbitro": "SEIJIDO LLANES, ROGELIO",
+      "estadio": "Municip. De Tarrio, (Culleredo)",
+      "ciudad": "Culleredo",
+      "goles": [
+        {
+          "marcador_raw": {
+            "local": 0,
+            "visitante": 1
+          },
+          "marcador": {
+            "local": 0,
+            "visitante": 1
+          },
+          "minuto": "22'",
+          "jugador": "PISOS SOMESO, DANIEL",
+          "tipo_gol": "Gol normal",
+          "marcador_fuente": "raw_y_jugador_coherentes"
+        },
+        {
+          "marcador_raw": {
+            "local": 0,
+            "visitante": 2
+          },
+          "marcador": {
+            "local": 0,
+            "visitante": 2
+          },
+          "minuto": "37'",
+          "jugador": "COLLAZO PORTEIRO, OSCAR",
+          "tipo_gol": "Gol normal",
+          "marcador_fuente": "raw_y_jugador_coherentes"
+        },
+        {
+          "marcador_raw": {
+            "local": 0,
+            "visitante": 3
+          },
+          "marcador": {
+            "local": 0,
+            "visitante": 3
+          },
+          "minuto": "45'",
+          "jugador": "ROCHA GESTAL, GONZALO",
+          "tipo_gol": "Gol normal",
+          "marcador_fuente": "raw_y_jugador_coherentes"
+        },
+        {
+          "marcador_raw": {
+            "local": 0,
+            "visitante": 4
+          },
+          "marcador": {
+            "local": 0,
+            "visitante": 4
+          },
+          "minuto": "52'",
+          "jugador": "PISOS SOMESO, BRUNO",
+          "tipo_gol": "Gol normal",
+          "marcador_fuente": "raw_y_jugador_coherentes"
+        },
+        {
+          "marcador_raw": {
+            "local": 0,
+            "visitante": 5
+          },
+          "marcador": {
+            "local": 0,
+            "visitante": 5
+          },
+          "minuto": "65'",
+          "jugador": "PISOS SOMESO, DANIEL",
+          "tipo_gol": "Gol normal",
+          "marcador_fuente": "raw_y_jugador_coherentes"
+        },
+        {
+          "marcador_raw": {
+            "local": 1,
+            "visitante": 2
+          },
+          "marcador": {
+            "local": 1,
+            "visitante": 5
+          },
+          "minuto": "70'",
+          "jugador": "PORTO CAMBLOR, PABLO",
+          "tipo_gol": "Gol normal",
+          "marcador_fuente": "jugador_prioritario"
+        },
+        {
+          "marcador_raw": {
+            "local": 1,
+            "visitante": 6
+          },
+          "marcador": {
+            "local": 1,
+            "visitante": 6
+          },
+          "minuto": "75'",
+          "jugador": "PISOS SOMESO, DANIEL",
+          "tipo_gol": "Gol normal",
+          "marcador_fuente": "raw_y_jugador_coherentes"
+        },
+        {
+          "marcador_raw": {
+            "local": 1,
+            "visitante": 7
+          },
+          "marcador": {
+            "local": 1,
+            "visitante": 7
+          },
+          "minuto": "86'",
+          "jugador": "PASTORIN SALIS, IGNACIO",
+          "tipo_gol": "Gol normal",
+          "marcador_fuente": "raw_y_jugador_coherentes"
+        }
+      ],
+      "equipo_local": {
+        "nombre": "PORTAZGO S.D.",
+        "titulares": [
+          {
+            "dorsal": "1",
+            "jugador": "OLIVEIRA AMIGO, EDUARDO GERMÁN"
+          },
+          {
+            "dorsal": "4",
+            "jugador": "GRILLO SUAREZ, LEONARDO M"
+          },
+          {
+            "dorsal": "7",
+            "jugador": "PORTO CAMBLOR, PABLO"
+          },
+          {
+            "dorsal": "8",
+            "jugador": "GONZALO CASTRO, MIGUEL A"
+          },
+          {
+            "dorsal": "11",
+            "jugador": "GONZALEZ SOUTO, DAVID"
+          },
+          {
+            "dorsal": "15",
+            "jugador": "BOLON RIEIRO, JORGE"
+          },
+          {
+            "dorsal": "17",
+            "jugador": "BANCELLS CARRANCIO, FRANCISCO J"
+          },
+          {
+            "dorsal": "19",
+            "jugador": "LOPEZ BAO, DAVID A"
+          },
+          {
+            "dorsal": "22",
+            "jugador": "DA SILVA ALVES, JONATHAN LOIS"
+          },
+          {
+            "dorsal": "27",
+            "jugador": "MELON FERNANDEZ, RAFAEL"
+          },
+          {
+            "dorsal": "29",
+            "jugador": "FONTEL PEREZ, YGOR"
+          }
+        ],
+        "suplentes": [
+          {
+            "dorsal": "2",
+            "jugador": "GRILLO SUAREZ, GONZALO M"
+          },
+          {
+            "dorsal": "6",
+            "jugador": "MELLA MAROÑO, MAURICIO M"
+          },
+          {
+            "dorsal": "25",
+            "jugador": "VALVERDE DA CAMARA, FABRICIO"
+          },
+          {
+            "dorsal": "28",
+            "jugador": "FERREIRA PAULINO, BRUNO"
+          },
+          {
+            "dorsal": "30",
+            "jugador": "SANCHES NETO, ELIAS"
+          }
+        ],
+        "cuerpo_tecnico": {
+          "delegado": "LOPEZ NOVO, IVAN",
+          "entrenador": "No presenta"
+        },
+        "tarjetas": []
+      },
+      "equipo_visitante": {
+        "nombre": "LICEO DE MONELOS S.D.",
+        "titulares": [
+          {
+            "dorsal": "1",
+            "jugador": "CONCHADO PARDO, EDUARDO"
+          },
+          {
+            "dorsal": "7",
+            "jugador": "PISOS COPPA, BORJA"
+          },
+          {
+            "dorsal": "8",
+            "jugador": "PISOS SOMESO, DANIEL"
+          },
+          {
+            "dorsal": "9",
+            "jugador": "RAMOS CARBALLEDO, FRANCO"
+          },
+          {
+            "dorsal": "10",
+            "jugador": "PISOS SOMESO, BRUNO"
+          },
+          {
+            "dorsal": "11",
+            "jugador": "COLLAZO PORTEIRO, OSCAR"
+          },
+          {
+            "dorsal": "12",
+            "jugador": "VIÑA CASTIÑEIRA, ALBERTO"
+          },
+          {
+            "dorsal": "13",
+            "jugador": "PEDROSA FIGUEROA, ARTURO"
+          },
+          {
+            "dorsal": "17",
+            "jugador": "POUSADA NION, DIEGO"
+          },
+          {
+            "dorsal": "21",
+            "jugador": "MEXIGOS PRUDENCIO, JOSE"
+          },
+          {
+            "dorsal": "29",
+            "jugador": "ROCHA GESTAL, GONZALO"
+          }
+        ],
+        "suplentes": [
+          {
+            "dorsal": "6",
+            "jugador": "LOPEZ TEIJO, ALEJANDRO"
+          },
+          {
+            "dorsal": "16",
+            "jugador": "FERNANDEZ SUERO, JOSE M"
+          },
+          {
+            "dorsal": "25",
+            "jugador": "PASTORIN SALIS, IGNACIO"
+          },
+          {
+            "dorsal": "28",
+            "jugador": "SANCHEZ SOTO, MANUEL"
+          }
+        ],
+        "cuerpo_tecnico": {
+          "delegado": "GONZALEZ CORTES, CARLOS M",
+          "entrenador": "No presenta"
+        },
+        "tarjetas": []
+      }
+    },
+    "validacion": {
+      "correcto": true,
+      "errores": [],
+      "pruebas": [
+        {
+          "prueba": "Temporada presente",
+          "ok": true,
+          "obtenido": "2026-2027"
+        },
+        {
+          "prueba": "Jornada presente",
+          "ok": true,
+          "obtenido": 8
+        },
+        {
+          "prueba": "Fecha presente",
+          "ok": true,
+          "obtenido": "07-11-2026"
+        },
+        {
+          "prueba": "Hora presente",
+          "ok": true,
+          "obtenido": "18:00"
+        },
+        {
+          "prueba": "Equipo local presente",
+          "ok": true,
+          "obtenido": "PORTAZGO S.D."
+        },
+        {
+          "prueba": "Equipo visitante presente",
+          "ok": true,
+          "obtenido": "LICEO DE MONELOS S.D."
+        },
+        {
+          "prueba": "Resultado completo",
+          "ok": true,
+          "obtenido": "1-7"
+        },
+        {
+          "prueba": "Árbitro presente",
+          "ok": true,
+          "obtenido": "SEIJIDO LLANES, ROGELIO"
+        },
+        {
+          "prueba": "Estadio presente",
+          "ok": true,
+          "obtenido": "Municip. De Tarrio, (Culleredo)"
+        },
+        {
+          "prueba": "Titulares local razonables",
+          "ok": true,
+          "obtenido": 11
+        },
+        {
+          "prueba": "Titulares visitante razonables",
+          "ok": true,
+          "obtenido": 11
+        },
+        {
+          "prueba": "Secuencia de goles coherente",
+          "ok": true,
+          "obtenido": [
+            {
+              "gol": 1,
+              "minuto": "22'",
+              "jugador": "PISOS SOMESO, DANIEL",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 0,
+                "visitante": 1
+              },
+              "corregido": {
+                "local": 0,
+                "visitante": 1
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 2,
+              "minuto": "37'",
+              "jugador": "COLLAZO PORTEIRO, OSCAR",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 0,
+                "visitante": 2
+              },
+              "corregido": {
+                "local": 0,
+                "visitante": 2
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 3,
+              "minuto": "45'",
+              "jugador": "ROCHA GESTAL, GONZALO",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 0,
+                "visitante": 3
+              },
+              "corregido": {
+                "local": 0,
+                "visitante": 3
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 4,
+              "minuto": "52'",
+              "jugador": "PISOS SOMESO, BRUNO",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 0,
+                "visitante": 4
+              },
+              "corregido": {
+                "local": 0,
+                "visitante": 4
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 5,
+              "minuto": "65'",
+              "jugador": "PISOS SOMESO, DANIEL",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 0,
+                "visitante": 5
+              },
+              "corregido": {
+                "local": 0,
+                "visitante": 5
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 6,
+              "minuto": "70'",
+              "jugador": "PORTO CAMBLOR, PABLO",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 1,
+                "visitante": 2
+              },
+              "corregido": {
+                "local": 1,
+                "visitante": 5
+              },
+              "fuente": "jugador_prioritario",
+              "equipo_esperado": "local",
+              "equipo_marcador": "local",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 7,
+              "minuto": "75'",
+              "jugador": "PISOS SOMESO, DANIEL",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 1,
+                "visitante": 6
+              },
+              "corregido": {
+                "local": 1,
+                "visitante": 6
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 8,
+              "minuto": "86'",
+              "jugador": "PASTORIN SALIS, IGNACIO",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 1,
+                "visitante": 7
+              },
+              "corregido": {
+                "local": 1,
+                "visitante": 7
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            }
+          ]
+        },
+        {
+          "prueba": "Goleadores asignados al equipo correcto",
+          "ok": true,
+          "obtenido": [
+            {
+              "gol": 1,
+              "minuto": "22'",
+              "jugador": "PISOS SOMESO, DANIEL",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 0,
+                "visitante": 1
+              },
+              "corregido": {
+                "local": 0,
+                "visitante": 1
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 2,
+              "minuto": "37'",
+              "jugador": "COLLAZO PORTEIRO, OSCAR",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 0,
+                "visitante": 2
+              },
+              "corregido": {
+                "local": 0,
+                "visitante": 2
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 3,
+              "minuto": "45'",
+              "jugador": "ROCHA GESTAL, GONZALO",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 0,
+                "visitante": 3
+              },
+              "corregido": {
+                "local": 0,
+                "visitante": 3
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 4,
+              "minuto": "52'",
+              "jugador": "PISOS SOMESO, BRUNO",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 0,
+                "visitante": 4
+              },
+              "corregido": {
+                "local": 0,
+                "visitante": 4
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 5,
+              "minuto": "65'",
+              "jugador": "PISOS SOMESO, DANIEL",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 0,
+                "visitante": 5
+              },
+              "corregido": {
+                "local": 0,
+                "visitante": 5
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 6,
+              "minuto": "70'",
+              "jugador": "PORTO CAMBLOR, PABLO",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 1,
+                "visitante": 2
+              },
+              "corregido": {
+                "local": 1,
+                "visitante": 5
+              },
+              "fuente": "jugador_prioritario",
+              "equipo_esperado": "local",
+              "equipo_marcador": "local",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 7,
+              "minuto": "75'",
+              "jugador": "PISOS SOMESO, DANIEL",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 1,
+                "visitante": 6
+              },
+              "corregido": {
+                "local": 1,
+                "visitante": 6
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 8,
+              "minuto": "86'",
+              "jugador": "PASTORIN SALIS, IGNACIO",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 1,
+                "visitante": 7
+              },
+              "corregido": {
+                "local": 1,
+                "visitante": 7
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            }
+          ]
+        },
+        {
+          "prueba": "Último marcador coincide con resultado",
+          "ok": true,
+          "obtenido": {
+            "ultimoGol": {
+              "local": 1,
+              "visitante": 7
+            },
+            "resultado": "1-7"
+          }
+        },
+        {
+          "prueba": "Número de goles coincide con resultado",
+          "ok": true,
+          "obtenido": {
+            "filasGol": 8,
+            "totalMarcador": 8
+          }
+        },
+        {
+          "prueba": "Ningún marcador sin resolver",
+          "ok": true,
+          "obtenido": [
+            {
+              "minuto": "22'",
+              "marcador": {
+                "local": 0,
+                "visitante": 1
+              },
+              "fuente": "raw_y_jugador_coherentes"
+            },
+            {
+              "minuto": "37'",
+              "marcador": {
+                "local": 0,
+                "visitante": 2
+              },
+              "fuente": "raw_y_jugador_coherentes"
+            },
+            {
+              "minuto": "45'",
+              "marcador": {
+                "local": 0,
+                "visitante": 3
+              },
+              "fuente": "raw_y_jugador_coherentes"
+            },
+            {
+              "minuto": "52'",
+              "marcador": {
+                "local": 0,
+                "visitante": 4
+              },
+              "fuente": "raw_y_jugador_coherentes"
+            },
+            {
+              "minuto": "65'",
+              "marcador": {
+                "local": 0,
+                "visitante": 5
+              },
+              "fuente": "raw_y_jugador_coherentes"
+            },
+            {
+              "minuto": "70'",
+              "marcador": {
+                "local": 1,
+                "visitante": 5
+              },
+              "fuente": "jugador_prioritario"
+            },
+            {
+              "minuto": "75'",
+              "marcador": {
+                "local": 1,
+                "visitante": 6
+              },
+              "fuente": "raw_y_jugador_coherentes"
+            },
+            {
+              "minuto": "86'",
+              "marcador": {
+                "local": 1,
+                "visitante": 7
+              },
+              "fuente": "raw_y_jugador_coherentes"
+            }
+          ]
+        }
+      ]
+    },
+    "fuente": "extraido_10B"
+  },
+  "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478268&cod_acta=1478268": {
+    "ok": true,
+    "jornada": 8,
+    "url": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478268&cod_acta=1478268",
+    "acta": {
+      "temporada": "2026-2027",
+      "jornada": 8,
+      "fecha": "07-11-2026",
+      "hora": "18:15",
+      "local": "C.C.D. CURTIS",
+      "visitante": "BETANZOS NORTE",
+      "resultado_principal_raw": {
+        "local": null,
+        "visitante": null
+      },
+      "resultado": {
+        "local": 3,
+        "visitante": 2,
+        "texto": "3-2",
+        "fuente": "secuencia_goles_validada"
+      },
+      "arbitro": "LOPEZ SANTISO, SAMUEL",
+      "estadio": "Novo ( Curtis )",
+      "ciudad": "Curtis",
+      "goles": [
+        {
+          "marcador_raw": {
+            "local": 1,
+            "visitante": 0
+          },
+          "marcador": {
+            "local": 1,
+            "visitante": 0
+          },
+          "minuto": "57'",
+          "jugador": "CASTRO VEIGA, IVAN",
+          "tipo_gol": "Gol normal",
+          "marcador_fuente": "raw_y_jugador_coherentes"
+        },
+        {
+          "marcador_raw": {
+            "local": 2,
+            "visitante": 0
+          },
+          "marcador": {
+            "local": 2,
+            "visitante": 0
+          },
+          "minuto": "60'",
+          "jugador": "CASTRO VEIGA, IVAN",
+          "tipo_gol": "Gol normal",
+          "marcador_fuente": "raw_y_jugador_coherentes"
+        },
+        {
+          "marcador_raw": {
+            "local": 3,
+            "visitante": 0
+          },
+          "marcador": {
+            "local": 3,
+            "visitante": 0
+          },
+          "minuto": "72'",
+          "jugador": "VAZQUEZ LIÑEIRA, PABLO",
+          "tipo_gol": "Gol normal",
+          "marcador_fuente": "raw_y_jugador_coherentes"
+        },
+        {
+          "marcador_raw": {
+            "local": 3,
+            "visitante": 1
+          },
+          "marcador": {
+            "local": 3,
+            "visitante": 1
+          },
+          "minuto": "79'",
+          "jugador": "FREIRE VAZQUEZ, JOSE L",
+          "tipo_gol": "Gol normal",
+          "marcador_fuente": "raw_y_jugador_coherentes"
+        },
+        {
+          "marcador_raw": {
+            "local": 3,
+            "visitante": 2
+          },
+          "marcador": {
+            "local": 3,
+            "visitante": 2
+          },
+          "minuto": "80'",
+          "jugador": "CASTRO MARTINEZ, OSCAR",
+          "tipo_gol": "Gol normal",
+          "marcador_fuente": "raw_y_jugador_coherentes"
+        }
+      ],
+      "equipo_local": {
+        "nombre": "C.C.D. CURTIS",
+        "titulares": [
+          {
+            "dorsal": "1",
+            "jugador": "BARRAL GARCIA, FRANCISCO J"
+          },
+          {
+            "dorsal": "5",
+            "jugador": "SANTOS PEREZ, CARLOS"
+          },
+          {
+            "dorsal": "7",
+            "jugador": "ALLER DE ALMEIDA, MICAEL"
+          },
+          {
+            "dorsal": "8",
+            "jugador": "FREIRE SOUTO, JOSE ALVARO"
+          },
+          {
+            "dorsal": "9",
+            "jugador": "GUERRA VIGO, ANGEL"
+          },
+          {
+            "dorsal": "11",
+            "jugador": "RODRIGUEZ RICO, DAVID"
+          },
+          {
+            "dorsal": "14",
+            "jugador": "CASTRO VEIGA, IVAN"
+          },
+          {
+            "dorsal": "18",
+            "jugador": "ESPIDO SANCHEZ, PEDRO JOSE"
+          },
+          {
+            "dorsal": "19",
+            "jugador": "NEIRA BOTANA, NICOLAS"
+          },
+          {
+            "dorsal": "22",
+            "jugador": "VEGA PEREZ, BORJA"
+          },
+          {
+            "dorsal": "30",
+            "jugador": "VAZQUEZ LIÑEIRA, PABLO"
+          }
+        ],
+        "suplentes": [
+          {
+            "dorsal": "2",
+            "jugador": "CAMIÑOS PEREZ, DIEGO"
+          },
+          {
+            "dorsal": "15",
+            "jugador": "BOADO SUAREZ, JOSE A"
+          },
+          {
+            "dorsal": "17",
+            "jugador": "NEIRA CASTRO, JOSE MANUEL"
+          },
+          {
+            "dorsal": "21",
+            "jugador": "DORS DE LOS RIOS, VIVIAN THERRY"
+          },
+          {
+            "dorsal": "27",
+            "jugador": "DEL AGUILA AMIGO, MIGUEL"
+          },
+          {
+            "dorsal": "29",
+            "jugador": "LOPEZ RIVERA, SERGIO"
+          }
+        ],
+        "cuerpo_tecnico": {
+          "delegado": "CASES VAZQUEZ, OSCAR LUIS",
+          "entrenador": "No presenta"
+        },
+        "tarjetas": [
+          {
+            "tipo": "amarilla",
+            "minuto": "76'",
+            "jugador": "VAZQUEZ LIÑEIRA, PABLO"
+          }
+        ]
+      },
+      "equipo_visitante": {
+        "nombre": "BETANZOS NORTE",
+        "titulares": [
+          {
+            "dorsal": "1",
+            "jugador": "GONZALEZ PICADO, LUIS A"
+          },
+          {
+            "dorsal": "3",
+            "jugador": "ZAS LOPEZ, CARLOS"
+          },
+          {
+            "dorsal": "10",
+            "jugador": "PAREDES CARRO, MARTIN"
+          },
+          {
+            "dorsal": "12",
+            "jugador": "CODESAL CRESPO, JOSE A"
+          },
+          {
+            "dorsal": "14",
+            "jugador": "FREIRE VAZQUEZ, JOSE L"
+          },
+          {
+            "dorsal": "16",
+            "jugador": "VIA MARTINEZ, JOSE M"
+          },
+          {
+            "dorsal": "17",
+            "jugador": "DEIBE BRAÑAS, IVAN"
+          },
+          {
+            "dorsal": "18",
+            "jugador": "RUZO RAMOS, ANTONIO"
+          },
+          {
+            "dorsal": "21",
+            "jugador": "BARDELLINI MOSCOSO, JAVIER FRANCISCO"
+          },
+          {
+            "dorsal": "22",
+            "jugador": "CASTRO MARTINEZ, OSCAR"
+          },
+          {
+            "dorsal": "23",
+            "jugador": "SANCHEZ MOSQUERA, JUAN C"
+          }
+        ],
+        "suplentes": [
+          {
+            "dorsal": "8",
+            "jugador": "LOPEZ FANDIñO, MANUEL A"
+          },
+          {
+            "dorsal": "24",
+            "jugador": "MALCA FASAVI, REIDER HUMBERTO"
+          },
+          {
+            "dorsal": "26",
+            "jugador": "BRA CARRO, PEDRO"
+          }
+        ],
+        "cuerpo_tecnico": {
+          "entrenador": "No presenta"
+        },
+        "tarjetas": []
+      }
+    },
+    "validacion": {
+      "correcto": true,
+      "errores": [],
+      "pruebas": [
+        {
+          "prueba": "Temporada presente",
+          "ok": true,
+          "obtenido": "2026-2027"
+        },
+        {
+          "prueba": "Jornada presente",
+          "ok": true,
+          "obtenido": 8
+        },
+        {
+          "prueba": "Fecha presente",
+          "ok": true,
+          "obtenido": "07-11-2026"
+        },
+        {
+          "prueba": "Hora presente",
+          "ok": true,
+          "obtenido": "18:15"
+        },
+        {
+          "prueba": "Equipo local presente",
+          "ok": true,
+          "obtenido": "C.C.D. CURTIS"
+        },
+        {
+          "prueba": "Equipo visitante presente",
+          "ok": true,
+          "obtenido": "BETANZOS NORTE"
+        },
+        {
+          "prueba": "Resultado completo",
+          "ok": true,
+          "obtenido": "3-2"
+        },
+        {
+          "prueba": "Árbitro presente",
+          "ok": true,
+          "obtenido": "LOPEZ SANTISO, SAMUEL"
+        },
+        {
+          "prueba": "Estadio presente",
+          "ok": true,
+          "obtenido": "Novo ( Curtis )"
+        },
+        {
+          "prueba": "Titulares local razonables",
+          "ok": true,
+          "obtenido": 11
+        },
+        {
+          "prueba": "Titulares visitante razonables",
+          "ok": true,
+          "obtenido": 11
+        },
+        {
+          "prueba": "Secuencia de goles coherente",
+          "ok": true,
+          "obtenido": [
+            {
+              "gol": 1,
+              "minuto": "57'",
+              "jugador": "CASTRO VEIGA, IVAN",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 1,
+                "visitante": 0
+              },
+              "corregido": {
+                "local": 1,
+                "visitante": 0
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "local",
+              "equipo_marcador": "local",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 2,
+              "minuto": "60'",
+              "jugador": "CASTRO VEIGA, IVAN",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 2,
+                "visitante": 0
+              },
+              "corregido": {
+                "local": 2,
+                "visitante": 0
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "local",
+              "equipo_marcador": "local",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 3,
+              "minuto": "72'",
+              "jugador": "VAZQUEZ LIÑEIRA, PABLO",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 3,
+                "visitante": 0
+              },
+              "corregido": {
+                "local": 3,
+                "visitante": 0
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "local",
+              "equipo_marcador": "local",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 4,
+              "minuto": "79'",
+              "jugador": "FREIRE VAZQUEZ, JOSE L",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 3,
+                "visitante": 1
+              },
+              "corregido": {
+                "local": 3,
+                "visitante": 1
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 5,
+              "minuto": "80'",
+              "jugador": "CASTRO MARTINEZ, OSCAR",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 3,
+                "visitante": 2
+              },
+              "corregido": {
+                "local": 3,
+                "visitante": 2
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            }
+          ]
+        },
+        {
+          "prueba": "Goleadores asignados al equipo correcto",
+          "ok": true,
+          "obtenido": [
+            {
+              "gol": 1,
+              "minuto": "57'",
+              "jugador": "CASTRO VEIGA, IVAN",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 1,
+                "visitante": 0
+              },
+              "corregido": {
+                "local": 1,
+                "visitante": 0
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "local",
+              "equipo_marcador": "local",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 2,
+              "minuto": "60'",
+              "jugador": "CASTRO VEIGA, IVAN",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 2,
+                "visitante": 0
+              },
+              "corregido": {
+                "local": 2,
+                "visitante": 0
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "local",
+              "equipo_marcador": "local",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 3,
+              "minuto": "72'",
+              "jugador": "VAZQUEZ LIÑEIRA, PABLO",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 3,
+                "visitante": 0
+              },
+              "corregido": {
+                "local": 3,
+                "visitante": 0
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "local",
+              "equipo_marcador": "local",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 4,
+              "minuto": "79'",
+              "jugador": "FREIRE VAZQUEZ, JOSE L",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 3,
+                "visitante": 1
+              },
+              "corregido": {
+                "local": 3,
+                "visitante": 1
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 5,
+              "minuto": "80'",
+              "jugador": "CASTRO MARTINEZ, OSCAR",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 3,
+                "visitante": 2
+              },
+              "corregido": {
+                "local": 3,
+                "visitante": 2
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            }
+          ]
+        },
+        {
+          "prueba": "Último marcador coincide con resultado",
+          "ok": true,
+          "obtenido": {
+            "ultimoGol": {
+              "local": 3,
+              "visitante": 2
+            },
+            "resultado": "3-2"
+          }
+        },
+        {
+          "prueba": "Número de goles coincide con resultado",
+          "ok": true,
+          "obtenido": {
+            "filasGol": 5,
+            "totalMarcador": 5
+          }
+        },
+        {
+          "prueba": "Ningún marcador sin resolver",
+          "ok": true,
+          "obtenido": [
+            {
+              "minuto": "57'",
+              "marcador": {
+                "local": 1,
+                "visitante": 0
+              },
+              "fuente": "raw_y_jugador_coherentes"
+            },
+            {
+              "minuto": "60'",
+              "marcador": {
+                "local": 2,
+                "visitante": 0
+              },
+              "fuente": "raw_y_jugador_coherentes"
+            },
+            {
+              "minuto": "72'",
+              "marcador": {
+                "local": 3,
+                "visitante": 0
+              },
+              "fuente": "raw_y_jugador_coherentes"
+            },
+            {
+              "minuto": "79'",
+              "marcador": {
+                "local": 3,
+                "visitante": 1
+              },
+              "fuente": "raw_y_jugador_coherentes"
+            },
+            {
+              "minuto": "80'",
+              "marcador": {
+                "local": 3,
+                "visitante": 2
+              },
+              "fuente": "raw_y_jugador_coherentes"
+            }
+          ]
+        }
+      ]
+    },
+    "fuente": "extraido_10B"
+  },
+  "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478267&cod_acta=1478267": {
+    "ok": true,
+    "jornada": 8,
+    "url": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478267&cod_acta=1478267",
+    "acta": {
+      "temporada": "2026-2027",
+      "jornada": 8,
+      "fecha": "07-11-2026",
+      "hora": "20:00",
+      "local": "SADA F.C. A NOSA VIÑA",
+      "visitante": "C.D. SIGRAS",
+      "resultado_principal_raw": {
+        "local": null,
+        "visitante": null
+      },
+      "resultado": {
+        "local": 5,
+        "visitante": 1,
+        "texto": "5-1",
+        "fuente": "secuencia_goles_validada"
+      },
+      "arbitro": "RODRIGUEZ CAMPOS, FCO XABIER",
+      "estadio": "Campo de Fútbol As Mariñas - Andrés Pena de Sada",
+      "ciudad": "Sada",
+      "goles": [
+        {
+          "marcador_raw": {
+            "local": 1,
+            "visitante": 0
+          },
+          "marcador": {
+            "local": 1,
+            "visitante": 0
+          },
+          "minuto": "9'",
+          "jugador": "FERRO ROZAS, GONZALO",
+          "tipo_gol": "Gol normal",
+          "marcador_fuente": "raw_y_jugador_coherentes"
+        },
+        {
+          "marcador_raw": {
+            "local": 0,
+            "visitante": 1
+          },
+          "marcador": {
+            "local": 1,
+            "visitante": 1
+          },
+          "minuto": "21'",
+          "jugador": "RAMOS BOTANA, DANIEL",
+          "tipo_gol": "Gol normal",
+          "marcador_fuente": "jugador_prioritario"
+        },
+        {
+          "marcador_raw": {
+            "local": 2,
+            "visitante": 1
+          },
+          "marcador": {
+            "local": 2,
+            "visitante": 1
+          },
+          "minuto": "35'",
+          "jugador": "FERRO ROZAS, GONZALO",
+          "tipo_gol": "Gol normal",
+          "marcador_fuente": "raw_y_jugador_coherentes"
+        },
+        {
+          "marcador_raw": {
+            "local": 2,
+            "visitante": 1
+          },
+          "marcador": {
+            "local": 3,
+            "visitante": 1
+          },
+          "minuto": "50'",
+          "jugador": "LOSADA GONZALEZ, MANUEL",
+          "tipo_gol": "Gol normal",
+          "marcador_fuente": "jugador_prioritario"
+        },
+        {
+          "marcador_raw": {
+            "local": 4,
+            "visitante": 0
+          },
+          "marcador": {
+            "local": 4,
+            "visitante": 1
+          },
+          "minuto": "76'",
+          "jugador": "FREIRE LESTA, CESAR",
+          "tipo_gol": "Gol normal",
+          "marcador_fuente": "jugador_prioritario"
+        },
+        {
+          "marcador_raw": {
+            "local": 5,
+            "visitante": 1
+          },
+          "marcador": {
+            "local": 5,
+            "visitante": 1
+          },
+          "minuto": "82'",
+          "jugador": "FERRO ROZAS, GONZALO",
+          "tipo_gol": "Gol normal",
+          "marcador_fuente": "raw_y_jugador_coherentes"
+        }
+      ],
+      "equipo_local": {
+        "nombre": "SADA F.C. A NOSA VIÑA",
+        "titulares": [
+          {
+            "dorsal": "1",
+            "jugador": "CAAMAÑO CAMBON, CARLOS"
+          },
+          {
+            "dorsal": "3",
+            "jugador": "MOURELO MOUZO, DAVID"
+          },
+          {
+            "dorsal": "4",
+            "jugador": "MARTINEZ VAZQUEZ, ALFONSO"
+          },
+          {
+            "dorsal": "10",
+            "jugador": "FERRO ROZAS, GONZALO"
+          },
+          {
+            "dorsal": "13",
+            "jugador": "TEIXEIRA FERNANDEZ, JULIO J"
+          },
+          {
+            "dorsal": "15",
+            "jugador": "GOMEZ CAGIAO, ENRIQUE BERNARDO"
+          },
+          {
+            "dorsal": "18",
+            "jugador": "MARTINEZ ABRUÑEDO, BORJA"
+          },
+          {
+            "dorsal": "21",
+            "jugador": "SEOANE BARROS, ANTONIO M"
+          },
+          {
+            "dorsal": "23",
+            "jugador": "FREIRE LESTA, CESAR"
+          },
+          {
+            "dorsal": "25",
+            "jugador": "ROIBAS NAVEIRO, ALBERTO"
+          },
+          {
+            "dorsal": "27",
+            "jugador": "VIZOSO GUERRA, JAVIER"
+          }
+        ],
+        "suplentes": [
+          {
+            "dorsal": "2",
+            "jugador": "GAREA PARGA, MIGUEL A"
+          },
+          {
+            "dorsal": "6",
+            "jugador": "FERNANDEZ CABANA, DIEGO"
+          },
+          {
+            "dorsal": "7",
+            "jugador": "AMOR HAZ, MIGUEL"
+          },
+          {
+            "dorsal": "11",
+            "jugador": "BOO FERNANDEZ, MIGUEL A"
+          },
+          {
+            "dorsal": "14",
+            "jugador": "SEIJO CANCELO, SANTIAGO"
+          },
+          {
+            "dorsal": "17",
+            "jugador": "ALBARRACIN, MIGUEL ANGEL"
+          },
+          {
+            "dorsal": "19",
+            "jugador": "MALLO LOPEZ, JOSE LUIS"
+          },
+          {
+            "dorsal": "29",
+            "jugador": "LOSADA GONZALEZ, MANUEL"
+          }
+        ],
+        "cuerpo_tecnico": {
+          "delegado": "NAVEIRA GARCÍA, FRANCISCO",
+          "entrenador": "No presenta"
+        },
+        "tarjetas": []
+      },
+      "equipo_visitante": {
+        "nombre": "C.D. SIGRAS",
+        "titulares": [
+          {
+            "dorsal": "1",
+            "jugador": "SARDIÑA RODRIGUEZ, SANTIAGO"
+          },
+          {
+            "dorsal": "4",
+            "jugador": "TEIXEIRA SANMARTIN, RUI M"
+          },
+          {
+            "dorsal": "5",
+            "jugador": "PEREZ COUTO, ADAN"
+          },
+          {
+            "dorsal": "7",
+            "jugador": "ROMERO RODRIGUEZ, PABLO"
+          },
+          {
+            "dorsal": "8",
+            "jugador": "RODRIGUEZ GESTAL, ANTOLIN"
+          },
+          {
+            "dorsal": "17",
+            "jugador": "NAVARRETE PENA, PABLO J"
+          },
+          {
+            "dorsal": "18",
+            "jugador": "CARRAL RAMOS, RAUL"
+          },
+          {
+            "dorsal": "21",
+            "jugador": "SAR VARELA, JORGE"
+          },
+          {
+            "dorsal": "26",
+            "jugador": "SANCHEZ GOMEZ, DIEGO"
+          },
+          {
+            "dorsal": "28",
+            "jugador": "BOO IGLESIAS, BRUNO"
+          },
+          {
+            "dorsal": "29",
+            "jugador": "RUMBO MENDEZ, MARCOS"
+          }
+        ],
+        "suplentes": [
+          {
+            "dorsal": "6",
+            "jugador": "RIOS RODRIGUEZ, MIGUEL A"
+          },
+          {
+            "dorsal": "11",
+            "jugador": "GESTAL MOAR, JOSE L"
+          },
+          {
+            "dorsal": "12",
+            "jugador": "CONCHEIRO MESIAS, ROBERTO"
+          },
+          {
+            "dorsal": "19",
+            "jugador": "IGLESIAS GARCIA, PABLO"
+          },
+          {
+            "dorsal": "20",
+            "jugador": "ROJO ALONSO, DIEGO"
+          },
+          {
+            "dorsal": "23",
+            "jugador": "RIOS MIRANDA, NOEL"
+          },
+          {
+            "dorsal": "24",
+            "jugador": "IGLESIAS LOVELLE, SANTIAGO"
+          },
+          {
+            "dorsal": "30",
+            "jugador": "RAMOS BOTANA, DANIEL"
+          }
+        ],
+        "cuerpo_tecnico": {
+          "delegado": "BARREIRO GAREA, NATALIA",
+          "entrenador": "No presenta"
+        },
+        "tarjetas": []
+      }
+    },
+    "validacion": {
+      "correcto": true,
+      "errores": [],
+      "pruebas": [
+        {
+          "prueba": "Temporada presente",
+          "ok": true,
+          "obtenido": "2026-2027"
+        },
+        {
+          "prueba": "Jornada presente",
+          "ok": true,
+          "obtenido": 8
+        },
+        {
+          "prueba": "Fecha presente",
+          "ok": true,
+          "obtenido": "07-11-2026"
+        },
+        {
+          "prueba": "Hora presente",
+          "ok": true,
+          "obtenido": "20:00"
+        },
+        {
+          "prueba": "Equipo local presente",
+          "ok": true,
+          "obtenido": "SADA F.C. A NOSA VIÑA"
+        },
+        {
+          "prueba": "Equipo visitante presente",
+          "ok": true,
+          "obtenido": "C.D. SIGRAS"
+        },
+        {
+          "prueba": "Resultado completo",
+          "ok": true,
+          "obtenido": "5-1"
+        },
+        {
+          "prueba": "Árbitro presente",
+          "ok": true,
+          "obtenido": "RODRIGUEZ CAMPOS, FCO XABIER"
+        },
+        {
+          "prueba": "Estadio presente",
+          "ok": true,
+          "obtenido": "Campo de Fútbol As Mariñas - Andrés Pena de Sada"
+        },
+        {
+          "prueba": "Titulares local razonables",
+          "ok": true,
+          "obtenido": 11
+        },
+        {
+          "prueba": "Titulares visitante razonables",
+          "ok": true,
+          "obtenido": 11
+        },
+        {
+          "prueba": "Secuencia de goles coherente",
+          "ok": true,
+          "obtenido": [
+            {
+              "gol": 1,
+              "minuto": "9'",
+              "jugador": "FERRO ROZAS, GONZALO",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 1,
+                "visitante": 0
+              },
+              "corregido": {
+                "local": 1,
+                "visitante": 0
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "local",
+              "equipo_marcador": "local",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 2,
+              "minuto": "21'",
+              "jugador": "RAMOS BOTANA, DANIEL",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 0,
+                "visitante": 1
+              },
+              "corregido": {
+                "local": 1,
+                "visitante": 1
+              },
+              "fuente": "jugador_prioritario",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 3,
+              "minuto": "35'",
+              "jugador": "FERRO ROZAS, GONZALO",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 2,
+                "visitante": 1
+              },
+              "corregido": {
+                "local": 2,
+                "visitante": 1
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "local",
+              "equipo_marcador": "local",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 4,
+              "minuto": "50'",
+              "jugador": "LOSADA GONZALEZ, MANUEL",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 2,
+                "visitante": 1
+              },
+              "corregido": {
+                "local": 3,
+                "visitante": 1
+              },
+              "fuente": "jugador_prioritario",
+              "equipo_esperado": "local",
+              "equipo_marcador": "local",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 5,
+              "minuto": "76'",
+              "jugador": "FREIRE LESTA, CESAR",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 4,
+                "visitante": 0
+              },
+              "corregido": {
+                "local": 4,
+                "visitante": 1
+              },
+              "fuente": "jugador_prioritario",
+              "equipo_esperado": "local",
+              "equipo_marcador": "local",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 6,
+              "minuto": "82'",
+              "jugador": "FERRO ROZAS, GONZALO",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 5,
+                "visitante": 1
+              },
+              "corregido": {
+                "local": 5,
+                "visitante": 1
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "local",
+              "equipo_marcador": "local",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            }
+          ]
+        },
+        {
+          "prueba": "Goleadores asignados al equipo correcto",
+          "ok": true,
+          "obtenido": [
+            {
+              "gol": 1,
+              "minuto": "9'",
+              "jugador": "FERRO ROZAS, GONZALO",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 1,
+                "visitante": 0
+              },
+              "corregido": {
+                "local": 1,
+                "visitante": 0
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "local",
+              "equipo_marcador": "local",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 2,
+              "minuto": "21'",
+              "jugador": "RAMOS BOTANA, DANIEL",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 0,
+                "visitante": 1
+              },
+              "corregido": {
+                "local": 1,
+                "visitante": 1
+              },
+              "fuente": "jugador_prioritario",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 3,
+              "minuto": "35'",
+              "jugador": "FERRO ROZAS, GONZALO",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 2,
+                "visitante": 1
+              },
+              "corregido": {
+                "local": 2,
+                "visitante": 1
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "local",
+              "equipo_marcador": "local",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 4,
+              "minuto": "50'",
+              "jugador": "LOSADA GONZALEZ, MANUEL",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 2,
+                "visitante": 1
+              },
+              "corregido": {
+                "local": 3,
+                "visitante": 1
+              },
+              "fuente": "jugador_prioritario",
+              "equipo_esperado": "local",
+              "equipo_marcador": "local",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 5,
+              "minuto": "76'",
+              "jugador": "FREIRE LESTA, CESAR",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 4,
+                "visitante": 0
+              },
+              "corregido": {
+                "local": 4,
+                "visitante": 1
+              },
+              "fuente": "jugador_prioritario",
+              "equipo_esperado": "local",
+              "equipo_marcador": "local",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 6,
+              "minuto": "82'",
+              "jugador": "FERRO ROZAS, GONZALO",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 5,
+                "visitante": 1
+              },
+              "corregido": {
+                "local": 5,
+                "visitante": 1
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "local",
+              "equipo_marcador": "local",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            }
+          ]
+        },
+        {
+          "prueba": "Último marcador coincide con resultado",
+          "ok": true,
+          "obtenido": {
+            "ultimoGol": {
+              "local": 5,
+              "visitante": 1
+            },
+            "resultado": "5-1"
+          }
+        },
+        {
+          "prueba": "Número de goles coincide con resultado",
+          "ok": true,
+          "obtenido": {
+            "filasGol": 6,
+            "totalMarcador": 6
+          }
+        },
+        {
+          "prueba": "Ningún marcador sin resolver",
+          "ok": true,
+          "obtenido": [
+            {
+              "minuto": "9'",
+              "marcador": {
+                "local": 1,
+                "visitante": 0
+              },
+              "fuente": "raw_y_jugador_coherentes"
+            },
+            {
+              "minuto": "21'",
+              "marcador": {
+                "local": 1,
+                "visitante": 1
+              },
+              "fuente": "jugador_prioritario"
+            },
+            {
+              "minuto": "35'",
+              "marcador": {
+                "local": 2,
+                "visitante": 1
+              },
+              "fuente": "raw_y_jugador_coherentes"
+            },
+            {
+              "minuto": "50'",
+              "marcador": {
+                "local": 3,
+                "visitante": 1
+              },
+              "fuente": "jugador_prioritario"
+            },
+            {
+              "minuto": "76'",
+              "marcador": {
+                "local": 4,
+                "visitante": 1
+              },
+              "fuente": "jugador_prioritario"
+            },
+            {
+              "minuto": "82'",
+              "marcador": {
+                "local": 5,
+                "visitante": 1
+              },
+              "fuente": "raw_y_jugador_coherentes"
+            }
+          ]
+        }
+      ]
+    },
+    "fuente": "extraido_10B"
+  },
+  "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478270&cod_acta=1478270": {
+    "ok": true,
+    "jornada": 8,
+    "url": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478270&cod_acta=1478270",
+    "acta": {
+      "temporada": "2026-2027",
+      "jornada": 8,
+      "fecha": "07-11-2026",
+      "hora": "20:00",
+      "local": "SPORTING CAMBRE AS TRAVESAS",
+      "visitante": "XUVENTUDE DORNEDA",
+      "resultado_principal_raw": {
+        "local": null,
+        "visitante": null
+      },
+      "resultado": {
+        "local": 1,
+        "visitante": 2,
+        "texto": "1-2",
+        "fuente": "secuencia_goles_validada"
+      },
+      "arbitro": "FERREIRO VARELA, JOSE LUIS",
+      "estadio": "Dani Mallo (Cambre)",
+      "ciudad": "Cambre",
+      "goles": [
+        {
+          "marcador_raw": {
+            "local": 0,
+            "visitante": 1
+          },
+          "marcador": {
+            "local": 0,
+            "visitante": 1
+          },
+          "minuto": "11'",
+          "jugador": "CHICO LAGO, MARCOS",
+          "tipo_gol": "Gol normal",
+          "marcador_fuente": "raw_y_jugador_coherentes"
+        },
+        {
+          "marcador_raw": {
+            "local": 0,
+            "visitante": 2
+          },
+          "marcador": {
+            "local": 0,
+            "visitante": 2
+          },
+          "minuto": "13'",
+          "jugador": "RAMOS BARDERAS, EDUARDO",
+          "tipo_gol": "Gol normal",
+          "marcador_fuente": "raw_y_jugador_coherentes"
+        },
+        {
+          "marcador_raw": {
+            "local": 1,
+            "visitante": 2
+          },
+          "marcador": {
+            "local": 1,
+            "visitante": 2
+          },
+          "minuto": "90'",
+          "jugador": "ABRUÑEDO DEBER, JESUS",
+          "tipo_gol": "Gol normal",
+          "marcador_fuente": "raw_y_jugador_coherentes"
+        }
+      ],
+      "equipo_local": {
+        "nombre": "SPORTING CAMBRE AS TRAVESAS",
+        "titulares": [
+          {
+            "dorsal": "1",
+            "jugador": "MARIÑO PEREIRO, JUAN C"
+          },
+          {
+            "dorsal": "3",
+            "jugador": "IGLESIAS RIOBOO, FRANCISCO J"
+          },
+          {
+            "dorsal": "4",
+            "jugador": "LOPEZ SANCHEZ, ISAAC"
+          },
+          {
+            "dorsal": "5",
+            "jugador": "FERNANDEZ GOMEZ, CESAR"
+          },
+          {
+            "dorsal": "6",
+            "jugador": "ABRUÑEDO DEBER, JESUS"
+          },
+          {
+            "dorsal": "7",
+            "jugador": "NAVARRETE PENA, DIEGO H"
+          },
+          {
+            "dorsal": "10",
+            "jugador": "SOUTO PERNAS, MIGUEL"
+          },
+          {
+            "dorsal": "12",
+            "jugador": "DIAZ CALVIÑO, RUBEN"
+          },
+          {
+            "dorsal": "16",
+            "jugador": "PEREZ FERNANDEZ, CARLOS"
+          },
+          {
+            "dorsal": "17",
+            "jugador": "GÓMEZ BLANCO, ROBERTO CARLOS"
+          },
+          {
+            "dorsal": "30",
+            "jugador": "GONZALEZ ESTEVEZ, OSCAR"
+          }
+        ],
+        "suplentes": [
+          {
+            "dorsal": "14",
+            "jugador": "SANCHEZ LOPEZ, JAVIER"
+          },
+          {
+            "dorsal": "15",
+            "jugador": "CUBEIRO FERNANDEZ, BRAIS"
+          },
+          {
+            "dorsal": "19",
+            "jugador": "PEREZ SABIO, ADRIAN"
+          },
+          {
+            "dorsal": "23",
+            "jugador": "CASTRO PARDO, PABLO"
+          }
+        ],
+        "cuerpo_tecnico": {
+          "delegado": "GARCIA FERREIRO, GONZALO",
+          "entrenador": "No presenta"
+        },
+        "tarjetas": []
+      },
+      "equipo_visitante": {
+        "nombre": "XUVENTUDE DORNEDA",
+        "titulares": [
+          {
+            "dorsal": "1",
+            "jugador": "CASADO GONZALEZ, DAVID"
+          },
+          {
+            "dorsal": "2",
+            "jugador": "VAZQUEZ RIVERA, JOSE A"
+          },
+          {
+            "dorsal": "3",
+            "jugador": "CERNADAS SOUTO, OSCAR"
+          },
+          {
+            "dorsal": "10",
+            "jugador": "LOPEZ GRAÑA, FELIX"
+          },
+          {
+            "dorsal": "12",
+            "jugador": "TORREIRO COUSO, ROMAN G"
+          },
+          {
+            "dorsal": "13",
+            "jugador": "RAMOS BARDERAS, EDUARDO"
+          },
+          {
+            "dorsal": "17",
+            "jugador": "SANCHEZ FERNANDEZ, ROGELIO JESUS"
+          },
+          {
+            "dorsal": "18",
+            "jugador": "CHICO LAGO, MARCOS"
+          },
+          {
+            "dorsal": "22",
+            "jugador": "CASAL VARELA, SERGIO J"
+          },
+          {
+            "dorsal": "25",
+            "jugador": "AGUADO PERNAS, JOSE L"
+          },
+          {
+            "dorsal": "30",
+            "jugador": "BLANCO VARELA, SERGIO"
+          }
+        ],
+        "suplentes": [
+          {
+            "dorsal": "4",
+            "jugador": "GARCIA DAPIA, JOSE I"
+          },
+          {
+            "dorsal": "5",
+            "jugador": "SALPURIDO GARCIA, DIEGO"
+          },
+          {
+            "dorsal": "8",
+            "jugador": "MEILAN SEOANE, IVAN"
+          },
+          {
+            "dorsal": "11",
+            "jugador": "BERGONDO MORENO, JOSE M"
+          },
+          {
+            "dorsal": "14",
+            "jugador": "RUMBO SUAREZ, ROBERTO"
+          },
+          {
+            "dorsal": "20",
+            "jugador": "GARABAL CALLON, SANTIAGO"
+          },
+          {
+            "dorsal": "21",
+            "jugador": "ALLEGUE LOPEZ, PABLO"
+          },
+          {
+            "dorsal": "26",
+            "jugador": "BLANCO CANOSA, MANUEL"
+          }
+        ],
+        "cuerpo_tecnico": {
+          "entrenador": "No presenta"
+        },
+        "tarjetas": []
+      }
+    },
+    "validacion": {
+      "correcto": true,
+      "errores": [],
+      "pruebas": [
+        {
+          "prueba": "Temporada presente",
+          "ok": true,
+          "obtenido": "2026-2027"
+        },
+        {
+          "prueba": "Jornada presente",
+          "ok": true,
+          "obtenido": 8
+        },
+        {
+          "prueba": "Fecha presente",
+          "ok": true,
+          "obtenido": "07-11-2026"
+        },
+        {
+          "prueba": "Hora presente",
+          "ok": true,
+          "obtenido": "20:00"
+        },
+        {
+          "prueba": "Equipo local presente",
+          "ok": true,
+          "obtenido": "SPORTING CAMBRE AS TRAVESAS"
+        },
+        {
+          "prueba": "Equipo visitante presente",
+          "ok": true,
+          "obtenido": "XUVENTUDE DORNEDA"
+        },
+        {
+          "prueba": "Resultado completo",
+          "ok": true,
+          "obtenido": "1-2"
+        },
+        {
+          "prueba": "Árbitro presente",
+          "ok": true,
+          "obtenido": "FERREIRO VARELA, JOSE LUIS"
+        },
+        {
+          "prueba": "Estadio presente",
+          "ok": true,
+          "obtenido": "Dani Mallo (Cambre)"
+        },
+        {
+          "prueba": "Titulares local razonables",
+          "ok": true,
+          "obtenido": 11
+        },
+        {
+          "prueba": "Titulares visitante razonables",
+          "ok": true,
+          "obtenido": 11
+        },
+        {
+          "prueba": "Secuencia de goles coherente",
+          "ok": true,
+          "obtenido": [
+            {
+              "gol": 1,
+              "minuto": "11'",
+              "jugador": "CHICO LAGO, MARCOS",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 0,
+                "visitante": 1
+              },
+              "corregido": {
+                "local": 0,
+                "visitante": 1
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 2,
+              "minuto": "13'",
+              "jugador": "RAMOS BARDERAS, EDUARDO",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 0,
+                "visitante": 2
+              },
+              "corregido": {
+                "local": 0,
+                "visitante": 2
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 3,
+              "minuto": "90'",
+              "jugador": "ABRUÑEDO DEBER, JESUS",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 1,
+                "visitante": 2
+              },
+              "corregido": {
+                "local": 1,
+                "visitante": 2
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "local",
+              "equipo_marcador": "local",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            }
+          ]
+        },
+        {
+          "prueba": "Goleadores asignados al equipo correcto",
+          "ok": true,
+          "obtenido": [
+            {
+              "gol": 1,
+              "minuto": "11'",
+              "jugador": "CHICO LAGO, MARCOS",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 0,
+                "visitante": 1
+              },
+              "corregido": {
+                "local": 0,
+                "visitante": 1
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 2,
+              "minuto": "13'",
+              "jugador": "RAMOS BARDERAS, EDUARDO",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 0,
+                "visitante": 2
+              },
+              "corregido": {
+                "local": 0,
+                "visitante": 2
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 3,
+              "minuto": "90'",
+              "jugador": "ABRUÑEDO DEBER, JESUS",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 1,
+                "visitante": 2
+              },
+              "corregido": {
+                "local": 1,
+                "visitante": 2
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "local",
+              "equipo_marcador": "local",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            }
+          ]
+        },
+        {
+          "prueba": "Último marcador coincide con resultado",
+          "ok": true,
+          "obtenido": {
+            "ultimoGol": {
+              "local": 1,
+              "visitante": 2
+            },
+            "resultado": "1-2"
+          }
+        },
+        {
+          "prueba": "Número de goles coincide con resultado",
+          "ok": true,
+          "obtenido": {
+            "filasGol": 3,
+            "totalMarcador": 3
+          }
+        },
+        {
+          "prueba": "Ningún marcador sin resolver",
+          "ok": true,
+          "obtenido": [
+            {
+              "minuto": "11'",
+              "marcador": {
+                "local": 0,
+                "visitante": 1
+              },
+              "fuente": "raw_y_jugador_coherentes"
+            },
+            {
+              "minuto": "13'",
+              "marcador": {
+                "local": 0,
+                "visitante": 2
+              },
+              "fuente": "raw_y_jugador_coherentes"
+            },
+            {
+              "minuto": "90'",
+              "marcador": {
+                "local": 1,
+                "visitante": 2
+              },
+              "fuente": "raw_y_jugador_coherentes"
+            }
+          ]
+        }
+      ]
+    },
+    "fuente": "extraido_10B"
   }
 }
