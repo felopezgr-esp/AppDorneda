@@ -1,1 +1,59 @@
-[]
+[
+  {
+    "jornada": 9,
+    "cambios": [
+      {
+        "tipo": "cambio_programacion",
+        "local": "XUVENTUDE DORNEDA",
+        "visitante": "PORTAZGO S.D.",
+        "diferencias": {
+          "hora": {
+            "antes": null,
+            "ahora": "16:00"
+          }
+        }
+      },
+      {
+        "tipo": "cambio_programacion",
+        "local": "CEDEIRA S.D.",
+        "visitante": "SPORTING CAMBRE AS TRAVESAS",
+        "diferencias": {
+          "hora": {
+            "antes": null,
+            "ahora": "17:00"
+          }
+        }
+      },
+      {
+        "tipo": "cambio_programacion",
+        "local": "SPORTING BURGO",
+        "visitante": "U.D. PAIOSACO H.AÑON",
+        "diferencias": {
+          "hora": {
+            "antes": null,
+            "ahora": "18:00"
+          }
+        }
+      },
+      {
+        "tipo": "cambio_programacion",
+        "local": "SAN MARTIÑO S.D.",
+        "visitante": "LICEO DE MONELOS S.D.",
+        "diferencias": {
+          "fecha": {
+            "antes": "14-11-2026",
+            "ahora": "15-11-2026"
+          },
+          "hora": {
+            "antes": null,
+            "ahora": "10:00"
+          },
+          "campo": {
+            "antes": "A Revolta (Queixas)",
+            "ahora": "Anexo O Roxo (Cerceda)"
+          }
+        }
+      }
+    ]
+  }
+]

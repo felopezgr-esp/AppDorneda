@@ -1,5 +1,5 @@
 {
-  "fecha": "2026-11-08T11:48:08.547Z",
+  "fecha": "2026-11-10T14:28:37.192Z",
   "modo": "10E_fresco_con_respaldo",
   "totalEquipos": 16,
   "jornadasEsperadas": 30,
@@ -79,7 +79,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478329&cod_acta=1478329",
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478211&cod_acta=1478211"
       ],
-      "origenDatos": "FUTGAL_FRESCO",
+      "origenDatos": "CHECKPOINT_VALIDADO_NO_REVISADO_RAPIDO",
       "fechaLecturaFresca": "2026-11-08T11:44:01.520Z"
     },
     {
@@ -157,7 +157,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478222&cod_acta=1478222",
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478217&cod_acta=1478217"
       ],
-      "origenDatos": "FUTGAL_FRESCO",
+      "origenDatos": "CHECKPOINT_VALIDADO_NO_REVISADO_RAPIDO",
       "fechaLecturaFresca": "2026-11-08T11:44:07.956Z"
     },
     {
@@ -235,7 +235,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478228&cod_acta=1478228",
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478229&cod_acta=1478229"
       ],
-      "origenDatos": "FUTGAL_FRESCO",
+      "origenDatos": "CHECKPOINT_VALIDADO_NO_REVISADO_RAPIDO",
       "fechaLecturaFresca": "2026-11-08T11:44:14.556Z"
     },
     {
@@ -313,7 +313,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478233&cod_acta=1478233",
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478237&cod_acta=1478237"
       ],
-      "origenDatos": "FUTGAL_FRESCO",
+      "origenDatos": "CHECKPOINT_VALIDADO_NO_REVISADO_RAPIDO",
       "fechaLecturaFresca": "2026-11-08T11:44:21.034Z"
     },
     {
@@ -391,7 +391,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478245&cod_acta=1478245",
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478244&cod_acta=1478244"
       ],
-      "origenDatos": "FUTGAL_FRESCO",
+      "origenDatos": "CHECKPOINT_VALIDADO_NO_REVISADO_RAPIDO",
       "fechaLecturaFresca": "2026-11-08T11:44:35.752Z"
     },
     {
@@ -469,7 +469,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478255&cod_acta=1478255",
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478248&cod_acta=1478248"
       ],
-      "origenDatos": "FUTGAL_FRESCO",
+      "origenDatos": "CHECKPOINT_VALIDADO_NO_REVISADO_RAPIDO",
       "fechaLecturaFresca": "2026-11-08T11:44:42.406Z"
     },
     {
@@ -548,7 +548,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478263&cod_acta=1478263"
       ],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-08T11:44:49.256Z"
+      "fechaLecturaFresca": "2026-11-10T14:28:23.994Z"
     },
     {
       "numero": 8,
@@ -626,7 +626,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478269&cod_acta=1478269"
       ],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-08T11:44:55.623Z"
+      "fechaLecturaFresca": "2026-11-10T14:28:30.289Z"
     },
     {
       "numero": 9,
@@ -637,13 +637,6 @@
       },
       "partidos": [
         {
-          "local": "SPORTING BURGO",
-          "visitante": "U.D. PAIOSACO H.AÑON",
-          "fecha": "14-11-2026",
-          "hora": null,
-          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
-        },
-        {
           "local": "BETANZOS NORTE",
           "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
           "fecha": "14-11-2026",
@@ -651,25 +644,25 @@
           "campo": "O Carregal (Betanzos)"
         },
         {
-          "local": "CEDEIRA S.D.",
-          "visitante": "SPORTING CAMBRE AS TRAVESAS",
-          "fecha": "14-11-2026",
-          "hora": null,
-          "campo": "Municipal Carmen Maseda (O Beco)"
-        },
-        {
           "local": "XUVENTUDE DORNEDA",
           "visitante": "PORTAZGO S.D.",
           "fecha": "14-11-2026",
-          "hora": null,
+          "hora": "16:00",
           "campo": "Campo de Fútbol A Marola"
         },
         {
-          "local": "SAN MARTIÑO S.D.",
-          "visitante": "LICEO DE MONELOS S.D.",
+          "local": "CEDEIRA S.D.",
+          "visitante": "SPORTING CAMBRE AS TRAVESAS",
           "fecha": "14-11-2026",
-          "hora": null,
-          "campo": "A Revolta (Queixas)"
+          "hora": "17:00",
+          "campo": "Municipal Carmen Maseda (O Beco)"
+        },
+        {
+          "local": "SPORTING BURGO",
+          "visitante": "U.D. PAIOSACO H.AÑON",
+          "fecha": "14-11-2026",
+          "hora": "18:00",
+          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
         },
         {
           "local": "C.D. SIGRAS",
@@ -677,6 +670,13 @@
           "fecha": "14-11-2026",
           "hora": "18:00",
           "campo": "Os Pinares, (Brexo Lema)"
+        },
+        {
+          "local": "SAN MARTIÑO S.D.",
+          "visitante": "LICEO DE MONELOS S.D.",
+          "fecha": "15-11-2026",
+          "hora": "10:00",
+          "campo": "Anexo O Roxo (Cerceda)"
         },
         {
           "local": "U.D. NARAHIO",
@@ -695,7 +695,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-08T11:45:09.788Z"
+      "fechaLecturaFresca": "2026-11-10T14:28:37.192Z"
     },
     {
       "numero": 10,
