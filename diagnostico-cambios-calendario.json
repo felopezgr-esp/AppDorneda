@@ -1,18 +1,1 @@
-[
-  {
-    "jornada": 9,
-    "cambios": [
-      {
-        "tipo": "cambio_programacion",
-        "local": "BETANZOS NORTE",
-        "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
-        "diferencias": {
-          "hora": {
-            "antes": null,
-            "ahora": "20:00"
-          }
-        }
-      }
-    ]
-  }
-]
+[]
