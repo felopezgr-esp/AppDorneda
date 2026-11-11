@@ -1,7 +1,13 @@
 {
   "versionFormato": 2,
-  "fechaExtraccion": "2026-11-10T14:34:12.550Z",
+  "fechaExtraccion": "2026-11-11T23:36:11.766Z",
   "fuente": "FUTGAL",
+  "modoActualizacion": "fast",
+  "jornadasObjetivoRapido": [
+    7,
+    8,
+    9
+  ],
   "temporada": "2026-2027",
   "competicion": "Veteranos - Primera Galicia",
   "grupo": "A Coruña | 1ª División Veteranos",
@@ -16731,18 +16737,6 @@
       "partidos": [
         {
           "orden": 1,
-          "local": "BETANZOS NORTE",
-          "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
-          "fecha": "14-11-2026",
-          "hora": null,
-          "campo": "O Carregal (Betanzos)",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
-        },
-        {
-          "orden": 2,
           "local": "XUVENTUDE DORNEDA",
           "visitante": "PORTAZGO S.D.",
           "fecha": "14-11-2026",
@@ -16754,7 +16748,7 @@
           "acta": null
         },
         {
-          "orden": 3,
+          "orden": 2,
           "local": "CEDEIRA S.D.",
           "visitante": "SPORTING CAMBRE AS TRAVESAS",
           "fecha": "14-11-2026",
@@ -16766,7 +16760,7 @@
           "acta": null
         },
         {
-          "orden": 4,
+          "orden": 3,
           "local": "SPORTING BURGO",
           "visitante": "U.D. PAIOSACO H.AÑON",
           "fecha": "14-11-2026",
@@ -16778,12 +16772,24 @@
           "acta": null
         },
         {
-          "orden": 5,
+          "orden": 4,
           "local": "C.D. SIGRAS",
           "visitante": "C.C.D. CURTIS",
           "fecha": "14-11-2026",
           "hora": "18:00",
           "campo": "Os Pinares, (Brexo Lema)",
+          "estado": "PROGRAMADO",
+          "actaDisponible": false,
+          "resultado": null,
+          "acta": null
+        },
+        {
+          "orden": 5,
+          "local": "BETANZOS NORTE",
+          "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "fecha": "14-11-2026",
+          "hora": "20:00",
+          "campo": "O Carregal (Betanzos)",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,
