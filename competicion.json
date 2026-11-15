@@ -1,7 +1,13 @@
 {
   "versionFormato": 2,
-  "fechaExtraccion": "2026-11-14T22:08:07.077Z",
+  "fechaExtraccion": "2026-11-15T15:19:45.471Z",
   "fuente": "FUTGAL",
+  "modoActualizacion": "fast",
+  "jornadasObjetivoRapido": [
+    8,
+    9,
+    10
+  ],
   "temporada": "2026-2027",
   "competicion": "Veteranos - Primera Galicia",
   "grupo": "A Coruña | 1ª División Veteranos",
@@ -26,8 +32,8 @@
   ],
   "totalJornadas": 30,
   "totalPartidos": 240,
-  "totalActasDetectadas": 69,
-  "totalActasIntegradas": 69,
+  "totalActasDetectadas": 72,
+  "totalActasIntegradas": 72,
   "jornadas": [
     {
       "numero": 1,
@@ -16725,8 +16731,8 @@
     {
       "numero": 9,
       "totalPartidos": 8,
-      "totalActasDetectadas": 5,
-      "totalActasIntegradas": 5,
+      "totalActasDetectadas": 8,
+      "totalActasIntegradas": 8,
       "actasPendientes": [],
       "partidos": [
         {
@@ -18109,10 +18115,279 @@
           "fecha": "15-11-2026",
           "hora": "10:00",
           "campo": "Anexo O Roxo (Cerceda)",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
+          "estado": "FINALIZADO",
+          "actaDisponible": true,
+          "resultado": {
+            "local": 3,
+            "visitante": 2,
+            "texto": "3-2",
+            "fuente": "secuencia_goles_validada"
+          },
+          "acta": {
+            "url": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478279&cod_acta=1478279",
+            "arbitro": "ECHEVARRIA FIAÑO, DIEGO",
+            "estadio": "Anexo O Roxo (Cerceda)",
+            "ciudad": "Cerceda",
+            "goles": [
+              {
+                "marcador_raw": {
+                  "local": 1,
+                  "visitante": 0
+                },
+                "marcador": {
+                  "local": 1,
+                  "visitante": 0
+                },
+                "minuto": "10'",
+                "jugador": "LAMAS SEÑARIS, GABINO J",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              },
+              {
+                "marcador_raw": {
+                  "local": 2,
+                  "visitante": 0
+                },
+                "marcador": {
+                  "local": 2,
+                  "visitante": 0
+                },
+                "minuto": "44'",
+                "jugador": "LOMBA MATA, FELIX",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              },
+              {
+                "marcador_raw": {
+                  "local": 2,
+                  "visitante": 1
+                },
+                "marcador": {
+                  "local": 2,
+                  "visitante": 1
+                },
+                "minuto": "68'",
+                "jugador": "PISOS SOMESO, BRUNO",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              },
+              {
+                "marcador_raw": {
+                  "local": 3,
+                  "visitante": 1
+                },
+                "marcador": {
+                  "local": 3,
+                  "visitante": 1
+                },
+                "minuto": "77'",
+                "jugador": "LAMAS SEÑARIS, GABINO J",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              },
+              {
+                "marcador_raw": {
+                  "local": 3,
+                  "visitante": 2
+                },
+                "marcador": {
+                  "local": 3,
+                  "visitante": 2
+                },
+                "minuto": "90'",
+                "jugador": "FERNANDEZ SUERO, JOSE M",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              }
+            ],
+            "equipo_local": {
+              "nombre": "SAN MARTIÑO S.D.",
+              "titulares": [
+                {
+                  "dorsal": "1",
+                  "jugador": "GONZALEZ LISTA, NICOLAS"
+                },
+                {
+                  "dorsal": "3",
+                  "jugador": "LOMBA MATA, FELIX"
+                },
+                {
+                  "dorsal": "4",
+                  "jugador": "GONZALEZ GENDE, ALVARO"
+                },
+                {
+                  "dorsal": "5",
+                  "jugador": "RUMBO BOEDO, CARLOS"
+                },
+                {
+                  "dorsal": "8",
+                  "jugador": "CANEDO NIEVES, JOSE"
+                },
+                {
+                  "dorsal": "9",
+                  "jugador": "LAMAS SEÑARIS, GABINO J"
+                },
+                {
+                  "dorsal": "17",
+                  "jugador": "QUEIJO ALVAREZ, DANIEL"
+                },
+                {
+                  "dorsal": "18",
+                  "jugador": "LAMAS DUBRA, MARCOS"
+                },
+                {
+                  "dorsal": "21",
+                  "jugador": "GESTO REGUEIRO, ALEJANDRO"
+                },
+                {
+                  "dorsal": "26",
+                  "jugador": "FARIÑA COSTA, JOSE A"
+                },
+                {
+                  "dorsal": "28",
+                  "jugador": "MOSQUERA CANOSA, MANUEL A"
+                }
+              ],
+              "suplentes": [
+                {
+                  "dorsal": "6",
+                  "jugador": "FARIÑA COSTA, ALFONSO"
+                },
+                {
+                  "dorsal": "7",
+                  "jugador": "FARIÑA IGLESIAS, CARLOS"
+                },
+                {
+                  "dorsal": "12",
+                  "jugador": "CASAS VARELA, MARCOS M"
+                },
+                {
+                  "dorsal": "13",
+                  "jugador": "LOUREIRO CASTRO, FRANCISCO MANUEL"
+                },
+                {
+                  "dorsal": "20",
+                  "jugador": "CASTRO REGUEIRO, MIGUEL"
+                },
+                {
+                  "dorsal": "22",
+                  "jugador": "RODRIGUEZ GONZALEZ, JESUS"
+                },
+                {
+                  "dorsal": "23",
+                  "jugador": "GUARDADO GESTO, JOSE MIGUEL"
+                },
+                {
+                  "dorsal": "24",
+                  "jugador": "BARBEITO GOMEZ, BORJA"
+                }
+              ],
+              "cuerpo_tecnico": {
+                "delegado": "QUEIJO GONZALEZ, ALEJANDRO",
+                "entrenador": "No presenta"
+              },
+              "tarjetas": [
+                {
+                  "tipo": "amarilla",
+                  "minuto": "60'",
+                  "jugador": "FARIÑA IGLESIAS, CARLOS"
+                },
+                {
+                  "tipo": "amarilla",
+                  "minuto": "67'",
+                  "jugador": "RODRIGUEZ GONZALEZ, JESUS"
+                },
+                {
+                  "tipo": "amarilla",
+                  "minuto": "70'",
+                  "jugador": "FARIÑA COSTA, JOSE A"
+                }
+              ]
+            },
+            "equipo_visitante": {
+              "nombre": "LICEO DE MONELOS S.D.",
+              "titulares": [
+                {
+                  "dorsal": "1",
+                  "jugador": "SANCHEZ SOTO, MANUEL"
+                },
+                {
+                  "dorsal": "4",
+                  "jugador": "PENA AMADO, GUSTAVO"
+                },
+                {
+                  "dorsal": "6",
+                  "jugador": "LOPEZ TEIJO, ALEJANDRO"
+                },
+                {
+                  "dorsal": "7",
+                  "jugador": "PISOS COPPA, BORJA"
+                },
+                {
+                  "dorsal": "8",
+                  "jugador": "PISOS SOMESO, DANIEL"
+                },
+                {
+                  "dorsal": "10",
+                  "jugador": "PISOS SOMESO, BRUNO"
+                },
+                {
+                  "dorsal": "12",
+                  "jugador": "VIÑA CASTIÑEIRA, ALBERTO"
+                },
+                {
+                  "dorsal": "13",
+                  "jugador": "PEDROSA FIGUEROA, ARTURO"
+                },
+                {
+                  "dorsal": "15",
+                  "jugador": "PREGO BARDANCA, IVAN"
+                },
+                {
+                  "dorsal": "23",
+                  "jugador": "CASAL GAREA, LIONEL"
+                },
+                {
+                  "dorsal": "29",
+                  "jugador": "ROCHA GESTAL, GONZALO"
+                }
+              ],
+              "suplentes": [
+                {
+                  "dorsal": "5",
+                  "jugador": "CONCHADO PARDO, EDUARDO"
+                },
+                {
+                  "dorsal": "9",
+                  "jugador": "RAMOS CARBALLEDO, FRANCO"
+                },
+                {
+                  "dorsal": "16",
+                  "jugador": "FERNANDEZ SUERO, JOSE M"
+                },
+                {
+                  "dorsal": "30",
+                  "jugador": "LOUSADO NOGUEIRA, JUAN JOSE"
+                }
+              ],
+              "cuerpo_tecnico": {
+                "delegado": "GONZALEZ CORTES, CARLOS M",
+                "entrenador": "No presenta"
+              },
+              "tarjetas": [
+                {
+                  "tipo": "amarilla",
+                  "minuto": "80'",
+                  "jugador": "PISOS COPPA, BORJA"
+                },
+                {
+                  "tipo": "amarilla",
+                  "minuto": "90'",
+                  "jugador": "PISOS SOMESO, BRUNO"
+                }
+              ]
+            }
+          }
         },
         {
           "orden": 7,
@@ -18121,10 +18396,266 @@
           "fecha": "15-11-2026",
           "hora": "11:00",
           "campo": "Da Piscina",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
+          "estado": "FINALIZADO",
+          "actaDisponible": true,
+          "resultado": {
+            "local": 6,
+            "visitante": 1,
+            "texto": "6-1",
+            "fuente": "secuencia_goles_validada"
+          },
+          "acta": {
+            "url": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478273&cod_acta=1478273",
+            "arbitro": "AGUILAR FERNANDEZ, MARTIN",
+            "estadio": "Da Piscina",
+            "ciudad": "San Sadurniño",
+            "goles": [
+              {
+                "marcador_raw": {
+                  "local": 1,
+                  "visitante": 0
+                },
+                "marcador": {
+                  "local": 1,
+                  "visitante": 0
+                },
+                "minuto": "19'",
+                "jugador": "SANDE DOPAZO, YAGO",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              },
+              {
+                "marcador_raw": {
+                  "local": 2,
+                  "visitante": 0
+                },
+                "marcador": {
+                  "local": 2,
+                  "visitante": 0
+                },
+                "minuto": "33'",
+                "jugador": "RIOS LAMAS, DANIEL",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              },
+              {
+                "marcador_raw": {
+                  "local": 3,
+                  "visitante": 0
+                },
+                "marcador": {
+                  "local": 3,
+                  "visitante": 0
+                },
+                "minuto": "39'",
+                "jugador": "HERMIDA IGLESIAS, RAUL",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              },
+              {
+                "marcador_raw": {
+                  "local": 3,
+                  "visitante": 1
+                },
+                "marcador": {
+                  "local": 3,
+                  "visitante": 1
+                },
+                "minuto": "43'",
+                "jugador": "GARCIA RODRIGUEZ, DAVID",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              },
+              {
+                "marcador_raw": {
+                  "local": 4,
+                  "visitante": 1
+                },
+                "marcador": {
+                  "local": 4,
+                  "visitante": 1
+                },
+                "minuto": "67'",
+                "jugador": "RIOS LAMAS, DANIEL",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              },
+              {
+                "marcador_raw": {
+                  "local": 5,
+                  "visitante": 1
+                },
+                "marcador": {
+                  "local": 5,
+                  "visitante": 1
+                },
+                "minuto": "79'",
+                "jugador": "HERMIDA IGLESIAS, RAUL",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              },
+              {
+                "marcador_raw": {
+                  "local": 6,
+                  "visitante": 1
+                },
+                "marcador": {
+                  "local": 6,
+                  "visitante": 1
+                },
+                "minuto": "85'",
+                "jugador": "HERMIDA IGLESIAS, RAUL",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              }
+            ],
+            "equipo_local": {
+              "nombre": "U.D. NARAHIO",
+              "titulares": [
+                {
+                  "dorsal": "1",
+                  "jugador": "ALVARIñO GARROTE, JAVIER"
+                },
+                {
+                  "dorsal": "2",
+                  "jugador": "RIOS LAMAS, DANIEL"
+                },
+                {
+                  "dorsal": "5",
+                  "jugador": "RODRIGUEZ CASAL, IGNACIO"
+                },
+                {
+                  "dorsal": "8",
+                  "jugador": "PENA GOMEZ, JOSE"
+                },
+                {
+                  "dorsal": "9",
+                  "jugador": "HERMIDA IGLESIAS, RAUL"
+                },
+                {
+                  "dorsal": "15",
+                  "jugador": "RAMOS RAMOS, JULIAN"
+                },
+                {
+                  "dorsal": "19",
+                  "jugador": "SANDE DOPAZO, YAGO"
+                },
+                {
+                  "dorsal": "22",
+                  "jugador": "REY ANTON, SERVANDO I"
+                },
+                {
+                  "dorsal": "26",
+                  "jugador": "GERVENO CASTRO, ALBERTO"
+                },
+                {
+                  "dorsal": "28",
+                  "jugador": "SABIN BOUZA, ALBERTO"
+                },
+                {
+                  "dorsal": "30",
+                  "jugador": "SABIN BOUZA, CARLOS"
+                }
+              ],
+              "suplentes": [
+                {
+                  "dorsal": "10",
+                  "jugador": "CASTRO BOUZAMAYOR, ANGEL"
+                },
+                {
+                  "dorsal": "16",
+                  "jugador": "TRIÑANES CORRAL, JUAN J"
+                },
+                {
+                  "dorsal": "17",
+                  "jugador": "REGUEIRA MESIA, JOSE R"
+                },
+                {
+                  "dorsal": "24",
+                  "jugador": "SEOANE SOTO, JAVIER ANDRES"
+                }
+              ],
+              "cuerpo_tecnico": {
+                "entrenador": "No presenta"
+              },
+              "tarjetas": []
+            },
+            "equipo_visitante": {
+              "nombre": "OZA DE LOS RÍOS",
+              "titulares": [
+                {
+                  "dorsal": "13",
+                  "jugador": "LOPEZ TAIN, MARCOS"
+                },
+                {
+                  "dorsal": "9",
+                  "jugador": "PEREZ GARCIA, DIEGO"
+                },
+                {
+                  "dorsal": "11",
+                  "jugador": "LENDOIRO AGILDA, EMILIO"
+                },
+                {
+                  "dorsal": "16",
+                  "jugador": "BEADE VILA, JORGE"
+                },
+                {
+                  "dorsal": "17",
+                  "jugador": "VEIGA GARCIA, DAVID M"
+                },
+                {
+                  "dorsal": "18",
+                  "jugador": "ROCHA GARCIA, JOSE F"
+                },
+                {
+                  "dorsal": "20",
+                  "jugador": "CARRO VAZQUEZ, ANTONIO"
+                },
+                {
+                  "dorsal": "21",
+                  "jugador": "LENDOIRO AGILDA, HECTOR"
+                },
+                {
+                  "dorsal": "23",
+                  "jugador": "GARCIA RODRIGUEZ, DAVID"
+                },
+                {
+                  "dorsal": "24",
+                  "jugador": "GABIN BELLO, BRUNO"
+                },
+                {
+                  "dorsal": "30",
+                  "jugador": "PEREZ MIñO, DAVID"
+                }
+              ],
+              "suplentes": [
+                {
+                  "dorsal": "3",
+                  "jugador": "BOLAÑO LOPEZ, ANGEL"
+                },
+                {
+                  "dorsal": "5",
+                  "jugador": "LAGO MATO, JOSE MARIA"
+                },
+                {
+                  "dorsal": "7",
+                  "jugador": "CARRO VAZQUEZ, ALBERTO"
+                },
+                {
+                  "dorsal": "8",
+                  "jugador": "LOPEZ BRA, FRANCISCO J"
+                },
+                {
+                  "dorsal": "26",
+                  "jugador": "IGLESIAS CASTRO, JORGE JOSE"
+                }
+              ],
+              "cuerpo_tecnico": {
+                "entrenador": "No presenta"
+              },
+              "tarjetas": []
+            }
+          }
         },
         {
           "orden": 8,
@@ -18133,10 +18664,248 @@
           "fecha": "15-11-2026",
           "hora": "11:00",
           "campo": "Campo de Fútbol de Freán",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
+          "estado": "FINALIZADO",
+          "actaDisponible": true,
+          "resultado": {
+            "local": 0,
+            "visitante": 3,
+            "texto": "0-3",
+            "fuente": "secuencia_goles_validada"
+          },
+          "acta": {
+            "url": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478274&cod_acta=1478274",
+            "arbitro": "FRAGA VIÑUELAS, DANIEL",
+            "estadio": "Campo de Fútbol de Freán",
+            "ciudad": "Arteixo",
+            "goles": [
+              {
+                "marcador_raw": {
+                  "local": 0,
+                  "visitante": 1
+                },
+                "marcador": {
+                  "local": 0,
+                  "visitante": 1
+                },
+                "minuto": "9'",
+                "jugador": "PARIS LABANDEIRA, DAMIAN",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              },
+              {
+                "marcador_raw": {
+                  "local": 0,
+                  "visitante": 2
+                },
+                "marcador": {
+                  "local": 0,
+                  "visitante": 2
+                },
+                "minuto": "38'",
+                "jugador": "FERRO ROZAS, GONZALO",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              },
+              {
+                "marcador_raw": {
+                  "local": 0,
+                  "visitante": 3
+                },
+                "marcador": {
+                  "local": 0,
+                  "visitante": 3
+                },
+                "minuto": "49'",
+                "jugador": "FERRO ROZAS, GONZALO",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              }
+            ],
+            "equipo_local": {
+              "nombre": "CAMPANAL DE LOUREDA F. C.",
+              "titulares": [
+                {
+                  "dorsal": "13",
+                  "jugador": "PEREZ PENAS, FRANCISCO"
+                },
+                {
+                  "dorsal": "4",
+                  "jugador": "MAGDALENA SOUTO, IVAN"
+                },
+                {
+                  "dorsal": "8",
+                  "jugador": "GOMEZ CASTRO, JOSE M"
+                },
+                {
+                  "dorsal": "10",
+                  "jugador": "TUSET ARIJON, RUBEN"
+                },
+                {
+                  "dorsal": "16",
+                  "jugador": "FERNANDEZ HERMIDA, DANIEL"
+                },
+                {
+                  "dorsal": "19",
+                  "jugador": "BLANCO MUIÑO, IAGO"
+                },
+                {
+                  "dorsal": "20",
+                  "jugador": "RIVEIRO RIVEIRO, RUBEN"
+                },
+                {
+                  "dorsal": "21",
+                  "jugador": "SANCHEZ BLANCO, IVAN"
+                },
+                {
+                  "dorsal": "22",
+                  "jugador": "SOTO MIRANDA, OSCAR"
+                },
+                {
+                  "dorsal": "23",
+                  "jugador": "PENA SEIJAS, SERGIO"
+                },
+                {
+                  "dorsal": "24",
+                  "jugador": "LOPEZ BAO, JUAN M"
+                }
+              ],
+              "suplentes": [
+                {
+                  "dorsal": "9",
+                  "jugador": "MAROÑO BOEDO, IVAN"
+                },
+                {
+                  "dorsal": "11",
+                  "jugador": "REGUEIRA CALVETE, RUBEN"
+                },
+                {
+                  "dorsal": "12",
+                  "jugador": "ESMORIS SUAREZ, ADRIAN"
+                },
+                {
+                  "dorsal": "15",
+                  "jugador": "CAAMAÑO MORAS, ALEJANDRO"
+                },
+                {
+                  "dorsal": "18",
+                  "jugador": "NAYA SEÑARIS, JUAN CARLOS"
+                },
+                {
+                  "dorsal": "28",
+                  "jugador": "SANTISO LOPEZ, BORJA"
+                }
+              ],
+              "cuerpo_tecnico": {
+                "delegado": "MARTINEZ GARCIA, JOSE ANTONIO",
+                "entrenador": "No presenta"
+              },
+              "tarjetas": [
+                {
+                  "tipo": "amarilla",
+                  "minuto": "52'",
+                  "jugador": "CAAMAÑO MORAS, ALEJANDRO"
+                }
+              ]
+            },
+            "equipo_visitante": {
+              "nombre": "SADA F.C. A NOSA VIÑA",
+              "titulares": [
+                {
+                  "dorsal": "1",
+                  "jugador": "CAAMAÑO CAMBON, CARLOS"
+                },
+                {
+                  "dorsal": "3",
+                  "jugador": "MOURELO MOUZO, DAVID"
+                },
+                {
+                  "dorsal": "4",
+                  "jugador": "MARTINEZ VAZQUEZ, ALFONSO"
+                },
+                {
+                  "dorsal": "9",
+                  "jugador": "FERNANDEZ ALVAREZ, IVAN"
+                },
+                {
+                  "dorsal": "10",
+                  "jugador": "FERRO ROZAS, GONZALO"
+                },
+                {
+                  "dorsal": "18",
+                  "jugador": "MARTINEZ ABRUÑEDO, BORJA"
+                },
+                {
+                  "dorsal": "19",
+                  "jugador": "MALLO LOPEZ, JOSE LUIS"
+                },
+                {
+                  "dorsal": "21",
+                  "jugador": "SEOANE BARROS, ANTONIO M"
+                },
+                {
+                  "dorsal": "23",
+                  "jugador": "FREIRE LESTA, CESAR"
+                },
+                {
+                  "dorsal": "25",
+                  "jugador": "ROIBAS NAVEIRO, ALBERTO"
+                },
+                {
+                  "dorsal": "26",
+                  "jugador": "GRAÑA PITA, PABLO"
+                }
+              ],
+              "suplentes": [
+                {
+                  "dorsal": "2",
+                  "jugador": "GAREA PARGA, MIGUEL A"
+                },
+                {
+                  "dorsal": "7",
+                  "jugador": "AMOR HAZ, MIGUEL"
+                },
+                {
+                  "dorsal": "11",
+                  "jugador": "BOO FERNANDEZ, MIGUEL A"
+                },
+                {
+                  "dorsal": "14",
+                  "jugador": "SEIJO CANCELO, SANTIAGO"
+                },
+                {
+                  "dorsal": "15",
+                  "jugador": "SEIJO CANCELO, SERGIO"
+                },
+                {
+                  "dorsal": "17",
+                  "jugador": "ALBARRACIN, MIGUEL ANGEL"
+                },
+                {
+                  "dorsal": "22",
+                  "jugador": "PARIS LABANDEIRA, DAMIAN"
+                },
+                {
+                  "dorsal": "24",
+                  "jugador": "DURAN ALFONSIN, ALBERTO"
+                },
+                {
+                  "dorsal": "29",
+                  "jugador": "LOSADA GONZALEZ, MANUEL"
+                }
+              ],
+              "cuerpo_tecnico": {
+                "delegado": "NAVEIRA GARCÍA, FRANCISCO",
+                "entrenador": "No presenta"
+              },
+              "tarjetas": [
+                {
+                  "tipo": "amarilla",
+                  "minuto": "56'",
+                  "jugador": "GAREA PARGA, MIGUEL A"
+                }
+              ]
+            }
+          }
         }
       ]
     },
