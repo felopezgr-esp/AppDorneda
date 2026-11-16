@@ -1,1 +1,29 @@
-[]
+[
+  {
+    "jornada": 10,
+    "cambios": [
+      {
+        "tipo": "cambio_programacion",
+        "local": "OZA DE LOS RÍOS",
+        "visitante": "SPORTING BURGO",
+        "diferencias": {
+          "hora": {
+            "antes": null,
+            "ahora": "18:00"
+          }
+        }
+      },
+      {
+        "tipo": "cambio_programacion",
+        "local": "SPORTING CAMBRE AS TRAVESAS",
+        "visitante": "BETANZOS NORTE",
+        "diferencias": {
+          "hora": {
+            "antes": null,
+            "ahora": "20:00"
+          }
+        }
+      }
+    ]
+  }
+]

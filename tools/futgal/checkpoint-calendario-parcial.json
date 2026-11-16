@@ -1,5 +1,5 @@
 {
-  "fecha": "2026-11-15T21:02:49.564Z",
+  "fecha": "2026-11-16T16:40:07.840Z",
   "modo": "10E_fresco_con_respaldo",
   "totalEquipos": 16,
   "jornadasEsperadas": 30,
@@ -79,7 +79,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478329&cod_acta=1478329",
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478211&cod_acta=1478211"
       ],
-      "origenDatos": "FUTGAL_FRESCO",
+      "origenDatos": "CHECKPOINT_VALIDADO_NO_REVISADO_RAPIDO",
       "fechaLecturaFresca": "2026-11-15T20:58:45.225Z"
     },
     {
@@ -157,7 +157,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478222&cod_acta=1478222",
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478217&cod_acta=1478217"
       ],
-      "origenDatos": "FUTGAL_FRESCO",
+      "origenDatos": "CHECKPOINT_VALIDADO_NO_REVISADO_RAPIDO",
       "fechaLecturaFresca": "2026-11-15T20:58:51.730Z"
     },
     {
@@ -235,7 +235,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478228&cod_acta=1478228",
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478229&cod_acta=1478229"
       ],
-      "origenDatos": "FUTGAL_FRESCO",
+      "origenDatos": "CHECKPOINT_VALIDADO_NO_REVISADO_RAPIDO",
       "fechaLecturaFresca": "2026-11-15T20:58:58.116Z"
     },
     {
@@ -313,7 +313,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478233&cod_acta=1478233",
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478237&cod_acta=1478237"
       ],
-      "origenDatos": "FUTGAL_FRESCO",
+      "origenDatos": "CHECKPOINT_VALIDADO_NO_REVISADO_RAPIDO",
       "fechaLecturaFresca": "2026-11-15T20:59:04.475Z"
     },
     {
@@ -391,7 +391,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478245&cod_acta=1478245",
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478244&cod_acta=1478244"
       ],
-      "origenDatos": "FUTGAL_FRESCO",
+      "origenDatos": "CHECKPOINT_VALIDADO_NO_REVISADO_RAPIDO",
       "fechaLecturaFresca": "2026-11-15T20:59:19.031Z"
     },
     {
@@ -469,7 +469,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478255&cod_acta=1478255",
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478248&cod_acta=1478248"
       ],
-      "origenDatos": "FUTGAL_FRESCO",
+      "origenDatos": "CHECKPOINT_VALIDADO_NO_REVISADO_RAPIDO",
       "fechaLecturaFresca": "2026-11-15T20:59:25.836Z"
     },
     {
@@ -547,7 +547,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478262&cod_acta=1478262",
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478263&cod_acta=1478263"
       ],
-      "origenDatos": "FUTGAL_FRESCO",
+      "origenDatos": "CHECKPOINT_VALIDADO_NO_REVISADO_RAPIDO",
       "fechaLecturaFresca": "2026-11-15T20:59:32.293Z"
     },
     {
@@ -626,7 +626,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478269&cod_acta=1478269"
       ],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-15T20:59:38.728Z"
+      "fechaLecturaFresca": "2026-11-16T16:39:54.429Z"
     },
     {
       "numero": 9,
@@ -704,7 +704,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478274&cod_acta=1478274"
       ],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-15T20:59:53.111Z"
+      "fechaLecturaFresca": "2026-11-16T16:40:01.155Z"
     },
     {
       "numero": 10,
@@ -714,13 +714,6 @@
         "errores": []
       },
       "partidos": [
-        {
-          "local": "OZA DE LOS RÍOS",
-          "visitante": "SPORTING BURGO",
-          "fecha": "21-11-2026",
-          "hora": null,
-          "campo": "O Loureiro (Oza De Los Ríos)"
-        },
         {
           "local": "SADA F.C. A NOSA VIÑA",
           "visitante": "U.D. NARAHIO",
@@ -743,13 +736,6 @@
           "campo": "O Cadaval"
         },
         {
-          "local": "SPORTING CAMBRE AS TRAVESAS",
-          "visitante": "BETANZOS NORTE",
-          "fecha": "21-11-2026",
-          "hora": null,
-          "campo": "Dani Mallo (Cambre)"
-        },
-        {
           "local": "PORTAZGO S.D.",
           "visitante": "CEDEIRA S.D.",
           "fecha": "21-11-2026",
@@ -764,16 +750,30 @@
           "campo": "Víctor Fernández Alonso - Antigua Leyma"
         },
         {
+          "local": "OZA DE LOS RÍOS",
+          "visitante": "SPORTING BURGO",
+          "fecha": "21-11-2026",
+          "hora": "18:00",
+          "campo": "O Loureiro (Oza De Los Ríos)"
+        },
+        {
           "local": "U.D. PAIOSACO H.AÑON",
           "visitante": "SAN MARTIÑO S.D.",
           "fecha": "21-11-2026",
           "hora": "19:40",
           "campo": "Porta Santa"
+        },
+        {
+          "local": "SPORTING CAMBRE AS TRAVESAS",
+          "visitante": "BETANZOS NORTE",
+          "fecha": "21-11-2026",
+          "hora": "20:00",
+          "campo": "Dani Mallo (Cambre)"
         }
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-15T20:59:59.566Z"
+      "fechaLecturaFresca": "2026-11-16T16:40:07.840Z"
     },
     {
       "numero": 11,
