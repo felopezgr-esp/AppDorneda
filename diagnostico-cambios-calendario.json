@@ -1,1 +1,29 @@
-[]
+[
+  {
+    "jornada": 10,
+    "cambios": [
+      {
+        "tipo": "cambio_programacion",
+        "local": "U.D. PAIOSACO H.AÑON",
+        "visitante": "SAN MARTIÑO S.D.",
+        "diferencias": {
+          "hora": {
+            "antes": "19:40",
+            "ahora": "18:00"
+          }
+        }
+      },
+      {
+        "tipo": "cambio_programacion",
+        "local": "SPORTING CAMBRE AS TRAVESAS",
+        "visitante": "BETANZOS NORTE",
+        "diferencias": {
+          "hora": {
+            "antes": "20:00",
+            "ahora": "18:00"
+          }
+        }
+      }
+    ]
+  }
+]

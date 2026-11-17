@@ -1,7 +1,13 @@
 {
   "versionFormato": 2,
-  "fechaExtraccion": "2026-11-16T16:44:54.173Z",
+  "fechaExtraccion": "2026-11-17T07:25:41.793Z",
   "fuente": "FUTGAL",
+  "modoActualizacion": "fast",
+  "jornadasObjetivoRapido": [
+    8,
+    9,
+    10
+  ],
   "temporada": "2026-2027",
   "competicion": "Veteranos - Primera Galicia",
   "grupo": "A Coruña | 1ª División Veteranos",
@@ -18972,6 +18978,18 @@
         },
         {
           "orden": 6,
+          "local": "U.D. PAIOSACO H.AÑON",
+          "visitante": "SAN MARTIÑO S.D.",
+          "fecha": "21-11-2026",
+          "hora": "18:00",
+          "campo": "Porta Santa",
+          "estado": "PROGRAMADO",
+          "actaDisponible": false,
+          "resultado": null,
+          "acta": null
+        },
+        {
+          "orden": 7,
           "local": "OZA DE LOS RÍOS",
           "visitante": "SPORTING BURGO",
           "fecha": "21-11-2026",
@@ -18983,23 +19001,11 @@
           "acta": null
         },
         {
-          "orden": 7,
-          "local": "U.D. PAIOSACO H.AÑON",
-          "visitante": "SAN MARTIÑO S.D.",
-          "fecha": "21-11-2026",
-          "hora": "19:40",
-          "campo": "Porta Santa",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
-        },
-        {
           "orden": 8,
           "local": "SPORTING CAMBRE AS TRAVESAS",
           "visitante": "BETANZOS NORTE",
           "fecha": "21-11-2026",
-          "hora": "20:00",
+          "hora": "18:00",
           "campo": "Dani Mallo (Cambre)",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
