@@ -1,15 +1,15 @@
 [
   {
-    "jornada": 25,
+    "jornada": 10,
     "cambios": [
       {
         "tipo": "partido_nuevo_o_pareja_distinta",
-        "local": "SADA F.C. A NOSA VIÑA",
-        "visitante": "U.D. NARAHIO",
+        "local": "Última actualización 11:55 h (min 45)",
+        "visitante": "SADA F.C. A NOSA VIÑA",
         "nuevo": {
-          "fecha": "04-04-2027",
-          "hora": null,
-          "campo": "Campo de Fútbol As Mariñas - Andrés Pena de Sada"
+          "fecha": "22-11-2026",
+          "hora": "11:00",
+          "campo": "Da Piscina"
         }
       }
     ]
