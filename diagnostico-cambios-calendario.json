@@ -1,71 +1,15 @@
 [
   {
-    "jornada": 10,
+    "jornada": 25,
     "cambios": [
       {
-        "tipo": "cambio_programacion",
-        "local": "C.C.D. CURTIS",
-        "visitante": "CAMPANAL DE LOUREDA F. C.",
-        "diferencias": {
-          "hora": {
-            "antes": null,
-            "ahora": "17:30"
-          }
-        }
-      },
-      {
-        "tipo": "cambio_programacion",
-        "local": "PORTAZGO S.D.",
-        "visitante": "CEDEIRA S.D.",
-        "diferencias": {
-          "hora": {
-            "antes": null,
-            "ahora": "18:00"
-          },
-          "campo": {
-            "antes": "Campo de Fútbol Municipal A Lavandeira en Culleredo",
-            "ahora": "Municip. De Tarrio, (Culleredo)"
-          }
-        }
-      },
-      {
-        "tipo": "cambio_programacion",
-        "local": "CLUB DEPORTIVO NARON SILVER CATERING",
-        "visitante": "C.D. SIGRAS",
-        "diferencias": {
-          "hora": {
-            "antes": null,
-            "ahora": "20:00"
-          }
-        }
-      },
-      {
-        "tipo": "cambio_programacion",
-        "local": "LICEO DE MONELOS S.D.",
-        "visitante": "XUVENTUDE DORNEDA",
-        "diferencias": {
-          "fecha": {
-            "antes": "21-11-2026",
-            "ahora": "22-11-2026"
-          },
-          "hora": {
-            "antes": null,
-            "ahora": "10:30"
-          },
-          "campo": {
-            "antes": "Víctor Fernández Alonso - Antigua Leyma",
-            "ahora": "San Pedro de Visma 2"
-          }
-        }
-      },
-      {
         "tipo": "partido_nuevo_o_pareja_distinta",
-        "local": "U.D. NARAHIO",
-        "visitante": "SADA F.C. A NOSA VIÑA",
+        "local": "SADA F.C. A NOSA VIÑA",
+        "visitante": "U.D. NARAHIO",
         "nuevo": {
-          "fecha": "22-11-2026",
-          "hora": "11:00",
-          "campo": "Da Piscina"
+          "fecha": "04-04-2027",
+          "hora": null,
+          "campo": "Campo de Fútbol As Mariñas - Andrés Pena de Sada"
         }
       }
     ]

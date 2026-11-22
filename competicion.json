@@ -1,13 +1,7 @@
 {
   "versionFormato": 2,
-  "fechaExtraccion": "2026-11-22T07:35:57.986Z",
+  "fechaExtraccion": "2026-11-22T07:40:46.885Z",
   "fuente": "FUTGAL",
-  "modoActualizacion": "fast",
-  "jornadasObjetivoRapido": [
-    9,
-    10,
-    11
-  ],
   "temporada": "2026-2027",
   "competicion": "Veteranos - Primera Galicia",
   "grupo": "A Coruña | 1ª División Veteranos",
@@ -21764,11 +21758,11 @@
         },
         {
           "orden": 7,
-          "local": "U.D. NARAHIO",
-          "visitante": "SADA F.C. A NOSA VIÑA",
+          "local": "SADA F.C. A NOSA VIÑA",
+          "visitante": "U.D. NARAHIO",
           "fecha": "04-04-2027",
-          "hora": "11:00",
-          "campo": "Da Piscina",
+          "hora": null,
+          "campo": "Campo de Fútbol As Mariñas - Andrés Pena de Sada",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,
