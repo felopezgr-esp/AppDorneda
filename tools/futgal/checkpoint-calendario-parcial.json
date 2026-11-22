@@ -1,5 +1,5 @@
 {
-  "fecha": "2026-11-17T07:30:02.956Z",
+  "fecha": "2026-11-22T07:35:33.121Z",
   "modo": "10E_fresco_con_respaldo",
   "totalEquipos": 16,
   "jornadasEsperadas": 30,
@@ -79,7 +79,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478329&cod_acta=1478329",
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478211&cod_acta=1478211"
       ],
-      "origenDatos": "FUTGAL_FRESCO",
+      "origenDatos": "CHECKPOINT_VALIDADO_NO_REVISADO_RAPIDO",
       "fechaLecturaFresca": "2026-11-17T07:26:18.521Z"
     },
     {
@@ -157,7 +157,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478222&cod_acta=1478222",
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478217&cod_acta=1478217"
       ],
-      "origenDatos": "FUTGAL_FRESCO",
+      "origenDatos": "CHECKPOINT_VALIDADO_NO_REVISADO_RAPIDO",
       "fechaLecturaFresca": "2026-11-17T07:26:24.430Z"
     },
     {
@@ -235,7 +235,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478228&cod_acta=1478228",
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478229&cod_acta=1478229"
       ],
-      "origenDatos": "FUTGAL_FRESCO",
+      "origenDatos": "CHECKPOINT_VALIDADO_NO_REVISADO_RAPIDO",
       "fechaLecturaFresca": "2026-11-17T07:26:30.676Z"
     },
     {
@@ -313,7 +313,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478233&cod_acta=1478233",
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478237&cod_acta=1478237"
       ],
-      "origenDatos": "FUTGAL_FRESCO",
+      "origenDatos": "CHECKPOINT_VALIDADO_NO_REVISADO_RAPIDO",
       "fechaLecturaFresca": "2026-11-17T07:26:36.759Z"
     },
     {
@@ -391,7 +391,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478245&cod_acta=1478245",
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478244&cod_acta=1478244"
       ],
-      "origenDatos": "FUTGAL_FRESCO",
+      "origenDatos": "CHECKPOINT_VALIDADO_NO_REVISADO_RAPIDO",
       "fechaLecturaFresca": "2026-11-17T07:26:50.840Z"
     },
     {
@@ -469,7 +469,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478255&cod_acta=1478255",
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478248&cod_acta=1478248"
       ],
-      "origenDatos": "FUTGAL_FRESCO",
+      "origenDatos": "CHECKPOINT_VALIDADO_NO_REVISADO_RAPIDO",
       "fechaLecturaFresca": "2026-11-17T07:26:57.017Z"
     },
     {
@@ -547,7 +547,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478262&cod_acta=1478262",
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478263&cod_acta=1478263"
       ],
-      "origenDatos": "FUTGAL_FRESCO",
+      "origenDatos": "CHECKPOINT_VALIDADO_NO_REVISADO_RAPIDO",
       "fechaLecturaFresca": "2026-11-17T07:27:03.254Z"
     },
     {
@@ -625,7 +625,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478266&cod_acta=1478266",
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478269&cod_acta=1478269"
       ],
-      "origenDatos": "FUTGAL_FRESCO",
+      "origenDatos": "CHECKPOINT_VALIDADO_NO_REVISADO_RAPIDO",
       "fechaLecturaFresca": "2026-11-17T07:27:08.749Z"
     },
     {
@@ -704,7 +704,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478274&cod_acta=1478274"
       ],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-17T07:27:22.254Z"
+      "fechaLecturaFresca": "2026-11-22T07:35:20.708Z"
     },
     {
       "numero": 10,
@@ -715,39 +715,11 @@
       },
       "partidos": [
         {
-          "local": "SADA F.C. A NOSA VIÑA",
-          "visitante": "U.D. NARAHIO",
-          "fecha": "21-11-2026",
-          "hora": null,
-          "campo": "Campo de Fútbol As Mariñas - Andrés Pena de Sada"
-        },
-        {
           "local": "C.C.D. CURTIS",
           "visitante": "CAMPANAL DE LOUREDA F. C.",
           "fecha": "21-11-2026",
-          "hora": null,
+          "hora": "17:30",
           "campo": "Novo ( Curtis )"
-        },
-        {
-          "local": "CLUB DEPORTIVO NARON SILVER CATERING",
-          "visitante": "C.D. SIGRAS",
-          "fecha": "21-11-2026",
-          "hora": null,
-          "campo": "O Cadaval"
-        },
-        {
-          "local": "PORTAZGO S.D.",
-          "visitante": "CEDEIRA S.D.",
-          "fecha": "21-11-2026",
-          "hora": null,
-          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
-        },
-        {
-          "local": "LICEO DE MONELOS S.D.",
-          "visitante": "XUVENTUDE DORNEDA",
-          "fecha": "21-11-2026",
-          "hora": null,
-          "campo": "Víctor Fernández Alonso - Antigua Leyma"
         },
         {
           "local": "U.D. PAIOSACO H.AÑON",
@@ -769,11 +741,45 @@
           "fecha": "21-11-2026",
           "hora": "18:00",
           "campo": "Dani Mallo (Cambre)"
+        },
+        {
+          "local": "PORTAZGO S.D.",
+          "visitante": "CEDEIRA S.D.",
+          "fecha": "21-11-2026",
+          "hora": "18:00",
+          "campo": "Municip. De Tarrio, (Culleredo)"
+        },
+        {
+          "local": "CLUB DEPORTIVO NARON SILVER CATERING",
+          "visitante": "C.D. SIGRAS",
+          "fecha": "21-11-2026",
+          "hora": "20:00",
+          "campo": "O Cadaval"
+        },
+        {
+          "local": "LICEO DE MONELOS S.D.",
+          "visitante": "XUVENTUDE DORNEDA",
+          "fecha": "22-11-2026",
+          "hora": "10:30",
+          "campo": "San Pedro de Visma 2"
+        },
+        {
+          "local": "U.D. NARAHIO",
+          "visitante": "SADA F.C. A NOSA VIÑA",
+          "fecha": "22-11-2026",
+          "hora": "11:00",
+          "campo": "Da Piscina"
         }
       ],
-      "actaUrls": [],
+      "actaUrls": [
+        "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478283&cod_acta=1478283",
+        "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478280&cod_acta=1478280",
+        "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478285&cod_acta=1478285",
+        "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478286&cod_acta=1478286",
+        "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478284&cod_acta=1478284"
+      ],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-17T07:27:27.704Z"
+      "fechaLecturaFresca": "2026-11-22T07:35:26.902Z"
     },
     {
       "numero": 11,
@@ -842,7 +848,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-17T07:27:33.468Z"
+      "fechaLecturaFresca": "2026-11-22T07:35:33.121Z"
     },
     {
       "numero": 12,
