@@ -1,13 +1,7 @@
 {
   "versionFormato": 2,
-  "fechaExtraccion": "2026-11-22T11:31:14.403Z",
+  "fechaExtraccion": "2026-11-22T11:36:03.112Z",
   "fuente": "FUTGAL",
-  "modoActualizacion": "fast",
-  "jornadasObjetivoRapido": [
-    9,
-    10,
-    11
-  ],
   "temporada": "2026-2027",
   "competicion": "Veteranos - Primera Galicia",
   "grupo": "A Coruña | 1ª División Veteranos",
@@ -28,7 +22,8 @@
     "CAMPANAL DE LOUREDA F. C.",
     "CEDEIRA S.D.",
     "LICEO DE MONELOS S.D.",
-    "SPORTING BURGO"
+    "SPORTING BURGO",
+    "Última actualización 11:55 h (min 45)"
   ],
   "totalJornadas": 30,
   "totalPartidos": 240,
