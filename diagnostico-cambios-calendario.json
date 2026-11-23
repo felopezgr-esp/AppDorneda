@@ -1,18 +1,1 @@
-[
-  {
-    "jornada": 11,
-    "cambios": [
-      {
-        "tipo": "cambio_programacion",
-        "local": "U.D. PAIOSACO H.AÑON",
-        "visitante": "OZA DE LOS RÍOS",
-        "diferencias": {
-          "hora": {
-            "antes": "19:45",
-            "ahora": "18:00"
-          }
-        }
-      }
-    ]
-  }
-]
+[]
