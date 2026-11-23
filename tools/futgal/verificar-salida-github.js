@@ -34,7 +34,6 @@ function norm(s) {
 try {
   const c = leerJson('competicion.json');
   const v = leerJson('validacion-competicion.json');
-  const co = leerJson('clasificacion-oficial.json');
 
   exigir(c.fuente === 'FUTGAL', 'Fuente distinta de FUTGAL.');
   exigir(c.temporada === '2026-2027', 'Temporada inesperada.');
@@ -126,43 +125,54 @@ try {
 
   exigir(equiposCalendario.size === 16, `Equipos únicos en calendario: ${equiposCalendario.size}/16.`);
 
-  // La clasificación oficial FUTGAL es obligatoria en TODA publicación.
-  exigir(c.fuenteClasificacionOficial === 'FUTGAL', 'Falta fuente oficial de clasificación FUTGAL.');
-  exigir(
-    Array.isArray(c.clasificacionOficial) && c.clasificacionOficial.length === 16,
-    `Clasificación oficial en competicion.json: ${c.clasificacionOficial?.length || 0}/16.`
-  );
-  exigir(
-    co.fuente === 'FUTGAL' && Array.isArray(co.filas) && co.filas.length === 16,
-    `clasificacion-oficial.json no contiene 16 filas oficiales.`
-  );
+  // La clasificación oficial se valida cuando existe una extracción válida,
+  // pero ya no puede bloquear la actualización de resultados/horarios.
+  const tieneClasificacionEnCompeticion =
+    c.fuenteClasificacionOficial === 'FUTGAL' &&
+    Array.isArray(c.clasificacionOficial) &&
+    c.clasificacionOficial.length === 16;
 
-  const clasifEquipos = new Set();
-  const posiciones = new Set();
+  const existeArchivoClasificacion = fs.existsSync('clasificacion-oficial.json');
 
-  for (const r of c.clasificacionOficial) {
-    const k = norm(r.equipo);
-    exigir(equiposCalendario.has(k), `Clasificación: equipo no reconocido: ${r.equipo}.`);
-    exigir(!clasifEquipos.has(k), `Clasificación: equipo duplicado: ${r.equipo}.`);
-    clasifEquipos.add(k);
+  if (tieneClasificacionEnCompeticion && existeArchivoClasificacion) {
+    const co = leerJson('clasificacion-oficial.json');
 
-    exigir(numeroEntero(r.pos), `Clasificación: posición inválida para ${r.equipo}.`);
-    exigir(Number(r.pos) >= 1 && Number(r.pos) <= 16, `Clasificación: posición fuera de rango para ${r.equipo}.`);
-    exigir(!posiciones.has(Number(r.pos)), `Clasificación: posición duplicada ${r.pos}.`);
-    posiciones.add(Number(r.pos));
+    exigir(
+      co.fuente === 'FUTGAL' && Array.isArray(co.filas) && co.filas.length === 16,
+      `clasificacion-oficial.json no contiene 16 filas oficiales.`
+    );
 
-    exigir(Number.isFinite(Number(r.pts)), `Clasificación: puntos inválidos para ${r.equipo}.`);
+    const clasifEquipos = new Set();
+    const posiciones = new Set();
+
+    for (const r of c.clasificacionOficial) {
+      const k = norm(r.equipo);
+      exigir(equiposCalendario.has(k), `Clasificación: equipo no reconocido: ${r.equipo}.`);
+      exigir(!clasifEquipos.has(k), `Clasificación: equipo duplicado: ${r.equipo}.`);
+      clasifEquipos.add(k);
+
+      exigir(numeroEntero(r.pos), `Clasificación: posición inválida para ${r.equipo}.`);
+      exigir(Number(r.pos) >= 1 && Number(r.pos) <= 16, `Clasificación: posición fuera de rango para ${r.equipo}.`);
+      exigir(!posiciones.has(Number(r.pos)), `Clasificación: posición duplicada ${r.pos}.`);
+      posiciones.add(Number(r.pos));
+
+      exigir(Number.isFinite(Number(r.pts)), `Clasificación: puntos inválidos para ${r.equipo}.`);
+    }
+
+    exigir(clasifEquipos.size === 16, `Clasificación: ${clasifEquipos.size}/16 equipos únicos.`);
+    exigir(posiciones.size === 16, `Clasificación: ${posiciones.size}/16 posiciones únicas.`);
+
+    console.log(' Clasificación FUTGAL: 16/16 | validada');
+  } else {
+    console.warn(' AVISO: clasificación oficial FUTGAL no disponible en esta ejecución.');
+    console.warn(' La actualización de jornadas sigue siendo válida y puede publicarse.');
   }
-
-  exigir(clasifEquipos.size === 16, `Clasificación: ${clasifEquipos.size}/16 equipos únicos.`);
-  exigir(posiciones.size === 16, `Clasificación: ${posiciones.size}/16 posiciones únicas.`);
 
   console.log('==========================================');
   console.log(' VALIDACIÓN GITHUB: 100% CORRECTA');
   console.log(` Jornadas: ${c.totalJornadas}/30`);
   console.log(` Partidos: ${c.totalPartidos}/240`);
   console.log(` Actas: ${c.totalActasIntegradas}/${c.totalActasDetectadas}`);
-  console.log(' Clasificación FUTGAL: 16/16');
   console.log(' Fallback en jornada fresca: 0');
   console.log('==========================================');
 

@@ -70,9 +70,17 @@ jobs:
         working-directory: tools/futgal
         run: node actualizar-futgal-auditoria.js
 
+      # La clasificación sigue auditándose, pero no puede invalidar una auditoría
+      # correcta de calendario/resultados si FUTGAL cambia temporalmente esa pantalla.
       - name: Auditar clasificación oficial FUTGAL
+        id: clasificacion
+        continue-on-error: true
         working-directory: tools/futgal
         run: node actualizar-clasificacion.js
+
+      - name: Avisar si la clasificación no pudo auditarse
+        if: steps.clasificacion.outcome == 'failure'
+        run: echo "::warning::La clasificación FUTGAL no pudo auditarse. La auditoría de jornadas continuará."
 
       - name: Validar salida antes de publicar
         working-directory: tools/futgal
@@ -81,9 +89,14 @@ jobs:
       - name: Preparar datos públicos para AppDorneda
         run: |
           cp tools/futgal/competicion.json ./competicion.json
-          cp tools/futgal/clasificacion-oficial.json ./clasificacion-oficial.json
           cp tools/futgal/validacion-competicion.json ./validacion-competicion.json
           cp tools/futgal/diagnostico-cambios-calendario.json ./diagnostico-cambios-calendario.json
+
+          if [ -f tools/futgal/clasificacion-oficial.json ]; then
+            cp tools/futgal/clasificacion-oficial.json ./clasificacion-oficial.json
+          else
+            echo "No hay una nueva clasificación oficial válida; no se sobrescribe la existente."
+          fi
 
       - name: Guardar diagnóstico de la auditoría
         if: always()
@@ -105,19 +118,22 @@ jobs:
             tools/futgal/error-clasificacion.png
             tools/futgal/errores/
 
-      - name: Publicar solo si TODO fue correcto
+      - name: Publicar solo si la auditoría de jornadas fue correcta
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           git add \
             competicion.json \
-            clasificacion-oficial.json \
             validacion-competicion.json \
             diagnostico-cambios-calendario.json \
             tools/futgal/checkpoint-actas.json \
             tools/futgal/checkpoint-calendario.json \
             tools/futgal/checkpoint-calendario-parcial.json
+
+          if [ -f clasificacion-oficial.json ]; then
+            git add clasificacion-oficial.json
+          fi
 
           if git diff --cached --quiet; then
             echo "No hay cambios que publicar."
