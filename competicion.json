@@ -1,7 +1,13 @@
 {
   "versionFormato": 2,
-  "fechaExtraccion": "2026-11-22T11:36:03.112Z",
+  "fechaExtraccion": "2026-11-23T12:59:04.961Z",
   "fuente": "FUTGAL",
+  "modoActualizacion": "fast",
+  "jornadasObjetivoRapido": [
+    9,
+    10,
+    11
+  ],
   "temporada": "2026-2027",
   "competicion": "Veteranos - Primera Galicia",
   "grupo": "A Coruña | 1ª División Veteranos",
@@ -27,8 +33,8 @@
   ],
   "totalJornadas": 30,
   "totalPartidos": 240,
-  "totalActasDetectadas": 79,
-  "totalActasIntegradas": 79,
+  "totalActasDetectadas": 80,
+  "totalActasIntegradas": 80,
   "jornadas": [
     {
       "numero": 1,
@@ -18907,8 +18913,8 @@
     {
       "numero": 10,
       "totalPartidos": 8,
-      "totalActasDetectadas": 7,
-      "totalActasIntegradas": 7,
+      "totalActasDetectadas": 8,
+      "totalActasIntegradas": 8,
       "actasPendientes": [],
       "partidos": [
         {
@@ -20654,15 +20660,229 @@
         },
         {
           "orden": 8,
-          "local": "Última actualización 11:55 h (min 45)",
+          "local": "U.D. NARAHIO",
           "visitante": "SADA F.C. A NOSA VIÑA",
           "fecha": "22-11-2026",
           "hora": "11:00",
           "campo": "Da Piscina",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
+          "estado": "FINALIZADO",
+          "actaDisponible": true,
+          "resultado": {
+            "local": 1,
+            "visitante": 1,
+            "texto": "1-1",
+            "fuente": "secuencia_goles_validada"
+          },
+          "acta": {
+            "url": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478402&cod_acta=1478402",
+            "arbitro": "GIMENEZ FERNANDEZ, CARLOS",
+            "estadio": "Da Piscina",
+            "ciudad": "San Sadurniño",
+            "goles": [
+              {
+                "marcador_raw": {
+                  "local": 1,
+                  "visitante": 0
+                },
+                "marcador": {
+                  "local": 1,
+                  "visitante": 0
+                },
+                "minuto": "15'",
+                "jugador": "HERMIDA IGLESIAS, RAUL",
+                "tipo_gol": "Gol de penalti",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              },
+              {
+                "marcador_raw": {
+                  "local": 1,
+                  "visitante": 1
+                },
+                "marcador": {
+                  "local": 1,
+                  "visitante": 1
+                },
+                "minuto": "73'",
+                "jugador": "FERRO ROZAS, GONZALO",
+                "tipo_gol": "Gol normal",
+                "marcador_fuente": "raw_y_jugador_coherentes"
+              }
+            ],
+            "equipo_local": {
+              "nombre": "U.D. NARAHIO",
+              "titulares": [
+                {
+                  "dorsal": "1",
+                  "jugador": "ALVARIñO GARROTE, JAVIER"
+                },
+                {
+                  "dorsal": "2",
+                  "jugador": "RIOS LAMAS, DANIEL"
+                },
+                {
+                  "dorsal": "5",
+                  "jugador": "RODRIGUEZ CASAL, IGNACIO"
+                },
+                {
+                  "dorsal": "8",
+                  "jugador": "PENA GOMEZ, JOSE"
+                },
+                {
+                  "dorsal": "9",
+                  "jugador": "HERMIDA IGLESIAS, RAUL"
+                },
+                {
+                  "dorsal": "11",
+                  "jugador": "SILVA CASAS, BORJA"
+                },
+                {
+                  "dorsal": "15",
+                  "jugador": "RAMOS RAMOS, JULIAN"
+                },
+                {
+                  "dorsal": "19",
+                  "jugador": "SANDE DOPAZO, YAGO"
+                },
+                {
+                  "dorsal": "22",
+                  "jugador": "REY ANTON, SERVANDO I"
+                },
+                {
+                  "dorsal": "26",
+                  "jugador": "GERVENO CASTRO, ALBERTO"
+                },
+                {
+                  "dorsal": "28",
+                  "jugador": "SABIN BOUZA, ALBERTO"
+                }
+              ],
+              "suplentes": [
+                {
+                  "dorsal": "3",
+                  "jugador": "LOPEZ LODEIRO, ALBERTO"
+                },
+                {
+                  "dorsal": "16",
+                  "jugador": "TRIÑANES CORRAL, JUAN J"
+                },
+                {
+                  "dorsal": "17",
+                  "jugador": "REGUEIRA MESIA, JOSE R"
+                }
+              ],
+              "cuerpo_tecnico": {
+                "entrenador": "No presenta"
+              },
+              "tarjetas": [
+                {
+                  "tipo": "amarilla",
+                  "minuto": "30'",
+                  "jugador": "RAMOS RAMOS, JULIAN"
+                },
+                {
+                  "tipo": "amarilla",
+                  "minuto": "63'",
+                  "jugador": "SABIN BOUZA, ALBERTO"
+                },
+                {
+                  "tipo": "amarilla",
+                  "minuto": "76'",
+                  "jugador": "GERVENO CASTRO, ALBERTO"
+                }
+              ]
+            },
+            "equipo_visitante": {
+              "nombre": "SADA F.C. A NOSA VIÑA",
+              "titulares": [
+                {
+                  "dorsal": "1",
+                  "jugador": "ALBARRACIN, MIGUEL ANGEL"
+                },
+                {
+                  "dorsal": "4",
+                  "jugador": "MARTINEZ VAZQUEZ, ALFONSO"
+                },
+                {
+                  "dorsal": "7",
+                  "jugador": "AMOR HAZ, MIGUEL"
+                },
+                {
+                  "dorsal": "10",
+                  "jugador": "FERRO ROZAS, GONZALO"
+                },
+                {
+                  "dorsal": "18",
+                  "jugador": "MARTINEZ ABRUÑEDO, BORJA"
+                },
+                {
+                  "dorsal": "19",
+                  "jugador": "MALLO LOPEZ, JOSE LUIS"
+                },
+                {
+                  "dorsal": "21",
+                  "jugador": "SEOANE BARROS, ANTONIO M"
+                },
+                {
+                  "dorsal": "22",
+                  "jugador": "PARIS LABANDEIRA, DAMIAN"
+                },
+                {
+                  "dorsal": "23",
+                  "jugador": "FREIRE LESTA, CESAR"
+                },
+                {
+                  "dorsal": "25",
+                  "jugador": "ROIBAS NAVEIRO, ALBERTO"
+                },
+                {
+                  "dorsal": "26",
+                  "jugador": "GRAÑA PITA, PABLO"
+                }
+              ],
+              "suplentes": [
+                {
+                  "dorsal": "11",
+                  "jugador": "BOO FERNANDEZ, MIGUEL A"
+                },
+                {
+                  "dorsal": "13",
+                  "jugador": "TEIXEIRA FERNANDEZ, JULIO J"
+                },
+                {
+                  "dorsal": "14",
+                  "jugador": "SEIJO CANCELO, SANTIAGO"
+                },
+                {
+                  "dorsal": "15",
+                  "jugador": "SEIJO CANCELO, SERGIO"
+                },
+                {
+                  "dorsal": "24",
+                  "jugador": "DURAN ALFONSIN, ALBERTO"
+                },
+                {
+                  "dorsal": "29",
+                  "jugador": "LOSADA GONZALEZ, MANUEL"
+                }
+              ],
+              "cuerpo_tecnico": {
+                "delegado": "NAVEIRA GARCÍA, FRANCISCO",
+                "entrenador": "No presenta"
+              },
+              "tarjetas": [
+                {
+                  "tipo": "amarilla",
+                  "minuto": "68'",
+                  "jugador": "MARTINEZ VAZQUEZ, ALFONSO"
+                },
+                {
+                  "tipo": "amarilla",
+                  "minuto": "76'",
+                  "jugador": "FREIRE LESTA, CESAR"
+                }
+              ]
+            }
+          }
         }
       ]
     },
