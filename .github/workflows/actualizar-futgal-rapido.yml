@@ -1,5 +1,5 @@
 name: Actualizar FUTGAL rápido
-run-name: ${{ github.event_name == 'schedule' && 'FUTGAL súper rápida · automática' || format('FUTGAL súper rápida · {0}', inputs.request_id || 'manual') }}
+run-name: Actualizar FUTGAL rápido · ${{ inputs.request_id || 'manual' }}
 
 on:
   workflow_dispatch:
@@ -8,15 +8,6 @@ on:
         description: "Identificador de la solicitud web"
         required: false
         type: string
-
-  # Horario local Europe/Madrid.
-  # Sábado: una vez cada hora, de 15:00 a 23:00.
-  # Domingo: una vez cada hora, de 09:00 a 16:00.
-  schedule:
-    - cron: '0 15-23 * * 6'
-      timezone: 'Europe/Madrid'
-    - cron: '0 9-16 * * 0'
-      timezone: 'Europe/Madrid'
 
 permissions:
   contents: write
@@ -51,59 +42,38 @@ jobs:
         working-directory: tools/futgal
         run: npx playwright install --with-deps chromium
 
-      - name: Actualizar solo la jornada de esta semana
+      - name: Ejecutar actualización rápida
         working-directory: tools/futgal
         run: node actualizar-futgal-rapido.js
-
-      # La clasificación se intenta actualizar, pero un fallo de FUTGAL en esta
-      # pantalla NO puede bloquear la publicación de resultados/horarios.
-      - name: Actualizar clasificación oficial FUTGAL
-        id: clasificacion
-        continue-on-error: true
-        working-directory: tools/futgal
-        run: node actualizar-clasificacion.js
-
-      - name: Avisar si la clasificación no pudo actualizarse
-        if: steps.clasificacion.outcome == 'failure'
-        run: echo "::warning::La clasificación FUTGAL no pudo actualizarse. Se publicarán igualmente los datos válidos de jornada."
 
       - name: Validar salida antes de publicar
         working-directory: tools/futgal
         run: node verificar-salida-github.js
 
-      - name: Preparar datos públicos para AppDorneda
+      - name: Preparar JSON público para AppDorneda
         run: |
           cp tools/futgal/competicion.json ./competicion.json
           cp tools/futgal/validacion-competicion.json ./validacion-competicion.json
           cp tools/futgal/diagnostico-cambios-calendario.json ./diagnostico-cambios-calendario.json
 
-          if [ -f tools/futgal/clasificacion-oficial.json ]; then
-            cp tools/futgal/clasificacion-oficial.json ./clasificacion-oficial.json
-          else
-            echo "No hay una nueva clasificación oficial válida; no se sobrescribe la existente."
-          fi
-
-      - name: Guardar diagnóstico de la ejecución súper rápida
+      - name: Guardar diagnóstico de la ejecución rápida
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: futgal-superrapido-${{ github.run_number }}
+          name: futgal-rapido-${{ github.run_number }}
           if-no-files-found: ignore
           retention-days: 14
           path: |
             tools/futgal/competicion.json
-            tools/futgal/clasificacion-oficial.json
             tools/futgal/validacion-competicion.json
-            tools/futgal/diagnostico-clasificacion.json
             tools/futgal/diagnostico-cambios-calendario.json
             tools/futgal/diagnostico-actas.json
             tools/futgal/diagnostico-navegacion.json
             tools/futgal/salida-integracion.txt
             tools/futgal/error-integracion.png
-            tools/futgal/error-clasificacion.png
             tools/futgal/errores/
 
-      - name: Publicar solo si los datos de jornada son correctos
+      - name: Publicar solo si todo fue correcto
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -116,13 +86,9 @@ jobs:
             tools/futgal/checkpoint-calendario.json \
             tools/futgal/checkpoint-calendario-parcial.json
 
-          if [ -f clasificacion-oficial.json ]; then
-            git add clasificacion-oficial.json
-          fi
-
           if git diff --cached --quiet; then
             echo "No hay cambios que publicar."
           else
-            git commit -m "Actualizar FUTGAL súper rápido"
+            git commit -m "Actualizar datos FUTGAL rápido"
             git push
           fi

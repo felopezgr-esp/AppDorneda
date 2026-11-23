@@ -1,5 +1,5 @@
 name: Actualizar FUTGAL
-run-name: ${{ github.event_name == 'workflow_run' && format('Auditoría FUTGAL · tras botón · fast-{0}', github.event.workflow_run.id) || github.event_name == 'schedule' && 'Auditoría FUTGAL · domingo 23:59' || format('Auditoría FUTGAL · {0}', inputs.request_id || 'manual') }}
+run-name: ${{ github.event_name == 'workflow_run' && format('Auditoría FUTGAL · fast-run-{0}', github.event.workflow_run.id) || format('Actualizar FUTGAL · {0}', inputs.request_id || 'manual') }}
 
 on:
   workflow_dispatch:
@@ -8,15 +8,6 @@ on:
         description: "Identificador de la solicitud web"
         required: false
         type: string
-
-  # Auditoría automática semanal completa.
-  schedule:
-    - cron: '59 23 * * 0'
-      timezone: 'Europe/Madrid'
-
-  # El botón de la web dispara primero "Actualizar FUTGAL rápido".
-  # Solo cuando esa ejecución procede de workflow_dispatch y termina bien,
-  # arrancamos esta auditoría completa por detrás.
   workflow_run:
     workflows:
       - "Actualizar FUTGAL rápido"
@@ -32,18 +23,9 @@ concurrency:
 
 jobs:
   actualizar:
-    if: >-
-      ${{
-        github.event_name != 'workflow_run' ||
-        (
-          github.event.workflow_run.head_branch == 'main' &&
-          github.event.workflow_run.conclusion == 'success' &&
-          github.event.workflow_run.event == 'workflow_dispatch'
-        )
-      }}
-
+    if: ${{ github.event_name == 'workflow_dispatch' || (github.event.workflow_run.head_branch == 'main' && github.event.workflow_run.conclusion != 'cancelled') }}
     runs-on: ubuntu-latest
-    timeout-minutes: 50
+    timeout-minutes: 45
 
     env:
       CI: "true"
@@ -66,59 +48,38 @@ jobs:
         working-directory: tools/futgal
         run: npx playwright install --with-deps chromium
 
-      - name: Ejecutar auditoría completa J1-J30 con actas frescas
+      - name: Ejecutar auditoría completa FUTGAL
         working-directory: tools/futgal
-        run: node actualizar-futgal-auditoria.js
-
-      # La clasificación sigue auditándose, pero no puede invalidar una auditoría
-      # correcta de calendario/resultados si FUTGAL cambia temporalmente esa pantalla.
-      - name: Auditar clasificación oficial FUTGAL
-        id: clasificacion
-        continue-on-error: true
-        working-directory: tools/futgal
-        run: node actualizar-clasificacion.js
-
-      - name: Avisar si la clasificación no pudo auditarse
-        if: steps.clasificacion.outcome == 'failure'
-        run: echo "::warning::La clasificación FUTGAL no pudo auditarse. La auditoría de jornadas continuará."
+        run: node actualizar-futgal.js
 
       - name: Validar salida antes de publicar
         working-directory: tools/futgal
         run: node verificar-salida-github.js
 
-      - name: Preparar datos públicos para AppDorneda
+      - name: Preparar JSON público para AppDorneda
         run: |
           cp tools/futgal/competicion.json ./competicion.json
           cp tools/futgal/validacion-competicion.json ./validacion-competicion.json
           cp tools/futgal/diagnostico-cambios-calendario.json ./diagnostico-cambios-calendario.json
 
-          if [ -f tools/futgal/clasificacion-oficial.json ]; then
-            cp tools/futgal/clasificacion-oficial.json ./clasificacion-oficial.json
-          else
-            echo "No hay una nueva clasificación oficial válida; no se sobrescribe la existente."
-          fi
-
-      - name: Guardar diagnóstico de la auditoría
+      - name: Guardar diagnóstico de la ejecución
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: futgal-auditoria-${{ github.run_number }}
+          name: futgal-diagnostico-${{ github.run_number }}
           if-no-files-found: ignore
           retention-days: 14
           path: |
             tools/futgal/competicion.json
-            tools/futgal/clasificacion-oficial.json
             tools/futgal/validacion-competicion.json
-            tools/futgal/diagnostico-clasificacion.json
             tools/futgal/diagnostico-cambios-calendario.json
             tools/futgal/diagnostico-actas.json
             tools/futgal/diagnostico-navegacion.json
             tools/futgal/salida-integracion.txt
             tools/futgal/error-integracion.png
-            tools/futgal/error-clasificacion.png
             tools/futgal/errores/
 
-      - name: Publicar solo si la auditoría de jornadas fue correcta
+      - name: Publicar solo si todo fue correcto
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -131,13 +92,9 @@ jobs:
             tools/futgal/checkpoint-calendario.json \
             tools/futgal/checkpoint-calendario-parcial.json
 
-          if [ -f clasificacion-oficial.json ]; then
-            git add clasificacion-oficial.json
-          fi
-
           if git diff --cached --quiet; then
             echo "No hay cambios que publicar."
           else
-            git commit -m "Auditar datos FUTGAL completos"
+            git commit -m "Auditar datos FUTGAL"
             git push
           fi

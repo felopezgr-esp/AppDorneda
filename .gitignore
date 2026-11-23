@@ -24,9 +24,5 @@ node_modules/
 scratch/
 index.backup*
 index_backup*
-index_back*
 index.paso*.html
 aplicar-paso*.js
-_backup*
-aplicar_fix*
-APLICAR_FIX*
