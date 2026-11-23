@@ -20,9 +20,21 @@ function numeroEntero(v) {
   return Number.isInteger(Number(v));
 }
 
+function norm(s) {
+  return String(s || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toUpperCase()
+    .replace(/\./g, '')
+    .replace(/[^A-Z0-9Ñ]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 try {
   const c = leerJson('competicion.json');
   const v = leerJson('validacion-competicion.json');
+  const co = leerJson('clasificacion-oficial.json');
 
   exigir(c.fuente === 'FUTGAL', 'Fuente distinta de FUTGAL.');
   exigir(c.temporada === '2026-2027', 'Temporada inesperada.');
@@ -42,7 +54,7 @@ try {
   );
   exigir(
     Array.isArray(v.jornadasConFallback) && v.jornadasConFallback.length === 0,
-    `Se usó checkpoint como respaldo en: ${(v.jornadasConFallback || []).join(', ')}`
+    `Se usó checkpoint como respaldo en una jornada que debía leerse fresca: ${(v.jornadasConFallback || []).join(', ')}`
   );
   exigir(Number(v.jornadasIntegradas) === 30, `Validación jornadas: ${v.jornadasIntegradas}/30.`);
   exigir(Number(v.partidosIntegrados) === 240, `Validación partidos: ${v.partidosIntegrados}/240.`);
@@ -54,6 +66,7 @@ try {
   exigir(Array.isArray(c.jornadas) && c.jornadas.length === 30, 'Array de jornadas incompleto.');
 
   const numeros = c.jornadas.map(j => Number(j.numero)).sort((a, b) => a - b);
+  const equiposCalendario = new Set();
 
   for (let n = 1; n <= 30; n++) {
     exigir(numeros[n - 1] === n, `Falta o está duplicada la jornada ${n}.`);
@@ -75,6 +88,8 @@ try {
     for (const p of j.partidos) {
       exigir(p.local && p.visitante, `J${j.numero}: partido sin equipos.`);
       equipos.push(p.local, p.visitante);
+      equiposCalendario.add(norm(p.local));
+      equiposCalendario.add(norm(p.visitante));
 
       exigir(
         /^\d{2}-\d{2}-\d{4}$/.test(String(p.fecha || '')),
@@ -104,17 +119,51 @@ try {
     }
 
     exigir(
-      new Set(equipos).size === 16,
+      new Set(equipos.map(norm)).size === 16,
       `J${j.numero}: no aparecen 16 equipos distintos.`
     );
   }
+
+  exigir(equiposCalendario.size === 16, `Equipos únicos en calendario: ${equiposCalendario.size}/16.`);
+
+  // La clasificación oficial FUTGAL es obligatoria en TODA publicación.
+  exigir(c.fuenteClasificacionOficial === 'FUTGAL', 'Falta fuente oficial de clasificación FUTGAL.');
+  exigir(
+    Array.isArray(c.clasificacionOficial) && c.clasificacionOficial.length === 16,
+    `Clasificación oficial en competicion.json: ${c.clasificacionOficial?.length || 0}/16.`
+  );
+  exigir(
+    co.fuente === 'FUTGAL' && Array.isArray(co.filas) && co.filas.length === 16,
+    `clasificacion-oficial.json no contiene 16 filas oficiales.`
+  );
+
+  const clasifEquipos = new Set();
+  const posiciones = new Set();
+
+  for (const r of c.clasificacionOficial) {
+    const k = norm(r.equipo);
+    exigir(equiposCalendario.has(k), `Clasificación: equipo no reconocido: ${r.equipo}.`);
+    exigir(!clasifEquipos.has(k), `Clasificación: equipo duplicado: ${r.equipo}.`);
+    clasifEquipos.add(k);
+
+    exigir(numeroEntero(r.pos), `Clasificación: posición inválida para ${r.equipo}.`);
+    exigir(Number(r.pos) >= 1 && Number(r.pos) <= 16, `Clasificación: posición fuera de rango para ${r.equipo}.`);
+    exigir(!posiciones.has(Number(r.pos)), `Clasificación: posición duplicada ${r.pos}.`);
+    posiciones.add(Number(r.pos));
+
+    exigir(Number.isFinite(Number(r.pts)), `Clasificación: puntos inválidos para ${r.equipo}.`);
+  }
+
+  exigir(clasifEquipos.size === 16, `Clasificación: ${clasifEquipos.size}/16 equipos únicos.`);
+  exigir(posiciones.size === 16, `Clasificación: ${posiciones.size}/16 posiciones únicas.`);
 
   console.log('==========================================');
   console.log(' VALIDACIÓN GITHUB: 100% CORRECTA');
   console.log(` Jornadas: ${c.totalJornadas}/30`);
   console.log(` Partidos: ${c.totalPartidos}/240`);
   console.log(` Actas: ${c.totalActasIntegradas}/${c.totalActasDetectadas}`);
-  console.log(' Fallback de checkpoint: 0');
+  console.log(' Clasificación FUTGAL: 16/16');
+  console.log(' Fallback en jornada fresca: 0');
   console.log('==========================================');
 
 } catch (err) {

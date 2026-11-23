@@ -7004,9 +7004,7 @@ button[aria-busy="true"]{
               </div>
               <div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap;">
                 <span id="clasifAutoBadge" class="badge" style="background:rgba(59,130,246,.10);color:var(--info);border:1px solid rgba(59,130,246,.22);font-size:9.5px;font-weight:800;">AUTOMÁTICA</span>
-                <button class="btn btn-ghost btn-sm" onclick="openModalClasif()" style="font-size:10.5px;padding:4px 8px;" title="Aplicar únicamente resoluciones disciplinarias que alteren los puntos">
-                  ⚖ Ajustes disciplinarios
-                </button>
+
               </div>
             </div>
             <div class="table-wrap">
@@ -19183,6 +19181,24 @@ function clasifAdjustmentFor(team, ajustes){
   };
 }
 
+function clasifOfficialRows(){
+  try{
+    var data = (window.FutgalOfficial && typeof window.FutgalOfficial.getData === 'function')
+      ? window.FutgalOfficial.getData()
+      : null;
+
+    var rows = data && Array.isArray(data.clasificacionOficial)
+      ? data.clasificacionOficial
+      : [];
+
+    return rows.filter(function(r){
+      return r && r.equipo && Number.isFinite(Number(r.pts));
+    });
+  }catch(e){
+    return [];
+  }
+}
+
 function clasifBuildBase(){
   var matches = clasifFlattenMatches();
   var teamMap = new Map();
@@ -19201,6 +19217,8 @@ function clasifBuildBase(){
         ajuste:0,
         ajusteMotivo:'',
         pts:0,
+        posOficial:null,
+        origenClasificacion:'CALCULADA_DESDE_RESULTADOS',
         tieMode:''
       });
     }
@@ -19251,9 +19269,55 @@ function clasifBuildBase(){
   });
 
   var ajustes = clasifLoadAjustes();
+  var officialRows = clasifOfficialRows();
+  var officialMap = new Map();
+
+  officialRows.forEach(function(r){
+    officialMap.set(clasifNormName(r.equipo), r);
+  });
+
   var teams = Array.from(teamMap.values());
+  var officialMatched = teams.filter(function(t){ return officialMap.has(t.key); }).length;
+  var hasOfficial = teams.length >= 16 && officialMatched === teams.length;
+
+  function officialNum(value, fallback){
+    if(value === null || value === undefined || value === '') return fallback;
+    var n = Number(value);
+    return Number.isFinite(n) ? n : fallback;
+  }
 
   teams.forEach(function(t){
+    var off = officialMap.get(t.key);
+
+    // FUTGAL manda. Cuando la clasificación oficial está disponible,
+    // posición y puntos proceden directamente de FUTGAL. También usamos
+    // sus estadísticas si la tabla oficial las publica.
+    if(hasOfficial && off){
+      var puntosCalculados = Number(t.basePts || 0);
+      var puntosOficiales = officialNum(off.pts, puntosCalculados);
+
+      t.pj = officialNum(off.pj, t.pj);
+      t.g = officialNum(off.g, t.g);
+      t.e = officialNum(off.e, t.e);
+      t.p = officialNum(off.p, t.p);
+      t.gf = officialNum(off.gf, t.gf);
+      t.gc = officialNum(off.gc, t.gc);
+
+      t.ajuste = puntosOficiales - puntosCalculados;
+      t.ajusteMotivo = t.ajuste
+        ? (off.ajusteMotivo || 'Ajuste oficial FUTGAL')
+        : '';
+      t.pts = puntosOficiales;
+      t.posOficial = officialNum(off.pos, null);
+      t.dg = Number.isFinite(Number(off.dg)) ? Number(off.dg) : (t.gf - t.gc);
+      t.origenClasificacion = 'FUTGAL_OFICIAL';
+      t.tieMode = 'futgal-oficial';
+      return;
+    }
+
+    // Respaldo únicamente mientras todavía no haya una clasificación oficial
+    // válida cargada. En cuanto FUTGAL esté disponible, estos ajustes locales
+    // dejan de intervenir.
     var adj = clasifAdjustmentFor(t.equipo, ajustes);
     t.ajuste = adj.puntos;
     t.ajusteMotivo = adj.motivo;
@@ -19266,7 +19330,9 @@ function clasifBuildBase(){
     scheduled:matches,
     played:played,
     totalScheduled:matches.length,
-    totalPlayed:played.length
+    totalPlayed:played.length,
+    hasOfficial:hasOfficial,
+    officialRows:officialRows
   };
 }
 
@@ -19427,6 +19493,37 @@ function clasifRankTieGroup(group, ctx){
 
 function calcularClasificacionAutomatica(){
   var ctx = clasifBuildBase();
+
+  // Si FUTGAL ha publicado una clasificación oficial completa, no intentamos
+  // reinterpretar sus desempates ni sus sanciones: respetamos exactamente su orden.
+  if(ctx.hasOfficial){
+    var officialOrdered = ctx.teams.slice().sort(function(a,b){
+      var pa = Number(a.posOficial);
+      var pb = Number(b.posOficial);
+
+      if(Number.isFinite(pa) && Number.isFinite(pb) && pa !== pb) return pa - pb;
+      if(Number.isFinite(pa) && !Number.isFinite(pb)) return -1;
+      if(!Number.isFinite(pa) && Number.isFinite(pb)) return 1;
+
+      var pts = Number(b.pts || 0) - Number(a.pts || 0);
+      if(pts) return pts;
+      return String(a.equipo || '').localeCompare(String(b.equipo || ''), 'es', {sensitivity:'base'});
+    });
+
+    officialOrdered.forEach(function(t, i){
+      t.pos = Number.isFinite(Number(t.posOficial)) ? Number(t.posOficial) : i + 1;
+      t.tieMode = 'futgal-oficial';
+    });
+
+    return {
+      rows:officialOrdered,
+      totalScheduled:ctx.totalScheduled,
+      totalPlayed:ctx.totalPlayed,
+      complete:ctx.totalScheduled > 0 && ctx.totalPlayed >= ctx.totalScheduled,
+      official:true
+    };
+  }
+
   var pointsGroups = new Map();
 
   ctx.teams.forEach(function(t){
@@ -19449,7 +19546,8 @@ function calcularClasificacionAutomatica(){
     rows:ordered,
     totalScheduled:ctx.totalScheduled,
     totalPlayed:ctx.totalPlayed,
-    complete:ctx.totalScheduled > 0 && ctx.totalPlayed >= ctx.totalScheduled
+    complete:ctx.totalScheduled > 0 && ctx.totalPlayed >= ctx.totalScheduled,
+    official:false
   };
 }
 
@@ -19469,7 +19567,7 @@ function clasifSyncLegacyDb(rows){
       pts:t.pts,
       ajuste:t.ajuste || 0,
       ajusteMotivo:t.ajusteMotivo || '',
-      origen:'FUTGAL_AUTOMATICA'
+      origen:t.origenClasificacion || 'FUTGAL_AUTOMATICA'
     };
   });
 }
@@ -19523,21 +19621,23 @@ function renderClasificacion(){
 
   if(meta){
     var msg = `${calc.totalPlayed}/${calc.totalScheduled} partidos finalizados`;
-    if(calc.complete){
+    if(calc.official){
+      msg += ' · Posición y puntos oficiales FUTGAL';
+    }else if(calc.complete){
       msg += ' · Clasificación final con desempates reglamentarios';
     }else if(hayProvisionales){
       msg += ' · Desempates provisionales cuando faltan enfrentamientos directos';
     }else{
-      msg += ' · Calculada automáticamente desde FUTGAL';
+      msg += ' · Calculada automáticamente desde resultados FUTGAL';
     }
-    if(hayFairPlayPendiente) msg += ' · Existe un empate que requeriría Juego Limpio';
+    if(!calc.official && hayFairPlayPendiente) msg += ' · Existe un empate que requeriría Juego Limpio';
     meta.textContent = msg;
   }
 
   if(badge){
-    badge.textContent = calc.complete ? 'DEFINITIVA' : 'PROVISIONAL';
-    badge.style.background = calc.complete ? 'rgba(34,197,94,.10)' : 'rgba(59,130,246,.10)';
-    badge.style.color = calc.complete ? 'var(--success)' : 'var(--info)';
+    badge.textContent = calc.official ? 'FUTGAL' : (calc.complete ? 'DEFINITIVA' : 'PROVISIONAL');
+    badge.style.background = calc.official || calc.complete ? 'rgba(34,197,94,.10)' : 'rgba(59,130,246,.10)';
+    badge.style.color = calc.official || calc.complete ? 'var(--success)' : 'var(--info)';
   }
 
   var rowsHtml = s.map(function(eq, i){
