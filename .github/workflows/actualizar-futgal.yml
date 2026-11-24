@@ -40,44 +40,63 @@ jobs:
     env:
       CI: "true"
       TZ: Europe/Madrid
+
     steps:
       - name: Descargar repositorio
         uses: actions/checkout@v4
+
       - name: Preparar Node
         uses: actions/setup-node@v4
         with:
           node-version: "22"
+
       - name: Instalar dependencias
         working-directory: tools/futgal
         run: npm install --no-audit --no-fund
+
       - name: Instalar Chromium
         working-directory: tools/futgal
         run: npx playwright install --with-deps chromium
+
       - name: Repasar todas las jornadas J1-J30
         working-directory: tools/futgal
         run: node actualizar-futgal.js
+
       - name: Leer clasificación oficial FUTGAL
         working-directory: tools/futgal
         run: node actualizar-clasificacion-oficial.js
+
+      - name: Comparar goleadores oficiales FUTGAL
+        working-directory: tools/futgal
+        run: node comparar-goleadores-oficial.js
+
       - name: Validar salida
         working-directory: tools/futgal
         run: node verificar-salida-github.js
+
       - name: Preparar JSON público
         run: |
           cp tools/futgal/competicion.json ./competicion.json
           cp tools/futgal/clasificacion-oficial.json ./clasificacion-oficial.json
           cp tools/futgal/validacion-competicion.json ./validacion-competicion.json
           cp tools/futgal/diagnostico-cambios-calendario.json ./diagnostico-cambios-calendario.json
+          cp tools/futgal/comparacion-goleadores.json ./comparacion-goleadores.json
+          cp tools/futgal/goleadores-oficial.json ./goleadores-oficial.json 2>/dev/null || true
+
       - name: Publicar
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add competicion.json clasificacion-oficial.json validacion-competicion.json \
-            diagnostico-cambios-calendario.json tools/futgal/checkpoint-actas.json \
-            tools/futgal/checkpoint-calendario.json tools/futgal/checkpoint-calendario-parcial.json
+            diagnostico-cambios-calendario.json comparacion-goleadores.json \
+            tools/futgal/checkpoint-actas.json tools/futgal/checkpoint-calendario.json \
+            tools/futgal/checkpoint-calendario-parcial.json tools/futgal/comparacion-goleadores.json
+          if [ -f goleadores-oficial.json ]; then
+            git add goleadores-oficial.json tools/futgal/goleadores-oficial.json
+          fi
           if git diff --cached --quiet; then
             echo "No hay cambios que publicar."
           else
-            git commit -m "Auditar FUTGAL completo y clasificación oficial"
+            git commit -m "Auditar FUTGAL completo, clasificación y goleadores"
             git push
           fi
