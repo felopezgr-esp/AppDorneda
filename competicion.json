@@ -1,7 +1,13 @@
 {
   "versionFormato": 2,
-  "fechaExtraccion": "2026-11-23T21:24:34.794Z",
+  "fechaExtraccion": "2026-11-24T08:59:50.534Z",
   "fuente": "FUTGAL",
+  "modoActualizacion": "fast",
+  "jornadasObjetivoRapido": [
+    9,
+    10,
+    11
+  ],
   "temporada": "2026-2027",
   "competicion": "Veteranos - Primera Galicia",
   "grupo": "A Coruña | 1ª División Veteranos",
@@ -20900,18 +20906,6 @@
         },
         {
           "orden": 2,
-          "local": "BETANZOS NORTE",
-          "visitante": "PORTAZGO S.D.",
-          "fecha": "28-11-2026",
-          "hora": null,
-          "campo": "O Carregal (Betanzos)",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
-        },
-        {
-          "orden": 3,
           "local": "CEDEIRA S.D.",
           "visitante": "LICEO DE MONELOS S.D.",
           "fecha": "28-11-2026",
@@ -20923,7 +20917,7 @@
           "acta": null
         },
         {
-          "orden": 4,
+          "orden": 3,
           "local": "SAN MARTIÑO S.D.",
           "visitante": "XUVENTUDE DORNEDA",
           "fecha": "28-11-2026",
@@ -20935,7 +20929,7 @@
           "acta": null
         },
         {
-          "orden": 5,
+          "orden": 4,
           "local": "U.D. PAIOSACO H.AÑON",
           "visitante": "OZA DE LOS RÍOS",
           "fecha": "28-11-2026",
@@ -20947,12 +20941,24 @@
           "acta": null
         },
         {
-          "orden": 6,
+          "orden": 5,
           "local": "C.D. SIGRAS",
           "visitante": "SPORTING CAMBRE AS TRAVESAS",
           "fecha": "28-11-2026",
           "hora": "18:00",
           "campo": "Os Pinares, (Brexo Lema)",
+          "estado": "PROGRAMADO",
+          "actaDisponible": false,
+          "resultado": null,
+          "acta": null
+        },
+        {
+          "orden": 6,
+          "local": "BETANZOS NORTE",
+          "visitante": "PORTAZGO S.D.",
+          "fecha": "28-11-2026",
+          "hora": "20:00",
+          "campo": "O Carregal (Betanzos)",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,
