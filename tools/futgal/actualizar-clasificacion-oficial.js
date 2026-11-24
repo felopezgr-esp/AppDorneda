@@ -107,23 +107,65 @@ function matchEquipo(cells,eqs){
 }
 
 function detectarPts(rows,calc){
-  const max=Math.max(...rows.map(r=>r.cells.length)), cand=[];
+  const max=Math.max(...rows.map(r=>r.cells.length));
+  const cand=[];
+
   for(let col=0;col<max;col++){
-    let valid=0,mono=0,err=0,errN=0,team=false; const vals=[];
+    let valid=0, err=0, errN=0, team=false;
+    const vals=[];
+
     for(const r of rows){
-      if(r.hit.indice===col){team=true;break;}
-      const v=n(r.cells[col]); if(v==null) continue;
-      valid++; vals.push(v);
-      const cc=calc.get(norm(r.hit.equipo)); if(cc){err+=Math.abs(v-cc.pts);errN++;}
+      if(r.hit.indice===col){
+        team=true;
+        break;
+      }
+
+      const v=n(r.cells[col]);
+      if(v==null) continue;
+
+      valid++;
+      vals.push(v);
+
+      const cc=calc.get(norm(r.hit.equipo));
+      if(cc && Number.isFinite(Number(cc.pts))){
+        err += Math.abs(v-Number(cc.pts));
+        errN++;
+      }
     }
-    if(team||valid<14) continue;
-    if(vals.every((v,i)=>Number.isInteger(v)&&v===i+1)) continue;
-    for(let i=0;i<vals.length-1;i++) if(vals[i]>=vals[i+1]) mono++;
-    const m=vals.length>1?mono/(vals.length-1):0, ae=errN?err/errN:99;
-    if(m>=0.8 && ae<=8) cand.push({col,score:m*100-ae*3});
+
+    if(team || valid<14 || errN<14) continue;
+
+    const parecePosicion =
+      vals.length===16 &&
+      vals.every((v,i)=>Number.isInteger(v) && v===i+1);
+
+    if(parecePosicion) continue;
+
+    const avgErr=err/errN;
+    const maxVal=Math.max(...vals);
+    const minVal=Math.min(...vals);
+
+    if(minVal < -20 || maxVal > 100) continue;
+
+    cand.push({col,avgErr});
   }
-  cand.sort((a,b)=>b.score-a.score);
-  return cand[0]?.col ?? null;
+
+  cand.sort((a,b)=>a.avgErr-b.avgErr);
+
+  if(!cand.length){
+    console.error('No hay columnas candidatas. Filas detectadas:');
+    rows.forEach(r=>console.error(JSON.stringify(r.cells)));
+    return null;
+  }
+
+  console.log(
+    'Columna de puntos detectada:',
+    cand[0].col,
+    'error medio:',
+    cand[0].avgErr.toFixed(3)
+  );
+
+  return cand[0].col;
 }
 
 (async()=>{
