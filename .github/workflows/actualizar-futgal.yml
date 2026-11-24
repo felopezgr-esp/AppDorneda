@@ -64,7 +64,63 @@ jobs:
 
       - name: Leer clasificación oficial FUTGAL
         working-directory: tools/futgal
-        run: node actualizar-clasificacion-oficial.js
+        shell: bash
+        run: |
+          correcto=0
+
+          for intento in 1 2 3; do
+            echo "Intento clasificacion $intento/3"
+
+            if node actualizar-clasificacion-oficial.js; then
+              correcto=1
+              break
+            fi
+
+            echo "FUTGAL no respondio. Reintentando..."
+            sleep $((intento * 2))
+          done
+
+          if [ "$correcto" -ne 1 ]; then
+            echo "AVISO: se conserva la ultima clasificacion oficial valida."
+
+            node <<'NODE'
+          const fs = require('fs');
+
+          const comp = JSON.parse(
+            fs.readFileSync('competicion.json', 'utf8')
+          );
+
+          const anterior = JSON.parse(
+            fs.readFileSync('clasificacion-oficial.json', 'utf8')
+          );
+
+          if (
+            !anterior ||
+            !Array.isArray(anterior.filas) ||
+            anterior.filas.length !== 16
+          ) {
+            throw new Error(
+              'No existe una clasificacion oficial anterior valida de 16 equipos.'
+            );
+          }
+
+          comp.clasificacionOficial = anterior.filas;
+          comp.fechaClasificacionOficial =
+            anterior.fechaExtraccion || new Date().toISOString();
+          comp.fuenteClasificacionOficial =
+            'FUTGAL_ULTIMA_VALIDA';
+
+          fs.writeFileSync(
+            'competicion.json',
+            JSON.stringify(comp, null, 2) + '\n',
+            'utf8'
+          );
+
+          console.log(
+            'Ultima clasificacion oficial valida restaurada: 16/16 equipos.'
+          );
+          NODE
+          fi
 
       - name: Comparar goleadores oficiales FUTGAL
         working-directory: tools/futgal
