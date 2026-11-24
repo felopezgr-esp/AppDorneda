@@ -28,6 +28,7 @@ function tablaActas(comp){
     const a=p?.acta;
     if(!a?.goles) continue;
     for(const g of a.goles){
+      if (/propia puerta/i.test(String(g?.tipo_gol || ''))) continue;
       const jugador=clean(g?.jugador);
       if(!jugador) continue;
       const k=norm(jugador);
