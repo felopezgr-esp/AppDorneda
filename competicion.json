@@ -1,6 +1,6 @@
 {
   "versionFormato": 2,
-  "fechaExtraccion": "2026-11-24T19:28:34.129Z",
+  "fechaExtraccion": "2026-11-24T21:27:35.175Z",
   "fuente": "FUTGAL",
   "temporada": "2026-2027",
   "competicion": "Veteranos - Primera Galicia",
@@ -21110,18 +21110,6 @@
         },
         {
           "orden": 2,
-          "local": "U.D. PAIOSACO H.AÑON",
-          "visitante": "C.C.D. CURTIS",
-          "fecha": "12-12-2026",
-          "hora": null,
-          "campo": "Porta Santa",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
-        },
-        {
-          "orden": 3,
           "local": "SPORTING BURGO",
           "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
           "fecha": "12-12-2026",
@@ -21133,7 +21121,7 @@
           "acta": null
         },
         {
-          "orden": 4,
+          "orden": 3,
           "local": "BETANZOS NORTE",
           "visitante": "XUVENTUDE DORNEDA",
           "fecha": "12-12-2026",
@@ -21145,12 +21133,24 @@
           "acta": null
         },
         {
-          "orden": 5,
+          "orden": 4,
           "local": "SAN MARTIÑO S.D.",
           "visitante": "CEDEIRA S.D.",
           "fecha": "12-12-2026",
           "hora": null,
           "campo": "A Revolta (Queixas)",
+          "estado": "PROGRAMADO",
+          "actaDisponible": false,
+          "resultado": null,
+          "acta": null
+        },
+        {
+          "orden": 5,
+          "local": "U.D. PAIOSACO H.AÑON",
+          "visitante": "C.C.D. CURTIS",
+          "fecha": "12-12-2026",
+          "hora": "18:00",
+          "campo": "Porta Santa",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,
@@ -23222,6 +23222,6 @@
       "fuente": "FUTGAL_OFICIAL"
     }
   ],
-  "fechaClasificacionOficial": "2026-11-24T19:28:39.764Z",
+  "fechaClasificacionOficial": "2026-11-24T21:27:46.236Z",
   "fuenteClasificacionOficial": "FUTGAL"
 }

@@ -1,11 +1,11 @@
 {
-  "fecha": "2026-11-24T19:28:46.211Z",
+  "fecha": "2026-11-24T21:27:52.070Z",
   "fuenteOficial": "FUTGAL",
   "fuenteLocal": "ACTAS_FUTGAL",
   "totalFutgal": 137,
-  "totalActas": 144,
-  "coincidencias": 136,
-  "diferencias": 8,
+  "totalActas": 137,
+  "coincidencias": 137,
+  "diferencias": 0,
   "filas": [
     {
       "jugador": "FERRO ROZAS, GONZALO",
@@ -492,17 +492,6 @@
       "soloActas": false
     },
     {
-      "jugador": "ALVAREZ GACIO, GABRIEL",
-      "equipoFutgal": "SPORTING CAMBRE AS TRAVESAS",
-      "equipoActas": "SPORTING CAMBRE AS TRAVESAS",
-      "golesFutgal": 1,
-      "golesActas": 2,
-      "diferencia": -1,
-      "coincide": false,
-      "soloFutgal": false,
-      "soloActas": false
-    },
-    {
       "jugador": "ANEIROS RODRIGUEZ, ANTONIO",
       "equipoFutgal": "CEDEIRA S.D.",
       "equipoActas": "CEDEIRA S.D.",
@@ -822,15 +811,15 @@
       "soloActas": false
     },
     {
-      "jugador": "BEADE VILA, JORGE",
-      "equipoFutgal": "",
-      "equipoActas": "OZA DE LOS RÍOS",
-      "golesFutgal": 0,
+      "jugador": "ALVAREZ GACIO, GABRIEL",
+      "equipoFutgal": "SPORTING CAMBRE AS TRAVESAS",
+      "equipoActas": "SPORTING CAMBRE AS TRAVESAS",
+      "golesFutgal": 1,
       "golesActas": 1,
-      "diferencia": -1,
-      "coincide": false,
+      "diferencia": 0,
+      "coincide": true,
       "soloFutgal": false,
-      "soloActas": true
+      "soloActas": false
     },
     {
       "jugador": "BELLO GABIN, ADRIÁN J",
@@ -1185,17 +1174,6 @@
       "soloActas": false
     },
     {
-      "jugador": "LOUSADO NOGUEIRA, JUAN JOSE",
-      "equipoFutgal": "",
-      "equipoActas": "LICEO DE MONELOS S.D.",
-      "golesFutgal": 0,
-      "golesActas": 1,
-      "diferencia": -1,
-      "coincide": false,
-      "soloFutgal": false,
-      "soloActas": true
-    },
-    {
       "jugador": "MAGAN LABORA, MIGUEL",
       "equipoFutgal": "SPORTING BURGO",
       "equipoActas": "SPORTING BURGO",
@@ -1205,17 +1183,6 @@
       "coincide": true,
       "soloFutgal": false,
       "soloActas": false
-    },
-    {
-      "jugador": "MAGDALENA SOUTO, IVAN",
-      "equipoFutgal": "",
-      "equipoActas": "CAMPANAL DE LOUREDA F. C.",
-      "golesFutgal": 0,
-      "golesActas": 1,
-      "diferencia": -1,
-      "coincide": false,
-      "soloFutgal": false,
-      "soloActas": true
     },
     {
       "jugador": "MALLO LOPEZ, JOSE LUIS",
@@ -1383,17 +1350,6 @@
       "soloActas": false
     },
     {
-      "jugador": "RODRIGUEZ GIAO, JAVIER",
-      "equipoFutgal": "",
-      "equipoActas": "SPORTING BURGO",
-      "golesFutgal": 0,
-      "golesActas": 1,
-      "diferencia": -1,
-      "coincide": false,
-      "soloFutgal": false,
-      "soloActas": true
-    },
-    {
       "jugador": "RODRIGUEZ PEREZ, RUBEN",
       "equipoFutgal": "C.D. SIGRAS",
       "equipoActas": "C.D. SIGRAS",
@@ -1403,17 +1359,6 @@
       "coincide": true,
       "soloFutgal": false,
       "soloActas": false
-    },
-    {
-      "jugador": "RUMBO MENDEZ, MARCOS",
-      "equipoFutgal": "",
-      "equipoActas": "C.D. SIGRAS",
-      "golesFutgal": 0,
-      "golesActas": 1,
-      "diferencia": -1,
-      "coincide": false,
-      "soloFutgal": false,
-      "soloActas": true
     },
     {
       "jugador": "RUMBO SUAREZ, ROBERTO",
@@ -1471,17 +1416,6 @@
       "soloActas": false
     },
     {
-      "jugador": "SANCHEZ SOTO, MANUEL",
-      "equipoFutgal": "",
-      "equipoActas": "LICEO DE MONELOS S.D.",
-      "golesFutgal": 0,
-      "golesActas": 1,
-      "diferencia": -1,
-      "coincide": false,
-      "soloFutgal": false,
-      "soloActas": true
-    },
-    {
       "jugador": "SÁNCHEZ VIEIRO, SERGIO",
       "equipoFutgal": "XUVENTUDE DORNEDA",
       "equipoActas": "XUVENTUDE DORNEDA",
@@ -1537,17 +1471,6 @@
       "soloActas": false
     },
     {
-      "jugador": "TEIXEIRA SANMARTIN, RUI M",
-      "equipoFutgal": "",
-      "equipoActas": "C.D. SIGRAS",
-      "golesFutgal": 0,
-      "golesActas": 1,
-      "diferencia": -1,
-      "coincide": false,
-      "soloFutgal": false,
-      "soloActas": true
-    },
-    {
       "jugador": "UZAL GOLPE, JUAN M",
       "equipoFutgal": "SPORTING BURGO",
       "equipoActas": "SPORTING BURGO",
@@ -1592,94 +1515,5 @@
       "soloActas": false
     }
   ],
-  "detalleDiferencias": [
-    {
-      "jugador": "ALVAREZ GACIO, GABRIEL",
-      "equipoFutgal": "SPORTING CAMBRE AS TRAVESAS",
-      "equipoActas": "SPORTING CAMBRE AS TRAVESAS",
-      "golesFutgal": 1,
-      "golesActas": 2,
-      "diferencia": -1,
-      "coincide": false,
-      "soloFutgal": false,
-      "soloActas": false
-    },
-    {
-      "jugador": "BEADE VILA, JORGE",
-      "equipoFutgal": "",
-      "equipoActas": "OZA DE LOS RÍOS",
-      "golesFutgal": 0,
-      "golesActas": 1,
-      "diferencia": -1,
-      "coincide": false,
-      "soloFutgal": false,
-      "soloActas": true
-    },
-    {
-      "jugador": "LOUSADO NOGUEIRA, JUAN JOSE",
-      "equipoFutgal": "",
-      "equipoActas": "LICEO DE MONELOS S.D.",
-      "golesFutgal": 0,
-      "golesActas": 1,
-      "diferencia": -1,
-      "coincide": false,
-      "soloFutgal": false,
-      "soloActas": true
-    },
-    {
-      "jugador": "MAGDALENA SOUTO, IVAN",
-      "equipoFutgal": "",
-      "equipoActas": "CAMPANAL DE LOUREDA F. C.",
-      "golesFutgal": 0,
-      "golesActas": 1,
-      "diferencia": -1,
-      "coincide": false,
-      "soloFutgal": false,
-      "soloActas": true
-    },
-    {
-      "jugador": "RODRIGUEZ GIAO, JAVIER",
-      "equipoFutgal": "",
-      "equipoActas": "SPORTING BURGO",
-      "golesFutgal": 0,
-      "golesActas": 1,
-      "diferencia": -1,
-      "coincide": false,
-      "soloFutgal": false,
-      "soloActas": true
-    },
-    {
-      "jugador": "RUMBO MENDEZ, MARCOS",
-      "equipoFutgal": "",
-      "equipoActas": "C.D. SIGRAS",
-      "golesFutgal": 0,
-      "golesActas": 1,
-      "diferencia": -1,
-      "coincide": false,
-      "soloFutgal": false,
-      "soloActas": true
-    },
-    {
-      "jugador": "SANCHEZ SOTO, MANUEL",
-      "equipoFutgal": "",
-      "equipoActas": "LICEO DE MONELOS S.D.",
-      "golesFutgal": 0,
-      "golesActas": 1,
-      "diferencia": -1,
-      "coincide": false,
-      "soloFutgal": false,
-      "soloActas": true
-    },
-    {
-      "jugador": "TEIXEIRA SANMARTIN, RUI M",
-      "equipoFutgal": "",
-      "equipoActas": "C.D. SIGRAS",
-      "golesFutgal": 0,
-      "golesActas": 1,
-      "diferencia": -1,
-      "coincide": false,
-      "soloFutgal": false,
-      "soloActas": true
-    }
-  ]
+  "detalleDiferencias": []
 }

@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "jornada": 13,
+    "cambios": [
+      {
+        "tipo": "cambio_programacion",
+        "local": "U.D. PAIOSACO H.AÑON",
+        "visitante": "C.C.D. CURTIS",
+        "diferencias": {
+          "hora": {
+            "antes": null,
+            "ahora": "18:00"
+          }
+        }
+      }
+    ]
+  }
+]
