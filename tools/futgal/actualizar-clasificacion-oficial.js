@@ -43,8 +43,9 @@ function calculados(c){
   return out;
 }
 
-async function abrir(page,eqs){
-  await page.goto(URL_J1,{waitUntil:'domcontentloaded',timeout:60000});
+async function abrir(page,eqs,jornada){
+  const urlJornada = URL_J1.replace(/CodJornada=1\b/, 'CodJornada=' + jornada);
+  await page.goto(urlJornada,{waitUntil:'domcontentloaded',timeout:60000});
   await page.waitForTimeout(1500);
 
   const els=page.locator('a,button,[role="button"]');
@@ -71,7 +72,7 @@ async function abrir(page,eqs){
   for(const prim of ['1000110','1000120']){
     const u='https://www.futgal.es/pnfg/NPcd/NFG_VisClasificacion?cod_primaria='+prim+
       '&CodCompeticion=26991153&CodGrupo=28251751&CodTemporada=22&cod_agrupacion=1'+
-      '&Sch_Codigo_Delegacion=1&Sch_Tipo_Juego=1';
+      '&Sch_Codigo_Delegacion=1&Sch_Tipo_Juego=1&CodJornada='+jornada;
     try{
       await page.goto(u,{waitUntil:'domcontentloaded',timeout:60000});
       await page.waitForTimeout(1800);
@@ -191,10 +192,25 @@ function detectarPts(rows,calc){
   if(eqs.length!==16) throw new Error(`Calendario: ${eqs.length}/16 equipos.`);
   const calc=calculados(comp);
 
+  const jornadasConResultados = (comp.jornadas || [])
+    .filter(j => (j.partidos || []).some(p =>
+      p.resultado &&
+      Number.isFinite(Number(p.resultado.local)) &&
+      Number.isFinite(Number(p.resultado.visitante))
+    ))
+    .map(j => Number(j.numero))
+    .filter(Number.isFinite);
+
+  const jornadaClasificacion = jornadasConResultados.length
+    ? Math.max(...jornadasConResultados)
+    : 1;
+
+  console.log('Clasificación oficial solicitada para jornada:', jornadaClasificacion);
+
   const browser=await chromium.launch(EN_CI?{headless:true}:{channel:'chrome',headless:false});
   const page=await (await browser.newContext({locale:'es-ES',timezoneId:'Europe/Madrid'})).newPage();
   try{
-    await abrir(page,eqs);
+    await abrir(page,eqs,jornadaClasificacion);
     const raw=await filas(page);
     const rows=[],seen=new Set();
     for(const cells of raw){
