@@ -1,5 +1,5 @@
 {
-  "fecha": "2026-11-24T14:19:55.356Z",
+  "fecha": "2026-11-24T17:28:16.903Z",
   "metodo": "10E_futgal_fresco_con_checkpoint_solo_respaldo",
   "totalEquipos": 16,
   "jornadasEsperadas": 30,
@@ -798,15 +798,15 @@
           "local": "SPORTING BURGO",
           "visitante": "SADA F.C. A NOSA VIÑA",
           "fecha": "28-11-2026",
-          "hora": null,
+          "hora": "18:00",
           "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
         },
         {
           "local": "SAN MARTIÑO S.D.",
           "visitante": "XUVENTUDE DORNEDA",
           "fecha": "28-11-2026",
-          "hora": null,
-          "campo": "A Revolta (Queixas)"
+          "hora": "16:00",
+          "campo": "Anexo O Roxo (Cerceda)"
         },
         {
           "local": "U.D. PAIOSACO H.AÑON",
@@ -2166,5 +2166,9 @@
       "origenDatos": "FUTGAL_FRESCO",
       "fechaLecturaFresca": "2026-11-24T14:19:53.153Z"
     }
+  ],
+  "modoActualizacion": "fast",
+  "jornadasObjetivoRapido": [
+    11
   ]
 }
