@@ -59,23 +59,17 @@ jobs:
         working-directory: tools/futgal
         run: node actualizar-clasificacion-oficial.js
 
-      - name: Validar salida
-        working-directory: tools/futgal
-        run: node verificar-salida-github.js
+      - name: Preparar competicion.json público
+        run: cp tools/futgal/competicion.json ./competicion.json
 
-      - name: Preparar JSON público
-        run: |
-          cp tools/futgal/competicion.json ./competicion.json
-          cp tools/futgal/validacion-competicion.json ./validacion-competicion.json
-          cp tools/futgal/diagnostico-cambios-calendario.json ./diagnostico-cambios-calendario.json
+      - name: Validar salida rápida
+        run: node tools/futgal/verificar-salida-github.js
 
       - name: Publicar
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add competicion.json validacion-competicion.json diagnostico-cambios-calendario.json \
-            tools/futgal/competicion.json tools/futgal/clasificacion-oficial.json \
-            tools/futgal/checkpoint-calendario.json tools/futgal/checkpoint-calendario-parcial.json
+          git add competicion.json             tools/futgal/competicion.json tools/futgal/clasificacion-oficial.json             tools/futgal/checkpoint-calendario.json tools/futgal/checkpoint-calendario-parcial.json
           if git diff --cached --quiet; then
             echo "No hay cambios que publicar."
           else
