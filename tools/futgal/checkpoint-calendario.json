@@ -1,10 +1,10 @@
 {
-  "fecha": "2026-11-24T09:30:55.818Z",
+  "fecha": "2026-11-24T12:09:06.879Z",
   "metodo": "10E_futgal_fresco_con_checkpoint_solo_respaldo",
   "totalEquipos": 16,
   "jornadasEsperadas": 30,
   "jornadasConFallback": [],
-  "cambiosDetectados": 0,
+  "cambiosDetectados": 1,
   "jornadas": [
     {
       "numero": 1,
@@ -82,7 +82,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478211&cod_acta=1478211"
       ],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-24T09:26:49.183Z"
+      "fechaLecturaFresca": "2026-11-24T12:05:13.350Z"
     },
     {
       "numero": 2,
@@ -160,7 +160,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478217&cod_acta=1478217"
       ],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-24T09:26:55.431Z"
+      "fechaLecturaFresca": "2026-11-24T12:05:19.659Z"
     },
     {
       "numero": 3,
@@ -238,7 +238,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478229&cod_acta=1478229"
       ],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-24T09:27:01.953Z"
+      "fechaLecturaFresca": "2026-11-24T12:05:25.659Z"
     },
     {
       "numero": 4,
@@ -316,7 +316,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478237&cod_acta=1478237"
       ],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-24T09:27:08.484Z"
+      "fechaLecturaFresca": "2026-11-24T12:05:31.749Z"
     },
     {
       "numero": 5,
@@ -394,7 +394,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478244&cod_acta=1478244"
       ],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-24T09:27:22.782Z"
+      "fechaLecturaFresca": "2026-11-24T12:05:45.976Z"
     },
     {
       "numero": 6,
@@ -472,7 +472,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478248&cod_acta=1478248"
       ],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-24T09:27:29.002Z"
+      "fechaLecturaFresca": "2026-11-24T12:05:51.811Z"
     },
     {
       "numero": 7,
@@ -550,7 +550,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478263&cod_acta=1478263"
       ],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-24T09:27:35.220Z"
+      "fechaLecturaFresca": "2026-11-24T12:05:57.997Z"
     },
     {
       "numero": 8,
@@ -628,7 +628,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478269&cod_acta=1478269"
       ],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-24T09:27:41.834Z"
+      "fechaLecturaFresca": "2026-11-24T12:06:04.411Z"
     },
     {
       "numero": 9,
@@ -706,7 +706,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478274&cod_acta=1478274"
       ],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-24T09:27:56.009Z"
+      "fechaLecturaFresca": "2026-11-24T12:06:18.396Z"
     },
     {
       "numero": 10,
@@ -784,7 +784,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478402&cod_acta=1478402"
       ],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-24T09:28:03.163Z"
+      "fechaLecturaFresca": "2026-11-24T12:06:24.383Z"
     },
     {
       "numero": 11,
@@ -800,13 +800,6 @@
           "fecha": "28-11-2026",
           "hora": null,
           "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo"
-        },
-        {
-          "local": "CEDEIRA S.D.",
-          "visitante": "LICEO DE MONELOS S.D.",
-          "fecha": "28-11-2026",
-          "hora": null,
-          "campo": "Municipal Carmen Maseda (O Beco)"
         },
         {
           "local": "SAN MARTIÑO S.D.",
@@ -828,6 +821,13 @@
           "fecha": "28-11-2026",
           "hora": "18:00",
           "campo": "Os Pinares, (Brexo Lema)"
+        },
+        {
+          "local": "CEDEIRA S.D.",
+          "visitante": "LICEO DE MONELOS S.D.",
+          "fecha": "28-11-2026",
+          "hora": "18:15",
+          "campo": "Municipal Carmen Maseda (O Beco)"
         },
         {
           "local": "BETANZOS NORTE",
@@ -853,7 +853,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-24T09:28:09.421Z"
+      "fechaLecturaFresca": "2026-11-24T12:06:30.464Z"
     },
     {
       "numero": 12,
@@ -922,7 +922,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-24T09:28:15.725Z"
+      "fechaLecturaFresca": "2026-11-24T12:06:36.890Z"
     },
     {
       "numero": 13,
@@ -991,7 +991,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-24T09:28:30.845Z"
+      "fechaLecturaFresca": "2026-11-24T12:06:50.799Z"
     },
     {
       "numero": 14,
@@ -1060,7 +1060,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-24T09:28:37.115Z"
+      "fechaLecturaFresca": "2026-11-24T12:06:56.657Z"
     },
     {
       "numero": 15,
@@ -1129,7 +1129,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-24T09:28:43.573Z"
+      "fechaLecturaFresca": "2026-11-24T12:07:02.830Z"
     },
     {
       "numero": 16,
@@ -1198,7 +1198,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-24T09:28:49.835Z"
+      "fechaLecturaFresca": "2026-11-24T12:07:08.869Z"
     },
     {
       "numero": 17,
@@ -1267,7 +1267,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-24T09:29:04.296Z"
+      "fechaLecturaFresca": "2026-11-24T12:07:22.738Z"
     },
     {
       "numero": 18,
@@ -1336,7 +1336,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-24T09:29:10.410Z"
+      "fechaLecturaFresca": "2026-11-24T12:07:28.654Z"
     },
     {
       "numero": 19,
@@ -1405,7 +1405,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-24T09:29:17.222Z"
+      "fechaLecturaFresca": "2026-11-24T12:07:34.465Z"
     },
     {
       "numero": 20,
@@ -1474,7 +1474,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-24T09:29:23.922Z"
+      "fechaLecturaFresca": "2026-11-24T12:07:40.946Z"
     },
     {
       "numero": 21,
@@ -1543,7 +1543,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-24T09:29:38.336Z"
+      "fechaLecturaFresca": "2026-11-24T12:07:55.133Z"
     },
     {
       "numero": 22,
@@ -1612,7 +1612,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-24T09:29:44.942Z"
+      "fechaLecturaFresca": "2026-11-24T12:08:00.970Z"
     },
     {
       "numero": 23,
@@ -1681,7 +1681,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-24T09:29:52.090Z"
+      "fechaLecturaFresca": "2026-11-24T12:08:06.886Z"
     },
     {
       "numero": 24,
@@ -1750,7 +1750,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-24T09:29:58.374Z"
+      "fechaLecturaFresca": "2026-11-24T12:08:12.841Z"
     },
     {
       "numero": 25,
@@ -1819,7 +1819,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-24T09:30:12.626Z"
+      "fechaLecturaFresca": "2026-11-24T12:08:26.730Z"
     },
     {
       "numero": 26,
@@ -1888,7 +1888,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-24T09:30:18.751Z"
+      "fechaLecturaFresca": "2026-11-24T12:08:32.815Z"
     },
     {
       "numero": 27,
@@ -1957,7 +1957,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-24T09:30:25.076Z"
+      "fechaLecturaFresca": "2026-11-24T12:08:38.674Z"
     },
     {
       "numero": 28,
@@ -2026,7 +2026,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-24T09:30:31.962Z"
+      "fechaLecturaFresca": "2026-11-24T12:08:44.487Z"
     },
     {
       "numero": 29,
@@ -2095,7 +2095,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-24T09:30:46.830Z"
+      "fechaLecturaFresca": "2026-11-24T12:08:58.424Z"
     },
     {
       "numero": 30,
@@ -2164,7 +2164,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-24T09:30:53.614Z"
+      "fechaLecturaFresca": "2026-11-24T12:09:04.673Z"
     }
   ]
 }

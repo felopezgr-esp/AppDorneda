@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "jornada": 11,
+    "cambios": [
+      {
+        "tipo": "cambio_programacion",
+        "local": "CEDEIRA S.D.",
+        "visitante": "LICEO DE MONELOS S.D.",
+        "diferencias": {
+          "hora": {
+            "antes": null,
+            "ahora": "18:15"
+          }
+        }
+      }
+    ]
+  }
+]
