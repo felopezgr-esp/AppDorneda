@@ -2,7 +2,7 @@ const { chromium } = require('playwright');
 const fs = require('fs');
 
 const EN_CI = process.env.GITHUB_ACTIONS === 'true' || process.env.CI === 'true';
-const URL =
+const COMPETICION_URL =
   'https://www.futgal.es/pnfg/NPcd/NFG_CmpJornada?' +
   'cod_primaria=1000120&CodCompeticion=26991153&CodGrupo=28251751' +
   '&CodTemporada=22&cod_agrupacion=1&CodJornada=11' +
@@ -42,7 +42,7 @@ function tablaActas(comp){
 }
 
 async function abrirGoleadores(page){
-  await page.goto(URL,{waitUntil:'domcontentloaded',timeout:60000});
+  await page.goto(COMPETICION_URL,{waitUntil:'domcontentloaded',timeout:60000});
   await page.waitForTimeout(1200);
 
   const els=page.locator('a,button,input[type="button"],input[type="submit"],[role="button"]');
