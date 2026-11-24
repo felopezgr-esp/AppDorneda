@@ -1,5 +1,5 @@
 name: Actualizar FUTGAL
-run-name: ${{ github.event_name == 'workflow_run' && format('Auditoría FUTGAL · fast-run-{0}', github.event.workflow_run.id) || format('Actualizar FUTGAL · {0}', inputs.request_id || 'manual') }}
+run-name: ${{ github.event_name == 'workflow_run' && format('Auditoría FUTGAL · tras botón · {0}', github.event.workflow_run.id) || github.event_name == 'schedule' && 'Auditoría FUTGAL · domingo 23:59' || format('Auditoría FUTGAL · {0}', inputs.request_id || 'manual') }}
 
 on:
   workflow_dispatch:
@@ -8,6 +8,9 @@ on:
         description: "Identificador de la solicitud web"
         required: false
         type: string
+  schedule:
+    - cron: '59 23 * * 0'
+      timezone: 'Europe/Madrid'
   workflow_run:
     workflows:
       - "Actualizar FUTGAL rápido"
@@ -23,78 +26,58 @@ concurrency:
 
 jobs:
   actualizar:
-    if: ${{ github.event_name == 'workflow_dispatch' || (github.event.workflow_run.head_branch == 'main' && github.event.workflow_run.conclusion != 'cancelled') }}
+    if: >-
+      ${{
+        github.event_name != 'workflow_run' ||
+        (
+          github.event.workflow_run.head_branch == 'main' &&
+          github.event.workflow_run.conclusion == 'success' &&
+          github.event.workflow_run.event == 'workflow_dispatch'
+        )
+      }}
     runs-on: ubuntu-latest
-    timeout-minutes: 45
-
+    timeout-minutes: 50
     env:
       CI: "true"
       TZ: Europe/Madrid
-
     steps:
       - name: Descargar repositorio
         uses: actions/checkout@v4
-
       - name: Preparar Node
         uses: actions/setup-node@v4
         with:
           node-version: "22"
-
       - name: Instalar dependencias
         working-directory: tools/futgal
         run: npm install --no-audit --no-fund
-
-      - name: Instalar Chromium de Playwright
+      - name: Instalar Chromium
         working-directory: tools/futgal
         run: npx playwright install --with-deps chromium
-
-      - name: Ejecutar auditoría completa FUTGAL
+      - name: Repasar todas las jornadas J1-J30
         working-directory: tools/futgal
         run: node actualizar-futgal.js
-
-      - name: Validar salida antes de publicar
+      - name: Leer clasificación oficial FUTGAL
+        working-directory: tools/futgal
+        run: node actualizar-clasificacion-oficial.js
+      - name: Validar salida
         working-directory: tools/futgal
         run: node verificar-salida-github.js
-
-      - name: Preparar JSON público para AppDorneda
+      - name: Preparar JSON público
         run: |
           cp tools/futgal/competicion.json ./competicion.json
+          cp tools/futgal/clasificacion-oficial.json ./clasificacion-oficial.json
           cp tools/futgal/validacion-competicion.json ./validacion-competicion.json
           cp tools/futgal/diagnostico-cambios-calendario.json ./diagnostico-cambios-calendario.json
-
-      - name: Guardar diagnóstico de la ejecución
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: futgal-diagnostico-${{ github.run_number }}
-          if-no-files-found: ignore
-          retention-days: 14
-          path: |
-            tools/futgal/competicion.json
-            tools/futgal/validacion-competicion.json
-            tools/futgal/diagnostico-cambios-calendario.json
-            tools/futgal/diagnostico-actas.json
-            tools/futgal/diagnostico-navegacion.json
-            tools/futgal/salida-integracion.txt
-            tools/futgal/error-integracion.png
-            tools/futgal/errores/
-
-      - name: Publicar solo si todo fue correcto
+      - name: Publicar
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          git add \
-            competicion.json \
-            validacion-competicion.json \
-            diagnostico-cambios-calendario.json \
-            tools/futgal/checkpoint-actas.json \
-            tools/futgal/checkpoint-calendario.json \
-            tools/futgal/checkpoint-calendario-parcial.json
-
+          git add competicion.json clasificacion-oficial.json validacion-competicion.json \
+            diagnostico-cambios-calendario.json tools/futgal/checkpoint-actas.json \
+            tools/futgal/checkpoint-calendario.json tools/futgal/checkpoint-calendario-parcial.json
           if git diff --cached --quiet; then
             echo "No hay cambios que publicar."
           else
-            git commit -m "Auditar datos FUTGAL"
+            git commit -m "Auditar FUTGAL completo y clasificación oficial"
             git push
           fi
