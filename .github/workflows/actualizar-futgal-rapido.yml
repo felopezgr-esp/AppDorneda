@@ -24,44 +24,58 @@ concurrency:
 jobs:
   actualizar:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 10
     env:
       CI: "true"
       TZ: Europe/Madrid
+      PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "1"
+
     steps:
       - name: Descargar repositorio
         uses: actions/checkout@v4
+
       - name: Preparar Node
         uses: actions/setup-node@v4
         with:
           node-version: "22"
+
+      - name: Restaurar dependencias FUTGAL
+        id: cache-futgal
+        uses: actions/cache@v4
+        with:
+          path: tools/futgal/node_modules
+          key: ${{ runner.os }}-node22-futgal-${{ hashFiles('tools/futgal/package.json') }}
+
       - name: Instalar dependencias
+        if: steps.cache-futgal.outputs.cache-hit != 'true'
         working-directory: tools/futgal
         run: npm install --no-audit --no-fund
-      - name: Instalar Chromium
-        working-directory: tools/futgal
-        run: npx playwright install --with-deps chromium
-      - name: Actualizar jornada actual
+
+      - name: Actualizar SOLO jornada de esta semana
         working-directory: tools/futgal
         run: node actualizar-futgal-rapido.js
-      - name: Preservar clasificación oficial
+
+      - name: Actualizar clasificación oficial FUTGAL
         working-directory: tools/futgal
-        run: node preservar-clasificacion-oficial.js
+        run: node actualizar-clasificacion-oficial.js
+
       - name: Validar salida
         working-directory: tools/futgal
         run: node verificar-salida-github.js
+
       - name: Preparar JSON público
         run: |
           cp tools/futgal/competicion.json ./competicion.json
           cp tools/futgal/validacion-competicion.json ./validacion-competicion.json
           cp tools/futgal/diagnostico-cambios-calendario.json ./diagnostico-cambios-calendario.json
+
       - name: Publicar
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add competicion.json validacion-competicion.json diagnostico-cambios-calendario.json \
-            tools/futgal/checkpoint-actas.json tools/futgal/checkpoint-calendario.json \
-            tools/futgal/checkpoint-calendario-parcial.json
+            tools/futgal/competicion.json tools/futgal/clasificacion-oficial.json \
+            tools/futgal/checkpoint-calendario.json tools/futgal/checkpoint-calendario-parcial.json
           if git diff --cached --quiet; then
             echo "No hay cambios que publicar."
           else
