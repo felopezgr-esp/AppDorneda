@@ -45,8 +45,8 @@ function calculados(c){
 
 async function abrir(page,eqs,jornada){
   const urlJornada = URL_J1.replace(/CodJornada=1\b/, 'CodJornada=' + jornada);
-  await page.goto(urlJornada,{waitUntil:'domcontentloaded',timeout:60000});
-  await page.waitForTimeout(1500);
+  await page.goto(urlJornada,{waitUntil:'domcontentloaded',timeout:15000});
+  await page.waitForTimeout(500);
 
   const els=page.locator('a,button,[role="button"]');
   for(let i=0;i<await els.count();i++){
@@ -61,9 +61,9 @@ async function abrir(page,eqs,jornada){
     try{
       const href=await el.getAttribute('href').catch(()=>null);
       if(href && href!=='#' && !/^javascript:/i.test(href))
-        await page.goto(new URL(href,page.url()).href,{waitUntil:'domcontentloaded',timeout:60000});
-      else await el.click({timeout:10000});
-      await page.waitForTimeout(1800);
+        await page.goto(new URL(href,page.url()).href,{waitUntil:'domcontentloaded',timeout:15000});
+      else await el.click({timeout:5000});
+      await page.waitForTimeout(500);
       const body=norm(await page.locator('body').innerText().catch(()=>''));
       if(eqs.filter(x=>body.includes(norm(x))).length>=14) return;
     }catch{}
@@ -74,8 +74,8 @@ async function abrir(page,eqs,jornada){
       '&CodCompeticion=26991153&CodGrupo=28251751&CodTemporada=22&cod_agrupacion=1'+
       '&Sch_Codigo_Delegacion=1&Sch_Tipo_Juego=1&CodJornada='+jornada;
     try{
-      await page.goto(u,{waitUntil:'domcontentloaded',timeout:60000});
-      await page.waitForTimeout(1800);
+      await page.goto(u,{waitUntil:'domcontentloaded',timeout:15000});
+      await page.waitForTimeout(500);
       const body=norm(await page.locator('body').innerText().catch(()=>''));
       if(eqs.filter(x=>body.includes(norm(x))).length>=14) return;
     }catch{}
@@ -116,11 +116,7 @@ function detectarPts(rows,calc){
     const vals=[];
 
     for(const r of rows){
-      if(r.hit.indice===col){
-        team=true;
-        break;
-      }
-
+      if(r.hit.indice===col){ team=true; break; }
       const v=n(r.cells[col]);
       if(v==null) continue;
 
@@ -146,9 +142,6 @@ function detectarPts(rows,calc){
     const maxVal=Math.max(...vals);
     const minVal=Math.min(...vals);
 
-    // Una columna de puntos real debe contener enteros y,
-    // con 10 jornadas disputadas, al menos algún valor >= 10.
-    // Esto evita confundir PG/PE/PP u otras columnas pequeñas con PTS.
     if(minVal < -20 || maxVal > 60) continue;
     if(maxVal < 10) continue;
     if(!vals.every(Number.isInteger)) continue;
@@ -163,11 +156,6 @@ function detectarPts(rows,calc){
     rows.forEach(r=>console.error(JSON.stringify(r.cells)));
     return null;
   }
-
-  console.log(
-    'Columnas candidatas:',
-    cand.slice(0,5)
-  );
 
   if(cand[0].avgErr > 5){
     throw new Error(
@@ -192,6 +180,14 @@ function detectarPts(rows,calc){
   if(eqs.length!==16) throw new Error(`Calendario: ${eqs.length}/16 equipos.`);
   const calc=calculados(comp);
 
+  const objetivoRapido =
+    comp.modoActualizacion === 'fast' &&
+    Array.isArray(comp.jornadasObjetivoRapido) &&
+    comp.jornadasObjetivoRapido.length === 1 &&
+    Number.isInteger(Number(comp.jornadasObjetivoRapido[0]))
+      ? Number(comp.jornadasObjetivoRapido[0])
+      : null;
+
   const jornadasConResultados = (comp.jornadas || [])
     .filter(j => (j.partidos || []).some(p =>
       p.resultado &&
@@ -201,23 +197,38 @@ function detectarPts(rows,calc){
     .map(j => Number(j.numero))
     .filter(Number.isFinite);
 
-  const jornadaClasificacion = jornadasConResultados.length
-    ? Math.max(...jornadasConResultados)
-    : 1;
+  const jornadaClasificacion = objetivoRapido ||
+    (jornadasConResultados.length
+      ? Math.max(...jornadasConResultados)
+      : 1);
 
   console.log('Clasificación oficial solicitada para jornada:', jornadaClasificacion);
 
-  const browser=await chromium.launch(EN_CI?{headless:true}:{channel:'chrome',headless:false});
-  const page=await (await browser.newContext({locale:'es-ES',timezoneId:'Europe/Madrid'})).newPage();
+  const browser=await chromium.launch(
+    EN_CI
+      ? {channel:'chrome',headless:true}
+      : {channel:'chrome',headless:false}
+  );
+
+  const page=await (await browser.newContext({
+    locale:'es-ES',
+    timezoneId:'Europe/Madrid'
+  })).newPage();
+
   try{
     await abrir(page,eqs,jornadaClasificacion);
     const raw=await filas(page);
     const rows=[],seen=new Set();
+
     for(const cells of raw){
-      const hit=matchEquipo(cells,eqs); if(!hit) continue;
-      const k=norm(hit.equipo); if(seen.has(k)) continue;
-      seen.add(k); rows.push({cells,hit});
+      const hit=matchEquipo(cells,eqs);
+      if(!hit) continue;
+      const k=norm(hit.equipo);
+      if(seen.has(k)) continue;
+      seen.add(k);
+      rows.push({cells,hit});
     }
+
     if(rows.length!==16) throw new Error(`Clasificación: ${rows.length}/16 equipos detectados.`);
 
     const ptsCol=detectarPts(rows,calc);
@@ -227,6 +238,7 @@ function detectarPts(rows,calc){
       const c=calc.get(norm(r.hit.equipo))||{};
       const pts=n(r.cells[ptsCol]);
       if(pts==null) throw new Error('Puntos no legibles para '+r.hit.equipo);
+
       return {
         pos:i+1,equipo:r.hit.equipo,pts,
         pj:c.pj||0,g:c.g||0,e:c.e||0,p:c.p||0,gf:c.gf||0,gc:c.gc||0,
@@ -241,11 +253,23 @@ function detectarPts(rows,calc){
     comp.clasificacionOficial=clasif;
     comp.fechaClasificacionOficial=new Date().toISOString();
     comp.fuenteClasificacionOficial='FUTGAL';
+
     write('competicion.json',comp);
-    write('clasificacion-oficial.json',{fechaExtraccion:comp.fechaClasificacionOficial,fuente:'FUTGAL',filas:clasif});
+    write('clasificacion-oficial.json',{
+      fechaExtraccion:comp.fechaClasificacionOficial,
+      fuente:'FUTGAL',
+      jornada:jornadaClasificacion,
+      filas:clasif
+    });
+
     console.log('Clasificación oficial FUTGAL: 16/16 OK');
   }catch(e){
     try{await page.screenshot({path:'error-clasificacion.png',fullPage:true});}catch{}
     throw e;
-  }finally{ await browser.close(); }
-})().catch(e=>{ console.error(e.stack||e.message); process.exit(1); });
+  }finally{
+    await browser.close();
+  }
+})().catch(e=>{
+  console.error(e.stack||e.message);
+  process.exit(1);
+});

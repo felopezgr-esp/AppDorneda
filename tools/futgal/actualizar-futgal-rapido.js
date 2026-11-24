@@ -1,47 +1,49 @@
+const { chromium } = require('playwright');
 const fs = require('fs');
-const path = require('path');
-const { spawnSync } = require('child_process');
 
-const basePath = path.join(__dirname, 'actualizar-futgal.js');
-const tempPath = path.join(__dirname, '.actualizar-futgal-rapido-runtime.js');
+const EN_CI =
+  process.env.GITHUB_ACTIONS === 'true' ||
+  process.env.CI === 'true';
 
-if (!fs.existsSync(basePath)) {
-  console.error('No existe tools/futgal/actualizar-futgal.js');
-  process.exit(1);
+const COMP_BASE =
+  'https://www.futgal.es/pnfg/NPcd/NFG_CmpJornada?' +
+  'cod_primaria=1000120' +
+  '&CodCompeticion=26991153' +
+  '&CodGrupo=28251751' +
+  '&CodTemporada=22' +
+  '&cod_agrupacion=1' +
+  '&Sch_Codigo_Delegacion=1' +
+  '&Sch_Tipo_Juego=1';
+
+function clean(s) {
+  return String(s || '').replace(/\s+/g, ' ').trim();
 }
 
-let src = fs.readFileSync(basePath, 'utf8');
-let cambios = 0;
+function norm(s) {
+  return clean(s)
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLocaleLowerCase('es')
+    .replace(/[^a-z0-9ñ]+/gi, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
 
-function reemplazarUnaVez(nombre, regex, replacement) {
-  const flags = regex.flags.includes('g') ? regex.flags : regex.flags + 'g';
-  const matches = [...src.matchAll(new RegExp(regex.source, flags))];
-
-  if (matches.length !== 1) {
-    throw new Error(
-      `${nombre}: esperaba 1 coincidencia y encontré ${matches.length}. ` +
-      'No ejecuto el modo rápido para no alterar una versión del scraper que no reconozco.'
-    );
+function readJson(path, fallback = null) {
+  try {
+    return JSON.parse(fs.readFileSync(path, 'utf8'));
+  } catch {
+    return fallback;
   }
-
-  src = src.replace(regex, replacement);
-  cambios++;
 }
 
-// 1) Identificador de modo. No cambia la lógica de validación del scraper original.
-reemplazarUnaVez(
-  'insertar modo rápido',
-  /const EN_CI =\s*\n\s*process\.env\.GITHUB_ACTIONS === 'true' \|\|\s*\n\s*process\.env\.CI === 'true';/,
-  `const EN_CI =\n  process.env.GITHUB_ACTIONS === 'true' ||\n  process.env.CI === 'true';\n\nconst FUTGAL_MODO_RAPIDO = true;`
-);
+function writeJson(path, value) {
+  fs.writeFileSync(path, JSON.stringify(value, null, 2) + '\n', 'utf8');
+}
 
-// 2) Funciones auxiliares para elegir las jornadas prioritarias a partir del
-//    calendario YA validado que existe en checkpoint.
-const helper = String.raw`
-function fechaFutgalATimestamp(valor) {
+function fechaTimestamp(valor) {
   const m = String(valor || '').match(/^(\d{2})-(\d{2})-(\d{4})$/);
   if (!m) return null;
-
   return new Date(
     Number(m[3]),
     Number(m[2]) - 1,
@@ -50,164 +52,444 @@ function fechaFutgalATimestamp(valor) {
   ).getTime();
 }
 
-function seleccionarJornadasPrioritariasRapidas(
-  fallbackMap,
-  jornadasEsperadas
-) {
+function rangoSemanaActual() {
   const ahora = new Date();
-  const finDeHoy = new Date(
+  const dia = ahora.getDay();
+  const deltaLunes = dia === 0 ? -6 : 1 - dia;
+
+  const inicio = new Date(
     ahora.getFullYear(),
     ahora.getMonth(),
-    ahora.getDate(),
+    ahora.getDate() + deltaLunes,
+    0, 0, 0, 0
+  );
+
+  const fin = new Date(
+    inicio.getFullYear(),
+    inicio.getMonth(),
+    inicio.getDate() + 6,
     23, 59, 59, 999
-  ).getTime();
+  );
 
-  const calendario = [];
+  return {
+    inicio: inicio.getTime(),
+    fin: fin.getTime(),
+    ahora: ahora.getTime()
+  };
+}
 
-  for (let n = 1; n <= jornadasEsperadas; n++) {
-    const j = fallbackMap.get(n);
-    if (!j || !Array.isArray(j.partidos)) continue;
+function seleccionarJornadaSemana(comp) {
+  const rango = rangoSemanaActual();
+  const candidatas = [];
 
-    const fechas = j.partidos
-      .map(p => fechaFutgalATimestamp(p.fecha))
+  for (const j of comp.jornadas || []) {
+    const fechas = (j.partidos || [])
+      .map(p => fechaTimestamp(p.fecha))
       .filter(Number.isFinite);
 
     if (!fechas.length) continue;
 
-    calendario.push({
-      numero: n,
-      inicio: Math.min(...fechas),
-      fin: Math.max(...fechas)
+    const dentro = fechas.filter(
+      t => t >= rango.inicio && t <= rango.fin
+    ).length;
+
+    const centro =
+      fechas.reduce((a, b) => a + b, 0) / fechas.length;
+
+    candidatas.push({
+      numero: Number(j.numero),
+      dentro,
+      distancia: Math.abs(centro - rango.ahora)
     });
   }
 
-  calendario.sort((a, b) => a.inicio - b.inicio);
+  const deEstaSemana = candidatas
+    .filter(x => x.dentro > 0)
+    .sort((a, b) =>
+      b.dentro - a.dentro ||
+      a.distancia - b.distancia ||
+      a.numero - b.numero
+    );
 
-  if (!calendario.length) {
+  if (deEstaSemana.length) return deEstaSemana[0].numero;
+
+  const masCercana = candidatas
+    .sort((a, b) =>
+      a.distancia - b.distancia ||
+      a.numero - b.numero
+    )[0];
+
+  if (!masCercana || !Number.isInteger(masCercana.numero)) {
     throw new Error(
-      'Modo rápido: no pude determinar la jornada actual desde el checkpoint validado.'
+      'Modo súper rápido: no pude determinar la jornada de esta semana.'
     );
   }
 
-  const iniciadas = calendario.filter(j => j.inicio <= finDeHoy);
-  const futuras = calendario.filter(j => j.inicio > finDeHoy);
+  return masCercana.numero;
+}
 
-  const ultimaIniciada = iniciadas.length
-    ? iniciadas[iniciadas.length - 1].numero
-    : calendario[0].numero;
+function esControl(linea) {
+  const t = clean(linea).toLocaleLowerCase('es');
+  return [
+    'anterior',
+    'siguiente',
+    'provisional',
+    'definitivo',
+    'resultados',
+    'calendario',
+    'clasificación',
+    'clasificacion',
+    'tabla cruzada',
+    'goleadores',
+    'imprimir',
+    'contacta coa rfgf'
+  ].includes(t);
+}
 
-  const proxima = futuras.length
-    ? futuras[0].numero
-    : null;
+function esLineaMarcador(linea) {
+  return /^\d*\s*-\s*\d*$/.test(clean(linea));
+}
 
-  // Ventana deliberadamente conservadora:
-  // anterior + jornada vigente/recién jugada + próxima.
-  // En lunes/martes cubre resultados del fin de semana y horarios siguientes.
-  // En sábado/domingo cubre la jornada en disputa, la anterior y la próxima.
-  const elegidas = new Set();
+function leerMarcador(lineas) {
+  for (const linea of lineas) {
+    const m = clean(linea).match(/^(\d+)\s*-\s*(\d+)$/);
+    if (m) {
+      const local = Number(m[1]);
+      const visitante = Number(m[2]);
+      return {
+        local,
+        visitante,
+        texto: local + '-' + visitante,
+        fuente: 'FUTGAL_JORNADA_RAPIDA'
+      };
+    }
+  }
+  return null;
+}
 
-  for (const n of [ultimaIniciada - 1, ultimaIniciada, proxima]) {
-    if (
-      Number.isInteger(n) &&
-      n >= 1 &&
-      n <= jornadasEsperadas
+function extraerJornadaDesdeTexto(texto) {
+  const lineas = String(texto || '')
+    .split(/\r?\n/)
+    .map(clean)
+    .filter(Boolean);
+
+  const jl = lineas.find(l => /^Jornada\s+\d+$/i.test(l));
+  const jornada = jl ? Number(jl.match(/\d+/)[0]) : null;
+  const partidos = [];
+
+  for (let i = 0; i < lineas.length; i++) {
+    if (!/^\d{2}-\d{2}-\d{4}$/.test(lineas[i])) continue;
+
+    const fecha = lineas[i];
+
+    const marcadoresAntes = [];
+    let p = i - 1;
+
+    while (
+      p >= 0 &&
+      (esControl(lineas[p]) || esLineaMarcador(lineas[p]))
     ) {
-      elegidas.add(n);
+      if (esLineaMarcador(lineas[p])) marcadoresAntes.unshift(lineas[p]);
+      p--;
+    }
+
+    const local = p >= 0 ? lineas[p] : '';
+
+    let j = i + 1;
+    let hora = null;
+
+    if (/^\d{1,2}:\d{2}$/.test(lineas[j] || '')) {
+      hora = lineas[j];
+      j++;
+    }
+
+    const marcadoresDespues = [];
+
+    while (
+      j < lineas.length &&
+      (esControl(lineas[j]) || esLineaMarcador(lineas[j]))
+    ) {
+      if (esLineaMarcador(lineas[j])) marcadoresDespues.push(lineas[j]);
+      j++;
+    }
+
+    const visitante = lineas[j] || '';
+    j++;
+
+    let campo = null;
+
+    while (j < lineas.length) {
+      const cand = lineas[j];
+
+      if (esLineaMarcador(cand)) {
+        marcadoresDespues.push(cand);
+        j++;
+        continue;
+      }
+
+      if (
+        /^-\s*/.test(cand) ||
+        /hierba/i.test(cand) ||
+        esControl(cand)
+      ) {
+        j++;
+        continue;
+      }
+
+      if (/^\d{2}-\d{2}-\d{4}$/.test(cand)) break;
+
+      if (/^\d{1,2}:\d{2}$/.test(cand)) {
+        j++;
+        continue;
+      }
+
+      campo = cand;
+      break;
+    }
+
+    const resultado =
+      leerMarcador(marcadoresAntes) ||
+      leerMarcador(marcadoresDespues);
+
+    partidos.push({
+      local,
+      visitante,
+      fecha,
+      hora,
+      campo,
+      resultado
+    });
+  }
+
+  return { jornada, partidos };
+}
+
+function validarExtraida(extra, esperada) {
+  if (extra.jornada !== esperada) {
+    throw new Error(
+      'Modo súper rápido: FUTGAL devolvió J' +
+      extra.jornada +
+      ' y esperaba J' +
+      esperada +
+      '.'
+    );
+  }
+
+  if (!Array.isArray(extra.partidos) || extra.partidos.length !== 8) {
+    throw new Error(
+      'Modo súper rápido: partidos detectados ' +
+      (extra.partidos?.length || 0) +
+      '/8.'
+    );
+  }
+
+  const equipos = extra.partidos.flatMap(
+    p => [norm(p.local), norm(p.visitante)]
+  );
+
+  if (new Set(equipos).size !== 16) {
+    throw new Error(
+      'Modo súper rápido: no aparecen 16 equipos distintos.'
+    );
+  }
+}
+
+function clavePartido(local, visitante) {
+  return norm(local) + '|||' + norm(visitante);
+}
+
+function aplicarJornadaACompeticion(comp, numero, extra) {
+  const jornada = (comp.jornadas || []).find(
+    j => Number(j.numero) === Number(numero)
+  );
+
+  if (!jornada) {
+    throw new Error(
+      'Modo súper rápido: J' + numero + ' no existe en competicion.json.'
+    );
+  }
+
+  const mapa = new Map(
+    (jornada.partidos || []).map(p => [
+      clavePartido(p.local, p.visitante),
+      p
+    ])
+  );
+
+  let resultadosLeidos = 0;
+
+  for (const live of extra.partidos) {
+    const actual = mapa.get(
+      clavePartido(live.local, live.visitante)
+    );
+
+    if (!actual) {
+      throw new Error(
+        'Modo súper rápido: partido no reconocido: ' +
+        live.local + ' - ' + live.visitante
+      );
+    }
+
+    actual.local = live.local;
+    actual.visitante = live.visitante;
+    actual.fecha = live.fecha;
+    actual.hora = live.hora;
+    actual.campo = live.campo || actual.campo;
+
+    if (live.resultado) {
+      actual.resultado = live.resultado;
+      resultadosLeidos++;
+
+      if (actual.actaDisponible === true && actual.acta) {
+        actual.estado = 'FINALIZADO';
+      }
     }
   }
 
-  if (!elegidas.size) {
-    throw new Error('Modo rápido: no se seleccionó ninguna jornada prioritaria.');
-  }
+  jornada.fuenteActualizacion = 'FUTGAL_SUPER_RAPIDA';
+  jornada.fechaActualizacionRapida = new Date().toISOString();
 
-  return elegidas;
+  return resultadosLeidos;
 }
 
-`;
+function actualizarCheckpoint(path, numero, extra) {
+  const cp = readJson(path, null);
+  if (!cp || !Array.isArray(cp.jornadas)) return;
 
-reemplazarUnaVez(
-  'insertar selector de jornadas',
-  /\n\(async \(\) => \{/,
-  `\n${helper}(async () => {`
-);
-
-// 3) Después de cargar el checkpoint validado, determinamos qué jornadas
-//    consultar en vivo. El resto NO se inventa ni se reconstruye: se conserva
-//    exactamente desde el último checkpoint válido.
-reemplazarUnaVez(
-  'declarar jornadas prioritarias',
-  /(registrar\(\s*`\s*Checkpoint disponible como respaldo:[\s\S]*?registrar\(\s*'\s*IMPORTANTE: el checkpoint NO evita la lectura fresca\.'\s*\);)/,
-  `$1\n\n    const jornadasObjetivoRapido =\n      seleccionarJornadasPrioritariasRapidas(\n        fallbackMap,\n        jornadasEsperadas\n      );\n\n    const jornadasNoRevisadasRapido = [];\n\n    registrar(\n      '   MODO RÁPIDO - jornadas prioritarias: ' +\n      [...jornadasObjetivoRapido]\n        .sort((a, b) => a - b)\n        .map(n => 'J' + n)\n        .join(', ')\n    );\n\n    registrar(\n      '   El resto se conserva desde el último checkpoint validado.'\n    );`
-);
-
-// 4) Saltamos la lectura FUTGAL únicamente para jornadas no prioritarias.
-//    Si falta un checkpoint válido, el modo rápido se detiene: nunca rellena
-//    datos a ciegas.
-reemplazarUnaVez(
-  'saltar jornadas no prioritarias',
-  /(for \(\s*\n\s*let esperada = 1;\s*\n\s*esperada <= jornadasEsperadas;\s*\n\s*esperada\+\+\s*\n\s*\) \{\s*\n)(\s*registrar\(\s*\n\s*`\s*J\$\{esperada\}: lectura FRESCA directa aislada\.\.\.`\s*\n\s*\);)/,
-  `$1      if (!jornadasObjetivoRapido.has(esperada)) {\n        const base = fallbackMap.get(esperada);\n\n        if (\n          !base ||\n          !checkpointJornadaValido(\n            base,\n            esperada,\n            partidosPorJornada\n          )\n        ) {\n          throw new Error(\n            \`Modo rápido sin checkpoint válido para J\${esperada}.\`\n          );\n        }\n\n        const copia = JSON.parse(JSON.stringify(base));\n        copia.origenDatos = 'CHECKPOINT_VALIDADO_NO_REVISADO_RAPIDO';\n\n        mapaJornadas.set(esperada, copia);\n        jornadasNoRevisadasRapido.push(esperada);\n        continue;\n      }\n\n$2`
-);
-
-// 5) Marcamos el resultado para poder auditar exactamente qué hizo el modo rápido.
-reemplazarUnaVez(
-  'marcar calendario rápido',
-  /(const calendarioCompleto = \{\s*\n\s*fecha:\s*\n\s*new Date\(\)\.toISOString\(\),\s*\n\s*metodo:\s*\n\s*)'10E_futgal_fresco_con_checkpoint_solo_respaldo'/,
-  `$1'10E_RAPIDO_prioritario_con_checkpoint_validado',\n      modoActualizacion: 'fast',\n      jornadasObjetivoRapido: [...jornadasObjetivoRapido].sort((a, b) => a - b),\n      jornadasNoRevisadasRapido`
-);
-
-reemplazarUnaVez(
-  'marcar competicion rápida',
-  /(fuente: 'FUTGAL',\s*\n\s*)temporada: '2026-2027'/,
-  `$1modoActualizacion: 'fast',\n      jornadasObjetivoRapido: [...jornadasObjetivoRapido].sort((a, b) => a - b),\n      temporada: '2026-2027'`
-);
-
-if (cambios !== 6) {
-  throw new Error(`Modo rápido: número inesperado de parches aplicados (${cambios}/6).`);
-}
-
-fs.writeFileSync(tempPath, src, 'utf8');
-
-const syntax = spawnSync(
-  process.execPath,
-  ['--check', tempPath],
-  {
-    cwd: __dirname,
-    stdio: 'inherit'
-  }
-);
-
-if (syntax.error || syntax.status !== 0) {
-  try {
-    fs.unlinkSync(tempPath);
-  } catch {}
-
-  console.error(
-    'Modo rápido: el runtime generado no supera node --check.'
+  const j = cp.jornadas.find(
+    x => Number(x.numero) === Number(numero)
   );
-  process.exit(1);
-}
 
-const run = spawnSync(
-  process.execPath,
-  [tempPath],
-  {
-    cwd: __dirname,
-    env: {
-      ...process.env,
-      FUTGAL_MODE: 'fast'
-    },
-    stdio: 'inherit'
+  if (!j || !Array.isArray(j.partidos)) return;
+
+  const mapa = new Map(
+    j.partidos.map(p => [
+      clavePartido(p.local, p.visitante),
+      p
+    ])
+  );
+
+  for (const live of extra.partidos) {
+    const p = mapa.get(
+      clavePartido(live.local, live.visitante)
+    );
+    if (!p) continue;
+
+    p.local = live.local;
+    p.visitante = live.visitante;
+    p.fecha = live.fecha;
+    p.hora = live.hora;
+    p.campo = live.campo || p.campo;
+
+    if (live.resultado) p.resultado = live.resultado;
   }
-);
 
-try {
-  fs.unlinkSync(tempPath);
-} catch {}
+  cp.fecha = new Date().toISOString();
+  cp.modoActualizacion = 'fast';
+  cp.jornadasObjetivoRapido = [numero];
 
-if (run.error) {
-  console.error(run.error);
-  process.exit(1);
+  writeJson(path, cp);
 }
 
-process.exit(run.status ?? 1);
+(async () => {
+  const comp = readJson('competicion.json', null);
+
+  if (
+    !comp ||
+    !Array.isArray(comp.jornadas) ||
+    comp.jornadas.length !== 30
+  ) {
+    throw new Error(
+      'Modo súper rápido: competicion.json no contiene las 30 jornadas.'
+    );
+  }
+
+  const jornadaObjetivo = seleccionarJornadaSemana(comp);
+
+  console.log('==========================================');
+  console.log(' FUTGAL SÚPER RÁPIDA');
+  console.log(' Jornada única objetivo: J' + jornadaObjetivo);
+  console.log(' Sin actas · sin goleadores');
+  console.log('==========================================');
+
+  const browser = await chromium.launch(
+    EN_CI
+      ? { channel: 'chrome', headless: true }
+      : { channel: 'chrome', headless: false }
+  );
+
+  try {
+    const page = await browser.newPage({
+      locale: 'es-ES',
+      timezoneId: 'Europe/Madrid'
+    });
+
+    const url =
+      COMP_BASE +
+      '&CodJornada=' +
+      jornadaObjetivo;
+
+    await page.goto(url, {
+      waitUntil: 'domcontentloaded',
+      timeout: 15000
+    });
+
+    await page.waitForTimeout(500);
+
+    const body = await page.locator('body')
+      .innerText()
+      .catch(() => '');
+
+    const extra = extraerJornadaDesdeTexto(body);
+    validarExtraida(extra, jornadaObjetivo);
+
+    const resultadosLeidos =
+      aplicarJornadaACompeticion(
+        comp,
+        jornadaObjetivo,
+        extra
+      );
+
+    comp.fechaExtraccion = new Date().toISOString();
+    comp.modoActualizacion = 'fast';
+    comp.jornadasObjetivoRapido = [jornadaObjetivo];
+    comp.ultimaActualizacionRapida = {
+      fecha: comp.fechaExtraccion,
+      jornada: jornadaObjetivo,
+      partidos: 8,
+      resultadosLeidos,
+      actasConsultadas: 0,
+      goleadoresActualizados: false
+    };
+
+    writeJson('competicion.json', comp);
+
+    actualizarCheckpoint(
+      'checkpoint-calendario.json',
+      jornadaObjetivo,
+      extra
+    );
+
+    actualizarCheckpoint(
+      'checkpoint-calendario-parcial.json',
+      jornadaObjetivo,
+      extra
+    );
+
+    console.log(
+      'J' + jornadaObjetivo +
+      ': 8/8 partidos · ' +
+      resultadosLeidos +
+      ' marcador(es) visibles.'
+    );
+
+    console.log('Actas consultadas: 0');
+    console.log('Goleadores actualizados: NO');
+    console.log('SÚPER RÁPIDA OK');
+  } finally {
+    await browser.close();
+  }
+})().catch(err => {
+  console.error(err.stack || err.message);
+  process.exit(1);
+});
