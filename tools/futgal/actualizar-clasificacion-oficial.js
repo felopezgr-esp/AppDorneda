@@ -86,8 +86,8 @@ async function filas(page){
   return page.evaluate(()=>{
     const c=s=>String(s||'').replace(/\s+/g,' ').trim();
     return [...document.querySelectorAll('tr')].map(tr=>
-      [...tr.querySelectorAll(':scope > th,:scope > td')].map(td=>c(td.innerText||td.textContent||'')).filter(Boolean)
-    ).filter(r=>r.length>=2);
+      [...tr.querySelectorAll(':scope > th,:scope > td')].map(td=>c(td.innerText||td.textContent||''))
+    ).filter(r=>r.filter(Boolean).length>=2);
   });
 }
 
@@ -145,9 +145,14 @@ function detectarPts(rows,calc){
     const maxVal=Math.max(...vals);
     const minVal=Math.min(...vals);
 
-    if(minVal < -20 || maxVal > 100) continue;
+    // Una columna de puntos real debe contener enteros y,
+    // con 10 jornadas disputadas, al menos algún valor >= 10.
+    // Esto evita confundir PG/PE/PP u otras columnas pequeñas con PTS.
+    if(minVal < -20 || maxVal > 60) continue;
+    if(maxVal < 10) continue;
+    if(!vals.every(Number.isInteger)) continue;
 
-    cand.push({col,avgErr});
+    cand.push({col,avgErr,maxVal,minVal});
   }
 
   cand.sort((a,b)=>a.avgErr-b.avgErr);
@@ -156,6 +161,18 @@ function detectarPts(rows,calc){
     console.error('No hay columnas candidatas. Filas detectadas:');
     rows.forEach(r=>console.error(JSON.stringify(r.cells)));
     return null;
+  }
+
+  console.log(
+    'Columnas candidatas:',
+    cand.slice(0,5)
+  );
+
+  if(cand[0].avgErr > 5){
+    throw new Error(
+      'La mejor columna de puntos sigue siendo poco fiable. Error medio: ' +
+      cand[0].avgErr.toFixed(3)
+    );
   }
 
   console.log(
