@@ -1,11 +1,7 @@
 {
   "versionFormato": 2,
-  "fechaExtraccion": "2026-11-24T17:28:16.899Z",
+  "fechaExtraccion": "2026-11-24T17:32:35.476Z",
   "fuente": "FUTGAL",
-  "modoActualizacion": "fast",
-  "jornadasObjetivoRapido": [
-    11
-  ],
   "temporada": "2026-2027",
   "competicion": "Veteranos - Primera Galicia",
   "grupo": "A Coruña | 1ª División Veteranos",
@@ -20892,42 +20888,6 @@
       "partidos": [
         {
           "orden": 1,
-          "local": "SPORTING BURGO",
-          "visitante": "SADA F.C. A NOSA VIÑA",
-          "fecha": "28-11-2026",
-          "hora": "18:00",
-          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
-        },
-        {
-          "orden": 2,
-          "local": "BETANZOS NORTE",
-          "visitante": "PORTAZGO S.D.",
-          "fecha": "28-11-2026",
-          "hora": "20:00",
-          "campo": "O Carregal (Betanzos)",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
-        },
-        {
-          "orden": 3,
-          "local": "CEDEIRA S.D.",
-          "visitante": "LICEO DE MONELOS S.D.",
-          "fecha": "28-11-2026",
-          "hora": "18:15",
-          "campo": "Municipal Carmen Maseda (O Beco)",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
-        },
-        {
-          "orden": 4,
           "local": "SAN MARTIÑO S.D.",
           "visitante": "XUVENTUDE DORNEDA",
           "fecha": "28-11-2026",
@@ -20939,7 +20899,31 @@
           "acta": null
         },
         {
-          "orden": 5,
+          "orden": 2,
+          "local": "U.D. PAIOSACO H.AÑON",
+          "visitante": "OZA DE LOS RÍOS",
+          "fecha": "28-11-2026",
+          "hora": "18:00",
+          "campo": "Porta Santa",
+          "estado": "PROGRAMADO",
+          "actaDisponible": false,
+          "resultado": null,
+          "acta": null
+        },
+        {
+          "orden": 3,
+          "local": "SPORTING BURGO",
+          "visitante": "SADA F.C. A NOSA VIÑA",
+          "fecha": "28-11-2026",
+          "hora": "18:00",
+          "campo": "Campo de Fútbol Municipal A Lavandeira en Culleredo",
+          "estado": "PROGRAMADO",
+          "actaDisponible": false,
+          "resultado": null,
+          "acta": null
+        },
+        {
+          "orden": 4,
           "local": "C.D. SIGRAS",
           "visitante": "SPORTING CAMBRE AS TRAVESAS",
           "fecha": "28-11-2026",
@@ -20951,12 +20935,24 @@
           "acta": null
         },
         {
-          "orden": 6,
-          "local": "U.D. PAIOSACO H.AÑON",
-          "visitante": "OZA DE LOS RÍOS",
+          "orden": 5,
+          "local": "CEDEIRA S.D.",
+          "visitante": "LICEO DE MONELOS S.D.",
           "fecha": "28-11-2026",
-          "hora": "18:00",
-          "campo": "Porta Santa",
+          "hora": "18:15",
+          "campo": "Municipal Carmen Maseda (O Beco)",
+          "estado": "PROGRAMADO",
+          "actaDisponible": false,
+          "resultado": null,
+          "acta": null
+        },
+        {
+          "orden": 6,
+          "local": "BETANZOS NORTE",
+          "visitante": "PORTAZGO S.D.",
+          "fecha": "28-11-2026",
+          "hora": "20:00",
+          "campo": "O Carregal (Betanzos)",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,
@@ -20986,9 +20982,7 @@
           "resultado": null,
           "acta": null
         }
-      ],
-      "fuenteActualizacion": "FUTGAL_SUPER_RAPIDA",
-      "fechaActualizacionRapida": "2026-11-24T17:28:16.899Z"
+      ]
     },
     {
       "numero": 12,
@@ -22986,14 +22980,6 @@
       ]
     }
   ],
-  "ultimaActualizacionRapida": {
-    "fecha": "2026-11-24T17:28:16.899Z",
-    "jornada": 11,
-    "partidos": 8,
-    "resultadosLeidos": 0,
-    "actasConsultadas": 0,
-    "goleadoresActualizados": false
-  },
   "clasificacionOficial": [
     {
       "pos": 1,
@@ -23236,6 +23222,6 @@
       "fuente": "FUTGAL_OFICIAL"
     }
   ],
-  "fechaClasificacionOficial": "2026-11-24T17:28:21.702Z",
+  "fechaClasificacionOficial": "2026-11-24T17:32:40.597Z",
   "fuenteClasificacionOficial": "FUTGAL"
 }
