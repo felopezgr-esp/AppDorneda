@@ -4,12 +4,16 @@
     "cambios": [
       {
         "tipo": "cambio_programacion",
-        "local": "CEDEIRA S.D.",
-        "visitante": "LICEO DE MONELOS S.D.",
+        "local": "CAMPANAL DE LOUREDA F. C.",
+        "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
         "diferencias": {
           "hora": {
-            "antes": null,
-            "ahora": "18:15"
+            "antes": "11:00",
+            "ahora": "12:00"
+          },
+          "campo": {
+            "antes": "Campo de Fútbol de Freán",
+            "ahora": "Meicende Pequeño"
           }
         }
       }
