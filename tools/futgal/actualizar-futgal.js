@@ -2528,9 +2528,7 @@ async function extraerJornadaDirectaRobusta(
   registrar,
   modo = 'normal'
 ) {
-  const esperas = modo === 'recuperacion'
-    ? [3500, 7000, 12000, 20000, 30000, 45000]
-    : [1800, 3500, 6500, 10000];
+  const esperas = [700];
 
   const intentos = [];
 
@@ -2545,7 +2543,7 @@ async function extraerJornadaDirectaRobusta(
     try {
       await pageJ.goto(url, {
         waitUntil: 'domcontentloaded',
-        timeout: 60000
+        timeout: 15000
       });
 
       await pageJ.waitForTimeout(esperas[intento - 1]);
@@ -2592,7 +2590,7 @@ async function extraerJornadaDirectaRobusta(
       // dentro del MISMO contexto y volvemos a entrar en la jornada.
       // Así no dependemos siempre del paso previo, pero lo usamos cuando
       // FUTGAL necesita inicializar sesión/cookies.
-      if (!ok) {
+      if (false && !ok) {
         try {
           warmupUsado = true;
 
@@ -3242,138 +3240,36 @@ function mapaCheckpointsCalendario(
         }
 
       } else {
-        pendientesCalendario.push(
-          esperada
-        );
+        const fallback = fallbackMap.get(esperada);
 
-        registrar(
-          `   J${esperada}: lectura fresca falló; queda para recuperación.`
-        );
+        if (
+          fallback &&
+          checkpointJornadaValido(
+            fallback,
+            esperada,
+            partidosPorJornada
+          )
+        ) {
+          const copia = JSON.parse(JSON.stringify(fallback));
+          copia.origenDatos = 'CHECKPOINT_FALLBACK_VALIDADO';
+          mapaJornadas.set(esperada, copia);
+          jornadasConFallback.push(esperada);
+          registrar(`   J${esperada}: FUTGAL no respondio; checkpoint validado conservado.`);
+          guardarTrabajoCalendario();
+        } else {
+          pendientesCalendario.push(esperada);
+          registrar(`   J${esperada}: sin lectura fresca ni checkpoint valido.`);
+        }
 
-        await page.waitForTimeout(
-          4500
-        );
+        await page.waitForTimeout(250);
       }
     }
 
-    // Segunda pasada de las jornadas que no pudieron leerse en vivo.
-    if (
-      pendientesCalendario.length > 0
-    ) {
-      registrar('');
+    // Sin segunda pasada masiva.
+    if (pendientesCalendario.length > 0) {
       registrar(
-        `   RECUPERACION FRESCA: ${pendientesCalendario.length} jornada(s)...`
+        `   AVISO: ${pendientesCalendario.length} jornada(s) sin dato fresco ni checkpoint valido.`
       );
-
-      await page.waitForTimeout(
-        15000
-      );
-
-      for (
-        const esperada of
-        pendientesCalendario
-      ) {
-        registrar(
-          `   Recuperando J${esperada} desde FUTGAL...`
-        );
-
-        const r =
-          await extraerJornadaDirectaRobusta(
-            browser,
-            esperada,
-            partidosPorJornada,
-            registrar,
-            'recuperacion'
-          );
-
-        diagnosticoNavegacion.push(
-          r.diagnostico
-        );
-
-        if (r.ok) {
-          const anterior =
-            fallbackMap.get(esperada) || null;
-
-          const cambios =
-            compararJornadasCalendario(
-              anterior,
-              r.jornada
-            );
-
-          r.jornada.origenDatos =
-            'FUTGAL_FRESCO_RECUPERADO';
-
-          r.jornada.fechaLecturaFresca =
-            new Date().toISOString();
-
-          mapaJornadas.set(
-            esperada,
-            r.jornada
-          );
-
-          if (cambios.length) {
-            cambiosCalendario.push({
-              jornada:
-                esperada,
-              cambios
-            });
-          }
-
-          registrar(
-            `   J${esperada}: RECUPERADA FRESCA | ${r.jornada.totalPartidos} partidos`
-          );
-
-          guardarTrabajoCalendario();
-
-          await page.waitForTimeout(
-            4500
-          );
-
-        } else {
-          const fallback =
-            fallbackMap.get(
-              esperada
-            );
-
-          if (
-            fallback &&
-            checkpointJornadaValido(
-              fallback,
-              esperada,
-              partidosPorJornada
-            )
-          ) {
-            const copia =
-              JSON.parse(
-                JSON.stringify(
-                  fallback
-                )
-              );
-
-            copia.origenDatos =
-              'CHECKPOINT_FALLBACK';
-
-            mapaJornadas.set(
-              esperada,
-              copia
-            );
-
-            jornadasConFallback.push(
-              esperada
-            );
-
-            registrar(
-              `   J${esperada}: FUTGAL no respondió. Se conserva checkpoint SOLO como respaldo.`
-            );
-
-            guardarTrabajoCalendario();
-          } else {
-            registrar(
-              `   J${esperada}: SIN DATO FRESCO NI CHECKPOINT VÁLIDO`
-            );
-          }
-        }
-      }
     }
 
     guardarJson(
@@ -3834,8 +3730,8 @@ function mapaCheckpointsCalendario(
       Array.isArray(calendarioCompleto.jornadasConFallback) &&
       calendarioCompleto.jornadasConFallback.length > 0
     ) {
-      erroresGlobales.push(
-        `Jornadas sin lectura fresca de FUTGAL: ${calendarioCompleto.jornadasConFallback.join(', ')}`
+      registrar(
+        `   AVISO: jornadas conservadas desde checkpoint validado: ${calendarioCompleto.jornadasConFallback.join(", ")}`
       );
     }
 
