@@ -1,6 +1,6 @@
 {
   "versionFormato": 2,
-  "fechaExtraccion": "2026-11-24T17:28:16.899Z",
+  "fechaExtraccion": "2026-11-24T17:40:44.729Z",
   "fuente": "FUTGAL",
   "modoActualizacion": "fast",
   "jornadasObjetivoRapido": [
@@ -20988,7 +20988,7 @@
         }
       ],
       "fuenteActualizacion": "FUTGAL_SUPER_RAPIDA",
-      "fechaActualizacionRapida": "2026-11-24T17:28:16.899Z"
+      "fechaActualizacionRapida": "2026-11-24T17:40:44.729Z"
     },
     {
       "numero": 12,
@@ -22987,7 +22987,7 @@
     }
   ],
   "ultimaActualizacionRapida": {
-    "fecha": "2026-11-24T17:28:16.899Z",
+    "fecha": "2026-11-24T17:40:44.729Z",
     "jornada": 11,
     "partidos": 8,
     "resultadosLeidos": 0,
@@ -23236,6 +23236,6 @@
       "fuente": "FUTGAL_OFICIAL"
     }
   ],
-  "fechaClasificacionOficial": "2026-11-24T17:28:21.702Z",
+  "fechaClasificacionOficial": "2026-11-24T17:40:49.038Z",
   "fuenteClasificacionOficial": "FUTGAL"
 }

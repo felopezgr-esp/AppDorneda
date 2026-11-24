@@ -1,5 +1,5 @@
 {
-  "fecha": "2026-11-24T17:32:35.460Z",
+  "fecha": "2026-11-24T17:40:44.733Z",
   "metodo": "10E_futgal_fresco_con_checkpoint_solo_respaldo",
   "totalEquipos": 16,
   "jornadasEsperadas": 30,
@@ -2166,5 +2166,9 @@
       "origenDatos": "FUTGAL_FRESCO",
       "fechaLecturaFresca": "2026-11-24T17:32:33.254Z"
     }
+  ],
+  "modoActualizacion": "fast",
+  "jornadasObjetivoRapido": [
+    11
   ]
 }

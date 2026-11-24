@@ -1,5 +1,5 @@
 {
-  "fecha": "2026-11-24T17:32:33.254Z",
+  "fecha": "2026-11-24T17:40:44.734Z",
   "modo": "10E_fresco_con_respaldo",
   "totalEquipos": 16,
   "jornadasEsperadas": 30,
@@ -2164,5 +2164,9 @@
       "origenDatos": "FUTGAL_FRESCO",
       "fechaLecturaFresca": "2026-11-24T17:32:33.254Z"
     }
+  ],
+  "modoActualizacion": "fast",
+  "jornadasObjetivoRapido": [
+    11
   ]
 }
