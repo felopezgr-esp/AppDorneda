@@ -1,10 +1,10 @@
 {
-  "fecha": "2026-11-28T08:03:18.809Z",
+  "fecha": "2026-11-28T17:04:35.027Z",
   "fuenteOficial": "FUTGAL",
   "fuenteLocal": "ACTAS_FUTGAL",
-  "totalFutgal": 137,
-  "totalActas": 137,
-  "coincidencias": 137,
+  "totalFutgal": 138,
+  "totalActas": 138,
+  "coincidencias": 138,
   "diferencias": 0,
   "filas": [
     {
@@ -96,6 +96,17 @@
       "soloActas": false
     },
     {
+      "jugador": "AGUADO PERNAS, JOSE L",
+      "equipoFutgal": "XUVENTUDE DORNEDA",
+      "equipoActas": "XUVENTUDE DORNEDA",
+      "golesFutgal": 6,
+      "golesActas": 6,
+      "diferencia": 0,
+      "coincide": true,
+      "soloFutgal": false,
+      "soloActas": false
+    },
+    {
       "jugador": "BARDELLINI MOSCOSO, JAVIER FRANCISCO",
       "equipoFutgal": "BETANZOS NORTE",
       "equipoActas": "BETANZOS NORTE",
@@ -121,6 +132,17 @@
       "jugador": "FREIRE VAZQUEZ, JOSE L",
       "equipoFutgal": "BETANZOS NORTE",
       "equipoActas": "BETANZOS NORTE",
+      "golesFutgal": 6,
+      "golesActas": 6,
+      "diferencia": 0,
+      "coincide": true,
+      "soloFutgal": false,
+      "soloActas": false
+    },
+    {
+      "jugador": "LOMBA MATA, FELIX",
+      "equipoFutgal": "SAN MARTIÑO S.D.",
+      "equipoActas": "SAN MARTIÑO S.D.",
       "golesFutgal": 6,
       "golesActas": 6,
       "diferencia": 0,
@@ -176,6 +198,17 @@
       "jugador": "LENDOIRO AGILDA, HECTOR",
       "equipoFutgal": "OZA DE LOS RÍOS",
       "equipoActas": "OZA DE LOS RÍOS",
+      "golesFutgal": 5,
+      "golesActas": 5,
+      "diferencia": 0,
+      "coincide": true,
+      "soloFutgal": false,
+      "soloActas": false
+    },
+    {
+      "jugador": "MEILAN SEOANE, IVAN",
+      "equipoFutgal": "XUVENTUDE DORNEDA",
+      "equipoActas": "XUVENTUDE DORNEDA",
       "golesFutgal": 5,
       "golesActas": 5,
       "diferencia": 0,
@@ -250,17 +283,6 @@
       "soloActas": false
     },
     {
-      "jugador": "LOMBA MATA, FELIX",
-      "equipoFutgal": "SAN MARTIÑO S.D.",
-      "equipoActas": "SAN MARTIÑO S.D.",
-      "golesFutgal": 4,
-      "golesActas": 4,
-      "diferencia": 0,
-      "coincide": true,
-      "soloFutgal": false,
-      "soloActas": false
-    },
-    {
       "jugador": "LÓPEZ FERNÁNDEZ, MARCOS",
       "equipoFutgal": "PORTAZGO S.D.",
       "equipoActas": "PORTAZGO S.D.",
@@ -275,17 +297,6 @@
       "jugador": "LOPEZ SANDA, BRUNO",
       "equipoFutgal": "SPORTING BURGO",
       "equipoActas": "SPORTING BURGO",
-      "golesFutgal": 4,
-      "golesActas": 4,
-      "diferencia": 0,
-      "coincide": true,
-      "soloFutgal": false,
-      "soloActas": false
-    },
-    {
-      "jugador": "MEILAN SEOANE, IVAN",
-      "equipoFutgal": "XUVENTUDE DORNEDA",
-      "equipoActas": "XUVENTUDE DORNEDA",
       "golesFutgal": 4,
       "golesActas": 4,
       "diferencia": 0,
@@ -321,17 +332,6 @@
       "equipoActas": "U.D. PAIOSACO H.AÑON",
       "golesFutgal": 4,
       "golesActas": 4,
-      "diferencia": 0,
-      "coincide": true,
-      "soloFutgal": false,
-      "soloActas": false
-    },
-    {
-      "jugador": "AGUADO PERNAS, JOSE L",
-      "equipoFutgal": "XUVENTUDE DORNEDA",
-      "equipoActas": "XUVENTUDE DORNEDA",
-      "golesFutgal": 3,
-      "golesActas": 3,
       "diferencia": 0,
       "coincide": true,
       "soloFutgal": false,
@@ -1265,6 +1265,17 @@
       "jugador": "PEREZ MIñO, DAVID",
       "equipoFutgal": "OZA DE LOS RÍOS",
       "equipoActas": "OZA DE LOS RÍOS",
+      "golesFutgal": 1,
+      "golesActas": 1,
+      "diferencia": 0,
+      "coincide": true,
+      "soloFutgal": false,
+      "soloActas": false
+    },
+    {
+      "jugador": "PITA GONZALEZ, BORJA",
+      "equipoFutgal": "XUVENTUDE DORNEDA",
+      "equipoActas": "XUVENTUDE DORNEDA",
       "golesFutgal": 1,
       "golesActas": 1,
       "diferencia": 0,

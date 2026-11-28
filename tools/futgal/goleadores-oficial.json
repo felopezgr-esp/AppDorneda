@@ -1,10 +1,10 @@
 {
-  "fecha": "2026-11-28T08:03:18.809Z",
+  "fecha": "2026-11-28T17:04:35.027Z",
   "fuente": "FUTGAL",
   "competicion": "Veteranos - Primera Galicia",
   "grupo": "A Coruña | 1ª División Veteranos",
   "url": "https://www.futgal.es/pnfg/NPcd/NFG_CMP_Goleadores?cod_primaria=1000120&CodJornada=11&codcompeticion=26991153&codtemporada=22&codgrupo=28251751&cod_agrupacion=1",
-  "total": 137,
+  "total": 138,
   "goleadores": [
     {
       "jugador": "FERRO ROZAS, GONZALO",
@@ -77,8 +77,23 @@
       "goles": 6
     },
     {
+      "jugador": "AGUADO PERNAS, JOSE L",
+      "equipo": "XUVENTUDE DORNEDA",
+      "goles": 6
+    },
+    {
+      "jugador": "LOMBA MATA, FELIX",
+      "equipo": "SAN MARTIÑO S.D.",
+      "goles": 6
+    },
+    {
       "jugador": "REY CRIBEIRO, MATEO",
       "equipo": "CEDEIRA S.D.",
+      "goles": 5
+    },
+    {
+      "jugador": "MEILAN SEOANE, IVAN",
+      "equipo": "XUVENTUDE DORNEDA",
       "goles": 5
     },
     {
@@ -122,11 +137,6 @@
       "goles": 4
     },
     {
-      "jugador": "MEILAN SEOANE, IVAN",
-      "equipo": "XUVENTUDE DORNEDA",
-      "goles": 4
-    },
-    {
       "jugador": "LÓPEZ FERNÁNDEZ, MARCOS",
       "equipo": "PORTAZGO S.D.",
       "goles": 4
@@ -144,11 +154,6 @@
     {
       "jugador": "DA SILVA ALVES, JONATHAN LOIS",
       "equipo": "PORTAZGO S.D.",
-      "goles": 4
-    },
-    {
-      "jugador": "LOMBA MATA, FELIX",
-      "equipo": "SAN MARTIÑO S.D.",
       "goles": 4
     },
     {
@@ -214,11 +219,6 @@
     {
       "jugador": "GOMEZ CASTRO, JOSE M",
       "equipo": "CAMPANAL DE LOUREDA F. C.",
-      "goles": 3
-    },
-    {
-      "jugador": "AGUADO PERNAS, JOSE L",
-      "equipo": "XUVENTUDE DORNEDA",
       "goles": 3
     },
     {
@@ -352,13 +352,13 @@
       "goles": 2
     },
     {
-      "jugador": "LOPEZ GRAÑA, FELIX",
-      "equipo": "XUVENTUDE DORNEDA",
+      "jugador": "LANDROVE GOMEZ, PABLO",
+      "equipo": "CLUB DEPORTIVO NARON SILVER CATERING",
       "goles": 2
     },
     {
-      "jugador": "LANDROVE GOMEZ, PABLO",
-      "equipo": "CLUB DEPORTIVO NARON SILVER CATERING",
+      "jugador": "LOPEZ GRAÑA, FELIX",
+      "equipo": "XUVENTUDE DORNEDA",
       "goles": 2
     },
     {
@@ -407,11 +407,6 @@
       "goles": 1
     },
     {
-      "jugador": "REI LACACI, MARIO",
-      "equipo": "XUVENTUDE DORNEDA",
-      "goles": 1
-    },
-    {
       "jugador": "BLANCO MUIÑO, IAGO",
       "equipo": "CAMPANAL DE LOUREDA F. C.",
       "goles": 1
@@ -427,18 +422,8 @@
       "goles": 1
     },
     {
-      "jugador": "SANCHEZ FERNANDEZ, ROGELIO JESUS",
-      "equipo": "XUVENTUDE DORNEDA",
-      "goles": 1
-    },
-    {
       "jugador": "VARELA GEREMIAS, DAVID",
       "equipo": "SPORTING CAMBRE AS TRAVESAS",
-      "goles": 1
-    },
-    {
-      "jugador": "BLANCO CANOSA, MANUEL",
-      "equipo": "XUVENTUDE DORNEDA",
       "goles": 1
     },
     {
@@ -447,8 +432,8 @@
       "goles": 1
     },
     {
-      "jugador": "FARIÑA IGLESIAS, CARLOS",
-      "equipo": "SAN MARTIÑO S.D.",
+      "jugador": "REI LACACI, MARIO",
+      "equipo": "XUVENTUDE DORNEDA",
       "goles": 1
     },
     {
@@ -459,6 +444,21 @@
     {
       "jugador": "VEGA PEREZ, BORJA",
       "equipo": "C.C.D. CURTIS",
+      "goles": 1
+    },
+    {
+      "jugador": "SANCHEZ FERNANDEZ, ROGELIO JESUS",
+      "equipo": "XUVENTUDE DORNEDA",
+      "goles": 1
+    },
+    {
+      "jugador": "BLANCO CANOSA, MANUEL",
+      "equipo": "XUVENTUDE DORNEDA",
+      "goles": 1
+    },
+    {
+      "jugador": "FARIÑA IGLESIAS, CARLOS",
+      "equipo": "SAN MARTIÑO S.D.",
       "goles": 1
     },
     {
@@ -484,11 +484,6 @@
     {
       "jugador": "FARIñA CANITO, CARLOS",
       "equipo": "SPORTING BURGO",
-      "goles": 1
-    },
-    {
-      "jugador": "RAMOS BARDERAS, EDUARDO",
-      "equipo": "XUVENTUDE DORNEDA",
       "goles": 1
     },
     {
@@ -547,8 +542,18 @@
       "goles": 1
     },
     {
+      "jugador": "RAMOS BARDERAS, EDUARDO",
+      "equipo": "XUVENTUDE DORNEDA",
+      "goles": 1
+    },
+    {
       "jugador": "MASEDA ALVAREZ, PABLO",
       "equipo": "CEDEIRA S.D.",
+      "goles": 1
+    },
+    {
+      "jugador": "PITA GONZALEZ, BORJA",
+      "equipo": "XUVENTUDE DORNEDA",
       "goles": 1
     },
     {
@@ -597,23 +602,8 @@
       "goles": 1
     },
     {
-      "jugador": "GARCIA DAPIA, JOSE I",
-      "equipo": "XUVENTUDE DORNEDA",
-      "goles": 1
-    },
-    {
-      "jugador": "SALPURIDO GARCIA, DIEGO",
-      "equipo": "XUVENTUDE DORNEDA",
-      "goles": 1
-    },
-    {
       "jugador": "SABIN BOUZA, CARLOS",
       "equipo": "U.D. NARAHIO",
-      "goles": 1
-    },
-    {
-      "jugador": "RUMBO SUAREZ, ROBERTO",
-      "equipo": "XUVENTUDE DORNEDA",
       "goles": 1
     },
     {
@@ -632,18 +622,8 @@
       "goles": 1
     },
     {
-      "jugador": "CASTRO REGUEIRO, MIGUEL",
-      "equipo": "SAN MARTIÑO S.D.",
-      "goles": 1
-    },
-    {
       "jugador": "PAREDES CARRO, MARTIN",
       "equipo": "BETANZOS NORTE",
-      "goles": 1
-    },
-    {
-      "jugador": "LAPORT RIVAS, FEDERICO",
-      "equipo": "XUVENTUDE DORNEDA",
       "goles": 1
     },
     {
@@ -662,8 +642,23 @@
       "goles": 1
     },
     {
+      "jugador": "GARCIA DAPIA, JOSE I",
+      "equipo": "XUVENTUDE DORNEDA",
+      "goles": 1
+    },
+    {
       "jugador": "SOTO MIRANDA, OSCAR",
       "equipo": "CAMPANAL DE LOUREDA F. C.",
+      "goles": 1
+    },
+    {
+      "jugador": "SALPURIDO GARCIA, DIEGO",
+      "equipo": "XUVENTUDE DORNEDA",
+      "goles": 1
+    },
+    {
+      "jugador": "RUMBO SUAREZ, ROBERTO",
+      "equipo": "XUVENTUDE DORNEDA",
       "goles": 1
     },
     {
@@ -682,13 +677,23 @@
       "goles": 1
     },
     {
-      "jugador": "CHICO LAGO, MARCOS",
+      "jugador": "MALLO LOPEZ, JOSE LUIS",
+      "equipo": "SADA F.C. A NOSA VIÑA",
+      "goles": 1
+    },
+    {
+      "jugador": "CASTRO REGUEIRO, MIGUEL",
+      "equipo": "SAN MARTIÑO S.D.",
+      "goles": 1
+    },
+    {
+      "jugador": "LAPORT RIVAS, FEDERICO",
       "equipo": "XUVENTUDE DORNEDA",
       "goles": 1
     },
     {
-      "jugador": "MALLO LOPEZ, JOSE LUIS",
-      "equipo": "SADA F.C. A NOSA VIÑA",
+      "jugador": "CHICO LAGO, MARCOS",
+      "equipo": "XUVENTUDE DORNEDA",
       "goles": 1
     }
   ]

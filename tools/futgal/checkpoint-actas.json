@@ -45112,5 +45112,731 @@
       ]
     },
     "fuente": "extraido_10B"
+  },
+  "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478295&cod_acta=1478295": {
+    "ok": true,
+    "jornada": 11,
+    "url": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478295&cod_acta=1478295",
+    "acta": {
+      "temporada": "2026-2027",
+      "jornada": 11,
+      "fecha": "28-11-2026",
+      "hora": "16:00",
+      "local": "SAN MARTIÑO S.D.",
+      "visitante": "XUVENTUDE DORNEDA",
+      "resultado_principal_raw": {
+        "local": null,
+        "visitante": null
+      },
+      "resultado": {
+        "local": 2,
+        "visitante": 5,
+        "texto": "2-5",
+        "fuente": "secuencia_goles_validada"
+      },
+      "arbitro": "AMOR VAZQUEZ, JOSE LUIS",
+      "estadio": "Anexo O Roxo (Cerceda)",
+      "ciudad": "Cerceda",
+      "goles": [
+        {
+          "marcador_raw": {
+            "local": 0,
+            "visitante": 1
+          },
+          "marcador": {
+            "local": 0,
+            "visitante": 1
+          },
+          "minuto": "22'",
+          "jugador": "PITA GONZALEZ, BORJA",
+          "tipo_gol": "Gol normal",
+          "marcador_fuente": "raw_y_jugador_coherentes"
+        },
+        {
+          "marcador_raw": {
+            "local": 0,
+            "visitante": 2
+          },
+          "marcador": {
+            "local": 0,
+            "visitante": 2
+          },
+          "minuto": "38'",
+          "jugador": "AGUADO PERNAS, JOSE L",
+          "tipo_gol": "Gol normal",
+          "marcador_fuente": "raw_y_jugador_coherentes"
+        },
+        {
+          "marcador_raw": {
+            "local": 0,
+            "visitante": 3
+          },
+          "marcador": {
+            "local": 0,
+            "visitante": 3
+          },
+          "minuto": "40'",
+          "jugador": "MEILAN SEOANE, IVAN",
+          "tipo_gol": "Gol de penalti",
+          "marcador_fuente": "raw_y_jugador_coherentes"
+        },
+        {
+          "marcador_raw": {
+            "local": 1,
+            "visitante": 3
+          },
+          "marcador": {
+            "local": 1,
+            "visitante": 3
+          },
+          "minuto": "54'",
+          "jugador": "LOMBA MATA, FELIX",
+          "tipo_gol": "Gol normal",
+          "marcador_fuente": "raw_y_jugador_coherentes"
+        },
+        {
+          "marcador_raw": {
+            "local": 2,
+            "visitante": 3
+          },
+          "marcador": {
+            "local": 2,
+            "visitante": 3
+          },
+          "minuto": "68'",
+          "jugador": "LOMBA MATA, FELIX",
+          "tipo_gol": "Gol normal",
+          "marcador_fuente": "raw_y_jugador_coherentes"
+        },
+        {
+          "marcador_raw": {
+            "local": 2,
+            "visitante": 4
+          },
+          "marcador": {
+            "local": 2,
+            "visitante": 4
+          },
+          "minuto": "73'",
+          "jugador": "AGUADO PERNAS, JOSE L",
+          "tipo_gol": "Gol normal",
+          "marcador_fuente": "raw_y_jugador_coherentes"
+        },
+        {
+          "marcador_raw": {
+            "local": 2,
+            "visitante": 5
+          },
+          "marcador": {
+            "local": 2,
+            "visitante": 5
+          },
+          "minuto": "75'",
+          "jugador": "AGUADO PERNAS, JOSE L",
+          "tipo_gol": "Gol normal",
+          "marcador_fuente": "raw_y_jugador_coherentes"
+        }
+      ],
+      "equipo_local": {
+        "nombre": "SAN MARTIÑO S.D.",
+        "titulares": [
+          {
+            "dorsal": "1",
+            "jugador": "GONZALEZ LISTA, NICOLAS"
+          },
+          {
+            "dorsal": "3",
+            "jugador": "LOMBA MATA, FELIX"
+          },
+          {
+            "dorsal": "4",
+            "jugador": "GONZALEZ GENDE, ALVARO"
+          },
+          {
+            "dorsal": "6",
+            "jugador": "FARIÑA COSTA, ALFONSO"
+          },
+          {
+            "dorsal": "8",
+            "jugador": "CANEDO NIEVES, JOSE"
+          },
+          {
+            "dorsal": "14",
+            "jugador": "ALONSO VAZQUEZ, ALEJANDRO"
+          },
+          {
+            "dorsal": "20",
+            "jugador": "CASTRO REGUEIRO, MIGUEL"
+          },
+          {
+            "dorsal": "21",
+            "jugador": "GESTO REGUEIRO, ALEJANDRO"
+          },
+          {
+            "dorsal": "23",
+            "jugador": "GUARDADO GESTO, JOSE MIGUEL"
+          },
+          {
+            "dorsal": "26",
+            "jugador": "FARIÑA COSTA, JOSE A"
+          },
+          {
+            "dorsal": "29",
+            "jugador": "LISTE OTERO, RICARDO A"
+          }
+        ],
+        "suplentes": [
+          {
+            "dorsal": "5",
+            "jugador": "RUMBO BOEDO, CARLOS"
+          },
+          {
+            "dorsal": "7",
+            "jugador": "FARIÑA IGLESIAS, CARLOS"
+          },
+          {
+            "dorsal": "13",
+            "jugador": "LOUREIRO CASTRO, FRANCISCO MANUEL"
+          },
+          {
+            "dorsal": "18",
+            "jugador": "LAMAS DUBRA, MARCOS"
+          },
+          {
+            "dorsal": "19",
+            "jugador": "LOPEZ PEREZ, DAMIAN"
+          },
+          {
+            "dorsal": "24",
+            "jugador": "BARBEITO GOMEZ, BORJA"
+          }
+        ],
+        "cuerpo_tecnico": {
+          "delegado": "QUEIJO GONZALEZ, ALEJANDRO",
+          "entrenador": "No presenta"
+        },
+        "tarjetas": [
+          {
+            "tipo": "amarilla",
+            "minuto": "51'",
+            "jugador": "LOMBA MATA, FELIX"
+          }
+        ]
+      },
+      "equipo_visitante": {
+        "nombre": "XUVENTUDE DORNEDA",
+        "titulares": [
+          {
+            "dorsal": "1",
+            "jugador": "CASADO GONZALEZ, DAVID"
+          },
+          {
+            "dorsal": "2",
+            "jugador": "VAZQUEZ RIVERA, JOSE A"
+          },
+          {
+            "dorsal": "5",
+            "jugador": "SALPURIDO GARCIA, DIEGO"
+          },
+          {
+            "dorsal": "9",
+            "jugador": "GARCIA DAPIA, JOSE I"
+          },
+          {
+            "dorsal": "10",
+            "jugador": "LOPEZ GRAÑA, FELIX"
+          },
+          {
+            "dorsal": "13",
+            "jugador": "RAMOS BARDERAS, EDUARDO"
+          },
+          {
+            "dorsal": "14",
+            "jugador": "RUMBO SUAREZ, ROBERTO"
+          },
+          {
+            "dorsal": "18",
+            "jugador": "TORREIRO COUSO, ROMAN G"
+          },
+          {
+            "dorsal": "24",
+            "jugador": "LAPORT RIVAS, FEDERICO"
+          },
+          {
+            "dorsal": "28",
+            "jugador": "PITA GONZALEZ, BORJA"
+          },
+          {
+            "dorsal": "30",
+            "jugador": "BLANCO VARELA, SERGIO"
+          }
+        ],
+        "suplentes": [
+          {
+            "dorsal": "4",
+            "jugador": "MEILAN SEOANE, IVAN"
+          },
+          {
+            "dorsal": "6",
+            "jugador": "CHICO LAGO, MARCOS"
+          },
+          {
+            "dorsal": "8",
+            "jugador": "AGUADO PERNAS, JOSE L"
+          },
+          {
+            "dorsal": "12",
+            "jugador": "REI LACACI, MARIO"
+          },
+          {
+            "dorsal": "16",
+            "jugador": "BLANCO CANOSA, MANUEL"
+          },
+          {
+            "dorsal": "17",
+            "jugador": "SANCHEZ FERNANDEZ, ROGELIO JESUS"
+          },
+          {
+            "dorsal": "21",
+            "jugador": "ALLEGUE LOPEZ, PABLO"
+          },
+          {
+            "dorsal": "26",
+            "jugador": "GARABAL CALLON, SANTIAGO"
+          }
+        ],
+        "cuerpo_tecnico": {
+          "entrenador": "No presenta"
+        },
+        "tarjetas": [
+          {
+            "tipo": "amarilla",
+            "minuto": "51'",
+            "jugador": "SANCHEZ FERNANDEZ, ROGELIO JESUS"
+          }
+        ]
+      }
+    },
+    "validacion": {
+      "correcto": true,
+      "errores": [],
+      "pruebas": [
+        {
+          "prueba": "Temporada presente",
+          "ok": true,
+          "obtenido": "2026-2027"
+        },
+        {
+          "prueba": "Jornada presente",
+          "ok": true,
+          "obtenido": 11
+        },
+        {
+          "prueba": "Fecha presente",
+          "ok": true,
+          "obtenido": "28-11-2026"
+        },
+        {
+          "prueba": "Hora presente",
+          "ok": true,
+          "obtenido": "16:00"
+        },
+        {
+          "prueba": "Equipo local presente",
+          "ok": true,
+          "obtenido": "SAN MARTIÑO S.D."
+        },
+        {
+          "prueba": "Equipo visitante presente",
+          "ok": true,
+          "obtenido": "XUVENTUDE DORNEDA"
+        },
+        {
+          "prueba": "Resultado completo",
+          "ok": true,
+          "obtenido": "2-5"
+        },
+        {
+          "prueba": "Árbitro presente",
+          "ok": true,
+          "obtenido": "AMOR VAZQUEZ, JOSE LUIS"
+        },
+        {
+          "prueba": "Estadio presente",
+          "ok": true,
+          "obtenido": "Anexo O Roxo (Cerceda)"
+        },
+        {
+          "prueba": "Titulares local razonables",
+          "ok": true,
+          "obtenido": 11
+        },
+        {
+          "prueba": "Titulares visitante razonables",
+          "ok": true,
+          "obtenido": 11
+        },
+        {
+          "prueba": "Secuencia de goles coherente",
+          "ok": true,
+          "obtenido": [
+            {
+              "gol": 1,
+              "minuto": "22'",
+              "jugador": "PITA GONZALEZ, BORJA",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 0,
+                "visitante": 1
+              },
+              "corregido": {
+                "local": 0,
+                "visitante": 1
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 2,
+              "minuto": "38'",
+              "jugador": "AGUADO PERNAS, JOSE L",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 0,
+                "visitante": 2
+              },
+              "corregido": {
+                "local": 0,
+                "visitante": 2
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 3,
+              "minuto": "40'",
+              "jugador": "MEILAN SEOANE, IVAN",
+              "tipo_gol": "Gol de penalti",
+              "raw": {
+                "local": 0,
+                "visitante": 3
+              },
+              "corregido": {
+                "local": 0,
+                "visitante": 3
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 4,
+              "minuto": "54'",
+              "jugador": "LOMBA MATA, FELIX",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 1,
+                "visitante": 3
+              },
+              "corregido": {
+                "local": 1,
+                "visitante": 3
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "local",
+              "equipo_marcador": "local",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 5,
+              "minuto": "68'",
+              "jugador": "LOMBA MATA, FELIX",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 2,
+                "visitante": 3
+              },
+              "corregido": {
+                "local": 2,
+                "visitante": 3
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "local",
+              "equipo_marcador": "local",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 6,
+              "minuto": "73'",
+              "jugador": "AGUADO PERNAS, JOSE L",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 2,
+                "visitante": 4
+              },
+              "corregido": {
+                "local": 2,
+                "visitante": 4
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 7,
+              "minuto": "75'",
+              "jugador": "AGUADO PERNAS, JOSE L",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 2,
+                "visitante": 5
+              },
+              "corregido": {
+                "local": 2,
+                "visitante": 5
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            }
+          ]
+        },
+        {
+          "prueba": "Goleadores asignados al equipo correcto",
+          "ok": true,
+          "obtenido": [
+            {
+              "gol": 1,
+              "minuto": "22'",
+              "jugador": "PITA GONZALEZ, BORJA",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 0,
+                "visitante": 1
+              },
+              "corregido": {
+                "local": 0,
+                "visitante": 1
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 2,
+              "minuto": "38'",
+              "jugador": "AGUADO PERNAS, JOSE L",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 0,
+                "visitante": 2
+              },
+              "corregido": {
+                "local": 0,
+                "visitante": 2
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 3,
+              "minuto": "40'",
+              "jugador": "MEILAN SEOANE, IVAN",
+              "tipo_gol": "Gol de penalti",
+              "raw": {
+                "local": 0,
+                "visitante": 3
+              },
+              "corregido": {
+                "local": 0,
+                "visitante": 3
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 4,
+              "minuto": "54'",
+              "jugador": "LOMBA MATA, FELIX",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 1,
+                "visitante": 3
+              },
+              "corregido": {
+                "local": 1,
+                "visitante": 3
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "local",
+              "equipo_marcador": "local",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 5,
+              "minuto": "68'",
+              "jugador": "LOMBA MATA, FELIX",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 2,
+                "visitante": 3
+              },
+              "corregido": {
+                "local": 2,
+                "visitante": 3
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "local",
+              "equipo_marcador": "local",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 6,
+              "minuto": "73'",
+              "jugador": "AGUADO PERNAS, JOSE L",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 2,
+                "visitante": 4
+              },
+              "corregido": {
+                "local": 2,
+                "visitante": 4
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            },
+            {
+              "gol": 7,
+              "minuto": "75'",
+              "jugador": "AGUADO PERNAS, JOSE L",
+              "tipo_gol": "Gol normal",
+              "raw": {
+                "local": 2,
+                "visitante": 5
+              },
+              "corregido": {
+                "local": 2,
+                "visitante": 5
+              },
+              "fuente": "raw_y_jugador_coherentes",
+              "equipo_esperado": "visitante",
+              "equipo_marcador": "visitante",
+              "secuencia_ok": true,
+              "goleador_ok": true
+            }
+          ]
+        },
+        {
+          "prueba": "Último marcador coincide con resultado",
+          "ok": true,
+          "obtenido": {
+            "ultimoGol": {
+              "local": 2,
+              "visitante": 5
+            },
+            "resultado": "2-5"
+          }
+        },
+        {
+          "prueba": "Número de goles coincide con resultado",
+          "ok": true,
+          "obtenido": {
+            "filasGol": 7,
+            "totalMarcador": 7
+          }
+        },
+        {
+          "prueba": "Ningún marcador sin resolver",
+          "ok": true,
+          "obtenido": [
+            {
+              "minuto": "22'",
+              "marcador": {
+                "local": 0,
+                "visitante": 1
+              },
+              "fuente": "raw_y_jugador_coherentes"
+            },
+            {
+              "minuto": "38'",
+              "marcador": {
+                "local": 0,
+                "visitante": 2
+              },
+              "fuente": "raw_y_jugador_coherentes"
+            },
+            {
+              "minuto": "40'",
+              "marcador": {
+                "local": 0,
+                "visitante": 3
+              },
+              "fuente": "raw_y_jugador_coherentes"
+            },
+            {
+              "minuto": "54'",
+              "marcador": {
+                "local": 1,
+                "visitante": 3
+              },
+              "fuente": "raw_y_jugador_coherentes"
+            },
+            {
+              "minuto": "68'",
+              "marcador": {
+                "local": 2,
+                "visitante": 3
+              },
+              "fuente": "raw_y_jugador_coherentes"
+            },
+            {
+              "minuto": "73'",
+              "marcador": {
+                "local": 2,
+                "visitante": 4
+              },
+              "fuente": "raw_y_jugador_coherentes"
+            },
+            {
+              "minuto": "75'",
+              "marcador": {
+                "local": 2,
+                "visitante": 5
+              },
+              "fuente": "raw_y_jugador_coherentes"
+            }
+          ]
+        }
+      ]
+    },
+    "fuente": "extraido_10B"
   }
 }
