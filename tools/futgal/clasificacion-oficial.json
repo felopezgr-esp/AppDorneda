@@ -1,5 +1,5 @@
 {
-  "fechaExtraccion": "2026-11-28T07:58:30.545Z",
+  "fechaExtraccion": "2026-11-28T17:00:01.233Z",
   "fuente": "FUTGAL",
   "jornada": 11,
   "filas": [
@@ -35,6 +35,21 @@
     },
     {
       "pos": 3,
+      "equipo": "XUVENTUDE DORNEDA",
+      "pts": 21,
+      "pj": 10,
+      "g": 6,
+      "e": 0,
+      "p": 4,
+      "gf": 21,
+      "gc": 26,
+      "dg": -5,
+      "puntosCalculados": 18,
+      "ajustePuntos": 3,
+      "fuente": "FUTGAL_OFICIAL"
+    },
+    {
+      "pos": 4,
       "equipo": "U.D. PAIOSACO H.AÑON",
       "pts": 21,
       "pj": 10,
@@ -49,7 +64,7 @@
       "fuente": "FUTGAL_OFICIAL"
     },
     {
-      "pos": 4,
+      "pos": 5,
       "equipo": "CLUB DEPORTIVO NARON SILVER CATERING",
       "pts": 20,
       "pj": 10,
@@ -60,21 +75,6 @@
       "gc": 17,
       "dg": 16,
       "puntosCalculados": 20,
-      "ajustePuntos": 0,
-      "fuente": "FUTGAL_OFICIAL"
-    },
-    {
-      "pos": 5,
-      "equipo": "U.D. NARAHIO",
-      "pts": 18,
-      "pj": 10,
-      "g": 5,
-      "e": 3,
-      "p": 2,
-      "gf": 25,
-      "gc": 12,
-      "dg": 13,
-      "puntosCalculados": 18,
       "ajustePuntos": 0,
       "fuente": "FUTGAL_OFICIAL"
     },
@@ -95,15 +95,15 @@
     },
     {
       "pos": 7,
-      "equipo": "XUVENTUDE DORNEDA",
+      "equipo": "U.D. NARAHIO",
       "pts": 18,
       "pj": 10,
-      "g": 6,
-      "e": 0,
-      "p": 4,
-      "gf": 21,
-      "gc": 26,
-      "dg": -5,
+      "g": 5,
+      "e": 3,
+      "p": 2,
+      "gf": 25,
+      "gc": 12,
+      "dg": 13,
       "puntosCalculados": 18,
       "ajustePuntos": 0,
       "fuente": "FUTGAL_OFICIAL"
