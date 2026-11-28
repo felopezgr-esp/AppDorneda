@@ -1,15 +1,15 @@
 {
-  "fecha": "2026-11-28T17:44:56.891Z",
+  "fecha": "2026-11-28T19:56:40.468Z",
   "fuente": "FUTGAL",
   "competicion": "Veteranos - Primera Galicia",
   "grupo": "A Coruña | 1ª División Veteranos",
   "url": "https://www.futgal.es/pnfg/NPcd/NFG_CMP_Goleadores?cod_primaria=1000120&CodJornada=11&codcompeticion=26991153&codtemporada=22&codgrupo=28251751&cod_agrupacion=1",
-  "total": 138,
+  "total": 144,
   "goleadores": [
     {
       "jugador": "FERRO ROZAS, GONZALO",
       "equipo": "SADA F.C. A NOSA VIÑA",
-      "goles": 16
+      "goles": 19
     },
     {
       "jugador": "HERMIDA IGLESIAS, RAUL",
@@ -17,14 +17,14 @@
       "goles": 12
     },
     {
+      "jugador": "CALVO LOPEZ, DANIEL",
+      "equipo": "U.D. PAIOSACO H.AÑON",
+      "goles": 11
+    },
+    {
       "jugador": "FERNANDEZ GARCIA, SENAR A",
       "equipo": "SPORTING BURGO",
       "goles": 10
-    },
-    {
-      "jugador": "CALVO LOPEZ, DANIEL",
-      "equipo": "U.D. PAIOSACO H.AÑON",
-      "goles": 9
     },
     {
       "jugador": "MARTINEZ VARELA, ANGEL",
@@ -47,6 +47,11 @@
       "goles": 7
     },
     {
+      "jugador": "ROCHA GESTAL, GONZALO",
+      "equipo": "LICEO DE MONELOS S.D.",
+      "goles": 7
+    },
+    {
       "jugador": "FREIRE VAZQUEZ, JOSE L",
       "equipo": "BETANZOS NORTE",
       "goles": 6
@@ -57,18 +62,13 @@
       "goles": 6
     },
     {
-      "jugador": "FREIRE LESTA, CESAR",
-      "equipo": "SADA F.C. A NOSA VIÑA",
-      "goles": 6
-    },
-    {
       "jugador": "PISOS SOMESO, DANIEL",
       "equipo": "LICEO DE MONELOS S.D.",
       "goles": 6
     },
     {
-      "jugador": "ROCHA GESTAL, GONZALO",
-      "equipo": "LICEO DE MONELOS S.D.",
+      "jugador": "FREIRE LESTA, CESAR",
+      "equipo": "SADA F.C. A NOSA VIÑA",
       "goles": 6
     },
     {
@@ -87,23 +87,23 @@
       "goles": 6
     },
     {
-      "jugador": "REY CRIBEIRO, MATEO",
-      "equipo": "CEDEIRA S.D.",
-      "goles": 5
-    },
-    {
       "jugador": "MEILAN SEOANE, IVAN",
       "equipo": "XUVENTUDE DORNEDA",
       "goles": 5
     },
     {
-      "jugador": "LENDOIRO AGILDA, HECTOR",
-      "equipo": "OZA DE LOS RÍOS",
+      "jugador": "REY CRIBEIRO, MATEO",
+      "equipo": "CEDEIRA S.D.",
       "goles": 5
     },
     {
       "jugador": "PENA GOMEZ, JOSE",
       "equipo": "U.D. NARAHIO",
+      "goles": 5
+    },
+    {
+      "jugador": "LENDOIRO AGILDA, HECTOR",
+      "equipo": "OZA DE LOS RÍOS",
       "goles": 5
     },
     {
@@ -142,6 +142,21 @@
       "goles": 4
     },
     {
+      "jugador": "IGLESIAS FREIRE, DIEGO",
+      "equipo": "CEDEIRA S.D.",
+      "goles": 4
+    },
+    {
+      "jugador": "QUIROGA BARREIRO, JOSE M",
+      "equipo": "U.D. PAIOSACO H.AÑON",
+      "goles": 4
+    },
+    {
+      "jugador": "DA SILVA ALVES, JONATHAN LOIS",
+      "equipo": "PORTAZGO S.D.",
+      "goles": 4
+    },
+    {
       "jugador": "VARELA BERTOA, RUBEN",
       "equipo": "U.D. PAIOSACO H.AÑON",
       "goles": 4
@@ -149,11 +164,6 @@
     {
       "jugador": "POUSADA NION, DIEGO",
       "equipo": "LICEO DE MONELOS S.D.",
-      "goles": 4
-    },
-    {
-      "jugador": "DA SILVA ALVES, JONATHAN LOIS",
-      "equipo": "PORTAZGO S.D.",
       "goles": 4
     },
     {
@@ -172,11 +182,6 @@
       "goles": 3
     },
     {
-      "jugador": "BARRAL TABOAS, MARCOS",
-      "equipo": "SPORTING BURGO",
-      "goles": 3
-    },
-    {
       "jugador": "DORADO MARIÑA, BORJA",
       "equipo": "CEDEIRA S.D.",
       "goles": 3
@@ -187,8 +192,13 @@
       "goles": 3
     },
     {
-      "jugador": "IGLESIAS FREIRE, DIEGO",
-      "equipo": "CEDEIRA S.D.",
+      "jugador": "BARRAL TABOAS, MARCOS",
+      "equipo": "SPORTING BURGO",
+      "goles": 3
+    },
+    {
+      "jugador": "PASTORIN SALIS, IGNACIO",
+      "equipo": "LICEO DE MONELOS S.D.",
       "goles": 3
     },
     {
@@ -197,13 +207,13 @@
       "goles": 3
     },
     {
-      "jugador": "QUIROGA BARREIRO, JOSE M",
-      "equipo": "U.D. PAIOSACO H.AÑON",
+      "jugador": "GONZALEZ COTO, MANUEL",
+      "equipo": "CLUB DEPORTIVO NARON SILVER CATERING",
       "goles": 3
     },
     {
-      "jugador": "GONZALEZ COTO, MANUEL",
-      "equipo": "CLUB DEPORTIVO NARON SILVER CATERING",
+      "jugador": "PARIS LABANDEIRA, DAMIAN",
+      "equipo": "SADA F.C. A NOSA VIÑA",
       "goles": 3
     },
     {
@@ -217,13 +227,28 @@
       "goles": 3
     },
     {
+      "jugador": "RIOS MIRANDA, NOEL",
+      "equipo": "C.D. SIGRAS",
+      "goles": 3
+    },
+    {
       "jugador": "GOMEZ CASTRO, JOSE M",
       "equipo": "CAMPANAL DE LOUREDA F. C.",
       "goles": 3
     },
     {
+      "jugador": "SAR VARELA, JORGE",
+      "equipo": "C.D. SIGRAS",
+      "goles": 3
+    },
+    {
       "jugador": "DEIBE BRAÑAS, IVAN",
       "equipo": "BETANZOS NORTE",
+      "goles": 3
+    },
+    {
+      "jugador": "BOO FERNANDEZ, MIGUEL A",
+      "equipo": "SADA F.C. A NOSA VIÑA",
       "goles": 3
     },
     {
@@ -237,28 +262,8 @@
       "goles": 2
     },
     {
-      "jugador": "PASTORIN SALIS, IGNACIO",
-      "equipo": "LICEO DE MONELOS S.D.",
-      "goles": 2
-    },
-    {
       "jugador": "SECO EDREIRA, JONATHAN",
       "equipo": "CLUB DEPORTIVO NARON SILVER CATERING",
-      "goles": 2
-    },
-    {
-      "jugador": "PARIS LABANDEIRA, DAMIAN",
-      "equipo": "SADA F.C. A NOSA VIÑA",
-      "goles": 2
-    },
-    {
-      "jugador": "RAMOS BOTANA, DANIEL",
-      "equipo": "C.D. SIGRAS",
-      "goles": 2
-    },
-    {
-      "jugador": "RIOS MIRANDA, NOEL",
-      "equipo": "C.D. SIGRAS",
       "goles": 2
     },
     {
@@ -269,11 +274,6 @@
     {
       "jugador": "GOMEZ LOPEZ, FRANCISCO J",
       "equipo": "CLUB DEPORTIVO NARON SILVER CATERING",
-      "goles": 2
-    },
-    {
-      "jugador": "SAR VARELA, JORGE",
-      "equipo": "C.D. SIGRAS",
       "goles": 2
     },
     {
@@ -297,6 +297,11 @@
       "goles": 2
     },
     {
+      "jugador": "RAMOS BOTANA, DANIEL",
+      "equipo": "C.D. SIGRAS",
+      "goles": 2
+    },
+    {
       "jugador": "ROJO ALONSO, DIEGO",
       "equipo": "C.D. SIGRAS",
       "goles": 2
@@ -317,6 +322,11 @@
       "goles": 2
     },
     {
+      "jugador": "MASEDA ALVAREZ, PABLO",
+      "equipo": "CEDEIRA S.D.",
+      "goles": 2
+    },
+    {
       "jugador": "SANCHEZ BLANCO, IVAN",
       "equipo": "CAMPANAL DE LOUREDA F. C.",
       "goles": 2
@@ -332,11 +342,6 @@
       "goles": 2
     },
     {
-      "jugador": "ANEIROS RODRIGUEZ, ANTONIO",
-      "equipo": "CEDEIRA S.D.",
-      "goles": 2
-    },
-    {
       "jugador": "RODRIGUEZ RICO, DAVID",
       "equipo": "C.C.D. CURTIS",
       "goles": 2
@@ -347,13 +352,18 @@
       "goles": 2
     },
     {
-      "jugador": "SANCHEZ GOMEZ, DIEGO",
-      "equipo": "C.D. SIGRAS",
+      "jugador": "LANDROVE GOMEZ, PABLO",
+      "equipo": "CLUB DEPORTIVO NARON SILVER CATERING",
       "goles": 2
     },
     {
-      "jugador": "LANDROVE GOMEZ, PABLO",
-      "equipo": "CLUB DEPORTIVO NARON SILVER CATERING",
+      "jugador": "ANEIROS RODRIGUEZ, ANTONIO",
+      "equipo": "CEDEIRA S.D.",
+      "goles": 2
+    },
+    {
+      "jugador": "SANCHEZ GOMEZ, DIEGO",
+      "equipo": "C.D. SIGRAS",
       "goles": 2
     },
     {
@@ -377,6 +387,11 @@
       "goles": 1
     },
     {
+      "jugador": "PEREZ MACEIRA, IVAN S",
+      "equipo": "SPORTING CAMBRE AS TRAVESAS",
+      "goles": 1
+    },
+    {
       "jugador": "BOGO VARELA, JAVIER",
       "equipo": "CLUB DEPORTIVO NARON SILVER CATERING",
       "goles": 1
@@ -387,22 +402,17 @@
       "goles": 1
     },
     {
-      "jugador": "ABUIN RODRIGUEZ, GERMAN",
-      "equipo": "SPORTING BURGO",
-      "goles": 1
-    },
-    {
       "jugador": "PUENTE LONGUEIRA, JORGE",
       "equipo": "XUVENTUDE DORNEDA",
       "goles": 1
     },
     {
-      "jugador": "LOSADA GONZALEZ, MANUEL",
-      "equipo": "SADA F.C. A NOSA VIÑA",
+      "jugador": "SOBRINO SEOANE, JUAN M",
+      "equipo": "OZA DE LOS RÍOS",
       "goles": 1
     },
     {
-      "jugador": "SABIO SANCHEZ, RUBEN",
+      "jugador": "ABUIN RODRIGUEZ, GERMAN",
       "equipo": "SPORTING BURGO",
       "goles": 1
     },
@@ -422,13 +432,28 @@
       "goles": 1
     },
     {
+      "jugador": "LOSADA GONZALEZ, MANUEL",
+      "equipo": "SADA F.C. A NOSA VIÑA",
+      "goles": 1
+    },
+    {
       "jugador": "VARELA GEREMIAS, DAVID",
       "equipo": "SPORTING CAMBRE AS TRAVESAS",
       "goles": 1
     },
     {
+      "jugador": "SABIO SANCHEZ, RUBEN",
+      "equipo": "SPORTING BURGO",
+      "goles": 1
+    },
+    {
       "jugador": "RODRIGUEZ PEREZ, RUBEN",
       "equipo": "C.D. SIGRAS",
+      "goles": 1
+    },
+    {
+      "jugador": "NUÑEZ GONZALEZ, JAVIER",
+      "equipo": "CEDEIRA S.D.",
       "goles": 1
     },
     {
@@ -467,6 +492,16 @@
       "goles": 1
     },
     {
+      "jugador": "REY AñON, SERGIO",
+      "equipo": "U.D. PAIOSACO H.AÑON",
+      "goles": 1
+    },
+    {
+      "jugador": "LOPEZ BAO, JUAN M",
+      "equipo": "CAMPANAL DE LOUREDA F. C.",
+      "goles": 1
+    },
+    {
       "jugador": "MAGAN LABORA, MIGUEL",
       "equipo": "SPORTING BURGO",
       "goles": 1
@@ -487,8 +522,13 @@
       "goles": 1
     },
     {
-      "jugador": "REY AñON, SERGIO",
-      "equipo": "U.D. PAIOSACO H.AÑON",
+      "jugador": "GARCIA RODRIGUEZ, DAVID",
+      "equipo": "OZA DE LOS RÍOS",
+      "goles": 1
+    },
+    {
+      "jugador": "RAMOS BARDERAS, EDUARDO",
+      "equipo": "XUVENTUDE DORNEDA",
       "goles": 1
     },
     {
@@ -502,13 +542,33 @@
       "goles": 1
     },
     {
-      "jugador": "LOPEZ BAO, JUAN M",
+      "jugador": "PITA GONZALEZ, BORJA",
+      "equipo": "XUVENTUDE DORNEDA",
+      "goles": 1
+    },
+    {
+      "jugador": "PENA SEIJAS, SERGIO",
       "equipo": "CAMPANAL DE LOUREDA F. C.",
+      "goles": 1
+    },
+    {
+      "jugador": "SANTISO LOPEZ, BORJA",
+      "equipo": "CAMPANAL DE LOUREDA F. C.",
+      "goles": 1
+    },
+    {
+      "jugador": "ROJAS CEBALLOS, RICHARD ALEJANDRO",
+      "equipo": "CEDEIRA S.D.",
       "goles": 1
     },
     {
       "jugador": "RODO VERDIA, OSCAR",
       "equipo": "U.D. PAIOSACO H.AÑON",
+      "goles": 1
+    },
+    {
+      "jugador": "FERNANDEZ GOMEZ, CESAR",
+      "equipo": "SPORTING CAMBRE AS TRAVESAS",
       "goles": 1
     },
     {
@@ -537,28 +597,18 @@
       "goles": 1
     },
     {
-      "jugador": "GARCIA RODRIGUEZ, DAVID",
-      "equipo": "OZA DE LOS RÍOS",
+      "jugador": "SABIN BOUZA, CARLOS",
+      "equipo": "U.D. NARAHIO",
       "goles": 1
     },
     {
-      "jugador": "RAMOS BARDERAS, EDUARDO",
-      "equipo": "XUVENTUDE DORNEDA",
+      "jugador": "RAMOS RAMOS, JULIAN",
+      "equipo": "U.D. NARAHIO",
       "goles": 1
     },
     {
-      "jugador": "MASEDA ALVAREZ, PABLO",
-      "equipo": "CEDEIRA S.D.",
-      "goles": 1
-    },
-    {
-      "jugador": "PITA GONZALEZ, BORJA",
-      "equipo": "XUVENTUDE DORNEDA",
-      "goles": 1
-    },
-    {
-      "jugador": "PENA SEIJAS, SERGIO",
-      "equipo": "CAMPANAL DE LOUREDA F. C.",
+      "jugador": "CAMIÑOS PEREZ, DIEGO",
+      "equipo": "C.C.D. CURTIS",
       "goles": 1
     },
     {
@@ -567,18 +617,13 @@
       "goles": 1
     },
     {
-      "jugador": "SANTISO LOPEZ, BORJA",
-      "equipo": "CAMPANAL DE LOUREDA F. C.",
-      "goles": 1
-    },
-    {
-      "jugador": "FERNANDEZ GOMEZ, CESAR",
-      "equipo": "SPORTING CAMBRE AS TRAVESAS",
-      "goles": 1
-    },
-    {
       "jugador": "CASAL GAREA, LIONEL",
       "equipo": "LICEO DE MONELOS S.D.",
+      "goles": 1
+    },
+    {
+      "jugador": "PAREDES CARRO, MARTIN",
+      "equipo": "BETANZOS NORTE",
       "goles": 1
     },
     {
@@ -597,47 +642,17 @@
       "goles": 1
     },
     {
-      "jugador": "LOPEZ TAIN, PABLO",
-      "equipo": "OZA DE LOS RÍOS",
-      "goles": 1
-    },
-    {
-      "jugador": "SABIN BOUZA, CARLOS",
-      "equipo": "U.D. NARAHIO",
-      "goles": 1
-    },
-    {
-      "jugador": "GABIN BELLO, BRUNO",
-      "equipo": "OZA DE LOS RÍOS",
-      "goles": 1
-    },
-    {
-      "jugador": "RAMOS RAMOS, JULIAN",
-      "equipo": "U.D. NARAHIO",
-      "goles": 1
-    },
-    {
-      "jugador": "CAMIÑOS PEREZ, DIEGO",
-      "equipo": "C.C.D. CURTIS",
-      "goles": 1
-    },
-    {
-      "jugador": "PAREDES CARRO, MARTIN",
-      "equipo": "BETANZOS NORTE",
-      "goles": 1
-    },
-    {
       "jugador": "PEREZ GARCIA, DIEGO",
       "equipo": "OZA DE LOS RÍOS",
       "goles": 1
     },
     {
-      "jugador": "BOO FERNANDEZ, MIGUEL A",
-      "equipo": "SADA F.C. A NOSA VIÑA",
+      "jugador": "IGLESIAS RIOBOO, FRANCISCO J",
+      "equipo": "SPORTING CAMBRE AS TRAVESAS",
       "goles": 1
     },
     {
-      "jugador": "CARRO VAZQUEZ, ALBERTO",
+      "jugador": "LOPEZ TAIN, PABLO",
       "equipo": "OZA DE LOS RÍOS",
       "goles": 1
     },
@@ -667,6 +682,11 @@
       "goles": 1
     },
     {
+      "jugador": "GABIN BELLO, BRUNO",
+      "equipo": "OZA DE LOS RÍOS",
+      "goles": 1
+    },
+    {
       "jugador": "CASTRO FLORIANI, IVAN",
       "equipo": "CLUB DEPORTIVO NARON SILVER CATERING",
       "goles": 1
@@ -689,6 +709,16 @@
     {
       "jugador": "LAPORT RIVAS, FEDERICO",
       "equipo": "XUVENTUDE DORNEDA",
+      "goles": 1
+    },
+    {
+      "jugador": "NAVARRETE PENA, DIEGO H",
+      "equipo": "SPORTING CAMBRE AS TRAVESAS",
+      "goles": 1
+    },
+    {
+      "jugador": "CARRO VAZQUEZ, ALBERTO",
+      "equipo": "OZA DE LOS RÍOS",
       "goles": 1
     },
     {

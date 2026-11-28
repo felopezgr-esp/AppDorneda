@@ -1,18 +1,18 @@
 {
-  "fecha": "2026-11-28T17:44:56.892Z",
+  "fecha": "2026-11-28T19:56:40.469Z",
   "fuenteOficial": "FUTGAL",
   "fuenteLocal": "ACTAS_FUTGAL",
-  "totalFutgal": 138,
-  "totalActas": 138,
-  "coincidencias": 138,
+  "totalFutgal": 144,
+  "totalActas": 144,
+  "coincidencias": 144,
   "diferencias": 0,
   "filas": [
     {
       "jugador": "FERRO ROZAS, GONZALO",
       "equipoFutgal": "SADA F.C. A NOSA VIÑA",
       "equipoActas": "SADA F.C. A NOSA VIÑA",
-      "golesFutgal": 16,
-      "golesActas": 16,
+      "golesFutgal": 19,
+      "golesActas": 19,
       "diferencia": 0,
       "coincide": true,
       "soloFutgal": false,
@@ -30,22 +30,22 @@
       "soloActas": false
     },
     {
-      "jugador": "FERNANDEZ GARCIA, SENAR A",
-      "equipoFutgal": "SPORTING BURGO",
-      "equipoActas": "SPORTING BURGO",
-      "golesFutgal": 10,
-      "golesActas": 10,
+      "jugador": "CALVO LOPEZ, DANIEL",
+      "equipoFutgal": "U.D. PAIOSACO H.AÑON",
+      "equipoActas": "U.D. PAIOSACO H.AÑON",
+      "golesFutgal": 11,
+      "golesActas": 11,
       "diferencia": 0,
       "coincide": true,
       "soloFutgal": false,
       "soloActas": false
     },
     {
-      "jugador": "CALVO LOPEZ, DANIEL",
-      "equipoFutgal": "U.D. PAIOSACO H.AÑON",
-      "equipoActas": "U.D. PAIOSACO H.AÑON",
-      "golesFutgal": 9,
-      "golesActas": 9,
+      "jugador": "FERNANDEZ GARCIA, SENAR A",
+      "equipoFutgal": "SPORTING BURGO",
+      "equipoActas": "SPORTING BURGO",
+      "golesFutgal": 10,
+      "golesActas": 10,
       "diferencia": 0,
       "coincide": true,
       "soloFutgal": false,
@@ -88,6 +88,17 @@
       "jugador": "LAMAS SEÑARIS, GABINO J",
       "equipoFutgal": "SAN MARTIÑO S.D.",
       "equipoActas": "SAN MARTIÑO S.D.",
+      "golesFutgal": 7,
+      "golesActas": 7,
+      "diferencia": 0,
+      "coincide": true,
+      "soloFutgal": false,
+      "soloActas": false
+    },
+    {
+      "jugador": "ROCHA GESTAL, GONZALO",
+      "equipoFutgal": "LICEO DE MONELOS S.D.",
+      "equipoActas": "LICEO DE MONELOS S.D.",
       "golesFutgal": 7,
       "golesActas": 7,
       "diferencia": 0,
@@ -163,17 +174,6 @@
     },
     {
       "jugador": "PISOS SOMESO, DANIEL",
-      "equipoFutgal": "LICEO DE MONELOS S.D.",
-      "equipoActas": "LICEO DE MONELOS S.D.",
-      "golesFutgal": 6,
-      "golesActas": 6,
-      "diferencia": 0,
-      "coincide": true,
-      "soloFutgal": false,
-      "soloActas": false
-    },
-    {
-      "jugador": "ROCHA GESTAL, GONZALO",
       "equipoFutgal": "LICEO DE MONELOS S.D.",
       "equipoActas": "LICEO DE MONELOS S.D.",
       "golesFutgal": 6,
@@ -283,6 +283,17 @@
       "soloActas": false
     },
     {
+      "jugador": "IGLESIAS FREIRE, DIEGO",
+      "equipoFutgal": "CEDEIRA S.D.",
+      "equipoActas": "CEDEIRA S.D.",
+      "golesFutgal": 4,
+      "golesActas": 4,
+      "diferencia": 0,
+      "coincide": true,
+      "soloFutgal": false,
+      "soloActas": false
+    },
+    {
       "jugador": "LÓPEZ FERNÁNDEZ, MARCOS",
       "equipoFutgal": "PORTAZGO S.D.",
       "equipoActas": "PORTAZGO S.D.",
@@ -327,6 +338,17 @@
       "soloActas": false
     },
     {
+      "jugador": "QUIROGA BARREIRO, JOSE M",
+      "equipoFutgal": "U.D. PAIOSACO H.AÑON",
+      "equipoActas": "U.D. PAIOSACO H.AÑON",
+      "golesFutgal": 4,
+      "golesActas": 4,
+      "diferencia": 0,
+      "coincide": true,
+      "soloFutgal": false,
+      "soloActas": false
+    },
+    {
       "jugador": "VARELA BERTOA, RUBEN",
       "equipoFutgal": "U.D. PAIOSACO H.AÑON",
       "equipoActas": "U.D. PAIOSACO H.AÑON",
@@ -352,6 +374,17 @@
       "jugador": "BARRAL TABOAS, MARCOS",
       "equipoFutgal": "SPORTING BURGO",
       "equipoActas": "SPORTING BURGO",
+      "golesFutgal": 3,
+      "golesActas": 3,
+      "diferencia": 0,
+      "coincide": true,
+      "soloFutgal": false,
+      "soloActas": false
+    },
+    {
+      "jugador": "BOO FERNANDEZ, MIGUEL A",
+      "equipoFutgal": "SADA F.C. A NOSA VIÑA",
+      "equipoActas": "SADA F.C. A NOSA VIÑA",
       "golesFutgal": 3,
       "golesActas": 3,
       "diferencia": 0,
@@ -448,9 +481,9 @@
       "soloActas": false
     },
     {
-      "jugador": "IGLESIAS FREIRE, DIEGO",
-      "equipoFutgal": "CEDEIRA S.D.",
-      "equipoActas": "CEDEIRA S.D.",
+      "jugador": "LOPEZ ROCHA, OSCAR",
+      "equipoFutgal": "CLUB DEPORTIVO NARON SILVER CATERING",
+      "equipoActas": "CLUB DEPORTIVO NARON SILVER CATERING",
       "golesFutgal": 3,
       "golesActas": 3,
       "diferencia": 0,
@@ -459,9 +492,20 @@
       "soloActas": false
     },
     {
-      "jugador": "LOPEZ ROCHA, OSCAR",
-      "equipoFutgal": "CLUB DEPORTIVO NARON SILVER CATERING",
-      "equipoActas": "CLUB DEPORTIVO NARON SILVER CATERING",
+      "jugador": "PARIS LABANDEIRA, DAMIAN",
+      "equipoFutgal": "SADA F.C. A NOSA VIÑA",
+      "equipoActas": "SADA F.C. A NOSA VIÑA",
+      "golesFutgal": 3,
+      "golesActas": 3,
+      "diferencia": 0,
+      "coincide": true,
+      "soloFutgal": false,
+      "soloActas": false
+    },
+    {
+      "jugador": "PASTORIN SALIS, IGNACIO",
+      "equipoFutgal": "LICEO DE MONELOS S.D.",
+      "equipoActas": "LICEO DE MONELOS S.D.",
       "golesFutgal": 3,
       "golesActas": 3,
       "diferencia": 0,
@@ -481,9 +525,20 @@
       "soloActas": false
     },
     {
-      "jugador": "QUIROGA BARREIRO, JOSE M",
-      "equipoFutgal": "U.D. PAIOSACO H.AÑON",
-      "equipoActas": "U.D. PAIOSACO H.AÑON",
+      "jugador": "RIOS MIRANDA, NOEL",
+      "equipoFutgal": "C.D. SIGRAS",
+      "equipoActas": "C.D. SIGRAS",
+      "golesFutgal": 3,
+      "golesActas": 3,
+      "diferencia": 0,
+      "coincide": true,
+      "soloFutgal": false,
+      "soloActas": false
+    },
+    {
+      "jugador": "SAR VARELA, JORGE",
+      "equipoFutgal": "C.D. SIGRAS",
+      "equipoActas": "C.D. SIGRAS",
       "golesFutgal": 3,
       "golesActas": 3,
       "diferencia": 0,
@@ -591,31 +646,20 @@
       "soloActas": false
     },
     {
+      "jugador": "MASEDA ALVAREZ, PABLO",
+      "equipoFutgal": "CEDEIRA S.D.",
+      "equipoActas": "CEDEIRA S.D.",
+      "golesFutgal": 2,
+      "golesActas": 2,
+      "diferencia": 0,
+      "coincide": true,
+      "soloFutgal": false,
+      "soloActas": false
+    },
+    {
       "jugador": "OTERO RODRIGUEZ, OSCAR",
       "equipoFutgal": "CLUB DEPORTIVO NARON SILVER CATERING",
       "equipoActas": "CLUB DEPORTIVO NARON SILVER CATERING",
-      "golesFutgal": 2,
-      "golesActas": 2,
-      "diferencia": 0,
-      "coincide": true,
-      "soloFutgal": false,
-      "soloActas": false
-    },
-    {
-      "jugador": "PARIS LABANDEIRA, DAMIAN",
-      "equipoFutgal": "SADA F.C. A NOSA VIÑA",
-      "equipoActas": "SADA F.C. A NOSA VIÑA",
-      "golesFutgal": 2,
-      "golesActas": 2,
-      "diferencia": 0,
-      "coincide": true,
-      "soloFutgal": false,
-      "soloActas": false
-    },
-    {
-      "jugador": "PASTORIN SALIS, IGNACIO",
-      "equipoFutgal": "LICEO DE MONELOS S.D.",
-      "equipoActas": "LICEO DE MONELOS S.D.",
       "golesFutgal": 2,
       "golesActas": 2,
       "diferencia": 0,
@@ -638,17 +682,6 @@
       "jugador": "RIOS LAMAS, DANIEL",
       "equipoFutgal": "U.D. NARAHIO",
       "equipoActas": "U.D. NARAHIO",
-      "golesFutgal": 2,
-      "golesActas": 2,
-      "diferencia": 0,
-      "coincide": true,
-      "soloFutgal": false,
-      "soloActas": false
-    },
-    {
-      "jugador": "RIOS MIRANDA, NOEL",
-      "equipoFutgal": "C.D. SIGRAS",
-      "equipoActas": "C.D. SIGRAS",
       "golesFutgal": 2,
       "golesActas": 2,
       "diferencia": 0,
@@ -702,17 +735,6 @@
     },
     {
       "jugador": "SANCHEZ GOMEZ, DIEGO",
-      "equipoFutgal": "C.D. SIGRAS",
-      "equipoActas": "C.D. SIGRAS",
-      "golesFutgal": 2,
-      "golesActas": 2,
-      "diferencia": 0,
-      "coincide": true,
-      "soloFutgal": false,
-      "soloActas": false
-    },
-    {
-      "jugador": "SAR VARELA, JORGE",
       "equipoFutgal": "C.D. SIGRAS",
       "equipoActas": "C.D. SIGRAS",
       "golesFutgal": 2,
@@ -869,17 +891,6 @@
       "jugador": "BOLAÑO LOPEZ, ANGEL",
       "equipoFutgal": "OZA DE LOS RÍOS",
       "equipoActas": "OZA DE LOS RÍOS",
-      "golesFutgal": 1,
-      "golesActas": 1,
-      "diferencia": 0,
-      "coincide": true,
-      "soloFutgal": false,
-      "soloActas": false
-    },
-    {
-      "jugador": "BOO FERNANDEZ, MIGUEL A",
-      "equipoFutgal": "SADA F.C. A NOSA VIÑA",
-      "equipoActas": "SADA F.C. A NOSA VIÑA",
       "golesFutgal": 1,
       "golesActas": 1,
       "diferencia": 0,
@@ -1119,6 +1130,17 @@
       "soloActas": false
     },
     {
+      "jugador": "IGLESIAS RIOBOO, FRANCISCO J",
+      "equipoFutgal": "SPORTING CAMBRE AS TRAVESAS",
+      "equipoActas": "SPORTING CAMBRE AS TRAVESAS",
+      "golesFutgal": 1,
+      "golesActas": 1,
+      "diferencia": 0,
+      "coincide": true,
+      "soloFutgal": false,
+      "soloActas": false
+    },
+    {
       "jugador": "LAPORT RIVAS, FEDERICO",
       "equipoFutgal": "XUVENTUDE DORNEDA",
       "equipoActas": "XUVENTUDE DORNEDA",
@@ -1196,9 +1218,9 @@
       "soloActas": false
     },
     {
-      "jugador": "MASEDA ALVAREZ, PABLO",
-      "equipoFutgal": "CEDEIRA S.D.",
-      "equipoActas": "CEDEIRA S.D.",
+      "jugador": "MONTEAGUDO GOMEZ, ANDRES",
+      "equipoFutgal": "PORTAZGO S.D.",
+      "equipoActas": "PORTAZGO S.D.",
       "golesFutgal": 1,
       "golesActas": 1,
       "diferencia": 0,
@@ -1207,9 +1229,20 @@
       "soloActas": false
     },
     {
-      "jugador": "MONTEAGUDO GOMEZ, ANDRES",
-      "equipoFutgal": "PORTAZGO S.D.",
-      "equipoActas": "PORTAZGO S.D.",
+      "jugador": "NAVARRETE PENA, DIEGO H",
+      "equipoFutgal": "SPORTING CAMBRE AS TRAVESAS",
+      "equipoActas": "SPORTING CAMBRE AS TRAVESAS",
+      "golesFutgal": 1,
+      "golesActas": 1,
+      "diferencia": 0,
+      "coincide": true,
+      "soloFutgal": false,
+      "soloActas": false
+    },
+    {
+      "jugador": "NUÑEZ GONZALEZ, JAVIER",
+      "equipoFutgal": "CEDEIRA S.D.",
+      "equipoActas": "CEDEIRA S.D.",
       "golesFutgal": 1,
       "golesActas": 1,
       "diferencia": 0,
@@ -1254,6 +1287,17 @@
       "jugador": "PEREZ GARCIA, DIEGO",
       "equipoFutgal": "OZA DE LOS RÍOS",
       "equipoActas": "OZA DE LOS RÍOS",
+      "golesFutgal": 1,
+      "golesActas": 1,
+      "diferencia": 0,
+      "coincide": true,
+      "soloFutgal": false,
+      "soloActas": false
+    },
+    {
+      "jugador": "PEREZ MACEIRA, IVAN S",
+      "equipoFutgal": "SPORTING CAMBRE AS TRAVESAS",
+      "equipoActas": "SPORTING CAMBRE AS TRAVESAS",
       "golesFutgal": 1,
       "golesActas": 1,
       "diferencia": 0,
@@ -1372,6 +1416,17 @@
       "soloActas": false
     },
     {
+      "jugador": "ROJAS CEBALLOS, RICHARD ALEJANDRO",
+      "equipoFutgal": "CEDEIRA S.D.",
+      "equipoActas": "CEDEIRA S.D.",
+      "golesFutgal": 1,
+      "golesActas": 1,
+      "diferencia": 0,
+      "coincide": true,
+      "soloFutgal": false,
+      "soloActas": false
+    },
+    {
       "jugador": "RUMBO SUAREZ, ROBERTO",
       "equipoFutgal": "XUVENTUDE DORNEDA",
       "equipoActas": "XUVENTUDE DORNEDA",
@@ -1452,6 +1507,17 @@
       "jugador": "SANTISO LOPEZ, BORJA",
       "equipoFutgal": "CAMPANAL DE LOUREDA F. C.",
       "equipoActas": "CAMPANAL DE LOUREDA F. C.",
+      "golesFutgal": 1,
+      "golesActas": 1,
+      "diferencia": 0,
+      "coincide": true,
+      "soloFutgal": false,
+      "soloActas": false
+    },
+    {
+      "jugador": "SOBRINO SEOANE, JUAN M",
+      "equipoFutgal": "OZA DE LOS RÍOS",
+      "equipoActas": "OZA DE LOS RÍOS",
       "golesFutgal": 1,
       "golesActas": 1,
       "diferencia": 0,
