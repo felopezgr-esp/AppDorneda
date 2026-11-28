@@ -1,5 +1,5 @@
 {
-  "fecha": "2026-11-28T17:40:22.642Z",
+  "fecha": "2026-11-28T17:44:45.109Z",
   "metodo": "10E_futgal_fresco_con_checkpoint_solo_respaldo",
   "totalEquipos": 16,
   "jornadasEsperadas": 30,
@@ -82,7 +82,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478211&cod_acta=1478211"
       ],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-28T17:21:57.371Z"
+      "fechaLecturaFresca": "2026-11-28T17:41:03.230Z"
     },
     {
       "numero": 2,
@@ -160,7 +160,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478217&cod_acta=1478217"
       ],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-28T17:22:02.854Z"
+      "fechaLecturaFresca": "2026-11-28T17:41:08.875Z"
     },
     {
       "numero": 3,
@@ -238,7 +238,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478229&cod_acta=1478229"
       ],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-28T17:22:08.779Z"
+      "fechaLecturaFresca": "2026-11-28T17:41:14.213Z"
     },
     {
       "numero": 4,
@@ -316,7 +316,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478237&cod_acta=1478237"
       ],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-28T17:22:14.088Z"
+      "fechaLecturaFresca": "2026-11-28T17:41:19.500Z"
     },
     {
       "numero": 5,
@@ -394,7 +394,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478244&cod_acta=1478244"
       ],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-28T17:22:26.716Z"
+      "fechaLecturaFresca": "2026-11-28T17:41:33.054Z"
     },
     {
       "numero": 6,
@@ -472,7 +472,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478248&cod_acta=1478248"
       ],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-28T17:22:32.200Z"
+      "fechaLecturaFresca": "2026-11-28T17:41:38.285Z"
     },
     {
       "numero": 7,
@@ -550,7 +550,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478263&cod_acta=1478263"
       ],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-28T17:22:36.840Z"
+      "fechaLecturaFresca": "2026-11-28T17:41:43.822Z"
     },
     {
       "numero": 8,
@@ -628,7 +628,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478269&cod_acta=1478269"
       ],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-28T17:22:41.562Z"
+      "fechaLecturaFresca": "2026-11-28T17:41:49.098Z"
     },
     {
       "numero": 9,
@@ -706,7 +706,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478274&cod_acta=1478274"
       ],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-28T17:22:54.532Z"
+      "fechaLecturaFresca": "2026-11-28T17:42:02.590Z"
     },
     {
       "numero": 10,
@@ -784,7 +784,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478402&cod_acta=1478402"
       ],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-28T17:22:59.731Z"
+      "fechaLecturaFresca": "2026-11-28T17:42:07.951Z"
     },
     {
       "numero": 11,
@@ -855,7 +855,7 @@
         "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478295&cod_acta=1478295"
       ],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-28T17:23:04.636Z"
+      "fechaLecturaFresca": "2026-11-28T17:42:15.320Z"
     },
     {
       "numero": 12,
@@ -924,7 +924,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-28T17:23:09.309Z"
+      "fechaLecturaFresca": "2026-11-28T17:42:20.639Z"
     },
     {
       "numero": 13,
@@ -993,7 +993,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-28T17:23:22.949Z"
+      "fechaLecturaFresca": "2026-11-28T17:42:34.300Z"
     },
     {
       "numero": 14,
@@ -1062,7 +1062,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-28T17:23:27.910Z"
+      "fechaLecturaFresca": "2026-11-28T17:42:39.598Z"
     },
     {
       "numero": 15,
@@ -1131,7 +1131,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-28T17:23:32.994Z"
+      "fechaLecturaFresca": "2026-11-28T17:42:45.003Z"
     },
     {
       "numero": 16,
@@ -1200,7 +1200,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-28T17:23:37.736Z"
+      "fechaLecturaFresca": "2026-11-28T17:42:50.500Z"
     },
     {
       "numero": 17,
@@ -1269,7 +1269,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-28T17:23:50.896Z"
+      "fechaLecturaFresca": "2026-11-28T17:43:05.304Z"
     },
     {
       "numero": 18,
@@ -1338,7 +1338,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-28T17:23:56.155Z"
+      "fechaLecturaFresca": "2026-11-28T17:43:11.057Z"
     },
     {
       "numero": 19,
@@ -1407,7 +1407,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-28T17:24:01.031Z"
+      "fechaLecturaFresca": "2026-11-28T17:43:16.281Z"
     },
     {
       "numero": 20,
@@ -1476,7 +1476,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-28T17:24:06.096Z"
+      "fechaLecturaFresca": "2026-11-28T17:43:21.609Z"
     },
     {
       "numero": 21,
@@ -1545,7 +1545,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-28T17:24:18.869Z"
+      "fechaLecturaFresca": "2026-11-28T17:43:36.888Z"
     },
     {
       "numero": 22,
@@ -1614,7 +1614,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-28T17:24:23.645Z"
+      "fechaLecturaFresca": "2026-11-28T17:43:42.138Z"
     },
     {
       "numero": 23,
@@ -1683,7 +1683,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-28T17:24:28.690Z"
+      "fechaLecturaFresca": "2026-11-28T17:43:47.439Z"
     },
     {
       "numero": 24,
@@ -1752,7 +1752,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-28T17:24:33.633Z"
+      "fechaLecturaFresca": "2026-11-28T17:43:53.581Z"
     },
     {
       "numero": 25,
@@ -1821,7 +1821,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-28T17:24:46.294Z"
+      "fechaLecturaFresca": "2026-11-28T17:44:06.779Z"
     },
     {
       "numero": 26,
@@ -1890,7 +1890,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-28T17:24:51.188Z"
+      "fechaLecturaFresca": "2026-11-28T17:44:12.389Z"
     },
     {
       "numero": 27,
@@ -1959,7 +1959,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-28T17:24:56.077Z"
+      "fechaLecturaFresca": "2026-11-28T17:44:19.092Z"
     },
     {
       "numero": 28,
@@ -2028,7 +2028,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-28T17:25:01.434Z"
+      "fechaLecturaFresca": "2026-11-28T17:44:24.406Z"
     },
     {
       "numero": 29,
@@ -2097,7 +2097,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-28T17:25:14.862Z"
+      "fechaLecturaFresca": "2026-11-28T17:44:37.631Z"
     },
     {
       "numero": 30,
@@ -2166,11 +2166,7 @@
       ],
       "actaUrls": [],
       "origenDatos": "FUTGAL_FRESCO",
-      "fechaLecturaFresca": "2026-11-28T17:25:19.786Z"
+      "fechaLecturaFresca": "2026-11-28T17:44:42.907Z"
     }
-  ],
-  "modoActualizacion": "fast",
-  "jornadasObjetivoRapido": [
-    11
   ]
 }
