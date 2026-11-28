@@ -1,7 +1,11 @@
 {
   "versionFormato": 2,
-  "fechaExtraccion": "2026-11-28T17:04:21.973Z",
+  "fechaExtraccion": "2026-11-28T17:21:19.092Z",
   "fuente": "FUTGAL",
+  "modoActualizacion": "fast",
+  "jornadasObjetivoRapido": [
+    11
+  ],
   "temporada": "2026-2027",
   "competicion": "Veteranos - Primera Galicia",
   "grupo": "A Coruña | 1ª División Veteranos",
@@ -26,8 +30,8 @@
   ],
   "totalJornadas": 30,
   "totalPartidos": 240,
-  "totalActasDetectadas": 81,
-  "totalActasIntegradas": 81,
+  "totalActasDetectadas": 80,
+  "totalActasIntegradas": 80,
   "jornadas": [
     {
       "numero": 1,
@@ -20882,325 +20886,12 @@
     {
       "numero": 11,
       "totalPartidos": 8,
-      "totalActasDetectadas": 1,
-      "totalActasIntegradas": 1,
+      "totalActasDetectadas": 0,
+      "totalActasIntegradas": 0,
       "actasPendientes": [],
       "partidos": [
         {
           "orden": 1,
-          "local": "SAN MARTIÑO S.D.",
-          "visitante": "XUVENTUDE DORNEDA",
-          "fecha": "28-11-2026",
-          "hora": "16:00",
-          "campo": "Anexo O Roxo (Cerceda)",
-          "estado": "FINALIZADO",
-          "actaDisponible": true,
-          "resultado": {
-            "local": 2,
-            "visitante": 5,
-            "texto": "2-5",
-            "fuente": "secuencia_goles_validada"
-          },
-          "acta": {
-            "url": "https://www.futgal.es/pnfg/NPcd/NFG_CmpPartido?cod_primaria=1000120&CodActa=1478295&cod_acta=1478295",
-            "arbitro": "AMOR VAZQUEZ, JOSE LUIS",
-            "estadio": "Anexo O Roxo (Cerceda)",
-            "ciudad": "Cerceda",
-            "goles": [
-              {
-                "marcador_raw": {
-                  "local": 0,
-                  "visitante": 1
-                },
-                "marcador": {
-                  "local": 0,
-                  "visitante": 1
-                },
-                "minuto": "22'",
-                "jugador": "PITA GONZALEZ, BORJA",
-                "tipo_gol": "Gol normal",
-                "marcador_fuente": "raw_y_jugador_coherentes"
-              },
-              {
-                "marcador_raw": {
-                  "local": 0,
-                  "visitante": 2
-                },
-                "marcador": {
-                  "local": 0,
-                  "visitante": 2
-                },
-                "minuto": "38'",
-                "jugador": "AGUADO PERNAS, JOSE L",
-                "tipo_gol": "Gol normal",
-                "marcador_fuente": "raw_y_jugador_coherentes"
-              },
-              {
-                "marcador_raw": {
-                  "local": 0,
-                  "visitante": 3
-                },
-                "marcador": {
-                  "local": 0,
-                  "visitante": 3
-                },
-                "minuto": "40'",
-                "jugador": "MEILAN SEOANE, IVAN",
-                "tipo_gol": "Gol de penalti",
-                "marcador_fuente": "raw_y_jugador_coherentes"
-              },
-              {
-                "marcador_raw": {
-                  "local": 1,
-                  "visitante": 3
-                },
-                "marcador": {
-                  "local": 1,
-                  "visitante": 3
-                },
-                "minuto": "54'",
-                "jugador": "LOMBA MATA, FELIX",
-                "tipo_gol": "Gol normal",
-                "marcador_fuente": "raw_y_jugador_coherentes"
-              },
-              {
-                "marcador_raw": {
-                  "local": 2,
-                  "visitante": 3
-                },
-                "marcador": {
-                  "local": 2,
-                  "visitante": 3
-                },
-                "minuto": "68'",
-                "jugador": "LOMBA MATA, FELIX",
-                "tipo_gol": "Gol normal",
-                "marcador_fuente": "raw_y_jugador_coherentes"
-              },
-              {
-                "marcador_raw": {
-                  "local": 2,
-                  "visitante": 4
-                },
-                "marcador": {
-                  "local": 2,
-                  "visitante": 4
-                },
-                "minuto": "73'",
-                "jugador": "AGUADO PERNAS, JOSE L",
-                "tipo_gol": "Gol normal",
-                "marcador_fuente": "raw_y_jugador_coherentes"
-              },
-              {
-                "marcador_raw": {
-                  "local": 2,
-                  "visitante": 5
-                },
-                "marcador": {
-                  "local": 2,
-                  "visitante": 5
-                },
-                "minuto": "75'",
-                "jugador": "AGUADO PERNAS, JOSE L",
-                "tipo_gol": "Gol normal",
-                "marcador_fuente": "raw_y_jugador_coherentes"
-              }
-            ],
-            "equipo_local": {
-              "nombre": "SAN MARTIÑO S.D.",
-              "titulares": [
-                {
-                  "dorsal": "1",
-                  "jugador": "GONZALEZ LISTA, NICOLAS"
-                },
-                {
-                  "dorsal": "3",
-                  "jugador": "LOMBA MATA, FELIX"
-                },
-                {
-                  "dorsal": "4",
-                  "jugador": "GONZALEZ GENDE, ALVARO"
-                },
-                {
-                  "dorsal": "6",
-                  "jugador": "FARIÑA COSTA, ALFONSO"
-                },
-                {
-                  "dorsal": "8",
-                  "jugador": "CANEDO NIEVES, JOSE"
-                },
-                {
-                  "dorsal": "14",
-                  "jugador": "ALONSO VAZQUEZ, ALEJANDRO"
-                },
-                {
-                  "dorsal": "20",
-                  "jugador": "CASTRO REGUEIRO, MIGUEL"
-                },
-                {
-                  "dorsal": "21",
-                  "jugador": "GESTO REGUEIRO, ALEJANDRO"
-                },
-                {
-                  "dorsal": "23",
-                  "jugador": "GUARDADO GESTO, JOSE MIGUEL"
-                },
-                {
-                  "dorsal": "26",
-                  "jugador": "FARIÑA COSTA, JOSE A"
-                },
-                {
-                  "dorsal": "29",
-                  "jugador": "LISTE OTERO, RICARDO A"
-                }
-              ],
-              "suplentes": [
-                {
-                  "dorsal": "5",
-                  "jugador": "RUMBO BOEDO, CARLOS"
-                },
-                {
-                  "dorsal": "7",
-                  "jugador": "FARIÑA IGLESIAS, CARLOS"
-                },
-                {
-                  "dorsal": "13",
-                  "jugador": "LOUREIRO CASTRO, FRANCISCO MANUEL"
-                },
-                {
-                  "dorsal": "18",
-                  "jugador": "LAMAS DUBRA, MARCOS"
-                },
-                {
-                  "dorsal": "19",
-                  "jugador": "LOPEZ PEREZ, DAMIAN"
-                },
-                {
-                  "dorsal": "24",
-                  "jugador": "BARBEITO GOMEZ, BORJA"
-                }
-              ],
-              "cuerpo_tecnico": {
-                "delegado": "QUEIJO GONZALEZ, ALEJANDRO",
-                "entrenador": "No presenta"
-              },
-              "tarjetas": [
-                {
-                  "tipo": "amarilla",
-                  "minuto": "51'",
-                  "jugador": "LOMBA MATA, FELIX"
-                }
-              ]
-            },
-            "equipo_visitante": {
-              "nombre": "XUVENTUDE DORNEDA",
-              "titulares": [
-                {
-                  "dorsal": "1",
-                  "jugador": "CASADO GONZALEZ, DAVID"
-                },
-                {
-                  "dorsal": "2",
-                  "jugador": "VAZQUEZ RIVERA, JOSE A"
-                },
-                {
-                  "dorsal": "5",
-                  "jugador": "SALPURIDO GARCIA, DIEGO"
-                },
-                {
-                  "dorsal": "9",
-                  "jugador": "GARCIA DAPIA, JOSE I"
-                },
-                {
-                  "dorsal": "10",
-                  "jugador": "LOPEZ GRAÑA, FELIX"
-                },
-                {
-                  "dorsal": "13",
-                  "jugador": "RAMOS BARDERAS, EDUARDO"
-                },
-                {
-                  "dorsal": "14",
-                  "jugador": "RUMBO SUAREZ, ROBERTO"
-                },
-                {
-                  "dorsal": "18",
-                  "jugador": "TORREIRO COUSO, ROMAN G"
-                },
-                {
-                  "dorsal": "24",
-                  "jugador": "LAPORT RIVAS, FEDERICO"
-                },
-                {
-                  "dorsal": "28",
-                  "jugador": "PITA GONZALEZ, BORJA"
-                },
-                {
-                  "dorsal": "30",
-                  "jugador": "BLANCO VARELA, SERGIO"
-                }
-              ],
-              "suplentes": [
-                {
-                  "dorsal": "4",
-                  "jugador": "MEILAN SEOANE, IVAN"
-                },
-                {
-                  "dorsal": "6",
-                  "jugador": "CHICO LAGO, MARCOS"
-                },
-                {
-                  "dorsal": "8",
-                  "jugador": "AGUADO PERNAS, JOSE L"
-                },
-                {
-                  "dorsal": "12",
-                  "jugador": "REI LACACI, MARIO"
-                },
-                {
-                  "dorsal": "16",
-                  "jugador": "BLANCO CANOSA, MANUEL"
-                },
-                {
-                  "dorsal": "17",
-                  "jugador": "SANCHEZ FERNANDEZ, ROGELIO JESUS"
-                },
-                {
-                  "dorsal": "21",
-                  "jugador": "ALLEGUE LOPEZ, PABLO"
-                },
-                {
-                  "dorsal": "26",
-                  "jugador": "GARABAL CALLON, SANTIAGO"
-                }
-              ],
-              "cuerpo_tecnico": {
-                "entrenador": "No presenta"
-              },
-              "tarjetas": [
-                {
-                  "tipo": "amarilla",
-                  "minuto": "51'",
-                  "jugador": "SANCHEZ FERNANDEZ, ROGELIO JESUS"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "orden": 2,
-          "local": "U.D. PAIOSACO H.AÑON",
-          "visitante": "OZA DE LOS RÍOS",
-          "fecha": "28-11-2026",
-          "hora": "18:00",
-          "campo": "Porta Santa",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
-        },
-        {
-          "orden": 3,
           "local": "SPORTING BURGO",
           "visitante": "SADA F.C. A NOSA VIÑA",
           "fecha": "28-11-2026",
@@ -21212,19 +20903,19 @@
           "acta": null
         },
         {
-          "orden": 4,
-          "local": "C.D. SIGRAS",
-          "visitante": "SPORTING CAMBRE AS TRAVESAS",
+          "orden": 2,
+          "local": "BETANZOS NORTE",
+          "visitante": "PORTAZGO S.D.",
           "fecha": "28-11-2026",
-          "hora": "18:00",
-          "campo": "Os Pinares, (Brexo Lema)",
+          "hora": "20:00",
+          "campo": "O Carregal (Betanzos)",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,
           "acta": null
         },
         {
-          "orden": 5,
+          "orden": 3,
           "local": "CEDEIRA S.D.",
           "visitante": "LICEO DE MONELOS S.D.",
           "fecha": "28-11-2026",
@@ -21236,12 +20927,36 @@
           "acta": null
         },
         {
-          "orden": 6,
-          "local": "BETANZOS NORTE",
-          "visitante": "PORTAZGO S.D.",
+          "orden": 4,
+          "local": "SAN MARTIÑO S.D.",
+          "visitante": "XUVENTUDE DORNEDA",
           "fecha": "28-11-2026",
-          "hora": "20:00",
-          "campo": "O Carregal (Betanzos)",
+          "hora": "16:00",
+          "campo": "Anexo O Roxo (Cerceda)",
+          "estado": "PROGRAMADO",
+          "actaDisponible": false,
+          "resultado": null,
+          "acta": null
+        },
+        {
+          "orden": 5,
+          "local": "C.D. SIGRAS",
+          "visitante": "SPORTING CAMBRE AS TRAVESAS",
+          "fecha": "28-11-2026",
+          "hora": "18:00",
+          "campo": "Os Pinares, (Brexo Lema)",
+          "estado": "PROGRAMADO",
+          "actaDisponible": false,
+          "resultado": null,
+          "acta": null
+        },
+        {
+          "orden": 6,
+          "local": "U.D. PAIOSACO H.AÑON",
+          "visitante": "OZA DE LOS RÍOS",
+          "fecha": "28-11-2026",
+          "hora": "18:00",
+          "campo": "Porta Santa",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,
@@ -21271,7 +20986,9 @@
           "resultado": null,
           "acta": null
         }
-      ]
+      ],
+      "fuenteActualizacion": "FUTGAL_SUPER_RAPIDA",
+      "fechaActualizacionRapida": "2026-11-28T17:21:19.092Z"
     },
     {
       "numero": 12,
@@ -21399,6 +21116,18 @@
         },
         {
           "orden": 2,
+          "local": "U.D. PAIOSACO H.AÑON",
+          "visitante": "C.C.D. CURTIS",
+          "fecha": "12-12-2026",
+          "hora": null,
+          "campo": "Porta Santa",
+          "estado": "PROGRAMADO",
+          "actaDisponible": false,
+          "resultado": null,
+          "acta": null
+        },
+        {
+          "orden": 3,
           "local": "SPORTING BURGO",
           "visitante": "CLUB DEPORTIVO NARON SILVER CATERING",
           "fecha": "12-12-2026",
@@ -21410,7 +21139,7 @@
           "acta": null
         },
         {
-          "orden": 3,
+          "orden": 4,
           "local": "BETANZOS NORTE",
           "visitante": "XUVENTUDE DORNEDA",
           "fecha": "12-12-2026",
@@ -21422,24 +21151,12 @@
           "acta": null
         },
         {
-          "orden": 4,
+          "orden": 5,
           "local": "SAN MARTIÑO S.D.",
           "visitante": "CEDEIRA S.D.",
           "fecha": "12-12-2026",
           "hora": null,
           "campo": "A Revolta (Queixas)",
-          "estado": "PROGRAMADO",
-          "actaDisponible": false,
-          "resultado": null,
-          "acta": null
-        },
-        {
-          "orden": 5,
-          "local": "U.D. PAIOSACO H.AÑON",
-          "visitante": "C.C.D. CURTIS",
-          "fecha": "12-12-2026",
-          "hora": "18:00",
-          "campo": "Porta Santa",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
           "resultado": null,
@@ -23269,6 +22986,14 @@
       ]
     }
   ],
+  "ultimaActualizacionRapida": {
+    "fecha": "2026-11-28T17:21:19.092Z",
+    "jornada": 11,
+    "partidos": 8,
+    "resultadosLeidos": 0,
+    "actasConsultadas": 0,
+    "goleadoresActualizados": false
+  },
   "clasificacionOficial": [
     {
       "pos": 1,
@@ -23304,15 +23029,15 @@
       "pos": 3,
       "equipo": "XUVENTUDE DORNEDA",
       "pts": 21,
-      "pj": 11,
-      "g": 7,
+      "pj": 10,
+      "g": 6,
       "e": 0,
       "p": 4,
-      "gf": 26,
-      "gc": 28,
-      "dg": -2,
-      "puntosCalculados": 21,
-      "ajustePuntos": 0,
+      "gf": 21,
+      "gc": 26,
+      "dg": -5,
+      "puntosCalculados": 18,
+      "ajustePuntos": 3,
       "fuente": "FUTGAL_OFICIAL"
     },
     {
@@ -23409,13 +23134,13 @@
       "pos": 10,
       "equipo": "SAN MARTIÑO S.D.",
       "pts": 13,
-      "pj": 11,
+      "pj": 10,
       "g": 4,
       "e": 1,
-      "p": 6,
-      "gf": 18,
-      "gc": 27,
-      "dg": -9,
+      "p": 5,
+      "gf": 16,
+      "gc": 22,
+      "dg": -6,
       "puntosCalculados": 13,
       "ajustePuntos": 0,
       "fuente": "FUTGAL_OFICIAL"
@@ -23511,6 +23236,6 @@
       "fuente": "FUTGAL_OFICIAL"
     }
   ],
-  "fechaClasificacionOficial": "2026-11-28T17:04:29.167Z",
+  "fechaClasificacionOficial": "2026-11-28T17:21:24.786Z",
   "fuenteClasificacionOficial": "FUTGAL"
 }
