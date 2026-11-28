@@ -1,5 +1,5 @@
 {
-  "fecha": "2026-11-28T17:44:42.907Z",
+  "fecha": "2026-11-28T19:52:09.810Z",
   "modo": "10E_fresco_con_respaldo",
   "totalEquipos": 16,
   "jornadasEsperadas": 30,
@@ -804,7 +804,13 @@
           "visitante": "OZA DE LOS RÍOS",
           "fecha": "28-11-2026",
           "hora": "18:00",
-          "campo": "Porta Santa"
+          "campo": "Porta Santa",
+          "resultado": {
+            "local": 3,
+            "visitante": 1,
+            "texto": "3-1",
+            "fuente": "FUTGAL_JORNADA_RAPIDA"
+          }
         },
         {
           "local": "SPORTING BURGO",
@@ -817,7 +823,7 @@
           "local": "C.D. SIGRAS",
           "visitante": "SPORTING CAMBRE AS TRAVESAS",
           "fecha": "28-11-2026",
-          "hora": "18:00",
+          "hora": "18:30",
           "campo": "Os Pinares, (Brexo Lema)"
         },
         {
@@ -2166,5 +2172,9 @@
       "origenDatos": "FUTGAL_FRESCO",
       "fechaLecturaFresca": "2026-11-28T17:44:42.907Z"
     }
+  ],
+  "modoActualizacion": "fast",
+  "jornadasObjetivoRapido": [
+    11
   ]
 }

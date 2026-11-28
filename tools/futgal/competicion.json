@@ -1,6 +1,6 @@
 {
   "versionFormato": 2,
-  "fechaExtraccion": "2026-11-28T17:40:22.638Z",
+  "fechaExtraccion": "2026-11-28T19:52:09.806Z",
   "fuente": "FUTGAL",
   "modoActualizacion": "fast",
   "jornadasObjetivoRapido": [
@@ -20943,7 +20943,7 @@
           "local": "C.D. SIGRAS",
           "visitante": "SPORTING CAMBRE AS TRAVESAS",
           "fecha": "28-11-2026",
-          "hora": "18:00",
+          "hora": "18:30",
           "campo": "Os Pinares, (Brexo Lema)",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
@@ -20959,7 +20959,12 @@
           "campo": "Porta Santa",
           "estado": "PROGRAMADO",
           "actaDisponible": false,
-          "resultado": null,
+          "resultado": {
+            "local": 3,
+            "visitante": 1,
+            "texto": "3-1",
+            "fuente": "FUTGAL_JORNADA_RAPIDA"
+          },
           "acta": null
         },
         {
@@ -20988,7 +20993,7 @@
         }
       ],
       "fuenteActualizacion": "FUTGAL_SUPER_RAPIDA",
-      "fechaActualizacionRapida": "2026-11-28T17:40:22.638Z"
+      "fechaActualizacionRapida": "2026-11-28T19:52:09.806Z"
     },
     {
       "numero": 12,
@@ -22987,10 +22992,10 @@
     }
   ],
   "ultimaActualizacionRapida": {
-    "fecha": "2026-11-28T17:40:22.638Z",
+    "fecha": "2026-11-28T19:52:09.806Z",
     "jornada": 11,
     "partidos": 8,
-    "resultadosLeidos": 0,
+    "resultadosLeidos": 1,
     "actasConsultadas": 0,
     "goleadoresActualizados": false
   },
@@ -22998,7 +23003,7 @@
     {
       "pos": 1,
       "equipo": "SADA F.C. A NOSA VIÑA",
-      "pts": 23,
+      "pts": 26,
       "pj": 10,
       "g": 7,
       "e": 2,
@@ -23007,13 +23012,13 @@
       "gc": 13,
       "dg": 19,
       "puntosCalculados": 23,
-      "ajustePuntos": 0,
+      "ajustePuntos": 3,
       "fuente": "FUTGAL_OFICIAL"
     },
     {
       "pos": 2,
       "equipo": "CEDEIRA S.D.",
-      "pts": 22,
+      "pts": 25,
       "pj": 10,
       "g": 7,
       "e": 1,
@@ -23022,11 +23027,26 @@
       "gc": 18,
       "dg": 8,
       "puntosCalculados": 22,
-      "ajustePuntos": 0,
+      "ajustePuntos": 3,
       "fuente": "FUTGAL_OFICIAL"
     },
     {
       "pos": 3,
+      "equipo": "U.D. PAIOSACO H.AÑON",
+      "pts": 24,
+      "pj": 11,
+      "g": 7,
+      "e": 3,
+      "p": 1,
+      "gf": 37,
+      "gc": 19,
+      "dg": 18,
+      "puntosCalculados": 24,
+      "ajustePuntos": 0,
+      "fuente": "FUTGAL_OFICIAL"
+    },
+    {
+      "pos": 4,
       "equipo": "XUVENTUDE DORNEDA",
       "pts": 21,
       "pj": 10,
@@ -23038,21 +23058,6 @@
       "dg": -5,
       "puntosCalculados": 18,
       "ajustePuntos": 3,
-      "fuente": "FUTGAL_OFICIAL"
-    },
-    {
-      "pos": 4,
-      "equipo": "U.D. PAIOSACO H.AÑON",
-      "pts": 21,
-      "pj": 10,
-      "g": 6,
-      "e": 3,
-      "p": 1,
-      "gf": 34,
-      "gc": 18,
-      "dg": 16,
-      "puntosCalculados": 21,
-      "ajustePuntos": 0,
       "fuente": "FUTGAL_OFICIAL"
     },
     {
@@ -23164,13 +23169,13 @@
       "pos": 12,
       "equipo": "OZA DE LOS RÍOS",
       "pts": 9,
-      "pj": 10,
+      "pj": 11,
       "g": 3,
       "e": 0,
-      "p": 7,
-      "gf": 15,
-      "gc": 29,
-      "dg": -14,
+      "p": 8,
+      "gf": 16,
+      "gc": 32,
+      "dg": -16,
       "puntosCalculados": 9,
       "ajustePuntos": 0,
       "fuente": "FUTGAL_OFICIAL"
@@ -23207,6 +23212,21 @@
     },
     {
       "pos": 15,
+      "equipo": "SPORTING CAMBRE AS TRAVESAS",
+      "pts": 7,
+      "pj": 10,
+      "g": 1,
+      "e": 1,
+      "p": 8,
+      "gf": 6,
+      "gc": 26,
+      "dg": -20,
+      "puntosCalculados": 4,
+      "ajustePuntos": 3,
+      "fuente": "FUTGAL_OFICIAL"
+    },
+    {
+      "pos": 16,
       "equipo": "C.D. SIGRAS",
       "pts": 6,
       "pj": 10,
@@ -23219,23 +23239,8 @@
       "puntosCalculados": 6,
       "ajustePuntos": 0,
       "fuente": "FUTGAL_OFICIAL"
-    },
-    {
-      "pos": 16,
-      "equipo": "SPORTING CAMBRE AS TRAVESAS",
-      "pts": 4,
-      "pj": 10,
-      "g": 1,
-      "e": 1,
-      "p": 8,
-      "gf": 6,
-      "gc": 26,
-      "dg": -20,
-      "puntosCalculados": 4,
-      "ajustePuntos": 0,
-      "fuente": "FUTGAL_OFICIAL"
     }
   ],
-  "fechaClasificacionOficial": "2026-11-28T17:40:28.191Z",
+  "fechaClasificacionOficial": "2026-11-28T19:52:16.483Z",
   "fuenteClasificacionOficial": "FUTGAL"
 }
